@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构与算法之队列 | Elays&#39;Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="队列：只允许在一端进行插入操作，在另一端进行删除操作的线性表。允许插入的一端称为队尾，允许删除的一端称为队头。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之队列">
+<meta property="og:url" content="http://yoursite.com/2016/08/28/队列/index.html">
+<meta property="og:site_name" content="Elays'Blog">
+<meta property="og:description" content="队列：只允许在一端进行插入操作，在另一端进行删除操作的线性表。允许插入的一端称为队尾，允许删除的一端称为队头。">
+<meta property="og:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue1.png&fhash=e496971ed5b3495f9fd255b2b9ed63476f380dd5&dt=85.bbcf893e8ce4104bec56f532f6e34e79&v=1.0.1&rtick=14722690758029&open_app_id=0&devtype=web&sign=be2f83e41cf3dc67d230453e040d4dc5&">
+<meta property="og:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue2.png&fhash=55ae3e70b837386cd9165af58abe6271ef5e03f6&dt=85.281d0a837be07c528c02cadc8e397061&v=1.0.1&rtick=14722690751652&open_app_id=0&devtype=web&sign=de5f58ffb8c336aac46afbcae56a3c01&">
+<meta property="og:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue3.png&fhash=33876e0f6caf184b48b4c2942f3807e7ab69f48b&dt=85.113104be6ad8b417a69e454180f009f1&v=1.0.1&rtick=14723004066608&open_app_id=0&devtype=web&sign=4d68931923fefe97b00e064f26582572&">
+<meta property="og:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue4.png&fhash=4c064e6bfd99d852eaa31aea4d52be30bd520b2e&dt=85.475bd0df7429e7aef41724515d7c1183&v=1.0.1&rtick=14723034057998&open_app_id=0&devtype=web&sign=d8b27447afea3d760df8745d10bd555b&">
+<meta property="og:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue5.png&fhash=8b9114f40cea97c8c038b90bdcd9f5b759abec8c&dt=85.0f0d3ad8d53f4dc2c7bd7b7944ce2168&v=1.0.1&rtick=14723034056778&open_app_id=0&devtype=web&sign=ffcfe2a09252f52841c1c1238571be22&">
+<meta property="og:updated_time" content="2016-08-28T06:48:36.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之队列">
+<meta name="twitter:description" content="队列：只允许在一端进行插入操作，在另一端进行删除操作的线性表。允许插入的一端称为队尾，允许删除的一端称为队头。">
+<meta name="twitter:image" content="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&qid=49291271&fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue1.png&fhash=e496971ed5b3495f9fd255b2b9ed63476f380dd5&dt=85.bbcf893e8ce4104bec56f532f6e34e79&v=1.0.1&rtick=14722690758029&open_app_id=0&devtype=web&sign=be2f83e41cf3dc67d230453e040d4dc5&">
+  
+    <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Elays&#39;Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">你是天地生的，美得超越人形</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-队列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/28/队列/" class="article-date">
+  <time datetime="2016-08-28T06:46:27.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构与算法之队列
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>队列：只允许在一端进行插入操作，在另一端进行删除操作的线性表。允许插入的一端称为队尾，允许删除的一端称为队头。<br><a id="more"></a></p>
+<p><strong>顺序队列</strong></p>
+<hr>
+<p>最简单的顺序队列：<br>由数组构成，入队时在数组元素尾部插入新元素，出队时移去数组下标为0的元素，同时其他数组元素向前移动一个位置。就像一群人在买票，前面的人离开，后面的人就会全部向前一步，补上空位。图示如下：<br>入队列：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue1.png&amp;fhash=e496971ed5b3495f9fd255b2b9ed63476f380dd5&amp;dt=85.bbcf893e8ce4104bec56f532f6e34e79&amp;v=1.0.1&amp;rtick=14722690758029&amp;open_app_id=0&amp;devtype=web&amp;sign=be2f83e41cf3dc67d230453e040d4dc5&amp;" alt=""><br>出队列：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue2.png&amp;fhash=55ae3e70b837386cd9165af58abe6271ef5e03f6&amp;dt=85.281d0a837be07c528c02cadc8e397061&amp;v=1.0.1&amp;rtick=14722690751652&amp;open_app_id=0&amp;devtype=web&amp;sign=de5f58ffb8c336aac46afbcae56a3c01&amp;" alt=""><br>C#的容器已经实现了这个在尾部插入数据、在头部删除数据并且自动补位的功能，用C#容器实现的队列代码如下(由于C#自带实现队头队尾的插入删除，所以不需要队头队尾节点的引用)：</p>
+<pre><code>class SequenceQueue
+{
+    private ArrayList Data;
+
+    public SequenceQueue() {
+        Data = new ArrayList();
+    }
+    //入队列
+    public void EnQueue(object data) {
+        Data.Add(data);
+    }
+    //出队列
+    public void DeQueue(ref object data) {
+        data = Data[0];
+        Data.RemoveAt(0);
+    }
+    //查找队列第i个元素
+    public object Find(int i) {
+        return Data[i];
+    }
+    //清除队列
+    public void Clear() {
+        Data.Clear();
+    }
+    //队列元素个数
+    public int Count() {
+        return Data.Count;
+    }
+}
+</code></pre><p><strong>循环队列</strong></p>
+<hr>
+<p>但是上面的队列实现方式有个性能缺陷：出队列时所有元素都要移位。所以我们可以设置一个队头和队尾的引用(指针)，出队列时直接把队头引用处的结点移除，入队列时直接把元素添加到队尾引用所在的节点，而其他元素不用动，只是在入队列和出队列时修改队头引用或者队尾引用即可。<br>所以，队头引用front指向队头元素，队尾引用rear指向队尾元素的下一个位置(方便下次入队时直接添加到该位置)。<br>但是，这种方式存在下图的尴尬(针对固定容量的队列，非ArrayList这种大小可变的容器)：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue3.png&amp;fhash=33876e0f6caf184b48b4c2942f3807e7ab69f48b&amp;dt=85.113104be6ad8b417a69e454180f009f1&amp;v=1.0.1&amp;rtick=14723004066608&amp;open_app_id=0&amp;devtype=web&amp;sign=4d68931923fefe97b00e064f26582572&amp;" alt=""><br>若再在rear位置入队插入新元素，则会溢出，但是明显数组前面还有空位，是可以插入新元素的。就像坐公交，前面有空位置肯定是要去座的。为了让新元素能够按次序插入到前面的空位里去，应该把队列的首尾连起来，形成循环队列，这样新元素插入到前面的空位就水到渠成了。<br>还有一个问题，如下：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue4.png&amp;fhash=4c064e6bfd99d852eaa31aea4d52be30bd520b2e&amp;dt=85.475bd0df7429e7aef41724515d7c1183&amp;v=1.0.1&amp;rtick=14723034057998&amp;open_app_id=0&amp;devtype=web&amp;sign=d8b27447afea3d760df8745d10bd555b&amp;" alt=""><br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E9%98%9F%E5%88%97%2Fqueue5.png&amp;fhash=8b9114f40cea97c8c038b90bdcd9f5b759abec8c&amp;dt=85.0f0d3ad8d53f4dc2c7bd7b7944ce2168&amp;v=1.0.1&amp;rtick=14723034056778&amp;open_app_id=0&amp;devtype=web&amp;sign=ffcfe2a09252f52841c1c1238571be22&amp;" alt=""><br>如上图所示，队列空和队列满的条件都是front==rear，为了区分他俩，我们人为设定：数组中只剩下一个空闲单元时，就认为队列已经满了。即敲定队列空的条件为：front==rear，队列满的条件为(rear+1)%QueueSize==front。【因为循环队列中只剩下一个空闲单元有两种情况：rear在front左边、rear在front右边】<br>综上，循环队列数据结构：数据成员：数组、队头引用front、队尾引用rear，方法成员：入队、出队等。代码如下：</p>
+<pre><code>class RoundQueue
+{
+    private Object[] Data;
+    private int front;
+    private int rear;
+
+    private int QueueSize;
+
+    public RoundQueue() {
+        QueueSize = 3;
+        front = 0;
+        rear = 0; 
+        Data = new object[QueueSize];
+    }
+    //入队列
+    public void EnQueue(object data) {
+        //如果队列满，则不能再入队列
+        if ((rear + 1) % QueueSize == front)
+            return;
+        Data[rear] = data;
+        rear = (rear + 1) % QueueSize;
+    }
+    //出队列
+    public void DeQueue(ref object data) {
+        //如果队列空，则不能再出队列
+        if (rear == front)
+            return;
+        data = Data[front];
+        front = (front + 1) % QueueSize;
+    }
+    //队列中元素个数
+    public int Count() {
+        return (rear - front + QueueSize) % QueueSize;
+    }
+}
+</code></pre><p><strong>优先队列</strong></p>
+<hr>
+<p>优先队列不再是每次移除队头的结点元素，而是每次出队优先级最高的结点。严格来说，它已经不算是一个队列。<br>对于优先队列，需要给每一个结点都加上一个表示优先级的数据成员，可以把结点单独写成一个类，如下：</p>
+<pre><code>class PriorQueueNode{
+    public object Data;
+    public int Priority;
+}
+</code></pre><p>优先队列可以继承普通的顺序队列或者循环队列，但是需要重载出队列函数，伪码如下：</p>
+<pre><code>public override object DeQueue(){
+    //找出优先队列里优先级最大的结点
+    for(;;){
+    }
+    //移除优先级最大的结点
+    Remove();
+}
+</code></pre><p><strong>链队列</strong></p>
+<hr>
+<p>因为顺序队列的存储空间有限且大小是固定的，插入时会有溢出，所以我们需要链队列。<br>由于链队列需要在表头(队头)删除结点，删除结点需要知道该结点的前一个结点是谁，为了统一第一个结点和中间结点，需要给链队列加上一个头结点。<br>链队列的队头引用front其实就是指向头结点，是固定不动的，队尾引用rear是一直指向表中的最后一个结点(最后一个结点有Next成员，所以rear不需要指向最后一个结点的下一个位置)。代码如下：</p>
+<pre><code>public class Node{
+    public object Data;
+    public Node Next;
+
+    public Node() {
+        Data = null;
+        Next = null;
+    }
+    public Node(Object data) {
+        Data = data;
+        Next = null;
+    }
+}
+class LinkQueue
+{
+    protected Node header;
+    protected Node front;
+    protected Node rear;
+
+    public LinkQueue() {
+        header = new Node();
+        front = header;
+        rear = header;
+    }
+    //入队列
+    public void EnQueue(object data) {
+        Node newNode = new Node(data);
+        rear.Next = newNode;
+        rear = newNode;
+    }
+    //出队列，队头引用front是不动的，一直指向头结点
+    public void DeQueue(ref object data) {
+        //队列空，则不再出队列
+        if (front == rear)
+            return;
+        //队头结点(头结点)的下一个结点就是队尾结点(表中只有一个元素了),则出队列后让队尾引用重新指向头结点
+        if (front.Next == rear)
+            rear = header;
+        data = front.Next.Data;
+        front.Next = front.Next.Next;
+    }
+}
+</code></pre><p>【注】：</p>
+<ul>
+<li>可以确定队列容量的情况下，建议使用循环队列，如果队列长度不能确定或者需要动态变化时，则需要用链队列</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/28/队列/" data-id="cit2x5t8w001cocvjp8tjjcm5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/队列/">队列</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/30/树/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据结构与算法之树
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/28/头结点/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">链表中什么时候需要用到头结点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-语法/">C#语法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/博客配置/">博客配置</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-容器/">C#容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MarkDown/">MarkDown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeTest/">timeTest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关键路径/">关键路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多说/">多说</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/头结点/">头结点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拓扑排序/">拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/改进排序/">改进排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小生成树/">最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最短路径/">最短路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/简单排序/">简单排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/队列/">队列</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-容器/" style="font-size: 10px;">C#容器</a> <a href="/tags/MarkDown/" style="font-size: 10px;">MarkDown</a> <a href="/tags/timeTest/" style="font-size: 10px;">timeTest</a> <a href="/tags/二叉树/" style="font-size: 10px;">二叉树</a> <a href="/tags/关键路径/" style="font-size: 10px;">关键路径</a> <a href="/tags/图/" style="font-size: 10px;">图</a> <a href="/tags/多说/" style="font-size: 10px;">多说</a> <a href="/tags/头结点/" style="font-size: 10px;">头结点</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/改进排序/" style="font-size: 10px;">改进排序</a> <a href="/tags/最小生成树/" style="font-size: 10px;">最小生成树</a> <a href="/tags/最短路径/" style="font-size: 10px;">最短路径</a> <a href="/tags/栈/" style="font-size: 10px;">栈</a> <a href="/tags/树/" style="font-size: 10px;">树</a> <a href="/tags/简单排序/" style="font-size: 10px;">简单排序</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/09/拓扑排序/">数据结构与算法之图之拓扑排序</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/03/改进排序/">数据结构与算法之改进排序</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/03/简单排序/">数据结构与算法之简单排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Elay<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

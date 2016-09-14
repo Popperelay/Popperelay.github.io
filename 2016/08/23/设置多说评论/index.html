@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Elays&#39;Blog</title>
+  <title>给博客添加多说评论 | Elays&#39;Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="Hexo+Github博客添加多说评论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/09/14/hello-world/index.html">
+<meta property="og:title" content="给博客添加多说评论">
+<meta property="og:url" content="http://yoursite.com/2016/08/23/设置多说评论/index.html">
 <meta property="og:site_name" content="Elays'Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-09-14T06:52:16.605Z">
+<meta property="og:description" content="Hexo+Github博客添加多说评论">
+<meta property="og:updated_time" content="2016-08-24T13:41:10.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="给博客添加多说评论">
+<meta name="twitter:description" content="Hexo+Github博客添加多说评论">
   
     <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
   
@@ -70,12 +67,16 @@ Quick">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-设置多说评论" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/09/14/hello-world/" class="article-date">
-  <time datetime="2016-09-14T12:50:48.144Z" itemprop="datePublished">2016-09-14</time>
+    <a href="/2016/08/23/设置多说评论/" class="article-date">
+  <time datetime="2016-08-23T08:04:49.000Z" itemprop="datePublished">2016-08-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/博客配置/">博客配置</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -84,7 +85,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      给博客添加多说评论
     </h1>
   
 
@@ -92,32 +93,66 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p><strong>Hexo+Github博客添加多说评论</strong><br><a id="more"></a></p>
+<hr>
+<ol>
+<li>在<a href="http://duoshuo.com/" target="_blank" rel="external">多说官网</a> 点击我要安装，创建自己的多说域名，其中<a href="http://xxx.duoshuo.com" target="_blank" rel="external">http://xxx.duoshuo.com</a> 中的xxx就是自己的duoshuo_shortname</li>
+<li>打开 <code>主题路径\_config.yml</code>，修改(\增加)duoshuo_shortname为<code>duoshuo_shortname: xxx</code>(xxx参考第一步，注意:后面有一个空格)</li>
+<li>打开<code>主题路径\layout\_partial\comment.ejs</code>(不同主题路径可能不一样)，将<section></section>之间的代码替换为如下：<pre><code>&lt;h2 class=&quot;title&quot;&gt;&lt;%= __(&apos;comment&apos;) %&gt;&lt;/h2&gt;
+&lt;% if(theme.duoshuo_shortname) { %&gt;
+&lt;!-- 多说评论框 start --&gt;
+  &lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%- page.path %&gt;&quot; data-title=&quot;&lt;%- page.title %&gt;&quot; data-url=&quot;&lt;%- page.permalink %&gt;&quot;&gt;&lt;/div&gt;
+ &lt;!-- 多说评论框 end --&gt;
+ &lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
+ &lt;script type=&quot;text/javascript&quot;&gt;
+ var duoshuoQuery = {short_name:&quot;duoshuo_shortname&quot;};   &lt;!-- 替换这里的duoshuo_shortname为第一步的xxx --&gt;
+     (function() {
+         var ds = document.createElement(&apos;script&apos;);
+         ds.type = &apos;text/javascript&apos;;ds.async = true;
+         ds.src = (document.location.protocol == &apos;https:&apos; ? &apos;https:&apos; : &apos;http:&apos;) + &apos;//static.duoshuo.com/embed.unstable.js&apos;;
+         ds.charset = &apos;UTF-8&apos;;
+         (document.getElementsByTagName(&apos;head&apos;)[0] 
+          || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);
+     })();
+     &lt;/script&gt;
+ &lt;!-- 多说公共JS代码 end --&gt; 
+        &lt;% } else if(config.disqus_shortname) { %&gt;
+&lt;div id=&quot;disqus_thread&quot;&gt;
+ &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;//disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;/div&gt;
+&lt;% } %&gt;
+</code></pre></li>
+<li>重新部署到github即可。打开博客文章便能看到多说评论框了。</li>
+</ol>
+<p>【注：博主用的主题是transparent，在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">github主题官网</a>就能找到，其它主题可能配置方法不太一样，但大多数都大同小异】</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/14/hello-world/" data-id="cit2x5t520001ocvjw8cbsr96" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/23/设置多说评论/" data-id="cit2x5t8g0016ocvjjlziq9r1" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多说/">多说</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
+    <a href="/2016/08/24/测试程序时间/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C#语法之测试程序时间花费
+        
+      </div>
+    </a>
   
-    <a href="/2016/09/14/test/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2016/08/22/MarkDown语法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">test</div>
+      <div class="article-nav-title">MarkDown的简单语法规则</div>
     </a>
   
 </nav>
