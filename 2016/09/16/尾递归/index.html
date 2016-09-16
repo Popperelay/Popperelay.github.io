@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>递归与尾递归 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="递归与尾递归"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-16T11:17:50.000Z"><a href="/2016/09/16/尾递归/">2016-09-16</a></time>
+      
+      
+  
+    <h1 class="title">递归与尾递归</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>递归：在函数或者方法里调用自身，且有明确的递归结束条件。</p>
+<hr>
+<p>下面来看一个基本递归（一般意义下的递归）<br><a id="more"></a><br>问题：计算n!<br>计算公式为：n!=nx(n-1)x(n-2)……2x1<br>递归公式为：<img src="http://dl44.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%B0%BE%E9%80%92%E5%BD%92%2FTailRecursion.png&amp;fhash=f8fe46fb6d104f93a0866c57ed5ebf9c0f0f8cfe&amp;dt=44.0640cb6cdbc2268d58dc9f176260b07f&amp;v=1.0.1&amp;rtick=14740145124960&amp;open_app_id=0&amp;devtype=web&amp;sign=8126d07d831831e022b8ac80e20662a2&amp;" alt=""><br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Recursion</span>(<span class="params"><span class="keyword">int</span> n</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">else</span> <span class="title">if</span> (<span class="params">n == <span class="number">0</span> || n == <span class="number">1</span></span>)  <span class="comment">//0的阶乘也等于1</span></span></div><div class="line">        return 1;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> n * Recursion(n - <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的每一次递归中，都需要在栈中开辟一块新的空间，用来保存当前方法的参数、局部变量、返回地址等等，便于后面递归返回时能够回溯到正确的位置和状态。如果递归深度太大，栈中就会保存大量的递归之前的数据，可能会造成栈溢出。</p>
+<hr>
+<p>下面再来看一下尾递归<br>问题还是：计算n!<br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用时currentValue传入1</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Recursion</span>(<span class="params"><span class="keyword">int</span> n, <span class="keyword">int</span> currentValue</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">else</span> <span class="title">if</span> (<span class="params">n == <span class="number">0</span> || n == <span class="number">1</span></span>)</span></div><div class="line">        return currentValue;</div><div class="line">    <span class="function"><span class="keyword">else</span> </span></div><div class="line">        return <span class="title">Recursion</span>(<span class="params">n - <span class="number">1</span>, n * currentValue</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>比较上诉两份代码，可以看到第一份代码的递归调用是在倒数第二步进行的（先递归调用再做乘法），而第二份代码的递归调用是在最后一步进行的。<br>所以，顾名思义，<strong>尾递归：对函数自身的递归调用在函数体的最后一步</strong></p>
+<p>还有更有意思的，由于尾递归是在最后一步调用的自身，所以在调用返回后应该就直接退出调用函数了（因为它已经是函数体最后一步了），也就是说返回到函数体的哪个位置（返回地址）不需要了，递归到最后一层时直接退出，不再需要回溯了。而且调用函数的参数、局部变量等等也不会再用到，那么就没有必要在尾递归调用的时候在栈中开辟新的空间去存储调用之前的状态信息了。很多编译器会自动识别并这样优化尾递归（部分高级语言不支持）。这样，尾递归就带来了性能上的很大提升。</p>
+<p>在第一份基本递归的代码中，由于递归调用是在倒数第二步进行的，再递归返回后还需要与方法的参数n相乘，这样就不得不在栈中开辟一块新的空间，来存储调用之前的参数n、返回地址等等。如果不开辟新的空间，下次进入递归的函数内部时，由于递归函数本身就有参数、局部变量等等，就有可能把递归调用之前的n给覆写了，导致递归返回时，跟它相乘的n不是正确的n，导致结果错误。</p>
+<p>可以看到在尾递归中，不仅需要把递归调用放在最后一步，还需要设置一个参数用来保存或计算调用之前的计算结果，如第二份尾递归代码中的currentValue。其实由于尾递归没了回溯，所以它的过程还是很类似迭代的。</p>
+<p>【注】：<br>可以看出，这种优化其实不止于尾递归，对于所有尾调用（在函数体最后一步调用别的函数）其实都是有这种优化的。尾递归是尾调用的一种。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据结构/">数据结构</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/尾递归/">尾递归</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/09/16/尾递归/" data-title="递归与尾递归" data-url="http://yoursite.com/2016/09/16/尾递归/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>2</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>14</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
