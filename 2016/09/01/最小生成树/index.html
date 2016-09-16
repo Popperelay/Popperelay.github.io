@@ -67,16 +67,18 @@
 <li>设置一个已知顶点序列和一个生成树边序列。</li>
 <li>先随机找一个顶点，把这个顶点加入已知顶点序列中</li>
 <li>找出已知顶点和图中剩余顶点(未知顶点)之间权值最小的边，把这个边加入到生成树边序列中，并且把这条边上的那个未知顶点加入到已知顶点序列中</li>
-<li>重复步骤3，直到已知顶点序列已经包含了图中所有的顶点为止<br>按Prim算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree2.png&amp;fhash=c8d86050bca17af0cc53fbfd28ea873cc4778891&amp;dt=81.8408afffcb0669616ee8a9670659b7ff&amp;v=1.0.1&amp;rtick=14727204873443&amp;open_app_id=0&amp;devtype=web&amp;sign=0e862bd2609e24bc455c69c48a6eb064&amp;" alt=""><br><strong>Prim算法核心：从已知顶点到未知顶点中找出最小边（权值最小）</strong><br>代码如下：</li>
+<li>重复步骤3，直到已知顶点序列已经包含了图中所有的顶点为止</li>
 </ol>
+<p>按Prim算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree2.png&amp;fhash=c8d86050bca17af0cc53fbfd28ea873cc4778891&amp;dt=81.8408afffcb0669616ee8a9670659b7ff&amp;v=1.0.1&amp;rtick=14727204873443&amp;open_app_id=0&amp;devtype=web&amp;sign=0e862bd2609e24bc455c69c48a6eb064&amp;" alt=""><br><strong>Prim算法核心：从已知顶点到未知顶点中找出最小边（权值最小）</strong><br>代码如下：</p>
 <p>普里姆(Prim)算法的时间复杂度为O(n^2)。</p>
 <hr>
 <p><font size="4" color="orange">克鲁斯卡尔(Kruskal)算法</font><br>算法规则：</p>
 <ol>
 <li>设置最小生成树的一个顶点序列和一个边序列。先确定图中的所有顶点，全部存放到最小生成树的顶点序列中，边序列还是空的</li>
 <li>找出原图中除去最小生成树边序列以外的权值最小的边，如果这条边的两个顶点在现有最小生成树的不同连通子图上(也就是加入这条边后不会在现有生成树中形成回路)，则加入到最小生成树的边序列中</li>
-<li>重复第2步，直到现有最小生成树的所有边都在同一连通子图上(只有一个连通分量)<br>按Kruskal算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree3.png&amp;fhash=d279dead31d88ec180a1d15490603205dbe9675e&amp;dt=81.b813d872fb209228c6a983007286edd3&amp;v=1.0.1&amp;rtick=14727204872850&amp;open_app_id=0&amp;devtype=web&amp;sign=a47d349144d1401e3a70d3bddcfbf7cf&amp;" alt=""><br><strong>Kruskal算法核心：从剩下的边中找出不会构成回路的最小边（权值最小）</strong><br>代码如下：</li>
+<li>重复第2步，直到现有最小生成树的所有边都在同一连通子图上(只有一个连通分量)</li>
 </ol>
+<p>按Kruskal算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree3.png&amp;fhash=d279dead31d88ec180a1d15490603205dbe9675e&amp;dt=81.b813d872fb209228c6a983007286edd3&amp;v=1.0.1&amp;rtick=14727204872850&amp;open_app_id=0&amp;devtype=web&amp;sign=a47d349144d1401e3a70d3bddcfbf7cf&amp;" alt=""><br><strong>Kruskal算法核心：从剩下的边中找出不会构成回路的最小边（权值最小）</strong><br>代码如下：</p>
 <p>克鲁斯卡尔(Kruskal)算法的时间复杂度为O(eloge)。其中e是图的边数</p>
 <hr>
 <p><font size="4" color="orange">普里姆(Prim)算法和克鲁斯卡尔(Kruskal)算法的比较：</font></p>
