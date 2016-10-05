@@ -99,6 +99,28 @@
 </li>
 </ul>
 <hr>
+<p><font size="5" color="orange">移动网络帧同步中自定义的UDP</font></p>
+<ul>
+<li><p><font size="4" color="red">为何要使用UDP而不是TCP呢？</font></p>
+<ul>
+<li>TCP的慢启动算法不适合移动网络，移动网络信号时好时坏，使用慢启动会使数据包的发送速率经常在很低的段位，导致数据不能及时快速地到达对端</li>
+<li>拥塞避免算法不适合移动网络主要原因是其考虑到网络的公平性及收敛性，并且AIMD 算法会使实时性大受影响，延迟明显提升</li>
+<li>还有TCP协议用于重传的RTO的指数变化及拥塞算法的实现Nagle的缓存等，都是TCP并不太适合高实时性要求的游戏玩法的原因</li>
+<li>实验表明，在弱网络环境下，UDP的RTT几乎不受影响，而TCP的RTT波动比较大，特别是受丢包率影响比较明显</li>
+</ul>
+</li>
+<li><p><font size="4" color="red">基于UDP的FSP协议栈</font><br>由于UDP是不可靠的，所以需要DIY自己的UDP。于是基于UDP实现一个自定义的协议栈，称为FSP（FrameSyncProtocol）。<br>FSP的基本原理其实就是仿照TCP的ACK/SEQ重传机制，并且使用冗余重传，来实现传输的可靠性。使用冗余重传的好处是简化了麻烦的时序问题，并且收到的每个包都是顺序的。在网络拥塞时带宽利用率优于TCP，但流量会略微增加一些（好像也无法调节网络拥塞，因为它去除了TCP的拥塞控制机制，可能对于时好时坏的移动网络是比较适合的，因为网络不大会一直很差）。FSP图示如下：<br><img src="http://dl40.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%B8%A7%E5%90%8C%E6%AD%A5%2FFrameSync3.png&amp;fhash=87092a987388ad9b8fd648f8b32233e958906562&amp;dt=40.546548d80a07f3a0178a8d83dcaecdaf&amp;v=1.0.1&amp;rtick=14756621797934&amp;open_app_id=0&amp;devtype=web&amp;sign=ebc0bafb11d96b3ea1c48f5a5617bae9&amp;" alt=""></p>
+<ol>
+<li>客户端发Action1，服务器未收到</li>
+<li>客户端新增Action2，发送给服务器的包同时包含Action1和Action2，并且seq=2</li>
+<li>服务器确认并发送给客户端ACK=2的包</li>
+<li>客户端由于某些原因（可能是网络延迟）未收到服务器ACK=2的确认包，新增Action3后，客户端则把Action1、Action2、Action3一起发送给服务器，并且seq=3</li>
+<li>客户端收到了ACK=2的确认包，则把队列中的Action1、Action2删除，新增Action4后，把队列中的Action3、Action4一起发送给服务器，并且seq=4</li>
+</ol>
+<p>实际上线测试中，FSP在弱网络环境下表现也是不错的</p>
+</li>
+</ul>
+<hr>
 <p>更多详细介绍，请看<a href="http://gad.qq.com/article/detail/7169916" target="_blank" rel="external">这篇文章</a></p>
 
       
