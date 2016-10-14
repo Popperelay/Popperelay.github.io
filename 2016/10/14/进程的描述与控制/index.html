@@ -60,7 +60,9 @@
     </header>
     <div class="entry">
       
-        <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
+        <hr>
+<a id="more"></a>
+<p><font size="5" color="orange">程序的并发执行</font><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
 <ul>
 <li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">进程p1：...;counter=counter+<span class="number">1</span>;...</div><div class="line">进程p2：...;counter=counter+<span class="number">1</span>;...</div></pre></td></tr></table></figure>
 </li>
