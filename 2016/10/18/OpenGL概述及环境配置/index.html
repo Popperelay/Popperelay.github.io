@@ -93,12 +93,12 @@
 </ol>
 </li>
 </ul>
-<p>一般还需要：#include<stdio.h>、#include<stdlib.h>、#include<math.h></math.h></stdlib.h></stdio.h></p>
+<p>一般还需要：<code>#include &lt;stdio.h&gt;、#include &lt;stdlib.h&gt;、#include &lt;math.h&gt;</code></p>
 <ul>
 <li>使用OpenGL实用函数工具包GLUT时的环境配置：<ol>
 <li>文件拷贝：<br>头文件glut.h拷贝到：\VC6.0安装目录\VC98\Include\GL目录下<br>连接库glut32.lib拷贝到：\VC6.0安装目录\VC98\Lib目录下<br>运行库glut32.dll拷贝到：C:\Windows\SysWOW64目录下（这时64位系统下的，如果是32位系统应该拷贝到：C:\Windows\System32）</li>
 <li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="https://dl40.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE2.png&amp;fhash=bece1d886e75e256e852c8aed0f40c03e122e274&amp;dt=40.c687d848309fc2cd206c5e59b49b96c9&amp;v=1.0.1&amp;rtick=14766991293000&amp;open_app_id=0&amp;devtype=web&amp;sign=5e5e286d24887262b9e2623387b61364&amp;" alt=""></li>
-<li>在源文件里加上头文件：#include <gl glut.h=""></gl></li>
+<li>在源文件里加上头文件：<code>#include &lt;GL/glut.h&gt;</code></li>
 </ol>
 </li>
 </ul>
