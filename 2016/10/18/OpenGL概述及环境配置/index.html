@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>数据结构与算法之图之最小生成树 | Elays&#39;Blog</title>
+  <title>OpenGL概述及环境配置 | Elays&#39;Blog</title>
   <meta name="author" content="Elay">
   
   <meta name="description" content="Elay">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="数据结构与算法之图之最小生成树"/>
+  <meta property="og:title" content="OpenGL概述及环境配置"/>
   <meta property="og:site_name" content="Elays&#39;Blog"/>
 
   
@@ -50,44 +50,54 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-01T09:33:30.000Z"><a href="/2016/09/01/最小生成树/">2016-09-01</a></time>
+        <time datetime="2016-10-18T07:08:20.000Z"><a href="/2016/10/18/OpenGL概述及环境配置/">2016-10-18</a></time>
       
       
   
-    <h1 class="title">数据结构与算法之图之最小生成树</h1>
+    <h1 class="title">OpenGL概述及环境配置</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>看下面这个实际问题：<br><a id="more"></a><br>假设你是电信的工程师，需要为下面的9个村庄架设网线，村庄位置如下图所示。边上的数字表示村庄之间的距离。要求以最小的成本使这9个村庄的网线互通，应该怎么办？<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree1.png&amp;fhash=6ca7c5128e203c1a05cac18cd2e900dbe921900b&amp;dt=81.adb70389adbe359e8ea498e213522e61&amp;v=1.0.1&amp;rtick=14727183898935&amp;open_app_id=0&amp;devtype=web&amp;sign=c3b0689025181f4a280318c2dbec0216&amp;" alt=""><br>最小成本，自然是需要连线的公里数最小。因为只需要9个村庄网线互通，不要求直接可达，所以设计路线至少应该是一颗生成树，9个结点，只铺设8条线路即可。但是图的生成树有很多个，我们需要代价最小的那棵生成树，即最小生成树。<br>要根据图找出这棵最小生成树，有两种算法：普里姆(Prim)算法、克鲁斯卡尔(Kruskal)算法。</p>
-<hr>
-<p><font size="5" color="orange">普里姆(Prim)算法</font><br>算法规则：</p>
-<ol>
-<li>设置一个已知顶点序列和一个生成树边序列。</li>
-<li>先随机找一个顶点，把这个顶点加入已知顶点序列中</li>
-<li>找出已知顶点和图中剩余顶点(未知顶点)之间权值最小的边，把这个边加入到生成树边序列中，并且把这条边上的那个未知顶点加入到已知顶点序列中</li>
-<li>重复步骤3，直到已知顶点序列已经包含了图中所有的顶点为止</li>
+        <p><font size="5" color="orange">OpenGL简介</font><br><a id="more"></a><br>OpenGL是一个功能强大的图形库，用户可以用它很方便地开发所需要的有多种特殊视觉（如光照、透明、纹理、阴影）的三维图形。<br>OpenGL具有很好的跨平台性，2012年8月已经更新到4.3版本。</p>
+<p><font size="4" color="red">OpenGL组成</font><br>OpenGL主要由OpenGL基本函数库、OpenGL实用函数工具包、WGL库（OpenGL的Windows扩展库）</p>
+<ul>
+<li>OpenGL的基本函数库：主要包括三个：OpenGL核心库、OpenGL实用库、OpenGL辅助库。<ul>
+<li>OpenGL核心库（GL）<br>这部分函数常用于常规的、核心的图形处理，是OpenGL的核心部分；包含300多个函数，函数名前缀都是”gl”。</li>
+<li>OpenGL实用库（GLU）（Utility）<br>这部分函数通过调用核心库的函数，为开发者提供相对简单的用法，实现一些较为复杂的操作。如绘制茶壶等简单形体。包含大约50个函数，函数名前缀都是”glu”。</li>
+<li>OpenGL辅助库（GLAUX）（Auxiliary）<br>这部分函数提供窗口管理、输入输出处理以及绘制一些简单的三维物体，包含约30个函数，函数名前缀都是”aux”。</li>
+</ul>
+</li>
+<li>OpenGL实用函数工具包（GLUT：OpenGL Utility Toolkit）：由Mark Kilgard开发。主要提供窗口系统操作功能，如创建窗口、鼠标和键盘输入、菜单、事件驱动等等。包含大约30个函数，函数名前缀都是glut。<br>【注】：glut中的窗口管理函数不依赖于操作系统，可以在所有的OpenGL平台上运行。</li>
+<li>WGL库：OpenGL对窗口系统的扩展<ul>
+<li>用于连接OpenGL和Windows，在Windows平台上设置OpenGL环境</li>
+<li>并不是所有函数前缀都是”wgl”</li>
+<li>只能在Windows上运行</li>
+</ul>
+</li>
+</ul>
+<p><font size="4" color="red">OpenGL主要功能</font></p>
+<ul>
+<li>基本几何形状<br>绘制点、线段、多边形、Bezier曲线、简单形体等。</li>
+<li>属性<br>设置颜色、线型（实、虚等）…</li>
+<li>变换<br>几何变换：平移、旋转、缩放；<br>投影变换：正投影、透视投影</li>
+<li>交互<br>键盘和鼠标</li>
+</ul>
+<p><font size="5" color="orange">OpenGL环境配置</font></p>
+<ul>
+<li>使用OpenGL辅助库GLAUX时的环境配置：<ol>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="https://dl40.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE1.png&amp;fhash=dd7ccd1284cd4a38f76362db692bea368966e36a&amp;dt=40.e865f78608e004368a44d66c62b4050d&amp;v=1.0.1&amp;rtick=14766969339640&amp;open_app_id=0&amp;devtype=web&amp;sign=f573ce0cb7a18b918fc0128983841515&amp;" alt=""></li>
+<li>Windows平台下的源文件需要加上以下头文件：<br>#include<window.h><br>#include<gl gl.h=""><br>#include<gl glu.h=""><br>#include<gl glaux.h=""><br>一般还需要：#include<stdio.h>、#include<stdlib.h>、#include<math.h></math.h></stdlib.h></stdio.h></gl></gl></gl></window.h></li>
 </ol>
-<p><strong>Prim算法核心：从已知顶点到未知顶点中找出最小边（权值最小）</strong><br>按Prim算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree2.png&amp;fhash=c8d86050bca17af0cc53fbfd28ea873cc4778891&amp;dt=81.8408afffcb0669616ee8a9670659b7ff&amp;v=1.0.1&amp;rtick=14727204873443&amp;open_app_id=0&amp;devtype=web&amp;sign=0e862bd2609e24bc455c69c48a6eb064&amp;" alt=""><br>代码如下：</p>
-<p>普里姆(Prim)算法的时间复杂度为O(n^2)。</p>
-<hr>
-<p><font size="5" color="orange">克鲁斯卡尔(Kruskal)算法</font><br>算法规则：</p>
-<ol>
-<li>设置最小生成树的一个顶点序列和一个边序列。先确定图中的所有顶点，全部存放到最小生成树的顶点序列中，边序列还是空的</li>
-<li>找出原图中除去最小生成树边序列以外的权值最小的边，如果这条边的两个顶点在现有最小生成树的不同连通子图上(也就是加入这条边后不会在现有生成树中形成回路)，则加入到最小生成树的边序列中</li>
-<li>重复第2步，直到现有最小生成树的所有边都在同一连通子图上(只有一个连通分量)</li>
+</li>
+<li>使用OpenGL实用函数工具包GLUT时的环境配置：<ol>
+<li>文件拷贝：<br>头文件glut.h拷贝到：\VC6.0安装目录\VC98\Include\GL目录下<br>连接库glut32.lib拷贝到：\VC6.0安装目录\VC98\Lib目录下<br>运行库glut32.dll拷贝到：C:\Windows\SysWOW64目录下（这时64位系统下的，如果是32位系统应该拷贝到：C:\Windows\System32）</li>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="https://dl40.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE%2FOpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E9%85%8D%E7%BD%AE2.png&amp;fhash=bece1d886e75e256e852c8aed0f40c03e122e274&amp;dt=40.c687d848309fc2cd206c5e59b49b96c9&amp;v=1.0.1&amp;rtick=14766991293000&amp;open_app_id=0&amp;devtype=web&amp;sign=5e5e286d24887262b9e2623387b61364&amp;" alt=""></li>
+<li>在源文件里加上头文件：#include <gl glut.h=""></gl></li>
 </ol>
-<p><strong>Kruskal算法核心：从剩下的边中找出不会构成回路的最小边（权值最小）</strong><br>按Kruskal算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree3.png&amp;fhash=d279dead31d88ec180a1d15490603205dbe9675e&amp;dt=81.b813d872fb209228c6a983007286edd3&amp;v=1.0.1&amp;rtick=14727204872850&amp;open_app_id=0&amp;devtype=web&amp;sign=a47d349144d1401e3a70d3bddcfbf7cf&amp;" alt=""><br>代码如下：</p>
-<p>克鲁斯卡尔(Kruskal)算法的时间复杂度为O(eloge)。其中e是图的边数</p>
-<hr>
-<p><font size="5" color="orange">普里姆(Prim)算法和克鲁斯卡尔(Kruskal)算法的比较：</font></p>
-<ol>
-<li>普里姆算法是从结点入手的，找出已知结点和未知结点之间权值最小的边；克鲁斯卡尔算法是从边入手的，其最小生成树中的所有结点已经事先确定好，再去找不会构成回路的权值最小的边</li>
-<li>普里姆算法在边数非常多的情况下，比如稠密图，效率会比克鲁斯卡尔算法高；而在边数比较少时，例如稀疏图，克鲁斯卡尔算法的效率比普里姆算法高</li>
-</ol>
-<hr>
-<p>未完待续</p>
+</li>
+</ul>
 
       
     </div>
@@ -96,13 +106,13 @@
         
   
   <div class="categories">
-    <a href="/categories/数据结构/">数据结构</a>
+    <a href="/categories/OpenGL/">OpenGL</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/最小生成树/">最小生成树</a>
+    <a href="/tags/OpenGL配置/">OpenGL配置</a>
   </div>
 
         
@@ -136,7 +146,7 @@
 
  
   	   <!-- 多说评论框 start -->
- 		<div class="ds-thread" data-thread-key="2016/09/01/最小生成树/" data-title="数据结构与算法之图之最小生成树" data-url="http://yoursite.com/2016/09/01/最小生成树/"></div>
+ 		<div class="ds-thread" data-thread-key="2016/10/18/OpenGL概述及环境配置/" data-title="OpenGL概述及环境配置" data-url="http://yoursite.com/2016/10/18/OpenGL概述及环境配置/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
