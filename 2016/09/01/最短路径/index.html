@@ -62,7 +62,7 @@
       
         <p>最短路径：两顶点之间权值之和最小的路径<br><a id="more"></a><br>寻找带权图(网图)中两点之间最短路径的算法主要有两种：迪杰斯特拉(Dijkstra)算法、弗洛伊德(Floyd)算法</p>
 <hr>
-<font size="4" color="orange">迪杰斯特拉(Dijkstra)算法</font><br>迪杰斯特拉算法的核心思想：基于已经求出的最短路径的基础上，去求出更远顶点的最短路径，最终得到想要的结果。<br>如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FshortestPath.png&amp;fhash=2cea91104e05b5423e9f0fff6202cdc43db5254e&amp;dt=81.b92f7c7fc0ddb2d0db8544f5ed917617&amp;v=1.0.1&amp;rtick=14727241201761&amp;open_app_id=0&amp;devtype=web&amp;sign=e7f98d780bd90f28237e28ae1914c533&amp;" alt=""><br>要求源点V0到终点V8的最短路径，根据迪杰斯特拉算法需要先求得到中间所有顶点的最短路径：<br>1. V0到V1的最短路径明显是1<br>2. V0到V2的最短路径应该是如下图：<br>….<br>迪杰斯特拉算法求最短路径的代码如下：<br><br>迪杰斯特拉算法求某两点之间的最短路径的时间复杂度为O(n^2)，求所有顶点到所有顶点之间最短路径的时间复杂度为O(n^2)。<br><em>*</em><br><font size="4" color="orange">弗洛伊德(Floyd)算法</font>
+<font size="4" color="orange">迪杰斯特拉(Dijkstra)算法</font><br>迪杰斯特拉算法的核心思想：基于已经求出的最短路径的基础上，去求出更远顶点的最短路径，最终得到想要的结果。<br>如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721569716.png" alt=""><br>要求源点V0到终点V8的最短路径，根据迪杰斯特拉算法需要先求得到中间所有顶点的最短路径：<br>1. V0到V1的最短路径明显是1<br>2. V0到V2的最短路径应该是如下图：<br>….<br>迪杰斯特拉算法求最短路径的代码如下：<br><br>迪杰斯特拉算法求某两点之间的最短路径的时间复杂度为O(n^2)，求所有顶点到所有顶点之间最短路径的时间复杂度为O(n^2)。<br><em>*</em><br><font size="4" color="orange">弗洛伊德(Floyd)算法</font>
 
 <hr>
 <p>未完待续</p>

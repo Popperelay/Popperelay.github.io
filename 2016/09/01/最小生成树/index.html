@@ -60,7 +60,7 @@
     </header>
     <div class="entry">
       
-        <p>看下面这个实际问题：<br><a id="more"></a><br>假设你是电信的工程师，需要为下面的9个村庄架设网线，村庄位置如下图所示。边上的数字表示村庄之间的距离。要求以最小的成本使这9个村庄的网线互通，应该怎么办？<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree1.png&amp;fhash=6ca7c5128e203c1a05cac18cd2e900dbe921900b&amp;dt=81.adb70389adbe359e8ea498e213522e61&amp;v=1.0.1&amp;rtick=14727183898935&amp;open_app_id=0&amp;devtype=web&amp;sign=c3b0689025181f4a280318c2dbec0216&amp;" alt=""><br>最小成本，自然是需要连线的公里数最小。因为只需要9个村庄网线互通，不要求直接可达，所以设计路线至少应该是一颗生成树，9个结点，只铺设8条线路即可。但是图的生成树有很多个，我们需要代价最小的那棵生成树，即最小生成树。<br>要根据图找出这棵最小生成树，有两种算法：普里姆(Prim)算法、克鲁斯卡尔(Kruskal)算法。</p>
+        <p>看下面这个实际问题：<br><a id="more"></a><br>假设你是电信的工程师，需要为下面的9个村庄架设网线，村庄位置如下图所示。边上的数字表示村庄之间的距离。要求以最小的成本使这9个村庄的网线互通，应该怎么办？<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721569563.png" alt=""><br>最小成本，自然是需要连线的公里数最小。因为只需要9个村庄网线互通，不要求直接可达，所以设计路线至少应该是一颗生成树，9个结点，只铺设8条线路即可。但是图的生成树有很多个，我们需要代价最小的那棵生成树，即最小生成树。<br>要根据图找出这棵最小生成树，有两种算法：普里姆(Prim)算法、克鲁斯卡尔(Kruskal)算法。</p>
 <hr>
 <p><font size="5" color="orange">普里姆(Prim)算法</font><br>算法规则：</p>
 <ol>
@@ -69,7 +69,7 @@
 <li>找出已知顶点和图中剩余顶点(未知顶点)之间权值最小的边，把这个边加入到生成树边序列中，并且把这条边上的那个未知顶点加入到已知顶点序列中</li>
 <li>重复步骤3，直到已知顶点序列已经包含了图中所有的顶点为止</li>
 </ol>
-<p><strong>Prim算法核心：从已知顶点到未知顶点中找出最小边（权值最小）</strong><br>按Prim算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree2.png&amp;fhash=c8d86050bca17af0cc53fbfd28ea873cc4778891&amp;dt=81.8408afffcb0669616ee8a9670659b7ff&amp;v=1.0.1&amp;rtick=14727204873443&amp;open_app_id=0&amp;devtype=web&amp;sign=0e862bd2609e24bc455c69c48a6eb064&amp;" alt=""><br>代码如下：</p>
+<p><strong>Prim算法核心：从已知顶点到未知顶点中找出最小边（权值最小）</strong><br>按Prim算法找出的最小生成树如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721569616.png" alt=""><br>代码如下：</p>
 <p>普里姆(Prim)算法的时间复杂度为O(n^2)。</p>
 <hr>
 <p><font size="5" color="orange">克鲁斯卡尔(Kruskal)算法</font><br>算法规则：</p>
@@ -78,7 +78,7 @@
 <li>找出原图中除去最小生成树边序列以外的权值最小的边，如果这条边的两个顶点在现有最小生成树的不同连通子图上(也就是加入这条边后不会在现有生成树中形成回路)，则加入到最小生成树的边序列中</li>
 <li>重复第2步，直到现有最小生成树的所有边都在同一连通子图上(只有一个连通分量)</li>
 </ol>
-<p><strong>Kruskal算法核心：从剩下的边中找出不会构成回路的最小边（权值最小）</strong><br>按Kruskal算法找出的最小生成树如下图所示：<br><img src="https://dl81.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2F%E5%9B%BE%2F%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%2FminSpanTree3.png&amp;fhash=d279dead31d88ec180a1d15490603205dbe9675e&amp;dt=81.b813d872fb209228c6a983007286edd3&amp;v=1.0.1&amp;rtick=14727204872850&amp;open_app_id=0&amp;devtype=web&amp;sign=a47d349144d1401e3a70d3bddcfbf7cf&amp;" alt=""><br>代码如下：</p>
+<p><strong>Kruskal算法核心：从剩下的边中找出不会构成回路的最小边（权值最小）</strong><br>按Kruskal算法找出的最小生成树如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721569664.png" alt=""><br>代码如下：</p>
 <p>克鲁斯卡尔(Kruskal)算法的时间复杂度为O(eloge)。其中e是图的边数</p>
 <hr>
 <p><font size="5" color="orange">普里姆(Prim)算法和克鲁斯卡尔(Kruskal)算法的比较：</font></p>
