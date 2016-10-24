@@ -170,8 +170,8 @@ public void CreateListTail(int n) {
 <ul>
 <li>尾节点不再是指向null，而是指向头节点header</li>
 <li>判断循环结束的条件不再是current是否为null，而是current不等于头节点header</li>
-<li>为了让查找头节点和尾节点的时间复杂度都为O(1)，需要保留一个尾节点的引用(如上述代码中的tailer)，如下图：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2Flinked.png&amp;fhash=ca435f99fa11e3566c3b7662bf69e8d38eecc7f0&amp;dt=85.31760e2d7af78da5ebdd31a199dbbab2&amp;v=1.0.1&amp;rtick=14720497643939&amp;open_app_id=0&amp;devtype=web&amp;sign=df76c7a61092f8010fe667f4e386c7d9&amp;" alt=""></li>
-<li>使用尾节点引用还可以方便地将两个链表链接成一个表：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2Flinked1.png&amp;fhash=19651392b7e4b656da8d76176a61c825ec27554e&amp;dt=85.7a46b5d7c9921b7f1a3fe18d8a39de6e&amp;v=1.0.1&amp;rtick=14720494924044&amp;open_app_id=0&amp;devtype=web&amp;sign=d3af0202974155145491da7a75e42145&amp;" alt=""><br>将上面两个循环链表合并成一个链表，如下：<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2Flinked3.png&amp;fhash=808850c7ce7751885df34c17c59f5c9ef7c3b7e8&amp;dt=85.fd9db71d87640f8d8c8ce6da22d06ca9&amp;v=1.0.1&amp;rtick=14720498833133&amp;open_app_id=0&amp;devtype=web&amp;sign=14321e25cbe27d254db98581b9674b4e&amp;" alt=""><br>合并的代码如下：<pre><code>headerA = rearA-&gt;next;  //保存A表的头节点,即图中1
+<li>为了让查找头节点和尾节点的时间复杂度都为O(1)，需要保留一个尾节点的引用(如上述代码中的tailer)，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721597924.png" alt=""></li>
+<li>使用尾节点引用还可以方便地将两个链表链接成一个表：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721597983.png" alt=""><br>将上面两个循环链表合并成一个链表，如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721598048.png" alt=""><br>合并的代码如下：<pre><code>headerA = rearA-&gt;next;  //保存A表的头节点,即图中1
 rearA-&gt;next = rearB-&gt;next-&gt;next; //将A表的尾节点的Link指向B表的第一个节点(非B表头节点),即图中2
 rearB-&gt;next = headerA; //将B表的尾节点的Link指向A表的头节点,即图中3
 </code></pre></li>
@@ -197,13 +197,13 @@ rearB-&gt;next = headerA; //将B表的尾节点的Link指向A表的头节点,即
   }
 }
 </code></pre></li>
-<li><p>插入结点时要不仅要考虑next，还要考虑prior<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2FdoubleLink.png&amp;fhash=75ddfdc8d643826167b8310eb97edfad7f41c6e0&amp;dt=85.bc9fbc7d5dacd883dbac5e7edd857a84&amp;v=1.0.1&amp;rtick=14720521691931&amp;open_app_id=0&amp;devtype=web&amp;sign=305aa4c62c09471c76caa7bed104690d&amp;" alt=""><br>对应代码如下：(顺序很重要)     </p>
+<li><p>插入结点时要不仅要考虑next，还要考虑prior<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721597816.png" alt=""><br>对应代码如下：(顺序很重要)     </p>
 <pre><code>s-&gt;prior = p;
 s-&gt;next = p-&gt;next;
 p-&gt;next-&gt;prior = s;
 p-&gt;next = s;
 </code></pre></li>
-<li><p>删除结点时也要考虑到prior<br><img src="https://dl85.yunpan.360.cn/intf.php?method=Preview.outputPic&amp;qid=49291271&amp;fname=%2F%E5%9B%BE%E7%89%87%2F%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%2FdoubleLink2.png&amp;fhash=286bda6e02647b16f4feea72152926927f2ad395&amp;dt=85.f86f2e30b782f032d441d9809dc80e0c&amp;v=1.0.1&amp;rtick=14720521695415&amp;open_app_id=0&amp;devtype=web&amp;sign=a3a6b0bf51ef32e8679b865437c8c7a3&amp;" alt=""><br>对应代码如下：</p>
+<li><p>删除结点时也要考虑到prior<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721597869.png" alt=""><br>对应代码如下：</p>
 <pre><code>p-&gt;prior-&gt;next = p-&gt;next;
 p-&gt;next-&gt;prior = p-&gt;prior;
 </code></pre></li>
