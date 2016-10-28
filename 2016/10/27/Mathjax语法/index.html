@@ -63,7 +63,12 @@
         <p><font size="5" color="orange">Mathjax简介</font><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">Mathjax语法</font></p>
-<p><font size="4" color="red">Mathjax公式排版方式</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用<code>$...$</code>），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displaye是公式独立成段（使用<code>$$...$$</code>），例如<code>$$f(x)=3 \times x$$</code>，$$f(x)=3 \times x$$是一个displayed公式。<br>【注】：右键点击公式，可查看公式代码、设置显示效果和渲染模式（点击打开的公式代码没有包含$，自己在写公式时加上即可）。</p>
+<p><font size="4" color="red">Mathjax公式排版方式</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用<code>$...$</code>），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displayed是公式独立成段（使用<code>$$...$$</code>），例如<code>$$f(x)=3 \times x$$</code>，$$f(x)=3 \times x$$是一个displayed公式。<br>【注】：</p>
+<ul>
+<li>右键点击公式，可查看公式代码、设置显示效果和渲染模式（点击打开的公式代码没有包含$，自己在写公式时加上即可）。</li>
+<li>两个独立成段的displayed公式之间必须以空行分开，否则显示不出来。即应该是下面这样：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$...$$</div><div class="line"></div><div class="line">$$...$$</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p><font size="4" color="red">公式中的希腊字母</font><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147764777424.png" alt=""></p>
 <p><font size="4" color="red">公式中的上标下标</font><br>上标使用^，下标使用_。例如x_i^2是：$x_i^2$。<br>【注】：</p>
 <ul>
