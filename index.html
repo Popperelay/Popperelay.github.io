@@ -61,10 +61,27 @@
     </header>
     <div class="entry">
       
-        <font size="5" color="orange">Mathjax简介</font><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。<br>&nbsp;<br><strong><em><br><font size="5" color="orange">Mathjax语法</font><br><font size="4" color="red">Mathjax公式排版</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用$…$），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displaye是公式独立成段（使用$$…$$），例如<code>$$(x)=3 \times x$$</code>，$$(x)=3 \times x$$是一个displayed公式。<br>&nbsp;
-</em></strong><br><font size="4" color="red">公式中希腊字母的写法</font>
+        <p><font size="5" color="orange">Mathjax简介</font><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">Mathjax语法</font></p>
+<p><font size="4" color="red">Mathjax公式排版方式</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用<code>$...$</code>），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displaye是公式独立成段（使用<code>$$...$$</code>），例如<code>$$(x)=3 \times x$$</code>，$$(x)=3 \times x$$是一个displayed公式。<br>【注】：右键点击公式，可查看公式代码、设置显示效果和渲染模式（点击打开的公式代码没有包含$，自己在写公式时加上即可）。</p>
+<p><font size="4" color="red">公式中的希腊字母</font><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147764777424.png" alt=""></p>
+<p><font size="4" color="red">公式中的上标下标</font><br>上标使用^，下标使用_。例如x_i^2是：$x_i^2$。<br>【注】：</p>
+<ul>
+<li>10^10得到的是&amp;10^10&amp;，而10^{10}才是$10^{10}$。</li>
+<li>x^5^6会报错，因为有二义性，必须使用大括号来加以界定，如：{x^5}^6：${x^5}^6$ 或者x^{5^6}：$x^{5^6}$。</li>
+</ul>
+<p><font size="4" color="red">公式中的括号</font></p>
+<ul>
+<li>小括号与方括号：小括号还是原始的()，方括号也是原始的[]。如(2+3)[4+4]：$(2+3)[4+4]$</li>
+<li>大括号：{}由于被用来界定分组（如上文中的10^{10}），所以大括号需要用￥{和￥)来表示，也可以使用￥lbrace和￥rbrace来表示。如￥{a<em>b￥}：$￥{a</em>b￥}$，￥lbrace a<em>b ￥rbrace：$￥lbrace a</em>b ￥rbrace$。</li>
+<li>尖括号：使用￥langle和￥rangle表示。如￥langle x ￥rangle：$￥langle x ￥rangle$。</li>
+<li>向上取整：使用￥lceil和￥rceil表示。如￥lceil x ￥rceil：$￥lceil x ￥rceil$。</li>
+<li>向下取整：使用￥lfloor和￥rfloor表示。如￥lfloor x ￥rfloor：$￥lfloor x ￥rfloor$。</li>
+<li>不可见括号：使用.表示。</li>
+</ul>
+<p>【注】：原始符号()、[]和￥{、￥}不会随着公式大小缩放。如下所示：<br>$$\lbrace\sum<em>{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\rbrace\tag{1.1}$$<br>$$\left \lbrace \sum</em>{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6} \right\rbrace\tag{1.2}$$</p>
 
-<table class="table table-bordered table-striped table-condensed"><br>   <tr><br>      <th>名称</th><br>      <th>大写</th><br>      <th>Tex</th><br>      <th>小写</th><br>      <th>Tex</th><br>   </tr><br>   <tr><br>      <td>alpha</td><br>      <td>AA</td><br>      <td>A</td><br>      <td>αα</td><br>      <td>\alpha</td><br>   </tr><br>   <tr><br>      <td>beta</td><br>      <td>BB</td><br>      <td>B</td><br>      <td>ββ</td><br>      <td>\beta</td><br>   </tr><br>   <tr><br>      <td>gamma</td><br>      <td>ΓΓ</td><br>      <td>\Gamma</td><br>      <td>γγ</td><br>      <td>\gamma</td><br>   </tr><br>   <tr><br>      <td>delta</td><br>      <td>ΔΔ</td><br>      <td>\Delta</td><br>      <td>δδ</td><br>      <td>\delta</td><br>   </tr><br>   <tr><br>      <td>epsilon</td><br>      <td>EE</td><br>      <td>E</td><br>      <td>ϵϵ</td><br>      <td>\epsilon</td><br>   </tr><br>   <tr><br>      <td>zeta</td><br>      <td>ZZ</td><br>      <td>Z</td><br>      <td>ζζ</td><br>      <td>\zeta</td><br>   </tr><br>   <tr><br>      <td>eta</td><br>      <td>HH</td><br>      <td>H</td><br>      <td>ηη</td><br>      <td>\eta</td><br>   </tr><br>   <tr><br>      <td>theta</td><br>      <td>ΘΘ</td><br>      <td>\Theta</td><br>      <td>θθ</td><br>      <td>\theta</td><br>   </tr><br>   <tr><br>      <td>iota</td><br>      <td>II</td><br>      <td>I</td><br>      <td>ιι</td><br>      <td>\iota</td><br>   </tr><br>   <tr><br>      <td>kappa</td><br>      <td>KK</td><br>      <td>K</td><br>      <td>κκ</td><br>      <td>\kappa</td><br>   </tr><br>   <tr><br>      <td>lambda</td><br>      <td>ΛΛ</td><br>      <td>\Lambda</td><br>      <td>λλ</td><br>      <td>\lambda</td><br>   </tr><br>   <tr><br>      <td>mu</td><br>      <td>MM</td><br>      <td>M</td><br>      <td>μμ</td><br>      <td>\mu</td><br>   </tr><br>   <tr><br>      <td>nu</td><br>      <td>NN</td><br>      <td>N</td><br>      <td>νν</td><br>      <td>\nu</td><br>   </tr><br>   <tr><br>      <td>xi</td><br>      <td>ΞΞ</td><br>      <td>\Xi</td><br>      <td>ξξ</td><br>      <td>\xi</td><br>   </tr><br>   <tr><br>      <td>omicron</td><br>      <td>OO</td><br>      <td>O</td><br>      <td>οο</td><br>      <td>\omicron</td><br>   </tr><br>   <tr><br>      <td>pi</td><br>      <td>ΠΠ</td><br>      <td>\Pi</td><br>      <td>ππ</td><br>      <td>\pi</td><br>   </tr><br>   <tr><br>      <td>rho</td><br>      <td>PP</td><br>      <td>P</td><br>      <td>ρρ</td><br>      <td>\rho</td><br>   </tr><br>   <tr><br>      <td>sigma</td><br>      <td>ΣΣ</td><br>      <td>\Sigma</td><br>      <td>σσ</td><br>      <td>\sigma</td><br>   </tr><br>   <tr><br>      <td>tau</td><br>      <td>TT</td><br>      <td>T</td><br>      <td>ττ</td><br>      <td>\tau</td><br>   </tr><br>   <tr><br>      <td>upsilon</td><br>      <td>ΥΥ</td><br>      <td>\Upsilon</td><br>      <td>υυ</td><br>      <td>\upsilon</td><br>   </tr><br>   <tr><br>      <td>phi</td><br>      <td>ΦΦ</td><br>      <td>\Phi</td><br>      <td>ϕϕ</td><br>      <td>\phi</td><br>   </tr><br>   <tr><br>      <td>chi</td><br>      <td>XX</td><br>      <td>X</td><br>      <td>χχ</td><br>      <td>\chi</td><br>   </tr><br>   <tr><br>      <td>psi</td><br>      <td>ΨΨ</td><br>      <td>\Psi</td><br>      <td>ψψ</td><br>      <td>\psi</td><br>   </tr><br>   <tr><br>      <td>omega</td><br>      <td>ΩΩ</td><br>      <td>\Omega</td><br>      <td>ωω</td><br>      <td>\omega</td><br>   </tr><br></table>
       
     </div>
     <footer>
