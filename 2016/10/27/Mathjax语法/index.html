@@ -157,7 +157,7 @@
 <ul>
 <li>给矩阵加括号：<ul>
 <li>可以用前文中提到的括号再配以\left和\right。</li>
-<li>也可以使用特殊的matrix，即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为pmatrix、bmatrix、Bmatrix、vmatrix、Vmatrix。<br>如pmatrix：&amp;\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{pmatrix}、bmatrix：&amp;\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{bmatrix}、Bmatrix：&amp;\begin{Bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Bmatrix}、<br>vmatrix：&amp;\begin{vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{vmatrix}、<br>Vmatrix：&amp;\begin{Vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Vmatrix}、</li>
+<li>也可以使用特殊的matrix，即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为pmatrix、bmatrix、Bmatrix、vmatrix、Vmatrix。<br>如pmatrix：$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{pmatrix}$、bmatrix：&amp;\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{bmatrix}$、Bmatrix：$\begin{Bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Bmatrix}$、<br>vmatrix：$\begin{vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{vmatrix}$、<br>Vmatrix：$\begin{Vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Vmatrix}$。</li>
 </ul>
 </li>
 <li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\<br>\end{pmatrix}<br>$$</li>
@@ -165,6 +165,16 @@
 </li>
 </ul>
 <p>效果：<br>$$<br>\left [<br>  \begin{array}{cc|c}<br>  1 &amp; 2 &amp; 3 \\<br>  4 &amp; 5 &amp; 6 \\<br>  \end{array}<br>\right ]<br>$$</p>
+<p><font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br> &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br> &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。</p>
+<p><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \<br>3n+1, &amp; \text{if $n$ is odd}  \<br>\end{cases}<br>$$</p>
+<p><font size="4" color="red">方程组</font></p>
+<ol>
+<li>可以使用<code>\begin{array}...\end{array}</code>与<code>\left{ ... \right.</code>，配合表示方程组。例如：<br>$$<br>\left{<br>\begin{array}{c}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{array}<br>\right.<br>$$</li>
+<li>也可以使用<code>\begin{cases}...\end{cases}</code>。例如：<br>$$<br>\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \<br>a_2x+b_2y+c_2z=d_2 \<br>a_3x+b_3y+c_3z=d_3<br>\end{cases}<br>$$</li>
+</ol>
+<p>&nbsp;</p>
+<hr>
+<p>【注】：本文主要参考<a href="http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/" target="_blank" rel="external">《Mathjax与LaTex公式简介》</a>一文，更多详细内容请参考此文。</p>
 
       
     </div>
