@@ -61,27 +61,15 @@
     </header>
     <div class="entry">
       
-        <p><font size="5" color="orange">配置方法</font></p>
-<ol>
-<li><p>在Hexo\themes\transparent\layout_partial路径下新建文件mathjax.ejs（transparent是我的主题名）。打开文件写入如下代码：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">   &lt;!-- mathjax config similar to math.stackexchange --&gt;</div><div class="line">    </div><div class="line">   &lt;script type=<span class="string">"text/x-mathjax-config"</span>&gt;</div><div class="line">     MathJax.Hub.Config(&#123;</div><div class="line">       tex2jax: &#123;</div><div class="line">         inlineMath: [ [<span class="string">'$'</span>,<span class="string">'$'</span>], [<span class="string">"\\("</span>,<span class="string">"\\)"</span>] ],</div><div class="line">         processEscapes: <span class="literal">true</span></div><div class="line">       &#125;</div><div class="line">     &#125;);</div><div class="line">   &lt;/script&gt;</div><div class="line">    </div><div class="line">   &lt;script type=<span class="string">"text/x-mathjax-config"</span>&gt;</div><div class="line">       MathJax.Hub.Config(&#123;</div><div class="line">         tex2jax: &#123;</div><div class="line">           skipTags: [<span class="string">'script'</span>, <span class="string">'noscript'</span>, <span class="string">'style'</span>, <span class="string">'textarea'</span>, <span class="string">'pre'</span>, <span class="string">'code'</span>]</div><div class="line">        &#125;</div><div class="line">       &#125;);</div><div class="line">   &lt;/script&gt;</div><div class="line">    </div><div class="line">   &lt;script type=<span class="string">"text/x-mathjax-config"</span>&gt;</div><div class="line">       MathJax.Hub.Queue(function() &#123;</div><div class="line">           <span class="keyword">var</span> all = MathJax.Hub.getAllJax(), i;</div><div class="line">           <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; all.length; i += <span class="number">1</span>) &#123;</div><div class="line">               all[i].SourceElement().parentNode.className += <span class="string">' has-jax'</span>;</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">   </div><div class="line"> &lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span>&gt;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>打开iHexo\themes\transparent\layout_partial目录下的after_footer.ejs文件，在末尾写入如下代码：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%- <span class="keyword">partial</span>(<span class="string">'mathjax'</span>) %&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>新建一片md文章（<code>hexo new &quot;新文章&quot;</code>），写入如下代码：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">## 公式</span></div><div class="line">$$J\_\alpha(x)=\sum _&#123;m=<span class="number">0</span>&#125;^\infty \frac&#123;(<span class="number">-1</span>)^ m&#125;&#123;m! \, \Gamma (m + \alpha + <span class="number">1</span>)&#125;&#123;\left(&#123;\frac&#123;x&#125;&#123;<span class="number">2</span>&#125;&#125;\right)&#125;^&#123;<span class="number">2</span> m + \alpha &#125;$$</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>部署完后，打开自己的网站查看公式是否成功显示。我的显示效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147757680727.png" alt=""></p>
-<ul>
-<li>关于mathjax的更多介绍和语法参见<a href="http://popperelay.com/2016/10/27/Mathjax%E8%AF%AD%E6%B3%95/" target="_blank" rel="external">《Mathjax简介及其语法》</a>。</li>
-</ul>
-
+        <p><font size="5" color="orange">配置方法</font><br>
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2016/11/10/添加数学公式mathjax/#more" class="more-link">Read More</a>
+          </div>
         
         
       
