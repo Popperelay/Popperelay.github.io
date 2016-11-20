@@ -114,7 +114,7 @@
 <li>第三个参数指定属性分量的数据类型。由于本例中每个顶点位置由3个float组成，所以该参数设为float。</li>
 <li>第四个参数指定是否规格化。当存储整型时，如果设置为GL_TRUE，那么当被以浮点数形式访问时，有符号整型转换到[-1,1]，无符号整型转换到[0,1]。否则，直接转换为float型，而不进行规格化。</li>
 <li>第5个参数指定两个顶点数据之间的间隔（即每个顶点数据的大小），以字节大小计算。当顶点属性紧密排列时，可以填0，由OpenGL代替我们计算出该值。本例中每个顶点数据大小为3*sizeof(GLfloat)。</li>
-<li>最后一个参数表示当前绑定到GL_ARRAY_BUFFER缓冲对象的缓冲区中，顶点属性的第一个分量距离数据的起点的偏移量，以字节为单位计算。因为最后一个参数的类型是GLvoid<em>，而我们的顶点数据就是从数据起点开始的，所以这里设为（GLvoid</em>）0。</li>
+<li>最后一个参数表示当前绑定到GL_ARRAY_BUFFER缓冲对象的缓冲区中，顶点属性的第一个分量距离数据的起点的偏移量，以字节为单位计算。因为最后一个参数的类型是GLvoid*，而我们的顶点数据就是从数据起点开始的，所以这里设为（GLvoid*）0。</li>
 </ul>
 <p>现在已经告诉OpenGL应该怎么从缓冲中解析顶点数据了，接着需要使用<code>glEnableVertexAttribArray</code>函数打开顶点属性数组，让这些顶点数据可以用于渲染图形。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//打开顶点属性数组</span></div><div class="line">glEnableVertexAttribArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
 <p>当然，最后不要忘了解绑VBO和VAO。解绑了之后才能让它们脱离具体的目标，从而再去复用，绑定别的目标：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解绑VBO</span></div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, <span class="number">0</span>);</div><div class="line"><span class="comment">//解绑VAO</span></div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
