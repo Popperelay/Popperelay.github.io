@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++文件的输入输出 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C++文件的输入输出"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-24T08:56:54.000Z"><a href="/2016/11/24/C++文件IO/">2016-11-24</a></time>
+      
+      
+  
+    <h1 class="title">C++文件的输入输出</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>计算机领域的文件，其实是指存放在外部介质上的数据的集合。<br><a id="more"></a></p>
+<p>如果想查找存放在外部介质上的数据，必须先按文件名找到所指定的文件，然后再从该文件中读取数据；而要把数据存储在外部介质上，必须先建立一个文件（以文件名标识），才能向它存入数据。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">文本文件和二进制文件</font><br>C++按照数据的组织形式，把文件分为文本文件和二进制文件。</p>
+<p><font size="4" color="red">文本文件</font><br>文本文件又称ASCII文件，它的每个字节存放一个ASCII码，代表一个字符。</p>
+<p>比如，对于一个整数10000，它如果按照文本形式输出到磁盘上，因为有5个数字，每个字符占一个字节，所以需要5个字节来保存这个整数。用文本形式输出时，一个字节对应一个字符，这便于对字符进行逐个处理，也便于输出字符，但是占用的存储空间较大。</p>
+<p><font size="4" color="orange">二进制文件</font><br>二进制文件是把内存中的数据，按照其在内存中的存储形式<strong>原样</strong>写到磁盘上存放。</p>
+<p>比如，对于一个整数10000，它在内存中只需要两个字节就能存储10000的二进制形式，它如果按照二进制形式输出到磁盘上，当然还是在磁盘上占用两个字节就能表示出10000的二进制。用二进制形式输出数据，可以节省存储空间和转换时间，但是一个字节不能对应一个字符，无法直接以字符形式输出。对于需要暂时保存在外存上，以后又需要输入到内存的中间结果数据，常用二进制形式保存。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">C++进行文件输入输出的基本过程</font><br>在C++中，无论对文本文件还是二进制文件，要进行文件的输入输出，必须首先创建一个流对象，然后将这个流对象与文件相关联，即打开文件，此时才能进行读写操作，读写操作完成后再关闭这个文件。</p>
+<p>创建流对象 → 打开文件 → 读写操作 → 关闭文件。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">创建流对象</font><br>建立流的过程其实就是定义流类的对象。因为与文件IO有关的类fstream、ifstream和ofstream都包含在头文件fstream，所以首先需要在程序中包含此头文件：<code>#include &lt;fstream&gt;</code>。</p>
+<p>接下来使用流类来定义流对象，例如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ifstream <span class="keyword">in</span>;</div><div class="line">ofstream <span class="keyword">out</span>;</div><div class="line">fstream both;</div></pre></td></tr></table></figure></p>
+<p>分别定义了输入流对象in、输出流对象out、输入输出流对象both。</p>
+<p>其实常用的cin和cout也是流对象，只是已经在头文件iostream中事先定义好了，我们不需要再去自己定义了。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">打开文件</font><br>打开文件有两种方式：使用3个文件流类的成员函数open打开文件、在定义流对象时同时打开文件。</p>
+<p><font size="4" color="orange">使用成员函数open打开文件</font><br>一般形式是：<code>文件流对象.open(文件名,打开方式);</code></p>
+<p>其中文件名可以是相对路径也可以是绝对路径。</p>
+<p>打开方式有如下选项：</p>
+<ul>
+<li>ios::app：打开一个输出文件，用于将数据添加到文件尾部。文件位置指针自动移到文件尾部。</li>
+<li>ios::ate：打开一个现存文件，文件位置指针自动移到文件尾部，但数据可以写入文件中任何地方。</li>
+<li>ios::in：打开一个文件，用于输入数据，即从文件读出数据到内存。</li>
+<li>ios::nocreate：打开一个文件，若文件不存在，则打开失败（通常用open函数打开文件时，如果不存在则创建该文件）。</li>
+<li>ios::noreplace：打开一个文件，若文件存在，则打开失败，不存在则新建文件。</li>
+<li>ios::out：打开一个文件，用于输出数据，即从内存写入数据到文件。</li>
+<li>ios::trunc：打开一个文件，若文件存在，则删除其中全部数据；若文件不存在，则新建文件。</li>
+<li>ios::binary：以二进制方式打开一个文件，默认情况下是以文本方式打开文件。</li>
+</ul>
+<p>对于ifstream对象，文件打开方式默认为ios::in；对于ofstream对象，文件打开方式默认为ios::out。</p>
+<p>当一个文件需要多种方式打开时，可以用操作符“|”把几种方式连接在一起。例如，打开一个用于输入和输出的二进制文件：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fstream mystream;</div><div class="line">mystream.open("test.dat",ios::in|ios::out|ios::binary);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">定义流对象同时打开文件</font><br>可以在定义文件流对象时指定文件路径，来同时打开文件。形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">ofstream <span class="title">out</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div></pre></td></tr></table></figure></p>
+<p>由于这种方式没有指定打开方式，所以使用的是默认打开方式，依旧是：ifstream对象为ios::in打开方式，ofstream对象为ios::out打开方式。所以上面的打开文件代码相当于：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ofstream <span class="keyword">out</span>;</div><div class="line"><span class="keyword">out</span>.open(<span class="string">"test.dat"</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">检测打开文件是否成功</font><br>执行打开文件操作后，还需要检测打开文件是否成功，如果打开失败，与文件相联系的流对象（比如上面的out）的值将是0。检测代码形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="keyword">out</span>)&#123;</div><div class="line">    cout&lt;&lt;<span class="string">"Cannot open file!"</span>&lt;&lt;endl;</div><div class="line">    <span class="comment">//其它处理</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">文件读写</font><br>文件打开以后，就可以进行文件读写了。但是由于数据组织方式不同，文本文件和二进制文件的读写是不一样的（二进制文件在打开时还需要显式指定ios::binary打开方式，默认是以文本方式打开）。</p>
+<p><font size="4" color="red">文本文件的读写</font><br>其实和cin、cout一样，使用<code>流对象&gt;&gt;</code>把数据从文件输入到内存，使用<code>流对象&lt;&lt;</code>把数据从内存输出到文件。</p>
+<p>下面上个demo，先建立一个输出文件，向它写入数据，然后关闭文件，在按输入方式打开它，并读取信息，保存到变量中，在屏幕上显示出来：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#include "stdafx.h"</span></div><div class="line"><span class="meta">#include &lt;iostream&gt;</span></div><div class="line"><span class="meta">#include &lt;fstream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//定义输出流对象，同时打开文件</span></div><div class="line">	<span class="function">ofstream <span class="title">fout</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div><div class="line">	<span class="comment">//检测文件是否打开成功</span></div><div class="line">	<span class="keyword">if</span> (!fout) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//把一个字符串写到磁盘文件test.dat中</span></div><div class="line">	fout &lt;&lt; <span class="string">"hello!\n"</span>;</div><div class="line">	<span class="comment">//把一个十进制整数和一个十六进制整数写到test.dat中</span></div><div class="line">	fout &lt;&lt; <span class="number">100</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; hex &lt;&lt; <span class="number">100</span> &lt;&lt; endl;</div><div class="line">	<span class="comment">//关闭文件</span></div><div class="line">	fout.close();</div><div class="line"></div><div class="line">	<span class="comment">//定义输入流对象，同时打开文件</span></div><div class="line">	<span class="function">ifstream <span class="title">fin</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!fin) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file!"</span> &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">char</span>* s=<span class="keyword">new</span> <span class="keyword">char</span>();</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="keyword">int</span> j;</div><div class="line">	<span class="comment">//从磁盘文件test.dat中读取一个字符串赋给s，读取一个整数赋给i</span></div><div class="line">	fin &gt;&gt; s &gt;&gt; i &gt;&gt; j;</div><div class="line">	<span class="comment">//在屏幕上显示</span></div><div class="line">	cout &lt;&lt; s &lt;&lt; endl &lt;&lt; i &lt;&lt; endl &lt;&lt; j &lt;&lt; endl;</div><div class="line">	fin.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译运行后，会在该源文件同路径下，创建出一个test.dat文件，文件中内容如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hello!</div><div class="line"><span class="number">100</span> <span class="number">64</span></div></pre></td></tr></table></figure></p>
+<p>并且在屏幕上会输出如下结果：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hello!</div><div class="line"><span class="number">100</span></div><div class="line"><span class="number">64</span></div></pre></td></tr></table></figure></p>
+<p>64是100的二进制。</p>
+<p><font size="4" color="red">二进制文件的读写</font><br>二进制文件的读写不再是使用&gt;&gt;或&lt;&lt;，而是使用类istream和类ostream的成员函数来进行读写。</p>
+<p>根据每次读写的数据量不同，二进制文件的读写有两种方式：一种是使用成员函数get和put；另一种是使用成员函数read和write。</p>
+<ul>
+<li><p>使用get和put函数读写二进制文件：<br>get函数是类istream的成员函数，put函数是类ostream的成员函数，它们每次都只是读写一个字节（字符）。</p>
+<p>上个demo体会一下，将a到z的26个英文字母写入二进制文件，而后从该文件中读出并在屏幕上显示出来：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">#include "stdafx.h"</span></div><div class="line"> <span class="meta">#include &lt;iostream&gt;</span></div><div class="line"> <span class="meta">#include &lt;fstream&gt;</span></div><div class="line"> <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="function">ofstream <span class="title">outb</span>(<span class="params"><span class="string">"binary.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!outb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>); <span class="comment">//退出程序，和abort()作用一样</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">char</span> ch = <span class="string">'a'</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</div><div class="line">		<span class="comment">//输出字符到磁盘文件binary.dat中</span></div><div class="line">		outb.put(ch);</div><div class="line">		ch++;</div><div class="line">	&#125;</div><div class="line">	outb.close();</div><div class="line"></div><div class="line">	<span class="function">ifstream <span class="title">inb</span>(<span class="params"><span class="string">"binary.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!inb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file"</span> &lt;&lt; endl;</div><div class="line">		abort();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span> (inb.<span class="keyword">get</span>(ch)) &#123;</div><div class="line">		<span class="comment">//从磁盘文件中读取字符赋给ch</span></div><div class="line">		cout &lt;&lt; ch;</div><div class="line">	&#125;</div><div class="line">	inb.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编译运行后，会在该源文件同路径下，创建出一个binary.dat，文件内容是26个小写英文字符对应的二进制（用记事本等工具打开后二进制会转为字符，所以用记事本打开看到的不是二进制，而是26个英文字母），并且屏幕上回输出如下结果：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>使用read和write函数读写二进制文件：</p>
+<ul>
+<li>read函数是类istream的成员函数，形如<code>inb .read(char* buf,int len);</code>。用于从与输入文件流对象inb向关联的磁盘文件中，读取len个字节（或遇到EOF提前结束），并把它们存放在字符指针buf所指的一段内存空间内。如果在len个字节（字符）前被读出前，就到达了文件尾，则read函数停止执行。</li>
+<li>write函数是类ostream的成员函数，形如<code>outb.write(const char* buf,int len);</code> 。用于将字符指针buf所给出地址开始的len个字节的内容，不加转换地写到与输出文件流对象outb相关联的磁盘文件中。</li>
+</ul>
+<p>再上个demo体会一下，将课程结构体以二进制形式一次性存放到磁盘文件中：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">#include "stdafx.h"</span></div><div class="line"> <span class="meta">#include &lt;iostream&gt;</span></div><div class="line"> <span class="meta">#include &lt;fstream&gt;</span></div><div class="line"> <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"> </div><div class="line"> <span class="comment">//课程结构体</span></div><div class="line"><span class="keyword">struct</span> Course &#123;</div><div class="line">	<span class="keyword">char</span> courseName[<span class="number">20</span>];</div><div class="line">	<span class="keyword">int</span> score;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//课程结构体实例</span></div><div class="line">	Course course = &#123; <span class="string">"computer"</span>,<span class="number">100</span> &#125;;</div><div class="line"></div><div class="line">	<span class="function">ofstream <span class="title">outb</span>(<span class="params"><span class="string">"binary2.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!outb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//将课程结构体实例写入磁盘文件binary2.dat中</span></div><div class="line">	outb.write((<span class="keyword">char</span>*)&amp;course, <span class="keyword">sizeof</span>(course));</div><div class="line">	outb.close();</div><div class="line"></div><div class="line">	<span class="comment">//课程结构体实例，用于存储从文件中读取的数据</span></div><div class="line">	Course inCourse;</div><div class="line"></div><div class="line">	<span class="function">ifstream <span class="title">inb</span>(<span class="params"><span class="string">"binary2.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!inb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//从磁盘文件binary2中读取数据存入inCourse结构体实例中</span></div><div class="line">	inb.read((<span class="keyword">char</span>*)&amp;inCourse, <span class="keyword">sizeof</span>(inCourse));</div><div class="line">	cout &lt;&lt; <span class="string">"courseName:"</span> &lt;&lt; inCourse.courseName &lt;&lt; <span class="string">' '</span> &lt;&lt; <span class="string">"score:"</span> &lt;&lt; inCourse.score &lt;&lt; endl;</div><div class="line">	inb.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编译运行后，在源文件同路径下回创建出一个binary2.dat文件，用记事本打开结果如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">computer            d</div></pre></td></tr></table></figure></p>
+<p>因为用记事本打开时会自动将二进制转换为字符，而数字100对应的二进制正好是字母d的ASCII码，所以数字100转变成了字母d。并且屏幕上会出现如下结果：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">courseName:computer score:<span class="number">100</span></div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">检测读文件是否结束</font><br>在文件结束的地方有一个标志位，记为EOF（end of file）。采用文件流方式读文件时，使用成员函数<code>eof</code>可以检测到这个结束符：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ifstream <span class="keyword">in</span>;</div><div class="line">...</div><div class="line"><span class="keyword">if</span>(!<span class="keyword">in</span>.eof())&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>函数<code>eof</code>如果返回值为0，未达到文件尾；如果返回值非0，表示到达文件尾。</p>
+<p>其实前面在使用get函数读文件时：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (inb.<span class="keyword">get</span>(ch)) &#123;</div><div class="line">    <span class="comment">//从磁盘文件中读取字符赋给ch</span></div><div class="line">    cout &lt;&lt; ch;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>get函数在读取字符的同时，也通过返回值是否为0，判断是否到达文件尾。</p>
+<p><font size="4" color="red">二进制文件的随机读写</font><br>文本文件一般是顺序读写的，但二进制文件还支持从任意位置开始读写，即随机读写。主要是靠设置读指针和写指针的位置来实现。</p>
+<p>类istream提供了3个成员函数来设置读指针位置（下面的g是get的缩写）：</p>
+<ul>
+<li><code>tellg()</code>：返回读指针的当前位置</li>
+<li><code>seekg(long position)</code>：将读指针设置到指定的position位置（以字节为单位）</li>
+<li><code>seekg(long offset,int way)</code>：以参照位置way为基准移动offset个字节<ul>
+<li>参照位置有如下选项：<ul>
+<li>ios::beg：文件开头位置</li>
+<li>ios::cur：当前文件指针位置</li>
+<li>ios::end：文件末尾位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例如<code>inf.seekg(-50,ios::cur);</code>，表示使读指针以当前位置为基准向前（文件开头方向）移动50个字节。</p>
+<p>类ostream也提供了3个成员函数来设置写指针位置（下面的p是put的缩写）：</p>
+<ul>
+<li><code>tellp()</code>：返回当前写指针的位置</li>
+<li><code>seekp(long position)</code>：将写指针设置到指定的position位置（以字节为单位）</li>
+<li><code>seekp(long offset,int way)</code>：以参考位置way为基准移动offset个字节<ul>
+<li>参照位置选项与上面的相同，不赘述了。<br>&nbsp; </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>.close();</div><div class="line"><span class="keyword">out</span>.close();</div><div class="line">inb.close();</div><div class="line">outb.close();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/C/">C++</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/文件IO/">文件IO</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/11/24/C++文件IO/" data-title="C++文件的输入输出" data-url="http://yoursite.com/2016/11/24/C++文件IO/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>1</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>2</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
