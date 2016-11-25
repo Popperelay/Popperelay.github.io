@@ -151,9 +151,18 @@
 <li><code>tellp()</code>：返回当前写指针的位置</li>
 <li><code>seekp(long position)</code>：将写指针设置到指定的position位置（以字节为单位）</li>
 <li><code>seekp(long offset,int way)</code>：以参考位置way为基准移动offset个字节<ul>
-<li>参照位置选项与上面的相同，不赘述了。<br>&nbsp; </li>
+<li>参照位置选项与上面的相同，不赘述了。</li>
 </ul>
 </li>
+</ul>
+<p>把读指针位置设置为文件尾ios::end，再使用<code>tellg</code>函数可以获得整个文件的长度：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fin.seekg(0, ios::end);</div><div class="line">	int length = fin.tellg();</div></pre></td></tr></table></figure></p>
+<p>知道了整个文件的长度，再使用<code>read</code>函数就可以一次性读出整个文件。上个demo，现在已经有一个binary.dat文件，文件内容如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div><div class="line">ABC</div></pre></td></tr></table></figure></p>
+<p>实现代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#include "stdafx.h"</div><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;fstream&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">	ifstream fin("binary.dat", ios::binary);</div><div class="line">	//设置读指针到文件尾</div><div class="line">	fin.seekg(0, ios::end);</div><div class="line">	//读出当前读指针的位置，从而得到文件长度</div><div class="line">	int length = fin.tellg();</div><div class="line">	//新建字符串str存储文件内容。</div><div class="line">	//需要在读出所有内容后给字符串加'\0'，所以长度设为length+1</div><div class="line">	char* str = new char[length + 1];</div><div class="line">	//把读指针重新设到文件头</div><div class="line">	fin.seekg(0, ios::beg);</div><div class="line">	//一次性读出整个文件</div><div class="line">	fin.read(str, length);</div><div class="line">	//给str加上字符串结束符'\0'</div><div class="line">	str[length] = '\0';</div><div class="line">	cout &lt;&lt; str &lt;&lt; endl;</div><div class="line">	fin.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译运行后，在屏幕上的输出结果如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div><div class="line">ABC</div></pre></td></tr></table></figure></p>
+<p>【注】：</p>
+<ul>
+<li>成员函数<code>get</code>、<code>put</code>、<code>read</code>、<code>write</code>函数不仅可以用于二进制文件，也可以用于文本文件</li>
+<li>当要将文件完整读入时，最好使用二进制方式打开ios::binary，因为如果以文本文件方式打开的话，文件流会把一些非字符的数据过滤掉，我们将读取不到那些内容。<br>&nbsp; </li>
 </ul>
 <hr>
 <p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>.close();</div><div class="line"><span class="keyword">out</span>.close();</div><div class="line">inb.close();</div><div class="line">outb.close();</div></pre></td></tr></table></figure></p>
