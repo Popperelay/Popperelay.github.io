@@ -166,7 +166,18 @@
 </ul>
 <hr>
 <p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>.close();</div><div class="line"><span class="keyword">out</span>.close();</div><div class="line">inb.close();</div><div class="line">outb.close();</div></pre></td></tr></table></figure></p>
-
+<p>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">C++字符串流的输入输出</font><br>C++字符串流的输入输出与文件IO类似。文件IO是内存和磁盘文件之间传递数据，而字符串流IO是内存和字符串流之间传递数据。</p>
+<p>字符串流IO主要由三个类来实现：</p>
+<ul>
+<li>istringstream类：从string读取数据到内存</li>
+<li>ostringstream类：从内存向string写入数据</li>
+<li>stringstream类：既可以向string读数据也可以写数据</li>
+</ul>
+<p>它们都包含在sstream.h头文件中。</p>
+<p>也是通过字符串流对象配合&gt;&gt;和&lt;&lt;运算符来进行IO操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string line=&quot;ourStr&quot;;</div><div class="line">istringstream ins(line);</div><div class="line">string str;</div><div class="line">ins&gt;&gt;str;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string line;</div><div class="line">ostringstream outs;</div><div class="line">outs&lt;&lt;&quot;ourStr&quot;;</div><div class="line">cout&lt;&lt;outs.str()&lt;&lt;endl;</div></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -249,7 +260,7 @@
   
     <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
   
-    <li><a href="/categories/C/">C++</a><small>1</small></li>
+    <li><a href="/categories/C/">C++</a><small>2</small></li>
   
     <li><a href="/categories/OpenGL/">OpenGL</a><small>4</small></li>
   
@@ -275,6 +286,8 @@
     <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
   
     <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
   
     <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
   
