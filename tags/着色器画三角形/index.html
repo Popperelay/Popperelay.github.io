@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>链表中什么时候需要用到头结点 | Elays&#39;Blog</title>
+  <title>着色器画三角形 | Elays&#39;Blog</title>
   <meta name="author" content="Elay">
   
   <meta name="description" content="Elay">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="链表中什么时候需要用到头结点"/>
+  
   <meta property="og:site_name" content="Elays&#39;Blog"/>
 
   
@@ -44,99 +44,25 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-08-28T06:07:45.000Z"><a href="/2016/08/28/头结点/">2016-08-28</a></time>
-      
-      
-  
-    <h1 class="title">链表中什么时候需要用到头结点</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">着色器画三角形</h2>
 
-    </header>
-    <div class="entry">
-      
-        <p><strong>链表中什么时候需要用到头结点：</strong><br><a id="more"></a></p>
-<hr>
-<ul>
-<li>需要统一对第一个结点和中间结点的操作 ，这时需要加上头结点</li>
-<li>链接的方向(引用/指针指向的方向)是从表头指向表尾时，这时需要加上头结点，因为需要对开始节点初始化内存以后，才能使用Node.Next。不可能在插入结点的函数里去指定第一个插入的结点是表头结点，因为这样会增加复杂度，每次都要判断插入的结点会不会是表里的第一个节点</li>
-<li>存在对链表的第一个结点的删除操作时，这时需要加上头结点。就像队列，出队列时需要删除表中第一个结点，如果链接方向是从表头指向表尾，虽然node=node.next就可以从容器中删除第一个结点，但是从第二条看，初始化时还是需要头结点的；如果链接方向是从表尾指向表头，就像栈的链接方向一样，虽然这时表中的第一个结点可以用前向结点来删除它，但是表中的最后一个结点却没有前向结点(指向它的结点)，要统一最后一个结点的操作，还是需要给最后一个结点加上空的前向结点，也就相当于还是加了一个头结点，不过加到了尾部而已。</li>
-<li>因为在栈里只存在对表尾结点的插入删除，不涉及中间结点，也不涉及对第一个结点的删除(栈中只有一个结点时，该结点也可以被看作是表尾结点来处理)，所以从原理上栈是可以不要头结点的，所有栈采用了从表尾指向表头的链接方式。而队列中存在对第一个结点的删除操作，所以是需要头结点作为辅助的。</li>
-</ul>
-<hr>
-<p>链接方向从表头指向表尾(比如队列)：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721583543.png" alt=""><br>链接方向从表尾指向表头(比如栈)<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721583493.png" alt=""><br>【头结点：链表头部不存放数据的一个结点，是有真实内存的，不同于结点引用、头指针等等，头结点存在的意义在于降低程序/时间复杂度】</p>
 
-      
-    </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/数据结构/">数据结构</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2016-11-19T08:57:47.000Z"><a href="/2016/11/19/OpenGL3着色器画三角形/">2016-11-19</a></time>
+            
+              <h1 class="title"><a href="/2016/11/19/OpenGL3着色器画三角形/">OpenGL3：着色器画三角形</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/头结点/">头结点</a>
-  </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h2 class="title">留言</h2>
-
-
- 
-  	   <!-- 多说评论框 start -->
- 		<div class="ds-thread" data-thread-key="2016/08/28/头结点/" data-title="链表中什么时候需要用到头结点" data-url="http://yoursite.com/2016/08/28/头结点/"></div>
-		<!-- 多说评论框 end -->
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
-			(function() {
-				var ds = document.createElement('script');
-				ds.type = 'text/javascript';ds.async = true;
-				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
-				ds.charset = 'UTF-8';
-				(document.getElementsByTagName('head')[0] 
-				 || document.getElementsByTagName('body')[0]).appendChild(ds);
-			})();
-			</script>
-		<!-- 多说公共JS代码 end -->
- 
-  
-</section>
-
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
