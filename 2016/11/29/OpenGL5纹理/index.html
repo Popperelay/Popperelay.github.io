@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenGL5：纹理 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OpenGL5：纹理"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-29T13:54:06.000Z"><a href="/2016/11/29/OpenGL5纹理/">2016-11-29</a></time>
+      
+      
+  
+    <h1 class="title">OpenGL5：纹理</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在前面的文章中，我们画过矩形，画过彩色三角形。<a id="more"></a>那么能不能画出现实生活中的图片呢？比如画一面砖墙，画一朵花。这样的图形无疑看起来更真实。但是这些更真实的图形也无疑很复杂，因为它们的每个像素颜色之间并没有什么明显的规律，如果要去画的话，就得一个像素一个像素的去画，要我们自己去指定大量的顶点颜色，这个开销太庞大了~~~<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">纹理概述</font><br>幸运的是，还有另一种方式。我们可以先照一张砖墙的照片，让GPU自动提取这张照片上的像素，然后画到屏幕上。这张用于GPU提取像素颜色的照片，就叫做纹理。纹理通常是一个2D图片（也有1D和3D的纹理）。可以想象纹理是一张绘有砖块的纸，无缝折叠贴合到我们的3D房子上，这样我们的房子看起来就像有砖墙外表了。这样我们就不用去一个一个地去指定纹理中每个纹素（纹理中的像素）的颜色了，只需要指定怎样把纹理贴到我们的模型（比如一个三角形、矩形甚至3D房子）上。举个例子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025320358.png" alt=""><br>为了把这张木箱纹理贴到图中红色三角形上，我们需要指定三角形的顶点对应纹理的那个位置。这个位置我们叫做纹理坐标，表示纹素在纹理上的位置，通常坐标值在0.0到1.0之间，原点通常在纹理左下角。我们把三角形左下角顶点对应纹理坐标（0,0），把三角形右下角顶点对应纹理坐标（1,0），把三角形上中顶点对应纹理坐标（0.5,1.0）。我们只要给顶点着色器传递这三个顶点纹理坐标就行了，接下来它们会被传到像素着色器中，GPU会根据三角形顶点纹理坐标，去为三角形内部点进行插值（根据内部点坐标和顶点坐标的关系，去纹理中找相应纹素颜色）。使用纹理坐标获取纹理颜色叫做采样。</p>
+<p>这么说来，纹理坐标也应该是三角形顶点的一个属性，所以我们定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//三角形顶点的坐标、颜色、纹理坐标</div><div class="line">GLfloat vertices[] = &#123;</div><div class="line">	//位置坐标         //颜色           //纹理坐标</div><div class="line">	0.5f, 0.5f, 0.0f,  1.0f,0.0f,0.0f,  1.0f,1.0f,</div><div class="line">	0.5f, -0.5f,0.0f,  0.0f,1.0f,0.0f,  1.0f,0.0f, </div><div class="line">	-0.5f,-0.5f,0.0f,  0.0f,0.0f,1.0f,  0.0f,0.0f,</div><div class="line">	-0.5f,0.5f, 0.0f,  1.0f,1.0f,0.0f,  0.0f,1.0f</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">告诉OpenGL如何解析顶点数据</font><br>由于顶点数据中增加了纹理坐标，我们需要重新设置OpenGL如何解析顶点数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//告诉OpenGL如何解析显存中的顶点位置属性数据</div><div class="line">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">//打开顶点位置属性数组</div><div class="line">glEnableVertexAttribArray(0);</div><div class="line">//告诉OpenGL如何解析显存中的顶点颜色属性数据</div><div class="line">glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));</div><div class="line">//打开顶点颜色属性数组</div><div class="line">glEnableVertexAttribArray(1);</div><div class="line">//告诉OpenGL如何解析显存中的顶点纹理坐标属性数据</div><div class="line">glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));</div><div class="line">//打开顶点纹理坐标属性数组</div><div class="line">glEnableVertexAttribArray(2);</div></pre></td></tr></table></figure></p>
+<p>每个顶点属性的步长都变成了<code>8*sizeof(GLfloat)</code>，起始偏移量（最后一个参数）也发生了变化。顶点纹理坐标属性对应顶点着色器中的location为2。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">创建纹理和绑定对象</font><br>和创建顶点数组对象VAO等一样，使用纹理前，我们需要创建和绑定纹理对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GLuint texture;</div><div class="line">//生成纹理对象texture</div><div class="line">glGenTextures(1, &amp;texture);</div><div class="line">//给纹理对象绑定目标（2D纹理）</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture);</div></pre></td></tr></table></figure></p>
+<p>我们使用的是2D纹理，所以纹理目标是GL_TEXTURE_2D。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">加载纹理</font><br>创建和绑定完纹理对象之后，我们把纹理从文件中加载进来。</p>
+<p>纹理图像可能被存储为各种各样的格式，每种都有自己的数据结构和排列方式，那么我们如何才能把这些图像加载到应用中呢？一个解决方案是选一个需要的文件格式，比如png，然后自己写一个图像加载器，把图像转化为字节序列。但是如果要支持更多文件格式呢？就得为每种希望支持的格式写加载器了。</p>
+<p>另一种解决方案就是借前人之树乘凉：使用一个支持多种流行格式的图像加载库来解决这个问题。比如我们要用的SOIL库（文末还介绍了另一种加载库）。</p>
+<p><font size="4" color="">简易OpenGL图像库SOIL</font><br>SOIL是简易OpenGL图像库（Simple OpenGL Image Library）的缩写，它支持大多数流行的图像格式。可以从<a href="http://www.lonesock.net/soil.html" target="_blank" rel="external">这里</a>下载。下载完成后用VS打开\projects\VC8目录下的SOIL.sln，生成解决方案后，从debug文件夹里取得SOIL.lib文件，将它添加到我们自己建的Libs文件夹里，再把src文件夹下的所有.h头文件添加到我们自己建的Includes文件夹里，并且在自己的VS项目中链接上SOIL.lib（具体过程和<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《OpenGL1：OpenGL概述及环境配置》</a>一文中构建GLFW类似）。</p>
+<p>当然，在我们的源文件中还需要包含SOIL.h头文件：<code>#include &lt;SOIL.h&gt;</code></p>
+<p><font size="4" color="red">使用SOIL加载图片</font><br>下面我们加载一张<a href="https://learnopengl-cn.github.io/img/01/06/container.jpg" target="_blank" rel="external">木箱</a>图片。<br>首先使用SOIL库的<code>SOIL_load_image</code>函数把木箱图片数据加载到内存：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int iamgeWidth, iamgeHeight;</div><div class="line">unsigned char* image = SOIL_load_image(&quot;container.jpg&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div></pre></td></tr></table></figure></p>
+<p>函数<code>SOIL_load_image</code>的第一个参数是需要加载的图片路径；然后需要两个int指针作为第二个和第三个参数，函数会分别返回图片的宽度和高度到其中；第4个参数指定图片的通道数量，这里设为0即可；最后一个参数告诉SOIL如何来加载图片，由于我们只关注图片的RGB值，所以设为SOIL_LOAD_RGB。函数返回一个很大的char（或者说byte）数组。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">生成纹理</font><br>图像数据已经有了，存储在image数组中，下面我们利用这些图形数据来生成纹理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div></pre></td></tr></table></figure></p>
+<p>函数<code>glTexImage2D</code>的参数都表示什么？</p>
+<ul>
+<li>第一个参数是纹理绑定的目标GL_TEXTURE_2D</li>
+<li>第二个参数是纹理的多级渐远纹理（后面会讲）级别，这里我们设置为0，也就是原始纹理</li>
+<li>第三个参数告诉OpenGL我们希望把纹理存储为何种格式。我们的图形只有RGB值，所以我们也把纹理存储为RGB</li>
+<li>第四个和第五个参数设置最终的纹理宽度和高度。我们之前加载图像的时候读取到了图像的宽度和高度，现在刚好用上</li>
+<li>第6个参数总是设为0（历史遗留问题）</li>
+<li>第7个参数指定源图的格式</li>
+<li>第8个参数指定源图的数据类型</li>
+<li>最后一个参数是真正的图形数据</li>
+</ul>
+<p>当调用函数<code>glTexImage2D</code>时，当前绑定的纹理对象就会被附加上纹理图像。</p>
+<p>使用完图像内存数据后，释放所占用的内存是个好习惯：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SOIL_free_image_data(image);</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p>接下来还需要对纹理进行一系列的配置，先来看对纹理环绕方式的配置。</p>
+<p><font size="5" color="orange">纹理环绕方式</font><br>纹理坐标的范围通常是（0,0）到（1,1），那如果我们把纹理坐标设置在这个范围之外会发生什么？OpenGL默认是重复这个纹理图像（即忽略纹理坐标的整数部分，只有小数部分有效），除此之外，OpenGL还提供了几种环绕方式（Wrapping）：</p>
+<ul>
+<li>GL_REPEAT：重复纹理图像。这是默认的。</li>
+<li>GL_MIRRORED_REPEAT：镜像重复纹理图像。</li>
+<li>GL_CLAMP_TO_EDGE：纹理坐标会被约束在0到1之间，超出部分会重复纹理边缘，产生一种边缘被拉伸的效果。</li>
+<li>GL_CLAMP_TO_BORDER：超出坐标为用户指定的边缘颜色。</li>
+</ul>
+<p>当纹理坐标不在0到1之间时，每个选项都有不同的视觉输出效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025552863.png" alt=""><br>可以使用<code>glTextParameteri</code>函数来设置纹理的环绕方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</div></pre></td></tr></table></figure></p>
+<p>第一个参数指定了纹理对象所绑定的目标；第二个参数指定需要配置的选项和应用的纹理轴，因为我们打算配置的是纹理环绕方式wrap，并且需要配置S和T方向（纹理中的s、t、r轴等价于通常的x、y、z轴）的环绕方式。最后一个参数指定环绕方式，这里我们指定的都是重复纹理图像这种方式。</p>
+<p>【注】：</p>
+<ul>
+<li>如果我们选择GL_CLAMP_TO_BORDER这种纹理环绕方式，就还需要再指定一个边缘颜色。这时就需要再使用<code>glTexParameterfv</code>函数了：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);</div><div class="line">GLfloat borderColor[] = &#123; 1.0f,1.0f,0.0f,1.0f &#125;;</div><div class="line">glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>函数<code>glTexParameterfv</code>的第一个参数依旧是纹理对象绑定的目标；因为要设置边缘颜色，所以第二个参数变成了<code>GL_TEXTURE_BORDER_COLOR</code>；第三个参数是表示颜色的一个float数组。<br>&nbsp;</p>
+<hr>
+<p>接下来我们看看对纹理过滤方式的配置</p>
+<p><font size="5" color="orange">纹理过滤</font><br>当使用顶点坐标映射相应纹素时，由于是根据位置关系进行插值计算的，所以得到的内部点的纹理坐标不一定是整数，比如说如果纹素位置（即纹理坐标）为（152.34,255,38）该怎么办呢？这种情况称为纹理过滤。</p>
+<p>纹理过滤有很多种方法，这里只讨论最重要的两种：GL_NEAREST（最邻近滤波）和GL_LINEAR（线性滤波）</p>
+<p><font size="4" color="red">最邻近滤波</font><br>最邻近滤波是选择中心点距离浮点数纹理坐标最近的那个纹素。图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032559086.png" alt=""><br>因为图中红色纹素离纹理坐标最近，所以选择该红色作为最终的输出纹素。</p>
+<p>最邻近滤波容易导致走样误差，明显有像素块的感觉。</p>
+<p><font size="4" color="red">线性滤波</font><br>线性滤波是使用纹理坐标附近的一组纹素的加权平均值（插值）来确定最终的纹素值。这个权值就是纹素中心到这个纹理坐标的距离，距离越近的纹素对最终的纹素值贡献越大。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032559137.png" alt=""></p>
+<p>最邻近滤波和线性滤波的对比效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032631514.png" alt=""><br>GL_NEAREST产生了颗粒状的图案，能够清晰地看到纹素，而GK_LINEAR能够产生更平滑的图案，很难看出单个的纹素。GL_LINEAR可以产生更真实的输出，不过GL_NEAREST却可以产生出8-bit风格（像素风），也有很多人喜欢。</p>
+<p>还有一些其它的滤波方式，比如三线性滤波（Trilinear Filtering）等。</p>
+<p><font size="4" color="red">纹素放大缩小时滤波</font><br>除了对纹理坐标取整时需要用到滤波以外，在纹素到像素时的放大和缩小时，也可能要用到滤波。</p>
+<p>什么是纹素到像素的放大、缩小？</p>
+<ul>
+<li>一个纹素最终对应屏幕上的多个像素，称为放大（magnification）</li>
+<li>一个纹素最终对应屏幕上的一个像素，这时不需要滤波</li>
+<li>一个纹素最终对应少于一个像素，称为缩小</li>
+</ul>
+<p>放大和缩小图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033138491.png" alt=""></p>
+<p>我们可以使用<code>glTexParameteri</code>函数在图像放大滤波和缩小滤波选项时设置纹理滤波：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div></pre></td></tr></table></figure></p>
+<p>第二个参数是放大滤波或者缩小滤波，第三个参数指定滤波方式。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">多级渐远纹理mipmap</font><br>一个物体，当它距离我们比较近时，需要很多像素去表现它；而当距离我们很远时，会看不大清楚，只有很少的像素需要被绘制，这时再从该物体对应的纹理中去找几个纹素来表现它，是很难的。因为它需要跨过纹理很大部分只拾取一个纹素，而且最终拾取出来的纹素凑在一起可能就面目全非了。更何况对于很远的物体去使用高分辨率的纹理无疑是浪费内存。</p>
+<p>OpenGL使用多级渐远纹理Mipmap来解决这个问题。mipmap其实就是一系列纹理图像，后一个纹理图像只有前一个纹理图像的一半大小。在观察者的距离在不同的距离范围时使用不同级别的mipmap。mipmap的另一个加分点是它的性能非常好。mipmap图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033241373.png" alt=""></p>
+<p><font size="4" color="red">mipmap滤波</font><br>在渲染中切换不同级别的mipmap时，会产生一些很明显的边界。对纹素的滤波也可以用到这里，来消除这些很生硬的边界。由于mipmap其实也相当于是把纹理缩小，所以它的滤滤波也是通过<code>glTexParameteri</code>函数在缩小滤波<code>GL_TEXTURE_MIN_FILTER</code>选项时来实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);</div></pre></td></tr></table></figure></p>
+<p>函数的第三个参数就是要设置的mipmap滤波方式，它有一下几种选项（“mipmap”之后是mipmap滤波方式，之前是纹素滤波方式）：</p>
+<ul>
+<li><code>GL_NEAREST_MIPMAP_NEAREST</code>：使用最接近像素大小的mipmap，纹理内部使用最邻近滤波</li>
+<li><code>GL_LINEAR_MIPMAP_NEAREST</code>：使用最接近像素大小的mipmap，纹理内部使用线性滤波</li>
+<li><code>GL_NEAREST_MIPMAP_LINEAR</code>：在两个最接近像素大小的mipmap中做线性插值，纹理内部使用最邻近滤波</li>
+<li><code>GL_LINEAR_MIPMAP_LINEAR</code>：在两个最接近像素大小的mipmap中线性插值，纹理内部使用线性滤波</li>
+</ul>
+<p>设置好mipmap的滤波之后，就可以来创建mipmap了。</p>
+<p><font size="4" color="red">创建mipmap</font><br>手工为每个纹理图像创建一系列mipmap挺麻烦的，不过OpenGL有一个<code>glGenerateMipmaps</code>函数，在创建完一个纹理后调用它，OpenGL就会自动建立该纹理的一系列mipmap了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glGenerateMipmap(GL_TEXTURE_2D);</div></pre></td></tr></table></figure></p>
+<p>【注】：</p>
+<ul>
+<li>如果不需要mipmap，那关于mipmap这里的操作可以不要。<br>&nbsp;</li>
+</ul>
+<hr>
+<p><font size="5" color="orange">解绑纹理对象</font><br>设置完纹理参数后，需要和别的对象一样，使用完之后解绑纹理对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glBindTexture(GL_TEXTURE_2D, 0);</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">更改顶点着色器</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//顶点着色器</div><div class="line">#version 330 core</div><div class="line">layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0</div><div class="line">layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1</div><div class="line">layout (location=2) in vec2 texCoord;  //顶点纹理坐标的属性位置值为2</div><div class="line">out vec3 ourColor;</div><div class="line">out vec2 TexCoord;</div><div class="line">void main()&#123;</div><div class="line">	gl_Position=vec4(position,1.0f);</div><div class="line">	ourColor=color;</div><div class="line">	TexCoord=texCoord;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>顶点着色器需要增加一个纹理坐标的输入变量，由于只有s、t坐标，所以是vec2类型；还需要增加一个输出变量，用于输出纹理坐标给像素着色器。在main函数内把输入纹理坐标赋值给输出纹理坐标。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">更改像素着色器</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//像素着色器</div><div class="line">#version 330 core</div><div class="line">in vec3 ourColor;</div><div class="line">in vec2 TexCoord;</div><div class="line">out vec4 color;</div><div class="line">uniform sampler2D ourTexture;</div><div class="line"></div><div class="line">void main()&#123;</div><div class="line">	color = vec4(ourColor,1.0f) * texture(ourTexture,TexCoord);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>像素着色器需要增加一个纹理坐标的输入变量；只有纹理坐标还不足以在像素着色器中输出对应纹素的颜色，我们还需要一个采样器（设置为uniform变量），让它结合纹理坐标、顶点坐标、纹理图像，进行插值获得每一个像素颜色。使用texture函数来使用采样器，第一个参数是我们设置的采用器，第二个参数是纹理坐标。</p>
+<p>在main函数内最终的输出颜色我们设置为顶点颜色和纹理颜色的混合。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">渲染时绑定纹理对象</font><br>设置完了纹理和相应的着色器，最后要做的就是在渲染循环里绑定纹理对象，这样才能渲染出纹理（这和绑定VAO是一个道理）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//绑定纹理</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture);</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p>自此，所有源码如下：</p>
+<p>顶点着色器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//顶点着色器</div><div class="line">#version 330 core</div><div class="line">layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0</div><div class="line">layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1</div><div class="line">layout (location=2) in vec2 texCoord;  //顶点纹理坐标的属性位置值为2</div><div class="line">out vec3 ourColor;</div><div class="line">out vec2 TexCoord;</div><div class="line">void main()&#123;</div><div class="line">	gl_Position=vec4(position,1.0f);</div><div class="line">	ourColor=color;</div><div class="line">	TexCoord=texCoord;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>像素着色器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//像素着色器</div><div class="line">#version 330 core</div><div class="line">in vec3 ourColor;</div><div class="line">in vec2 TexCoord;</div><div class="line">out vec4 color;</div><div class="line">//采样器</div><div class="line">uniform sampler2D ourTexture;</div><div class="line"></div><div class="line">void main()&#123;</div><div class="line">	color = vec4(ourColor,1.0f) * texture(ourTexture,TexCoord);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义着色器类头文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#define GLEW_STATIC</div><div class="line">#include &lt;GL/glew.h&gt;  //包含glew来获取OpenGL头文件，否则gl函数都不可用</div><div class="line"></div><div class="line">class shader</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	//着色器程序对象</div><div class="line">	GLuint shaderProgram;</div><div class="line">	//构造函数，创建编译顶点着色器、像素着色器，链接着色器程序对象</div><div class="line">	shader(const GLchar* vertexPath, const GLchar* fragmentPath);</div><div class="line">	//激活当前shader程序对象shaderProgram，供主函数调用</div><div class="line">	void Use();</div><div class="line">	//从指定路径的文件中读取着色器源码</div><div class="line">	const GLchar* GetShaderSourceFromFile(const GLchar* shaderPath);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>自定义着色器类源文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">#include &quot;shader.h&quot;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;fstream&gt;</div><div class="line">#include &lt;sstream&gt;</div><div class="line">//#define GLEW_STATIC</div><div class="line">//#include &lt;GL/glew.h&gt;</div><div class="line">#include &lt;GLFW/glfw3.h&gt;</div><div class="line"></div><div class="line">//构造函数，创建编译顶点着色器、像素着色器，链接着色器程序对象</div><div class="line">shader::shader(const GLchar* vertexPath, const GLchar* fragmentPath) &#123;</div><div class="line"></div><div class="line">	const GLchar* vertexShaderSource = GetShaderSourceFromFile(&quot;shader.vertex&quot;);</div><div class="line">	const GLchar* fragmentShaderSource = GetShaderSourceFromFile(&quot;shader.fragment&quot;);</div><div class="line"></div><div class="line">	GLuint vertexShader;</div><div class="line">	vertexShader = glCreateShader(GL_VERTEX_SHADER);</div><div class="line">	glShaderSource(vertexShader, 1, &amp;vertexShaderSource, NULL);</div><div class="line">	GLint success;</div><div class="line">	GLchar infolog[512];</div><div class="line">	glCompileShader(vertexShader);</div><div class="line">	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &amp;success);</div><div class="line">	if (!success) &#123;</div><div class="line">		glGetShaderInfoLog(vertexShader, 512, NULL, infolog);</div><div class="line">		cout &lt;&lt; &quot;vertex shader compilation failed&quot; &lt;&lt; infolog &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	GLuint fragementShader;</div><div class="line">	fragementShader = glCreateShader(GL_FRAGMENT_SHADER);</div><div class="line">	glShaderSource(fragementShader, 1, &amp;fragmentShaderSource, NULL);</div><div class="line">	glCompileShader(fragementShader);</div><div class="line">	glGetShaderiv(fragementShader, GL_COMPILE_STATUS, &amp;success);</div><div class="line">	if (!success) &#123;</div><div class="line">		glGetShaderInfoLog(fragementShader, 512, NULL, infolog);</div><div class="line">		cout &lt;&lt; &quot;fragment shader compilation failed&quot; &lt;&lt; infolog &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	shaderProgram = glCreateProgram();</div><div class="line">	glAttachShader(shaderProgram, vertexShader);</div><div class="line">	glAttachShader(shaderProgram, fragementShader);</div><div class="line">	glLinkProgram(shaderProgram);</div><div class="line">	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &amp;success);</div><div class="line">	if (!success) &#123;</div><div class="line">		glGetProgramInfoLog(shaderProgram, 512, NULL, infolog);</div><div class="line">		cout &lt;&lt; &quot;shader program linking failed&quot; &lt;&lt; infolog &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	glDeleteShader(vertexShader);</div><div class="line">	glDeleteShader(fragementShader);</div><div class="line">&#125;</div><div class="line">//激活当前shader程序对象shaderProgram，供主函数调用</div><div class="line">void shader::Use() &#123;</div><div class="line">	glUseProgram(shaderProgram);</div><div class="line">&#125;</div><div class="line">//从指定路径的文件中读取着色器源码</div><div class="line">const GLchar* shader::GetShaderSourceFromFile(const GLchar* shaderPath) &#123;</div><div class="line">	//以二进制方式打开指定路径的文件</div><div class="line">	ifstream fin(shaderPath, ios::binary);</div><div class="line">	//检测是否成功打开文件</div><div class="line">	if (!fin) &#123;</div><div class="line">		cout &lt;&lt; &quot;Cannot open input file&quot; &lt;&lt; endl;</div><div class="line">		exit(1);</div><div class="line">	&#125;</div><div class="line">	//将读指针设置到文件尾</div><div class="line">	fin.seekg(0, ios::end);</div><div class="line">	//读出当前文件位置，以获取文件长度</div><div class="line">	int length = fin.tellg();</div><div class="line">	//定义长度为length+1的字符串来存储文件内容</div><div class="line">	char* shaderSource = new char[length + 1];</div><div class="line">	//重新将读指针设置到文件头</div><div class="line">	fin.seekg(0, ios::beg);</div><div class="line">	//读出整个文件</div><div class="line">	fin.read(shaderSource, length);</div><div class="line">	//给字符串末尾加上字符串结束符&apos;\0&apos;</div><div class="line">	shaderSource[length] = &apos;\0&apos;;</div><div class="line">	fin.close();</div><div class="line">	return shaderSource;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用自定义着色器类的源程序（主程序）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line">#include &quot;shader.h&quot;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">//GLEW</div><div class="line">#define GLEW_STATIC</div><div class="line">#include &lt;GL/glew.h&gt;</div><div class="line">//GLFW</div><div class="line">#include &lt;GLFW/glfw3.h&gt;</div><div class="line">//SOIL</div><div class="line">#include &lt;SOIL/SOIL.h&gt;</div><div class="line">//窗口尺寸</div><div class="line">const GLuint WIDTH = 800, HEIGHT = 600;</div><div class="line">//函数声明</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">	//初始化GLFW</div><div class="line">	glfwInit();</div><div class="line">	//GLFW配置</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //主版本号</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //次版本号</div><div class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 核心开发模式</div><div class="line">	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); //窗口尺寸不可变</div><div class="line">	//创建能够使用GLFW函数的窗口对象（指针）</div><div class="line">	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, &quot;LearnOpenGL&quot;, nullptr, nullptr);</div><div class="line">	if (window == NULL) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to create GLFW window&quot; &lt;&lt; std::endl;</div><div class="line">		glfwTerminate();</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//创建窗口环境</div><div class="line">	glfwMakeContextCurrent(window);</div><div class="line">	//注册回调函数</div><div class="line">	glfwSetKeyCallback(window, key_callback);</div><div class="line">	//初始化GLEW</div><div class="line">	glewExperimental = GL_TRUE; //保证使用现代技术管理OpenGL机能</div><div class="line">	if (glewInit() != GLEW_OK) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to initialize GLEW&quot; &lt;&lt; std::endl;</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//设置渲染窗口位置大小</div><div class="line">	int width, height;</div><div class="line">	glfwGetFramebufferSize(window, &amp;width, &amp;height);</div><div class="line">	glViewport(0, 0, width, height);</div><div class="line">	//三角形顶点的坐标、颜色、纹理坐标</div><div class="line">	GLfloat vertices[] = &#123;</div><div class="line">		//位置坐标         //颜色           //纹理坐标</div><div class="line">		0.5f, 0.5f, 0.0f,  1.0f,0.0f,0.0f,  1.0f,1.0f,</div><div class="line">		0.5f, -0.5f,0.0f,  0.0f,1.0f,0.0f,  1.0f,0.0f, </div><div class="line">		-0.5f,-0.5f,0.0f,  0.0f,0.0f,1.0f,  0.0f,0.0f,</div><div class="line">		-0.5f,0.5f, 0.0f,  1.0f,1.0f,0.0f,  0.0f,1.0f</div><div class="line">	&#125;;</div><div class="line">	//顶点索引</div><div class="line">	GLuint indices[] = &#123;</div><div class="line">		0,1,3,  //第一个三角形</div><div class="line">		1,2,3   //第二个三角形</div><div class="line">	&#125;;</div><div class="line">	GLuint VAO, VBO, EBO;</div><div class="line">	//生成顶点数组对象VAO，记录数据的存储和如何使用的细节信息</div><div class="line">	glGenVertexArrays(1, &amp;VAO);</div><div class="line">	//生顶点缓冲对象VBO，负责顶点数据的存储</div><div class="line">	glGenBuffers(1, &amp;VBO);</div><div class="line">	//生成索引缓冲对象EBO，负责索引数据的存储</div><div class="line">	glGenBuffers(1, &amp;EBO);</div><div class="line">	//给顶点数组对象绑定目标(顶点数组，不需要参数)</div><div class="line">	glBindVertexArray(VAO);</div><div class="line">	//给顶点缓冲对象绑定目标（数组内存）</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">	//给索引缓冲对象绑定目标（索引数组内存）</div><div class="line">	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">	//把顶点数据复制到显卡的缓冲内存中</div><div class="line">	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">	//把索引数据复制到显卡的缓冲内存中</div><div class="line">	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点位置属性数据</div><div class="line">	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">	//打开顶点位置属性数组</div><div class="line">	glEnableVertexAttribArray(0);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点颜色属性数据</div><div class="line">	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));</div><div class="line">	//打开顶点颜色属性数组</div><div class="line">	glEnableVertexAttribArray(1);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点纹理坐标属性数据</div><div class="line">	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));</div><div class="line">	//打开顶点纹理坐标属性数组</div><div class="line">	glEnableVertexAttribArray(2);</div><div class="line">	//解绑VBO、EBO</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, 0);</div><div class="line">	//解绑VAO</div><div class="line">	glBindVertexArray(0);</div><div class="line"></div><div class="line">	GLuint texture;</div><div class="line">	//生成纹理对象texture</div><div class="line">	glGenTextures(1, &amp;texture);</div><div class="line">	//给纹理对象绑定目标（2D纹理）</div><div class="line">	glBindTexture(GL_TEXTURE_2D, texture);</div><div class="line">	int iamgeWidth, iamgeHeight;</div><div class="line">	//加载纹理图像</div><div class="line">	unsigned char* image = SOIL_load_image(&quot;container.jpg&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div><div class="line">	//生成2D纹理</div><div class="line">	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div><div class="line">	//释放纹理数据内存</div><div class="line">	SOIL_free_image_data(image);</div><div class="line">	//设置纹理s和t方向的环绕方式</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</div><div class="line">	//设置纹理放大和缩写时的过滤方式（纹素过滤、mipmap边界过滤）</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div><div class="line">	//生成多级渐远纹理</div><div class="line">	glGenerateMipmap(GL_TEXTURE_2D);</div><div class="line">	//解绑纹理对象</div><div class="line">	glBindTexture(GL_TEXTURE_2D, 0);</div><div class="line"></div><div class="line">	//定义自定义着色器类shader的对象</div><div class="line">	shader myshader(&quot;shader.vertex&quot;, &quot;shader.fragment&quot;);</div><div class="line"></div><div class="line">	//渲染循环（游戏循环）</div><div class="line">	while (!glfwWindowShouldClose(window)) &#123;</div><div class="line">		glfwPollEvents(); //检测是否有事件被触发（按键按下、鼠标移动）</div><div class="line">		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);</div><div class="line">		glClear(GL_COLOR_BUFFER_BIT);</div><div class="line">		//激活着色器程序对象</div><div class="line">		myshader.Use();</div><div class="line">		//绑定纹理</div><div class="line">		glBindTexture(GL_TEXTURE_2D, texture);</div><div class="line">		//绑定VAO，完成顶点输入初始化</div><div class="line">		glBindVertexArray(VAO);</div><div class="line">		//绘图</div><div class="line">		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);</div><div class="line">		//解绑VAO</div><div class="line">		glBindVertexArray(0);</div><div class="line">		glfwSwapBuffers(window); //交换颜色缓存</div><div class="line">	&#125;</div><div class="line">	//删除VAO、VBO、EBO</div><div class="line">	glDeleteVertexArrays(1, &amp;VAO);</div><div class="line">	glDeleteBuffers(1, &amp;VBO);</div><div class="line">	glDeleteBuffers(1, &amp;EBO);</div><div class="line">	//结束CLFW，释放由GLFW分配的资源</div><div class="line">	glfwTerminate();</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">//按键回调函数</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) &#123;</div><div class="line">	if (key == GLFW_KEY_ESCAPE&amp;&amp;action == GLFW_PRESS) &#123;</div><div class="line">		glfwSetWindowShouldClose(window, GL_TRUE);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译运行后，结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033659587.png" alt=""><br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">使用多个纹理</font></p>
+<p><font size="4" color="red">载入第二张图片</font><br>载入<a href="https://learnopengl-cn.github.io/img/01/06/awesomeface.png" target="_blank" rel="external">第二张图片</a>和第一张类似：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">GLuint texture1;</div><div class="line">//生成纹理对象texture1</div><div class="line">glGenTextures(1, &amp;texture1);</div><div class="line">//给纹理对象绑定目标（2D纹理）</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line">int iamgeWidth, iamgeHeight;</div><div class="line">//加载纹理图像</div><div class="line">unsigned char* image = SOIL_load_image(&quot;container.jpg&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div><div class="line">//生成2D纹理</div><div class="line">glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div><div class="line">//释放纹理数据内存</div><div class="line">SOIL_free_image_data(image);</div><div class="line">//设置纹理s和t方向的环绕方式</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</div><div class="line">//设置纹理放大和缩写时的过滤方式（纹素过滤、mipmap边界过滤）</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div><div class="line">//生成多级渐远纹理</div><div class="line">glGenerateMipmap(GL_TEXTURE_2D);</div><div class="line">//解绑纹理对象</div><div class="line">glBindTexture(GL_TEXTURE_2D, 0);</div><div class="line"></div><div class="line">GLuint texture2;</div><div class="line">//生成纹理对象texture2</div><div class="line">glGenTextures(1, &amp;texture2);</div><div class="line">//给纹理对象绑定目标（2D纹理）</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture2);</div><div class="line">//加载纹理图像</div><div class="line">image = SOIL_load_image(&quot;awesomeface.png&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div><div class="line">//生成2D纹理</div><div class="line">glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div><div class="line">//释放纹理数据内存</div><div class="line">SOIL_free_image_data(image);</div><div class="line">//设置纹理s和t方向的环绕方式</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_LINEAR);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_LINEAR);</div><div class="line">//设置纹理放大和缩写时的过滤方式（纹素过滤、mipmap边界过滤）</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div><div class="line">//生成多级渐远纹理</div><div class="line">glGenerateMipmap(GL_TEXTURE_2D);</div><div class="line">//解绑纹理对象</div><div class="line">glBindTexture(GL_TEXTURE_2D, 0);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">更改像素着色器</font><br>使用多个纹理，我们就需要在像素着色器中使用多个采样器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//像素着色器</div><div class="line">#version 330 core</div><div class="line">in vec3 ourColor;</div><div class="line">in vec2 TexCoord;</div><div class="line">out vec4 color;</div><div class="line">//纹理采样器1</div><div class="line">uniform sampler2D ourTexture1;</div><div class="line">//纹理采样器2</div><div class="line">uniform sampler2D ourTexture2;</div><div class="line"></div><div class="line">void main()&#123;</div><div class="line">	color = vec4(ourColor,1.0f) * mix(texture(ourTexture1,TexCoord),texture(ourTexture2,TexCoord),0.41);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在main函数中使用mix函数来混合两个纹理，第一个参数是纹理1的纹素颜色，第二个参数是纹理2的纹素颜色，第3个参数是纹素2在最终输出颜色中所占的权重，代码中是59%的纹素1，41%的纹素2。</p>
+<p><font size="4" color="red">渲染中激活纹理单元并设置相应采样器</font><br>我们可以看到我们的采样器是被uniform声明的，但是很奇怪的是之前的源程序中，渲染时并没有对uniform全局变量ourTexture赋值，但是依旧有效并没有报错。这是因为我们的ourTexture变量是个采样器，通过多个采样器我们可以使用多个纹理。</p>
+<p>每个纹理都有一个位置值，称为纹理单元（有点像多个纹理叠加时的图层）。而对于纹理处在哪一层，即纹理单元是多少，就是通过使用<code>glUniform1i</code>函数来给采样器赋值，从而确定纹理单元值。但是默认情况下，当只使用一个纹理时，纹理单元<code>GL_TEXTURE0</code>总是被激活的，也就是这个采样器（或者说纹理单元）总是对应0（0图层），所以不需要显式使用<code>glUniform1i</code>函数去为采样器赋值。</p>
+<p>但是有多个纹理时，就没有默认了，需要显式为每个采样器指定一个整数值，对应被激活的图层（被激活的纹理单元）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//激活纹理单元</div><div class="line">glActiveTexture(GL_TEXTURE0);</div><div class="line">//获取uniform变量位置</div><div class="line">GLint uniformLocation1 = glGetUniformLocation(myshader.shaderProgram, &quot;ourTexture1&quot;);</div><div class="line">//设置采样器的值（对应纹理单元值）</div><div class="line">glUniform1i(uniformLocation1, 0);</div><div class="line">//绑定纹理对象</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line"></div><div class="line">glActiveTexture(GL_TEXTURE1);</div><div class="line">GLint uniformLocation2 = glGetUniformLocation(myshader.shaderProgram, &quot;ourTexture2&quot;);</div><div class="line">glUniform1i(uniformLocation2, 1);</div><div class="line">glBindTexture(GL_TEXTURE_2D, texture2);</div></pre></td></tr></table></figure></p>
+<p>在给采样器赋值之前，我们需要先激活纹理单元，活着说激活纹理图层，再给采样器赋以相应的被激活的纹理单元值，这样采样器才能读出纹素颜色。<br>【注】：</p>
+<ul>
+<li>如果采样器值对应的纹理单元没有被激活，是无法读出纹素的。因为默认纹理单元0是激活的，所以在只渲染一个纹理时，就不用去激活纹理单元并设置采样器值，默认就是用采样器0去纹理单元0（图层0）采集纹素颜色。</li>
+<li>设置完采样器的值后，接下来就需要绑定纹理对象，好把相应纹理放在刚刚激活的纹理单元（图层）上。</li>
+<li>OpenGL至少保证有16个纹理单元可供使用，也就是说可以激活从<code>GL_TEXTURE0</code>到<code>GL_TEXTURE15</code>。它们都是按顺序定义的，所以<code>GL_TEXTURE8=GL_TEXTURE0+8</code>，这在当我们需要循环一些纹理单元时会很有用。</li>
+</ul>
+<p>其余代码和之前的源程序一样，编译运行的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148034269274.png" alt=""></p>
+<p><font size="4" color="red">翻转图片</font><br>可以看到第二张纹理上下颠倒了！这是因为OpenGL要求y轴0.0在图片底部，但是通常图片y轴0.0在图片顶部。有一些图片加载器比如DevIL在加载的时候有选项重载y原点，但是SOIL没有。所以，为了修复这个小问题，有两个选择：</p>
+<ul>
+<li>改变顶点的纹理坐标属性，翻转y值（用1减去y坐标）</li>
+<li>更改顶点着色器中对输出纹理坐标的赋值，也是用1减去y坐标：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//顶点着色器</div><div class="line">#version 330 core</div><div class="line">layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0</div><div class="line">layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1</div><div class="line">layout (location=2) in vec2 texCoord;  //顶点纹理坐标的属性位置值为2</div><div class="line">out vec3 ourColor;</div><div class="line">out vec2 TexCoord;</div><div class="line">void main()&#123;</div><div class="line">	gl_Position=vec4(position,1.0f);</div><div class="line">	ourColor=color;</div><div class="line">	TexCoord=vec2(texCoord.x,1-texCoord.y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148034318836.png" alt=""><br>&nbsp;</p>
+<hr>
+<p>到此，使用两张纹理的全部源程序如下：</p>
+<p>顶点着色器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//顶点着色器</div><div class="line">#version 330 core</div><div class="line">layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0</div><div class="line">layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1</div><div class="line">layout (location=2) in vec2 texCoord;  //顶点纹理坐标的属性位置值为2</div><div class="line">out vec3 ourColor;</div><div class="line">out vec2 TexCoord;</div><div class="line">void main()&#123;</div><div class="line">	gl_Position=vec4(position,1.0f);</div><div class="line">	ourColor=color;</div><div class="line">	TexCoord=vec2(texCoord.x,1-texCoord.y);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>像素着色器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//像素着色器</div><div class="line">#version 330 core</div><div class="line">in vec3 ourColor;</div><div class="line">in vec2 TexCoord;</div><div class="line">out vec4 color;</div><div class="line">//纹理采样器1</div><div class="line">uniform sampler2D ourTexture1;</div><div class="line">//纹理采样器2</div><div class="line">uniform sampler2D ourTexture2;</div><div class="line"></div><div class="line">void main()&#123;</div><div class="line">	color = vec4(ourColor,1.0f) * mix(texture(ourTexture1,TexCoord),texture(ourTexture2,TexCoord),0.41);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义着色器类的头文件和源程序：和之前一样</p>
+<p>使用自定义着色器类的程序（主程序）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div></pre></td><td class="code"><pre><div class="line">#include &quot;shader.h&quot;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">//GLEW</div><div class="line">#define GLEW_STATIC</div><div class="line">#include &lt;GL/glew.h&gt;</div><div class="line">//GLFW</div><div class="line">#include &lt;GLFW/glfw3.h&gt;</div><div class="line">//SOIL</div><div class="line">#include &lt;SOIL/SOIL.h&gt;</div><div class="line"></div><div class="line">//窗口尺寸</div><div class="line">const GLuint WIDTH = 800, HEIGHT = 600;</div><div class="line">//函数声明</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">	//初始化GLFW</div><div class="line">	glfwInit();</div><div class="line">	//GLFW配置</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //主版本号</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //次版本号</div><div class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 核心开发模式</div><div class="line">	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); //窗口尺寸不可变</div><div class="line">	//创建能够使用GLFW函数的窗口对象（指针）</div><div class="line">	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, &quot;LearnOpenGL&quot;, nullptr, nullptr);</div><div class="line">	if (window == NULL) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to create GLFW window&quot; &lt;&lt; std::endl;</div><div class="line">		glfwTerminate();</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//创建窗口环境</div><div class="line">	glfwMakeContextCurrent(window);</div><div class="line">	//注册回调函数</div><div class="line">	glfwSetKeyCallback(window, key_callback);</div><div class="line">	//初始化GLEW</div><div class="line">	glewExperimental = GL_TRUE; //保证使用现代技术管理OpenGL机能</div><div class="line">	if (glewInit() != GLEW_OK) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to initialize GLEW&quot; &lt;&lt; std::endl;</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//设置渲染窗口位置大小</div><div class="line">	int width, height;</div><div class="line">	glfwGetFramebufferSize(window, &amp;width, &amp;height);</div><div class="line">	glViewport(0, 0, width, height);</div><div class="line">	//三角形顶点的坐标、颜色、纹理坐标</div><div class="line">	GLfloat vertices[] = &#123;</div><div class="line">		//位置坐标         //颜色           //纹理坐标</div><div class="line">		0.5f, 0.5f, 0.0f,  1.0f,0.0f,0.0f,  1.0f,1.0f,</div><div class="line">		0.5f, -0.5f,0.0f,  0.0f,1.0f,0.0f,  1.0f,0.0f, </div><div class="line">		-0.5f,-0.5f,0.0f,  0.0f,0.0f,1.0f,  0.0f,0.0f,</div><div class="line">		-0.5f,0.5f, 0.0f,  1.0f,1.0f,0.0f,  0.0f,1.0f</div><div class="line">	&#125;;</div><div class="line">	//顶点索引</div><div class="line">	GLuint indices[] = &#123;</div><div class="line">		0,1,3,  //第一个三角形</div><div class="line">		1,2,3   //第二个三角形</div><div class="line">	&#125;;</div><div class="line">	GLuint VAO, VBO, EBO;</div><div class="line">	//生成顶点数组对象VAO，记录数据的存储和如何使用的细节信息</div><div class="line">	glGenVertexArrays(1, &amp;VAO);</div><div class="line">	//生顶点缓冲对象VBO，负责顶点数据的存储</div><div class="line">	glGenBuffers(1, &amp;VBO);</div><div class="line">	//生成索引缓冲对象EBO，负责索引数据的存储</div><div class="line">	glGenBuffers(1, &amp;EBO);</div><div class="line">	//给顶点数组对象绑定目标(顶点数组，不需要参数)</div><div class="line">	glBindVertexArray(VAO);</div><div class="line">	//给顶点缓冲对象绑定目标（数组内存）</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">	//给索引缓冲对象绑定目标（索引数组内存）</div><div class="line">	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">	//把顶点数据复制到显卡的缓冲内存中</div><div class="line">	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">	//把索引数据复制到显卡的缓冲内存中</div><div class="line">	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点位置属性数据</div><div class="line">	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">	//打开顶点位置属性数组</div><div class="line">	glEnableVertexAttribArray(0);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点颜色属性数据</div><div class="line">	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));</div><div class="line">	//打开顶点颜色属性数组</div><div class="line">	glEnableVertexAttribArray(1);</div><div class="line">	//告诉OpenGL如何解析显存中的顶点纹理坐标属性数据</div><div class="line">	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));</div><div class="line">	//打开顶点纹理坐标属性数组</div><div class="line">	glEnableVertexAttribArray(2);</div><div class="line">	//解绑VBO、EBO</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, 0);</div><div class="line">	//解绑VAO</div><div class="line">	glBindVertexArray(0);</div><div class="line"></div><div class="line">	GLuint texture1;</div><div class="line">	//生成纹理对象texture1</div><div class="line">	glGenTextures(1, &amp;texture1);</div><div class="line">	//给纹理对象绑定目标（2D纹理）</div><div class="line">	glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line">	int iamgeWidth, iamgeHeight;</div><div class="line">	//加载纹理图像</div><div class="line">	unsigned char* image = SOIL_load_image(&quot;container.jpg&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div><div class="line">	//生成2D纹理</div><div class="line">	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div><div class="line">	//释放纹理数据内存</div><div class="line">	SOIL_free_image_data(image);</div><div class="line">	//设置纹理s和t方向的环绕方式</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</div><div class="line">	//设置纹理放大和缩写时的过滤方式（纹素过滤、mipmap边界过滤）</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div><div class="line">	//生成多级渐远纹理</div><div class="line">	glGenerateMipmap(GL_TEXTURE_2D);</div><div class="line">	//解绑纹理对象</div><div class="line">	glBindTexture(GL_TEXTURE_2D, 0);</div><div class="line"></div><div class="line">	GLuint texture2;</div><div class="line">	//生成纹理对象texture2</div><div class="line">	glGenTextures(1, &amp;texture2);</div><div class="line">	//给纹理对象绑定目标（2D纹理）</div><div class="line">	glBindTexture(GL_TEXTURE_2D, texture2);</div><div class="line">	//加载纹理图像</div><div class="line">	image = SOIL_load_image(&quot;awesomeface.png&quot;, &amp;iamgeWidth, &amp;iamgeHeight, 0, SOIL_LOAD_RGB);</div><div class="line">	//生成2D纹理</div><div class="line">	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);</div><div class="line">	//释放纹理数据内存</div><div class="line">	SOIL_free_image_data(image);</div><div class="line">	//设置纹理s和t方向的环绕方式</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_LINEAR);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_LINEAR);</div><div class="line">	//设置纹理放大和缩写时的过滤方式（纹素过滤、mipmap边界过滤）</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div><div class="line">	//生成多级渐远纹理</div><div class="line">	glGenerateMipmap(GL_TEXTURE_2D);</div><div class="line">	//解绑纹理对象</div><div class="line">	glBindTexture(GL_TEXTURE_2D, 0);</div><div class="line">	</div><div class="line">	//定义自定义着色器类shader的对象</div><div class="line">	shader myshader(&quot;shader.vertex&quot;, &quot;shader.fragment&quot;);</div><div class="line"></div><div class="line">	//渲染循环（游戏循环）</div><div class="line">	while (!glfwWindowShouldClose(window)) &#123;</div><div class="line">		glfwPollEvents(); //检测是否有事件被触发（按键按下、鼠标移动）</div><div class="line">		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);</div><div class="line">		glClear(GL_COLOR_BUFFER_BIT);</div><div class="line">		//激活着色器程序对象</div><div class="line">		myshader.Use();</div><div class="line"></div><div class="line">		</div><div class="line">		//激活纹理单元</div><div class="line">		glActiveTexture(GL_TEXTURE0);</div><div class="line">		//获取uniform变量位置</div><div class="line">		GLint uniformLocation1 = glGetUniformLocation(myshader.shaderProgram, &quot;ourTexture1&quot;);</div><div class="line">		//设置采样器的值（对应纹理单元值）</div><div class="line">		glUniform1i(uniformLocation1, 0);</div><div class="line">		//绑定纹理对象</div><div class="line">		glBindTexture(GL_TEXTURE_2D, texture1);</div><div class="line"></div><div class="line">		glActiveTexture(GL_TEXTURE1);</div><div class="line">		GLint uniformLocation2 = glGetUniformLocation(myshader.shaderProgram, &quot;ourTexture2&quot;);</div><div class="line">		glUniform1i(uniformLocation2, 1);</div><div class="line">		glBindTexture(GL_TEXTURE_2D, texture2);</div><div class="line"></div><div class="line">		//绑定VAO，完成顶点输入初始化</div><div class="line">		glBindVertexArray(VAO);</div><div class="line">		//绘图</div><div class="line">		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);</div><div class="line">		//解绑VAO</div><div class="line">		glBindVertexArray(0);</div><div class="line">		glfwSwapBuffers(window); //交换颜色缓存</div><div class="line">	&#125;</div><div class="line">	//删除VAO、VBO、EBO</div><div class="line">	glDeleteVertexArrays(1, &amp;VAO);</div><div class="line">	glDeleteBuffers(1, &amp;VBO);</div><div class="line">	glDeleteBuffers(1, &amp;EBO);</div><div class="line">	//结束CLFW，释放由GLFW分配的资源</div><div class="line">	glfwTerminate();</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">//按键回调函数</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) &#123;</div><div class="line">	if (key == GLFW_KEY_ESCAPE&amp;&amp;action == GLFW_PRESS) &#123;</div><div class="line">		glfwSetWindowShouldClose(window, GL_TRUE);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/OpenGL/">OpenGL</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/纹理/">纹理</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/11/29/OpenGL5纹理/" data-title="OpenGL5：纹理" data-url="http://yoursite.com/2016/11/29/OpenGL5纹理/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>2</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>5</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
