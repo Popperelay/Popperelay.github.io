@@ -67,10 +67,10 @@
 <p>观察坐标系的组成需要有4个要素构成：</p>
 <ul>
 <li><p>摄像机的世界坐标，用来作为观察坐标系的原点，对应下面第一幅图中的摄像机位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//摄像机位置</div><div class="line">vec3 cameraPos = vec3(0.0, 0.0, 3.0f);</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机位置</span></div><div class="line">vec3 cameraPos = vec3(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3.0f</span>);</div></pre></td></tr></table></figure>
 </li>
 <li><p>观察坐标系的+z轴。通常用摄像机照射的目标位置到指向摄像机位置的向量来表示，对应下面第二幅图中的蓝色轴。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//摄像机目标位置</div><div class="line">vec3 cameraTarget = vec3(0.0f, 0.0f, 0.0f);</div><div class="line">//摄像机+z轴（从目标位置指向摄像机）</div><div class="line">vec3 targetToCamera = normalize(cameraPos - cameraTarget);</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机目标位置</span></div><div class="line">vec3 cameraTarget = vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</div><div class="line"><span class="comment">//摄像机+z轴（从目标位置指向摄像机）</span></div><div class="line">vec3 targetToCamera = normalize(cameraPos - cameraTarget);</div></pre></td></tr></table></figure>
 </li>
 <li><p>观察坐标系的+x轴。需要先有一个上向量，指明摄像机的正上方。再用上向量和+z轴做叉乘，得到+x轴，对应下面第三幅图（灰色的是上向量，红色的是+x轴）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//摄像机上向量</div><div class="line">vec3 upVector = vec3(0.0f, 1.0f, 0.0f);</div><div class="line">//摄像机+x轴（上向量和+z轴的叉乘）</div><div class="line">vec3 cameraRight = normalize(cross(upVector, targetToCamera));</div></pre></td></tr></table></figure>
