@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenGL9光照场景 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OpenGL9光照场景"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-12-10T10:16:47.000Z"><a href="/2016/12/10/OpenGL9光照场景/">2016-12-10</a></time>
+      
+      
+  
+    <h1 class="title">OpenGL9光照场景</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>我们先来看看物体颜色颜色是怎么形成的。<br><a id="more"></a></p>
+<hr>
+<p><font size="5" color="orange">光照颜色和物体颜色</font><br>计算机中的颜色主要是由三基色（RGB）来表示的，用有限种颜色来模拟现实世界中（无限）的颜色，因为现实世界中能被人眼区分的颜色只有有限种，差别太小的颜色人眼是看不出来的。如果想了解屏幕颜色是如何形成的，可以参考<a href="">《》</a></p>
+<p>OpenGL中颜色用一个vec3向量来表示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vec3 ourColor(1.0f,0.5f,0.31f);</div></pre></td></tr></table></figure></p>
+<p>在光学物理中，我们知道：我们看到的物体的颜色，其实是物体自身颜色和光源颜色相互作用（或者说相乘）的结果。比如物体本身是绿色，如果用白光去照它，那么物体会反射绿光，吸收其他色光，所以我们看到的物体颜色就是绿色；但是如果物体颜色是绿色，用红光去照它，那么物体就会把红色光全部吸收，没有反射光，所以我们看到的物体颜色就是黑色。</p>
+<p>所以，物体颜色可以定义为这个物体从一个光源反射各个颜色分量的多少。</p>
+<p>比如光源颜色是深橄榄绿色，物体颜色是珊瑚红，那么最后被人眼看到的物体颜色是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vec3 lightColor(0.33f, 0.42f, 0.18f);  //深橄榄绿色</div><div class="line">vec3 objectColor(1.0f, 0.5f, 0.31f);   //珊瑚红</div><div class="line">vec3 result = lightColor * toyColor; // = (0.33f, 0.21f, 0.06f);</div></pre></td></tr></table></figure></p>
+<p>&nbsp;</p>
+<hr>
+<p>下面我们来创建一个最基本的光照场景。</p>
+<p><font size="5" color="orange">创建一个光照场景</font><br>我们需要在场景中创建一个光源，设置为白色；还需要一个受光物体（被光源照射的物体）。光源和受光物体我们都用前面文章里的立方体来表示。</p>
+<p>我们这里立方体的顶点数据只有顶点坐标，暂时不要颜色和纹理坐标属性了。顶点数据见后面的完整代码。</p>
+<p>由于后面的文章里，我们还需要继续使用这个光照场景，后面会频繁地对物体顶点数据做一些改变，但是我们并不想因此影响到灯，所以我们光源和受光物体应该当做两个不同的立方体来绘制，不像前面文章里的10个物体都可以绑定一个VAO来绘制。我们这里给光源和受光物体分别创建一个VAO：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//光源VAO</div><div class="line">GLuint lightSourceVAO, VBO, EBO;</div><div class="line">glGenVertexArrays(1, &amp;lightSourceVAO);</div><div class="line">glGenBuffers(1, &amp;VBO);</div><div class="line">glGenBuffers(1, &amp;EBO);</div><div class="line">glBindVertexArray(lightSourceVAO);</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);</div><div class="line">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">glEnableVertexAttribArray(0);</div><div class="line">glBindVertexArray(0);</div><div class="line"></div><div class="line">//受光物体VAO</div><div class="line">GLuint lightObjectVAO;</div><div class="line">glGenVertexArrays(1, &amp;lightObjectVAO);</div><div class="line">glBindVertexArray(lightObjectVAO);</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">glEnableVertexAttribArray(0);</div><div class="line">glBindVertexArray(0);</div></pre></td></tr></table></figure></p>
+<p>由于受光立方体的顶点数据和此时光源立方体的顶点数据相同，所以在受光物体的VAO中可以直接使用光源立方体的VBO和EBO，直接绑定即可，不用再使用<code>glBufferData</code>函数把数据发送到显存。</p>
+<p>接下里我们需要给光源和受光物体分别设置顶点着色器和像素着色器（因为这是两个渲染效果不同的物体，不能使用同一套着色器）：<br>光源的顶点着色器和受光物体的顶点着色器都是如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//顶点着色器</div><div class="line">#version 330 core</div><div class="line">layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0</div><div class="line">//模型矩阵</div><div class="line">uniform mat4 model;</div><div class="line">//观察矩阵</div><div class="line">uniform mat4 view;</div><div class="line">//投影矩阵</div><div class="line">uniform mat4 projection;</div><div class="line"></div><div class="line">void main()&#123;</div><div class="line">	gl_Position=projection * view * model * vec4(position,1.0f);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>光源的像素着色器代码如下（光源颜色始终是白色）：</p>
+<p>#version 330 core<br>out vec4 color;<br>void main(){<br>    color=vec4(1.0f,1.0f,1.0f,1.0f);<br>}<br>受光物体的像素着色器代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#version 330 core</div><div class="line">out vec4 color;</div><div class="line">uniform vec3 lightColor;</div><div class="line">uniform vec3 objectColor;</div><div class="line">void main()&#123;</div><div class="line">	color=vec4(lightColor*objectColor,1.0f);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>受光物体的像素着色器里有两个uniform变量，用于从主程序里接收光源颜色和物体本身颜色，输出颜色是这两个颜色的乘积。</p>
+<p>在主程序里，我们给这两个uniform变量赋值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">GLint lightColorLoc = glGetUniformLocation(lightObject.shaderProgram, &quot;lightColor&quot;);</div><div class="line">GLint objectColorLoc = glGetUniformLocation(lightObject.shaderProgram, &quot;objectColor&quot;);</div><div class="line">glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);</div><div class="line">glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);</div></pre></td></tr></table></figure></p>
+<p>上面<code>lightObject</code>是受光物体的着色器类对象。</p>
+<p>我们还需要把这两个物体放在不同位置上。对于光源我们先给它设置一个全局变量，表示光源位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//光源位置</div><div class="line">vec3 lightPos(1.0f, 0.0f, -3.0f);</div></pre></td></tr></table></figure></p>
+<p>接着在模型矩阵中设置光源所处的位置，旋转角度和缩放系数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//模型矩阵</div><div class="line">		mat4 lightSource_model;</div><div class="line">		lightSource_model = translate(lightSource_model, lightPos);</div><div class="line">		lightSource_model = rotate(lightSource_model, radians(15.0f), vec3(0.5f, 1.0f, 1.0f));</div><div class="line">		lightSource_model = scale(lightSource_model, vec3(0.5f));</div></pre></td></tr></table></figure></p>
+<p>当然，受光物体的模型矩阵也需要做一些类似变换：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mat4 lightObject_model;</div><div class="line">lightObject_model = translate(lightObject_model, vec3(-1, 0, 0));</div></pre></td></tr></table></figure></p>
+<p>接下来就是需要给两个物体设置观察矩阵和投影矩阵了，它俩在同一场景里，观察矩阵和投影矩阵应该是一样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//观察矩阵</div><div class="line">mat4 view = mycamera.GetViewMatrix();</div><div class="line">//投影矩阵</div><div class="line">mat4 projection = perspective(radians(mycamera.cameraFov), (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);</div></pre></td></tr></table></figure></p>
+<p>当然，不要忘了把模型、观察、投影矩阵赋值给相应的uniform变量（两个物体的像素着色器里都有这些uniform变量，都需要赋值）。</p>
+<p>最后就是渲染出光源物体和受光物体了，需要分别绑定各自的VAO：<br>光源的绑定和渲染：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//绑定VAO，完成顶点输入初始化</div><div class="line">glBindVertexArray(lightSourceVAO);</div><div class="line">//绘图</div><div class="line">glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);</div><div class="line">//解绑VAO</div><div class="line">glBindVertexArray(0);</div></pre></td></tr></table></figure></p>
+<p>受光物体的绑定和渲染：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">glBindVertexArray(lightObjectVAO);</div><div class="line">glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);</div><div class="line">glBindVertexArray(0);</div></pre></td></tr></table></figure></p>
+<p><strong>注意，它俩需要分别在各自的<code>program.use</code>激活着色器程序对象之后</strong>。<br>&nbsp;</p>
+<hr>
+<p>到此，我们就构建完这个最基本的光照场景了。各自着色器代码上面已经给出，主程序全部源码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div></pre></td><td class="code"><pre><div class="line">#include &quot;shader.h&quot;</div><div class="line">#include &quot;camera.h&quot;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">//GLEW</div><div class="line">#define GLEW_STATIC</div><div class="line">#include &lt;GL/glew.h&gt;</div><div class="line">//GLFW</div><div class="line">#include &lt;GLFW/glfw3.h&gt;</div><div class="line">//SOIL</div><div class="line">#include &lt;SOIL/SOIL.h&gt;</div><div class="line">//GLM</div><div class="line">#include &lt;GLM/glm/glm.hpp&gt;</div><div class="line">#include &lt;GLM/glm/gtc/matrix_transform.hpp&gt;</div><div class="line">#include &lt;GLM/glm/gtc/type_ptr.hpp&gt;</div><div class="line">using namespace glm;</div><div class="line">//窗口尺寸</div><div class="line">const GLuint WIDTH = 800, HEIGHT = 600;</div><div class="line"></div><div class="line">bool keys[1024];</div><div class="line">//当前帧与上一帧的时间差</div><div class="line">GLfloat deltaTime = 0.0f;</div><div class="line">//上一帧开始的时间</div><div class="line">GLfloat lastTime = 0.0f;</div><div class="line">//上一帧鼠标位置</div><div class="line">GLfloat lastCursorX = WIDTH / 2;</div><div class="line">GLfloat lastCursorY = HEIGHT / 2;</div><div class="line"></div><div class="line">//光源位置</div><div class="line">vec3 lightPos(1.0f, 0.0f, -3.0f);</div><div class="line"></div><div class="line">//定义摄像机类Camera的对象</div><div class="line">Camera mycamera;</div><div class="line"></div><div class="line">//函数声明</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);</div><div class="line">void do_movement();</div><div class="line">void cursor_callback(GLFWwindow* window, double xpos, double ypos);</div><div class="line">void scroll_callback(GLFWwindow* window, double xoffset, double yoffser);</div><div class="line">int main() &#123;</div><div class="line">	//初始化GLFW</div><div class="line">	glfwInit();</div><div class="line">	//GLFW配置</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //主版本号</div><div class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //次版本号</div><div class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 核心开发模式</div><div class="line">	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); //窗口尺寸不可变</div><div class="line">											  //创建能够使用GLFW函数的窗口对象（指针）</div><div class="line">	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, &quot;LearnOpenGL&quot;, nullptr, nullptr);</div><div class="line">	if (window == NULL) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to create GLFW window&quot; &lt;&lt; std::endl;</div><div class="line">		glfwTerminate();</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//创建窗口环境</div><div class="line">	glfwMakeContextCurrent(window);</div><div class="line">	//注册按键回调函数</div><div class="line">	glfwSetKeyCallback(window, key_callback);</div><div class="line">	//注册鼠标位置回调函数</div><div class="line">	glfwSetCursorPosCallback(window, cursor_callback);</div><div class="line">	//隐藏鼠标</div><div class="line">	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);</div><div class="line">	//注册鼠标滚轮回调函数</div><div class="line">	glfwSetScrollCallback(window, scroll_callback);</div><div class="line">	//初始化GLEW</div><div class="line">	glewExperimental = GL_TRUE; //保证使用现代技术管理OpenGL机能</div><div class="line">	if (glewInit() != GLEW_OK) &#123;</div><div class="line">		std::cout &lt;&lt; &quot;Failed to initialize GLEW&quot; &lt;&lt; std::endl;</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">	//设置渲染窗口位置大小</div><div class="line">	int width, height;</div><div class="line">	glfwGetFramebufferSize(window, &amp;width, &amp;height);</div><div class="line">	glViewport(0, 0, width, height);</div><div class="line">	//立方体各面顶点的坐标、颜色、纹理坐标</div><div class="line">	GLfloat vertices[] = &#123;</div><div class="line">		//位置坐标         </div><div class="line">		//立方体前面</div><div class="line">		0.5f, 0.5f, 0.5f,</div><div class="line">		0.5f,-0.5f, 0.5f,</div><div class="line">		-0.5f,-0.5f, 0.5f,</div><div class="line">		-0.5f, 0.5f, 0.5f,</div><div class="line">		//立方体后</div><div class="line">		0.5f, 0.5f,-0.5f,</div><div class="line">		0.5f,-0.5f,-0.5f,</div><div class="line">		-0.5f,-0.5f,-0.5f,</div><div class="line">		-0.5f, 0.5f,-0.5f,</div><div class="line">		//立方体上面</div><div class="line">		0.5f, 0.5f, 0.5f,</div><div class="line">		0.5f, 0.5f,-0.5f,</div><div class="line">		-0.5f, 0.5f,-0.5f,</div><div class="line">		-0.5f, 0.5f, 0.5f,</div><div class="line">		//立方体下面</div><div class="line">		0.5f,-0.5f, 0.5f,</div><div class="line">		0.5f,-0.5f,-0.5f,</div><div class="line">		-0.5f,-0.5f,-0.5f,</div><div class="line">		-0.5f,-0.5f, 0.5f,</div><div class="line">		//立方体右面</div><div class="line">		0.5f, 0.5f, 0.5f,</div><div class="line">		0.5f, 0.5f,-0.5f,</div><div class="line">		0.5f,-0.5f,-0.5f,</div><div class="line">		0.5f,-0.5f, 0.5f,</div><div class="line">		//立方体左面</div><div class="line">		-0.5f, 0.5f, 0.5f,</div><div class="line">		-0.5f, 0.5f,-0.5f,</div><div class="line">		-0.5f,-0.5f,-0.5f,</div><div class="line">		-0.5f,-0.5f, 0.5f</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	//顶点索引</div><div class="line">	GLuint indices[] = &#123;</div><div class="line">		//立方体前面</div><div class="line">		0,1,3,</div><div class="line">		1,2,3,</div><div class="line">		//立方体后面</div><div class="line">		4,5,7,</div><div class="line">		5,6,7,</div><div class="line">		//立方体上面</div><div class="line">		8,9,11,</div><div class="line">		9,10,11,</div><div class="line">		//立方体下面</div><div class="line">		12,13,15,</div><div class="line">		13,14,15,</div><div class="line">		//立方体右面</div><div class="line">		16,17,19,</div><div class="line">		17,18,19,</div><div class="line">		//立方体左面</div><div class="line">		20,21,23,</div><div class="line">		21,22,23</div><div class="line">	&#125;;</div><div class="line">	//光源VAO</div><div class="line">	GLuint lightSourceVAO, VBO, EBO;</div><div class="line">	glGenVertexArrays(1, &amp;lightSourceVAO);</div><div class="line">	glGenBuffers(1, &amp;VBO);</div><div class="line">	glGenBuffers(1, &amp;EBO);</div><div class="line">	glBindVertexArray(lightSourceVAO);</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);</div><div class="line">	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);</div><div class="line">	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">	glEnableVertexAttribArray(0);</div><div class="line">	glBindVertexArray(0);</div><div class="line"></div><div class="line">	//受光物体VAO</div><div class="line">	GLuint lightObjectVAO;</div><div class="line">	glGenVertexArrays(1, &amp;lightObjectVAO);</div><div class="line">	glBindVertexArray(lightObjectVAO);</div><div class="line">	glBindBuffer(GL_ARRAY_BUFFER, VBO);</div><div class="line">	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div><div class="line">	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);</div><div class="line">	glEnableVertexAttribArray(0);</div><div class="line">	glBindVertexArray(0);</div><div class="line"></div><div class="line">	//定义自定义着色器类shader的对象</div><div class="line">	shader lightSource(&quot;lightSource.vertex&quot;, &quot;lightSource.fragment&quot;);</div><div class="line">	shader lightObject(&quot;lightObject.vertex&quot;, &quot;lightObject.fragment&quot;);</div><div class="line"></div><div class="line">	glEnable(GL_DEPTH_TEST);</div><div class="line">	//渲染循环（游戏循环）</div><div class="line">	while (!glfwWindowShouldClose(window)) &#123;</div><div class="line">		//计算deltaTime</div><div class="line">		GLfloat currentTime = glfwGetTime();</div><div class="line">		deltaTime = currentTime - lastTime;</div><div class="line">		lastTime = currentTime;</div><div class="line"></div><div class="line">		glfwPollEvents(); //检测是否有事件被触发（如按键按下、鼠标移动）</div><div class="line">		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);</div><div class="line">		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">		</div><div class="line">		//激活光源着色器程序对象</div><div class="line">		lightSource.Use();</div><div class="line">		//获取3个uniform矩阵的位置</div><div class="line">		GLint modelLocation = glGetUniformLocation(lightSource.shaderProgram, &quot;model&quot;);</div><div class="line">		GLint viewLocation = glGetUniformLocation(lightSource.shaderProgram, &quot;view&quot;);</div><div class="line">		GLint projectionLocation = glGetUniformLocation(lightSource.shaderProgram, &quot;projection&quot;);</div><div class="line">		//观察矩阵</div><div class="line">		mat4 view = mycamera.GetViewMatrix();</div><div class="line">		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(view));</div><div class="line">		//投影矩阵</div><div class="line">		mat4 projection = perspective(radians(mycamera.cameraFov), (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);</div><div class="line">		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(projection));</div><div class="line">		//模型矩阵</div><div class="line">		mat4 lightSource_model;</div><div class="line">		lightSource_model = translate(lightSource_model, lightPos);</div><div class="line">		lightSource_model = rotate(lightSource_model, radians(15.0f), vec3(0.5f, 1.0f, 1.0f));</div><div class="line">		lightSource_model = scale(lightSource_model, vec3(0.5f));</div><div class="line">		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(lightSource_model));</div><div class="line">		//绑定VAO，完成顶点输入初始化</div><div class="line">		glBindVertexArray(lightSourceVAO);</div><div class="line">		//绘图</div><div class="line">		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);</div><div class="line">		//解绑VAO</div><div class="line">		glBindVertexArray(0);</div><div class="line"></div><div class="line"></div><div class="line">		//激活受光物体着色器程序对象</div><div class="line">		lightObject.Use();</div><div class="line">		GLint lightColorLoc = glGetUniformLocation(lightObject.shaderProgram, &quot;lightColor&quot;);</div><div class="line">		GLint objectColorLoc = glGetUniformLocation(lightObject.shaderProgram, &quot;objectColor&quot;);</div><div class="line">		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);</div><div class="line">		glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);</div><div class="line"></div><div class="line">		modelLocation = glGetUniformLocation(lightObject.shaderProgram, &quot;model&quot;);</div><div class="line">		viewLocation = glGetUniformLocation(lightObject.shaderProgram, &quot;view&quot;);</div><div class="line">		projectionLocation = glGetUniformLocation(lightObject.shaderProgram, &quot;projection&quot;);</div><div class="line">		mat4 lightObject_model;</div><div class="line">		lightObject_model = translate(lightObject_model, vec3(-1, 0, 0));</div><div class="line">		//lightObject_model = rotate(lightObject_model, radians(45.0f), vec3(0.5f, 1.0f, 1.0f));</div><div class="line">		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, value_ptr(lightObject_model));</div><div class="line">		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, value_ptr(view));</div><div class="line">		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, value_ptr(projection));</div><div class="line">		glBindVertexArray(lightObjectVAO);</div><div class="line">		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);</div><div class="line">		glBindVertexArray(0);</div><div class="line"></div><div class="line">		do_movement();</div><div class="line"></div><div class="line">		glfwSwapBuffers(window); //交换颜色缓存</div><div class="line">	&#125;</div><div class="line">	//删除VAO、VBO、EBO</div><div class="line">	glDeleteVertexArrays(1, &amp;lightSourceVAO);</div><div class="line">	glDeleteBuffers(1, &amp;VBO);</div><div class="line">	glDeleteBuffers(1, &amp;EBO);</div><div class="line">	//结束CLFW，释放由GLFW分配的资源</div><div class="line">	glfwTerminate();</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">//按键回调函数</div><div class="line">void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) &#123;</div><div class="line">	if (key == GLFW_KEY_ESCAPE&amp;&amp;action == GLFW_PRESS) &#123;</div><div class="line">		glfwSetWindowShouldClose(window, GL_TRUE);</div><div class="line">	&#125;</div><div class="line">	//响应键盘按键来设置相应按键状态</div><div class="line">	if (action == GLFW_PRESS) &#123;</div><div class="line">		keys[key] = GL_TRUE;</div><div class="line">	&#125;</div><div class="line">	else if (action == GLFW_RELEASE) &#123;</div><div class="line">		keys[key] = GL_FALSE;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//根据按键状态移动摄像机</div><div class="line">void do_movement() &#123;</div><div class="line">	if (keys[GLFW_KEY_W]) &#123;</div><div class="line">		mycamera.ProcessMovemnet(mycamera.FORWARD, deltaTime);</div><div class="line">	&#125;</div><div class="line">	if (keys[GLFW_KEY_S]) &#123;</div><div class="line">		mycamera.ProcessMovemnet(mycamera.BACKWARD, deltaTime);</div><div class="line">	&#125;</div><div class="line">	if (keys[GLFW_KEY_D]) &#123;</div><div class="line">		mycamera.ProcessMovemnet(mycamera.RIGHT, deltaTime);</div><div class="line">	&#125;</div><div class="line">	if (keys[GLFW_KEY_A]) &#123;</div><div class="line">		mycamera.ProcessMovemnet(mycamera.LEFT, deltaTime);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//鼠标位置回调函数</div><div class="line">bool firstCursor = true;</div><div class="line">void cursor_callback(GLFWwindow* window, double xpos, double ypos) &#123;</div><div class="line">	if (firstCursor) &#123;</div><div class="line">		lastCursorX = xpos;</div><div class="line">		lastCursorY = ypos;</div><div class="line">		firstCursor = false;</div><div class="line">	&#125;</div><div class="line">	//计算前后两帧的鼠标位移量</div><div class="line">	GLfloat xOffset = (xpos - lastCursorX);</div><div class="line">	GLfloat yOffset = (lastCursorY - ypos);  //注意是相反的，因为鼠标坐标原点在窗口左上角</div><div class="line">	lastCursorX = xpos;</div><div class="line">	lastCursorY = ypos;</div><div class="line">	mycamera.ProcessRotate(xOffset, yOffset);</div><div class="line">&#125;</div><div class="line">//鼠标滚轮回调函数</div><div class="line">void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) &#123;</div><div class="line">	mycamera.ProcessScroll(xoffset, yoffset);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其余的摄像机类和着色器类代码和<a href="http://popperelay.com/2016/12/08/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA/" target="_blank" rel="external">《OpenGL8：摄像机》</a>一文中一样。</p>
+<p>编译运行后，结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148136481252.png" alt=""><br>&nbsp;</p>
+<hr>
+<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/12/10/OpenGL9光照场景/" data-title="OpenGL9光照场景" data-url="http://yoursite.com/2016/12/10/OpenGL9光照场景/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>2</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>7</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
