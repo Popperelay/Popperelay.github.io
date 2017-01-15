@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenGL1：OpenGL概述及环境配置 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OpenGL1：OpenGL概述及环境配置"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-10-18T07:08:20.000Z"><a href="/2016/10/18/OpenGL1概述及环境配置/">2016-10-18</a></time>
+      
+      
+  
+    <h1 class="title">OpenGL1：OpenGL概述及环境配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><font size="5" color="orange">OpenGL简介</font><br><a id="more"></a><br>OpenGL是一个功能强大的图形库，提供了很多操作图形和图片的API（Application Programming Interface），用户可以用它很方便地开发所需要的有多种特殊视觉（如光照、透明、纹理、阴影）的三维图形。<br>OpenGL库的实际开发者通常是各大显卡厂商。Khronos Group公开提供了所有OpenGL的规范文档，可以从<a href="https://www.opengl.org/registry/doc/glspec33.core.20100311.withchanges.pdf" target="_blank" rel="external">这里</a>看到OpenGL3.3规范文档。<br>OpenGL具有很好的跨平台性，2012年8月已经更新到4.3版本。</p>
+<p><font size="4" color="red">OpenGL组成</font><br>OpenGL主要由OpenGL基本函数库、OpenGL实用函数工具包、WGL库（OpenGL的Windows扩展库）</p>
+<ul>
+<li>OpenGL的基本函数库：主要包括三个：OpenGL核心库、OpenGL实用库、OpenGL辅助库。<ul>
+<li>OpenGL核心库（GL）<br>这部分函数常用于常规的、核心的图形处理，是OpenGL的核心部分；包含300多个函数，函数名前缀都是”gl”。</li>
+<li>OpenGL实用库（GLU）（Utility）<br>这部分函数通过调用核心库的函数，为开发者提供相对简单的用法，实现一些较为复杂的操作。如绘制茶壶等简单形体。包含大约50个函数，函数名前缀都是”glu”。</li>
+<li>OpenGL辅助库（GLAUX）（Auxiliary）<br>这部分函数提供窗口管理、输入输出处理以及绘制一些简单的三维物体，包含约30个函数，函数名前缀都是”aux”。</li>
+</ul>
+</li>
+<li>OpenGL实用函数工具包（GLUT：OpenGL Utility Toolkit）：由Mark Kilgard开发。主要提供窗口系统操作功能，如创建窗口、鼠标和键盘输入、菜单、事件驱动等等。包含大约30个函数，函数名前缀都是glut。<br>【注】：glut中的窗口管理函数不依赖于操作系统，可以在所有的OpenGL平台上运行。</li>
+<li>WGL库：OpenGL对窗口系统的扩展<ul>
+<li>用于连接OpenGL和Windows，在Windows平台上设置OpenGL环境</li>
+<li>并不是所有函数前缀都是”wgl”</li>
+<li>只能在Windows上运行</li>
+</ul>
+</li>
+</ul>
+<p><font size="4" color="red">OpenGL主要功能</font></p>
+<ul>
+<li>基本几何形状<br>绘制点、线段、多边形、Bezier曲线、简单形体等。</li>
+<li>属性<br>设置颜色、线型（实、虚等）…</li>
+<li>变换<br>几何变换：平移、旋转、缩放；<br>投影变换：正投影、透视投影</li>
+<li>交互<br>键盘和鼠标</li>
+</ul>
+<p>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL的两种开发模式</font><br>OpenGL的两种开发模式是：快速模式和core-profile（核心模式）。</p>
+<p>在OpenGL3.2版本以前，都是使用快速模式，也叫fixed function pipeline，固定函数输送管道，顾名思义，快速模式是一种简单易用的绘图方式，容易使用容易理解，但是效率低下，而且大多数功能都被封装了，开发者难以获得更多的图形控制权。所以从3.2版本开始，快速模式不建议被使用了，出现了core-profile（核心模式），它是OpenGL规范的一部分，移除了所有过时的不建议使用的功能。当使用core-profile模式时，OpenGL会强制让我们使用现代函数；如果使用了过时的或不建议的函数，是会报错的。</p>
+<p>使用core-profile，需要开发者真正懂得OpenGL，而且还要掌握图形编程，难度是提高了，但是却提供了更高的灵活性和效率，还能让我们更好的理解图形编程。由于之后版本的OpenGL都是以3.3为基础的，核心机理并没有变化，而且大多数开发情况下都需要支持较低的显卡，低显卡可能不支持最新版的OpenGL，所以我们也使用OpenGL3.3版本了。<br>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL特性：支持扩展</font><br>OpenGL是支持扩展的。如果显卡厂商在某个时候推出了一个新技术或渲染优化，   那么图形开发者就可以通过扩展来直接使用该新技术，而不需要等待新版本的OpenGL发布。事实上，当一个扩展被证明很流行或很有用时，它就会变成未来OpenGL的一部分。</p>
+<p>一般使用扩展的代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(GL_ARB_extension_name)  <span class="comment">//GL_ARB_扩展名</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//执行硬件支持的新特性</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//不支持该扩展，使用老办法</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL的本质</font><br>OpenGL本身其实是个大状态机，也就是说它定义了一大堆OpenGL该做何操作的变量。</p>
+<p>OpenGL的状态通常称为OpenGL环境（context）。我们通常都是设置一些选项，操作一些缓冲，来改变它们的状态（即环境），然后使用当前环境做渲染。</p>
+<p>使用OpenGL时，会遇到多种<strong>状态改变函数</strong>，这些函数会改变环境；还会遇到多种<strong>状态使用函数</strong>，这些函数是基于当前状态来执行一些操作。<br>&nbsp;  </p>
+<hr>
+<p><strong>OpenGL的库是用C写的</strong>，所以OpenGL无法表示诸如对象这些在更高级语言中才有东西。于是OpenGL开发了几种自己特有的抽象概念，对象就是其中一个。</p>
+<p><font size="5" color="orange">OpenGL中的对象</font><br>OpenGL的对象是一些可选项（即变量）的集合，是OpenGL状态的一部分。那么OpenGL中的对象怎么定义和使用呢？</p>
+<p>OpenGL中定义对象的流程大致如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//OpenGL的状态</span></div><div class="line"><span class="keyword">struct</span> OpenGL_Context</div><div class="line">&#123;</div><div class="line">	...</div><div class="line">	<span class="keyword">object</span>* object_Window_Target;</div><div class="line">	...</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//创建对象</span></div><div class="line">GLuint objectId = <span class="number">0</span>;</div><div class="line">glGenObject(<span class="number">1</span>, &amp;objectId);</div><div class="line"></div><div class="line"><span class="comment">//把对象绑定到目标上</span></div><div class="line">glBindObject(GL_WINDOW_TARGET, objectId);</div><div class="line"></div><div class="line"><span class="comment">//为当前绑定到GL_WINDOW_TARGET的对象设置选项</span></div><div class="line">glSetObjectOption(GL_WINDOW_TARGET, GL_OPTION_WINDOW_WIDTH, <span class="number">800</span>);</div><div class="line">glSetObjectOption(GL_WINDOW_TARGET, GL_OPTION_WINDOW_HEIGHT, <span class="number">600</span>);</div><div class="line"></div><div class="line"><span class="comment">//把目标绑定的对象恢复为默认（解绑）</span></div><div class="line">glBindObject(GL_WINDOW_TARGET, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>上面的代码是在OpenGL中会经常遇到的工作流。通过glGenObject函数创建一个对象，保存到后台内存中，并且用一个无符号整数来表示这个对象，相当于是给这个对象起了个名字（对象id，就像人的身份证号），然后把这个名字（整数）存入变量objectId中。接着用glBindObject方法把对象绑定到一个目标上（代码中是把目标定为了GL_WINDOW_TARGET）。再下一步就是设置目标的选项（这些设置会被保存到对象中），最后把目标绑定的对象id设置为0，即解绑对象。至此，便完成了对一个对象的属性设置。</p>
+<p>【注】：</p>
+<ul>
+<li>上面的代码只是在描述OpenGL的操作原理，并不是OpenGL中的实际函数，只是伪码。</li>
+<li>当使用OpenGL时，建议使用OpenGL定义的自由类型。在写float时在前面加GL；int、char、bool等等同样处理。应为不同的操作系统可能对于各自的类型有不同的内存布局，而OpenGL的GL自有类型的内存布局是跨平台的。所以使用OpenGL的自有类型可以保证我们的应用可以跨平台。</li>
+</ul>
+<p>好像还有点懵，这个对象有何意义？打个比方，上面对对象的定义流程就好像是：拿出来一张纸，先给它编个号（对应创建对象），说这是第一张纸，然后拿这张纸去找到一个橡皮泥（对应绑定目标），说我要把这个橡皮泥变成什么什么样，然后在纸上画出梦想中的橡皮泥（设置选项），橡皮泥捏好了以后，就用不上这张纸了（解绑），但是还可以根据这张纸（对象）再去捏出很多一模一样的橡皮泥（目标）啊！不用再去找张纸画画了，这就是对象的好处。<br>&nbsp;  </p>
+<hr>
+<p>下面来看看，OpenGL环境应该咋配置。先看VC++6.0下的：</p>
+<p><font size="5" color="orange">VC6.0下的OpenGL环境配置</font></p>
+<p><font size="4" color="red">使用OpenGL辅助库GLAUX时的环境配置：</font></p>
+<ol>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615911.png" alt=""></li>
+<li><p>Windows平台下的源文件需要加上以下头文件：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#include &lt;window.h&gt;</span></div><div class="line"><span class="meta">#include &lt;GL/gl.h&gt;</span></div><div class="line"><span class="meta">#include &lt;GL/glu.h&gt;</span></div><div class="line"><span class="meta">#include &lt;GL/glaux.h&gt;</span></div></pre></td></tr></table></figure>
+<p>一般还需要：<code>#include &lt;stdio.h&gt;、#include &lt;stdlib.h&gt;、#include &lt;math.h&gt;</code></p>
+</li>
+</ol>
+<p><font size="4" color="red">使用OpenGL实用函数工具包GLUT时的环境配置：</font></p>
+<ol>
+<li>文件拷贝（这三个文件百度很容易找到）：<br>头文件glut.h拷贝到：\VC6.0安装目录\VC98\Include\GL目录下<br>连接库glut32.lib拷贝到：\VC6.0安装目录\VC98\Lib目录下<br>运行库glut32.dll拷贝到：C:\Windows\SysWOW64目录下（这时64位系统下的，如果是32位系统应该拷贝到：C:\Windows\System32）</li>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615963.png" alt=""></li>
+<li>在源文件里加上头文件：<code>#include &lt;GL/glut.h&gt;</code></li>
+</ol>
+<p>【注】：OpenGL不需要单独下载安装，因为OpenGL是跟着驱动走的，只要装了显卡驱动，一般都会有OpenGL的。<br>&nbsp;  </p>
+<hr>
+<p>但是原生的OpenGL不支持窗口管理、跨平台等功能，所以就有了很多热心人写了工具来支持这些功能，比如glut、glfw等等。 它们都是一些函数库，这些库免去了所有跨平台的问题，同时也提供了窗口、OpenGL环境等渲染所需的功能。比较流行的库主要有GLUT、SDL、SFML、GLFW。但是glut太老了，最后一个版本都是90年代的。这里我们主要用GLFW。</p>
+<p><font size="5" color="orange">GLFW</font><br>GLFW（OpenGL For Window）是一个轻量级的、开源的、跨平台的library，是一个跨平台的OpenGL应用框架，支持OpenGL和 OpenGL ES，用于管理窗口、读取输入、处理事件等，并且可以给我们创建一个OpenGL环境。</p>
+<p>下面将介绍GLFW的构建过程。</p>
+<p><font size="5" color="orange">构建GLFW</font></p>
+<p><font size="4" color="orange">下载GLFW源文件</font><br>GLFW可以从<a href="http://www.glfw.org/download.html" target="_blank" rel="external">官网</a>下载。当然是可以直接上面已经编译好的二进制文件，但是反正它有源码了，我们自己来编译一把，体验多多。而且使用源码编译出来的glwf库，可以完美适应自己的CPU/OS，编译好的二进制库就不一定了，所以先下载源码把（如果是下载编译好的二进制文件，尽量下32位的，64位可能会有很诡异的错误）。</p>
+<p>但是从源码编译也有一个问题：不是所有人的IDE（ Integrated Development  Environment）都是相同的，这就意味着用自己的IDE编译出来的库或其他文件可能别人并不能用，项目整合时会出现不兼容。比如有的用VS，有的用XCode，在VS上面写的项目要与和在XCode上面写的项目进行整合，但是IDE不同，很多项目文件会不兼容，比较原始的办法就是把VS上的源文件一个一个复制到XCode上，再在XCode上编译（或者相反），如果工程很大源文件很多，这样做是很要命的。而CMake可以根据源文件和一些简单的配置信息，生成对应OS下的IDE的项目文件，比如可以在用CMake把VS下的源文件直接整体编译为XCode项目，然后就可以直接和别人的XCode项目进行整合，还是很节省效率的。</p>
+<p><font size="4">CMake</font><br>CMake是一个可以根据源文件生成多个IDE下的项目/解决方案的工具（CMake可以从这里<a href="https://cmake.org/download/" target="_blank" rel="external">下载</a>），我用的是Win32-x86 Installer。</p>
+<p>安装完成后进入\bin文件夹选择cmake-gui.exe，再分别选择源码文件夹和用于生成项目的目标文件夹（需要自己新建一个文件夹），如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912521589.png" alt=""><br>点击Configure按钮，CMake会要求选择目标IDE环境（即想要生成哪种IDE下的项目/解决方案），由于我用的是VS2015，所以选择了VS 14 2015，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912561803.png" alt=""><br>点击finish，  当出现configuring done后，点击generate，出现generating done以后，在新建的build文件夹内就可以看到生成的项目文件了。我的文件夹如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912612555.png" alt=""></p>
+<p><font size="4" color="red">编译</font><br>但是这些项目文件中还没有Debug文件夹，无法拿到我们进行OpenGL编程所需要的库文件，那么打开GLFW.sln编译一下把，在VS编辑器菜单上点击生成/生成解决方案（Build/Build Solution），然后编译好的库glfw3.lib就会出现在build/src/Debug文件夹内了。接下来把这个库链接到项目上，就可以进行OpenGL编程了。</p>
+<p><font size="4" color="red">链接</font><br>在链接到项目之前，得让IDE能够找到该库文件在哪里。新建一个将要写入OpenGL代码的VS项目，建好后在‘解决方案资源管理器’中右键项目名称，点击属性，在VC++目录（VC++ Directories）中点击包含目录（Include Directories），添加glfw源码的include文件夹。再点击库目录（Library Directories），添加glfw3.lib。现在VS能找到所需要的文件了。我添加的如下图（我是把包括后面glew要用到的文件一起放在文件夹内的，然后直接添加的文件夹。当然也可以向上面说的一个文件一个文件地添加）：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14791284794.png" alt=""></p>
+<p>接下来是链接。还是在属性里点击链接器（Linker）/输入（Input），在附加依赖项（Additional Dependencies）中添加上glfw3.lib，当然还需要把OpenGL也链接上，添加opengl32.lib（只要有显卡驱动一般都会有opengl，opengl32.lib是安装VS时自带的）。如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/1479128480.png" alt=""><br>&nbsp; </p>
+<hr>
+<p>下面就可以在项目中使用OpenGL的函数了。其实OpenGL只是一种标准/规范，具体怎么实现要看驱动怎么来实现这种显卡支持规范（通俗点说就是提供接口函数），由于存在着很多不同版本的OpenGL驱动，不能够在编译的时候（compile-time）就确定静态链接哪个OpenGL函数，需要在运行时（run-time）指定所需要的函数地址，然后把地址存储在函数指针中以备后用（有点像先声明后定义）。在Windows中类似如下代码段：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义函数原型</span></div><div class="line"><span class="function">typedef <span class="title">void</span>(<span class="params">*GL_GENBUFFERS</span>)(<span class="params">GLsizei, GLuint*</span>)</span>;</div><div class="line"><span class="comment">//寻找函数并分配给它一个函数指针</span></div><div class="line">GL_GENBUFFERS glGenBuffers = (GL_GENBUFFERS)wglGetProcAddress(<span class="string">"glGenBuffers"</span>);</div><div class="line"><span class="comment">//现在可以正常使用OpenGL函数了</span></div><div class="line">GLuint buffer;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;buffer);</div></pre></td></tr></table></figure></p>
+<p>如你所见，想使用一个OpenGL函数太麻烦了，每个函数都得先被声明。不过为了解决这个问题，一个工具GLEW应运而生。<br>&nbsp;</p>
+<hr>
+<p><font size="5">GLEW</font><br>GLEW（OpenGL Extension Wrangler Library）是一个跨平台的C++扩展库，基于OpenGL图形接口。由于目前Windows只支持OpenGL1.1的函数，但是现在OpenGL都已反正到4了，要使用这些OpenGL的高级特性，就必须下载最新的扩展，除此之外，不同的显卡公司，也会发布一些只有自家显卡才能支持的扩展函数。如果我们想要使用这些函数，就不得不去寻找最新的glext.h（glext.h使我们可以调用常见的更高版本的OpenGL函数，但是必须在源文件中包含此头文件，并将显卡驱动更新到最新版，glext.h可以在<a href="http://blog.csdn.net/epluguo/article/details/19302003?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a>找到，不保证最新，也有可能会有些函数接口找不到）。但是有了GLEW扩展库，就再也不用担心找不到这些函数的接口了，因为GLEW能自动识别你的平台所能支持的全部OpenGL高级扩展函数。也就是说，只要包含一个glew.h头文件，就能使用gl、glu、glext、wgl、glx的全部函数。并且GLEW支持目前流行的各种操作系统。当然了，我们之前得问题也迎刃而解了，可以直接使用函数，不用先声明了。下面来看看GLWF环境的搭建。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">构建GLEW</font><br>由于GLEW是一个库，所以我们还是需要把它的库文件和头文件链接到我们的项目中。GLEW可以从中<a href="http://glew.sourceforge.net/index.html" target="_blank" rel="external">这里</a>下载。当然还是可以和前面GLFW一样从源码编译出lib库文件。这里我直接下载编译好的二进制文件Binaries了。下载好后找到<code>\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32</code>路径下的glew32s.lib文件，把这个文件添加到项目属性的库目录里，再把<code>\glew-2.0.0-win32\glew-2.0.0</code>路径下的include文件夹添加到项目属性的包含目录里（我是把这里glew和之前glfw的库文件和头文件放在了两个新建文件夹下：一个Libs文件夹、一个Includes文件夹，再把这两个文件夹添加到项目属性的相应目录里。人懒省事~。可以参考前面GLFW标题后链接标题下的第一张图。）</p>
+<p>这里使用的是GLEW的静态库，即glew32s.lib。而且GLWF3默认也是被编译为静态库的。</p>
+<p>如果使用GLEW的静态库，必须在包含GLEW之前定义一个预处理变量GLEW_STATIC。如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#DEFINE GLEW_STATIC</span></div><div class="line"><span class="meta">#include &lt;GL/glew.h&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如果想要使用GLEW的动态库，需要移除对GLEW_STATIC的定义，而且需要把.dll复制到二进制代码所在的文件夹里。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">测试环境是否构建成功<font><br>在自己新建的并且构建好环境的项目中，写入如下代码：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// GLEW</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GLEW_STATIC</span></div><div class="line"><span class="meta">#include &lt;GL/glew.h&gt;</span></div><div class="line"> </div><div class="line"><span class="comment">// GLFW</span></div><div class="line"><span class="meta">#include &lt;GLFW/glfw3.h&gt;</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    glfwInit();</div><div class="line">    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);</div><div class="line">    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);</div><div class="line">    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</div><div class="line">    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">如果出现了很多未定义引用错误，就是还没有构建成功了~。</div></pre></td></tr></table></figure></font></font></p>
+<p>【注】：</p>
+<ul>
+<li>静态链接库是会在编译的时候整合到我们的二进制文件中，这样做的好处是不必保持跟踪这额外的文件，只需要发布单独的二进制文件。缺点是最后的可执行文件会变得更大，而且当一个库有一个更新的版本时需要重新编译整个应用程序。</li>
+<li>动态链接库就是.dll或.so文件，库的代码是与我们的二进制代码分开存在的，它可以使最终的可执行文件更小，更新的时候也更容易，不足之处是必须在最终的应用程序中发布dll文件。<br>&nbsp; </li>
+</ul>
+<hr>
+<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/OpenGL/">OpenGL</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/OpenGL配置/">OpenGL配置</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/10/18/OpenGL1概述及环境配置/" data-title="OpenGL1：OpenGL概述及环境配置" data-url="http://yoursite.com/2016/10/18/OpenGL1概述及环境配置/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>2</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>15</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/光照场景/">光照场景</a><small>1</small></li>
+  
+    <li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/常见光源/">常见光源</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/材质/">材质</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/模型加载/">模型加载</a><small>1</small></li>
+  
+    <li><a href="/tags/模板测试/">模板测试</a><small>1</small></li>
+  
+    <li><a href="/tags/深度测试/">深度测试</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
