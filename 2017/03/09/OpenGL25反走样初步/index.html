@@ -60,8 +60,9 @@
     </header>
     <div class="entry">
       
-        <hr>
-<p><font size="5" color="orange">锯齿效果</font><br><a id="more"></a><br>在我们的渲染中，可能会遇到模型边缘有锯齿的问题。锯齿边出现的原因是由顶点数据像素化成为片段的方式引起的。比如直线上的点是连续的，而屏幕上的像素却是离散的，用屏幕上的像素来近似表示直线段，必然会出现锯齿效果（可参考<a href="http://popperelay.com/2016/11/06/%E5%9F%BA%E6%9C%AC%E5%85%89%E6%A0%85%E5%9B%BE%E5%BD%A2%E7%94%9F%E4%BA%A7%E6%8A%80%E6%9C%AF/" target="_blank" rel="external">《基本光栅图形生成技术》</a>一文中的直线扫描转换）。</p>
+        <p><font size="5" color="orange">锯齿效果</font><br><a id="more"></a></p>
+<hr>
+<p>在我们的渲染中，可能会遇到模型边缘有锯齿的问题。锯齿边出现的原因是由顶点数据像素化成为片段的方式引起的。比如直线上的点是连续的，而屏幕上的像素却是离散的，用屏幕上的像素来近似表示直线段，必然会出现锯齿效果（可参考<a href="http://popperelay.com/2016/11/06/%E5%9F%BA%E6%9C%AC%E5%85%89%E6%A0%85%E5%9B%BE%E5%BD%A2%E7%94%9F%E4%BA%A7%E6%8A%80%E6%9C%AF/" target="_blank" rel="external">《基本光栅图形生成技术》</a>一文中的直线扫描转换）。</p>
 <p>下面是一个简单的立方体，可以看到它有锯齿边的效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148896296658.png" alt=""><br>放大后会更明显：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148896296704.png" alt=""><br>很明显能看到边是由像素所构成的，这种现象叫做走样（Aliasing）。有很多技术能够减少走样，产生更平滑的边缘，这些技术叫做抗锯齿技术（Anti-aliasing，也被称为反走样技术）。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">超级采样抗锯齿技术</font><br>超级采样反走样技术（Super-Sampled Anti-Aliasing，SSAA），是通过以更高的分辨率来采样图形，然后再显示在低分辨率的设备上，从而减少失真的方法。例如下图表示了增加分辨率后，绘制直线的差别：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148896296771.png" alt=""><br>通过将高分辨率的图形，显示在低分辨率的设备上，确实能有效减轻走样现象，但是存在的弊端就是：要为这些多出来的像素，进行更多的计算，并且内存开销很大。这是一种比较传统的方法。<br>&nbsp; </p>
