@@ -159,7 +159,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过查询获取uniform buffer中各个变量的索引和位移偏量</span></div><div class="line"><span class="keyword">const</span> GLchar* names[] = &#123;</div><div class="line">    <span class="string">"anotherColor"</span>, <span class="string">"mixValue"</span></div><div class="line">&#125;;</div><div class="line">GLuint indices[<span class="number">2</span>];</div><div class="line">glGetUniformIndices(redShader.programId, <span class="number">2</span>, names, indices);</div><div class="line">GLint offset[<span class="number">2</span>];</div><div class="line">glGetActiveUniformsiv(redShader.programId, <span class="number">2</span>, indices, GL_UNIFORM_OFFSET, offset);</div><div class="line"><span class="comment">// 使用获取的位移偏量更新数据</span></div><div class="line">glm::vec4 anotherColor = glm::vec4(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>);</div><div class="line">GLfloat mixValue = <span class="number">0.5f</span>;</div><div class="line">glBindBuffer(GL_UNIFORM_BUFFER, colorUBOId);</div><div class="line">glBufferSubData(GL_UNIFORM_BUFFER, offset[<span class="number">0</span>], <span class="keyword">sizeof</span>(glm::vec4), glm::value_ptr(anotherColor));</div><div class="line">glBufferSubData(GL_UNIFORM_BUFFER, offset[<span class="number">1</span>], <span class="keyword">sizeof</span>(glm::vec4), &amp;mixValue);</div><div class="line">glBindBuffer(GL_UNIFORM_BUFFER, <span class="number">0</span>);</div></pre></td></tr></table></figure>
 <p>&nbsp; </p>
 <hr>
-<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 
       
     </div>
@@ -235,7 +235,7 @@
   
     <li><a href="/categories/C/">C++</a><small>2</small></li>
   
-    <li><a href="/categories/OpenGL/">OpenGL</a><small>22</small></li>
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>23</small></li>
   
     <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
   
@@ -289,6 +289,8 @@
     <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
   
     <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
   
     <li><a href="/tags/图/">图</a><small>1</small></li>
   

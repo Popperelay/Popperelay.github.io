@@ -159,7 +159,7 @@
 <p><font size="4" color="red">kernel边缘检测效果</font><br>边缘检测的kernel矩阵如下，和锐化kernel有点像：<br>$$<br>\begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; -8 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{bmatrix}<br>$$<br>现在的kernel数组变为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> kernel[<span class="number">9</span>] = <span class="keyword">float</span>[](</div><div class="line">	<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>,</div><div class="line">       <span class="number">1</span>,<span class="number">-8</span>, <span class="number">1</span>,</div><div class="line">       <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span></div><div class="line">);</div></pre></td></tr></table></figure></p>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14849995058.png" alt=""><br>当偏移量offset不同时，效果会有所改变。更多kernel效果可查看<a href="http://setosa.io/ev/image-kernels/" target="_blank" rel="external">Image Kernels</a>。<br>&nbsp; </p>
 <hr>
-<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 
       
     </div>
@@ -245,7 +245,7 @@
   
     <li><a href="/categories/C/">C++</a><small>2</small></li>
   
-    <li><a href="/categories/OpenGL/">OpenGL</a><small>22</small></li>
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>23</small></li>
   
     <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
   
@@ -299,6 +299,8 @@
     <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
   
     <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
   
     <li><a href="/tags/图/">图</a><small>1</small></li>
   

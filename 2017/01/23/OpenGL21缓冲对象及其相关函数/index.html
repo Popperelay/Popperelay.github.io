@@ -86,7 +86,7 @@
 <p>也可以只把目标缓冲设为<code>GL_COPY_WRITE_BUFFER</code>，如下代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">GLfloat vertexData[] = &#123; ... &#125;;</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, vbo1);</div><div class="line">glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);</div><div class="line">glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">sizeof</span>(vertexData));</div></pre></td></tr></table></figure></p>
 <p>下一篇文章里我们将会讨论uniform缓冲对象，到时候我们会充分利用<code>glBufferSubData</code>函数。<br>&nbsp; </p>
 <hr>
-<p>参考文献：<a href="http://bullteacher.com/category/zh_learnopengl_com" target="_blank" rel="external">锦瑟无端五十弦</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 
       
     </div>
@@ -172,7 +172,7 @@
   
     <li><a href="/categories/C/">C++</a><small>2</small></li>
   
-    <li><a href="/categories/OpenGL/">OpenGL</a><small>22</small></li>
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>23</small></li>
   
     <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
   
@@ -226,6 +226,8 @@
     <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
   
     <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
   
     <li><a href="/tags/图/">图</a><small>1</small></li>
   
