@@ -63,7 +63,59 @@
         <p>之前我们的场景里用的全都是小方块，现在我们想要去加载一些其他模型。<a id="more"></a>我们是无法像定义小方块一样，用程序去手动地指定房子、人这些复杂模型的顶点、法线和纹理坐标。这些复杂模型通常是由美工用Blender、3DS Max和Maya这些建模软件来制作的，我们要做的只是把这些已经做好的模型打入到我们的应用程序中。在建模软件导出模型文件时，会自动生成模型的所有顶点坐标、顶点法线和纹理坐标，而我们需要去解析这些导出的模型文件，并将其中的模型数据存储为OpenGL能够使用的数据。</p>
 <p>由于导出的模型文件通常有几十种格式，为每种格式都写一种解析方式是很麻烦的。这里我们直接使用市面上一个很流行的模型加载库，叫做Assimp。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">模型加载库Assimp</font><br>Assimp是一个常用的模型加载库，全称是Open Asset Import Library。它可以导入几十种不同格式的模型文件（也可以导出部分模型格式），并且可以把不同的模型文件都转换为一个统一的数据结构，所以无论我们导入哪种格式的模型文件，都可以用同一个方式去访问我们需要的模型数据。</p>
+<p><font size="5" color="orange">模型加载库Assimp</font><br>Assimp是一个常用的模型加载库，全称是Open Asset Import Library。它可以导入几十种不同格式的模型文件（也可以导出部分模型格式），并且可以把不同的模型文件都转换为一个统一的数据结构，所以无论我们导入哪种格式的模型文件，都可以用同一个方式去访问我们需要的模型数据。<br>它能读取以下格式的模型文件：</p>
+<ul>
+<li>Autodesk ( .fbx )</li>
+<li>Collada ( .dae )</li>
+<li>glTF ( .gltf, .glb )</li>
+<li>Blender 3D ( .blend )</li>
+<li>3ds Max 3DS ( .3ds )</li>
+<li>3ds Max ASE ( .ase )</li>
+<li>Wavefront Object ( .obj )</li>
+<li>Industry Foundation Classes (IFC/Step) ( .ifc )</li>
+<li>XGL ( .xgl,.zgl )</li>
+<li>Stanford Polygon Library ( .ply )</li>
+<li>AutoCAD DXF ( .dxf )</li>
+<li>LightWave ( .lwo )</li>
+<li>LightWave Scene ( .lws )</li>
+<li>Modo ( .lxo )</li>
+<li>Stereolithography ( .stl )</li>
+<li>DirectX X ( .x )</li>
+<li>AC3D ( .ac )</li>
+<li>Milkshape 3D ( .ms3d )</li>
+<li>TrueSpace ( .cob,.scn )</li>
+<li>Biovision BVH ( .bvh )</li>
+<li>CharacterStudio Motion ( .csm )</li>
+<li>Ogre XML ( .xml )</li>
+<li>Irrlicht Mesh ( .irrmesh )</li>
+<li>Irrlicht Scene ( .irr )</li>
+<li>Quake I ( .mdl )</li>
+<li>Quake II ( .md2 )</li>
+<li>Quake III Mesh ( .md3 )</li>
+<li>Quake III Map/BSP ( .pk3 )</li>
+<li>Return to Castle Wolfenstein ( .mdc )</li>
+<li>Doom 3 ( .md5* )</li>
+<li>Valve Model ( .smd,.vta )</li>
+<li>Open Game Engine Exchange ( .ogex )</li>
+<li>Unreal ( .3d )</li>
+<li>BlitzBasic 3D ( .b3d )</li>
+<li>Quick3D ( .q3d,.q3s )</li>
+<li>Neutral File Format ( .nff )</li>
+<li>Sense8 WorldToolKit ( .nff )</li>
+<li>Object File Format ( .off )</li>
+<li>PovRAY Raw ( .raw )</li>
+<li>Terragen Terrain ( .ter )</li>
+<li>3D GameStudio (3DGS) ( .mdl )</li>
+<li>3D GameStudio (3DGS) Terrain ( .hmp )</li>
+<li>Izware Nendo ( .ndo )</li>
+</ul>
+<p>还能导出几种常见格式的模型：</p>
+<ul>
+<li>Collada ( .dae )</li>
+<li>Wavefront Object ( .obj )</li>
+<li>Stereolithography ( .stl )</li>
+<li>Stanford Polygon Library ( .ply )</li>
+</ul>
 <p><font size="4" color="red">Assimp生成的模型数据结构</font><br>当Assimp导入一个模型文件时，它会加载整个模型文件到一个scene对象，它包含了所有被导入的模型和场景数据（一个模型文件可能包含多个模型或场景）。Assimp会为这个模型文件中的所有场景节点、模型节点都生成一个对应的数据结构，每个节点包含着存储在scene对象中的数据的索引，有的可能还包含几个子节点。下图展示了一个简化的Assimp生成的模型数据结构：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148248044044.png" alt=""></p>
 <ul>
 <li>所有的模型、场景数据都包含在scene对象中，如所有的材质和Mesh。而且，场景的根节点应用也在这个scene对象中。</li>
