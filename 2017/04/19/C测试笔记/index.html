@@ -65,11 +65,10 @@
 <li>符号常量（用define定义的）和变量不同，符号常量是不占内存的，只是一个临时符号，预编译后这个符号就不存在了。</li>
 <li>变量名实际上是以一个名字代表的一个存储地址。编译链接时，编译系统会给每一个变量名分配对应的内存地址。</li>
 <li>常变量（用const定义的）和常量不同，常变量具有变量的基本属性，有类型，占存储单元，而常量只是一个数，没有名字不占内存。</li>
-<li>编码中常用的字符’1’、’A’等等，在内存中是以ASCII码存储的，占一个字节。字符’1’和整数1是不同的，整数1是以整数存储方式（二进制补码）存储的，占4个字节。例如：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = <span class="string">'1'</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,c);</div><div class="line"><span class="keyword">char</span> a = <span class="number">1</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,a);</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<li><p>编码中常用的字符’1’、’A’等等，在内存中是以ASCII码存储的，占一个字节。字符’1’和整数1是不同的，整数1是以整数存储方式（二进制补码）存储的，占4个字节。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c = <span class="string">'1'</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,c);</div><div class="line"><span class="keyword">char</span> a = <span class="number">1</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,a);</div></pre></td></tr></table></figure>
 <p>输出结果是49和1。</p>
-<ol>
+</li>
 <li>字符型char也有signed和unsigned。</li>
 <li>表达式如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"%7.2f\n"</span>,<span class="number">12.345678f</span>);</div></pre></td></tr></table></figure>
 </li>
