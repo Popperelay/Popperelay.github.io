@@ -157,11 +157,10 @@
 <li><p>C语言变量存储类别有4种：自动的（auto）、静态的（static）、寄存器的（ register）、外部的（extern）。</p>
 </li>
 <li>静态局部变量（在函数中定义的static变量）是在编译时赋初值的，即只赋值一次，以后每次调用函数时不再重新赋初值，而是保留上一次函数调用结束后的值。如果不对静态局部变量赋初值，编译时会自动赋为0或者空字符<code>\0</code>，但是如果不对自动变量赋初值，它的值就会是不确定的。因为静态局部变量是存放在静态存储区的，程序执行过程中不会改变位置，而自动变量是存放在动态存储区的，在每次函数结束后都会释放存储单元，下次调用时又重新分配存储单元，而所分配的存储单元中的内容是不可知的。</li>
-<li>寄存器变量使用register声明的变量，如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">register</span> <span class="keyword">int</span> i;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<li><p>寄存器变量使用register声明的变量，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">register</span> <span class="keyword">int</span> i;</div></pre></td></tr></table></figure>
 <p>寄存器变量用于存储那些使用非常频繁的变量，比如在10000次循环中每次都要用到的变量。其实现在的编译系统通常都能识别使用频繁的变量，从而自动把这些变量放到寄存器里，不需要程序设计者指定。所以用register声明变量的必要性不大。</p>
-<ol>
+</li>
 <li>extern外部变量：<br>其实用extern声明的外部变量是强制把变量的作用域扩大了。比如在同一个文件中，变量在后面声明的，但是在前面就想要用到这个变量，那么可以在用这个变量时，使用extern声明一下这个变量，把它的作用域扩展到此声明处。如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">extern</span> <span class="keyword">int</span> A,B,C;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">int</span> A,B,C;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
