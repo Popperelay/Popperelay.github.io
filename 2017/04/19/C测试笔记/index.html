@@ -74,10 +74,8 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"%7.2f\n"</span>,<span class="number">12.345678f</span>);</div></pre></td></tr></table></figure>
 <p>输出结果如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">12.35</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
 <p>整数部分12前面还有两个空格，%7.2表示输出结果总共占7列（包括小数点），保留两位小数并且会有四舍五入。</p>
-<ol>
+</li>
 <li><p>c语言中没有string类型，但是却可以使用<code>strlen</code>、’strcpy’等字符串函数：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">char</span> str[<span class="number">4</span>] = <span class="string">"acd"</span>;</div><div class="line">    <span class="keyword">char</span> str1[<span class="number">4</span>];</div><div class="line">    <span class="built_in">strcpy</span>(str1,str);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="built_in">strlen</span>(str));</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>,str1);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>输出结果是：</p>
