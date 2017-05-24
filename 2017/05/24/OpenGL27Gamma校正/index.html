@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>OpenGL27Gamma校正 | Elays&#39;Blog</title>
+  <title>OpenGL27：Gamma校正 | Elays&#39;Blog</title>
   <meta name="author" content="Elay">
   
   <meta name="description" content="Elay">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="OpenGL27Gamma校正"/>
+  <meta property="og:title" content="OpenGL27：Gamma校正"/>
   <meta property="og:site_name" content="Elays&#39;Blog"/>
 
   
@@ -54,20 +54,20 @@
       
       
   
-    <h1 class="title">OpenGL27Gamma校正</h1>
+    <h1 class="title">OpenGL27：Gamma校正</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>现在的很多监视器都是<a href="http://popperelay.com/2016/10/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="external">阴极射线管显示器（CRT）或者LED显示器</a>，它们在显示颜色时并非按照线性方式工作，我们在程序中输出的颜色，最终显示到屏幕上亮度会减弱，这对于计算光照和实时渲染的图形质量有一定影响，需要我们进行Gamma校正。<br><!--moe--></p>
+        <p>现在的很多监视器都是<a href="http://popperelay.com/2016/10/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="external">阴极射线管显示器（CRT）或者LED显示器</a>，它们在显示颜色时并非按照线性方式工作，我们在程序中输出的颜色，最终显示到屏幕上亮度会减弱，这对于计算光照和实时渲染的图形质量有一定影响，需要我们进行Gamma校正。<br><a id="more"></a></p>
 <p><font size="5" color="orange">Gamma校正的概念及意义</font></p>
 <hr>
-<p>我们在自己的图形程序中认为颜色(1.0,0.0,0.0)的红色强度应该是颜色(0.5,0.0,0.0)的两倍，但是实际上显示设备对于输入的原始值，是按照2.2次幂的的指数形式（简称Gamma指数变换）进行处理的，即$C<em>{out}=C</em>{in}^{2.2}$，其中2.2是Gamma系数，不同显示器的Gamma系数值会略有不同，通常在2.0到2.4之间。所以程序中红色分量增大到了2倍，但是显示器显示出来的红色亮度并不是2倍，而是暗一些，比2倍低（因为原始颜色值都是在0到1之间的小数）。显示器所做的这种Gamma指数变换如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%5BGamma%5DGamma%E6%A0%A1%E6%AD%A31.png" alt=""><br>图中间的点线是我们在图形程序中通常认定的线性颜色，即我们希望在程序中颜色分量（横轴）增加的同时显示器显示出来的亮度也会同比例增加。当显示器接收了来自程序的线性原始值后，会进行上诉的指数运算，完成Gamma变换，然后输出图中下方实线所示的非线性颜色，除了0和1这两个端点以外，其他颜色分量的亮度都会降低。</p>
+<p>我们在自己的图形程序中认为颜色(1.0,0.0,0.0)的红色强度应该是颜色(0.5,0.0,0.0)的两倍，但是实际上显示设备对于输入的原始值，是按照2.2次幂的的指数形式（简称Gamma指数变换）进行处理的，即$C_{out}=C_{in}^{2.2}$，其中2.2是Gamma系数，不同显示器的Gamma系数值会略有不同，通常在2.0到2.4之间。所以程序中红色分量增大到了2倍，但是显示器显示出来的红色亮度并不是2倍，而是暗一些，比2倍低（因为原始颜色值都是在0到1之间的小数）。显示器所做的这种Gamma指数变换如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%5BGamma%5DGamma%E6%A0%A1%E6%AD%A31.png" alt=""><br>图中间的点线是我们在图形程序中通常认定的线性颜色，即我们希望在程序中颜色分量（横轴）增加的同时显示器显示出来的亮度也会同比例增加。当显示器接收了来自程序的线性原始值后，会进行上诉的指数运算，完成Gamma变换，然后输出图中下方实线所示的非线性颜色，除了0和1这两个端点以外，其他颜色分量的亮度都会降低。</p>
 <ul>
 <li>【注】：<br>线性颜色可以通俗地理解为我们最终想要的颜色。</li>
 </ul>
-<p>所以，要想最终显示器按照我们在程序中预期的中间线性颜色来输出，我们需要在显示器执行Gamma指数变换之前，先做一个Gamma指数变换的逆变换：$C<em>{corrected}=C</em>{in}^{1.0/2.2}$，这样最终输出的颜色才会是我们在程序中指定的颜色，这个逆变换称为Gamma校正（Gamma Correction），对应第一幅图中最上面的短划线。Gamma系数取2.2进行校正在大多数显示器上效果都比较理想。例如颜色(0.5，0.0，0.0)进行Gamma校正后会变为：$(0.5,0.0,0.0)^{1/2.2}=(0.73,0.0,0.0)$，校正后的颜色接下来会被发送给显示器，由于现实器会对输入的颜色做Gamma指数变换，所以最显示出来的颜色是：$(0.73,0.0,0.0)^{2.2}={0.5,0.0,0.0}$，与我们在程序中最初想要输出的颜色一致。</p>
+<p>所以，要想最终显示器按照我们在程序中预期的中间线性颜色来输出，我们需要在显示器执行Gamma指数变换之前，先做一个Gamma指数变换的逆变换：$C_{corrected}=C_{in}^{1.0/2.2}$，这样最终输出的颜色才会是我们在程序中指定的颜色，这个逆变换称为Gamma校正（Gamma Correction），对应第一幅图中最上面的短划线。Gamma系数取2.2进行校正在大多数显示器上效果都比较理想。例如颜色(0.5，0.0，0.0)进行Gamma校正后会变为：$(0.5,0.0,0.0)^{1/2.2}=(0.73,0.0,0.0)$，校正后的颜色接下来会被发送给显示器，由于现实器会对输入的颜色做Gamma指数变换，所以最显示出来的颜色是：$(0.73,0.0,0.0)^{2.2}={0.5,0.0,0.0}$，与我们在程序中最初想要输出的颜色一致。</p>
 <p>下图是Gamma变换前后的效果图，可以看到Gamma变换后的亮度增大了，恢复为程序想要的正常颜色。<br><img src="http://oqcvzqam1.bkt.clouddn.com/%5BGamma%5DGamma%E6%A0%A1%E6%AD%A32.png" alt=""></p>
 <p><font size="5" color="orange">在程序中使用Gamma校正</font></p>
 <hr>
@@ -142,7 +142,7 @@
 
  
   	   <!-- 多说评论框 start -->
- 		<div class="ds-thread" data-thread-key="2017/05/24/OpenGL27Gamma校正/" data-title="OpenGL27Gamma校正" data-url="http://yoursite.com/2017/05/24/OpenGL27Gamma校正/"></div>
+ 		<div class="ds-thread" data-thread-key="2017/05/24/OpenGL27Gamma校正/" data-title="OpenGL27：Gamma校正" data-url="http://yoursite.com/2017/05/24/OpenGL27Gamma校正/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
