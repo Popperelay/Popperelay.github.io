@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>《GPP》第一章 架构、性能和游戏 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="《GPP》第一章 架构、性能和游戏"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-05-25T06:12:06.000Z"><a href="/2017/05/25/GPP第一章架构性能和游戏/">2017-05-25</a></time>
+      
+      
+  
+    <h1 class="title">《GPP》第一章 架构、性能和游戏</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><font size="5" color="orange">软件架构</font><br><a id="more"></a></p>
+<hr>
+<ul>
+<li>衡量一个设计好坏的方法就是看它应对变化的灵活性。</li>
+<li>如果两块代码耦合，意味着我们必须同时了解这两块代码，如果让它们解耦，那么只需了解其一。耦合得越低，更改所波及的范围就会越小。</li>
+</ul>
+<p><font size="5" color="orange">好架构的代价</font></p>
+<hr>
+<ul>
+<li>解耦意味着我们在进行扩展时仅需理解少量代码，但同时抽象却也增加了理解代码的难度。</li>
+<li>如果过度关注代码的设计架构，便会得到一个架构已经失控的代码库。我们会看到接口和抽象无处不在。插件系统、抽象基类、虚方法众多，还有各种的扩展点。我们将花费大量时间去找到有实际功能的代码。要避免过度设计。</li>
+</ul>
+<p><font size="5" color="orange">性能和速度</font></p>
+<hr>
+<ul>
+<li>使用接口，能够让代码可以与任何实现这些接口的类进行工作，而不是使用具体类。</li>
+<li>模板元编程可以让我们获得抽象接口而没有任何运行时开销，在编译期间就能决定在模板实例化时调用哪个类。</li>
+<li>性能优化总是在某些假设下进行的。</li>
+<li>软件架构好，灵活性高，但是会降低游戏性能，一种折中的办法是保持代码的灵活性，直到设计稳定下来，然后去除一些抽象，以提高游戏性能。</li>
+</ul>
+<p><font size="5" color="orange">坏代码中的好代码</font></p>
+<hr>
+<ul>
+<li>只是为了验证游戏想法、迟早会扔掉的一些代码，在编写时不必在意设计架构。</li>
+<li>我们需要确保那些使用一次性代码的人明白这种一次性代码看起来能够运行，但是它却不可维护，必须被重写。让boss明白原型代码只能用1次，以后要接着用就不要要求快速原型。</li>
+<li>有一个小技巧确保我们的原型代码不会变成真正的代码，就是使用不同于我们游戏使用的语言来编写。这样的话，我们就必须用游戏使用的语言重写一遍了。</li>
+</ul>
+<p><font size="5" color="orange">简单性</font></p>
+<hr>
+<ul>
+<li>保持简单性，代码量就会变少。这意味着更改代码时，我们的脑袋里只需装载更少的代码。</li>
+<li>但是一个好的解决方案并不是更少的实际代码量，而是对代码的升华。</li>
+<li>Blaise Pascal曾说：“我会写一封更简短的信，但我没有足够的时间。”</li>
+<li>Antoine de Saint-Exupery（书，小王子）：“极臻完美，并非无以复加，而是简无可减。”</li>
+</ul>
+<p><font size="5" color="orange">More..</font></p>
+<hr>
+<ul>
+<li>抽象和解耦能够使我们的程序开发变得更快和更简单。但不要浪费时间来做这件事，除非我们确信存在问题的代码需要这种灵活性。</li>
+<li>在我们的开发周期中要对性能进行思考和设计，但是要推迟那些降低灵活性的、底层的、详尽的优化，能晚则晚。</li>
+<li>如果我们将要删除代码，那么不要浪费时间将它整理得很整洁。摇滚明星把酒店弄得很乱是因为他们知道第二天就要结账走人。</li>
+<li>在游戏发布前的两个月并不是我们开始担心“游戏的FPS只有1帧”问题的时候。</li>
+</ul>
+<hr>
+<p>参考文献：<br>Nystrom R. Game Programming Patterns[M]. ?:Genever Benning, 2014.11.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/游戏设计模式/">游戏设计模式</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2017/05/25/GPP第一章架构性能和游戏/" data-title="《GPP》第一章 架构、性能和游戏" data-url="http://yoursite.com/2017/05/25/GPP第一章架构性能和游戏/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>3</small></li>
+  
+    <li><a href="/categories/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>25</small></li>
+  
+    <li><a href="/categories/c/">c++</a><small>1</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/毕设/">毕设</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+    <li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/c-特性/">c++特性</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/交流/">交流</a><small>1</small></li>
+  
+    <li><a href="/tags/光照场景/">光照场景</a><small>1</small></li>
+  
+    <li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
+  
+    <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/实例化/">实例化</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li>
+  
+    <li><a href="/tags/常见光源/">常见光源</a><small>1</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/材质/">材质</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/模型加载/">模型加载</a><small>1</small></li>
+  
+    <li><a href="/tags/模板测试/">模板测试</a><small>1</small></li>
+  
+    <li><a href="/tags/深度测试/">深度测试</a><small>1</small></li>
+  
+    <li><a href="/tags/混合/">混合</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li>
+  
+    <li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li>
+  
+    <li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
