@@ -51,6 +51,107 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-07-10T13:56:26.000Z"><a href="/2017/07/10/老张培训笔记/">2017-07-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/07/10/老张培训笔记/">老张培训笔记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><font size="5" color="orange">第一课</font></p>
+<hr>
+<ol>
+<li>用设计模式去解决一些实际问题。</li>
+<li>团队交流的重要性不亚于个人的编码能力。</li>
+<li>若有一个简单的函数要实现几十个int型数据的加法，最粗暴的写法如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">Add</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">		sum += i;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是如果需求变成几十个float型数据相加呢，是不是需要把上面函数中的int都换为float，如果还增加了double、char等等呢，需要重复写上诉代码？</p>
+<p> 很显然，这样做就真的是码农了，花大把时间做体力活。应该使用模板，如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="function">T <span class="title">Add</span><span class="params">(T n)</span> </span>&#123;</div><div class="line">	T sum = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (T i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">		sum += i;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样就可以很方便的调用Add(100)，Add(100.0f)，Add(‘!’)等等了。值得注意的是，在模板函数中声明变量时必须同时赋值来初始化，如上面程序中的<code>T sum=0;</code></p>
+<ol>
+<li>码农的定义：需求变化时，会有很多体力活要做。</li>
+<li>对同一个功能，应该用更少的代码去实现。</li>
+<li>多调试团队里其他人的代码，包括bug。</li>
+<li>函数不能超过50行，这样函数的功能就会比较单一，方便给函数起名字，这样一来也能减少甚至达到不写注释。</li>
+<li>在代码中应该尽量不要写注释，但注释不同于文档。注释是在说明变量代表什么，函数实现了什么功能，文档是在说明为什么这么设计，比如该函数为什么是私有的或者保护的。</li>
+<li>在写代码中，不要ctrl+c、ctrl+v，也不要copy团队里其他人的代码，要使用别人的代码时，应该只需要调用别人预留的函数接口，而非具体的代码实现。</li>
+<li>做起来像体力活的东西都需要改进。</li>
+<li>用不同的设计模式来解决同一个问题。</li>
+<li>问题示例：写日子文件。很多人的做法是仅仅实现了往文件里写东西的功能，但是没有考虑到效率问题，每收到一条log就打开文件、写文件、关闭文件。应该增加一个缓冲区，将日志信息先放到缓冲区中，每隔一段时间将缓冲区里的内容一起写入日志文件。</li>
+<li>具体的实现细节应该隐藏在类内部，外部只需要知道类的功能是什么。</li>
+<li><p>类的成员变量都应该尽量是私有的。甚至接口、虚基类里的成员变量也应该尽量私有（非保护）。为私有成员变量添加get、set函数，这样可以在get、set函数中对变量的读取、写入添加一些条件限制。</p>
+<p>比如某个私有成员变量m_Money，只有当它的值大于1000时，才允许被读取到外界：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMoney</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (m_Money &gt; <span class="number">1000</span>)</div><div class="line">		<span class="keyword">return</span> m_Money;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果将m_Money直接写为公有的，那么外界就可以直接读取到该变量，但是如果增加了上面这个读取条件限制，那么就需要在每个读取该变量的地方，加上条件限制，很显然体力活又来了。这就是为何需要将成员变量写为私有的原因。</p>
+<ol>
+<li>如下代码：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; getMoney() &#123;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</div><div class="line">		<span class="built_in">array</span>.push_back(i);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">array</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样的函数是不够好的，因为它向外界暴露了函数内部数据的存储方式为vector<int>，如果哪天把vector改为了List，那么外界所有调用该函数的地方可能都需要随之改变，把外界的vector改为List，体力活又来了。</int></p>
+<p> 如果想返回vector里的所有数据，通常get函数会接收一个输入输出参数，比如数组，来存储vector里的所有数据。当然，这样好的设计风格确实带来了数据复制时的性能开销。</p>
+<p><font size="5" color="orange">第二课：面向对象设计原则</font></p>
+<hr>
+<ol>
+<li>新增加代码的是否是必须的？判断标准是：<ul>
+<li>程序不会因为新增加的代码而发生连锁反应</li>
+<li>新增加的代码不用了解源程序过多的细节</li>
+</ul>
+</li>
+<li>枚举就不是一个好的设计风格，因为枚举类型增加时，需要去修改原有的代码，需要去了解源程序与枚举相关的很多地方。</li>
+<li>开闭原则：团队开发中，需求增加时，只增加自己的代码，不应该更改已有的代。即对扩展开放，对修改关闭。开闭原则是面向对象最重要的设计原则，其关键在于抽象。</li>
+<li><p>案例：绘制圆和正方形。<br>最粗暴的做法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing cirlce..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CSquare</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing square..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">enum</span> EShapeType &#123;</div><div class="line">		Circle, Square</div><div class="line">	&#125;;</div><div class="line">	EShapeType shapeType[] = &#123; Circle, Square &#125;;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(shapeType) / <span class="keyword">sizeof</span>(EShapeType); i++) &#123;</div><div class="line">		<span class="keyword">switch</span> (shapeType[i]) &#123;</div><div class="line">		<span class="keyword">case</span> Circle:</div><div class="line">			CCircle circle;</div><div class="line">			circle.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Square:</div><div class="line">			CSquare square;</div><div class="line">			square.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当需求增加时，比如再绘制一个三角形，那么需要加上或更改如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">enum</span> EShapeType &#123;</div><div class="line">		Circle, Square, Triangle</div><div class="line">	&#125;;</div><div class="line">	EShapeType shapeType[] = &#123; Circle, Square, Triangle &#125;;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(shapeType) / <span class="keyword">sizeof</span>(EShapeType); i++) &#123;</div><div class="line">		<span class="keyword">switch</span> (shapeType[i]) &#123;</div><div class="line">		<span class="keyword">case</span> Circle:</div><div class="line">			CCircle circle;</div><div class="line">			circle.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Square:</div><div class="line">			CSquare square;</div><div class="line">			square.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Triangle:</div><div class="line">			CTriangle triangle;</div><div class="line">			triangle.draw();</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>增加的这些代码都是必须的吗？增加的Triangle类是必须的，毕竟多了一种图元，但是改动的枚举类型和增加的case语句是必须的吗？而且需求增加时，改动了原来已有的代码。尤其是程序比较大以后，可能有很多地方都与这些枚举类型有关，那么需求一变，和这些枚举相关的代码都需要随之作出改变，而且还需要事先比较了解整个程序，才能不把程序改坏。很显然不符合开闭原则。这一切的根源都在于枚举的使用，只要使用了枚举就必然伴随类似switch-case的语句，枚举一变，和枚举相关的地方都要变，关联太大，可能会有连锁反应。</p>
+<p>可以为这些图元定义一个虚基类CShape，通过虚基类指针以多态的方式来调用所有子类的绘制函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CQuad</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing Quad..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> :</span><span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing circle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;CShape*&gt; shapes;</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CQuad());</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CCircle());</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CTriangle());</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; shapes.size(); i++) &#123;</div><div class="line">		shapes[i]-&gt;drawV();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当要绘制的图元类型增加时，只需要增加一个继承自CShape的子类，再将其对象加入到vector容器里就ok。很明显没有枚举、switch-case牵一发动全身的麻烦。 符合开闭原则。</p>
+</li>
+<li><p>现实中，没有任何一个程序或软件100%符合开闭原则。因为需求千奇百怪，不可能考虑到每一种情况，不可能对每一种需求都做到开闭原则。比如4中的程序，如果需求变为：按用户指定的顺序来绘制所有图元。此时4中的程序就必须针对该需求作出改变了，实现代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> priority;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setPriority</span><span class="params">(<span class="keyword">int</span> iPriority)</span> </span>&#123;</div><div class="line">		priority = iPriority;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> CShape&amp; iShape1, <span class="keyword">const</span> CShape&amp; iShape2) &#123;</div><div class="line">		<span class="keyword">return</span> iShape1.priority &lt; iShape2.priority;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">friend</span> <span class="keyword">bool</span> <span class="title">priorityLess</span><span class="params">(CShape* shape1, CShape* shape2)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> *shape1 &lt; *shape2;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> :</span> <span class="keyword">public</span> CShape&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CTriangle(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CQuad</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CQuad(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing Quad..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> :</span><span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CCircle(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Draw circle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;CShape*&gt; shapes;</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CQuad(<span class="number">2</span>));</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CCircle(<span class="number">1</span>));</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CTriangle(<span class="number">3</span>));</div><div class="line">	sort(begin(shapes), end(shapes), priorityLess);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">		shapes[i]-&gt;drawV();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的程序值得注意的是：</p>
+<ul>
+<li>可以使用STL中的sort函数对类对象进行排序，不过需要重载&lt;运算符，因为sort内部是将两个对象进行小于比较来排序的（或者直接用自定义的比较函数作为sort的第三个参数来排序）。</li>
+<li>使用sort进行排序，必须是针对对象，而不能是对象指针，否则将会是对指针进行排序，指针实际上是4个字节的整型数据，也就是在对整型数据排序了，这样就根本不会进入到对&lt;符号的重载函数里。但是要实现多态，必须使用对象指针或者引用，所以上面的程序给sort函数指定了第三个参数：priorityLess函数，执行sort函数时会先调用该函数，在该函数里将对象指针shape1、shape2转换为对象<em>shape1、</em>shape2，再将这两个对象进行小于比较，这样就会进入到自定义的&lt;符号重载函数里，按照优先级priority来确定对象的小于关系是否成立。这样就能正常工作了，如果没有priorityLess函数，将是对对象指针这个int型数据在进行排序，多次运行程序时将得到不同的结果，显然是错误的。</li>
+</ul>
+</li>
+<li><p>在实际开发中，需要通过重构不断改善原有的设计（这是很频繁的）。</p>
+</li>
+<li>重构的目标是：需求变化时尽量满足开闭原则。</li>
+<li>在敏捷开发中应该拒绝不成熟的抽象，避免过度设计。</li>
+<li>案例：母亲给孩子讲故事。<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBook</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is a book..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMother</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(CBook *vBook)</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Mother is reading: "</span>;</div><div class="line">		vBook-&gt;getContent();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>大多数初学者的实现方案都会是像上诉代码一样，这种设计是有问题的。CMother为什么要依赖于CBook呢？母亲除了给孩子读书，就不能读报纸这些了吗？如果要求母亲除了读书还能读报，最粗暴的就是再增加一个CNewspaper类，然后给read函数增加一个CNewspaper指针。很明显，这不符合开闭原则，需求增加时，改变了CMother类。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-05-31T02:40:04.000Z"><a href="/2017/05/31/C++浅层拷贝和深层拷贝/">2017-05-31</a></time>
       
       
@@ -371,43 +472,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-04-19T12:50:37.000Z"><a href="/2017/04/19/C测试笔记/">2017-04-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/04/19/C测试笔记/">C测试笔记</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <ol>
-<li>C语言中默认没有bool类型。需要加上stdbool.h头文件以后才能使用bool类型。
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2017/04/19/C测试笔记/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -575,6 +639,8 @@
     <li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li>
   
     <li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li>
+  
+    <li><a href="/tags/设计模式/">设计模式</a><small>1</small></li>
   
     <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
   
