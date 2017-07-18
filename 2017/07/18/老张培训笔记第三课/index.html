@@ -119,7 +119,7 @@
 <li><p>还有一点需要注意的是CCarFactory实体类对象是写在main函数中的，并没有写作全局对象，这样可以保证在执行其构造函数时另一个全局变量g_FactoryProducer已经初始化。</p>
 </li>
 </ul>
-<p>Bug来了，单例来了</p>
+<p><font size="5" color="orange">Bug来了，单例来了</font></p>
 <hr>
 <p>但是，上面程序中，我们是把CCarFactory实体类对象（AudiFactory等）写在main函数中的，将它们写到对应车类的cpp文件中更好，比如在CAudi.cpp中定义AudiFactory对象，因为毕竟改main函数也不符合开闭原则。这样一来程序就会有多个全局变量：AudiFactory、BenzFactory和g_FactoryProducer，运行程序会出错：读取访问权限冲突。这是因为C++全局变量初始化的顺序是不定的，在CCarFactory<cbenz>的构造函数中用到了g_FactoryProducer，这时候g_FactoryProducer可能还没有被初始化，导致程序运行出错。<br>【温馨提示：要找到这个错误原因还是有一定难度的，但是如果养成良好的编码习惯，在使用g_FactoryProducer之前先判断其是否为空，就会很快发现问题所在】</cbenz></p>
 <p>很容易想到的解决方案就是：将g_FactoryProducer从对象改为指针，在CCarFactory构造函数中使用它之前先进行非空判断，如果空就初始化。增改代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CFactoryProducer.cpp: </div><div class="line">CFactoryProducer *g_FactoryProducer=<span class="keyword">new</span> CFactoryProducer();</div></pre></td></tr></table></figure></p>
