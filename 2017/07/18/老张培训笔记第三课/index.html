@@ -114,7 +114,7 @@
 </li>
 <li><p>在CFactoryProducer .h中对要使用的类进行了声明，而不是直接包含如下头文件：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"CCarFactory.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"CCar.h"</span></span></div></pre></td></tr></table></figure>
-<p>因为这样会造成CCarFactory.h头文件和CFactoryProducer .h头文件相互包含，会出错：C4430 缺少类型说明符-假定为int，原因可参考《编译链接错误》一文第6条。</p>
+<p>因为这样会造成CCarFactory.h头文件和CFactoryProducer .h头文件相互包含，会出错：C4430 缺少类型说明符-假定为int，原因可参考<a href="http://popperelay.com/2017/05/09/C++%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5/" target="_blank" rel="external">《编译链接错误》</a>一文第6条。</p>
 </li>
 <li><p>还有一点需要注意的是CCarFactory实体类对象是写在main函数中的，并没有写作全局对象，这样可以保证在执行其构造函数时另一个全局变量g_FactoryProducer已经初始化。</p>
 </li>
