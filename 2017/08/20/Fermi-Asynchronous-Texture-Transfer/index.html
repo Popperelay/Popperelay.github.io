@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>项目中遇到的C++编译链接错误 | Elays&#39;Blog</title>
+  <title>Fermi Asynchronous Texture Transfer | Elays&#39;Blog</title>
   <meta name="author" content="Elay">
   
   <meta name="description" content="Elay">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="项目中遇到的C++编译链接错误"/>
+  <meta property="og:title" content="Fermi Asynchronous Texture Transfer"/>
   <meta property="og:site_name" content="Elays&#39;Blog"/>
 
   
@@ -50,33 +50,53 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-05-09T03:39:29.000Z"><a href="/2017/05/09/C++编译链接/">2017-05-09</a></time>
+        <time datetime="2017-08-20T13:14:17.000Z"><a href="/2017/08/20/Fermi-Asynchronous-Texture-Transfer/">2017-08-20</a></time>
       
       
   
-    <h1 class="title">项目中遇到的C++编译链接错误</h1>
+    <h1 class="title">Fermi Asynchronous Texture Transfer</h1>
   
 
     </header>
     <div class="entry">
       
-        <ol>
-<li>编译时出现重定义，可参考<a href="http://popperelay.com/2017/03/15/C++%E9%87%8D%E5%AE%9A%E4%B9%89/" target="_blank" rel="external">这篇文章</a><a id="more"></a></li>
-<li>链接时出现LINK1120：无法解析的外部符号，这种情况通常都是没有包含对应的库文件，或者库文件没有包含正确。库文件包括.lib和.dll。</li>
-<li>链接过程中出现读取访问冲突，很可能是空指针造成的。如果是在调用OpenGL函数的时候出现该问题，无法访问某个地址，则很有可能是在初始化GLEW之前就调用了该函数。要知道没有初始化GLEW，有可能某些OpenGL函数是无法使用的（版本问题）。</li>
-<li>使用静态成员变量时出现无法解析的外部符号：原因是静态成员变量必须在类外进行初始化，否则的话是不会给它们分配内存空间的。</li>
-<li>c++对bool变量的默认值是没有规定的，根据编译器不同，可能默认是true，也可能是false，应该自己显示对bool变量赋初始值，不要让编译来决定。</li>
-<li><p>如下代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">test1.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"test2.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test1.cpp:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"test1.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> n = <span class="number">10</span>;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">test2.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"test1.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span> n;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>程序时可以正常编译通过的，输出10。<br>但是下面的程序却无法通过：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test1.cpp:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"test1.h"</span></span></div><div class="line"></div><div class="line">A a;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">test2.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"test1.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">extern</span> A a;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">     <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">     &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>编译报错：C4430 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认int。</p>
-<p>这是因为C++头文件加载的顺序是不定的，有可能在加载test2之前，test1就已经加载好了，那么#include “test1.h”这句将不再起作用，由于test1.h和test2.h是两个独立的编译单元，test2又没有去加载test1，导致test2中无法识别类A，出现上诉错误。但是前面用int n是不报错的，因为int是系统基础类型，肯定认识它。</p>
-</li>
+        <p><font size="5" color="orange">简介</font><br><a id="more"></a></p>
+<hr>
+<p>NVIDIA Fermi 架构里存在拷贝引擎硬件，专门用于GPU到CPU之间以DMA的方式进行双向数据传输。Quadro中高端显卡会有两个拷贝引擎硬件，一个用于从GPU上下载数据到CPU，一个用于CPU上传数据到GPU。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_1.png" alt=""></p>
+<p><font size="5" color="orange">CPU上异步纹理传输：CPU Asynchronous Texture Transfers</font></p>
+<hr>
+<p>使用多个PBO异步传输数据的图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_2.png" alt=""><br>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">GLuint pbo[<span class="number">2</span>]; <span class="comment">// The ping-pong pbo ? s</span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> curPBO = <span class="number">0</span>;</div><div class="line"><span class="comment">// Bind current pbo for app-&gt;pbo transfer</span></div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[curPBO]);</div><div class="line">GLubyte *ptr;</div><div class="line">ptr = (GLubyte *)glMapBufferRange(GL_PIXEL_UNPACK_BUFFER_ARB, <span class="number">0</span>, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);</div><div class="line"><span class="built_in">memcpy</span>(ptr, pData , width * height * <span class="keyword">sizeof</span>(GLubyte) * nComponents);</div><div class="line">glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);</div><div class="line">glBindTexture(GL_TEXTURE_2D , texId);</div><div class="line"><span class="comment">// Bind next pbo for upload from pbo to texture object</span></div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[<span class="number">1</span> - curPBO]);</div><div class="line">glTexSubImage2D(GL_TEXTURE_2D , <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, width , height, GL_RGBA, GL_UNSIGNED_BYTE, <span class="number">0</span>);</div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, <span class="number">0</span>);</div><div class="line">glBindTexture(GL_TEXTURE_2D , <span class="number">0</span>);</div><div class="line">curPBO = <span class="number">1</span> - curPBO;</div></pre></td></tr></table></figure></p>
+<p>注意这只是在单个渲染线程上，不同PBO的数据传输在并行执行，属于CPU异步输出。并没有用到GPU的Copy引擎。</p>
+<p><font size="5" color="orange">GPU上异步纹理传输：GPU Asynchronous Texture Transfers</font></p>
+<hr>
+<ol>
+<li>GPU的Copy引擎硬件默认是不开启的，因为对于少量的数据传输，使用它会带来一些性能瓶颈。</li>
+<li>为了触发Copy引擎，需要把数据传输(transfers)放在一个单独的线程里，这样GPU调度程序就会把渲染线程(render thread)发出的命令交由图形渲染引擎来完成，而数据传输线程(transfer thread)发出的命令会交由Copy引擎来并行执行。这就是GPU异步传输。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_3.png" alt=""></li>
 </ol>
+<p><font size="5" color="orange">Implementation Details</font></p>
+<hr>
+<p><font size="4" color="red">多线程</font><br>实现GPU异步传输时，需要为上传、渲染、下载分别建立一个单独的线程。下图是上传线程和渲染线程异步工作的图解：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_4.png" alt=""><br>下图是渲染线程和下载线程异步工作的图解：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_5.png" alt=""><br>值得注意的是我们是通过多张纹理数据来达到并行执行的效果，确保渲染线程在工作的同时，上传线程或下载线程会保持繁忙（busy）。</p>
+<p><font size="4" color="red">管理线程并发访问共享纹理</font><br>为了管理线程到共享纹理的并发访问，需要为每个纹理创建类似signal这种同步原语。</p>
+<p>OpenGL的绘制函数（glDraw*等）是异步的，所以函数返回时并不能保证渲染完成了，但是我们经常需要知道一些事会在什么时候完成，比如渲染线程需要知道纹理是什么时候上传完成的，它才能开始用这张纹理。这种信号交换由GL_ARB_Sync机制的同步对象（synchronization object）来负责管理，这些同步对象在不同的OpenGL上下文之间可以共享。一个上下文里创建的同步对象可以用来阻塞另一个上下文。</p>
+<p> 上传线程和渲染线程之间的同步机制如下图所示，渲染线程必须在上传线程传输完纹理数据后才能使用该纹理，渲染线程在使用某纹理的时候上传线程不能对该纹理传输数据：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_6.png" alt=""><br>渲染线程和下载线程之间的同步机制如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_7.png" alt=""><br>其中 endUploadValid、endDownloadValid等用于避免线程之间出现忙等（？？？）。</p>
+<p><font size="5" color="orange">Copy引擎注意事项</font></p>
+<hr>
+<ol>
+<li>连接Copy引擎的OpenGL上下文也可以发送非非DMA命令，但是这些命令可能会和渲染线程分时，导致丢失并行性。如果序列化传输线程和渲染线程中的命令，可能会产生错误：“Pixeltransferis synchronizedwith 3Drendering.”</li>
+<li>Fermi的Copy引擎只允许pixel传输，而不允许vertex传输。</li>
+<li>FBO和Copy引擎结合使用时，由于纹理附件和渲染缓存附件的验证，可能会带来一些性能瓶颈。出于这个原因，建议用glGetTexImage来下载数据，而非用glReadPixels从渲染缓存或者纹理附件里下载数据。</li>
+<li>应该根据渲染时间和传输时间的比例来设置最佳共享纹理数，这需要很多次实验才能得出好的结果。两个时间平衡后，使用双缓冲纹理就足够了。</li>
+</ol>
+<p><font size="5" color="orange">总结</font></p>
+<hr>
+<ol>
+<li>上传数据时，在Quadro上比在GeForce上有更大的性能提升。</li>
+<li>传输的纹理大小小于1MB时，Copy引擎带来的性能提升很小。</li>
+<li>下载数据时，在GeForce上比在Quadro上有更大的性能提升。</li>
+<li>对于渲染时间和传输时间平衡的应用程序，Copy引擎能够带来最大的性能提升。</li>
+</ol>
+<hr>
+<p>参考文献：《OpenGL Insight》- Chapter29:Fermi Asynchronous Texture Transfers</p>
 
       
     </div>
@@ -85,13 +105,13 @@
         
   
   <div class="categories">
-    <a href="/categories/C/">C++</a>
+    <a href="/categories/OpenGL/">OpenGL</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/编译链接错误/">编译链接错误</a>
+    <a href="/tags/异步传输/">异步传输</a>
   </div>
 
         
@@ -125,7 +145,7 @@
 
  
   	   <!-- 多说评论框 start -->
- 		<div class="ds-thread" data-thread-key="2017/05/09/C++编译链接/" data-title="项目中遇到的C++编译链接错误" data-url="http://yoursite.com/2017/05/09/C++编译链接/"></div>
+ 		<div class="ds-thread" data-thread-key="2017/08/20/Fermi-Asynchronous-Texture-Transfer/" data-title="Fermi Asynchronous Texture Transfer" data-url="http://yoursite.com/2017/08/20/Fermi-Asynchronous-Texture-Transfer/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
