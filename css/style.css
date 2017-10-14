@@ -1,3 +1,4 @@
+@import url("//fonts.googleapis.com/css?family=Lato:400,400italic");
 @font-face {
   font-family: 'FontAwesome';
   font-style: normal;
@@ -16,7 +17,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  color: #000;
+  color: #fff;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 14px;
   text-shadow: 0 0 1px transparent;
@@ -161,7 +162,7 @@ article.link .icon:before {
 }
 article.link .title a:after {
   content: '\f08e';
-  color: #fff;
+  color: #000;
   font: 12px FontAwesome;
   padding-left: 10px;
   vertical-align: super;
@@ -607,7 +608,7 @@ article footer .addthis iframe {
   color: #000;
 }
 #sidebar .search input:focus {
-  color: #f00;
+  color: #fff;
 }
 #sidebar .tag small {
   margin-left: 15px;
