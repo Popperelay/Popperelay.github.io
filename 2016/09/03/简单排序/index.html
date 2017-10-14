@@ -1,1 +1,360 @@
-<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>数据结构与算法之简单排序 | Elays&#39;Blog</title><meta name="author" content="Elay"><meta name="description" content="Elay"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta property="og:title" content="数据结构与算法之简单排序"><meta property="og:site_name" content="Elays&#39;Blog"><meta property="og:image" content="undefined"><link href="/favicon.png" rel="icon"><link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml"><link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body><header id="header" class="inner"><div class="alignleft"><h1><a href="/">Elays&#39;Blog</a></h1><h2><a href="/">你是天地生的，美得超越人形</a></h2></div><nav id="main-nav" class="alignright"><ul><li><a href="/">主页</a></li><li><a href="/archives">所有文章</a></li></ul><div class="clearfix"></div></nav><div class="clearfix"></div></header><div id="content" class="inner"><div id="main-col" class="alignleft"><div id="wrapper"><article class="post"><div class="post-content"><header><div class="icon"></div> <time datetime="2016-09-02T17:53:08.000Z"><a href="/2016/09/03/简单排序/">2016-09-03</a></time><h1 class="title">数据结构与算法之简单排序</h1></header><div class="entry"><p>排序：将一组记录序列变成，在一组关键字的非递减(或非递增)排列下的映射记录序列。<br><a id="more"></a><br>比如下面这4个人的总分成绩为：<br>令狐冲 753，郭靖 573，杨过 682，张无忌 753<br>按照总分成绩这组关键字的非递减排列{573，682，753，753}，那么排序后的记录应该是：郭靖 573，杨过 682，令狐冲 753，张无忌 753<br>所以排序的依据是关键字之间的大小关系。</p><hr><p>排序的稳定性：当关键字相等时，如果排序前后对应记录的先后次序没有发生变化，则是稳定排序，如果变化了则是不稳定排序。如上面的例子有两个相等的关键字753，排序前令狐冲记录在张无忌记录前面，若排序后令狐冲记录还是在张无忌记录前面，则是稳定排序；若排序后令狐冲记录跑到了张无忌记录后面，则是不稳定排序。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772158907.png" alt=""></p><hr><p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)</p><p><font size="4" color="orange">冒泡排序</font><br>冒泡排序是一种交换排序，核心思想是：两两比较，符合大小关系则交换，将最小的元素浮到最上面(非递减排序)</p><ul><li><p>冒泡排序初级版<br>如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589126.png" alt=""><br>先让数组中第一个元素依次和后面的元素作比较，如果小于则交换位置，交换位置后依然是让第一个元素继续和后面的元素作比较，直到比到数组中最后一个元素为止。这样第一轮完了以后最小的元素(数字1)就浮到了最上面。<br>然后让数组中的第二个元素依次和后面的元素作比较，如果小于则交换位置。这样第二轮完了以后最小的元素(数字2)就浮到了次上面。<br>以此类推，9个元素8轮比较后，就完成了整个排序。<br>代码如下：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++)&#123;</div><div class="line">        <span class="comment">//j表示数组下标</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.Length; j++)&#123;</div><div class="line">            <span class="keyword">if</span> (array[i] &gt; array[j])&#123;</div><div class="line">                <span class="keyword">int</span> temp = array[i];</div><div class="line">                array[i] = array[j];</div><div class="line">                array[j] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>正宗的冒泡排序<br>上面的初级版其实效率是很低的，一个数字浮上去了却对其它数字没有任何帮助，比如在第二轮里2虽然浮上去了，却把3沉下来了。我们希望能够找到一种算法能够让2浮上去的同时，不会把3沉那么多下来。仔细观察会发现，初级版冒泡是把当前元素和与之比较的元素作交换，这两个元素有可能位置相差很远，就很有可能会让数值较小的元素一下大幅度沉底，比如上面第二轮的最后一次交换，让仅仅比2小的3一下子就沉底了。<br>那么能不能缩短每次交换的元素的距离呢？也就是缩短相比较的两个元素的距离。这就是正宗的冒泡排序：<strong>每次只比较相邻的两个元素的大小</strong>。不过它是从数组后面往前面比的，因为要冒泡把最小(或最大)的元素浮上去嘛。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589189.png" alt=""><br>先让数组最后一个元素和倒数第二个元素比较，如果小于则交换位置，再让倒数第二个元素和倒数第三个元素作比较，以此类推。因为每次比较的结果都是较小的元素在上面，所以一轮完成后就能把最小的元素浮到最上面去。以此类推，9个元素8轮比较后，就完成了排序。可以看到在把1浮到最上面的同时，也把2浮上去了很多，这相比初级版的冒泡会减少很多交换次数。<br>代码如下：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = array.Length - <span class="number">1</span>; j &gt; i; j--)&#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[j - <span class="number">1</span>])&#123;  <span class="comment">//注意这里和冒泡初级版的差别</span></div><div class="line">                <span class="keyword">int</span> temp = array[j];</div><div class="line">                array[j] = array[j - <span class="number">1</span>];</div><div class="line">                array[j - <span class="number">1</span>] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>冒泡排序升级版<br>正宗的冒泡排序也只是比初级版的冒泡减少了交换次数而已，那么有没有可能减少比较次数呢？如下面的情况：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589249.png" alt=""><br>第一轮交换完，最小元素浮到最上面以后，下面的序列就已经有序了，那么其实后面的比较都不用了。但是在正宗的冒泡算法里，后面的比较还是要继续的。为了减少这种无用的比较，我们可以设置一个bool变量，标识这一轮比较有没有数据交换，如果没有，则说明后面的元素已经有序了，不用再比较了。<br>代码如下：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//标识后面的元素是否已经有序</span></div><div class="line">    <span class="keyword">bool</span> ordered = <span class="literal">false</span>;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; !ordered &amp;&amp; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        ordered = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = array.Length - <span class="number">1</span>; j &gt; i; j--) &#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[j - <span class="number">1</span>]) &#123;</div><div class="line">                <span class="keyword">int</span> temp = array[j];</div><div class="line">                array[j] = array[j - <span class="number">1</span>];</div><div class="line">                array[j - <span class="number">1</span>] = temp;</div><div class="line">                ordered = <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li></ul><hr><p><font size="4" color="orange">简单选择排序</font><br>冒泡排序还是存在着很多次的位置交换，有没有可能直接找到某个元素应该所处的位置，然后只交换一次就可以了呢？选择排序就是这样的。<br>简单选择排序的核心思想：<strong>在每一轮排序中找出最小的元素，把它放到该轮次对应的位置上去</strong>。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589296.png" alt=""><br>在第一轮排序中，找到最小的元素是1，将它与数组中第一个元素交换位置<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589346.png" alt=""><br>在第二轮排序中，在剩下的元素中找到的最小元素是2，将它与数组中第二个元素交换位置<br>以此类推…<br>代码如下：<br></p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SimpleSelectSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">int</span> minIndex = i;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.Length; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[minIndex]) &#123;</div><div class="line">                minIndex = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (minIndex != i) &#123;</div><div class="line">            <span class="keyword">int</span> temp = array[minIndex];</div><div class="line">            array[minIndex] = array[i];</div><div class="line">            array[i] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p></p><p>由于简单选择排序每一轮最多只有一次交换数据，不像冒泡排序那样频繁地交换位置，所以简单选择排序的性能要略优于冒泡排序。</p><p><font size="4" color="orange">直接插入排序</font><br>直接插入排序的核心：<strong>一开始把数组的第一个元素看作是一个有序序列，接着在每一轮排序中把轮次对应的元素插入到该有序序列(数组的前i个元素就是该有序序列)中去</strong>。如下图所示(箭头表示接下来这一轮排序中将要后移的元素)：<br>有一组待排序的序列如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589397.png" alt=""><br>把第一个元素9看作是一个有序序列：{9}<br>在第一轮排序中，要将元素1插入到有序序列{9}(数组前1个元素)中，先将有序序列中大于1的所有元素右移一位，左边会多出一个空位(如下图中的残缺方块)，再把1插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589444.png" alt=""><br>在第二轮排序中，要将元素5插入到有序序列{1，9}(数组前两个元素)中，先将有序序列中大于5的所有元素右移一位，会出现一个空位(如下图中的残缺方块)，再把5插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589497.png" alt=""><br>在第三轮排序中，要将元素8插入到有序序列{1，5，9}(数组前三个元素)中，先将有序序列中大于8的所有元素右移一位，出现空位，再把8插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589544.png" alt=""><br>在第四轮排序中，要将元素3插入到有序序列{1，5，8，9}中，需要先将有序序列中所有大于3的元素右移一位，出现空位，再把3插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589591.png" alt=""><br>一次类推，9个元素8轮插入后，将完成整个排序。<br>【如果要插入元素的左边没有比它大的元素，则让这个要插入的元素什么也不做，保留在原地】<br>代码如下：<br></p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">StraightInsertSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="comment">//如果要插入元素小于左边有序序列最大值，则让有序序列中所有比它大的元素右移一位</span></div><div class="line">        <span class="keyword">if</span> (array[i + <span class="number">1</span>] &lt; array[i]) &#123;</div><div class="line">            <span class="keyword">int</span> temp = array[i + <span class="number">1</span>];<span class="comment">//保存要插入元素的值，因为在右移过程中会覆盖这个元素</span></div><div class="line">            <span class="keyword">int</span> j;</div><div class="line">            <span class="keyword">for</span> (j = i; j &gt;= <span class="number">0</span> &amp;&amp; array[j] &gt; temp; j--) &#123;</div><div class="line">                array[j + <span class="number">1</span>] = array[j];</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//把要插入元素插入到移出来的空位中去</span></div><div class="line">            array[j + <span class="number">1</span>] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p></p><p>因为插入排序是向有序序列中插入新元素的，所以比较次数会比简单选择排序少，且每一轮排序都只是把大于的元素往后移再插入一个元素而已，所以直接插入排序要比简单选择排序和冒泡排序的性能好一些。</p></div><footer><div class="categories"> <a href="/categories/数据结构/">数据结构</a></div><div class="tags"> <a href="/tags/简单排序/">简单排序</a></div><div class="addthis addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a><a class="addthis_button_tweet"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a><a class="addthis_counter addthis_pill_style"></a></div><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script><div class="clearfix"></div></footer></div></article><section id="comment"><h2 class="title">留言</h2><div class="ds-thread" data-thread-key="2016/09/03/简单排序/" data-title="数据结构与算法之简单排序" data-url="http://yoursite.com/2016/09/03/简单排序/"></div><script type="text/javascript">var duoshuoQuery={short_name:"popperelay"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.unstable.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></section></div></div><aside id="sidebar" class="alignright"><div class="search"><form action="//google.com/search" method="get" accept-charset="utf-8"> <input type="search" name="q" results="0" placeholder="搜索"> <input type="hidden" name="q" value="site:yoursite.com"></form></div><div class="widget tag"><h3 class="title">分类</h3><ul class="entry"><li><a href="/categories/C-语法/">C#语法</a><small>2</small></li><li><a href="/categories/C/">C++</a><small>4</small></li><li><a href="/categories/C语言/">C语言</a><small>1</small></li><li><a href="/categories/OpenGL/">OpenGL</a><small>27</small></li><li><a href="/categories/c/">c++</a><small>1</small></li><li><a href="/categories/博客配置/">博客配置</a><small>3</small></li><li><a href="/categories/操作系统/">操作系统</a><small>4</small></li><li><a href="/categories/数据结构/">数据结构</a><small>15</small></li><li><a href="/categories/毕设/">毕设</a><small>1</small></li><li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li><li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li><li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li><li><a href="/categories/设计模式/">设计模式</a><small>5</small></li><li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li></ul></div><div class="widget tag"><h3 class="title">标签</h3><ul class="entry"><li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li><li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li><li><a href="/tags/C/">C</a><small>1</small></li><li><a href="/tags/C-容器/">C#容器</a><small>1</small></li><li><a href="/tags/C-IO/">C++IO</a><small>1</small></li><li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li><li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li><li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li><li><a href="/tags/OS内核/">OS内核</a><small>1</small></li><li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li><li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li><li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li><li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li><li><a href="/tags/c-特性/">c++特性</a><small>1</small></li><li><a href="/tags/const/">const</a><small>1</small></li><li><a href="/tags/timeTest/">timeTest</a><small>1</small></li><li><a href="/tags/二叉树/">二叉树</a><small>1</small></li><li><a href="/tags/交流/">交流</a><small>1</small></li><li><a href="/tags/光照场景/">光照场景</a><small>1</small></li><li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li><li><a href="/tags/关键路径/">关键路径</a><small>1</small></li><li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li><li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li><li><a href="/tags/反走样/">反走样</a><small>1</small></li><li><a href="/tags/图/">图</a><small>1</small></li><li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li><li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li><li><a href="/tags/外观-观察-者命令/">外观 观察 者命令</a><small>1</small></li><li><a href="/tags/多说/">多说</a><small>1</small></li><li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li><li><a href="/tags/头结点/">头结点</a><small>1</small></li><li><a href="/tags/实例化/">实例化</a><small>1</small></li><li><a href="/tags/尾递归/">尾递归</a><small>1</small></li><li><a href="/tags/工厂模式单例模式/">工厂模式单例模式</a><small>1</small></li><li><a href="/tags/帧同步/">帧同步</a><small>1</small></li><li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li><li><a href="/tags/常见光源/">常见光源</a><small>1</small></li><li><a href="/tags/异步传输/">异步传输</a><small>2</small></li><li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li><li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li><li><a href="/tags/改进排序/">改进排序</a><small>1</small></li><li><a href="/tags/文件IO/">文件IO</a><small>1</small></li><li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li><li><a href="/tags/最短路径/">最短路径</a><small>1</small></li><li><a href="/tags/材质/">材质</a><small>1</small></li><li><a href="/tags/查找/">查找</a><small>1</small></li><li><a href="/tags/栈/">栈</a><small>1</small></li><li><a href="/tags/树/">树</a><small>1</small></li><li><a href="/tags/模型加载/">模型加载</a><small>1</small></li><li><a href="/tags/模板测试/">模板测试</a><small>1</small></li><li><a href="/tags/深度测试/">深度测试</a><small>1</small></li><li><a href="/tags/混合/">混合</a><small>1</small></li><li><a href="/tags/着色器/">着色器</a><small>1</small></li><li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li><li><a href="/tags/码农/">码农</a><small>1</small></li><li><a href="/tags/简单排序/">简单排序</a><small>1</small></li><li><a href="/tags/纹理/">纹理</a><small>1</small></li><li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li><li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li><li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li><li><a href="/tags/责任链模式适配器模式/">责任链模式适配器模式</a><small>1</small></li><li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li><li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li><li><a href="/tags/链表/">链表</a><small>1</small></li><li><a href="/tags/队列/">队列</a><small>1</small></li><li><a href="/tags/面向对象设计原则/">面向对象设计原则</a><small>1</small></li></ul></div></aside><div class="clearfix"></div></div><footer id="footer" class="inner"><div class="alignleft"> &copy; 2017 Elay</div><div class="clearfix"></div></footer><script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="/js/jquery.imagesloaded.min.js"></script><script src="/js/gallery.js"></script><link rel="stylesheet" href="http://apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.css"></body></html>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构与算法之简单排序 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据结构与算法之简单排序"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-02T17:53:08.000Z"><a href="/2016/09/03/简单排序/">2016-09-03</a></time>
+      
+      
+  
+    <h1 class="title">数据结构与算法之简单排序</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>排序：将一组记录序列变成，在一组关键字的非递减(或非递增)排列下的映射记录序列。<br><a id="more"></a><br>比如下面这4个人的总分成绩为：<br>令狐冲 753，郭靖 573，杨过 682，张无忌 753<br>按照总分成绩这组关键字的非递减排列{573，682，753，753}，那么排序后的记录应该是：郭靖 573，杨过 682，令狐冲 753，张无忌 753<br>所以排序的依据是关键字之间的大小关系。</p>
+<hr>
+<p>排序的稳定性：当关键字相等时，如果排序前后对应记录的先后次序没有发生变化，则是稳定排序，如果变化了则是不稳定排序。如上面的例子有两个相等的关键字753，排序前令狐冲记录在张无忌记录前面，若排序后令狐冲记录还是在张无忌记录前面，则是稳定排序；若排序后令狐冲记录跑到了张无忌记录后面，则是不稳定排序。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772158907.png" alt=""></p>
+<hr>
+<p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)</p>
+<p><font size="4" color="orange">冒泡排序</font><br>冒泡排序是一种交换排序，核心思想是：两两比较，符合大小关系则交换，将最小的元素浮到最上面(非递减排序)</p>
+<ul>
+<li><p>冒泡排序初级版<br>如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589126.png" alt=""><br>先让数组中第一个元素依次和后面的元素作比较，如果小于则交换位置，交换位置后依然是让第一个元素继续和后面的元素作比较，直到比到数组中最后一个元素为止。这样第一轮完了以后最小的元素(数字1)就浮到了最上面。<br>然后让数组中的第二个元素依次和后面的元素作比较，如果小于则交换位置。这样第二轮完了以后最小的元素(数字2)就浮到了次上面。<br>以此类推，9个元素8轮比较后，就完成了整个排序。<br>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++)&#123;</div><div class="line">        <span class="comment">//j表示数组下标</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.Length; j++)&#123;</div><div class="line">            <span class="keyword">if</span> (array[i] &gt; array[j])&#123;</div><div class="line">                <span class="keyword">int</span> temp = array[i];</div><div class="line">                array[i] = array[j];</div><div class="line">                array[j] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>正宗的冒泡排序<br>上面的初级版其实效率是很低的，一个数字浮上去了却对其它数字没有任何帮助，比如在第二轮里2虽然浮上去了，却把3沉下来了。我们希望能够找到一种算法能够让2浮上去的同时，不会把3沉那么多下来。仔细观察会发现，初级版冒泡是把当前元素和与之比较的元素作交换，这两个元素有可能位置相差很远，就很有可能会让数值较小的元素一下大幅度沉底，比如上面第二轮的最后一次交换，让仅仅比2小的3一下子就沉底了。<br>那么能不能缩短每次交换的元素的距离呢？也就是缩短相比较的两个元素的距离。这就是正宗的冒泡排序：<strong>每次只比较相邻的两个元素的大小</strong>。不过它是从数组后面往前面比的，因为要冒泡把最小(或最大)的元素浮上去嘛。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589189.png" alt=""><br>先让数组最后一个元素和倒数第二个元素比较，如果小于则交换位置，再让倒数第二个元素和倒数第三个元素作比较，以此类推。因为每次比较的结果都是较小的元素在上面，所以一轮完成后就能把最小的元素浮到最上面去。以此类推，9个元素8轮比较后，就完成了排序。可以看到在把1浮到最上面的同时，也把2浮上去了很多，这相比初级版的冒泡会减少很多交换次数。<br>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++)&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = array.Length - <span class="number">1</span>; j &gt; i; j--)&#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[j - <span class="number">1</span>])&#123;  <span class="comment">//注意这里和冒泡初级版的差别</span></div><div class="line">                <span class="keyword">int</span> temp = array[j];</div><div class="line">                array[j] = array[j - <span class="number">1</span>];</div><div class="line">                array[j - <span class="number">1</span>] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>冒泡排序升级版<br>正宗的冒泡排序也只是比初级版的冒泡减少了交换次数而已，那么有没有可能减少比较次数呢？如下面的情况：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589249.png" alt=""><br>第一轮交换完，最小元素浮到最上面以后，下面的序列就已经有序了，那么其实后面的比较都不用了。但是在正宗的冒泡算法里，后面的比较还是要继续的。为了减少这种无用的比较，我们可以设置一个bool变量，标识这一轮比较有没有数据交换，如果没有，则说明后面的元素已经有序了，不用再比较了。<br>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//标识后面的元素是否已经有序</span></div><div class="line">    <span class="keyword">bool</span> ordered = <span class="literal">false</span>;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; !ordered &amp;&amp; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        ordered = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = array.Length - <span class="number">1</span>; j &gt; i; j--) &#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[j - <span class="number">1</span>]) &#123;</div><div class="line">                <span class="keyword">int</span> temp = array[j];</div><div class="line">                array[j] = array[j - <span class="number">1</span>];</div><div class="line">                array[j - <span class="number">1</span>] = temp;</div><div class="line">                ordered = <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p><font size="4" color="orange">简单选择排序</font><br>冒泡排序还是存在着很多次的位置交换，有没有可能直接找到某个元素应该所处的位置，然后只交换一次就可以了呢？选择排序就是这样的。<br>简单选择排序的核心思想：<strong>在每一轮排序中找出最小的元素，把它放到该轮次对应的位置上去</strong>。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589296.png" alt=""><br>在第一轮排序中，找到最小的元素是1，将它与数组中第一个元素交换位置<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589346.png" alt=""><br>在第二轮排序中，在剩下的元素中找到的最小元素是2，将它与数组中第二个元素交换位置<br>以此类推…<br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SimpleSelectSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>)</span>&#123;</div><div class="line">    <span class="comment">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">int</span> minIndex = i;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.Length; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (array[j] &lt; array[minIndex]) &#123;</div><div class="line">                minIndex = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (minIndex != i) &#123;</div><div class="line">            <span class="keyword">int</span> temp = array[minIndex];</div><div class="line">            array[minIndex] = array[i];</div><div class="line">            array[i] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于简单选择排序每一轮最多只有一次交换数据，不像冒泡排序那样频繁地交换位置，所以简单选择排序的性能要略优于冒泡排序。</p>
+<p><font size="4" color="orange">直接插入排序</font><br>直接插入排序的核心：<strong>一开始把数组的第一个元素看作是一个有序序列，接着在每一轮排序中把轮次对应的元素插入到该有序序列(数组的前i个元素就是该有序序列)中去</strong>。如下图所示(箭头表示接下来这一轮排序中将要后移的元素)：<br>有一组待排序的序列如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589397.png" alt=""><br>把第一个元素9看作是一个有序序列：{9}<br>在第一轮排序中，要将元素1插入到有序序列{9}(数组前1个元素)中，先将有序序列中大于1的所有元素右移一位，左边会多出一个空位(如下图中的残缺方块)，再把1插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589444.png" alt=""><br>在第二轮排序中，要将元素5插入到有序序列{1，9}(数组前两个元素)中，先将有序序列中大于5的所有元素右移一位，会出现一个空位(如下图中的残缺方块)，再把5插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589497.png" alt=""><br>在第三轮排序中，要将元素8插入到有序序列{1，5，9}(数组前三个元素)中，先将有序序列中大于8的所有元素右移一位，出现空位，再把8插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589544.png" alt=""><br>在第四轮排序中，要将元素3插入到有序序列{1，5，8，9}中，需要先将有序序列中所有大于3的元素右移一位，出现空位，再把3插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589591.png" alt=""><br>一次类推，9个元素8轮插入后，将完成整个排序。<br>【如果要插入元素的左边没有比它大的元素，则让这个要插入的元素什么也不做，保留在原地】<br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">StraightInsertSort</span>(<span class="params"><span class="keyword">int</span>[] array</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.Length - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="comment">//如果要插入元素小于左边有序序列最大值，则让有序序列中所有比它大的元素右移一位</span></div><div class="line">        <span class="keyword">if</span> (array[i + <span class="number">1</span>] &lt; array[i]) &#123;</div><div class="line">            <span class="keyword">int</span> temp = array[i + <span class="number">1</span>];<span class="comment">//保存要插入元素的值，因为在右移过程中会覆盖这个元素</span></div><div class="line">            <span class="keyword">int</span> j;</div><div class="line">            <span class="keyword">for</span> (j = i; j &gt;= <span class="number">0</span> &amp;&amp; array[j] &gt; temp; j--) &#123;</div><div class="line">                array[j + <span class="number">1</span>] = array[j];</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//把要插入元素插入到移出来的空位中去</span></div><div class="line">            array[j + <span class="number">1</span>] = temp;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为插入排序是向有序序列中插入新元素的，所以比较次数会比简单选择排序少，且每一轮排序都只是把大于的元素往后移再插入一个元素而已，所以直接插入排序要比简单选择排序和冒泡排序的性能好一些。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据结构/">数据结构</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/简单排序/">简单排序</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/09/03/简单排序/" data-title="数据结构与算法之简单排序" data-url="http://yoursite.com/2016/09/03/简单排序/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>4</small></li>
+  
+    <li><a href="/categories/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>27</small></li>
+  
+    <li><a href="/categories/c/">c++</a><small>1</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/毕设/">毕设</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+    <li><a href="/categories/设计模式/">设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/c-特性/">c++特性</a><small>1</small></li>
+  
+    <li><a href="/tags/const/">const</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/交流/">交流</a><small>1</small></li>
+  
+    <li><a href="/tags/光照场景/">光照场景</a><small>1</small></li>
+  
+    <li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
+  
+    <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/外观-观察-者命令/">外观 观察 者命令</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/实例化/">实例化</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/工厂模式单例模式/">工厂模式单例模式</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li>
+  
+    <li><a href="/tags/常见光源/">常见光源</a><small>1</small></li>
+  
+    <li><a href="/tags/异步传输/">异步传输</a><small>2</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/材质/">材质</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/模型加载/">模型加载</a><small>1</small></li>
+  
+    <li><a href="/tags/模板测试/">模板测试</a><small>1</small></li>
+  
+    <li><a href="/tags/深度测试/">深度测试</a><small>1</small></li>
+  
+    <li><a href="/tags/混合/">混合</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/码农/">码农</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li>
+  
+    <li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li>
+  
+    <li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li>
+  
+    <li><a href="/tags/责任链模式适配器模式/">责任链模式适配器模式</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+    <li><a href="/tags/面向对象设计原则/">面向对象设计原则</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.css">
+
+
+
+
+</body>
+</html>

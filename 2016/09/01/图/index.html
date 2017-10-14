@@ -1,1 +1,388 @@
-<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>数据结构与算法之图 | Elays&#39;Blog</title><meta name="author" content="Elay"><meta name="description" content="Elay"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta property="og:title" content="数据结构与算法之图"><meta property="og:site_name" content="Elays&#39;Blog"><meta property="og:image" content="undefined"><link href="/favicon.png" rel="icon"><link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml"><link rel="stylesheet" href="/css/style.css" media="screen" type="text/css"><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--></head><body><header id="header" class="inner"><div class="alignleft"><h1><a href="/">Elays&#39;Blog</a></h1><h2><a href="/">你是天地生的，美得超越人形</a></h2></div><nav id="main-nav" class="alignright"><ul><li><a href="/">主页</a></li><li><a href="/archives">所有文章</a></li></ul><div class="clearfix"></div></nav><div class="clearfix"></div></header><div id="content" class="inner"><div id="main-col" class="alignleft"><div id="wrapper"><article class="post"><div class="post-content"><header><div class="icon"></div> <time datetime="2016-09-01T08:00:40.000Z"><a href="/2016/09/01/图/">2016-09-01</a></time><h1 class="title">数据结构与算法之图</h1></header><div class="entry"><p><font size="4" color="orange">先来看几个图的概念和特性</font><br><a id="more"></a></p><ul><li>图：由顶点的有穷非空集合和顶点之间边的集合组成</li><li>完全图：图中任意两个顶点之间都存在可直接到达对方的边。分为无向完全图和有向完全图，其中无向完全图有n(n-1)/2条边，有向完全图有n(n-1)条边</li><li>稀疏图：边数很少的图，反之为稠密图</li><li>简单路径：路径的顶点序列中不存在重复的顶点</li><li>连通图：任意两点之间都有路径可达(不需要直接可达)的<strong>无向图</strong></li><li>强连通图：任意两点之间都有路径可达的<strong>有向图</strong></li><li>连通分量：非连通无向图中的极大连通子图(顶点数最大)叫做连通分量</li><li>强连通分量：非强连通有向图的极大强连通子图叫做强连通分量</li><li>连通图的生成树：连通图的极小连通子图。有n个顶点时，只有n-1条边，随便加哪两个顶点之间的边都将构成环，而生成树里是没有环的。</li><li>网：带权图称为网</li></ul><hr><p><font size="4" color="orange">图的存储结构</font><br>由于图的结构比较复杂，任意两点之间都可能存在联系，难以用元素在内存中的物理位置来表示元素之间的关系，也就是图不可能用简单的顺序存储结构来表示。前辈们给我们提供了图的5种存储结构：</p><ul><li><p>图的邻接矩阵存储方式：<br>将图的点和边分开存储，用一个一维数组加一个二维数组来表示图。一维数组存储图中的顶点信息，二维数组(邻接矩阵)存储图中边或弧的信息。<br>当然，边数组不仅可以存储0,1这两个数字，如果是带权图(网)，边数组中还能存储对应边的权值。不过这时需要指定一个比较大的数来标识图中不存在的边，如代码中的Infinity。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576173.png" alt=""><br>我们可以通过给顶点数组和边数组输入数据，来创建邻接矩阵图。当然，由于是数组，需要先输入要创建的图的顶点数numVertexs和边数numEdges。代码如下：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">AdjacencyMatrixGrpah</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> numVertexs;</div><div class="line">    <span class="keyword">int</span> numEdges;</div><div class="line">    <span class="keyword">object</span>[] Vertexs;</div><div class="line">    <span class="keyword">int</span>[,] EdgesMatrix;</div><div class="line"></div><div class="line">    <span class="comment">//Infinity标识图中不存在的边</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> Infinity = <span class="number">66535</span>;</div><div class="line"></div><div class="line">    <span class="comment">//建立邻接矩阵图</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateGraph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        numVertexs = Convert.ToInt32(Console.ReadLine());</div><div class="line">        numEdges = Convert.ToInt32(Console.ReadLine());</div><div class="line">        Vertexs = <span class="keyword">new</span> <span class="keyword">object</span>[numVertexs];</div><div class="line">        EdgesMatrix = <span class="keyword">new</span> <span class="keyword">int</span>[numVertexs,numVertexs];</div><div class="line">        <span class="comment">//建立顶点数组</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            Vertexs[i] = Console.ReadLine();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//初始化边数组(邻接矩阵)</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numVertexs; j++) &#123;</div><div class="line">                EdgesMatrix[i,j] = Infinity;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//将图中的带权边存储到邻接矩阵中</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; numEdges; k++) &#123;</div><div class="line">            <span class="keyword">int</span> i = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> j = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> weight = Convert.ToInt32(Console.ReadLine());</div><div class="line">            EdgesMatrix[i, j] = weight;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>【注】：</p><ul><li>上面代码是针对有向图的，如果是无向图，只需要把<code>EdgesMatrix[i, j] = weight;</code>改为<code>EdgesMatrix[i, j] = EdgesMatrix[j, i] = weight;</code>，因为无向图的邻接矩阵是一个对称矩阵。</li><li>在邻接矩阵主对角线上的元素，即顶点到自身的边，我也是设置为Infinity的，并非像上图中那样主对角线上的元素都为0</li></ul></li><li><p>图的邻接表存储方式：<br>可以看到在图的邻接矩阵存储方式中，还有很多没有用到的空间，尤其是在稀疏图中，将会浪费很多存储空间。所以我们考虑用链表替换邻接矩阵中的每一行，减少空间浪费。但是图中每个结点的出度不一样，不方便把每个结点的邻接结点引用都存储的自身结点中，其实可以用类似树中的孩子表示法，把结点的所有邻接结点都用链表连起来。这就是图的邻接表存储方式，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576244.png" alt=""><br>需要的数据结构有：顶点类+邻接结点类+图(类)<br>顶点类由两个数据成员组成：顶点数据、第一个邻接结点的引用<br>邻接结点类由三个数据成员：邻接结点在数组中的下标、权值、下一个邻接结点的引用<br>图(类)的数据成员主要是：顶点类数组<br>代码如下：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VertexNode</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">object</span> Data;</div><div class="line">    <span class="keyword">public</span> AdjacencyNode FirstAdjacencyNode;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VertexNode</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Data = <span class="literal">null</span>;</div><div class="line">        FirstAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VertexNode</span>(<span class="params"><span class="keyword">object</span> data</span>) </span>&#123;</div><div class="line">        Data = data;</div><div class="line">        FirstAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//邻接结点类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdjacencyNode</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> NodeIndex;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Weight;</div><div class="line">    <span class="keyword">public</span> AdjacencyNode NextAdjacencyNode;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> Infinity = <span class="number">65535</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AdjacencyNode</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        NodeIndex = <span class="number">-1</span>;</div><div class="line">        Weight = Infinity;</div><div class="line">        NextAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AdjacencyNode</span>(<span class="params"><span class="keyword">int</span> index,<span class="keyword">int</span> weight</span>) </span>&#123;</div><div class="line">        NodeIndex = index;</div><div class="line">        Weight = weight;</div><div class="line">        NextAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//邻接表图类</span></div><div class="line"><span class="keyword">class</span> <span class="title">AdjacencyListGraph</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> VertexNode[] Vertexs;</div><div class="line">    <span class="keyword">int</span> numVertexs;</div><div class="line">    <span class="keyword">int</span> numEdges;</div><div class="line"></div><div class="line">    <span class="comment">//建立邻接表图</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateGraph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        numVertexs = Convert.ToInt32(Console.ReadLine());</div><div class="line">        numEdges = Convert.ToInt32(Console.ReadLine());</div><div class="line">        Vertexs = <span class="keyword">new</span> VertexNode[numVertexs];</div><div class="line"></div><div class="line">        <span class="comment">//建立顶点数组</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            <span class="keyword">object</span> data = Console.ReadLine();</div><div class="line">            Vertexs[i] = <span class="keyword">new</span> VertexNode(data);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//建立顶点的邻接结点链表(边表)</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; numEdges; k++) &#123;</div><div class="line">            <span class="keyword">int</span> i = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> j = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> weight = Convert.ToInt32(Console.ReadLine());</div><div class="line"></div><div class="line">            AdjacencyNode newNode = <span class="keyword">new</span> AdjacencyNode(j, weight);</div><div class="line">            <span class="comment">//头插法</span></div><div class="line">            newNode.NextAdjacencyNode = Vertexs[i].FirstAdjacencyNode;</div><div class="line">            Vertexs[i].FirstAdjacencyNode = newNode;</div><div class="line"></div><div class="line">            <span class="comment">//无向图还要同时对另一个顶点对称操作，有向图就不需要下面的代码了</span></div><div class="line">            AdjacencyNode newNode1 = <span class="keyword">new</span> AdjacencyNode(i, weight);</div><div class="line">            <span class="comment">//头插法</span></div><div class="line">            newNode1.NextAdjacencyNode = Vertexs[j].FirstAdjacencyNode;</div><div class="line">            Vertexs[j].FirstAdjacencyNode = newNode1;</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>图的十字链表存储方式</p></li><li>图的邻接多重表存储方式</li><li>图的边集数组存储方式</li></ul><hr><p><font size="4" color="orange">图的遍历</font><br>图的遍历：从图中某一顶点出发访遍图中其余顶点，且要求每个顶点仅被访问一次。分为深度优先遍历DFS(depth first search)和广度优先遍历BFS(breadth first search)。</p><ul><li><p>深度优先遍历DFS<br>先来看下面这个图<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576302.png" alt=""><br>任意选择一个顶点，比如A点，现在开始想象在走这个迷宫，给自己定一个原则：没有碰到重复顶点时，就始终向右手边走，碰到了重复顶点则回退到上一个顶点处，再选择除开重复顶点外的最右手边的路(最右边没被访问过的邻接结点)，如果在某个顶点处所有的路都走过了(所有的邻接结点都被访问过了)，则回退到上一个顶点处。重复上述操作，一直到回退到起点A，这时就能保证连通图中的所有结点都被访问到了，且只被访问了一次(发现是重复结点的那一步不算)。<br>上图的访问过程如下：在A出一直沿着右手边走到F处，再向右走发现A被访问过了，回退到F，再访问F处除了A的最右手边结点G，在G点去访问B，发现B已经访问过了，回退到G，再去访问D，发现D已经访问过了，又回退到G，再访问H，在H点去访问D、E，发现D、E都已经访问过了，按原路回退到上一个访问过的结点G，也没有未被访问过的邻接点，再回退到F，同样没有未被访问过的结点，再回退到E，再回退到D，发现I是没有被访问过的，则去访问I，在I处没有未被访问过的邻接点，回退到D，再回退到C，回退到B，回退到A。此时回到了起点，则访问结束。<br>不难发现，这个访问过程其实就是一棵二叉树的前序遍历过程，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576357.png" alt=""><br>所以，对图的深度优先遍历DFS，其实就是类似对树的前序遍历。<br>注意，上述过程是针对一个连通图来说的，如果不是连通图，则需要把图中每一个顶点作为起点，都来一次深度优先遍历DFS，这样就能保证非连通图也能访问到所有结点了。<br>对邻接矩阵图的深度优先遍历DFS的代码如下(还未上机验证过)：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//标识每一个节点是否被访问过</span></div><div class="line"><span class="keyword">bool</span>[] Visited;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFSTraverse</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    Visited = <span class="keyword">new</span> <span class="keyword">bool</span>[numVertexs];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">        Visited[i] = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    DFS(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//深度优先遍历DFS</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFS</span>(<span class="params"><span class="keyword">int</span> i</span>) </span>&#123;</div><div class="line">    Visited[i] = <span class="literal">true</span>;</div><div class="line">    Console.WriteLine(Vertexs[i]);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numVertexs; j++) &#123;</div><div class="line">        <span class="keyword">if</span> (EdgesMatrix[i, j] == <span class="number">1</span> &amp;&amp; Visited[j] == <span class="literal">false</span>) &#123;</div><div class="line">            DFS(j);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>对邻接表图的深度优先遍历DFS的代码如下(还未上机验证过)：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//标识每一个节点是否被访问过</span></div><div class="line"><span class="keyword">bool</span>[] Visited;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFSTraverse</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    Visited = <span class="keyword">new</span> <span class="keyword">bool</span>[numVertexs];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++)</div><div class="line">    &#123;</div><div class="line">        Visited[i] = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    DFS(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//深度优先遍历DFS</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFS</span>(<span class="params"><span class="keyword">int</span> i</span>)</span></div><div class="line">&#123;</div><div class="line">    Visited[i] = <span class="literal">true</span>;</div><div class="line">    Console.WriteLine(Vertexs[i].Data);</div><div class="line">    AdjacencyNode current = Vertexs[i].FirstAdjacencyNode;</div><div class="line">    <span class="keyword">while</span> (current != <span class="literal">null</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (Visited[current.NodeIndex] == <span class="literal">false</span>)</div><div class="line">        &#123;</div><div class="line">            DFS(current.NodeIndex);</div><div class="line">        &#125;</div><div class="line">        current = current.NextAdjacencyNode;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>广度优先遍历BFS<br>深度优先遍历类似于树的前序遍历，其实广度优先遍历BFS类似于树的层序遍历。需要先把图调整称为层次分明一点的图。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576482.png" alt=""><br>由于是层序遍历，所以是需要借助队列的，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576547.png" alt=""></p><ol><li>先让图中的任意一个结点入队列</li><li>让队头的结点出队列，同时让与此结点相连的其他结点入队列</li><li>重复第2步，直到队列为空。<br>广度优先遍历BFS的代码如下：</li></ol></li></ul><hr><p>未完待续</p></div><footer><div class="categories"> <a href="/categories/数据结构/">数据结构</a></div><div class="tags"> <a href="/tags/图/">图</a></div><div class="addthis addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a><a class="addthis_button_tweet"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a><a class="addthis_counter addthis_pill_style"></a></div><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script><div class="clearfix"></div></footer></div></article><section id="comment"><h2 class="title">留言</h2><div class="ds-thread" data-thread-key="2016/09/01/图/" data-title="数据结构与算法之图" data-url="http://yoursite.com/2016/09/01/图/"></div><script type="text/javascript">var duoshuoQuery={short_name:"popperelay"};!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"==document.location.protocol?"https:":"http:")+"//static.duoshuo.com/embed.unstable.js",t.charset="UTF-8",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(t)}()</script></section></div></div><aside id="sidebar" class="alignright"><div class="search"><form action="//google.com/search" method="get" accept-charset="utf-8"> <input type="search" name="q" results="0" placeholder="搜索"> <input type="hidden" name="q" value="site:yoursite.com"></form></div><div class="widget tag"><h3 class="title">分类</h3><ul class="entry"><li><a href="/categories/C-语法/">C#语法</a><small>2</small></li><li><a href="/categories/C/">C++</a><small>4</small></li><li><a href="/categories/C语言/">C语言</a><small>1</small></li><li><a href="/categories/OpenGL/">OpenGL</a><small>27</small></li><li><a href="/categories/c/">c++</a><small>1</small></li><li><a href="/categories/博客配置/">博客配置</a><small>3</small></li><li><a href="/categories/操作系统/">操作系统</a><small>4</small></li><li><a href="/categories/数据结构/">数据结构</a><small>15</small></li><li><a href="/categories/毕设/">毕设</a><small>1</small></li><li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li><li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li><li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li><li><a href="/categories/设计模式/">设计模式</a><small>5</small></li><li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li></ul></div><div class="widget tag"><h3 class="title">标签</h3><ul class="entry"><li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li><li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li><li><a href="/tags/C/">C</a><small>1</small></li><li><a href="/tags/C-容器/">C#容器</a><small>1</small></li><li><a href="/tags/C-IO/">C++IO</a><small>1</small></li><li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li><li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li><li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li><li><a href="/tags/OS内核/">OS内核</a><small>1</small></li><li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li><li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li><li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li><li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li><li><a href="/tags/c-特性/">c++特性</a><small>1</small></li><li><a href="/tags/const/">const</a><small>1</small></li><li><a href="/tags/timeTest/">timeTest</a><small>1</small></li><li><a href="/tags/二叉树/">二叉树</a><small>1</small></li><li><a href="/tags/交流/">交流</a><small>1</small></li><li><a href="/tags/光照场景/">光照场景</a><small>1</small></li><li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li><li><a href="/tags/关键路径/">关键路径</a><small>1</small></li><li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li><li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li><li><a href="/tags/反走样/">反走样</a><small>1</small></li><li><a href="/tags/图/">图</a><small>1</small></li><li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li><li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li><li><a href="/tags/外观-观察-者命令/">外观 观察 者命令</a><small>1</small></li><li><a href="/tags/多说/">多说</a><small>1</small></li><li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li><li><a href="/tags/头结点/">头结点</a><small>1</small></li><li><a href="/tags/实例化/">实例化</a><small>1</small></li><li><a href="/tags/尾递归/">尾递归</a><small>1</small></li><li><a href="/tags/工厂模式单例模式/">工厂模式单例模式</a><small>1</small></li><li><a href="/tags/帧同步/">帧同步</a><small>1</small></li><li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li><li><a href="/tags/常见光源/">常见光源</a><small>1</small></li><li><a href="/tags/异步传输/">异步传输</a><small>2</small></li><li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li><li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li><li><a href="/tags/改进排序/">改进排序</a><small>1</small></li><li><a href="/tags/文件IO/">文件IO</a><small>1</small></li><li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li><li><a href="/tags/最短路径/">最短路径</a><small>1</small></li><li><a href="/tags/材质/">材质</a><small>1</small></li><li><a href="/tags/查找/">查找</a><small>1</small></li><li><a href="/tags/栈/">栈</a><small>1</small></li><li><a href="/tags/树/">树</a><small>1</small></li><li><a href="/tags/模型加载/">模型加载</a><small>1</small></li><li><a href="/tags/模板测试/">模板测试</a><small>1</small></li><li><a href="/tags/深度测试/">深度测试</a><small>1</small></li><li><a href="/tags/混合/">混合</a><small>1</small></li><li><a href="/tags/着色器/">着色器</a><small>1</small></li><li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li><li><a href="/tags/码农/">码农</a><small>1</small></li><li><a href="/tags/简单排序/">简单排序</a><small>1</small></li><li><a href="/tags/纹理/">纹理</a><small>1</small></li><li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li><li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li><li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li><li><a href="/tags/责任链模式适配器模式/">责任链模式适配器模式</a><small>1</small></li><li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li><li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li><li><a href="/tags/链表/">链表</a><small>1</small></li><li><a href="/tags/队列/">队列</a><small>1</small></li><li><a href="/tags/面向对象设计原则/">面向对象设计原则</a><small>1</small></li></ul></div></aside><div class="clearfix"></div></div><footer id="footer" class="inner"><div class="alignleft"> &copy; 2017 Elay</div><div class="clearfix"></div></footer><script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="/js/jquery.imagesloaded.min.js"></script><script src="/js/gallery.js"></script><link rel="stylesheet" href="http://apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.css"></body></html>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据结构与算法之图 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据结构与算法之图"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-01T08:00:40.000Z"><a href="/2016/09/01/图/">2016-09-01</a></time>
+      
+      
+  
+    <h1 class="title">数据结构与算法之图</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><font size="4" color="orange">先来看几个图的概念和特性</font><br><a id="more"></a></p>
+<ul>
+<li>图：由顶点的有穷非空集合和顶点之间边的集合组成</li>
+<li>完全图：图中任意两个顶点之间都存在可直接到达对方的边。分为无向完全图和有向完全图，其中无向完全图有n(n-1)/2条边，有向完全图有n(n-1)条边</li>
+<li>稀疏图：边数很少的图，反之为稠密图</li>
+<li>简单路径：路径的顶点序列中不存在重复的顶点</li>
+<li>连通图：任意两点之间都有路径可达(不需要直接可达)的<strong>无向图</strong></li>
+<li>强连通图：任意两点之间都有路径可达的<strong>有向图</strong></li>
+<li>连通分量：非连通无向图中的极大连通子图(顶点数最大)叫做连通分量</li>
+<li>强连通分量：非强连通有向图的极大强连通子图叫做强连通分量</li>
+<li>连通图的生成树：连通图的极小连通子图。有n个顶点时，只有n-1条边，随便加哪两个顶点之间的边都将构成环，而生成树里是没有环的。</li>
+<li>网：带权图称为网</li>
+</ul>
+<hr>
+<p><font size="4" color="orange">图的存储结构</font><br>由于图的结构比较复杂，任意两点之间都可能存在联系，难以用元素在内存中的物理位置来表示元素之间的关系，也就是图不可能用简单的顺序存储结构来表示。前辈们给我们提供了图的5种存储结构：</p>
+<ul>
+<li><p>图的邻接矩阵存储方式：<br>将图的点和边分开存储，用一个一维数组加一个二维数组来表示图。一维数组存储图中的顶点信息，二维数组(邻接矩阵)存储图中边或弧的信息。<br>当然，边数组不仅可以存储0,1这两个数字，如果是带权图(网)，边数组中还能存储对应边的权值。不过这时需要指定一个比较大的数来标识图中不存在的边，如代码中的Infinity。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576173.png" alt=""><br>我们可以通过给顶点数组和边数组输入数据，来创建邻接矩阵图。当然，由于是数组，需要先输入要创建的图的顶点数numVertexs和边数numEdges。代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">AdjacencyMatrixGrpah</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> numVertexs;</div><div class="line">    <span class="keyword">int</span> numEdges;</div><div class="line">    <span class="keyword">object</span>[] Vertexs;</div><div class="line">    <span class="keyword">int</span>[,] EdgesMatrix;</div><div class="line"></div><div class="line">    <span class="comment">//Infinity标识图中不存在的边</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> Infinity = <span class="number">66535</span>;</div><div class="line"></div><div class="line">    <span class="comment">//建立邻接矩阵图</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateGraph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        numVertexs = Convert.ToInt32(Console.ReadLine());</div><div class="line">        numEdges = Convert.ToInt32(Console.ReadLine());</div><div class="line">        Vertexs = <span class="keyword">new</span> <span class="keyword">object</span>[numVertexs];</div><div class="line">        EdgesMatrix = <span class="keyword">new</span> <span class="keyword">int</span>[numVertexs,numVertexs];</div><div class="line">        <span class="comment">//建立顶点数组</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            Vertexs[i] = Console.ReadLine();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//初始化边数组(邻接矩阵)</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numVertexs; j++) &#123;</div><div class="line">                EdgesMatrix[i,j] = Infinity;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//将图中的带权边存储到邻接矩阵中</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; numEdges; k++) &#123;</div><div class="line">            <span class="keyword">int</span> i = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> j = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> weight = Convert.ToInt32(Console.ReadLine());</div><div class="line">            EdgesMatrix[i, j] = weight;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>【注】：</p>
+<ul>
+<li>上面代码是针对有向图的，如果是无向图，只需要把<code>EdgesMatrix[i, j] = weight;</code>改为<code>EdgesMatrix[i, j] = EdgesMatrix[j, i] = weight;</code>，因为无向图的邻接矩阵是一个对称矩阵。</li>
+<li>在邻接矩阵主对角线上的元素，即顶点到自身的边，我也是设置为Infinity的，并非像上图中那样主对角线上的元素都为0</li>
+</ul>
+</li>
+<li><p>图的邻接表存储方式：<br>可以看到在图的邻接矩阵存储方式中，还有很多没有用到的空间，尤其是在稀疏图中，将会浪费很多存储空间。所以我们考虑用链表替换邻接矩阵中的每一行，减少空间浪费。但是图中每个结点的出度不一样，不方便把每个结点的邻接结点引用都存储的自身结点中，其实可以用类似树中的孩子表示法，把结点的所有邻接结点都用链表连起来。这就是图的邻接表存储方式，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576244.png" alt=""><br>需要的数据结构有：顶点类+邻接结点类+图(类)<br>顶点类由两个数据成员组成：顶点数据、第一个邻接结点的引用<br>邻接结点类由三个数据成员：邻接结点在数组中的下标、权值、下一个邻接结点的引用<br>图(类)的数据成员主要是：顶点类数组<br>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VertexNode</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">object</span> Data;</div><div class="line">    <span class="keyword">public</span> AdjacencyNode FirstAdjacencyNode;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VertexNode</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Data = <span class="literal">null</span>;</div><div class="line">        FirstAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">VertexNode</span>(<span class="params"><span class="keyword">object</span> data</span>) </span>&#123;</div><div class="line">        Data = data;</div><div class="line">        FirstAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//邻接结点类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdjacencyNode</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> NodeIndex;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Weight;</div><div class="line">    <span class="keyword">public</span> AdjacencyNode NextAdjacencyNode;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> Infinity = <span class="number">65535</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AdjacencyNode</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        NodeIndex = <span class="number">-1</span>;</div><div class="line">        Weight = Infinity;</div><div class="line">        NextAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AdjacencyNode</span>(<span class="params"><span class="keyword">int</span> index,<span class="keyword">int</span> weight</span>) </span>&#123;</div><div class="line">        NodeIndex = index;</div><div class="line">        Weight = weight;</div><div class="line">        NextAdjacencyNode = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//邻接表图类</span></div><div class="line"><span class="keyword">class</span> <span class="title">AdjacencyListGraph</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> VertexNode[] Vertexs;</div><div class="line">    <span class="keyword">int</span> numVertexs;</div><div class="line">    <span class="keyword">int</span> numEdges;</div><div class="line"></div><div class="line">    <span class="comment">//建立邻接表图</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CreateGraph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        numVertexs = Convert.ToInt32(Console.ReadLine());</div><div class="line">        numEdges = Convert.ToInt32(Console.ReadLine());</div><div class="line">        Vertexs = <span class="keyword">new</span> VertexNode[numVertexs];</div><div class="line"></div><div class="line">        <span class="comment">//建立顶点数组</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">            <span class="keyword">object</span> data = Console.ReadLine();</div><div class="line">            Vertexs[i] = <span class="keyword">new</span> VertexNode(data);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//建立顶点的邻接结点链表(边表)</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; numEdges; k++) &#123;</div><div class="line">            <span class="keyword">int</span> i = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> j = Convert.ToInt32(Console.ReadLine());</div><div class="line">            <span class="keyword">int</span> weight = Convert.ToInt32(Console.ReadLine());</div><div class="line"></div><div class="line">            AdjacencyNode newNode = <span class="keyword">new</span> AdjacencyNode(j, weight);</div><div class="line">            <span class="comment">//头插法</span></div><div class="line">            newNode.NextAdjacencyNode = Vertexs[i].FirstAdjacencyNode;</div><div class="line">            Vertexs[i].FirstAdjacencyNode = newNode;</div><div class="line"></div><div class="line">            <span class="comment">//无向图还要同时对另一个顶点对称操作，有向图就不需要下面的代码了</span></div><div class="line">            AdjacencyNode newNode1 = <span class="keyword">new</span> AdjacencyNode(i, weight);</div><div class="line">            <span class="comment">//头插法</span></div><div class="line">            newNode1.NextAdjacencyNode = Vertexs[j].FirstAdjacencyNode;</div><div class="line">            Vertexs[j].FirstAdjacencyNode = newNode1;</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>图的十字链表存储方式</p>
+</li>
+<li>图的邻接多重表存储方式</li>
+<li>图的边集数组存储方式</li>
+</ul>
+<hr>
+<p><font size="4" color="orange">图的遍历</font><br>图的遍历：从图中某一顶点出发访遍图中其余顶点，且要求每个顶点仅被访问一次。分为深度优先遍历DFS(depth first search)和广度优先遍历BFS(breadth first search)。</p>
+<ul>
+<li><p>深度优先遍历DFS<br>先来看下面这个图<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576302.png" alt=""><br>任意选择一个顶点，比如A点，现在开始想象在走这个迷宫，给自己定一个原则：没有碰到重复顶点时，就始终向右手边走，碰到了重复顶点则回退到上一个顶点处，再选择除开重复顶点外的最右手边的路(最右边没被访问过的邻接结点)，如果在某个顶点处所有的路都走过了(所有的邻接结点都被访问过了)，则回退到上一个顶点处。重复上述操作，一直到回退到起点A，这时就能保证连通图中的所有结点都被访问到了，且只被访问了一次(发现是重复结点的那一步不算)。<br>上图的访问过程如下：在A出一直沿着右手边走到F处，再向右走发现A被访问过了，回退到F，再访问F处除了A的最右手边结点G，在G点去访问B，发现B已经访问过了，回退到G，再去访问D，发现D已经访问过了，又回退到G，再访问H，在H点去访问D、E，发现D、E都已经访问过了，按原路回退到上一个访问过的结点G，也没有未被访问过的邻接点，再回退到F，同样没有未被访问过的结点，再回退到E，再回退到D，发现I是没有被访问过的，则去访问I，在I处没有未被访问过的邻接点，回退到D，再回退到C，回退到B，回退到A。此时回到了起点，则访问结束。<br>不难发现，这个访问过程其实就是一棵二叉树的前序遍历过程，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576357.png" alt=""><br>所以，对图的深度优先遍历DFS，其实就是类似对树的前序遍历。<br>注意，上述过程是针对一个连通图来说的，如果不是连通图，则需要把图中每一个顶点作为起点，都来一次深度优先遍历DFS，这样就能保证非连通图也能访问到所有结点了。<br>对邻接矩阵图的深度优先遍历DFS的代码如下(还未上机验证过)：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//标识每一个节点是否被访问过</span></div><div class="line"><span class="keyword">bool</span>[] Visited;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFSTraverse</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    Visited = <span class="keyword">new</span> <span class="keyword">bool</span>[numVertexs];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++) &#123;</div><div class="line">        Visited[i] = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    DFS(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//深度优先遍历DFS</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFS</span>(<span class="params"><span class="keyword">int</span> i</span>) </span>&#123;</div><div class="line">    Visited[i] = <span class="literal">true</span>;</div><div class="line">    Console.WriteLine(Vertexs[i]);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numVertexs; j++) &#123;</div><div class="line">        <span class="keyword">if</span> (EdgesMatrix[i, j] == <span class="number">1</span> &amp;&amp; Visited[j] == <span class="literal">false</span>) &#123;</div><div class="line">            DFS(j);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对邻接表图的深度优先遍历DFS的代码如下(还未上机验证过)：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//标识每一个节点是否被访问过</span></div><div class="line"><span class="keyword">bool</span>[] Visited;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFSTraverse</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    Visited = <span class="keyword">new</span> <span class="keyword">bool</span>[numVertexs];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numVertexs; i++)</div><div class="line">    &#123;</div><div class="line">        Visited[i] = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    DFS(<span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//深度优先遍历DFS</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFS</span>(<span class="params"><span class="keyword">int</span> i</span>)</span></div><div class="line">&#123;</div><div class="line">    Visited[i] = <span class="literal">true</span>;</div><div class="line">    Console.WriteLine(Vertexs[i].Data);</div><div class="line">    AdjacencyNode current = Vertexs[i].FirstAdjacencyNode;</div><div class="line">    <span class="keyword">while</span> (current != <span class="literal">null</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (Visited[current.NodeIndex] == <span class="literal">false</span>)</div><div class="line">        &#123;</div><div class="line">            DFS(current.NodeIndex);</div><div class="line">        &#125;</div><div class="line">        current = current.NextAdjacencyNode;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>广度优先遍历BFS<br>深度优先遍历类似于树的前序遍历，其实广度优先遍历BFS类似于树的层序遍历。需要先把图调整称为层次分明一点的图。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576482.png" alt=""><br>由于是层序遍历，所以是需要借助队列的，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576547.png" alt=""></p>
+<ol>
+<li>先让图中的任意一个结点入队列</li>
+<li>让队头的结点出队列，同时让与此结点相连的其他结点入队列</li>
+<li>重复第2步，直到队列为空。<br>广度优先遍历BFS的代码如下：</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p>未完待续</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据结构/">数据结构</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/图/">图</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2016/09/01/图/" data-title="数据结构与算法之图" data-url="http://yoursite.com/2016/09/01/图/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>4</small></li>
+  
+    <li><a href="/categories/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>27</small></li>
+  
+    <li><a href="/categories/c/">c++</a><small>1</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/毕设/">毕设</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+    <li><a href="/categories/设计模式/">设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/c-特性/">c++特性</a><small>1</small></li>
+  
+    <li><a href="/tags/const/">const</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/交流/">交流</a><small>1</small></li>
+  
+    <li><a href="/tags/光照场景/">光照场景</a><small>1</small></li>
+  
+    <li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
+  
+    <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/外观-观察-者命令/">外观 观察 者命令</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/实例化/">实例化</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/工厂模式单例模式/">工厂模式单例模式</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li>
+  
+    <li><a href="/tags/常见光源/">常见光源</a><small>1</small></li>
+  
+    <li><a href="/tags/异步传输/">异步传输</a><small>2</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/材质/">材质</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/模型加载/">模型加载</a><small>1</small></li>
+  
+    <li><a href="/tags/模板测试/">模板测试</a><small>1</small></li>
+  
+    <li><a href="/tags/深度测试/">深度测试</a><small>1</small></li>
+  
+    <li><a href="/tags/混合/">混合</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/码农/">码农</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li>
+  
+    <li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li>
+  
+    <li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li>
+  
+    <li><a href="/tags/责任链模式适配器模式/">责任链模式适配器模式</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+    <li><a href="/tags/面向对象设计原则/">面向对象设计原则</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.css">
+
+
+
+
+</body>
+</html>
