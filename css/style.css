@@ -272,7 +272,7 @@ article header .title {
   font-weight: normal;
 }
 article header .title a {
-  color: #fff;
+  color: #000;
 }
 article header .title a:hover {
   color: #bedeea;
@@ -607,7 +607,7 @@ article footer .addthis iframe {
   color: #000;
 }
 #sidebar .search input:focus {
-  color: #fff;
+  color: #000;
 }
 #sidebar .tag small {
   margin-left: 15px;

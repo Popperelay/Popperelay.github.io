@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenGL28：阴影映射 | Elays&#39;Blog</title>
+  <meta name="author" content="Elay">
+  
+  <meta name="description" content="Elay">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OpenGL28：阴影映射"/>
+  <meta property="og:site_name" content="Elays&#39;Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Elays&#39;Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Elays&#39;Blog</a></h1>
+  <h2><a href="/">你是天地生的，美得超越人形</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-11-03T02:28:49.000Z"><a href="/2017/11/03/OpenGL28阴影映射/">2017-11-03</a></time>
+      
+      
+  
+    <h1 class="title">OpenGL28：阴影映射</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><font size="5" color="orange">阴影的重要意义</font><br><a id="more"></a></p>
+<hr>
+<p>阴影是光线被阻挡的结果，它能够使场景看起来真实很多，可以让观察者获得物体之间的空间位置关系。如下图所示：</p>
+<p><div align="center"><br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%841.png" alt=""><br>图1</div></p>
+<p><div><br>可以看到，有阴影的时候能够更容易的看出立方体是悬浮在地板上的。</div></p>
+<p>当前实时渲染领域还没找到一种完美的阴影算法，目前有几种近似阴影技术，但他它们都有自己的弱点和不足。游戏中常用的技术是阴影贴图（shadow mapping），效果不错，而且相对容易实现，性能也挺高，比较容易扩展为更高级的算法，如 <a href="http://learnopengl.com/#!Advanced-Lighting/Shadows/Point-Shadows" target="_blank" rel="external">Omnidirectional Shadow Maps</a>和 <a href="http://learnopengl.com/#!Advanced-Lighting/Shadows/CSM" target="_blank" rel="external">Cascaded Shadow Maps</a>。</p>
+<p><font size="5" color="orange">阴影映射原理</font></p>
+<hr>
+<p>在绘制物体的某个片元时，要确定它是否在阴影中，就是要判断它是否被别的片元挡住了。而这个挡住其实是光线被挡住了，所以应该从光源位置看过去，看这个片元是否被其他片元挡住。如下图所示：</p>
+<p><div align="center"><br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%842.png" alt=""><br>图2<br></div><br>判断是否被遮挡可以用深度贴图来实现：从光源处看过去（相当于把摄像机调整到光源的位置，即更改观察矩阵和投影矩阵，只是不渲染场景颜色而已），渲染一次场景（开启深度测试），将场景的深度值渲染到<a href="http://popperelay.cn/2017/01/21/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2/" target="_blank" rel="external">自定义帧缓冲的深度纹理附件</a>中，此时深度纹理中存储的深度值就是离光源（或者说摄像机）最近的深度值，然后再渲染一次场景，这次渲染过程中判断当前片元的深度是否比对应位置上深度纹理中的深度更靠近光源（在屏幕空间里就是深度值更小），如果不是则说明该片元被挡住了，在阴影里。如下图所示：</p>
+<p><div align="center"><br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%843.png" alt=""><br>图3<br></div><br>右图中，在光源看来C点和P点处在同一xy位置（以光源为原点的坐标系）上，但是深度z不同，P点的深度是0.9，C点的深度是0.4，存储在深度纹理中的应该是最靠近光源的0.4，在绘制点P时由于其深度值0.9比从深度纹理中取出的0.4大，所以判定点P被挡住了，应该位于阴影里。</p>
+<p>综上，深度映射通过两个步骤完成：</p>
+<ol>
+<li>渲染深度纹理。</li>
+<li>正常渲染场景，同时采样深度纹理来判断片元是否在阴影中。</li>
+</ol>
+<p>用代码表示如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 首先渲染深度贴图</span></div><div class="line">glViewport(<span class="number">0</span>, <span class="number">0</span>, SHADOW_WIDTH, SHADOW_HEIGHT);</div><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);</div><div class="line">    glClear(GL_DEPTH_BUFFER_BIT);</div><div class="line">    ConfigureShaderAndMatrices();</div><div class="line">    RenderScene();</div><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line"><span class="comment">// 2. 像往常一样渲染场景，但这次使用深度贴图</span></div><div class="line">glViewport(<span class="number">0</span>, <span class="number">0</span>, SCR_WIDTH, SCR_HEIGHT);</div><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">ConfigureShaderAndMatrices();</div><div class="line">glBindTexture(GL_TEXTURE_2D, depthMap);</div><div class="line">RenderScene();</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">渲染深度纹理</font><br>我们需要从光源的视角去渲染得到一张场景的深度纹理，最后需要用它来计算阴影。为了将场景的深度保存到纹理中，我们需要用到帧缓冲，并且为它添加深度纹理附件：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">GLuint DepthMap;</div><div class="line">	glGenTextures(<span class="number">1</span>, &amp;DepthMap);</div><div class="line">	glBindTexture(GL_TEXTURE_2D, DepthMap);</div><div class="line">	glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_DEPTH_COMPONENT, WIDTH, HEIGHT, <span class="number">0</span>, GL_DEPTH_COMPONENT, GL_FLOAT, <span class="literal">NULL</span>);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);</div><div class="line">	glBindTexture(GL_TEXTURE_2D, <span class="number">0</span>);</div><div class="line"></div><div class="line">	GLuint DepthMapFBO;</div><div class="line">	glGenFramebuffers(<span class="number">1</span>, &amp;DepthMapFBO);</div><div class="line">	glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);</div><div class="line">	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, DepthMap, <span class="number">0</span>);</div><div class="line">	glDrawBuffer(GL_NONE);</div><div class="line">	glReadBuffer(GL_NONE);</div><div class="line">	<span class="keyword">if</span> (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Framebuffer is not complete!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>上面的代码首先创建了一张<code>GL_DEPTH_COMPONENT</code>格式的纹理，然后将它绑定到帧缓冲的深度附件上。</p>
+<p>接下来我们需要从光源视角去渲染场景。先来看看着色器怎么写吧：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">layout (location = <span class="number">0</span>) in vec3 position;</div><div class="line"></div><div class="line">uniform mat4 LightSpaceMVP;  <span class="comment">//projection * view * model</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	gl_Position = LightSpaceMVP * vec4(position,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到渲染深度纹理的着色器相当简单，在顶点着色器里只是需要一个在光源视角下的MVP矩阵（投影矩阵、观察矩阵和物体模型矩阵的乘积），来计算在光源视角下的顶点坐标。片元着色器可以是空的，因为我们只想得到深度，所以没有必要在片元着色器里输出颜色。<br>【注】：</p>
+<ul>
+<li>直接使用MVP矩阵，是为了避免每一个顶点着色器都去执行模型矩阵、观察矩阵、投影矩阵的乘法运算，减少GPU的运算量，只需要每帧在应用程序里计算一次MVP矩阵，然后传给顶点着色器即可。这样还减少了传输带宽，毕竟只需要给GPU传一个MVP矩阵，而不是三个矩阵。</li>
+</ul>
+<p>加下来需要我们在应用程序里算好这个LightSpaceMVP矩阵了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mat4 View = lookAt(lightPos, lightPos + lightDirection, vec3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>));</div><div class="line">mat4 Projection = ortho(<span class="number">-6.0</span>, <span class="number">6.0</span>, <span class="number">-6.0</span>, <span class="number">6.0</span>, <span class="number">0.1</span>, <span class="number">20.0</span>);</div><div class="line">mat4 LightSpaceVP = Projection * View;</div><div class="line">mat4 CubeModel;</div><div class="line">CubeModel = translate(CubeModel, glm::vec3(<span class="number">-1.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>));</div><div class="line">mat4 LightSpaceMVPCube = LightSpaceVP * CubeModel;</div><div class="line">mat4 PlaneModel;</div><div class="line">PlaneModel = mat4();</div><div class="line">mat4 LightSpaceMVPPlane = LightSpaceVP * PlaneModel;</div></pre></td></tr></table></figure></p>
+<p>场景里面有两个物体：地面和箱子，它们都需要在上面的着色器下绘制一次，由于它们的模型矩阵不同，所以它们的MVP矩阵需要分开算。观察矩阵通过平行光源的位置和方向来计算，投影矩阵是一个正交投影矩阵（因为场景里用的是平行光源）。</p>
+<p>然后我们绑定自定义帧缓冲，激活着色器渲染场景，就可以渲染出深度纹理了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);</div><div class="line">glClear(GL_DEPTH_BUFFER_BIT);</div><div class="line"></div><div class="line">GenerateDepthMap_Shader.Use();</div><div class="line">glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, <span class="string">"LightSpaceMVP"</span>), <span class="number">1</span>, GL_FALSE, value_ptr(LightSpaceMVPCube));</div><div class="line">glBindVertexArray(cubeVAO);</div><div class="line">glDrawElements(GL_TRIANGLES, <span class="number">36</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</div><div class="line"></div><div class="line">glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, <span class="string">"LightSpaceMVP"</span>), <span class="number">1</span>, GL_FALSE, value_ptr(LightSpaceMVPPlane));</div><div class="line">glBindVertexArray(planeVAO);</div><div class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>我们可以用一张窗口四边形来渲染这张深度贴图：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line">glClearColor(<span class="number">0.3f</span>, <span class="number">0.4f</span>, <span class="number">0.5f</span>, <span class="number">1.0f</span>);</div><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">	</div><div class="line">RenderDepthMap_Shader.Use();</div><div class="line">glBindVertexArray(windowQuadVAO);</div><div class="line">glBindTexture(GL_TEXTURE_2D, DepthMap);</div><div class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>渲染结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%844.png" alt=""><br>所有源码在<a href="">这里</a>。</p>
+<p><font size="5" color="orange">渲染阴影</font><br>我们先来看看着色器怎么写。</p>
+<p>顶点着色器和正常渲染场景时一样，只是多了计算顶点在光源视角下的裁剪坐标这一步：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">layout (location = <span class="number">0</span>) in vec3 position;</div><div class="line">layout (location = <span class="number">1</span>) in vec2 texCoords;</div><div class="line">layout (location = <span class="number">2</span>) in vec3 normal;</div><div class="line"></div><div class="line">out vec2 VS_TexCoords;</div><div class="line">out vec3 VS_Normal;</div><div class="line">out vec3 VS_WorldPos;</div><div class="line">out vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">uniform mat4 u_LightSpaceMVP;  <span class="comment">//projection * view * model</span></div><div class="line">uniform mat4 u_Model;</div><div class="line">uniform mat4 u_View;</div><div class="line">uniform mat4 u_Projection;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	VS_TexCoords = texCoords;</div><div class="line">	VS_Normal = transpose(inverse(mat3(u_Model))) * normal;</div><div class="line">	VS_WorldPos = vec3(u_Model * vec4(position, <span class="number">1.0f</span>));</div><div class="line">	gl_Position = u_Projection * u_View * vec4(VS_WorldPos, <span class="number">1.0f</span>);</div><div class="line">	VS_LightSpacePos = u_LightSpaceMVP * vec4(position, <span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中u_LightSpaceMVP是光源视角下的模型矩阵、观察矩阵和投影矩阵的乘积。</p>
+<p>将计算得到的顶点在光源视角下的裁剪坐标VS_LightSpacePos，传递给片元着色器，来计算阴影：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">in vec2 VS_TexCoords;</div><div class="line">in vec3 VS_Normal;</div><div class="line">in vec3 VS_WorldPos;</div><div class="line">in vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">out vec4 Color;</div><div class="line"></div><div class="line">uniform sampler2D u_DiffuseMapSampler1;</div><div class="line">uniform sampler2D u_DepthMapSampler2;</div><div class="line">uniform vec3 u_LightPos;</div><div class="line">uniform vec3 u_LightDirection;</div><div class="line">uniform vec3 u_ViewPos;</div><div class="line">uniform vec3 u_LightColor;</div><div class="line"></div><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;</div><div class="line"></div><div class="line">	<span class="keyword">float</span> AmbientStrength = <span class="number">0.3f</span>;</div><div class="line">	vec3  AmbientColor = AmbientStrength * ObjectColor;</div><div class="line"></div><div class="line">	vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);</div><div class="line">	<span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.01</span>)</div><div class="line">	&#123;</div><div class="line">		Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	vec3 Normal = normalize(VS_Normal);</div><div class="line">	vec3 LightDir = normalize(-u_LightDirection);</div><div class="line">	<span class="keyword">float</span> DiffuseFactor = max(dot(Normal, LightDir), <span class="number">0.0</span>);</div><div class="line">	vec3 DiffuseColor = DiffuseFactor * u_LightColor;</div><div class="line"></div><div class="line">	vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);</div><div class="line">	vec3 HalfDir = normalize(LightDir + ViewDir);</div><div class="line">	<span class="keyword">float</span> SpecularFactor = <span class="built_in">pow</span>(max(dot(HalfDir, Normal), <span class="number">0.0f</span>), <span class="number">32</span>);</div><div class="line">	vec3 SpecularColor = SpecularFactor * u_LightColor;</div><div class="line"></div><div class="line">	Color = vec4((AmbientColor + DiffuseColor + SpecularColor) * ObjectColor, <span class="number">1.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中在片元着色器里，我们需要计算插值后的片元在光源视角下的深度：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>原理跟简单，就是模拟了一下透视除法，让xyz分量分别除以w分量（其实不除也可以，因为在我们的demo里用的是平行光，光源视角下的投影矩阵是正交投影，所以w分量其实是1，但是如果不是平行光，这一步还是必须要做的）。但是透视除法之后的坐标范围还是-1到1，而之后我们需要用这个坐标去查找之前的深度纹理，而且其z分量应该代表片元在光源视角下的深度，所以不应该有负数，我们需要把-1到1的范围映射到0到1，所以才有了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div></pre></td></tr></table></figure></p>
+<p>然后我们就可以根据这个坐标（片元在光源视角下的裁剪坐标并且映射到了0到1的范围）的xy值，去之前保存下来的深度纹理里查找场景在这个xy位置上距离光源最近的深度值，如果当前片元在光源视角下的深度值大于从纹理中查找到的深度值，则说明这个片元被挡住了，应该在阴影里：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.01</span>)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里对阴影的处理方式是让片元的颜色等于环境光颜色，不再对它做漫反射和镜面反射光照了。</p>
+<p>对于不满足这个条件，即不在阴影里的片元，照常执行blinn-phong光照即可。</p>
+<p>剩下的就是在应用程序里把着色器需要的顶点数据和uniform变量传进来就可以了，由于这些内容和之前的文章里几乎是一样的，所以不再赘述了，所有源码都在<a href="">这里</a>。</p>
+<p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%845.png" alt=""></p>
+<p><font size="5" color="red">改进阴影贴图</font></p>
+<p><font size="4" color="red">阴影fighting</font><br>可以看到上面的阴影并不好，有很多条纹，这是由于深度贴图所能保存的精度有限，相邻的很多片元可能用的是同一个深度，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%846.png" alt=""><br>可能表示的最大深度只有6位，那么图中0.9276355到0.9276364的部分都只能用0.927636来表示了，但是getDepthInLightSpace函数计算出来的片元深度精度通常更大，导致在比较时，0.9276355到0.927636的部分，比深度纹理中存储的0.927636小，不处于阴影中，而0.927636到0.9276364的部分比深度纹理中存储的0.927636更大，处于阴影中，所以会出现一半不在阴影中，而另一半在阴影中，而这种精度情况在每一个类似的精度范围内都会出现，所以造成了上图里的条纹状。<br>【注：】</p>
+<ul>
+<li>这里只是举了个例子，最大精度不一定是6位小数，也不一定是四舍五入，要视具体运行环境和硬件决定。</li>
+</ul>
+<p>那么我们怎么避免这种深度精度问题呢？</p>
+<p>我们可以在判断条件上加一个很小的偏移量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.0009</span>)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%847.png" alt=""><br>可以看到虽然很大程度上解决了条纹状问题，但是由于偏移量加得太小，在箱子的垂直表面上，坡度很大，导致上面还是有一些黑点，有两种方法可以解决：一种是加大偏移量，但是有可能会产生彼得潘效应（后文会介绍），另一种就是利用表面法线和光线的夹角来计算出一个偏移值，这样对于坡度大的地方偏移就大、对坡度小的地方偏移就很小：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> Offset = max(<span class="number">0.0009</span>, <span class="number">0.0025</span> * (<span class="number">1.0</span> - dot(Normal, LightDir)));</div><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + Offset)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%848.png" alt=""></p>
+<p>但是，偏移量加多少合适需要多次微调，加少了会有黑点，加多了会有彼得潘效应，其实即使是上面的代码，运行程序后拉近看依然有彼得潘效应。想要调出合适的偏移量很难，很容易出现彼得潘效应。下面来看看什么是彼得潘效应。</p>
+<p><font size="4" color="red">彼得潘效应</font><br>当偏移加的偏大时，可以看到阴影相对实际物体的偏移，如下图所示（这个偏移值加得很大0.01）：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%849.png" alt=""><br>看起来像箱子漂浮在地面之上，但是实际上从顶点数据来看箱子是紧贴着地面的，这种错觉就是彼得潘效应（童话里彼得潘是个会飞的男孩……）。</p>
+<p>经过代码实现，渲染阴影贴图时开启正面剔除依然不能消除彼得潘效应，只能用更精确的偏移值来让彼得潘效应更小，直到看不出来。</p>
+<p><font size="4" color="red">光视锥外的阴影</font><br>在之前的片元着色器里，对于不在光源视角下的正交投影视锥里的片元，经过getDepthInLightSpace函数算出来的裁剪坐标绝对值将大于1，用这个坐标去索引深度纹理，当然得不到正确的深度值。因为默认深度纹理的环绕方式是repeat，所以导致在视锥之外的片元都处于阴影里，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8410.png" alt=""></p>
+<p>有两个解决方案：</p>
+<ol>
+<li>把正交投影矩阵的参数加大，让正交视锥能包含更大的区域。</li>
+<li>如果当前正交视锥之外没有物体（或者没有需要投射阴影的物体），可以让视锥外的片元索引深度纹理得到的深度值总是1.0，这样这些片元就不会处在阴影里了。其实也就是想用绝对值大于1的坐标去索引深度纹理，总是得到1.0这个值，所以我们可以把深度纹理的环绕方式设为GL_CLAMP_TO_BORDER，让超出1.0的坐标永远得到的都是边界上的值，同时要设置边界颜色的r分量为1.0：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);</div><div class="line">GLfloat BorderColor[] = &#123; <span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span> &#125;;</div><div class="line">glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, BorderColor);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8411.png" alt=""></p>
+<p>可以发现在视锥横截面之外的片元都不再处于阴影里了，远处还有片元处于阴影里，是因为那块区域超过视锥的远平面，计算出来的深度值是大于1.0的，会永远比从深度纹理中取出来的值要大，所以会处于阴影里。有两种解决方案：</p>
+<ol>
+<li>在正交投影矩阵里加大远平面的距离。</li>
+<li>在片元着色器里计算裁剪坐标的时候，如果最后发现裁剪坐标的z值大于1.0，则把其z值强制更改为0：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">if</span>(Temp.z &gt; <span class="number">1.0</span>)</div><div class="line">		Temp.z = <span class="number">0.0</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行结果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8412.png" alt=""><br>到此的所有源码都在<a href="">这里</a>。其中解开一些注释代码就能看到这一小节说过的各种结果。</p>
+<p><font size="4" color="red">PCF</font><br>拉近了看，会发现阴影边缘走样很严重，有明显的锯齿，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8413.png" alt=""><br>这是因为深度纹理的分辨率有限，多个片元可能对应同一个阴影，这样采样计算阴影时就会产生锯齿边。当然可以通过增加深度纹理分辨率的方式来降低锯齿块。但是这样会增加很多内存开销。</p>
+<p>我们可以用一种叫做PCF（percentage-closer filtering）的技术来得到更柔和一点的阴影：对片元裁剪坐标的四周多次采样，对采样的结果（在或者不在阴影里）求均值。实现代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">in vec2 VS_TexCoords;</div><div class="line">in vec3 VS_Normal;</div><div class="line">in vec3 VS_WorldPos;</div><div class="line">in vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">out vec4 Color;</div><div class="line"></div><div class="line">uniform sampler2D u_DiffuseMapSampler1;</div><div class="line">uniform sampler2D u_DepthMapSampler2;</div><div class="line">uniform vec3 u_LightPos;</div><div class="line">uniform vec3 u_LightDirection;</div><div class="line">uniform vec3 u_ViewPos;</div><div class="line">uniform vec3 u_LightColor;</div><div class="line"></div><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="comment">//远平面外的深度值更改为0.0</span></div><div class="line">	<span class="keyword">if</span>(Temp.z &gt; <span class="number">1.0</span>)</div><div class="line">		Temp.z = <span class="number">0.0</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;</div><div class="line"></div><div class="line">	<span class="comment">//Ambient Lighting</span></div><div class="line">	<span class="keyword">float</span> AmbientStrength = <span class="number">0.3f</span>;</div><div class="line">	vec3  AmbientColor = AmbientStrength * ObjectColor;</div><div class="line"></div><div class="line">	vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);</div><div class="line"></div><div class="line">	vec3 Normal = normalize(VS_Normal);</div><div class="line">	vec3 LightDir = normalize(-u_LightDirection);</div><div class="line"></div><div class="line">	<span class="comment">//PCF阴影测试</span></div><div class="line">	<span class="keyword">float</span> Offset = max(<span class="number">0.002</span>, <span class="number">0.0025</span> * (<span class="number">1.0</span> - dot(Normal, LightDir)));</div><div class="line">	<span class="keyword">float</span> Shadow = <span class="number">0.0</span>;</div><div class="line">	vec2 texelSize = <span class="number">1.0</span> / textureSize(u_DepthMapSampler2, <span class="number">0</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">if</span>(LightClipSpacePos.z != <span class="number">0.0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">-1</span>; x &lt;= <span class="number">1</span>; ++x)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> y = <span class="number">-1</span>; y &lt;= <span class="number">1</span>; ++y)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy + vec2(x, y) * texelSize).r + Offset)</div><div class="line">					Shadow += <span class="number">1.0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	Shadow /= <span class="number">9.0</span>;</div><div class="line">	</div><div class="line">	<span class="comment">//Diffuse Lighting</span></div><div class="line">	<span class="keyword">float</span> DiffuseFactor = max(dot(Normal, LightDir), <span class="number">0.0</span>);</div><div class="line">	vec3 DiffuseColor = DiffuseFactor * u_LightColor;</div><div class="line"></div><div class="line">	<span class="comment">//Specular Lighting</span></div><div class="line">	vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);</div><div class="line">	vec3 HalfDir = normalize(LightDir + ViewDir);</div><div class="line">	<span class="keyword">float</span> SpecularFactor = <span class="built_in">pow</span>(max(dot(HalfDir, Normal), <span class="number">0.0f</span>), <span class="number">32</span>);</div><div class="line">	vec3 SpecularColor = SpecularFactor * u_LightColor;</div><div class="line"></div><div class="line">	Color = vec4((AmbientColor + (<span class="number">1.0</span> - Shadow) * (DiffuseColor + SpecularColor)) * ObjectColor, <span class="number">1.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中texelSize 是深度纹理中每个纹素的大小。</p>
+<p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8414.png" alt=""><br>可以发现，阴影边缘确实较之前柔和了一些。</p>
+<p><font size="5" color="orange">投射投影渲染深度贴图</font><br>之前用的是正交投影来渲染深度纹理，这对于平行光比较适用，但是对于点光源和聚光灯，透视投影更适合。只是透视投影渲染得到的深度纹理里的深度值是非线性的，有两种就解决方案：</p>
+<ol>
+<li>在片元着色器里，计算片元在光源视角下的裁剪坐标时，手动做一次透视除法，这样也就变为非线性的深度。</li>
+<li>不在片元着色器里计算片元的裁剪坐标，计算到它在观察空间里的深度就好了，然后把从深度纹理中的非线性深度转变为观察空间里的线性深度。怎么转换呢？可以参考<a href="http://popperelay.cn/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">《OpenGL15：深度测试》</a>里说过的非线性深度公式：<br>$$<br>\begin{equation}<br>F_{depth} = \frac{1/z - 1/near}{1/far - 1/near}<br>\end{equation}<br>$$<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">LinearizeDepth</span><span class="params">(<span class="keyword">float</span> depth)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">float</span> z = depth * <span class="number">2.0</span> - <span class="number">1.0</span>; <span class="comment">// Back to NDC </span></div><div class="line">    <span class="keyword">return</span> (<span class="number">2.0</span> * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/OpenGL/">OpenGL</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/ShadowMap/">ShadowMap</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+
+ 
+  	   <!-- 多说评论框 start -->
+ 		<div class="ds-thread" data-thread-key="2017/11/03/OpenGL28阴影映射/" data-title="OpenGL28：阴影映射" data-url="http://yoursite.com/2017/11/03/OpenGL28阴影映射/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"popperelay"};   <!-- 替换这里的duoshuo_shortname为前面注册的shortname -->
+			(function() {
+				var ds = document.createElement('script');
+				ds.type = 'text/javascript';ds.async = true;
+				ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+				ds.charset = 'UTF-8';
+				(document.getElementsByTagName('head')[0] 
+				 || document.getElementsByTagName('body')[0]).appendChild(ds);
+			})();
+			</script>
+		<!-- 多说公共JS代码 end -->
+ 
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/C-语法/">C#语法</a><small>2</small></li>
+  
+    <li><a href="/categories/C/">C++</a><small>4</small></li>
+  
+    <li><a href="/categories/C语言/">C语言</a><small>1</small></li>
+  
+    <li><a href="/categories/OpenGL/">OpenGL</a><small>28</small></li>
+  
+    <li><a href="/categories/c/">c++</a><small>1</small></li>
+  
+    <li><a href="/categories/博客配置/">博客配置</a><small>3</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>4</small></li>
+  
+    <li><a href="/categories/数据结构/">数据结构</a><small>15</small></li>
+  
+    <li><a href="/categories/毕设/">毕设</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏开发/">游戏开发</a><small>1</small></li>
+  
+    <li><a href="/categories/游戏设计模式/">游戏设计模式</a><small>1</small></li>
+  
+    <li><a href="/categories/计算机图形学/">计算机图形学</a><small>2</small></li>
+  
+    <li><a href="/categories/设计模式/">设计模式</a><small>5</small></li>
+  
+    <li><a href="/categories/调试错误集锦/">调试错误集锦</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/BIOS和微机启动过程/">BIOS和微机启动过程</a><small>1</small></li>
+  
+    <li><a href="/tags/Blinn-Phong/">Blinn-Phong</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C</a><small>1</small></li>
+  
+    <li><a href="/tags/C-容器/">C#容器</a><small>1</small></li>
+  
+    <li><a href="/tags/C-IO/">C++IO</a><small>1</small></li>
+  
+    <li><a href="/tags/Gamma校正/">Gamma校正</a><small>1</small></li>
+  
+    <li><a href="/tags/MarkDown/">MarkDown</a><small>1</small></li>
+  
+    <li><a href="/tags/Mathjax语法/">Mathjax语法</a><small>1</small></li>
+  
+    <li><a href="/tags/OS内核/">OS内核</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL坐标系统/">OpenGL坐标系统</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL摄像机/">OpenGL摄像机</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL窗口/">OpenGL窗口</a><small>1</small></li>
+  
+    <li><a href="/tags/OpenGL配置/">OpenGL配置</a><small>1</small></li>
+  
+    <li><a href="/tags/ShadowMap/">ShadowMap</a><small>1</small></li>
+  
+    <li><a href="/tags/c-特性/">c++特性</a><small>1</small></li>
+  
+    <li><a href="/tags/const/">const</a><small>1</small></li>
+  
+    <li><a href="/tags/timeTest/">timeTest</a><small>1</small></li>
+  
+    <li><a href="/tags/二叉树/">二叉树</a><small>1</small></li>
+  
+    <li><a href="/tags/交流/">交流</a><small>1</small></li>
+  
+    <li><a href="/tags/光照场景/">光照场景</a><small>1</small></li>
+  
+    <li><a href="/tags/光照贴图/">光照贴图</a><small>1</small></li>
+  
+    <li><a href="/tags/关键路径/">关键路径</a><small>1</small></li>
+  
+    <li><a href="/tags/冯氏光照/">冯氏光照</a><small>1</small></li>
+  
+    <li><a href="/tags/几何着色器/">几何着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/反走样/">反走样</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/图形学概述/">图形学概述</a><small>1</small></li>
+  
+    <li><a href="/tags/图形显示系统/">图形显示系统</a><small>1</small></li>
+  
+    <li><a href="/tags/外观-观察-者命令/">外观 观察 者命令</a><small>1</small></li>
+  
+    <li><a href="/tags/多说/">多说</a><small>1</small></li>
+  
+    <li><a href="/tags/天空盒子/">天空盒子</a><small>1</small></li>
+  
+    <li><a href="/tags/头结点/">头结点</a><small>1</small></li>
+  
+    <li><a href="/tags/实例化/">实例化</a><small>1</small></li>
+  
+    <li><a href="/tags/尾递归/">尾递归</a><small>1</small></li>
+  
+    <li><a href="/tags/工厂模式单例模式/">工厂模式单例模式</a><small>1</small></li>
+  
+    <li><a href="/tags/帧同步/">帧同步</a><small>1</small></li>
+  
+    <li><a href="/tags/帧缓冲/">帧缓冲</a><small>1</small></li>
+  
+    <li><a href="/tags/常见光源/">常见光源</a><small>1</small></li>
+  
+    <li><a href="/tags/异步传输/">异步传输</a><small>2</small></li>
+  
+    <li><a href="/tags/拓扑排序/">拓扑排序</a><small>1</small></li>
+  
+    <li><a href="/tags/操作系统概述/">操作系统概述</a><small>1</small></li>
+  
+    <li><a href="/tags/改进排序/">改进排序</a><small>1</small></li>
+  
+    <li><a href="/tags/文件IO/">文件IO</a><small>1</small></li>
+  
+    <li><a href="/tags/最小生成树/">最小生成树</a><small>1</small></li>
+  
+    <li><a href="/tags/最短路径/">最短路径</a><small>1</small></li>
+  
+    <li><a href="/tags/材质/">材质</a><small>1</small></li>
+  
+    <li><a href="/tags/查找/">查找</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/树/">树</a><small>1</small></li>
+  
+    <li><a href="/tags/模型加载/">模型加载</a><small>1</small></li>
+  
+    <li><a href="/tags/模板测试/">模板测试</a><small>1</small></li>
+  
+    <li><a href="/tags/深度测试/">深度测试</a><small>1</small></li>
+  
+    <li><a href="/tags/混合/">混合</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器/">着色器</a><small>1</small></li>
+  
+    <li><a href="/tags/着色器画三角形/">着色器画三角形</a><small>1</small></li>
+  
+    <li><a href="/tags/码农/">码农</a><small>1</small></li>
+  
+    <li><a href="/tags/简单排序/">简单排序</a><small>1</small></li>
+  
+    <li><a href="/tags/纹理/">纹理</a><small>1</small></li>
+  
+    <li><a href="/tags/缓冲对象/">缓冲对象</a><small>1</small></li>
+  
+    <li><a href="/tags/编译链接错误/">编译链接错误</a><small>1</small></li>
+  
+    <li><a href="/tags/背面剔除/">背面剔除</a><small>1</small></li>
+  
+    <li><a href="/tags/责任链模式适配器模式/">责任链模式适配器模式</a><small>1</small></li>
+  
+    <li><a href="/tags/进程的描述与控制/">进程的描述与控制</a><small>1</small></li>
+  
+    <li><a href="/tags/重定义错误/">重定义错误</a><small>1</small></li>
+  
+    <li><a href="/tags/链表/">链表</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+    <li><a href="/tags/面向对象设计原则/">面向对象设计原则</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Elay
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/fancybox/2.1.5/jquery.fancybox.css">
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML">
+</script>
+
+
+</body>
+</html>
