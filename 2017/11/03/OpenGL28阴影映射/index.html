@@ -136,7 +136,7 @@
 <p>其中texelSize 是深度纹理中每个纹素的大小。</p>
 <p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8414.png" alt=""><br>可以发现，阴影边缘确实较之前柔和了一些。</p>
 <p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL28_ShadowMap/LearnOpenGL28_ShadowMap_3" target="_blank" rel="external">这里</a>。</p>
-<p><font size="5" color="orange">投射投影渲染深度贴图</font></p>
+<p><font size="5" color="orange">透视投影渲染深度贴图</font></p>
 <hr>
 <p>之前用的是正交投影来渲染深度纹理，这对于平行光比较适用，但是对于点光源和聚光灯，透视投影更适合。只是透视投影渲染得到的深度纹理里的深度值是非线性的，有两种就解决方案：</p>
 <ol>
