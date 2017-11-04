@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>OpenGL26：Blinn-Phong模型 | Elays&#39;Blog</title>
+  <title>C++Primer第一章开始 | Elays&#39;Blog</title>
   <meta name="author" content="Elay">
   
   <meta name="description" content="Elay">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="OpenGL26：Blinn-Phong模型"/>
+  <meta property="og:title" content="C++Primer第一章开始"/>
   <meta property="og:site_name" content="Elays&#39;Blog"/>
 
   
@@ -50,33 +50,71 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-05-24T03:37:06.000Z"><a href="/2017/05/24/OpenGL26Blinn-Phong模型/">2017-05-24</a></time>
+        <time datetime="2017-11-04T13:31:58.000Z"><a href="/2017/11/04/C++Primer第一章开始/">2017-11-04</a></time>
       
       
   
-    <h1 class="title">OpenGL26：Blinn-Phong模型</h1>
+    <h1 class="title">C++Primer第一章开始</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><font size="5" color="orange">Phong模型的缺陷</font><br><a id="more"></a></p>
+        <p><font size="5" color="orange">编写一个简单的C++程序</font><br><a id="more"></a></p>
 <hr>
-<p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong1.png" alt=""><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong2.png" alt=""><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>
-<p>当镜面高光系数较大时，高光比较集中，当高光突变为0时还有很强的漫反射光存在，所以人眼观察到的镜面光硬边缘不明显；但是当镜面高光系数较小时，高光半径会很大，高光在边缘处突变为0时漫反射强度很弱，镜面光成分较高，此时的镜面光硬边缘就会很明显。</p>
-<p><font size="5" color="orange">Blinn-Phong模型</font></p>
+<ol>
+<li>在一些系统中，即使文件就在当前目录或文件夹中，也必须显式指出文件的位置。在此情况下，我们可以输入：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ .\prog1</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>“.”后面跟一个反斜线可以指出该文件在当前目录中。</p>
+<ol>
+<li>运行GNU编译器的命令是g++：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ g++ -o prog1 prog1.cc</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，$是系统提示符；-o prog1是编译器参数，指定可执行文件的文件名；prog1.cc是代码源文件名。</p>
+<ol>
+<li>运行微软VS编译器的命令为cl：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\User\me\Programs&gt; cl /EHsc prog1.cpp</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，C:\User\me\Programs&gt;是系统提示符，表示当前处于哪个路径下；命令cl可以调用编译器；/EHsc是编译器选项，用来打开标准异常处理。</p>
+<p><font size="5" color="orange">初识输入输出</font></p>
 <hr>
-<p>1977年James F. Blinn提出了Blinn-Phong模型，它是对Phong模型的改进：放弃反射光向量，改用半程向量，半程向量是入射光线向量与视线向量的和向量，再归一化之后的单位向量。如下图中的向量H：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong3.png" alt=""><br>Blinn-Phong模型不再使用法线与反射向量的夹角来计算镜面光，而是使用半程向量和法线向量之间的夹角。半程向量越靠近法线向量，人眼观察到的镜面光强度越大。只要不从物体背面去看，半程向量和法线向量之间的夹角永远都小于等于90度。</p>
-<p><font size="5" color="orange">Blinn-Phong模型的代码实现</font></p>
+<ol>
+<li>术语“流”想要表达的是：随之时间的推移，字符是顺序生成或消耗的。</li>
+<li>cerr通常用来输出警告和错误消息，clog用来输出程序运行时的一般性信息。如果是控制台程序的话，它俩和cout一样都是输出到控制台的。</li>
+<li><p>如下语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two numbers:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<p>我们在输出语句中用了两次&lt;&lt;运算符。因为此运算符返回其左侧的运算对象，因此第一个运算符的结果成为了第二个运算符的左侧运算对象，即等价于：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two numbers:"</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> 其中std::endl被称为操纵符，写入endl的效果是结束当前行，并将于设备关联的缓冲区(buffer)中的内容刷到设备中。缓冲刷新操作可以保证到目前为止程序所产生的所有输出都真正写入输出流中，而不是仅停留在内存中等待写入流。所以：</p>
+<p> 程序员常常在调试时添加打印语句。这类语句应该保证“一直”刷新流。否则，如果程序崩溃，输出可能还留在缓冲区中，从而导致关于程序崩溃位置的错误推断。</p>
+<ol>
+<li>标准库定义的所有名字都在命名空间std中。 </li>
+</ol>
+<p><font size="5" color="orange">注释简介</font></p>
+<ol>
+<li>编译器会忽略注释，因此注释对程序的行为或性能不会有任何影响。</li>
+<li>当我们修改代码时，不要忘记同时更新注释。</li>
+</ol>
+<p><font size="5" color="orange">控制流</font></p>
+<ol>
+<li>如下程序：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; value)</div><div class="line">		sum += value;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum is: "</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当遇到文件结束符（end-of-file），或遇到一个无效输入时（例如读入的值不是一个整数），istream对象的状态才会变为无效，才会退出上面的while循环。所以仅仅输入空格或者回车，是无法让上述循环终止的。可以输入一个字符来终止循环：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span>  <span class="number">4</span> <span class="number">5</span></div><div class="line"><span class="number">6</span>   <span class="number">7</span></div><div class="line">a</div><div class="line">Sum is: <span class="number">28</span></div></pre></td></tr></table></figure></p>
+<p>除此之外，还可以输入文件结束符。在Windows系统中，输入文件结束符的方法是Ctrl+Z，然后按回车（Enter键），Unix系统中（包括Mac OS X系统），文件结束符输入是用Ctrl+D。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span>^Z</div><div class="line">Sum is: <span class="number">6</span></div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">类简介</font></p>
+<ol>
+<li>标准库头文件通常不带后缀（string.h不属于标准库头文件，string头文件才是）。</li>
+<li><string.h>是旧的C头文件，对应的是基于char*的字符串处理函数（C++为了兼容C的标准库）；<string>是位于std中的C++头文件，对应的是基于string类的字符串处理函数；<cstring>是旧C头文件对应的std版本，所以也是基于char*的。</cstring></string></string.h></li>
+<li>文件重定向：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ addIems &lt;infile&gt; outfile</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>$是操作系统提示符，addItems代表程序的可执行文件addItems.exe，则上述命令会从一个名为infile的文件读取输入，并将输出结果写入到一个名为outfile的文件中。用这种方法，我们就不必每次运行程序都往控制台手动输入一堆数据了。<br>&nbsp; </p>
 <hr>
-<p>Phong模型计算镜面光的代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vec3 reflectDir = normalize(reflect(-lightDir, normal));</div><div class="line">vec3 viewDir = normalize(viewPos - positionInWorld); </div><div class="line"><span class="keyword">float</span> specularFactor = <span class="built_in">pow</span>(max(dot(reflectDir, viewDir), <span class="number">0.0</span>), <span class="number">1</span>); </div><div class="line">vec3 specularColor =  specularFactor * lightColor;</div></pre></td></tr></table></figure></p>
-<p>Blinn-Phong模型舍弃反射光向量，使用半程向量，代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vec3 viewDir = normalize(viewPos - positionInWorld);</div><div class="line">vec3 halfDir = normalize(lightDir + viewDir);</div><div class="line"><span class="keyword">float</span> specularFactor = <span class="built_in">pow</span>(max(dot(halfDir, normal), <span class="number">0.0f</span>), <span class="number">1</span>);</div><div class="line">vec3 specularColor =  specularFactor * lightColor;</div></pre></td></tr></table></figure></p>
-<p>可以发现Blinn-Phong模型除了表现效果更真实以外，还有个很大的优势：不用去计算复杂的反射光向量，降低了计算量，相比Phong模型性能更高。</p>
-<p>当镜面高光系数为0.5时，Phong模型表现效果如第一幅图。Blinn-Phong模型表现效果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong4.png" alt=""><br>由于半程向量和法线向量之间的夹角通常会比视线向量和反射向量之间的夹角更小，即余弦值更大，所以相同镜面高光系数下，Blinn-Phong模型的镜面光会比Phong模型更亮，Blinn-Phong模型要达到和Phong模型一样的效果，需要增大镜面高光系数，通常是Phong模型中的镜面高光系数的2到4倍。</p>
-<p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL26_BlinnPhong" target="_blank" rel="external">这里</a>。</p>
-<p>&nbsp;</p>
-<hr>
-<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+<p>参考文献：《C++Primer第五版》</p>
 
       
     </div>
@@ -85,13 +123,13 @@
         
   
   <div class="categories">
-    <a href="/categories/OpenGL/">OpenGL</a>
+    <a href="/categories/C/">C++</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/Blinn-Phong/">Blinn-Phong</a>
+    <a href="/tags/C-Primer/">C++Primer</a>
   </div>
 
         
@@ -125,7 +163,7 @@
 
  
   	   <!-- 多说评论框 start -->
- 		<div class="ds-thread" data-thread-key="2017/05/24/OpenGL26Blinn-Phong模型/" data-title="OpenGL26：Blinn-Phong模型" data-url="http://yoursite.com/2017/05/24/OpenGL26Blinn-Phong模型/"></div>
+ 		<div class="ds-thread" data-thread-key="2017/11/04/C++Primer第一章开始/" data-title="C++Primer第一章开始" data-url="http://yoursite.com/2017/11/04/C++Primer第一章开始/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
