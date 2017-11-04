@@ -85,11 +85,9 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two numbers:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
 <p>我们在输出语句中用了两次&lt;&lt;运算符。因为此运算符返回其左侧的运算对象，因此第一个运算符的结果成为了第二个运算符的左侧运算对象，即等价于：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter two numbers:"</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<p>其中std::endl被称为操纵符，写入endl的效果是结束当前行，并将于设备关联的缓冲区(buffer)中的内容刷到设备中。缓冲刷新操作可以保证到目前为止程序所产生的所有输出都真正写入输出流中，而不是仅停留在内存中等待写入流。所以：</p>
+<p>程序员常常在调试时添加打印语句。这类语句应该保证“一直”刷新流。否则，如果程序崩溃，输出可能还留在缓冲区中，从而导致关于程序崩溃位置的错误推断。</p>
 </li>
-</ol>
-<p>   其中std::endl被称为操纵符，写入endl的效果是结束当前行，并将于设备关联的缓冲区(buffer)中的内容刷到设备中。缓冲刷新操作可以保证到目前为止程序所产生的所有输出都真正写入输出流中，而不是仅停留在内存中等待写入流。所以：</p>
-<p>   程序员常常在调试时添加打印语句。这类语句应该保证“一直”刷新流。否则，如果程序崩溃，输出可能还留在缓冲区中，从而导致关于程序崩溃位置的错误推断。</p>
-<ol>
 <li>标准库定义的所有名字都在命名空间std中。 </li>
 </ol>
 <p><font size="5" color="orange">注释简介</font></p>
@@ -98,6 +96,7 @@
 <li>当我们修改代码时，不要忘记同时更新注释。</li>
 </ol>
 <p><font size="5" color="orange">控制流</font></p>
+<hr>
 <ol>
 <li><p>如下程序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; value)</div><div class="line">		sum += value;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum is: "</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -108,6 +107,7 @@
 </li>
 </ol>
 <p><font size="5" color="orange">类简介</font></p>
+<hr>
 <ol>
 <li>标准库头文件通常不带后缀（string.h不属于标准库头文件，string头文件才是）。</li>
 <li><string.h>是旧的C头文件，对应的是基于char*的字符串处理函数（C++为了兼容C的标准库）；<string>是位于std中的C++头文件，对应的是基于string类的字符串处理函数；<cstring>是旧C头文件对应的std版本，所以也是基于char*的。</cstring></string></string.h></li>
