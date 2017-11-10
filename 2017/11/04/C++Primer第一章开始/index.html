@@ -35,7 +35,7 @@
 
 
 <!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/prism_default.css" />
 <link rel="stylesheet" href="/css/typo.css" />
 <!-- 文章页 -->
 <body class="is-loading">
@@ -116,13 +116,13 @@
                 <p><font size="5" color="orange">编写一个简单的C++程序</font><br><a id="more"></a></p>
 <hr>
 <ol>
-<li>在一些系统中，即使文件就在当前目录或文件夹中，也必须显式指出文件的位置。在此情况下，我们可以输入：<pre class=" language-c++"><code class="language-c++">$ .\prog1
+<li>在一些系统中，即使文件就在当前目录或文件夹中，也必须显式指出文件的位置。在此情况下，我们可以输入：<pre class=" language-cpp"><code class="language-cpp">$ <span class="token punctuation">.</span>\prog1
 </code></pre>
 “.”后面跟一个反斜线可以指出该文件在当前目录中。</li>
-<li>运行GNU编译器的命令是g++：<pre class=" language-c++"><code class="language-c++">$ g++ -o prog1 prog1.cc
+<li>运行GNU编译器的命令是g++：<pre class=" language-cpp"><code class="language-cpp">$ g<span class="token operator">++</span> <span class="token operator">-</span>o prog1 prog1<span class="token punctuation">.</span>cc
 </code></pre>
 其中，$是系统提示符；-o prog1是编译器参数，指定可执行文件的文件名；prog1.cc是代码源文件名。</li>
-<li>运行微软VS编译器的命令为cl：<pre class=" language-c++"><code class="language-c++">C:\User\me\Programs> cl /EHsc prog1.cpp
+<li>运行微软VS编译器的命令为cl：<pre class=" language-cpp"><code class="language-cpp">C<span class="token operator">:</span>\User\me\Programs<span class="token operator">></span> cl <span class="token operator">/</span>EHsc prog1<span class="token punctuation">.</span>cpp
 </code></pre>
 其中，C:\User\me\Programs&gt;是系统提示符，表示当前处于哪个路径下；命令cl可以调用编译器；/EHsc是编译器选项，用来打开标准异常处理。</li>
 </ol>
@@ -132,10 +132,10 @@
 <li>术语“流”想要表达的是：随之时间的推移，字符是顺序生成或消耗的。</li>
 <li>cerr通常用来输出警告和错误消息，clog用来输出程序运行时的一般性信息。如果是控制台程序的话，它俩和cout一样都是输出到控制台的。</li>
 <li><p>如下语句：</p>
-<pre class=" language-c++"><code class="language-c++">std::cout << "Enter two numbers:" << std::endl;
+<pre class=" language-cpp"><code class="language-cpp">std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Enter two numbers:"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
 </code></pre>
 <p>我们在输出语句中用了两次&lt;&lt;运算符。因为此运算符返回其左侧的运算对象，因此第一个运算符的结果成为了第二个运算符的左侧运算对象，即等价于：</p>
-<pre class=" language-c++"><code class="language-c++">(std::cout << "Enter two numbers:") << std::endl;
+<pre class=" language-cpp"><code class="language-cpp"><span class="token punctuation">(</span>std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Enter two numbers:"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
 </code></pre>
 <p>其中std::endl被称为操纵符，写入endl的效果是结束当前行，并将于设备关联的缓冲区(buffer)中的内容刷到设备中。缓冲刷新操作可以保证到目前为止程序所产生的所有输出都真正写入输出流中，而不是仅停留在内存中等待写入流。所以：</p>
 <p>程序员常常在调试时添加打印语句。这类语句应该保证“一直”刷新流。否则，如果程序崩溃，输出可能还留在缓冲区中，从而导致关于程序崩溃位置的错误推断。</p>
@@ -151,27 +151,27 @@
 <p><font size="5" color="orange">控制流</font></p>
 <hr>
 <ol>
-<li>如下程序：<br>```c++<br>#include <iostream></iostream></li>
+<li>如下程序：<br>```cpp<br>#include <iostream></iostream></li>
 </ol>
 <p>int main() {<br>    int sum = 0, value = 0;<br>    while (std::cin &gt;&gt; value)<br>        sum += value;<br>    std::cout &lt;&lt; “Sum is: “ &lt;&lt; sum &lt;&lt; std::endl;</p>
 <pre><code>return 0;
 </code></pre><p>}</p>
 <pre><code>   当遇到文件结束符（end-of-file），或遇到一个无效输入时（例如读入的值不是一个整数），istream对象的状态才会变为无效，才会退出上面的while循环。所以仅仅输入空格或者回车，是无法让上述循环终止的。可以输入一个字符来终止循环：
-```c++
+```cpp
 1 2 3  4 5
 6   7
 a
 Sum is: 28
 </code></pre><p>   除此之外，还可以输入文件结束符。在Windows系统中，输入文件结束符的方法是Ctrl+Z，然后按回车（Enter键），Unix系统中（包括Mac OS X系统），文件结束符输入是用Ctrl+D。</p>
-<pre class=" language-c++"><code class="language-c++">1 2 3^Z
-Sum is: 6
+<pre class=" language-cpp"><code class="language-cpp"><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token operator">^</span>Z
+Sum is<span class="token operator">:</span> <span class="token number">6</span>
 </code></pre>
 <p><font size="5" color="orange">类简介</font></p>
 <hr>
 <ol>
 <li>标准库头文件通常不带后缀（string.h不属于标准库头文件，string头文件才是）。</li>
 <li><string.h>是旧的C头文件，对应的是基于char*的字符串处理函数（C++为了兼容C的标准库）；<string>是位于std中的C++头文件，对应的是基于string类的字符串处理函数；<cstring>是旧C头文件对应的std版本，所以也是基于char*的。</cstring></string></string.h></li>
-<li>文件重定向：<pre class=" language-c++"><code class="language-c++">$ addIems <infile> outfile
+<li>文件重定向：<pre class=" language-cpp"><code class="language-cpp">$ addIems <span class="token operator">&lt;</span>infile<span class="token operator">></span> outfile
 </code></pre>
 $是操作系统提示符，addItems代表程序的可执行文件addItems.exe，则上述命令会从一个名为infile的文件读取输入，并将输出结果写入到一个名为outfile的文件中。用这种方法，我们就不必每次运行程序都往控制台手动输入一堆数据了。<br>&nbsp; </li>
 </ol>
