@@ -60,12 +60,12 @@ pre[class*="language-"] {
 
 /* Plugin styles: Line Numbers */
 pre[class*="language-"].line-numbers {
-	padding-top: 15px;
+	padding-top: 55px;
 	padding-left: 0;
 }
 
 pre[class*="language-"].line-numbers code {
-	padding-top: 15px;
+	padding-top: 55px;
 	padding-left: 3.8em;
 }
 
