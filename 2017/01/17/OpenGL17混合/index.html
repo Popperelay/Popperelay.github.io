@@ -120,15 +120,15 @@
 <hr>
 <p><font size="5" color="orange">丢弃片段来实现全透明</font><br>有些纹理是纹理部分要么全透明，要么不透明，不存在半透明的部分。如下面的草纹理，它没有半透明的部分：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463674953.png" alt=""><br>对于这种纹理，我们可以直接丢弃全透明部分的片段，没有必要将它存储到颜色缓冲中，更没有必要使用混合技术。</p>
 <p>首先，我们需要更改一下SOIL加载图片的方式，我们需要以RGBA的方式去加载带有alpha值的纹理（如果某些像素没有alpha值将会被设为1.0）：</p>
-<pre class=" language-c++"><code class="language-c++">    //加载纹理图像
+<pre class="line-numbers language-c++"><code class="language-c++">    //加载纹理图像
     unsigned char* image = SOIL_load_image(texturePath, &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>不要忘记还要改变OpenGL生成纹理的方式：</p>
-<pre class=" language-c++"><code class="language-c++">    //生成2D纹理
+<pre class="line-numbers language-c++"><code class="language-c++">    //生成2D纹理
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>绘制草的着色器很简单，仅仅是让片段颜色等于纹素颜色而已，代码如下：<br>顶点着色器（写在grass.vertex中）：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 layout (location=0) in vec3 position;
 layout (location=1) in vec2 texCoords;
 
@@ -142,9 +142,9 @@ void main(){
     gl_Position = projection * view * model * vec4(position,1.0f);
     TexCoords = vec2(texCoords.x ,1 - texCoords.y); 
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>像素着色器（写在grass.fragment中）：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
 
@@ -153,9 +153,9 @@ uniform sampler2D texture1;
 void main(){
     color = texture(texture1,TexCoords);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>设置草平面的顶点属性如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //草平面的顶点属性（位置坐标、纹理坐标）
+<pre class="line-numbers language-c++"><code class="language-c++">    //草平面的顶点属性（位置坐标、纹理坐标）
     GLfloat grass_vertices[] = {
         //顶点位置坐标    //纹理坐标
         0.5f, 0.5f, 0.0f, 1.0f,1.0f,
@@ -167,9 +167,9 @@ void main(){
        -0.5f,-0.5f, 0.0f, 0.0f,0.0f,
 
     };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来需要对它进行VAO绑定和数据解析：</p>
-<pre class=" language-c++"><code class="language-c++">    //草平面顶点数据的绑定和解析
+<pre class="line-numbers language-c++"><code class="language-c++">    //草平面顶点数据的绑定和解析
     GLuint grassVAO, grassVBO;
     glGenVertexArrays(1, &grassVAO);
     glBindVertexArray(grassVAO);
@@ -181,25 +181,25 @@ void main(){
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), (GLvoid*)(3 * sizeof(GL_FLOAT)));
     glBindVertexArray(0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>还需要加载草纹理：</p>
-<pre class=" language-c++"><code class="language-c++">    TextureLoader texLoader;
+<pre class="line-numbers language-c++"><code class="language-c++">    TextureLoader texLoader;
     GLuint grassTexture = texLoader.LoadTexture("grass.png");
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>由于要绘制多株草，我们给每株草设置不同的位置：</p>
-<pre class=" language-c++"><code class="language-c++">    //草的位置
+<pre class="line-numbers language-c++"><code class="language-c++">    //草的位置
     vector<vec3> grass_location;
     grass_location.push_back(vec3(-1.5f, 0.0f, -0.48f));
     grass_location.push_back(vec3(1.5f, 0.0f, 0.51f));
     grass_location.push_back(vec3(0.0f, 0.0f, 0.7f));
     grass_location.push_back(vec3(-0.3f, 0.0f, -2.3f));
     grass_location.push_back(vec3(0.5f, 0.0f, -0.6f));
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为了绘制草所定义的着色器对象如下：</p>
-<pre class=" language-c++"><code class="language-c++">    shader grass_shader("grass.vertex", "grass.fragment");
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    shader grass_shader("grass.vertex", "grass.fragment");
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>最后就是在渲染循环里绘制几株草了：</p>
-<pre class=" language-c++"><code class="language-c++">        //绘制几株草
+<pre class="line-numbers language-c++"><code class="language-c++">        //绘制几株草
         glBindVertexArray(grassVAO);
         glBindTexture(GL_TEXTURE_2D, grassTexture);
         for (int i = 0; i < grass_location.size(); i++) {
@@ -209,9 +209,9 @@ void main(){
             glDrawArrays(GL_TRIANGLES, 0, 6);
         }
         glBindVertexArray(0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846367522.png" alt=""><br>出现这种结果是因为OpenGL默认是不知道如何处理alpha值得，需要我们自己来设置。在像素着色器中，当片段的alpha值小于某一指定值时，就使用discard命令丢弃它。discard是GLSL为我们提供的用于丢弃片段的命令：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
 
@@ -223,45 +223,45 @@ void main(){
         discard;
     color=texColor;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463921017.png" alt=""><br>可以看到绘制出来的每张草纹理上方会有一个白边，这是因为我们的纹理设置得是REPEAT环绕方式，在采样纹理边缘的时候，OpenGL会在该边缘和环绕的下一张重复纹理的边缘之间插值，这里上方的白边就是草纹理的透明上边缘和下边缘（绿色）插值的结果。为了防止四周这种白边的出现，我们需要把纹理环绕方式设置为<code>GL_CLAMP_TO_EDGE</code>：</p>
-<pre class=" language-c++"><code class="language-c++">    //设置纹理s和t方向的环绕方式
+<pre class="line-numbers language-c++"><code class="language-c++">    //设置纹理s和t方向的环绕方式
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463922702.png" alt=""><br>草确实没有了白边，但是地面很诡异了，地面纹理边缘也被拉伸了。地面纹理和草纹理应该是不同的环绕方式，所以，我们给TextureLoader类的<code>LoadTexture</code>函数加一个参数，表示s和t方向上的环绕方式，函数声明如下：</p>
-<pre class=" language-c++"><code class="language-c++">    GLuint LoadTexture(const GLchar* texturePath, GLint wrap_st = GL_REPEAT);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    GLuint LoadTexture(const GLchar* texturePath, GLint wrap_st = GL_REPEAT);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在<code>LoadTexture</code>函数的实现中，就用这个<code>wrap_st</code>参数来设置纹理环绕方式：</p>
-<pre class=" language-c++"><code class="language-c++">    //设置纹理s和t方向的环绕方式
+<pre class="line-numbers language-c++"><code class="language-c++">    //设置纹理s和t方向的环绕方式
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap_st);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap_st);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>现在加载草纹理和地面纹理应该是这样：</p>
-<pre class=" language-c++"><code class="language-c++">    TextureLoader texLoader;
+<pre class="line-numbers language-c++"><code class="language-c++">    TextureLoader texLoader;
     GLuint grassTexture = texLoader.LoadTexture("grass.png", GL_CLAMP_TO_EDGE);
     GLuint planeTexture = texLoader.LoadTexture("container.jpg");
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463924882.png" alt=""><br>所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL17_Blend/LearnOpenGL17_Blend_1" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">混合原理</font><br>上诉丢弃片段的方式，虽然可以实现全透明效果，但是不能渲染半透明图像。为了能够实现半透明，我们需要先开启混合：</p>
-<pre class=" language-c++"><code class="language-c++">    //开启混合
+<pre class="line-numbers language-c++"><code class="language-c++">    //开启混合
     glEnable(GL_BLEND);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">混合方程</font><br>OpenGL是按照以下混合方程进行混合的：<br>$$<br>\begin{equation}<br>Result=source*sFactor+destination*dFactor<br>\end{equation}<br>$$<br>source是源颜色向量，是将要绘制的纹理的颜色向量；destination是目标颜色向量，是存储在颜色缓冲中当前位置的颜色向量。sFactor和dFactor分别是对源颜色目标颜色的影响系数。</p>
 <p>系数着色器运行完成并且所有的测试都通过以后，混合方程才开始执行。方程中的源和目标颜色会自动被OpenGL设置，而源和目标颜色的影响因子是由我们来设置的。比如现在有以下两个方块（或者说放大了的片段）：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148464152063.png" alt=""><br>我们希望在红色方块上绘制绿色方块。红色方块将是目标颜色（它会先进入颜色缓冲中），绿色方块将是源颜色。如果我们把源颜色影响因子设为源颜色的alpha值0.6， 把目标颜色影响因子设为剩下（1-0.6），那么混合方程将是：<br>$$<br>\begin{equation}<br>Result =<br>\begin{pmatrix}<br>0.0 \\<br>1.0 \\<br>0.0 \\<br>0.6<br>\end{pmatrix}<br>* 0.6 +<br>\begin{pmatrix}<br>1.0 \\<br>0.0 \\<br>0.0 \\<br>1.0 \\<br>\end{pmatrix}<br>* (1 - 0.6)<br>\end{equation}<br>$$<br>最终方块将包含60%的绿色和40的红色：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846421609.png" alt=""></p>
 <p><font size="4" color="red">设置源和目标颜色的影响因子</font><br>我们使用<code>glBlendFunc</code>函数来设置这两个影响因子，函数原型如下：</p>
-<pre class=" language-c++"><code class="language-c++">void glBlendFunc(GLenum sfactor, GLenum dfactor)
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">void glBlendFunc(GLenum sfactor, GLenum dfactor)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这两个参数可以设置为下列选项：<br><img src="" alt=""><br>为了获得混合效果，把源颜色的alpha给源因子，1-alpha给目标因子：</p>
-<pre class=" language-c++"><code class="language-c++">glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>glBlendFunc</code>函数是为R、G、B、A这四个分量都设置了相同的影响因子。其实我们还可以不用混合方程，直接使用<code>glBlendFuncSeperate</code>函数为最终颜色的每个分量设置一个值，例如：</p>
-<pre class=" language-c++"><code class="language-c++">glBlendFuncSeperate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE, GL_ZERO);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glBlendFuncSeperate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA,GL_ONE, GL_ZERO);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><font size="4" color="red">混合方程不止于加</font><br>我们之前给的混合方程是源颜色和目标颜色按比例相加，其实还可以是减、逆序减。这需要用到<code>glBlendEquation</code>函数。函数原型如下：</p>
-<pre class=" language-c++"><code class="language-c++">void glBlendEquation(GLenum mode)
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">void glBlendEquation(GLenum mode)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>它的参数有以下选项：</p>
 <ul>
 <li>GL_FUNC_ADD：相加，这是默认的，$Result = Src + Dst$。</li>
@@ -271,14 +271,14 @@ void main(){
 <hr>
 <p><font size="5" color="orange">渲染半透明纹理</font><br>现在我们开始用OpenGL来渲染下面这个半透明的窗子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846446012.png" alt=""></p>
 <p>首先我们需要开启混合，并设置合适的混合方程：</p>
-<pre class=" language-c++"><code class="language-c++">    //开启混合
+<pre class="line-numbers language-c++"><code class="language-c++">    //开启混合
     glEnable(GL_BLEND);
     //混合方程
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里是让源颜色影响因子等于源颜色的alpha值，目标颜色的影响因子等于1-源颜色的alpha。</p>
 <p> 现在我们是用混合来绘制半透明窗子的，不需要丢弃片段了，将像素着色器改回来：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
 
@@ -291,7 +291,7 @@ void main(){
     color=texColor;*/
     color = texture(texture1,TexCoords);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148464557355.png" alt=""><br>&nbsp; </p>
 <hr>
 <p>但是有个很明显的问题，前面的窗子并不能透明显示后面的窗子。这是因为深度测试并不关心alpha值，所以前面的窗子就会挡住后面的窗子，即使前面的窗子是透明的，它也会把后面窗子被挡住的片段丢弃。</p>
@@ -302,35 +302,35 @@ void main(){
 </ol>
 <p>如果由远及近地绘制透明物体，那么在绘制近一些的透明物体时，就会混合远处的透明物体，最终会产生正确的结果。</p>
 <p>几个窗子的位置如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //窗子的位置
+<pre class="line-numbers language-c++"><code class="language-c++">    //窗子的位置
     vector<vec3> window_location;
     window_location.push_back(vec3(-1.5f, 0.0f, -0.48f));
     window_location.push_back(vec3(1.5f, 0.0f, 0.51f));
     window_location.push_back(vec3(0.0f, 0.0f, 0.7f));
     window_location.push_back(vec3(-0.3f, 0.0f, -2.3f));
     window_location.push_back(vec3(0.5f, 0.0f, -0.6f));
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们以窗子到摄像机的距离作为键，以窗子的位置作为键对应的值，会 建键值对数据结构map，map会自动对键进行排序，也就是map会自动排序窗子到摄像机的距离。<br>【注】：</p>
 <ul>
 <li>map是STL库中的数据结构，是键值对的集合，可以用键作为下标来访问对应的值。</li>
 </ul>
 <p>在渲染循环中，我们创建一个map，并且把窗子到摄像机的距离作为键，把当前窗子作为键对应的值： </p>
-<pre class=" language-c++"><code class="language-c++">        //把多个窗子位置存入map数据结构中，以窗子到摄像机的距离为键
+<pre class="line-numbers language-c++"><code class="language-c++">        //把多个窗子位置存入map数据结构中，以窗子到摄像机的距离为键
         map<float, vec3> sortedWindow;
         for (int i = 0; i < window_location.size(); i++) {
             GLfloat distance = length(mycamera.cameraPos - window_location[i]);
             sortedWindow[distance] = window_location[i];
         }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在绘制时，我们逆序遍历这个map，就能由远及近地绘制出每个窗子：</p>
-<pre class=" language-c++"><code class="language-c++">        //逆序访问键值对map，由远及近地绘制透明窗子
+<pre class="line-numbers language-c++"><code class="language-c++">        //逆序访问键值对map，由远及近地绘制透明窗子
         for (map<float, vec3>::reverse_iterator it = sortedWindow.rbegin(); it != sortedWindow.rend(); ++it) {
             model = mat4();
             model = translate(model, it->second);
             glUniformMatrix4fv(glGetUniformLocation(grass_shader.shaderProgram, "model"), 1, GL_FALSE, value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 6);
         }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>reverse_iterator</code>是逆序迭代器，<code>it-&gt;second</code>是键值对中的第二个元素，这里就是键对应的值，窗子的位置。</p>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148465013058.png" alt=""></p>
 <p>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL17_Blend/LearnOpenGL17_Blend_2" target="_blank" rel="external">在这里</a>。</p>

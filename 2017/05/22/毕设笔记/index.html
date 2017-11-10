@@ -125,7 +125,7 @@
 <li>使用完纹理后，一定要记得立即解绑，否则可能出现很诡异的结果。</li>
 <li><p>shader里的着色器缓冲对象SSBO和uniform缓冲对象UBO等等，有std140或者std430的修饰时，一定要注意字节对齐。</p>
 <p>比如下面这个着色器里的缓冲对象SSBO：</p>
-<pre class=" language-c++"><code class="language-c++">struct Light{
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
  vec3 Position;    //世界坐标
  vec3 Color;
  float radius;     //光体积半径
@@ -133,43 +133,43 @@
 layout (std430, binding = 3) buffer LightsData{
  Light lights[];
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为buffer里的成员是结构体，而根据std140和std430的对齐规则，结构体对齐值应该是结构体内最大成员的对齐值，所有上面结构体Light的对齐值就应该是vec4，即16字节对齐（vec3需要按vec4算）。也就是说GPU每次是按16字节一起读的，所以为了值正确，我们需要把上述结构体改为：</p>
-<pre class=" language-c++"><code class="language-c++">struct Light{
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
  vec3 Position;    //世界坐标
  float none;       //用作16字节对齐
  vec3 Color;
  float radius;     //光体积半径
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>或者：</p>
-<pre class=" language-c++"><code class="language-c++">struct Light{
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
  vec4 Position;    //世界坐标
  vec3 Color;
  float radius;     //光体积半径
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果还是原来的Light结构体的话，读vec3类型的Position时，会一次直接读走32个字节（vec4），这样就把Position后面的Color的前4个字节读走了，导致Position和Color的值都不正确。所以我们可以把Position改成vec4，或者在它后面添加一个float，来补足16字节。后面vec3类型的Color和float类型的radius正好组成16字节，可以一次读走，每个成员数据在读的时候没有被中断而分成两半，所以这样读出来的值才是正确的。</p>
 </li>
 <li>使用<code>glTexImage2D</code>函数生成图片后一定要设置图片的过滤方式，否则图片不会显示。</li>
 <li>实验证明，如果不使用<code>glClear</code>清除深度缓冲，OpenGL默认深度值是0.0。使用该函数清除了深度缓冲之后，才会将深度值设为1.0。所以如果一直不使用<code>glClear(GL_DEPTH_BUFFER_BIT)</code>，而且开启了深度测试，将会黑屏，画不出来任何东西，因为深度值是0.0，每个片段都无法通过深度测试。</li>
 <li>如果在自定义的帧缓冲里有深度测试，一定要给自定义的帧缓冲绑定深度附件（渲染缓冲或者纹理附件都可以），否则深度测试无效。傻B又惨痛的教训~~</li>
 <li><p>某个变量在shader里没有被赋值给别的变量，那么它就不会被NSight显示出正确的值。想要看出它的正确值，只有把它再赋值给另一个变量了，观察另一个变量的值是多少。如下面的程序：</p>
-<pre class=" language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
+<pre class="line-numbers language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
     ...
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>在循环过程中，由于i没有被赋值给别的变量，所以NSight所显示出来的i值就一直是0，如果想看到i的值，可以加一行代码，如下：</p>
-<pre class=" language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
+<pre class="line-numbers language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
     int j = i;
     ...
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>用NSight调试可以看到，i的值虽然一直都是0，但是j的值却会从0变到4。</p>
 <p>这个结论不一定正确，只是经验之谈。不过却提供了一种调试的方法，当发现NSight给出的值明显不正确时（它可能给出的是0或者？？？等等），可以把它赋给另一个变量，就可以看到正确的值了。</p>
 </li>
 <li><p>GPU对于if-else的处理，并不像LearnOpenGL中（Deferred Shading那一节）讲得那样：为了GPU高度并行if分支和else分支都会被执行，执行完之后再回滚。做实验如下：</p>
-<pre class=" language-c++"><code class="language-c++">#version 430 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 430 core
 
 out vec4 color;
 
@@ -181,9 +181,9 @@ void main(){
       while(true){}        
     }
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果if和else分支都执行，那么程序将陷入死循环，但是实际运行结果是屏幕上会出现红色矩形（该着色器用于绘制一个矩形），说明else分支没有被执行。如果把程序改成如下，将会陷入死循环（实验的结果就是重启电脑吧！卡住了！）：</p>
-<pre class=" language-c++"><code class="language-c++">#version 430 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 430 core
 
 out vec4 color;
 
@@ -196,32 +196,32 @@ void main(){
       while(true){}        
     }
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>自定义程序实现的前置深度测试：比如我们需要对一个模型进行很多很复杂的光照计算，为了不让被遮挡住的片元也去进行光照计算（因为被遮挡的片元颜色是不会显示出来的，它所进行的关照计算对最后的显示结果是多余的），我们可以采用延迟着色（Deferred Shading）或前向着色（forward shading）。延迟着色很好理解，而对于前向着色，为了不让被遮挡的片元也进行光照计算，我们也可以向延迟着色一样，把光照阶段剥离出来：先开启深度测试把模型绘制一遍，把深度值保存到深度纹理中，这样在深度纹理中的深度值就是模型最靠近摄像机的片元的深度值了（这是第一个pass）；接着我们再把模型绘制一遍，在这次绘制中，我们先在片元着色器里，判断当前片元的深度值是否大于深度纹理中对应位置的深度值，如果是则直接返回，不用再进行接下来的光照计算，否则照常进行光照计算，赋予片元光照下的颜色值：</p>
-<pre class=" language-c++"><code class="language-c++">void main(){
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
     if(gl_FragCoord.z > texture(TexForDepth, vec2(gl_FragCoord.x/1024.0f, gl_FragCoord.y/768.0f)).r ){
         return;
     }
     //执行光照计算
     ...
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样一来，就只有最后会被显示到窗口上的片元才会去执行光照计算，大大减少了光照计算的次数。</p>
 <p>但是在实际运用中，按照上诉代码来实现前置深度测试，会出现如下图所示的抖动现象：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149225097087.png" alt=""><br>这通常是由于计算机对浮点数精度表示的不准确而造成的，我们在条件判断的时候加上一个很小的误差就能解决这个问题了：</p>
-<pre class=" language-c++"><code class="language-c++">void main(){
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
     if(gl_FragCoord.z > texture(TexForDepth, vec2(gl_FragCoord.x/1024.0f, gl_FragCoord.y/768.0f)).r  + 0.00001){
         return;
     }
     //执行光照计算
     ...
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149225097469.png" alt=""></p>
 </li>
 <li>GLFW的回调函数：按键回调函数、鼠标位置回调函数、鼠标滚轮回调函数等等，都是在事件触发之后才会执行的。也就是说鼠标放在窗口里不动，是不会调用鼠标位置回调函数的。</li>
 <li>类的私有构造函数是不会被执行的。比如单例模式中的私有构造函数。</li>
-<li>在单例模式中，返回的实例对象最好是指针类型的，如果是直接返回静态的实例对象，那么在其他地方对返回的这个实例对象的修改是不会影响到原单例类的实例对象的：<pre class=" language-c++"><code class="language-c++">单例类A：
+<li>在单例模式中，返回的实例对象最好是指针类型的，如果是直接返回静态的实例对象，那么在其他地方对返回的这个实例对象的修改是不会影响到原单例类的实例对象的：<pre class="line-numbers language-c++"><code class="language-c++">单例类A：
 static A getInstance(){
     return m_Instance;
 }
@@ -232,11 +232,11 @@ void init(){
 A::getInstance().init();
 另一个类C：
 cout<<A::getInstance().m_Count<<endl;
-</code></pre>
-A只是返回了实例对象，而不是对象指针，也就是说B类中通过<code>getInstance</code>得到的对象和A类中的<code>m_Instance</code>不是同一个对象，所以即使在B类中对成员变量<code>m_Count</code>做了初始化，但是<code>m_Instance</code>是没有任何变化的，所以在C类里再去得到<code>m_Instance</code>实例对象的<code>m_Count</code>属性，输出将会是0。<br>应该改为：<pre class=" language-c++"><code class="language-c++">static A* getInstance(){
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+A只是返回了实例对象，而不是对象指针，也就是说B类中通过<code>getInstance</code>得到的对象和A类中的<code>m_Instance</code>不是同一个对象，所以即使在B类中对成员变量<code>m_Count</code>做了初始化，但是<code>m_Instance</code>是没有任何变化的，所以在C类里再去得到<code>m_Instance</code>实例对象的<code>m_Count</code>属性，输出将会是0。<br>应该改为：<pre class="line-numbers language-c++"><code class="language-c++">static A* getInstance(){
     return &m_Instance;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>可能出现黑屏的原因：</p>
 <ul>
@@ -249,7 +249,7 @@ A只是返回了实例对象，而不是对象指针，也就是说B类中通过
 <li><p>OpenGL默认使用<code>glEnable(GL_MULTISAMPLE)</code>开启多重采样，想要关闭多重采样，需要注释掉<code>glfwWindowHint(windon, 4);</code>，只使用<code>glDisable(GL_MULTISAMPLE)</code>是不够的。</p>
 </li>
 <li><p>复制帧缓冲时，如果帧缓冲上有多个纹理附件，需要使用<code>glReadBuffer</code>和<code>glDrawBuffer</code>函数指定附件来一个一个地复制：</p>
-<pre class=" language-c++"><code class="language-c++">    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_DeferredFBO);
+<pre class="line-numbers language-c++"><code class="language-c++">    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_DeferredFBO);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_CommonFBO);
     glDrawBuffer(GL_COLOR_ATTACHMENT0);
@@ -268,7 +268,7 @@ A只是返回了实例对象，而不是对象指针，也就是说B类中通过
     glBlitFramebuffer(0, 0, WIDTH, HEIGHT, 0, 0, WIDTH, HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>运行时屏幕上出现分块的原因：<ol>
 <li>没有清空存储影响光源编号的SSBO缓存。</li>

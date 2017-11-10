@@ -118,7 +118,7 @@
 <hr>
 <p><font size="5" color="orange">纹理概述</font><br>幸运的是，还有另一种方式。我们可以先照一张砖墙的照片，让GPU自动提取这张照片上的像素，然后画到屏幕上。这张用于GPU提取像素颜色的照片，就叫做纹理。纹理通常是一个2D图片（也有1D和3D的纹理）。可以想象纹理是一张绘有砖块的纸，无缝折叠贴合到我们的3D房子上，这样我们的房子看起来就像有砖墙外表了。这样我们就不用去一个一个地去指定纹理中每个纹素（纹理中的像素）的颜色了，只需要指定怎样把纹理贴到我们的模型（比如一个三角形、矩形甚至3D房子）上。举个例子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025320358.png" alt=""><br>为了把这张木箱纹理贴到图中红色三角形上，我们需要指定三角形的顶点对应纹理的那个位置。这个位置我们叫做纹理坐标，表示纹素在纹理上的位置，通常坐标值在0.0到1.0之间，原点通常在纹理左下角。我们把三角形左下角顶点对应纹理坐标（0,0），把三角形右下角顶点对应纹理坐标（1,0），把三角形上中顶点对应纹理坐标（0.5,1.0）。我们只要给顶点着色器传递这三个顶点纹理坐标就行了，接下来它们会被传到像素着色器中，GPU会根据三角形顶点纹理坐标，去为三角形内部点进行插值（根据内部点坐标和顶点坐标的关系，去纹理中找相应纹素颜色）。使用纹理坐标获取纹理颜色叫做采样。</p>
 <p>这么说来，纹理坐标也应该是三角形顶点的一个属性，所以我们定义如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //三角形顶点的坐标、颜色、纹理坐标
+<pre class="line-numbers language-c++"><code class="language-c++">    //三角形顶点的坐标、颜色、纹理坐标
     GLfloat vertices[] = {
         //位置坐标         //颜色           //纹理坐标
         0.5f, 0.5f, 0.0f,  1.0f,0.0f,0.0f,  1.0f,1.0f,
@@ -126,11 +126,11 @@
         -0.5f,-0.5f,0.0f,  0.0f,0.0f,1.0f,  0.0f,0.0f,
         -0.5f,0.5f, 0.0f,  1.0f,1.0f,0.0f,  0.0f,1.0f
     };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">告诉OpenGL如何解析顶点数据</font><br>由于顶点数据中增加了纹理坐标，我们需要重新设置OpenGL如何解析顶点数据：</p>
-<pre class=" language-c++"><code class="language-c++">    //告诉OpenGL如何解析显存中的顶点位置属性数据
+<pre class="line-numbers language-c++"><code class="language-c++">    //告诉OpenGL如何解析显存中的顶点位置属性数据
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
     //打开顶点位置属性数组
     glEnableVertexAttribArray(0);
@@ -142,16 +142,16 @@
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
     //打开顶点纹理坐标属性数组
     glEnableVertexAttribArray(2);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>每个顶点属性的步长都变成了<code>8*sizeof(GLfloat)</code>，起始偏移量（最后一个参数）也发生了变化。顶点纹理坐标属性对应顶点着色器中的location为2。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">创建纹理和绑定对象</font><br>和创建顶点数组对象VAO等一样，使用纹理前，我们需要创建和绑定纹理对象：</p>
-<pre class=" language-c++"><code class="language-c++">    GLuint texture;
+<pre class="line-numbers language-c++"><code class="language-c++">    GLuint texture;
     //生成纹理对象texture
     glGenTextures(1, &texture);
     //给纹理对象绑定目标（2D纹理）
     glBindTexture(GL_TEXTURE_2D, texture);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们使用的是2D纹理，所以纹理目标是GL_TEXTURE_2D。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">加载纹理</font><br>创建和绑定完纹理对象之后，我们把纹理从文件中加载进来。</p>
@@ -160,14 +160,14 @@
 <p><font size="4" color="">简易OpenGL图像库SOIL</font><br>SOIL是简易OpenGL图像库（Simple OpenGL Image Library）的缩写，它支持大多数流行的图像格式。可以从<a href="http://www.lonesock.net/soil.html" target="_blank" rel="external">这里</a>下载。下载完成后用VS打开\projects\VC8目录下的SOIL.sln，生成解决方案后，从debug文件夹里取得SOIL.lib文件，将它添加到我们自己建的Libs文件夹里，再把src文件夹下的所有.h头文件添加到我们自己建的Includes文件夹里，并且在自己的VS项目中链接上SOIL.lib（具体过程和<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《OpenGL1：OpenGL概述及环境配置》</a>一文中构建GLFW类似）。</p>
 <p>当然，在我们的源文件中还需要包含SOIL.h头文件：<code>#include &lt;SOIL.h&gt;</code></p>
 <p><font size="4" color="red">使用SOIL加载图片</font><br>下面我们加载一张<a href="https://learnopengl-cn.github.io/img/01/06/container.jpg" target="_blank" rel="external">木箱</a>图片。<br>首先使用SOIL库的<code>SOIL_load_image</code>函数把木箱图片数据加载到内存：</p>
-<pre class=" language-c++"><code class="language-c++">    int iamgeWidth, iamgeHeight;
+<pre class="line-numbers language-c++"><code class="language-c++">    int iamgeWidth, iamgeHeight;
     unsigned char* image = SOIL_load_image("container.jpg", &iamgeWidth, &iamgeHeight, 0, SOIL_LOAD_RGB);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>函数<code>SOIL_load_image</code>的第一个参数是需要加载的图片路径；然后需要两个int指针作为第二个和第三个参数，函数会分别返回图片的宽度和高度到其中；第4个参数指定图片的通道数量，这里设为0即可；最后一个参数告诉SOIL如何来加载图片，由于我们只关注图片的RGB值，所以设为SOIL_LOAD_RGB。函数返回一个很大的char（或者说byte）数组。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">生成纹理</font><br>图像数据已经有了，存储在image数组中，下面我们利用这些图形数据来在GPU上生成一张纹理：</p>
-<pre class=" language-c++"><code class="language-c++">    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iamgeWidth, iamgeHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>函数<code>glTexImage2D</code>的参数都表示什么？</p>
 <ul>
 <li>第一个参数是纹理绑定的目标GL_TEXTURE_2D</li>
@@ -181,8 +181,8 @@
 </ul>
 <p>当调用函数<code>glTexImage2D</code>时，当前绑定的纹理对象就会被附加上纹理图像。</p>
 <p>使用完图像内存数据后，释放所占用的内存是个好习惯：</p>
-<pre class=" language-c++"><code class="language-c++">    SOIL_free_image_data(image);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    SOIL_free_image_data(image);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p>接下来还需要对纹理进行一系列的配置，先来看对纹理环绕方式的配置。</p>
@@ -194,16 +194,16 @@
 <li>GL_CLAMP_TO_BORDER：超出坐标为用户指定的边缘颜色。</li>
 </ul>
 <p>当纹理坐标不在0到1之间时，每个选项都有不同的视觉输出效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025552863.png" alt=""><br>可以使用<code>glTextParameteri</code>函数来设置纹理的环绕方式：</p>
-<pre class=" language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+<pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>第一个参数指定了纹理对象所绑定的目标；第二个参数指定需要配置的选项和应用的纹理轴，因为我们打算配置的是纹理环绕方式wrap，并且需要配置S和T方向（纹理中的s、t、r轴等价于通常的x、y、z轴）的环绕方式。最后一个参数指定环绕方式，这里我们指定的都是重复纹理图像这种方式。</p>
 <p>【注】：</p>
 <ul>
-<li>如果我们选择GL_CLAMP_TO_BORDER这种纹理环绕方式，就还需要再指定一个边缘颜色。这时就需要再使用<code>glTexParameterfv</code>函数了：<pre class=" language-c++"><code class="language-c++">  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+<li>如果我们选择GL_CLAMP_TO_BORDER这种纹理环绕方式，就还需要再指定一个边缘颜色。这时就需要再使用<code>glTexParameterfv</code>函数了：<pre class="line-numbers language-c++"><code class="language-c++">  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
   GLfloat borderColor[] = { 1.0f,1.0f,0.0f,1.0f };
   glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 函数<code>glTexParameterfv</code>的第一个参数依旧是纹理对象绑定的目标；因为要设置边缘颜色，所以第二个参数变成了<code>GL_TEXTURE_BORDER_COLOR</code>；第三个参数是表示颜色的一个float数组。<br>&nbsp;</li>
 </ul>
 <hr>
@@ -224,16 +224,16 @@
 </ul>
 <p>放大和缩小图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033138491.png" alt=""></p>
 <p>我们可以使用<code>glTexParameteri</code>函数在图像放大滤波和缩小滤波选项时设置纹理滤波：</p>
-<pre class=" language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+<pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>第二个参数是放大滤波或者缩小滤波，第三个参数指定滤波方式。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">多级渐远纹理mipmap</font><br>一个物体，当它距离我们比较近时，需要很多像素去表现它；而当距离我们很远时，会看不大清楚，只有很少的像素需要被绘制，这时再从该物体对应的纹理中去找几个纹素来表现它，是很难的。因为它需要跨过纹理很大部分只拾取一个纹素，而且最终拾取出来的纹素凑在一起可能就面目全非了。更何况对于很远的物体去使用高分辨率的纹理无疑是浪费内存。</p>
 <p>OpenGL使用多级渐远纹理Mipmap来解决这个问题。mipmap其实就是一系列纹理图像，后一个纹理图像只有前一个纹理图像的一半大小。在观察者的距离在不同的距离范围时使用不同级别的mipmap。mipmap的另一个加分点是它的性能非常好。mipmap图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033241373.png" alt=""></p>
 <p><font size="4" color="red">mipmap滤波</font><br>在渲染中切换不同级别的mipmap时，会产生一些很明显的边界。对纹素的滤波也可以用到这里，来消除这些很生硬的边界。由于mipmap其实也相当于是把纹理缩小，所以它的滤滤波也是通过<code>glTexParameteri</code>函数在缩小滤波<code>GL_TEXTURE_MIN_FILTER</code>选项时来实现：</p>
-<pre class=" language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>函数的第三个参数就是要设置的mipmap滤波方式，它有一下几种选项（“mipmap”之后是mipmap滤波方式，之前是纹素滤波方式）：</p>
 <ul>
 <li><code>GL_NEAREST_MIPMAP_NEAREST</code>：使用最接近像素大小的mipmap，纹理内部使用最邻近滤波</li>
@@ -243,20 +243,20 @@
 </ul>
 <p>设置好mipmap的滤波之后，就可以来创建mipmap了。</p>
 <p><font size="4" color="red">创建mipmap</font><br>手工为每个纹理图像创建一系列mipmap挺麻烦的，不过OpenGL有一个<code>glGenerateMipmaps</code>函数，在创建完一个纹理后调用它，OpenGL就会自动建立该纹理的一系列mipmap了：</p>
-<pre class=" language-c++"><code class="language-c++">    glGenerateMipmap(GL_TEXTURE_2D);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    glGenerateMipmap(GL_TEXTURE_2D);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>如果不需要mipmap，那关于mipmap这里的操作可以不要。<br>&nbsp;</li>
 </ul>
 <hr>
 <p><font size="5" color="orange">解绑纹理对象</font><br>设置完纹理参数后，需要和别的对象一样，使用完之后解绑纹理对象：</p>
-<pre class=" language-c++"><code class="language-c++">    glBindTexture(GL_TEXTURE_2D, 0);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    glBindTexture(GL_TEXTURE_2D, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">更改顶点着色器</font></p>
-<pre class=" language-c++"><code class="language-c++">//顶点着色器
+<pre class="line-numbers language-c++"><code class="language-c++">//顶点着色器
 #version 330 core
 layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0
 layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1
@@ -268,11 +268,11 @@ void main(){
     ourColor=color;
     TexCoord=texCoord;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>顶点着色器需要增加一个纹理坐标的输入变量，由于只有s、t坐标，所以是vec2类型；还需要增加一个输出变量，用于输出纹理坐标给像素着色器。在main函数内把输入纹理坐标赋值给输出纹理坐标。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">更改像素着色器</font></p>
-<pre class=" language-c++"><code class="language-c++">//像素着色器
+<pre class="line-numbers language-c++"><code class="language-c++">//像素着色器
 #version 330 core
 in vec3 ourColor;
 in vec2 TexCoord;
@@ -282,14 +282,14 @@ uniform sampler2D ourTexture;
 void main(){
     color = vec4(ourColor,1.0f) * texture(ourTexture,TexCoord);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>像素着色器需要增加一个纹理坐标的输入变量；只有纹理坐标还不足以在像素着色器中输出对应纹素的颜色，我们还需要一个采样器（设置为uniform变量），让它结合纹理坐标、顶点坐标、纹理图像，进行插值获得每一个像素颜色。使用texture函数来使用采样器，第一个参数是我们设置的采用器，第二个参数是纹理坐标。</p>
 <p>在main函数内最终的输出颜色我们设置为顶点颜色和纹理颜色的混合。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">渲染时绑定纹理对象</font><br>设置完了纹理和相应的着色器，最后要做的就是在渲染循环里绑定纹理对象，这样才能渲染出纹理（这和绑定VAO是一个道理）。</p>
-<pre class=" language-c++"><code class="language-c++">        //绑定纹理
+<pre class="line-numbers language-c++"><code class="language-c++">        //绑定纹理
         glBindTexture(GL_TEXTURE_2D, texture);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p>自此，所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL5_Texture/LearnOpenGL5_Texture_1" target="_blank" rel="external">在这里</a>。</p>
@@ -297,7 +297,7 @@ void main(){
 <hr>
 <p><font size="5" color="orange">使用多个纹理</font></p>
 <p><font size="4" color="red">载入第二张图片</font><br>载入<a href="https://learnopengl-cn.github.io/img/01/06/awesomeface.png" target="_blank" rel="external">第二张图片</a>和第一张类似：</p>
-<pre class=" language-c++"><code class="language-c++">    GLuint texture1;
+<pre class="line-numbers language-c++"><code class="language-c++">    GLuint texture1;
     //生成纹理对象texture1
     glGenTextures(1, &texture1);
     //给纹理对象绑定目标（2D纹理）
@@ -341,9 +341,9 @@ void main(){
     glGenerateMipmap(GL_TEXTURE_2D);
     //解绑纹理对象
     glBindTexture(GL_TEXTURE_2D, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">更改像素着色器</font><br>使用多个纹理，我们就需要在像素着色器中使用多个采样器：</p>
-<pre class=" language-c++"><code class="language-c++">//像素着色器
+<pre class="line-numbers language-c++"><code class="language-c++">//像素着色器
 #version 330 core
 in vec3 ourColor;
 in vec2 TexCoord;
@@ -356,12 +356,12 @@ uniform sampler2D ourTexture2;
 void main(){
     color = vec4(ourColor,1.0f) * mix(texture(ourTexture1,TexCoord),texture(ourTexture2,TexCoord),0.41);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在main函数中使用mix函数来混合两个纹理，第一个参数是纹理1的纹素颜色，第二个参数是纹理2的纹素颜色，第3个参数是纹素2在最终输出颜色中所占的权重，代码中是59%的纹素1，41%的纹素2。</p>
 <p><font size="4" color="red">渲染中激活纹理单元并设置相应采样器</font><br>我们可以看到我们的采样器是被uniform声明的，但是很奇怪的是之前的源程序中，渲染时并没有对uniform全局变量ourTexture赋值，但是依旧有效并没有报错。这是因为我们的ourTexture变量是个采样器，通过多个采样器我们可以使用多个纹理。</p>
 <p>每个纹理都有一个位置值，称为纹理单元（有点像多个纹理叠加时的图层）。而对于纹理处在哪一层，即纹理单元是多少，就是通过使用<code>glUniform1i</code>函数来给采样器赋值，从而确定纹理单元值。但是默认情况下，当只使用一个纹理时，纹理单元<code>GL_TEXTURE0</code>总是被激活的，也就是这个采样器（或者说纹理单元）总是对应0（0图层），所以不需要显式使用<code>glUniform1i</code>函数去为采样器赋值。</p>
 <p>但是有多个纹理时，就没有默认了，需要显式为每个采样器指定一个整数值，对应被激活的图层（被激活的纹理单元）：</p>
-<pre class=" language-c++"><code class="language-c++">        //激活纹理单元
+<pre class="line-numbers language-c++"><code class="language-c++">        //激活纹理单元
         glActiveTexture(GL_TEXTURE0);
         //获取uniform变量位置
         GLint uniformLocation1 = glGetUniformLocation(myshader.shaderProgram, "ourTexture1");
@@ -374,7 +374,7 @@ void main(){
         GLint uniformLocation2 = glGetUniformLocation(myshader.shaderProgram, "ourTexture2");
         glUniform1i(uniformLocation2, 1);
         glBindTexture(GL_TEXTURE_2D, texture2);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在给采样器赋值之前，我们需要先激活纹理单元，活着说激活纹理图层，再给采样器赋以相应的被激活的纹理单元值，这样采样器才能读出纹素颜色。<br>【注】：</p>
 <ul>
 <li>如果采样器值对应的纹理单元没有被激活，是无法读出纹素的。因为默认纹理单元0是激活的，所以在只渲染一个纹理时，就不用去激活纹理单元并设置采样器值，默认就是用采样器0去纹理单元0（图层0）采集纹素颜色。</li>
@@ -385,7 +385,7 @@ void main(){
 <p><font size="4" color="red">翻转图片</font><br>可以看到第二张纹理上下颠倒了！这是因为OpenGL要求y轴0.0在图片底部，但是通常图片y轴0.0在图片顶部。有一些图片加载器比如DevIL在加载的时候有选项重载y原点，但是SOIL没有。所以，为了修复这个小问题，有两个选择：</p>
 <ul>
 <li>改变顶点的纹理坐标属性，翻转y值（用1减去y坐标）</li>
-<li>更改顶点着色器中对输出纹理坐标的赋值，也是用1减去y坐标：<pre class=" language-c++"><code class="language-c++">//顶点着色器
+<li>更改顶点着色器中对输出纹理坐标的赋值，也是用1减去y坐标：<pre class="line-numbers language-c++"><code class="language-c++">//顶点着色器
 #version 330 core
 layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0
 layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1
@@ -397,14 +397,14 @@ void main(){
   ourColor=color;
   TexCoord=vec2(texCoord.x,1-texCoord.y);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148034318836.png" alt=""><br>&nbsp;</li>
 </ul>
 <hr>
 <p>到此，使用两张纹理的全部源程序<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL5_Texture/LearnOpenGL5_Texture_2" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">纹理加载类</font><br>我们把上面主程序中加载纹理的部分单独封装成一个类：<br>纹理加载类的头文件：</p>
-<pre class=" language-c++"><code class="language-c++">#pragma once
+<pre class="line-numbers language-c++"><code class="language-c++">#pragma once
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -414,9 +414,9 @@ class TextureLoader {
 public:
     GLuint LoadTexture(GLchar* texturePath);
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>纹理加载类的源文件：</p>
-<pre class=" language-c++"><code class="language-c++">#include "TextureLoader.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "TextureLoader.h"
 
 GLuint TextureLoader::LoadTexture(GLchar* texturePath) {
     GLuint texture;
@@ -444,7 +444,7 @@ GLuint TextureLoader::LoadTexture(GLchar* texturePath) {
 
     return texture;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>主程序可以直接使用该类的<code>LoadTexture</code>函数直接加载图片了。全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL5_Texture/LearnOpenGL5_Texture_3" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>

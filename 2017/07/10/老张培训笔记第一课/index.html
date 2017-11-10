@@ -120,17 +120,17 @@
 <li>用设计模式去解决一些实际问题。</li>
 <li>团队交流的重要性不亚于个人的编码能力。</li>
 <li><p>若有一个简单的函数要实现几十个int型数据的加法，最粗暴的写法如下：</p>
-<pre class=" language-c++"><code class="language-c++">int Add(int n) {
+<pre class="line-numbers language-c++"><code class="language-c++">int Add(int n) {
  int sum = 0;
  for (int i = 0; i < n; i++) {
      sum += i;
  }
  return sum;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是如果需求变成几十个float型数据相加呢，是不是需要把上面函数中的int都换为float，如果还增加了double、char等等呢，需要重复写上诉代码？</p>
 <p>很显然，这样做就真的是码农了，花大把时间做体力活。应该使用模板，如下：</p>
-<pre class=" language-c++"><code class="language-c++">template <typename T>
+<pre class="line-numbers language-c++"><code class="language-c++">template <typename T>
 T Add(T n) {
  T sum = 0;
  for (T i = 0; i < n; i++) {
@@ -138,7 +138,7 @@ T Add(T n) {
  }
  return sum;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样就可以很方便的调用Add(100)，Add(100.0f)，Add(‘!’)等等了。值得注意的是，在模板函数中声明变量时必须同时赋值来初始化，如上面程序中的<code>T sum=0;</code></p>
 </li>
 <li>码农的定义：需求变化时，会有很多体力活要做。</li>
@@ -153,24 +153,24 @@ T Add(T n) {
 <li>具体的实现细节应该隐藏在类内部，外部只需要知道类的功能是什么。</li>
 <li><p>类的成员变量都应该尽量是私有的。甚至接口、虚基类里的成员变量也应该尽量私有（非保护）。为私有成员变量添加get、set函数，这样可以在get、set函数中对变量的读取、写入添加一些条件限制。</p>
 <p>比如某个私有成员变量m_Money，只有当它的值大于1000时，才允许被读取到外界：</p>
-<pre class=" language-c++"><code class="language-c++">int getMoney() {
+<pre class="line-numbers language-c++"><code class="language-c++">int getMoney() {
 if (m_Money > 1000)
     return m_Money;
 else
     return -1;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果将m_Money直接写为公有的，那么外界就可以直接读取到该变量，但是如果增加了上面这个读取条件限制，那么就需要在每个读取该变量的地方，加上条件限制，很显然体力活又来了。这就是为何需要将成员变量写为私有的原因。</p>
 </li>
 <li><p>如下代码：</p>
-<pre class=" language-c++"><code class="language-c++">vector<int> getMoney() {
+<pre class="line-numbers language-c++"><code class="language-c++">vector<int> getMoney() {
 vector<int> array;
 for (int i = 0; i < 100; i++) {
     array.push_back(i);
 }
 return array;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样的函数是不够好的，因为它向外界暴露了函数内部数据的存储方式为vector<int>，如果哪天把vector改为了List，那么外界所有调用该函数的地方可能都需要随之改变，把外界的vector改为List，体力活又来了。</int></p>
 <p>如果想返回vector里的所有数据，通常get函数会接收一个输入输出参数，比如数组，来存储vector里的所有数据。当然，这样好的设计风格确实带来了数据复制时的性能开销。</p>
 </li>

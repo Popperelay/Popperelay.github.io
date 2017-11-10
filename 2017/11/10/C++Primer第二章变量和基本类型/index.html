@@ -122,46 +122,46 @@
 <p>所以，在算术表达式中不要使用char和bool，只有在存放字符或布尔值时才使用它们。因为类型char在一些机器上是有符号的，而在另一些机器上又是无符号的，所以如果使用char进行运算特别容易出问题。如果需要使用一个不大的整数，那么明确指定它的类型是signed char或者unsigned char。int、short、long和long long都是有符号的。</p>
 </li>
 <li>执行浮点数运算时选用double，这是因为float通常精度不够而且双精度浮点数和单精度浮点数的计算代价相差无几。事实上，对于某些机器来说，双精度运算甚至比单精度还快。</li>
-<li>可以给无符号char赋以可表示范围之外的值，但是有符号char却不能，否则它的值将是未定义的：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//c的值等于0</span>
+<li>可以给无符号char赋以可表示范围之外的值，但是有符号char却不能，否则它的值将是未定义的：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//c的值等于0</span>
  <span class="token keyword">signed</span> <span class="token keyword">char</span> c2 <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//c2的值未定义</span>
  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>c <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>c2 <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
  虽然上面的程序可能正常运行，但是c2的值确实是未定义的。当给有符号类型赋以一个超出它可表示范围之外的值时，结果是未定义的。此时，程序可能继续工作、可能崩溃、也可能产生垃圾数据。</li>
-<li>不要在表达式中混用带符号和无符号类型。<br>比如对于无符号数的自减操作：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> u <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>u<span class="token punctuation">)</span>
+<li>不要在表达式中混用带符号和无符号类型。<br>比如对于无符号数的自减操作：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> u <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>u<span class="token punctuation">)</span>
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> u <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
-</code></pre>
-这个程序会陷入死循环。因为u是无符号数，减到0时，再减1会变成unsigned int类型可表示的最大整数，永远不会小于0。<br>再比如在混用带符号数和无符号数的表达式中，带符号数会自动转换为无符号数：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">unsigned</span> u <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+这个程序会陷入死循环。因为u是无符号数，减到0时，再减1会变成unsigned int类型可表示的最大整数，永远不会小于0。<br>再比如在混用带符号数和无符号数的表达式中，带符号数会自动转换为无符号数：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">unsigned</span> u <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">42</span><span class="token punctuation">;</span>
  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> u <span class="token operator">+</span> i <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//，如果int占32位，输出4294967264</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>如下面一组整型数字：<pre class=" language-cpp"><code class="language-cpp"> <span class="token number">20</span> <span class="token comment" spellcheck="true">/*十进制*/</span>    <span class="token number">024</span> <span class="token comment" spellcheck="true">/*八进制*/</span>    <span class="token number">0x14</span> <span class="token comment" spellcheck="true">/*十六进制*/</span>
-</code></pre>
+<li>如下面一组整型数字：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token number">20</span> <span class="token comment" spellcheck="true">/*十进制*/</span>    <span class="token number">024</span> <span class="token comment" spellcheck="true">/*八进制*/</span>    <span class="token number">0x14</span> <span class="token comment" spellcheck="true">/*十六进制*/</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  虽然这些数字都表示数字20，但是实际上它们不都是一样的。因为默认情况下，十进制字面值是带符号数，而八进制和十六进制既可能是带符号的也可能是无符号的。十进制字面值的类型是能够容纳其数值的int、long和long long中尺寸最小的那个，而八进制和十六进制字面值的类型是能够容纳其数字的int、unsigned int、long、unsigned long、long long和unsigned long long中的尺寸最小者。</li>
-<li>默认的浮点型字面值是一个double，可以加f后缀让其变成float型，加L变成long double型。还有一些不太常见的字面值前缀或者后缀：<pre class=" language-cpp"><code class="language-cpp"> L<span class="token string">'a'</span>      <span class="token comment" spellcheck="true">//宽字符型字面值，类型是wchar_t</span>
+<li>默认的浮点型字面值是一个double，可以加f后缀让其变成float型，加L变成long double型。还有一些不太常见的字面值前缀或者后缀：<pre class="line-numbers language-cpp"><code class="language-cpp"> L<span class="token string">'a'</span>      <span class="token comment" spellcheck="true">//宽字符型字面值，类型是wchar_t</span>
  u8<span class="token string">"hi!"</span>   <span class="token comment" spellcheck="true">//utf-8字符串字面值（utf-8用8位编码一个Unicode字符）</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>编译器会在每一个字符串字面值的结尾处添加一个空字符’\0’。</li>
-<li>C++除了’\n’等等转义字符外，还可以使用泛化的转义序列，其形式是\x后紧跟1个或多个十六进制数字，或者\后紧跟1个、2个或3个八进制数字。<br>如下：<pre class=" language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\x4d"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\115"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//输出M M</span>
-</code></pre>
- 要注意的是，反斜线\后面跟着的八进制数字超过3个时，只有前3个数字与\构成转义序列，如下：<pre class=" language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\1234"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//输出S4</span>
-</code></pre>
+<li>C++除了’\n’等等转义字符外，还可以使用泛化的转义序列，其形式是\x后紧跟1个或多个十六进制数字，或者\后紧跟1个、2个或3个八进制数字。<br>如下：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\x4d"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"\115"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//输出M M</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ 要注意的是，反斜线\后面跟着的八进制数字超过3个时，只有前3个数字与\构成转义序列，如下：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\1234"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//输出S4</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  “\1234”只表示2个字符，八进制数123对应的字符S以及字符4。</li>
 </ol>
 <p><font size="5" color="orange">变量</font></p>
 <hr>
 <ol>
 <li>初始化不是赋值，初始化的含义是创建变量时赋予其一个某一个初始值，而赋值的含义是把对象的当前值擦除，而以一个新值来替代。</li>
-<li>在C++11中，可以用花括号来初始化变量（也叫列表初始化）：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> n<span class="token punctuation">{</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
- 当用于内置类型的变量时，这种初始化形式有一个重要特点：如果我们使用列表初始化且初始值存在丢失信息的风险，编译器会报错。这在C++11之前通过等号或者括号来初始化变量是做不到的，如下：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> a<span class="token punctuation">{</span> <span class="token number">3.14</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//编译失败，因为存在信息丢失的危险</span>
+<li>在C++11中，可以用花括号来初始化变量（也叫列表初始化）：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> n<span class="token punctuation">{</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ 当用于内置类型的变量时，这种初始化形式有一个重要特点：如果我们使用列表初始化且初始值存在丢失信息的风险，编译器会报错。这在C++11之前通过等号或者括号来初始化变量是做不到的，如下：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> a<span class="token punctuation">{</span> <span class="token number">3.14</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//编译失败，因为存在信息丢失的危险</span>
  <span class="token keyword">int</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//编译通过，但是因为类型转换丢失了部分值</span>
  <span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//编译通过，但是因为类型转换丢失了部分值</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>定义在函数体外的变量会被默认初始化，但定义在函数内部的局部变量是不会被默认初始化的，它的值将是未定义的，如果试图拷贝或以其他形式访问此类值将引发错误：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> m<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//初始化为0</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> m<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//初始化为0</span>
  <span class="token keyword">char</span> c<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//初始化为空字符'\0'</span>
 
  <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
@@ -172,17 +172,17 @@
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> n <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//编译报错，n没有被默认初始化</span>
      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 不过类对象如果没有显示地初始化，则其值由类确定，如上面的str对象。</p>
 <p> 所以，建议初始化每一个内置类型的变量。为初始化的变量含有一个不确定的值，使用未初始化变量的值是一种错误的编程行为并且很难调试，因为严格来说，编译器并未被要求检查此类错误（虽然大多数编译器都会对一部分使用未初始化变量的行为提出警告），使用未初始化的变量将带来无法预计的后果。</p>
 </li>
 <li><p>如果想要声明一个变量而非定义它，可以在变量名前面加关键字extern，而不要显式地初始化变量：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i<span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">//声明并定义i</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i<span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">//声明并定义i</span>
  <span class="token keyword">extern</span> <span class="token keyword">int</span> j<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//声明j而非定义j</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p> 但是如果给extern声明的变量赋初值，那么就变成定义了：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">extern</span> <span class="token keyword">double</span> PI <span class="token operator">=</span> <span class="token number">3.1415926</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//声明并定义PI（不能在函数内部对extern声明的变量赋初值）</span>
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">extern</span> <span class="token keyword">double</span> PI <span class="token operator">=</span> <span class="token number">3.1415926</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//声明并定义PI（不能在函数内部对extern声明的变量赋初值）</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p> 变量只能被定义一次，但是可以被多次声明，即可以多次extern同一变量。</p>
 </li>
 </ol>
@@ -192,13 +192,13 @@
 <li>引用本身不是一个对象，只是某一个对象的别名。</li>
 <li>因为无法令引用重新绑定到另外一个对象上，所以引用必须被初始化（重新绑定的话会重复定义标识符）。</li>
 <li>因为引用本身不是一个对象，所以不能定义引用的引用，即不能给别名再起一个别名。</li>
-<li>允许在一条语句中定义多个引用，其中每个引用标识符都必须以符号&amp;开头（指针也是类似）：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<li>允许在一条语句中定义多个引用，其中每个引用标识符都必须以符号&amp;开头（指针也是类似）：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> n<span class="token punctuation">,</span> j <span class="token operator">=</span> n<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//i是n的引用，但j是int</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>i2 <span class="token operator">=</span> n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>j2 <span class="token operator">=</span> n<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//i2和j2都是n的引用</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>引用和指针的类型都要和与之绑定的对象严格匹配：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> d<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//编译报错，引用类型和绑定的对象类型不符</span>
  <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">double</span> <span class="token operator">&amp;</span>m <span class="token operator">=</span> n<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//编译报错，引用类型和绑定的对象类型不符</span>
@@ -207,7 +207,7 @@
  <span class="token keyword">int</span> <span class="token operator">*</span>pi <span class="token operator">=</span> <span class="token operator">&amp;</span>d<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//编译报错，指针类型和指向的对象类型不符</span>
  <span class="token keyword">int</span> nn <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">double</span> <span class="token operator">*</span>pm <span class="token operator">=</span> <span class="token operator">&amp;</span>nn<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//编译报错，指针类型和指向的对象类型不符</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>引用和指针有很多不同点：<ul>
 <li>指针本身就是一个对象，允许对指针赋值和拷贝，而且在指针的生命周期内它可以先后指向几个不同的对象，但是引用本身不是对象，一旦初始化后就不能被重新绑定到其他对象上。</li>
@@ -219,17 +219,17 @@
 <li>因为指针类型代表了其所指向对象的类型，通过类型才知道其指向对象的存储大小等等信息，才可以对它进行操作，所以指针类型和其指向对象的类型必须匹配（引用也是同理）。</li>
 <li>编译器可能不会检查无效指针和未初始化的变量，所以一定要记得初始化。</li>
 <li>“*“不仅是指针声明符，也是解引用符，所以通过*p能够访问到指针p所指向的对象。</li>
-<li>给指针赋空值有以下3种方法：<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//等价于int *p1 = 0;</span>
+<li>给指针赋空值有以下3种方法：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//等价于int *p1 = 0;</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p3  <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//等价于int *p3 = 0;不过需要先#include cstdlib</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 得到空指针最好的方法就是使用字面值nullptr来初始化指针，因为它可以被转换成任意其他的指针类型。nullptr也是在C++11新标准中引入的。尽量避免使用NULL。</li>
 <li>使用未经初始化的指针是引发运行时错误的一大原因。尽量先有对象，再有指向对象的指针，如果实在不清楚指针应该指向何处，也应该把它初始化为nullptr。</li>
 <li>void*是一种特殊的指针类型，可用于存放任意类型对象的地址。不能直接操作void*指针所指的对象，因为我们并不知道这个对象到底是什么类型，也就无法确定能在这个对象上做哪些操作。</li>
 <li>在声明或者定义指针（或引用）时，最好把*（或&amp;）与变量名连在一起。</li>
 <li><p>对于如下类型语句：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">&amp;</span>r <span class="token operator">=</span> p<span class="token punctuation">;</span>
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span><span class="token operator">&amp;</span>r <span class="token operator">=</span> p<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>想弄清楚r的类型到底是什么，最简单的方法是从右向左阅读r的定义，离变量名最近的符号对变量的类型有最直接的影响。上面离变量名r最近的符号是&amp;，说明r是一个引用。那么声明符的其余部分说明了它引用的对象是什么类型，上面声明符中剩余的是int *，说明r是对一个int型指针的引用。</p>
 <p>所以，面对一条比较复杂的指针或引用的声明语句时，从右向左阅读有助于弄清楚它的真实含义。</p>
 </li>
@@ -240,15 +240,15 @@
 <li>因为const对象一旦创建后其值就不能再改变，所以const对象必须初始化。</li>
 <li>既可以用非const对象去初始化const对象，也可以用const对象去初始化非const对象。在拷贝时，无需在意双方是否是const，因为拷贝只是值传递，不会影响到原来的对象。</li>
 <li><p>默认情况下，const对象被设定为仅在文件内有效。什么意思呢？我们先来看看下面的程序：</p>
-<pre class=" language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>h<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
  <span class="token keyword">class</span> <span class="token class-name">A</span>
  <span class="token punctuation">{</span>
  <span class="token keyword">public</span><span class="token operator">:</span>
      <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"A.h"</span></span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
@@ -258,8 +258,8 @@
  <span class="token punctuation">{</span>
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A: "</span> <span class="token operator">&lt;&lt;</span> N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"> main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"A.h"</span></span>
 
@@ -271,9 +271,9 @@
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"main: "</span> <span class="token operator">&lt;&lt;</span> N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 由于在main.cpp文件里，并没有包含A.cpp，所以它不知道变量N的存在，想要使用变量N，需要在main.cpp里用extern关键字声明变量N，表示该变量是一个外部链接，在别的编译单元里有它的定义，所以在链接时，程序会因为它是外部链接而去找它的定义，所以main函数里也就可以识别到变量N了。那么我们再看下面的程序：</p>
-<pre class=" language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>h<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
 
  <span class="token keyword">class</span> <span class="token class-name">A</span>
@@ -281,8 +281,8 @@
  <span class="token keyword">public</span><span class="token operator">:</span>
      <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"A.h"</span></span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
@@ -292,8 +292,8 @@
  <span class="token punctuation">{</span>
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A: "</span> <span class="token operator">&lt;&lt;</span> N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"> main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"A.h"</span></span>
 
@@ -305,9 +305,9 @@
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"main: "</span> <span class="token operator">&lt;&lt;</span> N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 程序变动很小，只是给变量N加上了const属性，但是此时编译却无法通过，main.cpp中识别不到变量N。这是因为默认情况下，const对象被设定为仅在文件内有效。所以在A.cpp中声明的常量N只能在该文件内被访问了。如果想要在不同的相互独立的文件之间共享这个常量怎么办呢？可以在A.cpp中定义该常量的时候加上extern关键字，即：</p>
-<pre class=" language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> A<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"A.h"</span></span>
  <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
@@ -317,135 +317,135 @@
  <span class="token punctuation">{</span>
      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A: "</span> <span class="token operator">&lt;&lt;</span> N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p> 所以，如果想在多个独立的文件之间共享const对象，必须在变量的定义之前添加extern关键字。<br> 【注】：注意是在相互独立的文件之间，比如上面main.cpp和A.cpp文件并不存在#include这种包含关系。如果把定义常量A的语句写到A.h中，main.cpp当然可以访问到了，因为它包含了A.h，这时A.h和main.cpp不是相互独立的文件。不过在头文件中定义全局变量通常不是好的做法。</p>
 </li>
-<li>如下语句：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<li>如下语句：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>j <span class="token operator">=</span> i<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误：试图让一个非常量引用绑定到常量引用上</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
  这时非法的，因为如果合法的话，则可以通过j来改变它引用对象i的值，这显然是不正确的。</li>
 <li><p>看如下程序：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> d<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//错误：不能用double类型的值去初始化int &amp;类型的引用</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p> 错误还是很明显的，如果正确的话，那我们就可以用用操作整型变量的方式来改变d的值了，这显然是和double类型的d冲突。<br> 再看如下程序：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
  <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> d<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//正确</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p> 为什么加上const之后就正确了？这是因为加上const之后，我们就不能再改变i的值了，也就不能通过整型变量i来改变double型变量d了，所以合法。</p>
 <p> 我们再从编译的角度来看一下这个程序：<br> 在初始化引用或者指针时，编译器会自动进行类型检查，如果类型不符，会先生成临时量。比如上面的<code>const int &amp;i = d;</code>，由于d是double型而非int型，所以编译器会把上述代码变成如下形式：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> temp <span class="token operator">=</span> d<span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> temp <span class="token operator">=</span> d<span class="token punctuation">;</span>
  <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p> 虽然此时i实际上是临时量的别名，但是由于i是常量对象的引用，i的值不可能再变，所以它到底是临时量还是原对象的引用都无关紧要了。如果输出i和d的地址，会得到不同的结果：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">double</span> d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
  <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> d<span class="token punctuation">;</span>
  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">&amp;</span>d <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">&amp;</span>i <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//输出00E7FD84 00E7FD6C</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p> 但是对于之前的<code>int &amp;i = d;</code>，如果合法的话，编译器也会有类似上面的变换：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> temp <span class="token operator">=</span> d<span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> temp <span class="token operator">=</span> d<span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p> 同样的，i还是临时量的引用，改变i的值其实改变的是临时量的值，而不是d的，但是<code>int &amp;i = d;</code>的语义就包括了可以通过改变i来改变d的潜在意图，所以矛盾了，所以该语句是非法的。</p>
 <p> 类似的，下面的语句也是非法的：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span>i <span class="token operator">=</span> <span class="token operator">&amp;</span>d<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误</span>
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span>i <span class="token operator">=</span> <span class="token operator">&amp;</span>d<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p> 如果合法的话，编译器会把它转换成如下形式：</p>
 <pre><code> const int temp = d;
  const int *i = &amp;temp;
 </code></pre><p> 虽然*i是常量，不会被改变，但是指针i本身是可以被改变的。比如对于i++，对于前者应该得到的是d的地址加4个字节，但是对于后者得到的却是临时量temp的地址加4个字节，所以该语句也是非法的。</p>
 </li>
-<li>注意区分常量指针和指向常量的指针：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<li>注意区分常量指针和指向常量的指针：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">*</span><span class="token keyword">const</span> pi <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//常量指针</span>
  <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">*</span>pI <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//指向常量的指针</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>常量指针必须被初始化，而且一旦初始化完成，则它的值（也就是存放在指针中的那个地址）就不能再改变了：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<li>常量指针必须被初始化，而且一旦初始化完成，则它的值（也就是存放在指针中的那个地址）就不能再改变了：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  <span class="token keyword">int</span> <span class="token operator">*</span><span class="token keyword">const</span> pi <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>顶层const表示指针本身是个常量，而底层const表示指针所指的对象是一个常量。其实不止指针，普通变量也可以有底层/顶层const属性。</li>
-<li>常量和常量表达式是不一样的，常量是变量在被初始化后就不能再被修改，而常量表达式更严格，还需要在编译时就能确定其初始值。如下代码：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> sz <span class="token operator">=</span> <span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<li>常量和常量表达式是不一样的，常量是变量在被初始化后就不能再被修改，而常量表达式更严格，还需要在编译时就能确定其初始值。如下代码：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> sz <span class="token operator">=</span> <span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  sz是一个常量，但不是常量表达式。因为它的初始值，需要getSize函数运行后才能知道，不是在编译时就确定的。</li>
 <li><p>C++11规定，用constexpr声明的变量是常量表达式，如果它的初始值不是常量表达式，那么语句会报错：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//正确，因为初始值20是常量表达式</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">constexpr</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//正确，因为初始值20是常量表达式</span>
 <span class="token keyword">constexpr</span> <span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//正确，因为初始值i+1是常量表达式</span>
 <span class="token keyword">constexpr</span> <span class="token keyword">int</span> sz <span class="token operator">=</span> <span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//只有getSize是一个constexpr函数时才正确</span>
 <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token keyword">constexpr</span> <span class="token keyword">int</span> m <span class="token operator">=</span> n<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//错误，因为初始值n需要在运行时才能确定具体值</span>
 <span class="token keyword">constexpr</span> std<span class="token operator">::</span>string str <span class="token operator">=</span> <span class="token string">"asd"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误，因为string类型不属于字面值类型</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为了在编译时就确定值，所以常量表达式的初始值都是字面值类型，包括算术类型、引用和指针，但是不包括string等复杂类型。所以string类型变量不能被声明为常量表达式，即不能用constrexpr声明。</p>
 <p>如果我们认为某个变量是一个常量表达式，那么就应该把它声明为constexpr类型。</p>
 </li>
 <li>用constexpr声明的指针是常量指针，初始值必须为空，或者存在在固定地址的某个对象的地址。限定符constexpr仅仅对指针有效，对指针所指向的对象无关。</li>
-<li>如下语句：<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//非法，因为10是一个常量</span>
+<li>如下语句：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">&amp;</span>i <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//非法，因为10是一个常量</span>
 <span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>j <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//合法，因为10是一个常量</span>
 <span class="token keyword">constexpr</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>k <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//非法，因为10的内存地址不是编译时确定的</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 <p><font size="5" color="orange">处理类型</font></p>
 <hr>
 <ol>
-<li>using和typedef基本等价，都可以为内置类型和自定义类型设置别名。<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">typedef</span> <span class="token keyword">double</span> _Double<span class="token punctuation">;</span>
+<li>using和typedef基本等价，都可以为内置类型和自定义类型设置别名。<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">typedef</span> <span class="token keyword">double</span> _Double<span class="token punctuation">;</span>
  _Double d <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
  <span class="token keyword">using</span> _Int <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">;</span>
  _Int i <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>如下语句：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">typedef</span> <span class="token keyword">char</span> <span class="token operator">*</span>pstr<span class="token punctuation">;</span>
+<li>如下语句：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">typedef</span> <span class="token keyword">char</span> <span class="token operator">*</span>pstr<span class="token punctuation">;</span>
  <span class="token keyword">const</span> pstr str <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//str是指向char型对象的常量指针</span>
-</code></pre>
- 对于声明中的别名不要把它替换回原来的内容来理解，比如上面的语句把pstr替换后成为如下形式：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>str <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//str是指向char型常量的指针</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ 对于声明中的别名不要把它替换回原来的内容来理解，比如上面的语句把pstr替换后成为如下形式：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>str <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//str是指向char型常量的指针</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  这种理解是错误的。pstr实际上是指向char的指针，所以const pstr就是指向char的常量指针，而非指向常量字符的指针。</li>
 <li>auto这个类型说明符可以让编译器通过初始值来推算变量的类型，所以，Auto定义的变量必须有初始值。</li>
-<li>如果使用auto一次声明多个变量，那么这些变量的初始值类型都应该一样：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> i <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span> d <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误，i和d的类型不一致</span>
-</code></pre>
+<li>如果使用auto一次声明多个变量，那么这些变量的初始值类型都应该一样：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> i <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span> d <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//错误，i和d的类型不一致</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>auto一般会忽略掉顶层const，保留底层const。即auto会去掉变量自己的const性质，但不会影响变量指向const对象的这个事实：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<li>auto一般会忽略掉顶层const，保留底层const。即auto会去掉变量自己的const性质，但不会影响变量指向const对象的这个事实：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
  <span class="token keyword">const</span> <span class="token keyword">int</span> ci <span class="token operator">=</span> i<span class="token punctuation">,</span> <span class="token operator">&amp;</span>cr <span class="token operator">=</span> ci<span class="token punctuation">;</span>
  <span class="token keyword">auto</span> b <span class="token operator">=</span> ci<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//b是int型（ci的顶层const特性被忽略掉了）</span>
  <span class="token keyword">auto</span> c <span class="token operator">=</span> cr<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//c是int型（cr是ci的别名，ci本身是一个顶层const）</span>
  <span class="token keyword">auto</span> d <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//d是int*类型（整型变量i的地址）</span>
  <span class="token keyword">auto</span> e <span class="token operator">=</span> <span class="token operator">&amp;</span>ci<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//d是指向常量的int*类型（整型常量ci的地址，对常量取地址是一种底层const）</span>
-</code></pre>
- 如果需要推断出的auto类型是一个顶层const，需要明确指出：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">auto</span> f <span class="token operator">=</span> ci<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//auto去掉了ci的const特性，但是显式指定const让f变成了const int类型</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 如果需要推断出的auto类型是一个顶层const，需要明确指出：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">auto</span> f <span class="token operator">=</span> ci<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//auto去掉了ci的const特性，但是显式指定const让f变成了const int类型</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>auto是通过初始值来推断声明的变量的类型，比如<code>auto i = 3.14;</code>，i的变量会被推断为double型，但是如果我们想要i的变量被推断为int型怎么办呢？可以用decltype这个类型指示符：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<li>auto是通过初始值来推断声明的变量的类型，比如<code>auto i = 3.14;</code>，i的变量会被推断为double型，但是如果我们想要i的变量被推断为int型怎么办呢？可以用decltype这个类型指示符：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
  <span class="token keyword">decltype</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span> i <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
  decltype可以根据表达式的值来推断变量的声明类型。括号里的表达式不止是变量，还可以是任何复杂表达式，甚至函数调用。</li>
-<li>decltype和auto不一样，它会保留变量的顶层const和底层const以及引用符号&amp;。如下：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> ci <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>cj <span class="token operator">=</span> ci<span class="token punctuation">;</span>
+<li>decltype和auto不一样，它会保留变量的顶层const和底层const以及引用符号&amp;。如下：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">const</span> <span class="token keyword">int</span> ci <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>cj <span class="token operator">=</span> ci<span class="token punctuation">;</span>
  <span class="token keyword">decltype</span><span class="token punctuation">(</span>ci<span class="token punctuation">)</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//x是const int类型</span>
  <span class="token keyword">decltype</span><span class="token punctuation">(</span>cj<span class="token punctuation">)</span> y <span class="token operator">=</span> x<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//y是const int&amp;类型，y绑定到x</span>
  <span class="token keyword">decltype</span><span class="token punctuation">(</span>cj<span class="token punctuation">)</span> z<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//错误，z是一个引用，必须初始化</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>decltype中如果表达式的内容是解引用操作，则decltype将得到引用类型。如下：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">41</span><span class="token punctuation">,</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
+<li>decltype中如果表达式的内容是解引用操作，则decltype将得到引用类型。如下：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">41</span><span class="token punctuation">,</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token operator">&amp;</span>i<span class="token punctuation">;</span>
  <span class="token keyword">decltype</span><span class="token punctuation">(</span><span class="token operator">*</span>p<span class="token punctuation">)</span> j<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//错误，j是int&amp;类型，必须被初始化</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>decltype((variable))（注意是双层括号）的结果永远是引用，而decltype（variable）结果只有当variable本身就是一个引用时才是引用。</li>
 </ol>
 <p><font size="5" color="orange">自定义数据结构</font></p>
 <hr>
 <ol>
-<li>C++11规定，可以为类的成员数据提供类内初始值。创建对象时，类内初始值将用于初始化成员数据。没有初始值的成员将默认被初始化。<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">class</span> <span class="token class-name">A</span>
+<li>C++11规定，可以为类的成员数据提供类内初始值。创建对象时，类内初始值将用于初始化成员数据。没有初始值的成员将默认被初始化。<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">class</span> <span class="token class-name">A</span>
  <span class="token punctuation">{</span>
  <span class="token keyword">private</span><span class="token operator">:</span>
      <span class="token keyword">int</span> m_Data <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
      <span class="token keyword">double</span> m_Vlaue <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>头文件一旦改变，相关的源文件必须重新编译以获取更新过得声明。</li>
 <li><p>确保头文件多次包含仍能安全工作的常用技术是预处理器，它由C++语言从C语言继承而来。预处理器是在编译之前执行的一段程序，可以部分地改变我们所写的程序。比如当预处理器看到#include标记时就会用指定的头文件的内容代替#include。</p>
 <p> 预处理变量有两种状态：已定义和未定义。#define指定把一个名字设定为预处理变量，#ifdef当且仅当变量已定义时为真，#ifndef当且仅当变量未定义时为真。一旦检查结果为真，则执行后续操作直至遇到#endif为止。如下程序：</p>
-<pre class=" language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">ifndef</span> A_H</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">ifndef</span> A_H</span>
  <span class="token macro property">#<span class="token directive keyword">define</span> A_H</span>
  <span class="token keyword">class</span> <span class="token class-name">A</span>
  <span class="token punctuation">{</span>
@@ -454,7 +454,7 @@
      <span class="token keyword">double</span> m_Vlaue <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
  <span class="token punctuation">}</span><span class="token punctuation">;</span>
  <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>第一次包含A.h时，#ifndef的检查结果为真，预处理器将顺序执行后面的操作直至遇到#endif为止。此时，预处理变量A_H的将变为已定义，而且A.h也会被包含到主程序中来。后面如果再一次包含A.h，则#ifndef将为假，编译器将会忽略#ifndef到#endif之间的部分。</p>
 </li>
 <li>预处理变量无视C++语言中关于作用域的规则。</li>

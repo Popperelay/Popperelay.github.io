@@ -226,14 +226,14 @@ n &amp; Left &amp; Center &amp; Right \\\\
 $$
 </code></pre><p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\<br>\hline<br>\end{array}<br>$$</p>
 <p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\来分隔，列之间依然使用&amp;来分隔。<br>例如：</p>
-<pre class=" language-csharp"><code class="language-csharp">$$
+<pre class="line-numbers language-csharp"><code class="language-csharp">$$
 \begin<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
 <span class="token number">1</span> <span class="token operator">&amp;</span> x <span class="token operator">&amp;</span> x<span class="token operator">^</span><span class="token number">2</span> \\\\
 <span class="token number">1</span> <span class="token operator">&amp;</span> y <span class="token operator">&amp;</span> y<span class="token operator">^</span><span class="token number">2</span> \\\\
 <span class="token number">1</span> <span class="token operator">&amp;</span> z <span class="token operator">&amp;</span> z<span class="token operator">^</span><span class="token number">2</span> \\\\
 \end<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
 $$
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>效果：<br>$$<br>\begin{matrix}<br>1 &amp; x &amp; x^2 \\<br>1 &amp; y &amp; y^2 \\<br>1 &amp; z &amp; z^2 \\<br>\end{matrix}<br>$$</p>
 <ul>
 <li>给矩阵加括号：<ul>
@@ -242,7 +242,7 @@ $$
 </ul>
 </li>
 <li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\<br>\end{pmatrix}<br>$$</li>
-<li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<pre class=" language-csharp"><code class="language-csharp">$$ 
+<li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<pre class="line-numbers language-csharp"><code class="language-csharp">$$ 
 \left <span class="token punctuation">[</span>
 \begin<span class="token punctuation">{</span>array<span class="token punctuation">}</span><span class="token punctuation">{</span>cc<span class="token operator">|</span>c<span class="token punctuation">}</span>
 <span class="token number">1</span> <span class="token operator">&amp;</span> <span class="token number">2</span> <span class="token operator">&amp;</span> <span class="token number">3</span> \\\\
@@ -250,7 +250,7 @@ $$
 \end<span class="token punctuation">{</span>array<span class="token punctuation">}</span>
 \right <span class="token punctuation">]</span>
 $$
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 效果：<br>$$<br>\left [<br>\begin{array}{cc|c}<br>1 &amp; 2 &amp; 3 \\<br>4 &amp; 5 &amp; 6 \\<br>\end{array}<br>\right ]<br>$$<font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br>&amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br>&amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。<br><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}<br>$$<br><font size="4" color="red">方程组</font></li>
 </ul>
 <ol>

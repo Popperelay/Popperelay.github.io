@@ -117,7 +117,7 @@
                 <p><font size="5" color="orange">配置方法</font><br><a id="more"></a></p>
 <ol>
 <li><p>在Hexo\themes\transparent\layout_partial路径下新建文件mathjax.ejs（transparent是我的主题名）。打开文件写入如下代码：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> mathjax config similar to math<span class="token punctuation">.</span>stackexchange <span class="token operator">--</span><span class="token operator">></span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> mathjax config similar to math<span class="token punctuation">.</span>stackexchange <span class="token operator">--</span><span class="token operator">></span>
 
 <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/x-mathjax-config"</span><span class="token operator">></span>
   MathJax<span class="token punctuation">.</span>Hub<span class="token punctuation">.</span><span class="token function">Config</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -147,14 +147,14 @@
 
 <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span> src<span class="token operator">=</span><span class="token string">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="token operator">></span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>打开iHexo\themes\transparent\layout_partial目录下的after_footer.ejs文件，在末尾写入如下代码：<pre class=" language-csharp"><code class="language-csharp"><span class="token operator">&lt;</span><span class="token operator">%</span><span class="token operator">-</span> <span class="token keyword">partial</span><span class="token punctuation">(</span><span class="token string">'mathjax'</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token operator">></span>
-</code></pre>
+<li>打开iHexo\themes\transparent\layout_partial目录下的after_footer.ejs文件，在末尾写入如下代码：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token operator">&lt;</span><span class="token operator">%</span><span class="token operator">-</span> <span class="token keyword">partial</span><span class="token punctuation">(</span><span class="token string">'mathjax'</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>新建一片md文章（<code>hexo new &quot;新文章&quot;</code>），写入如下代码：<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">## 公式</span>
+<li>新建一片md文章（<code>hexo new &quot;新文章&quot;</code>），写入如下代码：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">## 公式</span>
 $$J\_\<span class="token function">alpha</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">=</span>\sum _<span class="token punctuation">{</span>m<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token operator">^</span>\infty \frac<span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">^</span> m<span class="token punctuation">}</span><span class="token punctuation">{</span>m<span class="token operator">!</span> \<span class="token punctuation">,</span> \<span class="token function">Gamma</span> <span class="token punctuation">(</span>m <span class="token operator">+</span> \alpha <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">{</span>\<span class="token function">left</span><span class="token punctuation">(</span><span class="token punctuation">{</span>\frac<span class="token punctuation">{</span>x<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">}</span>\right<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">^</span><span class="token punctuation">{</span><span class="token number">2</span> m <span class="token operator">+</span> \alpha <span class="token punctuation">}</span>$$
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 部署完后，打开自己的网站查看公式是否成功显示。我的显示效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147757680727.png" alt=""></li>
 </ol>
 <ul>

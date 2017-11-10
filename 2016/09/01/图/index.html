@@ -131,7 +131,7 @@
 <p><font size="4" color="orange">图的存储结构</font><br>由于图的结构比较复杂，任意两点之间都可能存在联系，难以用元素在内存中的物理位置来表示元素之间的关系，也就是图不可能用简单的顺序存储结构来表示。前辈们给我们提供了图的5种存储结构：</p>
 <ul>
 <li><p>图的邻接矩阵存储方式：<br>将图的点和边分开存储，用一个一维数组加一个二维数组来表示图。一维数组存储图中的顶点信息，二维数组(邻接矩阵)存储图中边或弧的信息。<br>当然，边数组不仅可以存储0,1这两个数字，如果是带权图(网)，边数组中还能存储对应边的权值。不过这时需要指定一个比较大的数来标识图中不存在的边，如代码中的Infinity。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576173.png" alt=""><br>我们可以通过给顶点数组和边数组输入数据，来创建邻接矩阵图。当然，由于是数组，需要先输入要创建的图的顶点数numVertexs和边数numEdges。代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">class</span> <span class="token class-name">AdjacencyMatrixGrpah</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">class</span> <span class="token class-name">AdjacencyMatrixGrpah</span>
 <span class="token punctuation">{</span>
   <span class="token keyword">int</span> numVertexs<span class="token punctuation">;</span>
   <span class="token keyword">int</span> numEdges<span class="token punctuation">;</span>
@@ -166,7 +166,7 @@
       <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>上面代码是针对有向图的，如果是无向图，只需要把<code>EdgesMatrix[i, j] = weight;</code>改为<code>EdgesMatrix[i, j] = EdgesMatrix[j, i] = weight;</code>，因为无向图的邻接矩阵是一个对称矩阵。</li>
@@ -174,7 +174,7 @@
 </ul>
 </li>
 <li><p>图的邻接表存储方式：<br>可以看到在图的邻接矩阵存储方式中，还有很多没有用到的空间，尤其是在稀疏图中，将会浪费很多存储空间。所以我们考虑用链表替换邻接矩阵中的每一行，减少空间浪费。但是图中每个结点的出度不一样，不方便把每个结点的邻接结点引用都存储的自身结点中，其实可以用类似树中的孩子表示法，把结点的所有邻接结点都用链表连起来。这就是图的邻接表存储方式，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576244.png" alt=""><br>需要的数据结构有：顶点类+邻接结点类+图(类)<br>顶点类由两个数据成员组成：顶点数据、第一个邻接结点的引用<br>邻接结点类由三个数据成员：邻接结点在数组中的下标、权值、下一个邻接结点的引用<br>图(类)的数据成员主要是：顶点类数组<br>代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">VertexNode</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">VertexNode</span> <span class="token punctuation">{</span>
   <span class="token keyword">public</span> <span class="token keyword">object</span> Data<span class="token punctuation">;</span>
   <span class="token keyword">public</span> AdjacencyNode FirstAdjacencyNode<span class="token punctuation">;</span>
 
@@ -243,7 +243,7 @@
       <span class="token punctuation">}</span>
   <span class="token punctuation">}</span> 
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>图的十字链表存储方式</li>
 <li>图的邻接多重表存储方式</li>
@@ -252,7 +252,7 @@
 <hr>
 <p><font size="4" color="orange">图的遍历</font><br>图的遍历：从图中某一顶点出发访遍图中其余顶点，且要求每个顶点仅被访问一次。分为深度优先遍历DFS(depth first search)和广度优先遍历BFS(breadth first search)。</p>
 <ul>
-<li>深度优先遍历DFS<br>先来看下面这个图<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576302.png" alt=""><br>任意选择一个顶点，比如A点，现在开始想象在走这个迷宫，给自己定一个原则：没有碰到重复顶点时，就始终向右手边走，碰到了重复顶点则回退到上一个顶点处，再选择除开重复顶点外的最右手边的路(最右边没被访问过的邻接结点)，如果在某个顶点处所有的路都走过了(所有的邻接结点都被访问过了)，则回退到上一个顶点处。重复上述操作，一直到回退到起点A，这时就能保证连通图中的所有结点都被访问到了，且只被访问了一次(发现是重复结点的那一步不算)。<br>上图的访问过程如下：在A出一直沿着右手边走到F处，再向右走发现A被访问过了，回退到F，再访问F处除了A的最右手边结点G，在G点去访问B，发现B已经访问过了，回退到G，再去访问D，发现D已经访问过了，又回退到G，再访问H，在H点去访问D、E，发现D、E都已经访问过了，按原路回退到上一个访问过的结点G，也没有未被访问过的邻接点，再回退到F，同样没有未被访问过的结点，再回退到E，再回退到D，发现I是没有被访问过的，则去访问I，在I处没有未被访问过的邻接点，回退到D，再回退到C，回退到B，回退到A。此时回到了起点，则访问结束。<br>不难发现，这个访问过程其实就是一棵二叉树的前序遍历过程，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576357.png" alt=""><br>所以，对图的深度优先遍历DFS，其实就是类似对树的前序遍历。<br>注意，上述过程是针对一个连通图来说的，如果不是连通图，则需要把图中每一个顶点作为起点，都来一次深度优先遍历DFS，这样就能保证非连通图也能访问到所有结点了。<br>对邻接矩阵图的深度优先遍历DFS的代码如下(还未上机验证过)：<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//标识每一个节点是否被访问过</span>
+<li>深度优先遍历DFS<br>先来看下面这个图<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576302.png" alt=""><br>任意选择一个顶点，比如A点，现在开始想象在走这个迷宫，给自己定一个原则：没有碰到重复顶点时，就始终向右手边走，碰到了重复顶点则回退到上一个顶点处，再选择除开重复顶点外的最右手边的路(最右边没被访问过的邻接结点)，如果在某个顶点处所有的路都走过了(所有的邻接结点都被访问过了)，则回退到上一个顶点处。重复上述操作，一直到回退到起点A，这时就能保证连通图中的所有结点都被访问到了，且只被访问了一次(发现是重复结点的那一步不算)。<br>上图的访问过程如下：在A出一直沿着右手边走到F处，再向右走发现A被访问过了，回退到F，再访问F处除了A的最右手边结点G，在G点去访问B，发现B已经访问过了，回退到G，再去访问D，发现D已经访问过了，又回退到G，再访问H，在H点去访问D、E，发现D、E都已经访问过了，按原路回退到上一个访问过的结点G，也没有未被访问过的邻接点，再回退到F，同样没有未被访问过的结点，再回退到E，再回退到D，发现I是没有被访问过的，则去访问I，在I处没有未被访问过的邻接点，回退到D，再回退到C，回退到B，回退到A。此时回到了起点，则访问结束。<br>不难发现，这个访问过程其实就是一棵二叉树的前序遍历过程，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576357.png" alt=""><br>所以，对图的深度优先遍历DFS，其实就是类似对树的前序遍历。<br>注意，上述过程是针对一个连通图来说的，如果不是连通图，则需要把图中每一个顶点作为起点，都来一次深度优先遍历DFS，这样就能保证非连通图也能访问到所有结点了。<br>对邻接矩阵图的深度优先遍历DFS的代码如下(还未上机验证过)：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//标识每一个节点是否被访问过</span>
 <span class="token keyword">bool</span><span class="token punctuation">[</span><span class="token punctuation">]</span> Visited<span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">DFSTraverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   Visited <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">bool</span><span class="token punctuation">[</span>numVertexs<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -271,8 +271,8 @@
       <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
-对邻接表图的深度优先遍历DFS的代码如下(还未上机验证过)：<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//标识每一个节点是否被访问过</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+对邻接表图的深度优先遍历DFS的代码如下(还未上机验证过)：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//标识每一个节点是否被访问过</span>
 <span class="token keyword">bool</span><span class="token punctuation">[</span><span class="token punctuation">]</span> Visited<span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">DFSTraverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -298,7 +298,7 @@
       current <span class="token operator">=</span> current<span class="token punctuation">.</span>NextAdjacencyNode<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>广度优先遍历BFS<br>深度优先遍历类似于树的前序遍历，其实广度优先遍历BFS类似于树的层序遍历。需要先把图调整称为层次分明一点的图。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576482.png" alt=""><br>由于是层序遍历，所以是需要借助队列的，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721576547.png" alt=""><ol>
 <li>先让图中的任意一个结点入队列</li>

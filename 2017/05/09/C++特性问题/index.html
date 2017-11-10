@@ -115,7 +115,7 @@
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
                 <p><font size="5" color="orange">多态</font><br><a id="more"></a><br>使用基类实现多态时，是使用基类指针，而不是基类对象：</p>
-<pre class=" language-c++"><code class="language-c++">class A{
+<pre class="line-numbers language-c++"><code class="language-c++">class A{
     virtual print(){
         cout << "A" <<endl;
     }
@@ -130,28 +130,28 @@ int main(){
     a.print();
     return 0;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面程序输出结果将是B，并没有实现多态。这是因为定义的是基类A的对象，将B对象赋值给它，只会赋值成员变量，并不会将成员函数也一起赋值给它，所以对象a还是使用的A类的print函数。但是改为：</p>
 <pre><code>A* a = &amp;B();
 </code></pre><p>a将指向B对象地址，再调用print函数时，执行的将是B类的print函数。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">C++数组越界问题</font><br>如下代码：</p>
-<pre class=" language-c++"><code class="language-c++">int c[5];
+<pre class="line-numbers language-c++"><code class="language-c++">int c[5];
 c[7] = 123;
 cout << c[7] << endl;
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>在运行过程中编译器是不会报数组越界的错误的，这是因为c[7]的地址很可能还在程序栈空间中，如果是访问c[1000]就会出现数组越界的错误，因为c[1000]的地址可能已经超出了程序栈空间，非法访问其它地址。</p>
 <p>不过在GLSL里面编译时是会出现数组越界错误的。但是下面这样GLSL也不会报错：</p>
-<pre class=" language-c++"><code class="language-c++">int c[5];
+<pre class="line-numbers language-c++"><code class="language-c++">int c[5];
 int i = 7;
 c[i] = 123;
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>因为i是变量，在编译时无法确定它的值，所以不会报错，在运行时无论i多大glsl都不会报错。</p>
 <p>如果定义<code>int a[3][4];</code>，那么a[1][4]其实是等于a[2][0]。</p>
 <p><font size="5" color="orange">纯虚基类（抽象类）里的私有成员变量</font></p>
 <hr>
 <p>为了程序更好的设计风格和可修改性，应该尽量把类里的成员变量声明为私有的。对于纯虚基类也是如此，代码示例如下：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 using namespace std;
 
 class A {
@@ -186,16 +186,16 @@ int main() {
 
     return 0;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果如下：</p>
-<pre class=" language-c++"><code class="language-c++">400
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">400
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>虚基类里的成员变量也应该是私有的，虽然无法被子类继承，但是公有的成员函数是可以继承的，子类可以通过继承自虚基类的getN函数，来间接访问虚基类的私有成员变量。</p>
 <p>值得注意的是继承自父类的成员函数，是可以访问父类的私有成员变量的。</p>
 <p><font size="5" color="orange">成员函数中用本类对象作为参数</font></p>
 <hr>
 <p>如果在类的成员函数里，其参数是本类对象，那么在函数内部可以通过对象名.的方式来直接访问私有成员变量：</p>
-<pre class=" language-c++"><code class="language-c++">class A {
+<pre class="line-numbers language-c++"><code class="language-c++">class A {
 private:
     int n;
 public:
@@ -206,10 +206,10 @@ public:
         return n + a.n;
     }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码是可以正常工作的，形参a可以直接用a.n来访问其私有成员变量。</p>
 <p>但是参数如果是别的类的对象，就没有访问权限了：</p>
-<pre class=" language-c++"><code class="language-c++">class B {
+<pre class="line-numbers language-c++"><code class="language-c++">class B {
 private:
     int m;
 public:
@@ -229,10 +229,10 @@ public:
         return n + b.m;
     }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码会报错：B::m不可访问。</p>
 <p>值得注意的是如果函数是处于类内部的友元函数（虽然它不是类的成员函数），也是可以直接访问到本类的私有成员变量的。这在重载运算符中有实际应用：</p>
-<pre class=" language-c++"><code class="language-c++">class CShape {
+<pre class="line-numbers language-c++"><code class="language-c++">class CShape {
 private:
     int priority;
 public:
@@ -242,18 +242,18 @@ public:
 bool operator<(const CShape& iShape1, const CShape& iShape2) {
     return iShape1.priority < iShape2.priority;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码用友元函数重载了&lt;运算符，函数里可以直接通过对象名访问到其所在类的私有成员变量。</p>
 <p><font size="5" color="orange">多态分配内存的对象指针</font><br>在实现多态时，需要用到基类指针，如果需要为基类指针用new动态分配内存，可以使用指向指针的指针：</p>
-<pre class=" language-c++"><code class="language-c++">CShape **shapes = new CShape*[3];
+<pre class="line-numbers language-c++"><code class="language-c++">CShape **shapes = new CShape*[3];
 shapes[0] = new CQuad();
 shapes[1] = new CCircle();
 shapes[2] = new CTriangle();
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中CShape是基类，CQuad、CCircle、CTriangle都是其子类。值得注意的是，new运算符返回的是指针，所以shapes[0]也应该是一个指针。如果用<code>CShape *shapes = new CShape[3];</code>，那么shapes[0]将会是一个CShape对象，这很好理解，和下述代码一样：</p>
-<pre class=" language-c++"><code class="language-c++">int *array = new int[3];
+<pre class="line-numbers language-c++"><code class="language-c++">int *array = new int[3];
 array[0] = 10;
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>其中array[0]就是一个整型，而非指针，同理上面的shapes[0]也是对象，而非指针。但是如果想要shapes[0]代表一个指针的话，就得将等号右边的<code>new CShape[3]</code>改为<code>new CShape*[3]</code>，等号左边改为指向指针的指针，*shapes表示一个CShape对象，**shapes才表示指向CShape对象的指针。</p>
 
             </div>

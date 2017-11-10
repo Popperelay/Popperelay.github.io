@@ -162,25 +162,25 @@
 <p><font size="4" color="red">getline函数</font><br>getline函数用于读取n-1个字符，赋给指定的字符数组，然后插入一个字符串结束标志’\n’。形如：<code>char line[20];cin.getline(line,20,&#39;t&#39;);</code>。如果在读取n-1个字符之前遇到指定的终止字符（比如第三个参数t），则会提前结束读取。</p>
 <p>使用<code>cin&lt;&lt;</code>读取数据默认以空白字符（包括空格、tab键、回车键）作为终止字符，而<code>cin.getline</code>是可以读取空格的。</p>
 <p><font size="4" color="red">ignore函数</font><br>ignore函数用于跳过输入的n个字符，或者在遇到指定字符时停止跳过。形如:</p>
-<pre class=" language-csharp"><code class="language-csharp">    <span class="token keyword">char</span><span class="token operator">*</span> str<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token keyword">char</span><span class="token operator">*</span> str<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     cin<span class="token punctuation">.</span><span class="token function">ignore</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'z'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     cin<span class="token punctuation">.</span><span class="token function">getline</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     cout<span class="token operator">&lt;</span><span class="token operator">&lt;</span>str<span class="token operator">&lt;</span><span class="token operator">&lt;</span>endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果输入bcdefghi，ignore函数会跳过头3个字符bcd，getline函数把后面的efghi这5个字符存储到str中，最后在屏幕上输出的就是efghi。</p>
 <p>如果输入bzdefga，ignore函数在跳过3个字符之前遇到了指定的终止字符z，getline函数继续读取字符，在读取6-1个字符之前遇到了指定的终止字符a，最后输出defg。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">重载&gt;&gt;和&lt;&lt;</font><br>我们可以重载输入运算符&gt;&gt;和输出运算符&lt;&lt;，来达到我们想要的输出方式。</p>
 <p><font size="4" color="red">重载输出运算符&lt;&lt;</font><br>重载的格式如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">ostream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token punctuation">(</span>ostream <span class="token operator">&amp;</span><span class="token keyword">out</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ostream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token punctuation">(</span>ostream <span class="token operator">&amp;</span><span class="token keyword">out</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>item1<span class="token punctuation">;</span>
     <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>item2<span class="token punctuation">;</span>
     <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>itemn<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token keyword">out</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中class_name是我们自定义的类名，函数内部可以根据需要输出我们想输出的内容。以后使用<code>&lt;&lt;对象名</code>就可以一次性输出你想输出的全部内容。举例如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include&lt;iostream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -203,20 +203,20 @@ ostream <span class="token operator">&amp;</span><span class="token keyword">ope
     cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出的结果如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><font size="4" color="red">重载输入运算符&gt;&gt;</font><br>重载的格式如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">istream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span>istream <span class="token operator">&amp;</span><span class="token keyword">in</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">istream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span>istream <span class="token operator">&amp;</span><span class="token keyword">in</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>item1<span class="token punctuation">;</span>
     <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>item2<span class="token punctuation">;</span>
     <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>itemn<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token keyword">in</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中class_name是我们自定义的类名，函数内部可以根据需要输入我们需要的内容。以后使用<code>&gt;&gt;对象名</code>就可以一次性输入需要的全部内容。举例如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include&lt;iostream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
@@ -241,13 +241,13 @@ istream <span class="token operator">&amp;</span><span class="token keyword">ope
     cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a<span class="token punctuation">.</span>x <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a<span class="token punctuation">.</span>y <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果输入如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token number">11</span> <span class="token number">22</span>
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span> <span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>那么会有如下输出结果：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>上述两个重载代码虽然简单易懂，但是在工程设计上确实有点糟糕啊~-~！<br>&nbsp;  </li>

@@ -120,7 +120,7 @@
 <p><font size="5" color="orange">CPU上异步纹理传输：CPU Asynchronous Texture Transfers</font></p>
 <hr>
 <p>使用多个PBO异步传输数据的图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_2.png" alt=""><br>代码如下：</p>
-<pre class=" language-c++"><code class="language-c++">GLuint pbo[2]; // The ping-pong pbo ? s
+<pre class="line-numbers language-c++"><code class="language-c++">GLuint pbo[2]; // The ping-pong pbo ? s
 unsigned int curPBO = 0;
 // Bind current pbo for app->pbo transfer
 glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[curPBO]);
@@ -135,7 +135,7 @@ glTexSubImage2D(GL_TEXTURE_2D , 0, 0, 0, width , height, GL_RGBA, GL_UNSIGNED_BY
 glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 glBindTexture(GL_TEXTURE_2D , 0);
 curPBO = 1 - curPBO;
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意这只是在单个渲染线程上，不同PBO的数据传输在并行执行，属于CPU异步输出。并没有用到GPU的Copy引擎。</p>
 <p><font size="5" color="orange">GPU上异步纹理传输：GPU Asynchronous Texture Transfers</font></p>
 <hr>

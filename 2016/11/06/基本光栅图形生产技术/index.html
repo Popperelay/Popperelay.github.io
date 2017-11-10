@@ -136,7 +136,7 @@
 <ul>
 <li>基本思想：<br>直接根据直线的几何方程确定直线段路径上的像素位置。x坐标的值从左端点x遍历到右端点x，对应y坐标通过直线方程算出来。描点时如果发现y坐标不是整数值，需要取为离它最近的整数（如3.4取为3，3.5取为4，程序上用了一个小技巧实现：<code>(int)(y+0.5)</code>）。</li>
 <li><p>具体代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的直线方程画法。直线方程式：y=mx+b</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的直线方程画法。直线方程式：y=mx+b</span>
 <span class="token keyword">void</span> <span class="token function">Equation</span><span class="token punctuation">(</span><span class="token keyword">int</span> x0<span class="token punctuation">,</span><span class="token keyword">int</span> y0<span class="token punctuation">,</span><span class="token keyword">int</span> x1<span class="token punctuation">,</span><span class="token keyword">int</span> y1<span class="token punctuation">,</span><span class="token keyword">int</span> red<span class="token punctuation">,</span><span class="token keyword">int</span> green<span class="token punctuation">,</span><span class="token keyword">int</span> blue<span class="token punctuation">)</span><span class="token punctuation">{</span>    
   <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span> 
   <span class="token function">glColor3ub</span><span class="token punctuation">(</span>red<span class="token punctuation">,</span>green<span class="token punctuation">,</span>blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -151,7 +151,7 @@
       <span class="token punctuation">}</span>
   <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>用到的主要运算有：浮点运算、乘法、除法、取整、加法。</li>
 </ul>
@@ -160,7 +160,7 @@
 <ul>
 <li>基本思想：<br><strong>纵坐标每次加一个斜率值</strong>。x坐标的值从左端点x遍历到右端点x，对应y坐标每次加一个斜率。描点时如果发现y坐标不是整数值，需要取为离它最近的整数（如3.4取为3，3.5取为4，程序上用了一个小技巧实现：<code>(int)(y+0.5)</code>）<br>【注】：只是在描点的时候描在最近的整数点上，即(int)(y+0.5)，而不能把y值变为最近的整数值，即y=int(y+0.5)是不对的。因为每次描点都应该是在其纵坐标的真实值上，进行取整描点；如果是y=int(y+0.5)这样把纵坐标作了近似处理，那么下一个点加斜率值之后，算出来的纵坐标就不是它的真实纵坐标了。</li>
 <li><p>具体代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的DDA画法。直线方程式：y=mx+b</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的DDA画法。直线方程式：y=mx+b</span>
 <span class="token keyword">void</span> <span class="token function">LineDDA</span><span class="token punctuation">(</span><span class="token keyword">int</span> x0<span class="token punctuation">,</span><span class="token keyword">int</span> y0<span class="token punctuation">,</span><span class="token keyword">int</span> x1<span class="token punctuation">,</span><span class="token keyword">int</span> y1<span class="token punctuation">,</span><span class="token keyword">int</span> red<span class="token punctuation">,</span><span class="token keyword">int</span> green<span class="token punctuation">,</span><span class="token keyword">int</span> blue<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span> 
   <span class="token function">glColor3ub</span><span class="token punctuation">(</span>red<span class="token punctuation">,</span>green<span class="token punctuation">,</span>blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -173,7 +173,7 @@
       <span class="token punctuation">}</span>
   <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>用到的主要运算有：浮点运算、除法、加法、取整。</li>
 </ul>
@@ -186,7 +186,7 @@
 <ul>
 <li>基本思想：中点算法中只存在整数加法运算。在分类情况下（下一格中点在直线上方还是下方），下一个像素点坐标可以直接通过上一个点坐标做加法得到；同时下一个中点代入方程值也可以在分类情况下，直接通过上一个中点代入方程值做加法得到。<br>【注】：上面只是研究了直线斜率0~45度的情况，其实其它斜率也是同样的研究方法。不再赘述，结论如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147783822848.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147783822974.png" alt=""></li>
 <li><p>具体代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的中点算法。直线方程ax+by+c=0</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//直线段的中点算法。直线方程ax+by+c=0</span>
 <span class="token keyword">void</span> <span class="token function">MidPointLine</span><span class="token punctuation">(</span><span class="token keyword">int</span> x0<span class="token punctuation">,</span><span class="token keyword">int</span> y0<span class="token punctuation">,</span><span class="token keyword">int</span> x1<span class="token punctuation">,</span><span class="token keyword">int</span> y1<span class="token punctuation">,</span><span class="token keyword">int</span> red<span class="token punctuation">,</span><span class="token keyword">int</span> green<span class="token punctuation">,</span><span class="token keyword">int</span> blue<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span> 
   <span class="token function">glColor3ub</span><span class="token punctuation">(</span>red<span class="token punctuation">,</span>green<span class="token punctuation">,</span>blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -282,7 +282,7 @@
   <span class="token punctuation">}</span>
   <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>用到的主要运算有：整数加法。</li>
 </ul>
@@ -303,7 +303,7 @@
 <p>总结一下：</p>
 <ul>
 <li>基本思想：圆弧扫描转换的中点算法也只存在整数加法运算。在分类情况下（下一格中点在圆弧里面还是外面），下一个像素点坐标可以直接通过上一个点坐标做加法得到；同时下一个中点代入方程值也可以在分类情况下，直接通过上一个中点代入方程值做加法得到。<br>【注】：上面只是研究了逆时针45度到90度的圆弧，其他圆弧可以通过坐标对称得到。</li>
-<li>具体代码如下：<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//圆弧的中点算法</span>
+<li>具体代码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//圆弧的中点算法</span>
 <span class="token keyword">void</span> <span class="token function">MidPointCircle</span><span class="token punctuation">(</span><span class="token keyword">int</span> R<span class="token punctuation">,</span><span class="token keyword">int</span> red<span class="token punctuation">,</span><span class="token keyword">int</span> green<span class="token punctuation">,</span><span class="token keyword">int</span> blue<span class="token punctuation">,</span><span class="token keyword">int</span> centre_x<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">int</span> centre_y<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_POINTS<span class="token punctuation">)</span><span class="token punctuation">;</span> 
   <span class="token function">glColor3f</span><span class="token punctuation">(</span>red<span class="token punctuation">,</span>green<span class="token punctuation">,</span>blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -339,7 +339,7 @@
   <span class="token punctuation">}</span>
   <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p><font size="4" color="red">扫描转换圆弧：多边形逼近法</font><br>平时生活学习中，我们都知道正多边形边数越多，就会越像一个圆。多边形逼近法就是源自于此：根据已知的圆半径（圆心在原点），求出多边形的各个顶点，再依次连起来就像一个圆了。</p>
@@ -354,7 +354,7 @@
 </ul>
 </li>
 </ul>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//圆弧的正内接多边形逼近法</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//圆弧的正内接多边形逼近法</span>
 <span class="token keyword">void</span> <span class="token function">CircleIn</span><span class="token punctuation">(</span><span class="token keyword">float</span> MaxError<span class="token punctuation">,</span><span class="token keyword">float</span> R<span class="token punctuation">,</span><span class="token keyword">int</span> red<span class="token punctuation">,</span><span class="token keyword">int</span> green<span class="token punctuation">,</span><span class="token keyword">int</span> blue<span class="token punctuation">,</span><span class="token keyword">int</span> centre_x<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">int</span> centre_y<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">glBegin</span><span class="token punctuation">(</span>GL_LINE_LOOP<span class="token punctuation">)</span><span class="token punctuation">;</span> 
     <span class="token function">glColor3f</span><span class="token punctuation">(</span>red<span class="token punctuation">,</span>green<span class="token punctuation">,</span>blue<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -378,7 +378,7 @@
     <span class="token punctuation">}</span>
     <span class="token function">glEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><p>等面积正多边形逼近法：<br>在圆内接正多边形逼近法中，正多边形是内接于圆的，总感觉上面画出来的正多边形比圆要小，毕竟是内接嘛~那么有没有和圆差不多大的？减少一点这种差距。那干脆找一个面积和圆一样大，且圆心重合的正多边形把，这就是等面积正多边形逼近法（参见前面的“等面积多边形”一图）。</p>
 <p>由于圆面积和正多边形面积相等，所以相同圆心角对应的扇形（圆的一部分）和三角形（正多边形的一部分）面积应该相等，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147808731637.png" alt=""><br>图中的扇形ODCE和三角形$OP_iP_{i+1}$面积应该相等，再结合给定（在圆的参数方程中给定的）的圆半径R和最大逼近误差d，可以算出圆心角$\alpha$和正多边形半径$OP_i$的长度。知道了正多边形的圆心角和半径长度，自然就能算出正多边形个顶点的坐标了（求法和内接正多边形一致）。</p>
@@ -442,7 +442,7 @@
 <p>【注】：由于边的斜率倒数可能是小数，如e2的斜率倒数是1.25，所以每次算出来的交点是一个小数，但是描点的时候只能是整数值，所以4.3中，描点时需要对配对的交点的x坐标取整（这样也能在填充时减少浮点数的出现），取整规则是：让取整后的交点坐标都落在多边形内。即配对的交点中，左边的交点向右取整（通常采用int(…)+1），右边的交点向左取整（通常采用int(…)）。</p>
 <ul>
 <li><p>用扫描线算法来扫描转换多边形的具体代码如下（代码里的多边形坐标比前面多边形图中扩大了10倍）：</p>
-<pre class=" language-csharp"><code class="language-csharp">  <span class="token preprocessor property">#include&lt;iostream></span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">  <span class="token preprocessor property">#include&lt;iostream></span>
   <span class="token preprocessor property">#include&lt;math.h></span>
   <span class="token preprocessor property">#include&lt;gl/glut.h></span>
   <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -605,7 +605,7 @@
       <span class="token function">glutMainLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>&nbsp;</p>
@@ -616,7 +616,7 @@
 <li>边界填充：首先用一种颜色（取名边界色）画出多边形轮廓，再从多边形内部任意一点开始，查看它的周围像素点（一般是上下左右）<strong>是否是边界色或者已填充色</strong>，如果都不是，则说明该点是多边形内部且暂时没有被描色的点，接下来给该点描色即可。一般采用递归的方式，让每个已描色的点都去重复上诉过程。</li>
 <li><p>内点填充：依然是首先用一种不同于背景色的颜色，画出多边形轮廓，再从多边形内部任意一点开始，查看它的周围像素点（一般是上下左右）<strong>是否是背景色</strong>，如果是则说明该点是多边形内部且暂时没有被描色的点，接下来用一种不同于背景色的颜色给该点描色即可。同样采用递归的方式，让每个以描色的点都去重复上诉过程。</p>
 <p>使用内点填充画五角星的代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">    <span class="token preprocessor property">#include&lt;math.h></span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token preprocessor property">#include&lt;math.h></span>
     <span class="token preprocessor property">#include&lt;gl/glut.h></span>
     <span class="token preprocessor property">#include&lt;iostream></span>
     <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -725,7 +725,7 @@
       <span class="token function">glutDisplayFunc</span><span class="token punctuation">(</span>mydisplay<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token function">glutMainLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147876876527.png" alt=""></p>
 </li>
 </ul>

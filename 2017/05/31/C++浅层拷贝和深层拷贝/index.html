@@ -117,8 +117,8 @@
                 <p><font size="5" color="orange">拷贝构造函数</font><br><a id="more"></a></p>
 <hr>
 <p><font size="4" color="red">什么是拷贝构造函数</font><br>拷贝构造函数是一种特殊的构造函数，其形参是本类对象的引用。它的作用是：在建立一个新对象时，使用一个已经存在的对象去初始化这个新对象。例如：</p>
-<pre class=" language-c++"><code class="language-c++">Point p2(p1);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">Point p2(p1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在建立新对象p2时，用已经存在的对象p1去初始化新对象p2，在这个过程中就要调用拷贝构造函数。</p>
 <p><font size="4" color="red">拷贝构造函数的特点</font><br>拷贝构造函数具有以下特点：</p>
 <ol>
@@ -127,12 +127,12 @@
 <li>每个类都必须有一个拷贝构造函数。如果我们没有自定义某个类的拷贝构造函数，那么系统会自动生成一个默认的拷贝构造函数，用于复制出数据成员值完全相同的新对象。</li>
 </ol>
 <p><font size="4" color="red">拷贝构造函数的一般形式</font><br>自定义拷贝构造函数的一般形式如下：</p>
-<pre class=" language-c++"><code class="language-c++">类名(const 类名& 对象名){
+<pre class="line-numbers language-c++"><code class="language-c++">类名(const 类名& 对象名){
     ...
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>例如：</p>
-<pre class=" language-c++"><code class="language-c++">class Point {
+<pre class="line-numbers language-c++"><code class="language-c++">class Point {
 private:
     int x, y;
 public:
@@ -145,19 +145,19 @@ public:
         y = 2 * p.y;
     }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">什么时候会调用拷贝构造函数</font><br>有3种情况下会调用拷贝构造函数：</p>
 <ol>
-<li>用一个对象去初始化另一个对象时。如下：<pre class=" language-c++"><code class="language-c++">Point p2(p1);
+<li>用一个对象去初始化另一个对象时。如下：<pre class="line-numbers language-c++"><code class="language-c++">Point p2(p1);
 Point p3=p1;
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>类对象作为函数参数时。如下：<pre class=" language-c++"><code class="language-c++">void func(Point p){
+<li>类对象作为函数参数时。如下：<pre class="line-numbers language-c++"><code class="language-c++">void func(Point p){
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 调用函数func，实参传入形参时会调用拷贝构造函数来初始化形参p。</li>
 <li><p>函数返回值是类对象时。如下：</p>
-<pre class=" language-c++"><code class="language-c++">Point func(){
+<pre class="line-numbers language-c++"><code class="language-c++">Point func(){
    Point p1(10,20);
    return p1;
 }
@@ -167,7 +167,7 @@ int main(){
    p2 = func();
    return 0;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>执行语句<code>return p1</code>时，将会调用拷贝构造函数将p1的值复制到一个临时对象中，这个临时对象是编译系统在主程序中临时创建的，函数运行结束时对象p1消失，但临时对象将会通过语句<code>p2=func()</code>将它的值赋给对象p2，执行完这个语句后，临时对象的使命也就完成了，该临时对象便自动消失了。</p>
 </li>
 </ol>
@@ -175,7 +175,7 @@ int main(){
 <hr>
 <p>编译器会提供默认的拷贝构造函数，但它只是把传递进来的对象的每个成员复制到新对象的成员变量中去，两个对象的变量共享内存区域，我们把这种拷贝叫做浅层拷贝。</p>
 <p>如果浅层拷贝的两个对象共享指针变量，那么当其中一个对象释放掉该存放指针变量的内存空间时，另一个对象的该指针变量就变成了野指针（迷途指针），会报错。如下所示：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 using namespace std;
 
 class Point {
@@ -207,17 +207,17 @@ int main() {
     cout << p2.getX() << endl;
     return 0;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当删除p1之后，p1和p2共用的指针x就会通过析构函数被释放掉，在执行<code>cout &lt;&lt; p2.getX() &lt;&lt; endl;</code>将无法得到想要的值14（会得到一个随机内存的值，可能会很大），在main函数结束时，程序会调用p2的析构函数再次释放指针x，但是x在此之前已经被释放掉了，所以程序会报错。程序输出结果如下：</p>
-<pre class=" language-c++"><code class="language-c++">delete
+<pre class="line-numbers language-c++"><code class="language-c++">delete
 -572662307
 delete
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>去掉上面程序中的拷贝构造函数也是一样的错误，因为程序默认的拷贝构造函数就是浅层拷贝，跟上面程序中的拷贝构造函数几乎是一样的。</p>
 <p><font size="5" color="orange">深层拷贝构造函数</font></p>
 <hr>
 <p>为了解决浅层拷贝导致的野指针问题，必须创建自己的拷贝构造函数，并且在函数里为成员变量分配内存。这样两个对象的成员变量都各自拥有自己的内存区域。这就是深层拷贝，可以使拷贝结果与拷贝源不共用内存。如下所示：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 using namespace std;
 
 class Point {
@@ -250,12 +250,12 @@ int main() {
     cout << p2.getX() << endl;
     return 0;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在拷贝构造函数<code>Point(const Point&amp; p)</code>中，对当前类对象的成员变量又重新分配了内存空间，并且完成了变量内容复制（注意不要写成x=p.x，否则指针相同导致对应的变量还是共用的一个地址），程序运行正常，输出结果如下：</p>
-<pre class=" language-c++"><code class="language-c++">delete
+<pre class="line-numbers language-c++"><code class="language-c++">delete
 14
 delete
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>当释放p1调用析构函数时，释放的是p1的指针变量x，并不会影响到p2的指针变量x，因为深层拷贝下p1和p2的成员变量x不再共用内存。<br>&nbsp;</p>
 <hr>
 <p>参考文献：<a href="http://blog.csdn.net/cainv89/article/details/47285453" target="_blank" rel="external">《C++基础–浅层及深层拷贝构造函数》</a></p>

@@ -121,19 +121,19 @@
 <li>使用静态成员变量时出现无法解析的外部符号：原因是静态成员变量必须在类外进行初始化，否则的话是不会给它们分配内存空间的。</li>
 <li>c++对bool变量的默认值是没有规定的，根据编译器不同，可能默认是true，也可能是false，应该自己显示对bool变量赋初始值，不要让编译来决定。</li>
 <li><p>如下代码：</p>
-<pre class=" language-c++"><code class="language-c++">test1.h:
+<pre class="line-numbers language-c++"><code class="language-c++">test1.h:
 #pragma once
 #include "test2.h"
 
 class A {
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">test1.cpp:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">test1.cpp:
 #include "test1.h"
 
 int n = 10;
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">test2.h:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">test2.h:
 #pragma once
 #include "test1.h"
 #include <iostream>
@@ -144,14 +144,14 @@ public:
      std::cout << n << std::endl;
  }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>程序时可以正常编译通过的，输出10。<br>但是下面的程序却无法通过：</p>
-<pre class=" language-c++"><code class="language-c++">test1.cpp:
+<pre class="line-numbers language-c++"><code class="language-c++">test1.cpp:
 #include "test1.h"
 
 A a;
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">test2.h:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">test2.h:
 #pragma once
 #include "test1.h"
 #include <iostream>
@@ -161,7 +161,7 @@ public:
   void draw() {
   }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译报错：C4430 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认int。</p>
 <p>这是因为C++头文件加载的顺序是不定的，有可能在加载test2之前，test1就已经加载好了，那么#include “test1.h”这句将不再起作用，由于test1.h和test2.h是两个独立的编译单元，test2又没有去加载test1，导致test2中无法识别类A，出现上诉错误。但是前面用int n是不报错的，因为int是系统基础类型，肯定认识它。</p>
 </li>

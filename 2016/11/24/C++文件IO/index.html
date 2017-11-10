@@ -128,10 +128,10 @@
 <hr>
 <p><font size="5" color="orange">创建流对象</font><br>建立流的过程其实就是定义流类的对象。因为与文件IO有关的类fstream、ifstream和ofstream都包含在头文件fstream，所以首先需要在程序中包含此头文件：<code>#include &lt;fstream&gt;</code>。</p>
 <p>接下来使用流类来定义流对象，例如：</p>
-<pre class=" language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
 ofstream <span class="token keyword">out</span><span class="token punctuation">;</span>
 fstream both<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>分别定义了输入流对象in、输出流对象out、输入输出流对象both。</p>
 <p>其实常用的cin和cout也是流对象，只是已经在头文件iostream中事先定义好了，我们不需要再去自己定义了。<br>&nbsp; </p>
 <hr>
@@ -151,29 +151,29 @@ fstream both<span class="token punctuation">;</span>
 </ul>
 <p>对于ifstream对象，文件打开方式默认为ios::in；对于ofstream对象，文件打开方式默认为ios::out。</p>
 <p>当一个文件需要多种方式打开时，可以用操作符“|”把几种方式连接在一起。例如，打开一个用于输入和输出的二进制文件：</p>
-<pre class=" language-csharp"><code class="language-csharp">fstream mystream<span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">fstream mystream<span class="token punctuation">;</span>
 mystream<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">,</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">in</span><span class="token operator">|</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">out</span><span class="token operator">|</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">定义流对象同时打开文件</font><br>可以在定义文件流对象时指定文件路径，来同时打开文件。形如：</p>
-<pre class=" language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>由于这种方式没有指定打开方式，所以使用的是默认打开方式，依旧是：ifstream对象为ios::in打开方式，ofstream对象为ios::out打开方式。所以上面的打开文件代码相当于：</p>
-<pre class=" language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">;</span>
 <span class="token keyword">out</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">检测打开文件是否成功</font><br>执行打开文件操作后，还需要检测打开文件是否成功，如果打开失败，与文件相联系的流对象（比如上面的out）的值将是0。检测代码形如：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">out</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">out</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     cout<span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token string">"Cannot open file!"</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span>endl<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//其它处理</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">文件读写</font><br>文件打开以后，就可以进行文件读写了。但是由于数据组织方式不同，文本文件和二进制文件的读写是不一样的（二进制文件在打开时还需要显式指定ios::binary打开方式，默认是以文本方式打开）。</p>
 <p><font size="4" color="red">文本文件的读写</font><br>其实和cin、cout一样，使用<code>流对象&gt;&gt;</code>把数据从文件输入到内存，使用<code>流对象&lt;&lt;</code>把数据从内存输出到文件。</p>
 <p>下面上个demo，先建立一个输出文件，向它写入数据，然后关闭文件，在按输入方式打开它，并读取信息，保存到变量中，在屏幕上显示出来：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include &lt;iostream></span>
 <span class="token preprocessor property">#include &lt;fstream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -207,23 +207,23 @@ mystream<span class="token punctuation">.</span><span class="token function">ope
     fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后，会在该源文件同路径下，创建出一个test.dat文件，文件中内容如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
 <span class="token number">100</span> <span class="token number">64</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>并且在屏幕上会输出如下结果：</p>
-<pre class=" language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
 <span class="token number">100</span>
 <span class="token number">64</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>64是100的二进制。</p>
 <p><font size="4" color="red">二进制文件的读写</font><br>二进制文件的读写不再是使用&gt;&gt;或&lt;&lt;，而是使用类istream和类ostream的成员函数来进行读写。</p>
 <p>根据每次读写的数据量不同，二进制文件的读写有两种方式：一种是使用成员函数get和put；另一种是使用成员函数read和write。</p>
 <ul>
 <li><p>使用get和put函数读写二进制文件：<br>get函数是类istream的成员函数，put函数是类ostream的成员函数，它们每次都只是读写一个字节（字符）。</p>
 <p>上个demo体会一下，将a到z的26个英文字母写入二进制文件，而后从该文件中读出并在屏幕上显示出来：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include &lt;iostream></span>
 <span class="token preprocessor property">#include &lt;fstream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -254,10 +254,10 @@ mystream<span class="token punctuation">.</span><span class="token function">ope
   inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后，会在该源文件同路径下，创建出一个binary.dat，文件内容是26个小写英文字符对应的二进制（用记事本等工具打开后二进制会转为字符，所以用记事本打开看到的不是二进制，而是26个英文字母），并且屏幕上回输出如下结果：</p>
-<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>使用read和write函数读写二进制文件：</p>
 <ul>
@@ -265,7 +265,7 @@ mystream<span class="token punctuation">.</span><span class="token function">ope
 <li>write函数是类ostream的成员函数，形如<code>outb.write(const char* buf,int len);</code> 。用于将字符指针buf所给出地址开始的len个字节的内容，不加转换地写到与输出文件流对象outb相关联的磁盘文件中。</li>
 </ul>
 <p>再上个demo体会一下，将课程结构体以二进制形式一次性存放到磁盘文件中：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include &lt;iostream></span>
 <span class="token preprocessor property">#include &lt;fstream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -302,29 +302,29 @@ mystream<span class="token punctuation">.</span><span class="token function">ope
   inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后，在源文件同路径下回创建出一个binary2.dat文件，用记事本打开结果如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">computer            d
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp">computer            d
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>因为用记事本打开时会自动将二进制转换为字符，而数字100对应的二进制正好是字母d的ASCII码，所以数字100转变成了字母d。并且屏幕上会出现如下结果：</p>
-<pre class=" language-csharp"><code class="language-csharp">courseName<span class="token punctuation">:</span>computer score<span class="token punctuation">:</span><span class="token number">100</span>
-</code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp">courseName<span class="token punctuation">:</span>computer score<span class="token punctuation">:</span><span class="token number">100</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
 <p><font size="4" color="red">检测读文件是否结束</font><br>在文件结束的地方有一个标志位，记为EOF（end of file）。采用文件流方式读文件时，使用成员函数<code>eof</code>可以检测到这个结束符：</p>
-<pre class=" language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">in</span><span class="token punctuation">.</span><span class="token function">eof</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>函数<code>eof</code>如果返回值为0，未达到文件尾；如果返回值非0，表示到达文件尾。</p>
 <p>其实前面在使用get函数读文件时：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">while</span> <span class="token punctuation">(</span>inb<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">while</span> <span class="token punctuation">(</span>inb<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//从磁盘文件中读取字符赋给ch</span>
     cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> ch<span class="token punctuation">;</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>get函数在读取字符的同时，也通过返回值是否为0，判断是否到达文件尾。</p>
 <p><font size="4" color="red">二进制文件的随机读写</font><br>文本文件一般是顺序读写的，但二进制文件还支持从任意位置开始读写，即随机读写。主要是靠设置读指针和写指针的位置来实现。</p>
 <p>类istream提供了3个成员函数来设置读指针位置（下面的g是get的缩写）：</p>
@@ -352,15 +352,15 @@ mystream<span class="token punctuation">.</span><span class="token function">ope
 </li>
 </ul>
 <p>把读指针位置设置为文件尾ios::end，再使用<code>tellg</code>函数可以获得整个文件的长度：</p>
-<pre class=" language-csharp"><code class="language-csharp">fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>end<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp">fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>end<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> length <span class="token operator">=</span> fin<span class="token punctuation">.</span><span class="token function">tellg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>知道了整个文件的长度，再使用<code>read</code>函数就可以一次性读出整个文件。上个demo，现在已经有一个binary.dat文件，文件内容如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+<pre class="line-numbers language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
 ABC
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>实现代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
 <span class="token preprocessor property">#include&lt;iostream></span>
 <span class="token preprocessor property">#include&lt;fstream></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -383,11 +383,11 @@ ABC
     cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> str <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
     fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后，在屏幕上的输出结果如下：</p>
-<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+<pre class="line-numbers language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
 ABC
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>成员函数<code>get</code>、<code>put</code>、<code>read</code>、<code>write</code>函数不仅可以用于二进制文件，也可以用于文本文件</li>
@@ -395,11 +395,11 @@ ABC
 </ul>
 <hr>
 <p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">in</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">in</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">out</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 outb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">C++字符串流的输入输出</font><br>C++字符串流的输入输出与文件IO类似。文件IO是内存和磁盘文件之间传递数据，而字符串流IO是内存和字符串流之间传递数据。</p>

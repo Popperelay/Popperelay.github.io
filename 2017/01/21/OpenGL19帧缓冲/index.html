@@ -122,13 +122,13 @@
 <p>FBO中包含两种类型的附件：纹理图像、渲染缓冲（renderbuffer）对象。之所以用附加这个词，表达的是FBO可以附加多个缓冲区，而且可以灵活地在缓冲区间切换，一个重要的概念是附加点（其实就是指针）。FBO中可以包含多个颜色附加点，但只能有一个深度和模板附加点，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148491821495.png" alt=""><br>从图中可以看到FBO本身并不包含任何缓冲对象，实际上是通过附加点指向实际缓冲对象的。这样FBO就可以快速地切换缓冲对象。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">创建帧缓冲FBO</font><br>和创建其他缓冲对象一样，使用<code>glGenFramebuffers</code>函数创建FBO如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //创建FBO
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建FBO
     GLuint fbo;
     glGenFramebuffers(1, &fbo);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后我们需要将创建的fbo绑定到目标对象（读帧缓冲/写帧缓冲/读写帧缓冲）：</p>
-<pre class=" language-c++"><code class="language-c++">    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>绑定到目标<code>GL_FRAMEBUFFER</code>后，接下来所有的读、写帧缓冲操作都会影响到当前绑定的帧缓冲，并且该缓冲区可以执行读和写操作。绑定的目标还可以是<code>GL_READ_FRAMEBUFFER</code>，这时该帧缓冲区只能执行读操作，比如<code>glReadPixels</code>；目标还可以是<code>GL_DRAW_FRAMEBUFFER</code>，这时该帧缓冲区允许进行渲染、清空等等写入操作。大多数时候我们都用的<code>GL_FRAMEBUFFER</code>。</p>
 <p>构建一个完整的帧缓冲FBO必须满足以下条件：</p>
 <ul>
@@ -138,25 +138,25 @@
 <li>每个缓冲区的采样数需要一致</li>
 </ul>
 <p>从上面可以看到，我们需要为帧缓冲创建一些附件，还需要把这些附件添加到帧缓冲上。当我们做完上面的所有条件后，我们可以使用<code>glCheckFramebufferStatus</code>函数来检查FBO是否完整：</p>
-<pre class=" language-c++"><code class="language-c++">if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+<pre class="line-numbers language-c++"><code class="language-c++">if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
     ...
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>后续的所有渲染操作将渲染到当前绑定的帧缓冲所附加的对应缓冲中。由于我们这里的帧缓冲是自己创建的，不是默认的帧缓冲，渲染命令对窗口的视频输出不会产生任何影响，所以称为离屏渲染（off-screen rendering）。为了让所有的渲染操作对主窗口产生影响，我们必须在最后通过绑定帧缓冲到0（即默认帧缓冲），来激活默认帧缓冲，才能才窗口上实现最终的绘制效果：</p>
-<pre class=" language-c++"><code class="language-c++">glBindFramebuffer(GL_FRAMEBUFFER, 0);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glBindFramebuffer(GL_FRAMEBUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p>前面提到了，我们需要把一个或多个附件附加到帧缓冲上。一个附件其实就是一个指向颜色缓冲（或深度缓冲、或模板缓冲）的指针。有两张类型的附件（缓冲区）：纹理、渲染缓冲对象。</p>
 <p><font size="5" color="orange">附件：纹理</font><br>当把一个纹理附加到帧缓冲上的时候，所有渲染命令会写入到该纹理上，就像它是一个普通的颜色/深度/模板缓冲一样。使用纹理的好处是，所有渲染操作的结果都会被存储为一个纹理图像，这样我们就可以在着色器中访问并使用这个渲染出来的纹理，可以实现很多特效。</p>
 <p>创建一个用于附加到帧缓冲的纹理，和创建普通纹理差不多：</p>
-<pre class=" language-c++"><code class="language-c++">    //创建纹理附件
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建纹理附件
     GLuint texAttachment;
     glGenTextures(1, &texAttachment);
     glBindTexture(GL_TEXTURE_2D, texAttachment);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>主要区别是：</p>
 <ul>
 <li>我们把纹理大小设置为渲染窗口的大小。因为后边把这张纹理绘入到默认帧缓冲里，让这张纹理铺满整个渲染窗口，以达到和只使用默认帧缓冲一样的效果</li>
@@ -168,9 +168,9 @@
 <li>如果打算渲染到一个当前渲染窗口大一点或者小一点的纹理上，需要使用<code>glViewport</code>函数调整当前的渲染窗口。因为最好让渲染窗口和纹理附件尺寸大小一致。</li>
 </ul>
 <p>创建完纹理附件后，还需要把它附加到帧缓冲上：</p>
-<pre class=" language-c++"><code class="language-c++">    //将纹理附件附加到帧缓冲上
+<pre class="line-numbers language-c++"><code class="language-c++">    //将纹理附件附加到帧缓冲上
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texAttachment, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>该函数参数说明如下：</p>
 <ul>
 <li>第一个参数target：我们所创建的帧缓冲类型（读/写/读写的帧缓冲）。<ul>
@@ -182,44 +182,44 @@
 </ul>
 <p>除了可以把纹理附件附加为帧缓冲的颜色缓冲外，还可以作为深度缓冲和模板缓冲。如果是要附加为深度缓冲，需要把<code>glFramebufferTexture2D</code>函数的第二个参数附件类型指定为<code>GL_DEPTH_ATTACHMENT</code>，而且用<code>glTexImage2D</code>函数生成纹理时，纹理格式和内部格式不再是<code>GL_RGB</code>了，而是<code>GL_DEPTH_COMPONENT</code>，这样才可以存储为深度缓冲所需要的存储格式；如果是要附加为模板缓冲，需要把附件类型指定为<code>GL_STENCIL_ATTACHMENT</code>，把纹理格式和内部格式指定为<code>GL_STENCIL_INDEX</code>。</p>
 <p>还可以把纹理附件同时作为帧缓冲的深度缓冲和模板缓冲。这样纹理的每32位数值就包含了24位的深度信息和8位的模板信息，这时需要把附件类型指定为<code>GL_DEPTH_STENCIL_ATTACHMENT</code>，生成纹理时内部格式应该指定为<code>GL_DEPTH24_STENCIL8</code>，纹理格式应该设置为<code>GL_DEPTH_STENCIL</code>，如下所示：</p>
-<pre class=" language-c++"><code class="language-c++">glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 800, 600, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL );
+<pre class="line-numbers language-c++"><code class="language-c++">glTexImage2D( GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 800, 600, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL );
 
 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, texture, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">附件：渲染缓冲对象</font><br>除了纹理附件，另外一种附件是渲染缓冲对象。和纹理图像一样，渲染缓冲对象也是一个缓冲，它可以是一堆字节、整数、像素或者其他东西。渲染缓冲对象的一大优点是：它以OpenGL原生渲染格式存储它的数据，因此在离屏渲染到帧缓冲的时候，这些数据就相当于被优化过的了。</p>
 <p>渲染缓冲对象将所有渲染数据直接存储到它们的缓冲里，而不会进行针对特定纹理格式的任何转换，这样它们就成了一种可快速可写的存储介质了。然而，渲染缓冲对象是只写的，不能修改它们（就是只能写一次，后面不能再修改了）。可以用<code>glReadPixels</code>函数去读取。</p>
 <p>因为它所存储的数据已经是原生格式了，在写入或把它们的数据简单地拷贝到其他缓冲的时候会非常快。所以使用渲染缓冲对象时，像切换缓冲这种操作会变得异常高速。我们在每个渲染循环末尾使用的那个<code>glfwSwapBuffers</code>函数，同样可以缓冲对象实现：我们简单地写入到一个渲染缓冲对象，最后交换到另一个里。渲染缓冲对象对于这种切换缓冲的操作来说很完美。</p>
 <p><font size="4" color="red">创建渲染缓冲对象</font><br>创建渲染缓冲对象和创建一般的缓冲对象类似：</p>
-<pre class=" language-c++"><code class="language-c++">GLuint rbo;
+<pre class="line-numbers language-c++"><code class="language-c++">GLuint rbo;
 glGenRenderbuffers(1, &rbo);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>接下来需要绑定到渲染缓冲上，这样所有后续渲染操作都会影响到当前绑定的渲染缓冲对象：</p>
-<pre class=" language-c++"><code class="language-c++">glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>大多数时候，我们不需要从深度和模板缓冲中读取数据，不需要进行采样，只要能进行深度和模板测试就可以，而渲染缓冲对象通常是只写的，所以它经常作为深度和模板附件来使用，优点是它们等于是被优化过的。</p>
 <p>我们可以调用<code>glRenderbufferStorage</code>函数为rbo预分配内存空间，这里把rbo存储为24位深度缓冲和8位模板缓冲的格式：</p>
-<pre class=" language-c++"><code class="language-c++">glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>渲染缓冲对象是专门被设计用于图像的，而不是通用目的的数据缓冲。</li>
 </ul>
 <p>最后需要把帧缓冲对象附件附加到帧缓冲上：</p>
-<pre class=" language-c++"><code class="language-c++">glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在帧缓冲项目中，渲染缓冲对象可以提供一些优化，但更重要的是知道何时使用渲染缓冲对象，何时使用纹理附件。通常的规则是：如果永远都不需要从特定的缓冲中进行采样，渲染缓冲对象对特定缓冲是更明智的选择；如果需要从比如颜色或深度这样的特定缓冲中采样数据的话，最好还是使用纹理附件。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">渲染到纹理</font><br>现在我们来上个demo，把场景渲染到一个颜色纹理上（这个纹理是附加到我们创建的帧缓冲上的），然后我们把纹理绘制到一个简单的四边形上（这个四边形铺满整个屏幕）。最后输出的图像看似和没用帧缓冲一样，但是其实是直接输出到了一个单独的四边形上面。后面会看到这样做的好处。</p>
 <p>首先，我们需要创建一个帧缓冲对象，并绑定它：</p>
-<pre class=" language-c++"><code class="language-c++">    //创建FBO
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建FBO
     GLuint fbo;
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接下来创建一个纹理附件，它将附加为帧缓冲的颜色缓冲：</p>
-<pre class=" language-c++"><code class="language-c++">    //创建纹理附件
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建纹理附件
     GLuint texColorBuffer;
     glGenTextures(1, &texColorBuffer);
     glBindTexture(GL_TEXTURE_2D, texColorBuffer);
@@ -229,26 +229,26 @@ glGenRenderbuffers(1, &rbo);
     glBindTexture(GL_TEXTURE_2D, 0);
     //将纹理附件附加到帧缓冲上
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们还想让OpenGL可以进行深度测试和模板测试，所以我们还需要向帧缓冲中添加一个深度和模板附件。由于我们只采样颜色缓冲，并不采样深度缓冲，所以深度附件可以用渲染缓冲对象来实现。</p>
 <p>创建并绑定渲染缓冲对象，同时预分配内存空间：</p>
-<pre class=" language-c++"><code class="language-c++">    //创建渲染缓冲对象
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建渲染缓冲对象
     GLuint rbo;
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后需要把渲染缓冲对象附加到帧缓冲上：</p>
-<pre class=" language-c++"><code class="language-c++">    //将渲染缓冲对象附加到帧缓冲上
+<pre class="line-numbers language-c++"><code class="language-c++">    //将渲染缓冲对象附加到帧缓冲上
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>接下里我们检查一下帧缓冲是否真的做完整了，如果没有就打印一个错误消息：</p>
-<pre class=" language-c++"><code class="language-c++">    //检查帧缓冲是否完整
+<pre class="line-numbers language-c++"><code class="language-c++">    //检查帧缓冲是否完整
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         std::cout << "Framebuffer is not complete!" << std::endl;
     }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接着我们就可以把场景渲染到我们所创建的帧缓冲上了。一般按照以下步骤来做：</p>
 <ol>
 <li>绑定帧缓冲为我们所创建的帧缓冲对象，好场景渲染到我们自己的帧缓冲里。</li>
@@ -257,7 +257,7 @@ glGenRenderbuffers(1, &rbo);
 <li>绘制一个四边形，让它平铺到整个屏幕上，使用前面渲染出来的纹理附件（也就是我们的帧缓冲里的颜色缓冲）作为这个四边形的纹理。</li>
 </ol>
 <p>为了绘制出铺满窗口的四边形，我们先定义四边形的顶点属性如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //窗口四边形的顶点坐标、纹理坐标
+<pre class="line-numbers language-c++"><code class="language-c++">    //窗口四边形的顶点坐标、纹理坐标
     GLfloat windowQuadVertices[] = {
         //位置坐标
         1.0f, 1.0f,  1.0f,1.0f,
@@ -268,9 +268,9 @@ glGenRenderbuffers(1, &rbo);
         1.0f,-1.0f,  1.0f,0.0f,
        -1.0f,-1.0f,  0.0f,0.0f
     };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>该四边形的VAO绑定和数据解析如下：</p>
-<pre class=" language-c++"><code class="language-c++">    //窗口四边形windowQuadVAO和数据解析
+<pre class="line-numbers language-c++"><code class="language-c++">    //窗口四边形windowQuadVAO和数据解析
     GLuint windowQuadVAO, windowQuadVBO;
     glGenVertexArrays(1, &windowQuadVAO);
     glBindVertexArray(windowQuadVAO);
@@ -282,9 +282,9 @@ glGenRenderbuffers(1, &rbo);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GL_FLOAT), (GLvoid*)(2 * sizeof(GLfloat)));
     glBindVertexArray(0);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再给这个四边写一个顶点着色器和像素着色器：<br>四边形的顶点着色器（写在quad.vertex中）</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 layout (location=0) in vec2 position;
 layout (location=1) in vec2 texCoords;
 out vec2 TexCoords;
@@ -293,9 +293,9 @@ void main(){
     gl_Position = vec4(position,0.0f,1.0f);
     TexCoords = texCoords;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>四边形的像素着色器（写在quad.fragment中）：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
 
@@ -304,58 +304,58 @@ uniform sampler2D texture1;
 void main(){
     color = texture(texture1,TexCoords);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为四边形创建的着色器对象如下：</p>
-<pre class=" language-c++"><code class="language-c++">    shader windowQuad_shader("quad.vertex", "quad.fragment");
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">    shader windowQuad_shader("quad.vertex", "quad.fragment");
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后在渲染循环中，我们先把帧缓冲切换为我们自己创建的帧缓冲：</p>
-<pre class=" language-c++"><code class="language-c++">        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+<pre class="line-numbers language-c++"><code class="language-c++">        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>切换成我们自己的帧缓冲对象fbo，同时刷新颜色缓冲、深度缓冲，并且开启深度测试和面剔除。接下来就是照常渲染场景。</p>
 <p>场景渲染完后，我们再切换到默认帧缓冲：</p>
-<pre class=" language-c++"><code class="language-c++">        //将帧缓冲切换为默认帧缓冲
+<pre class="line-numbers language-c++"><code class="language-c++">        //将帧缓冲切换为默认帧缓冲
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>由于我们只需要把一张二维纹理渲染到二维四边形上，所以不需要深度测试和面剔除，应该关掉：</p>
-<pre class=" language-c++"><code class="language-c++">        glDisable(GL_DEPTH_TEST);
+<pre class="line-numbers language-c++"><code class="language-c++">        glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>接下来就是渲染这个铺满窗口的四边形了：</p>
-<pre class=" language-c++"><code class="language-c++">        windowQuad_shader.Use();
+<pre class="line-numbers language-c++"><code class="language-c++">        windowQuad_shader.Use();
         glBindVertexArray(windowQuadVAO);
         glBindTexture(GL_TEXTURE_2D, texColorBuffer);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在渲染四边形之前，我们给它绑定了在自定义帧缓冲中已经渲染好的纹理（附件）。</p>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499563004.png" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL19_FrameBuffer" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">后期处理</font><br>现在，我们把整个场景渲染到了一个单独的纹理上，只需要简单操纵纹理数据，我么就能创建一些有趣的效果。下面，会展示出一些流行的后期处理（Post-processing）特效。</p>
 <p><font size="4" color="red">反相</font><br>我们已经在纹理上存储了渲染输出的每个颜色，可以在四边形的像素着色器中用1减去每个颜色，就能得到这些颜色的反射：</p>
-<pre class=" language-c++"><code class="language-c++">void main(){
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
     color = 1.0 - texture(texture1,TexCoords);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950269.png" alt=""><br>想象一下，如果不先把场景渲染到纹理上，而是用我们之前的直接渲染到默认帧缓冲里，要实现这种效果，那我们就得在每一种着色器中去做上面的反色操作（每一种物体可能都有它们各自的着色器）。</p>
 <p><font size="4" color="red">灰度</font><br>另一个有意思的效果是把整个场景图像变成黑白的。实现它的简单方式是获得每一个颜色分量，然后将它们平均化：</p>
-<pre class=" language-c++"><code class="language-c++">void main(){
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
     color = texture(texture1,TexCoords);
     float average = (color.r + color.g + color.b)/3;
     color = vec4(average,average,average,1.0f);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950349.png" alt=""><br>&nbsp;</p>
 <hr>
 <p>在单独纹理图像上进行后处理的另一个好处是我们可以从纹理的其他部分进行采样。比如我们可以从当前纹理值的周围采样多个纹理值。这样我们可以使用一些图像处理技巧，来实现很多后处理效果。比如接下来的后处理效果中的Kernel效果。</p>
 <p><font size="5" color="orange">Kernel effects</font><br>kernel是一个长得有点像一个小矩阵的数值数组，通常是一个3x3的矩阵，而且所有元素加起来的和通常等于1。</p>
 <p><font size="4" color="red">锐化Kernel：麻醉效果</font><br>下面是一个锐化Kernel的例子：<br>$$<br>\begin{bmatrix}-1 &amp; -1 &amp; -1 \\ -1 &amp; 9 &amp; -1 \\ -1 &amp; -1 &amp; -1 \end{bmatrix}<br>$$<br>通过Kernel矩阵，将当前纹素扩展到周围9个纹素，然后通过加权和得到最终的当前片段颜色。</p>
 <p>为了得到当前片段周围的9个纹素值，我们需要知道这9个纹素的坐标是多少，然后才能通过采样取得纹素值。所以，我们先定义一个纹理坐标偏移量，就是这9个纹理坐标离中心纹素坐标的偏移量：</p>
-<pre class=" language-c++"><code class="language-c++">//离中心纹素的s或t距离
+<pre class="line-numbers language-c++"><code class="language-c++">//离中心纹素的s或t距离
 const float offset = 1.0/300;
 
 void main(){
@@ -372,31 +372,31 @@ void main(){
         vec2(offset,  -offset)  // bottom-right
     );
     ...
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>接着我们就可以用这9个纹素坐标偏移量，采样得到周围9个纹素值了：</p>
-<pre class=" language-c++"><code class="language-c++">    //当前纹素周围的9个纹素
+<pre class="line-numbers language-c++"><code class="language-c++">    //当前纹素周围的9个纹素
     vec3 sampleTex[9];
     for(int i=0;i<9;i++){
         sampleTex[i] = vec3(texture(texture1,TexCoords.st + offsets[i]));
     }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们定义的Kernel矩阵如下：</p>
-<pre class=" language-c++"><code class="language-c++">    float kernel[9] = float[](
+<pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         -1, -1, -1,
         -1,  9, -1,
         -1, -1, -1
     );
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>片段的最终颜色应该是在Kernel矩阵作用下的，9个周围像素的加权和：</p>
-<pre class=" language-c++"><code class="language-c++">    vec3 col;
+<pre class="line-numbers language-c++"><code class="language-c++">    vec3 col;
     //kernel矩阵作用下的加权和
     for(int i=0;i<9;i++){
         col += sampleTex[i] * kernel[i];
     }
     color = vec4(col,1.0f);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>四边形的像素着色器完整源码如下：</p>
-<pre class=" language-c++"><code class="language-c++">#version 330 core
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
 
@@ -435,23 +435,23 @@ void main(){
     }
     color = vec4(col,1.0f);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950443.png" alt=""><br>这是一个锐化的Kernel，就好像玩家吞了麻醉剂产生的幻觉一样。</p>
 <p><font size="4" color="red">kernel模糊效果Blur</font><br>创建模糊效果的kernel如下：<br>$$<br>\begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 2 &amp; 4 &amp; 2 \\ 1 &amp; 2 &amp; 1 \end{bmatrix} / 16<br>$$<br>我们像素着色器里的kernel数组现在变成：</p>
-<pre class=" language-c++"><code class="language-c++">    float kernel[9] = float[](
+<pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1.0 / 16, 2.0 / 16, 1.0 / 16,
         2.0 / 16, 4.0 / 16, 2.0 / 16,
         1.0 / 16, 2.0 / 16, 1.0 / 16 
     );
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950506.png" alt=""></p>
 <p><font size="4" color="red">kernel边缘检测效果</font><br>边缘检测的kernel矩阵如下，和锐化kernel有点像：<br>$$<br>\begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; -8 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{bmatrix}<br>$$<br>现在的kernel数组变为：</p>
-<pre class=" language-c++"><code class="language-c++">    float kernel[9] = float[](
+<pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1, 1, 1,
         1,-8, 1,
         1, 1, 1
     );
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14849995058.png" alt=""><br>当偏移量offset不同时，效果会有所改变。更多kernel效果可查看<a href="http://setosa.io/ev/image-kernels/" target="_blank" rel="external">Image Kernels</a>。<br>&nbsp; </p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>

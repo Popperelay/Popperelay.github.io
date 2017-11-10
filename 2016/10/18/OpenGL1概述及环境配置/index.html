@@ -146,7 +146,7 @@
 <hr>
 <p><font size="5" color="orange">OpenGL特性：支持扩展</font><br>OpenGL是支持扩展的。如果显卡厂商在某个时候推出了一个新技术或渲染优化，   那么图形开发者就可以通过扩展来直接使用该新技术，而不需要等待新版本的OpenGL发布。事实上，当一个扩展被证明很流行或很有用时，它就会变成未来OpenGL的一部分。</p>
 <p>一般使用扩展的代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>GL_ARB_extension_name<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//GL_ARB_扩展名</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>GL_ARB_extension_name<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//GL_ARB_扩展名</span>
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//执行硬件支持的新特性</span>
 <span class="token punctuation">}</span>
@@ -154,7 +154,7 @@
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//不支持该扩展，使用老办法</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>&nbsp;  </p>
 <hr>
 <p><font size="5" color="orange">OpenGL的本质</font><br>OpenGL本身其实是个大状态机，也就是说它定义了一大堆OpenGL该做何操作的变量。</p>
@@ -164,7 +164,7 @@
 <p><strong>OpenGL的库是用C写的</strong>，所以OpenGL无法表示诸如对象这些在更高级语言中才有东西。于是OpenGL开发了几种自己特有的抽象概念，对象就是其中一个。</p>
 <p><font size="5" color="orange">OpenGL中的对象</font><br>OpenGL的对象是一些可选项（即变量）的集合，是OpenGL状态的一部分。那么OpenGL中的对象怎么定义和使用呢？</p>
 <p>OpenGL中定义对象的流程大致如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//OpenGL的状态</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//OpenGL的状态</span>
 <span class="token keyword">struct</span> OpenGL_Context
 <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
@@ -185,7 +185,7 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 
 <span class="token comment" spellcheck="true">//把目标绑定的对象恢复为默认（解绑）</span>
 <span class="token function">glBindObject</span><span class="token punctuation">(</span>GL_WINDOW_TARGET<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码是在OpenGL中会经常遇到的工作流。通过glGenObject函数创建一个对象，保存到后台内存中，并且用一个无符号整数来表示这个对象，相当于是给这个对象起了个名字（对象id，就像人的身份证号），然后把这个名字（整数）存入变量objectId中。接着用glBindObject方法把对象绑定到一个目标上（代码中是把目标定为了GL_WINDOW_TARGET）。再下一步就是设置目标的选项（这些设置会被保存到对象中），最后把目标绑定的对象id设置为0，即解绑对象。至此，便完成了对一个对象的属性设置。</p>
 <p>【注】：</p>
 <ul>
@@ -199,11 +199,11 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 <p><font size="4" color="red">使用OpenGL辅助库GLAUX时的环境配置：</font></p>
 <ol>
 <li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615911.png" alt=""></li>
-<li>Windows平台下的源文件需要加上以下头文件：<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include &lt;window.h></span>
+<li>Windows平台下的源文件需要加上以下头文件：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include &lt;window.h></span>
 <span class="token preprocessor property">#include &lt;GL/gl.h></span>
 <span class="token preprocessor property">#include &lt;GL/glu.h></span>
 <span class="token preprocessor property">#include &lt;GL/glaux.h></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 一般还需要：<code>#include &lt;stdio.h&gt;、#include &lt;stdlib.h&gt;、#include &lt;math.h&gt;</code></li>
 </ol>
 <p><font size="4" color="red">使用OpenGL实用函数工具包GLUT时的环境配置：</font></p>
@@ -227,14 +227,14 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 <p>接下来是链接。还是在属性里点击链接器（Linker）/输入（Input），在附加依赖项（Additional Dependencies）中添加上glfw3.lib，当然还需要把OpenGL也链接上，添加opengl32.lib（只要有显卡驱动一般都会有opengl，opengl32.lib是安装VS时自带的）。如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/1479128480.png" alt=""><br>&nbsp; </p>
 <hr>
 <p>下面就可以在项目中使用OpenGL的函数了。其实OpenGL只是一种标准/规范，具体怎么实现要看驱动怎么来实现这种显卡支持规范（通俗点说就是提供接口函数），由于存在着很多不同版本的OpenGL驱动，不能够在编译的时候（compile-time）就确定静态链接哪个OpenGL函数，需要在运行时（run-time）指定所需要的函数地址，然后把地址存储在函数指针中以备后用（有点像先声明后定义）。在Windows中类似如下代码段：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//定义函数原型</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//定义函数原型</span>
 typedef <span class="token keyword">void</span><span class="token punctuation">(</span><span class="token operator">*</span>GL_GENBUFFERS<span class="token punctuation">)</span><span class="token punctuation">(</span>GLsizei<span class="token punctuation">,</span> GLuint<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//寻找函数并分配给它一个函数指针</span>
 GL_GENBUFFERS glGenBuffers <span class="token operator">=</span> <span class="token punctuation">(</span>GL_GENBUFFERS<span class="token punctuation">)</span><span class="token function">wglGetProcAddress</span><span class="token punctuation">(</span><span class="token string">"glGenBuffers"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//现在可以正常使用OpenGL函数了</span>
 GLuint buffer<span class="token punctuation">;</span>
 <span class="token function">glGenBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如你所见，想使用一个OpenGL函数太麻烦了，每个函数都得先被声明。不过为了解决这个问题，一个工具GLEW应运而生。<br>&nbsp;</p>
 <hr>
 <p><font size="5">GLEW</font><br>GLEW（OpenGL Extension Wrangler Library）是一个跨平台的C++扩展库，基于OpenGL图形接口。由于目前Windows只支持OpenGL1.1的函数，但是现在OpenGL都已反正到4了，要使用这些OpenGL的高级特性，就必须下载最新的扩展，除此之外，不同的显卡公司，也会发布一些只有自家显卡才能支持的扩展函数。如果我们想要使用这些函数，就不得不去寻找最新的glext.h（glext.h使我们可以调用常见的更高版本的OpenGL函数，但是必须在源文件中包含此头文件，并将显卡驱动更新到最新版，glext.h可以在<a href="http://blog.csdn.net/epluguo/article/details/19302003?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a>找到，不保证最新，也有可能会有些函数接口找不到）。但是有了GLEW扩展库，就再也不用担心找不到这些函数的接口了，因为GLEW能自动识别你的平台所能支持的全部OpenGL高级扩展函数。也就是说，只要包含一个glew.h头文件，就能使用gl、glu、glext、wgl、glx的全部函数。并且GLEW支持目前流行的各种操作系统。当然了，我们之前得问题也迎刃而解了，可以直接使用函数，不用先声明了。下面来看看GLWF环境的搭建。<br>&nbsp; </p>
@@ -242,13 +242,13 @@ GLuint buffer<span class="token punctuation">;</span>
 <p><font size="5" color="orange">构建GLEW</font><br>由于GLEW是一个库，所以我们还是需要把它的库文件和头文件链接到我们的项目中。GLEW可以从中<a href="http://glew.sourceforge.net/index.html" target="_blank" rel="external">这里</a>下载。当然还是可以和前面GLFW一样从源码编译出lib库文件。这里我直接下载编译好的二进制文件Binaries了。下载好后找到<code>\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32</code>路径下的glew32s.lib文件，把这个文件添加到项目属性的库目录里，再把<code>\glew-2.0.0-win32\glew-2.0.0</code>路径下的include文件夹添加到项目属性的包含目录里（我是把这里glew和之前glfw的库文件和头文件放在了两个新建文件夹下：一个Libs文件夹、一个Includes文件夹，再把这两个文件夹添加到项目属性的相应目录里。人懒省事~。可以参考前面GLFW标题后链接标题下的第一张图。）</p>
 <p>这里使用的是GLEW的静态库，即glew32s.lib。而且GLWF3默认也是被编译为静态库的。</p>
 <p>如果使用GLEW的静态库，必须在包含GLEW之前定义一个预处理变量GLEW_STATIC。如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#DEFINE GLEW_STATIC</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#DEFINE GLEW_STATIC</span>
 <span class="token preprocessor property">#include &lt;GL/glew.h></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>如果想要使用GLEW的动态库，需要移除对GLEW_STATIC的定义，而且需要把.dll复制到二进制代码所在的文件夹里。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">测试环境是否构建成功<font><br>在自己新建的并且构建好环境的项目中，写入如下代码：</font></font></p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// GLEW</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// GLEW</span>
 <span class="token preprocessor property">#<span class="token directive keyword">define</span> GLEW_STATIC</span>
 <span class="token preprocessor property">#include &lt;GL/glew.h></span>
 
@@ -265,7 +265,7 @@ GLuint buffer<span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 如果出现了很多未定义引用错误，就是还没有构建成功了<span class="token operator">~</span>。
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>静态链接库是会在编译的时候整合到我们的二进制文件中，这样做的好处是不必保持跟踪这额外的文件，只需要发布单独的二进制文件。缺点是最后的可执行文件会变得更大，而且当一个库有一个更新的版本时需要重新编译整个应用程序。</li>

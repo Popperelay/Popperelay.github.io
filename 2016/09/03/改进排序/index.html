@@ -117,7 +117,7 @@
                 <p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)<br><a id="more"></a></p>
 <hr>
 <p><font size="5" color="orange">希尔排序</font><br>希尔排序是直接插入排序的升级版。对于直接插入排序，原序列中待排序的元素还是比较多。每次插入时需要很多次后移操作(因为序列较长时一般后移距离也长)，有没有什么办法能够减少后移的距离呢？很容易想到的是，把原序列分组，在每一组内进行直接插入排序，由于每一组序列长度较小，再插入时移动的次数也就自然少了。<br>但是有一个问题，对{9，1，2，5，7，4，8，6，3，5}分成五组：{9，1}，{2，5}，{7，4}，{8，6}，{3，5}，即使每一分组都排好序后再合并：{1，9，2，5，4，7，6，8，3，5}，得到的这个序列依旧是杂乱无章的，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159135.png" alt=""><br>并没有大体上让小的元素往前走，让大的元素往后走，对下一次的直接排序几乎没有多大帮助。原因在于分组时，元素间隔太小，交换位置时，只能和附近的元素交换，如果把元素间隔设大一点，就能够和较远的元素交换位置，这就增大了小元素大幅度往前走，大元素大幅度往后走的几率。但是通常仅有一次排序是不够的，需要缩小间隔再直接插入排序多次（第一次间隔gap=n/2，后面几次的间隔减半gap=gap/2，直到gap==1。直接插入排序相当于gap=1时的希尔排序）。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159142.png" alt=""><br>希尔排序的核心：<strong>按间隔分组直接插入排序，再缩小间隔分组直接插入排序，直到间隔等于1</strong><br>代码如下：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ShellSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ShellSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> gap <span class="token operator">=</span> array<span class="token punctuation">.</span>Length <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//多次分组直接插入排序，直到gap=1</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> gap <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> gap <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -133,7 +133,7 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>【注】：</p>
 <ul>
 <li>由于希尔排序比直接插入排序减少了移动距离(移动次序)，所以希尔排序的效率比直接插入排序高，也就自然比简单选择排序和冒泡排序性能好了。进过分析希尔排序的平均时间复杂度是O(nlogn)。</li>
@@ -154,7 +154,7 @@
 <li>由于构建堆的时候需要很多次比较，所以它并不适合待排序序列个数较少的情况，因为得不偿失嘛！</li>
 </ul>
 <p>代码如下：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 using namespace std;
 
 void HeapSort(int array[], int length);
@@ -220,7 +220,7 @@ int GreaterRoot(int array[], int i, int length) {
         return 2 * i + 1;
     }
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><font size="5" color="orange">归并排序</font><br>归并排序很简单，归并在数据结构中定义是将两个或者两个以上的有序表组合成一个新的有序表。2路归并排序就是每两个一组进行排序，再归并（合起来并同时排序），再每两个一组进行排序，再归并，直到不能再归并为止（或者得到的有序序列长度等于原始待排序序列长度为止）。如下图所示：<br>迭代图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592075.png" alt=""><br>递归图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592208.png" alt=""><br>归并排序可以用递归来实现，也可以用迭代（非递归）来实现。<br>归并排序的递归代码如下：<br>归并排序的迭代代码如下：</p>
 <hr>
@@ -264,7 +264,7 @@ int GreaterRoot(int array[], int i, int length) {
 </ul>
 </li>
 <li>减少交换次数。在哨兵换岗法中，右哨兵和左哨兵找出的数要互相交换位置，这种swap交换需要三个赋值语句，其实可以减少。而挖坑填数法正好是哨兵换岗法的这种优化，把要调到前面或者后面的数填到坑里就行，不一定要正好调换两个哨兵的位置，只要保证把小的大致往前放，把大的大致往后放就行。比如右哨兵找到了一个比基准数小的数，左哨兵找到了一个比基准数大的数，这时候其实不需要交换左右哨兵，只需要把右哨兵填到前面的坑里（基准数那个位置），再把左哨兵填到后面的坑里（原右哨兵空出来的位置），这样就大致保证了“把小的往前挪，把大的往后挪”的原则，同时减少了交换次数（在下图中可以看到只有两次赋值，而不是三次），如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159251.png" alt=""></li>
-<li>小数组时使用直接插入排序（直接插入排序是简单排序中性能最好的）。对于序列元素较少时，使用快速排序反而不如直接插入排序，因为快速排序用到了递归操作，在数据量大时，相比于快排的优势递归带来的开销可以忽略，但数据量小时就无法忽略了。所以对快排的优化，可以在待排序序列长度递归到很小时，就不再继续用快排进行排序了，而换成直接插入排序。一般递归到待排序序列长度小于7（有时是50）时，改为使用直接插入排序。伪码如下：<pre class=" language-csharp"><code class="language-csharp"> <span class="token keyword">const</span> <span class="token keyword">int</span> Length_InsertSort <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<li>小数组时使用直接插入排序（直接插入排序是简单排序中性能最好的）。对于序列元素较少时，使用快速排序反而不如直接插入排序，因为快速排序用到了递归操作，在数据量大时，相比于快排的优势递归带来的开销可以忽略，但数据量小时就无法忽略了。所以对快排的优化，可以在待排序序列长度递归到很小时，就不再继续用快排进行排序了，而换成直接插入排序。一般递归到待排序序列长度小于7（有时是50）时，改为使用直接插入排序。伪码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"> <span class="token keyword">const</span> <span class="token keyword">int</span> Length_InsertSort <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
  <span class="token keyword">void</span> <span class="token function">QuickSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token punctuation">{</span>
      <span class="token keyword">int</span> pivot<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//基准数在序列中的位置</span>
      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>high <span class="token operator">-</span> low<span class="token punctuation">)</span> <span class="token operator">></span> Length_InsertSort<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -278,9 +278,9 @@ int GreaterRoot(int array[], int i, int length) {
          <span class="token function">InsertSort</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
      <span class="token punctuation">}</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>减少递归调用的次数。在上述代码中，第一个递归调用和第二个递归调用做的都是相同的Partition操作，其实可以把它俩合成一个。伪码如下：<pre class=" language-csharp"><code class="language-csharp"> <span class="token keyword">const</span> <span class="token keyword">int</span> Length_InsertSort <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<li>减少递归调用的次数。在上述代码中，第一个递归调用和第二个递归调用做的都是相同的Partition操作，其实可以把它俩合成一个。伪码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"> <span class="token keyword">const</span> <span class="token keyword">int</span> Length_InsertSort <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
  <span class="token keyword">void</span> <span class="token function">QuickSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token punctuation">{</span>
      <span class="token keyword">int</span> pivot<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//基准数在序列中的位置</span>
      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>high <span class="token operator">-</span> low<span class="token punctuation">)</span> <span class="token operator">></span> Length_InsertSort<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -298,7 +298,7 @@ int GreaterRoot(int array[], int i, int length) {
          <span class="token function">InsertSort</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
      <span class="token punctuation">}</span>
  <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 将<code>low=pivot+1</code>后，再循环来一次<code>pivot = Partition(array, low, high);</code>，其实就是<code>pivot = Partition(array, pivot+1, high);</code>，与<code>QuickSort(array, pivot + 1, high);</code>是同样的效果，因为QuickSort本来做的就是Partition操作。但是使用循环减少了一个递归调用，从而减少了堆栈带来的开销，提高了性能。</li>
 </ol>
 <hr>

@@ -137,7 +137,7 @@
 <hr>
 <p>通常最容易想到的就是按C语言的方式在主程序里通过if-else的判断来实现这种逐级处理。</p>
 <p>我们先把请假请求封装成一个类，当中有一个表示请假天数的成员变量（封装成类是为了后续需求变化考虑，因为可能请假可能不仅考虑到天数，还考虑到职位、在团队里的重要性等等）：</p>
-<pre class=" language-c++"><code class="language-c++">class CLeaveRequest {
+<pre class="line-numbers language-c++"><code class="language-c++">class CLeaveRequest {
 public:
     CLeaveRequest() {}
     CLeaveRequest(int vLeaveDays) : m_LeaveDays(vLeaveDays) {}
@@ -147,17 +147,17 @@ public:
 private:
     int m_LeaveDays;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们再创建一个员工的基类（依赖倒置原则），它只有一个表示审批动作本身的函数，至于通不通过我们在主程序里通过if-else去实现：</p>
-<pre class=" language-c++"><code class="language-c++">#include "LeaveRequest.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "LeaveRequest.h"
 
 class CEmployee{
 public:
     virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const = 0;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后实现员工类的3个子类，它们各自有自己具体的审批动作：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CTeamLeader : public CEmployee{
@@ -166,8 +166,8 @@ public:
         std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by team leader." << std::endl;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CProjectLeader : public CEmployee {
@@ -176,8 +176,8 @@ public:
         std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by project leader." << std::endl;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CHR : public CEmployee {
@@ -186,9 +186,9 @@ public:
         std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by HR." << std::endl;
     }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后我们在主函数里创建请求以及三类员工的对象：</p>
-<pre class=" language-c++"><code class="language-c++">#include "TeamLeader.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "TeamLeader.h"
 #include "ProjectLeader.h"
 #include "HR.h"
 
@@ -197,9 +197,9 @@ int main() {
     CProjectLeader *pProjectLeader = new CProjectLeader;
     CHR *pHR = new CHR;
     CLeaveRequest *pLeaveRequest = new CLeaveRequest(25);
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后从TeamLeader开始，使用if-else判断请假类里的天数是否满足他的天数限制，如果不满足，则看是否满足他的上司的天数限制，以此类推：</p>
-<pre class=" language-c++"><code class="language-c++">    if (pLeaveRequest->getLeaveDays() < 10) {
+<pre class="line-numbers language-c++"><code class="language-c++">    if (pLeaveRequest->getLeaveDays() < 10) {
         pTeamLeader->approveLeaveV(pLeaveRequest);
     }
     else {
@@ -216,10 +216,10 @@ int main() {
         }
     }
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>程序输出的结果如下：</p>
-<pre class=" language-c++"><code class="language-c++">The leave request of 25 days has been approved by HR.
-</code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">The leave request of 25 days has been approved by HR.
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但是这多重if-else明显不符合开闭原则，审批条件和审批流程完全在客户端实现，即客户端和审批业务耦合太紧。</p>
 <p><font size="5" color="orange">责任链模式</font></p>
 <hr>
@@ -230,7 +230,7 @@ int main() {
 <li>怎么知道自己上级是谁？</li>
 </ul>
 <p>我们先看怎么知道自己的上级，某个员工要知道自己的上级是谁，其实很简单，在员工基类里加一个表示上级的成员变量就可以了：</p>
-<pre class=" language-c++"><code class="language-c++">#include "LeaveRequest.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "LeaveRequest.h"
 
 class CEmployee{
 public:
@@ -244,9 +244,9 @@ public:
 private:
     const CEmployee *m_Superior;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>每级员工都知道自己的权限天数是多少，不满足则交给他的上级m_Superior来处理：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CTeamLeader : public CEmployee{
@@ -259,8 +259,8 @@ public:
                 getSuperior()->approveLeaveV(vLeaveRequest);
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CProjectLeader : public CEmployee {
@@ -273,8 +273,8 @@ public:
                 getSuperior()->approveLeaveV(vLeaveRequest);
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
 #include "Employee.h"
 
 class CHR : public CEmployee {
@@ -286,9 +286,9 @@ public:
             std::cout << "The only way to get " << vLeaveRequest->getLeaveDays() << " leave days to quit the company." << std::endl;
     }
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这时主函数就变得很简单了，只需要把请求交给底层的TeamLeader就行，它会自动逐级上交审批请求的：</p>
-<pre class=" language-c++"><code class="language-c++">#include "TeamLeader.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "TeamLeader.h"
 #include "ProjectLeader.h"
 #include "HR.h"
 
@@ -303,10 +303,10 @@ int main() {
 
     pTeamLeader->approveLeaveV(pLeaveRequest);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这就是责任链模式：在具有上下级关系的一串对象中，每一级对象都含有其直接上级对象的指针。这样就将请求的处理者组织成一条链，客户端无需关心请求的处理细节以及请求的传递，只需要将请求发送到链上，实现请求的发送者和处理者解耦。请求会沿着链向上传递。但是，很明显的，系统性能会受到一定影响。</p>
 <p>但是上面代码里，三类员工的approveLeaveV函数有没有太像了？几乎只有一个10、20、30不同，外加审批通过后作出的反应不同（这里是输出的字符串不同）。这代码明显重复得太厉害了，确定写的时候没有CtrlC、CtrlV？有没有什么办法能够减少重复代码？如果能够把这段approveLeaveV函数代码移到基类CEmployee当然就可以减少每个子类重复写了，但是那两个不同的地方怎么处理？<br>先看第一个不同地方：每一级员工的权限天数不一样，我们在基类里设置一个表示权限天数的变量就可以了，子类在创建后分别给这个变量赋以不同的值就OK：</p>
-<pre class=" language-c++"><code class="language-c++">class CEmployee{
+<pre class="line-numbers language-c++"><code class="language-c++">class CEmployee{
 public:
     ...
     void  setMaxApproveDays(int vMaxApproveDays) { m_MaxApproveDays = vMaxApproveDays; }
@@ -317,9 +317,9 @@ private:
     const CEmployee *m_Superior;
     int m_MaxApproveDays;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么第二个不同的地方：审批通过后的反应不同，这个我们可以用多态啊！在基类里设置一个表示审批通过的函数：</p>
-<pre class=" language-c++"><code class="language-c++">class CEmployee{
+<pre class="line-numbers language-c++"><code class="language-c++">class CEmployee{
 public:
     ...
     virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const = 0;
@@ -329,9 +329,9 @@ private:
     const CEmployee *m_Superior;
     int m_MaxApproveDays;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>把这两个不同的地方都用基类的变量或者虚函数处理掉以后，就可以把approvePassedV函数搬到基类了：</p>
-<pre class=" language-c++"><code class="language-c++">Employee.h:
+<pre class="line-numbers language-c++"><code class="language-c++">Employee.h:
 #include "LeaveRequest.h"
 
 class CEmployee{
@@ -357,9 +357,9 @@ private:
     const CEmployee *m_Superior;
     int m_MaxApproveDays;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>子类会去分别重写这个虚函数：</p>
-<pre class=" language-c++"><code class="language-c++">CTeamLeader.h:
+<pre class="line-numbers language-c++"><code class="language-c++">CTeamLeader.h:
 #include <iostream>
 #include "Employee.h"
 
@@ -369,8 +369,8 @@ public:
         std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by team leader." << std::endl;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">CProjectLeader.h:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">CProjectLeader.h:
 #include <iostream>
 #include "Employee.h"
 
@@ -380,8 +380,8 @@ public:
         std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by project leader." << std::endl;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">CHR.h:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">CHR.h:
 #include <iostream>
 #include "Employee.h"
 
@@ -391,8 +391,8 @@ public:
         std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by HR." << std::endl;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">main.cpp:
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">main.cpp:
 #include "TeamLeader.h"
 #include "ProjectLeader.h"
 #include "HR.h"
@@ -411,48 +411,48 @@ int main() {
 
     pTeamLeader->approveLeave(pLeaveRequest);
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样一来，就减少了子类里重复的代码，看起来更简洁，扩展性也更好。主要是要通过这个过程了解怎样把子类的相似代码抽象到父类中，体会抽象、多态的思想，尽可能用更少的代码去实现相同的功能。</p>
 <p><font size="5" color="orange">另一个案例</font></p>
 <hr>
 <p>案例：某公司需要实现验证客户信息的功能（姓名、地址、电话号码、社保号码等），实现了一个抽象类来完成这些功能：</p>
-<pre class=" language-c++"><code class="language-c++">class CInfoValidation {
+<pre class="line-numbers language-c++"><code class="language-c++">class CInfoValidation {
     virtual bool isValidName() = 0;
     virtual bool isValidAddress() = 0;
     virtual bool isValidPhoneNumber() = 0;
     virtual bool isValidSSN() = 0;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为了加快开发进度，购买了别人的产品，其中提供了类CLegacyInfoValidation，但是只完成了部分功能，而且只有动态链接库和头文件，卖方没有提供源码：</p>
-<pre class=" language-c++"><code class="language-c++">class CLegacyInfoValidation {
+<pre class="line-numbers language-c++"><code class="language-c++">class CLegacyInfoValidation {
 public:
     bool isNameValid();
     bool isAddressValid();
     bool isPhoneNumberValid();
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可见少了一个严重SSN的功能，而且卖方提供的接口和已有的抽象类接口不一致，那么应该怎么复用别人已经实现好的功能呢？</p>
 <p><font size="5" color="orange">最码农的做法</font></p>
 <hr>
 <p>最直接也是最码农的做法，就是把自己抽象类的接口改成和别人接口形式一样，让自己的抽象类CInfoValidation 派生别人的类CLegacyInfoValidation ，再增加一个验证SSN的函数：</p>
-<pre class=" language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
 
 class CInfoValidation : public CLegacyInfoValidation {
 public:
     virtual bool isSSNValid() {...}
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样就能在自己的抽象类里复用别人实现的其他3个功能了，但是这明显不符合开闭原则，改动了已有代码，导致程序中依赖原始接口的代码必须发生相应修改：</p>
-<pre class=" language-c++"><code class="language-c++">bool ValidateInfo(CInfoValidation *vValidator) {
+<pre class="line-numbers language-c++"><code class="language-c++">bool ValidateInfo(CInfoValidation *vValidator) {
     if (!vValidator->isValidName())            return false;
     if (!vValidator->isValidAddress())        return false;
     if (!vValidator->isValidPhoneNumber())  return false;
     if (!vValidator->isValidSSN())            return false;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中vValidator调用的函数名都要改。。。</p>
 <p><font size="5" color="orange">类适配器模式</font><br>别人实现了前三个验证，公司自己实现第四个验证，想要复用别人的函数完全可以靠继承嘛！上面最码农的做法也是靠继承来复用的，但是它改变了原有的类设计，我们完全可以不改嘛，在自己原有的isValidName函数里调用别人的isNameValid函数：</p>
-<pre class=" language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
 
 class CInfoValidation :public CLegacyInfoValidation {
     virtual bool isValidName() {
@@ -466,10 +466,10 @@ class CInfoValidation :public CLegacyInfoValidation {
     }
     virtual bool isValidSSN() = 0;
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样程序中依赖原始接口的代码就不需要改变了（比如上面ValidateInfo函数中的方法调用就不需要改动了），但是这还是或多或少改动了原有的CInfoValidation 类代码。</p>
 <p>如果想一点都不改动，只是增加新代码，也就是既想用CLegacyInfoValidation 类的三个方法，又想用CInfoValidation 类的isValidSSN方法，想用到两个类的方法，我们可以多重继承啊，派生一个新的类：</p>
-<pre class=" language-c++"><code class="language-c++">#include "InfoValidation.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "InfoValidation.h"
 #include "LegacyInfoValidation.h"
 
 class CInfoValidationAdapter : public CInfoValidation, private CLegacyInfoValidation{
@@ -491,28 +491,28 @@ public:
             return true;
     }
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">class CInfoValidation {
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">class CInfoValidation {
     virtual bool isValidName() = 0;
     virtual bool isValidAddress() = 0;
     virtual bool isValidPhoneNumber() = 0;
     virtual bool isValidSSN() = 0;
 };
-</code></pre>
-<pre class=" language-c++"><code class="language-c++">class CLegacyInfoValidation {
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">class CLegacyInfoValidation {
 public:
     bool isNameValid();
     bool isAddressValid();
     bool isPhoneNumberValid();
 };
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>一样的，程序中依赖原始接口的代码还是不用改，比如之前的ValidateInfo方法中的函数调用，不过传入的CInfoValidation对象指针应该是来自新的CInfoValidationAdapter 类对象了，而不是原始的CInfoValidation 类对象。但是这基本上是在客户端才做出的改动，影响很小。</p>
 <p>这就是类对象适配器：通过类继承来复用别的类的函数代码。</p>
 <p><font size="5" color="orange">对象适配器模式</font></p>
 <hr>
 <p>上面的代码有个比较麻烦的地方，新的类是通过多重继承得到的，当程序变得复杂以后，这可能会带来一些不必要的麻烦，比如野指针、类爆炸等等。</p>
 <p>可以通过合成复用原则来解决这个问题，不派生CLegacyInfoValidation 类，而是使用该类对象作为新的类的成员变量，通过变量对象来使用CLegacyInfoValidation 的函数：</p>
-<pre class=" language-c++"><code class="language-c++">#include "InfoValidation.h"
+<pre class="line-numbers language-c++"><code class="language-c++">#include "InfoValidation.h"
 #include "LegacyInfoValidation.h"
 
 class CInfoValidationAdapter : public CInfoValidation{
@@ -537,7 +537,7 @@ public:
 private:
     CLegacyInfoValidation m_LegacyValidator;
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为什么使用CLegacyInfoValidation 类对象作为成员变量，而不使用CInfoValidation类对象，这个道理很简单啊~。因为程序里原本可能会有很多依赖原有抽象类CInfoValidation的地方，我们让新类派生自CInfoValidation类，就可以使用多态了，原来存在依赖的代码不用做任何修改，只是在传入对象参数的时候，实参由原来的CInfoValidation类对象，改成了现在的CInfoValidationAdapter 子类对象而已。</p>
 <p>这就是对象适配器模式：通过合成复用（对象成员），来复用别的类的函数代码。</p>
 
