@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL26：Blinn-Phong模型</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">Phong模型的缺陷</font><br><a id="more"></a></p>
+<hr>
+<p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong1.png" alt=""><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong2.png" alt=""><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>
+<p>当镜面高光系数较大时，高光比较集中，当高光突变为0时还有很强的漫反射光存在，所以人眼观察到的镜面光硬边缘不明显；但是当镜面高光系数较小时，高光半径会很大，高光在边缘处突变为0时漫反射强度很弱，镜面光成分较高，此时的镜面光硬边缘就会很明显。</p>
+<p><font size="5" color="orange">Blinn-Phong模型</font></p>
+<hr>
+<p>1977年James F. Blinn提出了Blinn-Phong模型，它是对Phong模型的改进：放弃反射光向量，改用半程向量，半程向量是入射光线向量与视线向量的和向量，再归一化之后的单位向量。如下图中的向量H：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong3.png" alt=""><br>Blinn-Phong模型不再使用法线与反射向量的夹角来计算镜面光，而是使用半程向量和法线向量之间的夹角。半程向量越靠近法线向量，人眼观察到的镜面光强度越大。只要不从物体背面去看，半程向量和法线向量之间的夹角永远都小于等于90度。</p>
+<p><font size="5" color="orange">Blinn-Phong模型的代码实现</font></p>
+<hr>
+<p>Phong模型计算镜面光的代码如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">vec3 reflectDir = normalize(reflect(-lightDir, normal));
+vec3 viewDir = normalize(viewPos - positionInWorld); 
+float specularFactor = pow(max(dot(reflectDir, viewDir), 0.0), 1); 
+vec3 specularColor =  specularFactor * lightColor;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Blinn-Phong模型舍弃反射光向量，使用半程向量，代码如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">vec3 viewDir = normalize(viewPos - positionInWorld);
+vec3 halfDir = normalize(lightDir + viewDir);
+float specularFactor = pow(max(dot(halfDir, normal), 0.0f), 1);
+vec3 specularColor =  specularFactor * lightColor;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以发现Blinn-Phong模型除了表现效果更真实以外，还有个很大的优势：不用去计算复杂的反射光向量，降低了计算量，相比Phong模型性能更高。</p>
+<p>当镜面高光系数为0.5时，Phong模型表现效果如第一幅图。Blinn-Phong模型表现效果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong4.png" alt=""><br>由于半程向量和法线向量之间的夹角通常会比视线向量和反射向量之间的夹角更小，即余弦值更大，所以相同镜面高光系数下，Blinn-Phong模型的镜面光会比Phong模型更亮，Blinn-Phong模型要达到和Phong模型一样的效果，需要增大镜面高光系数，通常是Phong模型中的镜面高光系数的2到4倍。</p>
+<p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL26_BlinnPhong" target="_blank" rel="external">这里</a>。</p>
+<p>&nbsp;</p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/05/24/OpenGL26Blinn-Phong模型/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/05/24/OpenGL26Blinn-Phong模型/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

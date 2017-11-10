@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >毕设笔记</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <ol>
+<li>在投影变换的过程中，就会剔除掉所有在视见体之外的片段，它们是不会从顶点着色器进入片元着色器的。也就是说那些在视见体之外的片段不会执行片元着色器。<a id="more"></a></li>
+<li>深度测试是在片元着色器的过程中的，即使是那些被挡住的片段也是会执行片元着色器里的内容（比如片元着色器里的所有光照计算），很明显的证明例子就是延迟着色，延迟着色的优点就是剔除掉了对那些被遮挡的片段的光照计算。虽然被遮挡的和没被遮挡的片段都会执行光照计算，但是最后留在帧缓冲里的都是没被遮挡的片段，因为开启了深度测试。</li>
+<li>透视除法也是在片元着色器之前的。当我们在顶点着色器输出一个裁剪空间顶点位置到<code>gl_Position</code>时，OpenGL会自动进行一个透视除法，将裁剪空间坐标范围的-w到w转换为-1到1。这要通过将x、y、z元素除以w元素来实现。</li>
+<li>纹理采样时，纹理坐标是在每一个纹素的中心位置采样的。比如一张1024 * 768的纹理，如果传入的纹理坐标范围是0~1，那么采样最左下角的纹理坐标应该是（1/1024*0.5，1/768*0.5），它的右边的纹理坐标应该是（1/1024*1.5，1/768*1.5）。 片段坐标gl_FragCoord也是这样。</li>
+<li>memset函数不能对数组置0和-1以外的值。</li>
+<li>CPU上的结构体可以有构造函数，但是GPU上着色器里的结构体内不能有任何函数。想要对着色器里的结构体初始化，只能到CPU上进行。</li>
+<li>如果前面有用过glActiveTexture()，那么后面绑定纹理时，也必须得用该函数激活对应的纹理单元，即使这时只有一个纹理要绑定（或者说要去采样）。如果前面激活了GL_TEXTURE0，且用完纹理后解绑了，那么后面绑定时可以再激活绑定到GL_TEXTURE0上；如果没有解绑，就得绑定到其他没用过的纹理单元上。</li>
+<li>使用完纹理后，一定要记得立即解绑，否则可能出现很诡异的结果。</li>
+<li><p>shader里的着色器缓冲对象SSBO和uniform缓冲对象UBO等等，有std140或者std430的修饰时，一定要注意字节对齐。</p>
+<p>比如下面这个着色器里的缓冲对象SSBO：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
+ vec3 Position;    //世界坐标
+ vec3 Color;
+ float radius;     //光体积半径
+};
+layout (std430, binding = 3) buffer LightsData{
+ Light lights[];
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为buffer里的成员是结构体，而根据std140和std430的对齐规则，结构体对齐值应该是结构体内最大成员的对齐值，所有上面结构体Light的对齐值就应该是vec4，即16字节对齐（vec3需要按vec4算）。也就是说GPU每次是按16字节一起读的，所以为了值正确，我们需要把上述结构体改为：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
+ vec3 Position;    //世界坐标
+ float none;       //用作16字节对齐
+ vec3 Color;
+ float radius;     //光体积半径
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">struct Light{
+ vec4 Position;    //世界坐标
+ vec3 Color;
+ float radius;     //光体积半径
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果还是原来的Light结构体的话，读vec3类型的Position时，会一次直接读走32个字节（vec4），这样就把Position后面的Color的前4个字节读走了，导致Position和Color的值都不正确。所以我们可以把Position改成vec4，或者在它后面添加一个float，来补足16字节。后面vec3类型的Color和float类型的radius正好组成16字节，可以一次读走，每个成员数据在读的时候没有被中断而分成两半，所以这样读出来的值才是正确的。</p>
+</li>
+<li>使用<code>glTexImage2D</code>函数生成图片后一定要设置图片的过滤方式，否则图片不会显示。</li>
+<li>实验证明，如果不使用<code>glClear</code>清除深度缓冲，OpenGL默认深度值是0.0。使用该函数清除了深度缓冲之后，才会将深度值设为1.0。所以如果一直不使用<code>glClear(GL_DEPTH_BUFFER_BIT)</code>，而且开启了深度测试，将会黑屏，画不出来任何东西，因为深度值是0.0，每个片段都无法通过深度测试。</li>
+<li>如果在自定义的帧缓冲里有深度测试，一定要给自定义的帧缓冲绑定深度附件（渲染缓冲或者纹理附件都可以），否则深度测试无效。傻B又惨痛的教训~~</li>
+<li><p>某个变量在shader里没有被赋值给别的变量，那么它就不会被NSight显示出正确的值。想要看出它的正确值，只有把它再赋值给另一个变量了，观察另一个变量的值是多少。如下面的程序：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>在循环过程中，由于i没有被赋值给别的变量，所以NSight所显示出来的i值就一直是0，如果想看到i的值，可以加一行代码，如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">for(int i = 0; i < 5; i++){
+    int j = i;
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>用NSight调试可以看到，i的值虽然一直都是0，但是j的值却会从0变到4。</p>
+<p>这个结论不一定正确，只是经验之谈。不过却提供了一种调试的方法，当发现NSight给出的值明显不正确时（它可能给出的是0或者？？？等等），可以把它赋给另一个变量，就可以看到正确的值了。</p>
+</li>
+<li><p>GPU对于if-else的处理，并不像LearnOpenGL中（Deferred Shading那一节）讲得那样：为了GPU高度并行if分支和else分支都会被执行，执行完之后再回滚。做实验如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 430 core
+
+out vec4 color;
+
+void main(){
+    if(true){
+      color=vec4(1,0,0,1);
+    }
+    else{
+      while(true){}        
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果if和else分支都执行，那么程序将陷入死循环，但是实际运行结果是屏幕上会出现红色矩形（该着色器用于绘制一个矩形），说明else分支没有被执行。如果把程序改成如下，将会陷入死循环（实验的结果就是重启电脑吧！卡住了！）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 430 core
+
+out vec4 color;
+
+void main(){
+    if(true){
+      while(true){}  
+      color=vec4(1,0,0,1);
+    }
+    else{
+      while(true){}        
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>自定义程序实现的前置深度测试：比如我们需要对一个模型进行很多很复杂的光照计算，为了不让被遮挡住的片元也去进行光照计算（因为被遮挡的片元颜色是不会显示出来的，它所进行的关照计算对最后的显示结果是多余的），我们可以采用延迟着色（Deferred Shading）或前向着色（forward shading）。延迟着色很好理解，而对于前向着色，为了不让被遮挡的片元也进行光照计算，我们也可以向延迟着色一样，把光照阶段剥离出来：先开启深度测试把模型绘制一遍，把深度值保存到深度纹理中，这样在深度纹理中的深度值就是模型最靠近摄像机的片元的深度值了（这是第一个pass）；接着我们再把模型绘制一遍，在这次绘制中，我们先在片元着色器里，判断当前片元的深度值是否大于深度纹理中对应位置的深度值，如果是则直接返回，不用再进行接下来的光照计算，否则照常进行光照计算，赋予片元光照下的颜色值：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    if(gl_FragCoord.z > texture(TexForDepth, vec2(gl_FragCoord.x/1024.0f, gl_FragCoord.y/768.0f)).r ){
+        return;
+    }
+    //执行光照计算
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样一来，就只有最后会被显示到窗口上的片元才会去执行光照计算，大大减少了光照计算的次数。</p>
+<p>但是在实际运用中，按照上诉代码来实现前置深度测试，会出现如下图所示的抖动现象：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149225097087.png" alt=""><br>这通常是由于计算机对浮点数精度表示的不准确而造成的，我们在条件判断的时候加上一个很小的误差就能解决这个问题了：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    if(gl_FragCoord.z > texture(TexForDepth, vec2(gl_FragCoord.x/1024.0f, gl_FragCoord.y/768.0f)).r  + 0.00001){
+        return;
+    }
+    //执行光照计算
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149225097469.png" alt=""></p>
+</li>
+<li>GLFW的回调函数：按键回调函数、鼠标位置回调函数、鼠标滚轮回调函数等等，都是在事件触发之后才会执行的。也就是说鼠标放在窗口里不动，是不会调用鼠标位置回调函数的。</li>
+<li>类的私有构造函数是不会被执行的。比如单例模式中的私有构造函数。</li>
+<li>在单例模式中，返回的实例对象最好是指针类型的，如果是直接返回静态的实例对象，那么在其他地方对返回的这个实例对象的修改是不会影响到原单例类的实例对象的：<pre class="line-numbers language-c++"><code class="language-c++">单例类A：
+static A getInstance(){
+    return m_Instance;
+}
+void init(){
+    m_Count = 10;
+}
+其他类B：
+A::getInstance().init();
+另一个类C：
+cout<<A::getInstance().m_Count<<endl;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+A只是返回了实例对象，而不是对象指针，也就是说B类中通过<code>getInstance</code>得到的对象和A类中的<code>m_Instance</code>不是同一个对象，所以即使在B类中对成员变量<code>m_Count</code>做了初始化，但是<code>m_Instance</code>是没有任何变化的，所以在C类里再去得到<code>m_Instance</code>实例对象的<code>m_Count</code>属性，输出将会是0。<br>应该改为：<pre class="line-numbers language-c++"><code class="language-c++">static A* getInstance(){
+    return &m_Instance;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>可能出现黑屏的原因：</p>
+<ul>
+<li>没有清空颜色缓冲，即没有使用glClearColor和glClear函数。</li>
+<li>绘制时不在默认帧缓冲上。</li>
+<li>用到了但是没有给着色器传入模型矩阵、观察矩阵和投影矩阵。</li>
+<li>没有激活着色器程序</li>
+</ul>
+</li>
+<li><p>OpenGL默认使用<code>glEnable(GL_MULTISAMPLE)</code>开启多重采样，想要关闭多重采样，需要注释掉<code>glfwWindowHint(windon, 4);</code>，只使用<code>glDisable(GL_MULTISAMPLE)</code>是不够的。</p>
+</li>
+<li><p>复制帧缓冲时，如果帧缓冲上有多个纹理附件，需要使用<code>glReadBuffer</code>和<code>glDrawBuffer</code>函数指定附件来一个一个地复制：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_DeferredFBO);
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_CommonFBO);
+    glDrawBuffer(GL_COLOR_ATTACHMENT0);
+    glBlitFramebuffer(0, 0, WIDTH, HEIGHT, 0, 0, WIDTH, HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_DeferredFBO);
+    glReadBuffer(GL_COLOR_ATTACHMENT1);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_CommonFBO);
+    glDrawBuffer(GL_COLOR_ATTACHMENT1);
+    glBlitFramebuffer(0, 0, WIDTH, HEIGHT, 0, 0, WIDTH, HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, m_DeferredFBO);
+    glReadBuffer(GL_COLOR_ATTACHMENT2);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_CommonFBO);
+    glDrawBuffer(GL_COLOR_ATTACHMENT2);
+    glBlitFramebuffer(0, 0, WIDTH, HEIGHT, 0, 0, WIDTH, HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>运行时屏幕上出现分块的原因：<ol>
+<li>没有清空存储影响光源编号的SSBO缓存。</li>
+<li>取影响光源编号时，不能根据是否等于-1（没有存储编号时的默认值）来判断是否终止取光源操作。因为对于数组<code>tiles[768][100]</code>，若<code>tiles[2]</code>中都存满了，即<code>tiles[2][99]</code>都是有值不等于-1的，那么会继续去取<code>tiles[2][100]</code>，这时其实取的是<code>tiles[3][0]</code>，即取到了下一个分块的影响光源编号，导致第2个分块的影响光源多算了，出现明显的分块现象。</li>
+<li>存储分块影响光源编号的内存空间太小。</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/05/22/毕设笔记/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/05/22/毕设笔记/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

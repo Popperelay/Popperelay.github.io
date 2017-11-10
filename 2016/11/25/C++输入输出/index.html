@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C++的输入输出</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">C++输入输出系统的优势</font><br><a id="more"></a><br>C语言本身有自己的输入输出方式，作为升级版的C++为何还要建立一个输入输出系统呢？原因如下：</p>
+<ul>
+<li>C++的输入输出系统是类型安全的，也就是说它可以自动识别输出数据的类型，如<code>cout &lt;&lt; 5;</code>会自动识别出要输出的数据是字符串类型，但是如果用C的话就得写成<code>printf(&quot;%d&quot;,5);</code>。因为C++可以自动识别类型，所以可以有效防止格式控制符与输出数据的类型不一致的错误。</li>
+<li>C++可以通过重载运算符&lt;&lt;和&gt;&gt;，让用户能够自定义输入和输出的形式，并且可以像预定义（C++已经定义好的\自带的）的一样有效方便。</li>
+<li>C++输入输出的书写形式简单清晰，程序代码会有更好的可读性。</li>
+</ul>
+<p>【注】：</p>
+<ul>
+<li>在C++中也可以使用C的printf和scanf函数。<br>&nbsp;  </li>
+</ul>
+<hr>
+<p><font size="5" color="orange">C++的输入输出流</font><br>C++的输入输出是以字节流的形式实现的。在输入操作中，字节流从输入设备（如键盘、磁盘、网络连接等）流向内存；输出操作中，字节流从内存流向输出设备（如显示器、打印机、网络连接等）。可以看到输入输出是相对于内存的，流向内存的称为输入，从内存流出的称为输出。</p>
+<p>C++编译系统给了一个用于输入输出的库：iostream类库。这个类库中包含了很多头文件，很多用于输入输出操作的类的声明都放在这些头文件中。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">C++用于输入输出的常用头文件</font></p>
+<ul>
+<li>iostream：主要用于基本的输入输出操作。使用cin、cout对标准设备进行IO（输入输出）时，须包含此头文件。</li>
+<li>fstream： 用于文件的IO操作。使用文件流对象对磁盘文件进行读写，须包含此头文件。</li>
+<li>sstream：用于字符串流的IO操作。使用字符串流对象对内存字符串空间的IO操作，须包含此头文件。</li>
+<li>iomanip：用于输入输出时的格式控制。在使用setw、fixed等大多数操作符进行格式控制时，须包含此头文件。</li>
+</ul>
+<p>【注】：</p>
+<ul>
+<li>用于字符串流IO的还有strstream头文件。strstream头文件是基于C类型字符串char*类型编写的，返回的是char*类型的字符串；而sstream是基于std::string编写的，返回的是string类型的字符串。<br>&nbsp;  </li>
+</ul>
+<hr>
+<p><font size="5" color="orange">C++用于输入输出的流类</font><br>C++的iostream类库中当然还有很多用于输入输出的类，它们的声明都包含在上诉头文件中。常用的流类有如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147988556066.png" alt=""><br>其中，ios类是所有输入输出类的抽象基类，类istream和ostream单一继承ios类，而类iostream多重继承于类istream和ostream。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">C++预定义的流对象</font><br>用上诉的流类定义的对象称为流对象。C++有几个已经定义好的流对象，也就是C++自带的：</p>
+<ul>
+<li>cin：它是istream类的派生类istream_withassign的对象，与标准输入设备（比如键盘）相联系。</li>
+<li>cout：它是ostream类的派生类ostream_withassign的对象，与标准输出设备（比如显示器）相联系。</li>
+<li>cerr：它也是ostream类的派生类ostream_withassign的对象，与标准错误输出设备（比如显示器）相联系。</li>
+<li>clog：它也是ostream类的派生类ostream_withassign的对象，也是与标准错误输出设备（比如显示器）相联系。</li>
+</ul>
+<p>【注】：</p>
+<ul>
+<li>可以看到cerr和clog都用来输出错误信息。区别是cerr不经过缓冲区，直接向显示器输出相关信息，所以发送给它的任何内容都立即输出；而clog中的信息存放在缓冲区中，缓冲区满后或遇上endl后才向显示器输出。<br>&nbsp; </li>
+</ul>
+<hr>
+<p><font size="5" color="orange">基本输入输出流的成员函数</font><br>众所周知，C++的基本输入输出可以用&lt;&lt;（输出运算符\插入运算符）和&gt;&gt;（输入运算符\提取运算符）来实现。除此之外，还可以使用类istream和类ostream对象的一些成员函数来实现字符的输入输出：</p>
+<p><font size="4" color="red">put函数</font><br>put函数用于输出一个字符，形如：<code>cout.put(&#39;A&#39;);</code>。</p>
+<p>它的参数可以是一个字符，也可以是字符的ASCII码，如<code>cout.put(65);</code>也会在屏幕上显示字符A。</p>
+<p><font size="4" color="red">get函数</font><br>get函数用于读入一个字符，赋给指定的字符。形如：<code>char ch;cin.get(ch);</code>。get函数会把从标准输入设备（键盘）上输入的字符赋值给字符类型变量ch。</p>
+<p><code>cin.get</code>函数与&gt;&gt;有一点不同，get函数可以读入空白字符，而&gt;&gt;默认情况下是不接收空白字符的。</p>
+<p><font size="4" color="red">getline函数</font><br>getline函数用于读取n-1个字符，赋给指定的字符数组，然后插入一个字符串结束标志’\n’。形如：<code>char line[20];cin.getline(line,20,&#39;t&#39;);</code>。如果在读取n-1个字符之前遇到指定的终止字符（比如第三个参数t），则会提前结束读取。</p>
+<p>使用<code>cin&lt;&lt;</code>读取数据默认以空白字符（包括空格、tab键、回车键）作为终止字符，而<code>cin.getline</code>是可以读取空格的。</p>
+<p><font size="4" color="red">ignore函数</font><br>ignore函数用于跳过输入的n个字符，或者在遇到指定字符时停止跳过。形如:</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">    <span class="token keyword">char</span><span class="token operator">*</span> str<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">ignore</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'z'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cin<span class="token punctuation">.</span><span class="token function">getline</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;</span><span class="token operator">&lt;</span>str<span class="token operator">&lt;</span><span class="token operator">&lt;</span>endl<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果输入bcdefghi，ignore函数会跳过头3个字符bcd，getline函数把后面的efghi这5个字符存储到str中，最后在屏幕上输出的就是efghi。</p>
+<p>如果输入bzdefga，ignore函数在跳过3个字符之前遇到了指定的终止字符z，getline函数继续读取字符，在读取6-1个字符之前遇到了指定的终止字符a，最后输出defg。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">重载&gt;&gt;和&lt;&lt;</font><br>我们可以重载输入运算符&gt;&gt;和输出运算符&lt;&lt;，来达到我们想要的输出方式。</p>
+<p><font size="4" color="red">重载输出运算符&lt;&lt;</font><br>重载的格式如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">ostream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token punctuation">(</span>ostream <span class="token operator">&amp;</span><span class="token keyword">out</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>item1<span class="token punctuation">;</span>
+    <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>item2<span class="token punctuation">;</span>
+    <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>itemn<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">out</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中class_name是我们自定义的类名，函数内部可以根据需要输出我们想输出的内容。以后使用<code>&lt;&lt;对象名</code>就可以一次性输出你想输出的全部内容。举例如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include&lt;iostream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Coord</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token punctuation">:</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+
+    <span class="token function">Coord</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        y <span class="token operator">=</span> j<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//重载输出运算符&lt;&lt;</span>
+ostream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token punctuation">(</span>ostream <span class="token operator">&amp;</span><span class="token keyword">out</span><span class="token punctuation">,</span> Coord<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">out</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>x <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> obj<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">out</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Coord <span class="token function">a</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出的结果如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><font size="4" color="red">重载输入运算符&gt;&gt;</font><br>重载的格式如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">istream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span>istream <span class="token operator">&amp;</span><span class="token keyword">in</span><span class="token punctuation">,</span> class_name<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>item1<span class="token punctuation">;</span>
+    <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>item2<span class="token punctuation">;</span>
+    <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>itemn<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">in</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中class_name是我们自定义的类名，函数内部可以根据需要输入我们需要的内容。以后使用<code>&gt;&gt;对象名</code>就可以一次性输入需要的全部内容。举例如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include&lt;iostream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Coord</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token punctuation">:</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+
+    <span class="token function">Coord</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        x <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        y <span class="token operator">=</span> j<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+istream <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">></span><span class="token operator">></span><span class="token punctuation">(</span>istream <span class="token operator">&amp;</span><span class="token keyword">in</span><span class="token punctuation">,</span> Coord<span class="token operator">&amp;</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword">in</span> <span class="token operator">></span><span class="token operator">></span> obj<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">in</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Coord a<span class="token punctuation">;</span>
+    cin <span class="token operator">></span><span class="token operator">></span> a<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a<span class="token punctuation">.</span>x <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">","</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> a<span class="token punctuation">.</span>y <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果输入如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span> <span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么会有如下输出结果：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>【注】：</p>
+<ul>
+<li>上述两个重载代码虽然简单易懂，但是在工程设计上确实有点糟糕啊~-~！<br>&nbsp;  </li>
+</ul>
+<hr>
+<p>对于文件的输入输出请参考<a href="http://popperelay.com/2016/11/24/C++%E6%96%87%E4%BB%B6IO/" target="_blank" rel="external">《C++文件的输入输出》</a>，对于字符串流的输入输出这篇文章也有简单介绍。</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2016/11/25/C++输入输出/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2016/11/25/C++输入输出/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

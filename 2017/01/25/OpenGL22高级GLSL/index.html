@@ -1,0 +1,563 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL22：高级GLSL</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>本文将会讨论一些GLSL内置变量、接口块和uniform缓冲对象。<br><a id="more"></a><br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">GLSL的内置变量</font><br>GLSL有几个以<strong>gl_</strong>为前缀的变量，我们可以用它们来实现对着色器的输入输出数据。其中两个我们已经接触过：<code>gl_Position</code>和<code>gl_FragCoord</code>，前一个是顶点着色器的输出向量，后一个是像素着色器的变量。接下里我们再多了解几个内置变量。</p>
+<p><font size="4" color="red">顶点着色器的内置变量</font><br>我么已经了解到<code>gl_Position</code>是顶点着色器裁剪空间输出的位置向量，如果想让窗口上渲染出东西，必须使用它，否则我们什么都看不到。除此之外，还有几个顶点着色器的内置变量：</p>
+<p><font size="3" color="blue"><strong>内置变量gl_PointSize</strong></font><br>渲染的基本图形不仅可以是我们常用的<code>GL_TRIANGLES</code>，还可以是<code>GL_POINTS</code>，顾名思义，它是渲染每一个顶点。除了在主程序中可以使用<code>glPointSize</code>函数来设置这个点的大小以外，我们还可以在顶点着色器里通过内置输出变量<code>gl_Pointsize</code>来设置点的大小。</p>
+<p> <code>gl_Pointsize</code>是一个float变量。要使用它我们必须要先开启OpenGL的<code>GL_PROGRAM_POINT_SIZE</code>，因为在着色器中影响点的大小默认是关闭的：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    glEnable(GL_PROGRAM_POINT_SIZE);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>现在我们来画几个点，着色器都很简单：<br>点的顶点着色器（写在points.vertex中）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (location=0) in vec3 position;
+
+ void main(){
+    gl_Position = vec4(position, 1.0f);
+    gl_PointSize = position.z * 10;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里我们让内置变量<code>gl_PointSize</code>（也就是顶点大小）等于顶点z坐标的10倍。</p>
+<p> 点的像素着色器（points.fragment）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+
+ void main(){
+    color= vec4(1.0f, 0.0f, 0.0f, 1.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>完整源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL22_AdvancedGLSL/LearnOpenGL22_AdvancedGLSL_1" target="_blank" rel="external">在这里</a>。</p>
+<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051623.png" alt=""><br>可以看到z值越大的点越大。想象一下，每个顶点表示出来的点的大小不同，如果用在像粒子生成之类的技术里会挺有意思的。</p>
+<p><font size="3" color="blue"><strong>内置变量gl_VertexID</strong></font><br>顶点着色器给我们提供了一个有趣的输入变量<code>gl_VertexID</code>，它是只读的。</p>
+<p> <code>gl_VertexID</code>是个整型变量，它存储着我们绘制的当前顶点的ID。当进行索引渲染（indexed rendering，使用<code>glDrawElements</code>函数绘制）时，这个变量保存着当前绘制顶点的索引；如果用的不是索引绘制（使用<code>glDrawArrays</code>函数绘制），这个变量保存的是从渲染开始直到当前处理的这个顶点（当前顶点）的编号。</p>
+<p><font size="4" color="red">片段着色器的内置变量</font></p>
+<p><font size="3" color="blue"><strong>内置变量gl_FragCoord</strong></font><br>在<a href="http://popperelay.com/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">《OpenGL15：深度测试》</a>中，我们已经用过<code>gl_FragCoord</code>了，因为它的z值表示片段的深度值。</p>
+<p> <code>gl_FragCoord</code>的x和y元素是当前片段的窗口空间坐标，它的起始处（原点）是窗口的左下角。</p>
+<p> <code>gl_FragCoord</code>变量的一个常用方式是与一个不同的片段计算出来的视频输出进行对比，通常在技术演示中常见。比如我们可以把物体分为两部分，某个x值左侧渲染一个输出，右侧渲染另一个输出。如下面的像素着色器：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    if(gl_FragCoord.x < 400){
+        color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+    }
+    else{
+        color = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们用这个像素着色器代码绘制一个立方体，源码不再赘述了，之前的文章里有很多，编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051683.png" alt=""></p>
+<p><font size="3" color="blue"><strong>内置变量gl_FrontFacing</strong></font><br>像素着色器另一个有意思的输入变量是<code>gl_FrontFacing</code>。在<a href="http://popperelay.com/2017/01/18/OpenGL18%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A4/" target="_blank" rel="external">《OpenGL18：背面剔除》</a>中，我们知道OpenGL可以根据顶点绘制顺序弄清楚一个面是正面还是背面。如果我们不使用面剔除，那么<code>gl_FrontFacing</code>变量能告诉我们当前片段是某个正面的一部分还是背面的一部分。</p>
+<p> <code>gl_FrontFacing</code>变量是一个布尔值，如果当前片段时正面的一部分那么就是true，否则就是false。这样我们可以创建一个立方体，里面和外面使用不同的纹理：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+in vec2 TexCoords;
+
+ uniform sampler2D frontTexture;
+uniform sampler2D backTexture;
+
+ void main()
+{
+    if(gl_FrontFacing)
+        color = texture(frontTexture, TexCoords);
+    else
+        color = texture(backTexture, TexCoords);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后，如果我们移动摄像机到箱子的一角里，就能看到里面和外面使用的是不同的纹理：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051745.png" alt=""><br>注意不要开启面剔除，否则摄像机进入箱子后，不会看到箱子的任何部分。</p>
+<p><font size="3" color="blue"><strong>内置变量gl_FragDepth</strong></font><br>输入变量<code>gl_FragCoord</code>让我们可以读得当前片段的窗口空间坐标和深度值。但是GLSL给我们提供了一个叫做<code>gl_FragDepth</code>的变量，我们可以用它在着色器中设置像素的深度值（片段的窗口空间坐标是没法改变的）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">gl_FragDepth = 0.0f; //现在片段的深度值被设为0
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果着色器中没有显式设置<code>gl_FragDepth</code>的值，它就会自动采样<code>gl_FragCoord.z</code>的值。</p>
+<p> 我们自己设置深度值有一个显著缺点，因为只要我们在像素着色器中对<code>gl_FragDepth</code>写入什么，OpenGL就会关闭所有的前置深度测试，因为在我们运行片段着色器之前，OpenGL搞不清楚像素的深度值，因为片段着色器可能会完全改变这个深度值。因此需要考虑到<code>gl_FragDepth</code>写入所带来的性能的下降。</p>
+<p> 然而从OpenGL4.2起，我们仍然可以对二者进行一定的调和，这需要在片段着色器的顶部使用深度条件（depth condition）来重新声明<code>gl_FragDepth</code>：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">layout (depth_<condition>) out float gl_FragDepth;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>condition可以使用下面的值：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051792.png" alt=""><br>下面是一个在像素着色器里增加深度值得例子，不过仍可开启前置深度测试：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (depth_greater) out float gl_FragDepth;
+out vec4 color;
+
+ void main()
+{
+    color = vec4(1.0f);
+    gl_FragDepth = gl_FragCoord.z + 0.1f;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一定要记住这个功能只能在OpenGL4.2以上版本才有。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">接口块</font><br>到目前为止，每次我们打算从顶点着色器向片段着色器发送数据，我们都会声明一个相互匹配的输出/输入变量。但是随着应用变得越来越大，我们也许会打算发送的不仅仅是变量，最好还可以包括数组和结构体等。</p>
+<p>为了帮助我们组织这些变量，GLSL为我们提供了一些叫做接口块（Interface Blocks）的东西，好让我们能够组织这些变量。声明接口块和声明结构体比较像，只是结构使用struct关键字，而接口块使用in和out关键字来定义一个输入或输出块。示例如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 texCoords;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+out VS_OUT
+{
+    vec2 TexCoords;
+} vs_out;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(position, 1.0f);
+    vs_out.TexCoords = texCoords;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们声明了一个叫做vs_out的接口块，它把我们需要发送给下个阶段着色器的所有输出变量组合起来。</p>
+<p>然后我们还需要在像素着色器中声明一个输入接口块，快名应该是一样的，但是实例名可以不一样：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+
+in VS_OUT
+{
+    vec2 TexCoords;
+} fs_in;
+
+uniform sampler2D texture;
+
+void main()
+{
+    color = texture(texture, fs_in.TexCoords);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果两个接口块的快名一致，它们对应的输入和输出就会匹配起来。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">Uniform缓冲对象UBO</font><br>在之前的文章中，我们肯定有感受：箱子、地面等等不同的物体，它们使用不同的着色器，但是每种着色器里都有相同的uniform变量：观察矩阵view和投影矩阵projection。我们之前的做法是为每种着色器都设置这些uniform变量的值。既然对于每个着色器来说它们都是一样的，那为何还多次设置它们呢？</p>
+<p>OpenGL为我们提供了一个叫做uniform缓冲对象（uniform buffer object）的工具，使我们能够声明一系列的全局uniform变量，它们会在几个着色器程序中保持一致。当使用uniform缓冲对象时相关的uniform就只需设置一次了。但是我们还是需要为每个着色器手动设置uniform块，只是不需要在主程序里为这些uniform变量重复赋值了。</p>
+<p>如何在多个着色器之间简洁地共享变量，GLSL中可以通过uniform buffer来实现。实现思路是：在多个着色器中定义相同的uniform块（就是上面的接口块，但是使用uniform关键词），然后将这些uniform块绑定到对应的uniform缓冲对象ubo，而uniform缓冲对象中实际存储这些需要共享的变量。着色器中的uniform块和主程序中的uniform缓冲对象，是通过OpenGL的绑定点（binding points）连接起来的，它们的关系如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051835.png" alt=""><br>使用时，每个shader中定义的uniform块有一个索引，通过这个索引连接到OpenGL的绑定点x；而主程序中创建uniform缓冲对象，传递数据后，将这个UBO绑定到对应的绑定点x，这样shader中的uniform块就和主程序中的UBO连续起来了，我们在主程序中操作UBO的数据，就能够在不同着色器之间共享了。例如上图中，着色器A和着色器B中的Matrices的索引都指向绑定点0，他们共享主程序的uboMatrices这个UBO的数据。同时着色器A的Lights和着色器B的Data，分别指向不同的UBO。</p>
+<p>下面是一个使用uniform块的着色器例子：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (location = 0) in vec3 position;
+
+layout (std140) uniform Matrices
+{
+    mat4 projection;
+    mat4 view;
+};
+uniform mat4 model;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(position, 1.0);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里我们声明了一个叫做Matrices的uniform块，它存储两个4x4矩阵。在uniform块中的变量可以直接获取，而不用使用块名作为前缀。</p>
+<p>但是上面的<code>layout (std140)</code>是什么意思呢？它的意思是说为当前的uniform块的内容使用特定的内存布局，这个声明实际上就是在设置uniform块布局（uniform block layout）。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">Uniform块布局</font><br>在主程序中对UBO的实现（或者说数据填充），依赖于着色器中uniform块的内存布局。uniform块的内存布局有四种形式：shared、packed、std140、std430（GLSL4.3以上才支持），默认是shared共享内存布局。 </p>
+<p>我们先来了解一下字节对齐的概念：</p>
+<p><font size="4" color="red">字节对齐的概念</font><br>字节对齐的一个经典案例就是C语言中的结构体变量，例如下面的结构体：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">struct StructExample {
+    char c;  
+    int i;  
+    short s; 
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>估计他占用内存大小是多少字节？如果int占用4字节，short占用2字节，char占用1字节，那么整体大小等于1+4+2=7字节吗？</p>
+<p>答案是否定的。在Windows平台上测试的结果是占用12个字节。这是因为结构体里的变量存在字节对齐（或者叫字节补齐）的概念。实际上上述结构体的内存布局为：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">struct StructExample {
+    char c;  // 0 bytes offset, 3 bytes padding
+    int i;   // 4 bytes offset
+    short s; // 8 bytes offset, 2 bytes padding
+}; // End of 12 bytes
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>内存布局如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051878.png" alt=""><br>字节对齐的一个重要原因是为了使机器访问更迅速。例如在32位字长的机器中，每次会读取4个字节数据，所以将字节对齐到0x0000、0x0004、0x0008、0x000C等，将使读取更加迅速。否则，如果上面的结构体里，字符c后面不填充三个字节而直接紧邻int，那么int将会跨越两个字长（0x0000和0x0004，32位机中4个字节为一个字），就需要两次读取操作，影响效率。还有一些更详细的原因，可参考<a href="http://stackoverflow.com/questions/381244/purpose-of-memory-alignment" target="_blank" rel="external">SO Purpose of memory alignment</a>。</p>
+<p>关于字节对齐，需要记住以下几个要点：</p>
+<ul>
+<li>每个基本变量的起始位置，一定是自己长度的整数倍（对齐）</li>
+<li>对齐后的总长度必须是最长元素长度的整数倍，不够的话用额外的字节补齐</li>
+<li>复杂类型（结构体、联合等）以其中的最长成员的长度对齐。</li>
+</ul>
+<p>上面的结构体中，int变量的起始地址应该是自身长度4的整数倍，为了int类型对齐，需要在char后面填充3个字节。这样一来，char、int、short总共占了10字节，但是总长度需要是最长元素int长度4的整数倍，所以需要在末尾再补上2个字节，让总长度达到12字节。</p>
+<p><font size="4" color="red">std140的字节对齐</font><br>std140内存布局同样存在字节对齐的概念，可以参考<a href="https://www.opengl.org/registry/specs/ARB/uniform_buffer_object.txt" target="_blank" rel="external">官方文档</a>获取完整描述。常用标量int、float、bool等要求4字节对齐。4字节也被作为一个基础值N，下面是几个常用的类型的字节对齐要求：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051929.png" alt=""><br>例如一个复杂的uniform块定义如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">layout (std140) uniform ExampleBlock
+{
+                     // base alignment ----------  // aligned offset
+    float value;     // 4                          // 0
+    vec3 vector;     // 16                         // 16 (必须是16的倍数，因此 4->16)
+    mat4 matrix;     // 16                         // 32  (第 0 行)
+                     // 16                         // 48  (第 1 行)
+                     // 16                         // 64  (第 2 行)
+                     // 16                         // 80  (第 3 行)
+    float values[3]; // 16 (数组中的标量与vec4相同)  //96 (values[0])
+                     // 16                         // 112 (values[1])
+                     // 16                         // 128 (values[2])
+    bool boolean;    // 4                          // 144
+    int integer;     // 4                          // 148
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>根据std140布局规则，使用计算出来的偏移量，我们可以用<code>glBufferSubData</code>这样的函数来传递数据并填充缓冲。虽然不是很高效，但std140布局可以保证在每个程序中声明的这个uniform块的布局保持一致。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">使用uniform缓冲</font><br>首先我们需要使用<code>glGenBuffers</code>函数创建一个uniform缓冲对象，然后绑定到<code>GL_UNIFORM_BUFFER</code>目标上，接着需要调用<code>glBufferData</code>函数来给它分配足够的内存空间：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //创建uniform缓冲对象
+    GLuint ubo;
+    glGenBuffers(1, &ubo);
+    glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+    glBufferData(GL_UNIFORM_BUFFER, 150, NULL, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以后当我们打算往缓冲中更新或插入数据，我们就绑定一下该缓冲对象<code>uboExampleBlock</code>，并使用<code>glBufferSubData</code>来更新它的内存。</p>
+<p>我们可以使用<code>glUniformBlockBinding</code>函数来把uniform块绑定到一个指定的绑定点上。在此之前，我们需要先用<code>glGetUniformBlockIndex</code>函数来获取指定着色器中uniform块的索引位置：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //把uniform块绑定到绑定点2
+    GLuint uniform_index = glGetUniformBlockIndex(cube_shader.shaderProgram, "Matrices");
+    glUniformBlockBinding(cube_shader.shaderProgram, uniform_index, 2);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>glGetUniformBlockIndex</code>的第一个参数是着色器程序对象，第二个参数就是该着色器里的块名称。<code>glUniformBlockBinding</code>函数的第一个参数也是着色器程序对象，第二个参数是uniform块索引，第三个参数是绑定点。注意，我们必须对每个着色器的uniform块都要做这件事。</p>
+<p>【注】：</p>
+<ul>
+<li>从OpenGL4.2起，也可以在着色器中通过添加另一个局部标识符来存储一个uniform块的绑定点，就不用我们调用<code>glGetUniformBlockIndex</code>和<code>glUniformBlockBinding</code>了。如下所示：<pre class="line-numbers language-c++"><code class="language-c++">layout(std140, binding = 2) uniform Lights { ... };
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+添加一个binding标识符就能指定了uniform块的绑定点了。</li>
+</ul>
+<p>然后我们还需要把uniform缓冲对象绑定到同样的绑定点上，可以使用<code>glBindBufferBase</code>函数或<code>glBindBufferRange</code>函数来完成：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">glBindBufferBase(GL_UNIFORM_BUFFER, 2, uboExampleBlock);
+// 或者
+glBindBufferRange(GL_UNIFORM_BUFFER, 2, uboExampleBlock, 0, 150);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>函数<code>glBindBufferBase</code>的第一个参数是绑定目标，这里当然是uniform缓冲；第二个参数是绑定点，第三个参数就是uniform缓冲对象。函数<code>glBindBufferRange</code>多了两个参数，可以指定把一定范围内的uniform缓冲绑定到一个绑定点上。所以使用<code>glBindBufferRange</code>函数，能够将让一个uniform缓冲对象对应多个uniform块。</p>
+<p>最后我们可以开始想uniform缓冲中添加数据了。可以使用<code>glBufferSubData</code>函数来实现。例如为了更新之前那个uniform块里的boolean变量，我们可以使用下面的代码：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">glBindBuffer(GL_UNIFORM_BUFFER, uboExampleBlock);
+GLint b = true; // GLSL中的布尔值是4个字节，因此我们将它创建为一个4字节的整数
+glBufferSubData(GL_UNIFORM_BUFFER, 144, 4, &b);
+glBindBuffer(GL_UNIFORM_BUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">Demo</font><br>下面我们上一个Demo，使用uniform缓冲对象。将观察矩阵view和投影矩阵projection放到uniform块中。由于模型矩阵是频繁变化的，在不同的着色器里模型矩阵的值可能不同，所以不需要把模型矩阵model也放入uniform块中。uniform块中存储着的应该是被大多数着色器共享的uniform变量，在这些着色器里的值都应该一样才行。</p>
+<p>我们将在窗口上绘制红、绿、蓝、黄4个立方体，它们有各自的像素着色器，共用一个顶点着色器（当然也可以是4个顶点着色器，不过它们的代码是一样的）。它们的代码很简单，可参考文末的源码汇总。</p>
+<p>写好4个立方体各自的着色器之后，我们给它们各自创建一个着色器类对象：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //定义自定义着色器类shader的对象
+    shader redCube_shader("cube.vertex", "redCube.fragment");
+    shader greenCube_shader("cube.vertex", "greenCube.fragment");
+    shader blueCube_shader("cube.vertex", "blueCube.fragment");
+    shader yellowCube_shader("cube.vertex", "yellowCube.fragment");
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接下里我们把每个着色器程序里的uniform块<code>Matrices</code>绑定到绑定点2上（其他绑定点也可以）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //把uniform块绑定到绑定点2
+    //红方块的uniform块
+    GLuint uniform_index = glGetUniformBlockIndex(redCube_shader.shaderProgram, "Matrices");
+    glUniformBlockBinding(redCube_shader.shaderProgram, uniform_index, 2);
+    //绿方块的uniform块
+    uniform_index = glGetUniformBlockIndex(greenCube_shader.shaderProgram, "Matrices");
+    glUniformBlockBinding(greenCube_shader.shaderProgram, uniform_index, 2);
+    //蓝方块的uniform块
+    uniform_index = glGetUniformBlockIndex(blueCube_shader.shaderProgram, "Matrices");
+    glUniformBlockBinding(blueCube_shader.shaderProgram, uniform_index, 2);
+    //黄方块的uniform块
+    uniform_index = glGetUniformBlockIndex(yellowCube_shader.shaderProgram, "Matrices");
+    glUniformBlockBinding(yellowCube_shader.shaderProgram, uniform_index, 2);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>还需要创建一个uniform缓冲对象，并且把它绑定到相同的绑定点2上：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //将uniform缓冲对象绑定到相同的绑定点2
+      //创建uniform缓冲对象
+    GLuint ubo;
+    glGenBuffers(1, &ubo);
+    glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+    glBufferData(GL_UNIFORM_BUFFER, 150, NULL, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+      //绑定ubo到绑定点2
+    glBindBufferBase(GL_UNIFORM_BUFFER, 2, ubo);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样一来，每个着色器里的uniform块<code>Matrices</code>就都和这个uniform缓冲对象ubo连接在一起了。</p>
+<p>然后我们就可以在渲染循环里给这个uniform缓冲对象填充数据了（使用<code>glBufferSubData</code>函数），也就是给uniform块的view矩阵和projection矩阵赋值：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">        //为uniform缓冲对象填充数据
+        mat4 view = mycamera.GetViewMatrix();
+        mat4 projection = perspective(radians(mycamera.cameraFov), (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), value_ptr(view));
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), value_ptr(projection));
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后当然就是绘制这4个立方体：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">        //绘制红绿蓝黄四个立方体
+        //红色立方体
+        redCube_shader.Use();
+        mat4 model;
+        model = translate(model, vec3(-0.75f, 0.75f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(redCube_shader.shaderProgram, "model"), 1, GL_FALSE, value_ptr(model));
+        glBindVertexArray(cubeVAO);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //绿色立方体
+        greenCube_shader.Use();
+        model = mat4();
+        model = translate(model, vec3(-0.75f, -0.75f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(greenCube_shader.shaderProgram, "model"), 1, GL_FALSE, value_ptr(model));
+        glBindVertexArray(cubeVAO);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //蓝色立方体
+        blueCube_shader.Use();
+        model = mat4();
+        model = translate(model, vec3(0.75f, 0.75f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(blueCube_shader.shaderProgram, "model"), 1, GL_FALSE, value_ptr(model));
+        glBindVertexArray(cubeVAO);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        //黄色立方体
+        yellowCube_shader.Use();
+        model = mat4();
+        model = translate(model, vec3(0.75f, -0.75f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(yellowCube_shader.shaderProgram, "model"), 1, GL_FALSE, value_ptr(model));
+        glBindVertexArray(cubeVAO);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148535051966.png" alt=""><br>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL22_AdvancedGLSL/LearnOpenGL22_AdvancedGLSL_2" target="_blank" rel="external">这里</a>。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">使用uniform缓冲对象的好处</font><br>uniform缓冲对象比单独的uniform有很多好处：</p>
+<ul>
+<li>一次设置多个uniform比一次设置一个速度快。</li>
+<li>如果打算改变一个横跨多个着色器的uniform，只需要在uniform缓冲中更改一次。</li>
+<li>使用uniform缓冲对象让我们可以在着色器中使用更多的uniform。因为OpenGL对uniform缓冲对象最大个数比uniform最大个数大。<br>&nbsp; </li>
+</ul>
+<hr>
+<p><font size="5" color="orange">shared共享内存布局</font><br>同std140内存布局方式不一样，shared方式的内存布局依赖于具体实现，因此我们无法提前根据某种字节对齐规范计算出UBO中变量的位移偏量和整体大小，所以在使用shared方式时，我们需要多次利用OpenGL的函数来查询UBO的信息。如下面的部分程序所示：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+// 使用默认shared​方式的UBO
+uniform mixColorSettings {
+    vec4  anotherColor;
+    float mixValue;
+};
+out vec4 color;
+void main()
+{
+    color = mix(vec4(0.0, 0.0, 1.0, 1.0), anotherColor, mixValue);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c++"><code class="language-c++">// 通过查询获取uniform buffer中各个变量的索引和位移偏量
+const GLchar* names[] = {
+    "anotherColor", "mixValue"
+};
+GLuint indices[2];
+glGetUniformIndices(redShader.programId, 2, names, indices);
+GLint offset[2];
+glGetActiveUniformsiv(redShader.programId, 2, indices, GL_UNIFORM_OFFSET, offset);
+// 使用获取的位移偏量更新数据
+glm::vec4 anotherColor = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);
+GLfloat mixValue = 0.5f;
+glBindBuffer(GL_UNIFORM_BUFFER, colorUBOId);
+glBufferSubData(GL_UNIFORM_BUFFER, offset[0], sizeof(glm::vec4), glm::value_ptr(anotherColor));
+glBufferSubData(GL_UNIFORM_BUFFER, offset[1], sizeof(glm::vec4), &mixValue);
+glBindBuffer(GL_UNIFORM_BUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/01/25/OpenGL22高级GLSL/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/01/25/OpenGL22高级GLSL/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

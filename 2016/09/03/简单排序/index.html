@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >数据结构与算法之简单排序</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>排序：将一组记录序列变成，在一组关键字的非递减(或非递增)排列下的映射记录序列。<br><a id="more"></a><br>比如下面这4个人的总分成绩为：<br>令狐冲 753，郭靖 573，杨过 682，张无忌 753<br>按照总分成绩这组关键字的非递减排列{573，682，753，753}，那么排序后的记录应该是：郭靖 573，杨过 682，令狐冲 753，张无忌 753<br>所以排序的依据是关键字之间的大小关系。</p>
+<hr>
+<p>排序的稳定性：当关键字相等时，如果排序前后对应记录的先后次序没有发生变化，则是稳定排序，如果变化了则是不稳定排序。如上面的例子有两个相等的关键字753，排序前令狐冲记录在张无忌记录前面，若排序后令狐冲记录还是在张无忌记录前面，则是稳定排序；若排序后令狐冲记录跑到了张无忌记录后面，则是不稳定排序。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772158907.png" alt=""></p>
+<hr>
+<p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)</p>
+<p><font size="4" color="orange">冒泡排序</font><br>冒泡排序是一种交换排序，核心思想是：两两比较，符合大小关系则交换，将最小的元素浮到最上面(非递减排序)</p>
+<ul>
+<li>冒泡排序初级版<br>如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589126.png" alt=""><br>先让数组中第一个元素依次和后面的元素作比较，如果小于则交换位置，交换位置后依然是让第一个元素继续和后面的元素作比较，直到比到数组中最后一个元素为止。这样第一轮完了以后最小的元素(数字1)就浮到了最上面。<br>然后让数组中的第二个元素依次和后面的元素作比较，如果小于则交换位置。这样第二轮完了以后最小的元素(数字2)就浮到了次上面。<br>以此类推，9个元素8轮比较后，就完成了整个排序。<br>代码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">BubbleSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//j表示数组下标</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>正宗的冒泡排序<br>上面的初级版其实效率是很低的，一个数字浮上去了却对其它数字没有任何帮助，比如在第二轮里2虽然浮上去了，却把3沉下来了。我们希望能够找到一种算法能够让2浮上去的同时，不会把3沉那么多下来。仔细观察会发现，初级版冒泡是把当前元素和与之比较的元素作交换，这两个元素有可能位置相差很远，就很有可能会让数值较小的元素一下大幅度沉底，比如上面第二轮的最后一次交换，让仅仅比2小的3一下子就沉底了。<br>那么能不能缩短每次交换的元素的距离呢？也就是缩短相比较的两个元素的距离。这就是正宗的冒泡排序：<strong>每次只比较相邻的两个元素的大小</strong>。不过它是从数组后面往前面比的，因为要冒泡把最小(或最大)的元素浮上去嘛。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589189.png" alt=""><br>先让数组最后一个元素和倒数第二个元素比较，如果小于则交换位置，再让倒数第二个元素和倒数第三个元素作比较，以此类推。因为每次比较的结果都是较小的元素在上面，所以一轮完成后就能把最小的元素浮到最上面去。以此类推，9个元素8轮比较后，就完成了排序。可以看到在把1浮到最上面的同时，也把2浮上去了很多，这相比初级版的冒泡会减少很多交换次数。<br>代码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">BubbleSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">></span> i<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//注意这里和冒泡初级版的差别</span>
+              <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>冒泡排序升级版<br>正宗的冒泡排序也只是比初级版的冒泡减少了交换次数而已，那么有没有可能减少比较次数呢？如下面的情况：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589249.png" alt=""><br>第一轮交换完，最小元素浮到最上面以后，下面的序列就已经有序了，那么其实后面的比较都不用了。但是在正宗的冒泡算法里，后面的比较还是要继续的。为了减少这种无用的比较，我们可以设置一个bool变量，标识这一轮比较有没有数据交换，如果没有，则说明后面的元素已经有序了，不用再比较了。<br>代码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">BubbleSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//标识后面的元素是否已经有序</span>
+  <span class="token keyword">bool</span> ordered <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">!</span>ordered <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      ordered <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">;</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">></span> i<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+              array<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+              ordered <span class="token operator">=</span> <span class="token keyword">false</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<hr>
+<p><font size="4" color="orange">简单选择排序</font><br>冒泡排序还是存在着很多次的位置交换，有没有可能直接找到某个元素应该所处的位置，然后只交换一次就可以了呢？选择排序就是这样的。<br>简单选择排序的核心思想：<strong>在每一轮排序中找出最小的元素，把它放到该轮次对应的位置上去</strong>。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589296.png" alt=""><br>在第一轮排序中，找到最小的元素是1，将它与数组中第一个元素交换位置<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589346.png" alt=""><br>在第二轮排序中，在剩下的元素中找到的最小元素是2，将它与数组中第二个元素交换位置<br>以此类推…<br>代码如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">SimpleSelectSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//i既表示比较多少轮，也表示数组下标，所以得从0开始</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> minIndex <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> array<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                minIndex <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>minIndex <span class="token operator">!=</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            array<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于简单选择排序每一轮最多只有一次交换数据，不像冒泡排序那样频繁地交换位置，所以简单选择排序的性能要略优于冒泡排序。</p>
+<p><font size="4" color="orange">直接插入排序</font><br>直接插入排序的核心：<strong>一开始把数组的第一个元素看作是一个有序序列，接着在每一轮排序中把轮次对应的元素插入到该有序序列(数组的前i个元素就是该有序序列)中去</strong>。如下图所示(箭头表示接下来这一轮排序中将要后移的元素)：<br>有一组待排序的序列如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589397.png" alt=""><br>把第一个元素9看作是一个有序序列：{9}<br>在第一轮排序中，要将元素1插入到有序序列{9}(数组前1个元素)中，先将有序序列中大于1的所有元素右移一位，左边会多出一个空位(如下图中的残缺方块)，再把1插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589444.png" alt=""><br>在第二轮排序中，要将元素5插入到有序序列{1，9}(数组前两个元素)中，先将有序序列中大于5的所有元素右移一位，会出现一个空位(如下图中的残缺方块)，再把5插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589497.png" alt=""><br>在第三轮排序中，要将元素8插入到有序序列{1，5，9}(数组前三个元素)中，先将有序序列中大于8的所有元素右移一位，出现空位，再把8插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589544.png" alt=""><br>在第四轮排序中，要将元素3插入到有序序列{1，5，8，9}中，需要先将有序序列中所有大于3的元素右移一位，出现空位，再把3插入到空位中去。结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721589591.png" alt=""><br>一次类推，9个元素8轮插入后，将完成整个排序。<br>【如果要插入元素的左边没有比它大的元素，则让这个要插入的元素什么也不做，保留在原地】<br>代码如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">StraightInsertSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array<span class="token punctuation">.</span>Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//如果要插入元素小于左边有序序列最大值，则让有序序列中所有比它大的元素右移一位</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>array<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> array<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//保存要插入元素的值，因为在右移过程中会覆盖这个元素</span>
+            <span class="token keyword">int</span> j<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> temp<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                array<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//把要插入元素插入到移出来的空位中去</span>
+            array<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为插入排序是向有序序列中插入新元素的，所以比较次数会比简单选择排序少，且每一轮排序都只是把大于的元素往后移再插入一个元素而已，所以直接插入排序要比简单选择排序和冒泡排序的性能好一些。</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2016/09/03/简单排序/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2016/09/03/简单排序/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL1：OpenGL概述及环境配置</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">OpenGL简介</font><br><a id="more"></a><br>OpenGL是一个功能强大的图形库，提供了很多操作图形和图片的API（Application Programming Interface），用户可以用它很方便地开发所需要的有多种特殊视觉（如光照、透明、纹理、阴影）的三维图形。<br>OpenGL库的实际开发者通常是各大显卡厂商。Khronos Group公开提供了所有OpenGL的规范文档，可以从<a href="https://www.opengl.org/registry/doc/glspec33.core.20100311.withchanges.pdf" target="_blank" rel="external">这里</a>看到OpenGL3.3规范文档。<br>OpenGL具有很好的跨平台性，2012年8月已经更新到4.3版本。</p>
+<p><font size="4" color="red">OpenGL组成</font><br>OpenGL主要由OpenGL基本函数库、OpenGL实用函数工具包、WGL库（OpenGL的Windows扩展库）</p>
+<ul>
+<li>OpenGL的基本函数库：主要包括三个：OpenGL核心库、OpenGL实用库、OpenGL辅助库。<ul>
+<li>OpenGL核心库（GL）<br>这部分函数常用于常规的、核心的图形处理，是OpenGL的核心部分；包含300多个函数，函数名前缀都是”gl”。</li>
+<li>OpenGL实用库（GLU）（Utility）<br>这部分函数通过调用核心库的函数，为开发者提供相对简单的用法，实现一些较为复杂的操作。如绘制茶壶等简单形体。包含大约50个函数，函数名前缀都是”glu”。</li>
+<li>OpenGL辅助库（GLAUX）（Auxiliary）<br>这部分函数提供窗口管理、输入输出处理以及绘制一些简单的三维物体，包含约30个函数，函数名前缀都是”aux”。</li>
+</ul>
+</li>
+<li>OpenGL实用函数工具包（GLUT：OpenGL Utility Toolkit）：由Mark Kilgard开发。主要提供窗口系统操作功能，如创建窗口、鼠标和键盘输入、菜单、事件驱动等等。包含大约30个函数，函数名前缀都是glut。<br>【注】：glut中的窗口管理函数不依赖于操作系统，可以在所有的OpenGL平台上运行。</li>
+<li>WGL库：OpenGL对窗口系统的扩展<ul>
+<li>用于连接OpenGL和Windows，在Windows平台上设置OpenGL环境</li>
+<li>并不是所有函数前缀都是”wgl”</li>
+<li>只能在Windows上运行</li>
+</ul>
+</li>
+</ul>
+<p><font size="4" color="red">OpenGL主要功能</font></p>
+<ul>
+<li>基本几何形状<br>绘制点、线段、多边形、Bezier曲线、简单形体等。</li>
+<li>属性<br>设置颜色、线型（实、虚等）…</li>
+<li>变换<br>几何变换：平移、旋转、缩放；<br>投影变换：正投影、透视投影</li>
+<li>交互<br>键盘和鼠标</li>
+</ul>
+<p>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL的两种开发模式</font><br>OpenGL的两种开发模式是：快速模式和core-profile（核心模式）。</p>
+<p>在OpenGL3.2版本以前，都是使用快速模式，也叫fixed function pipeline，固定函数输送管道，顾名思义，快速模式是一种简单易用的绘图方式，容易使用容易理解，但是效率低下，而且大多数功能都被封装了，开发者难以获得更多的图形控制权。所以从3.2版本开始，快速模式不建议被使用了，出现了core-profile（核心模式），它是OpenGL规范的一部分，移除了所有过时的不建议使用的功能。当使用core-profile模式时，OpenGL会强制让我们使用现代函数；如果使用了过时的或不建议的函数，是会报错的。</p>
+<p>使用core-profile，需要开发者真正懂得OpenGL，而且还要掌握图形编程，难度是提高了，但是却提供了更高的灵活性和效率，还能让我们更好的理解图形编程。由于之后版本的OpenGL都是以3.3为基础的，核心机理并没有变化，而且大多数开发情况下都需要支持较低的显卡，低显卡可能不支持最新版的OpenGL，所以我们也使用OpenGL3.3版本了。<br>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL特性：支持扩展</font><br>OpenGL是支持扩展的。如果显卡厂商在某个时候推出了一个新技术或渲染优化，   那么图形开发者就可以通过扩展来直接使用该新技术，而不需要等待新版本的OpenGL发布。事实上，当一个扩展被证明很流行或很有用时，它就会变成未来OpenGL的一部分。</p>
+<p>一般使用扩展的代码如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>GL_ARB_extension_name<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//GL_ARB_扩展名</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//执行硬件支持的新特性</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//不支持该扩展，使用老办法</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&nbsp;  </p>
+<hr>
+<p><font size="5" color="orange">OpenGL的本质</font><br>OpenGL本身其实是个大状态机，也就是说它定义了一大堆OpenGL该做何操作的变量。</p>
+<p>OpenGL的状态通常称为OpenGL环境（context）。我们通常都是设置一些选项，操作一些缓冲，来改变它们的状态（即环境），然后使用当前环境做渲染。</p>
+<p>使用OpenGL时，会遇到多种<strong>状态改变函数</strong>，这些函数会改变环境；还会遇到多种<strong>状态使用函数</strong>，这些函数是基于当前状态来执行一些操作。<br>&nbsp;  </p>
+<hr>
+<p><strong>OpenGL的库是用C写的</strong>，所以OpenGL无法表示诸如对象这些在更高级语言中才有东西。于是OpenGL开发了几种自己特有的抽象概念，对象就是其中一个。</p>
+<p><font size="5" color="orange">OpenGL中的对象</font><br>OpenGL的对象是一些可选项（即变量）的集合，是OpenGL状态的一部分。那么OpenGL中的对象怎么定义和使用呢？</p>
+<p>OpenGL中定义对象的流程大致如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//OpenGL的状态</span>
+<span class="token keyword">struct</span> OpenGL_Context
+<span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">object</span><span class="token operator">*</span> object_Window_Target<span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//创建对象</span>
+GLuint objectId <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token function">glGenObject</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>objectId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//把对象绑定到目标上</span>
+<span class="token function">glBindObject</span><span class="token punctuation">(</span>GL_WINDOW_TARGET<span class="token punctuation">,</span> objectId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//为当前绑定到GL_WINDOW_TARGET的对象设置选项</span>
+<span class="token function">glSetObjectOption</span><span class="token punctuation">(</span>GL_WINDOW_TARGET<span class="token punctuation">,</span> GL_OPTION_WINDOW_WIDTH<span class="token punctuation">,</span> <span class="token number">800</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glSetObjectOption</span><span class="token punctuation">(</span>GL_WINDOW_TARGET<span class="token punctuation">,</span> GL_OPTION_WINDOW_HEIGHT<span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//把目标绑定的对象恢复为默认（解绑）</span>
+<span class="token function">glBindObject</span><span class="token punctuation">(</span>GL_WINDOW_TARGET<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的代码是在OpenGL中会经常遇到的工作流。通过glGenObject函数创建一个对象，保存到后台内存中，并且用一个无符号整数来表示这个对象，相当于是给这个对象起了个名字（对象id，就像人的身份证号），然后把这个名字（整数）存入变量objectId中。接着用glBindObject方法把对象绑定到一个目标上（代码中是把目标定为了GL_WINDOW_TARGET）。再下一步就是设置目标的选项（这些设置会被保存到对象中），最后把目标绑定的对象id设置为0，即解绑对象。至此，便完成了对一个对象的属性设置。</p>
+<p>【注】：</p>
+<ul>
+<li>上面的代码只是在描述OpenGL的操作原理，并不是OpenGL中的实际函数，只是伪码。</li>
+<li>当使用OpenGL时，建议使用OpenGL定义的自由类型。在写float时在前面加GL；int、char、bool等等同样处理。应为不同的操作系统可能对于各自的类型有不同的内存布局，而OpenGL的GL自有类型的内存布局是跨平台的。所以使用OpenGL的自有类型可以保证我们的应用可以跨平台。</li>
+</ul>
+<p>好像还有点懵，这个对象有何意义？打个比方，上面对对象的定义流程就好像是：拿出来一张纸，先给它编个号（对应创建对象），说这是第一张纸，然后拿这张纸去找到一个橡皮泥（对应绑定目标），说我要把这个橡皮泥变成什么什么样，然后在纸上画出梦想中的橡皮泥（设置选项），橡皮泥捏好了以后，就用不上这张纸了（解绑），但是还可以根据这张纸（对象）再去捏出很多一模一样的橡皮泥（目标）啊！不用再去找张纸画画了，这就是对象的好处。<br>&nbsp;  </p>
+<hr>
+<p>下面来看看，OpenGL环境应该咋配置。先看VC++6.0下的：</p>
+<p><font size="5" color="orange">VC6.0下的OpenGL环境配置</font></p>
+<p><font size="4" color="red">使用OpenGL辅助库GLAUX时的环境配置：</font></p>
+<ol>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615911.png" alt=""></li>
+<li>Windows平台下的源文件需要加上以下头文件：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include &lt;window.h></span>
+<span class="token preprocessor property">#include &lt;GL/gl.h></span>
+<span class="token preprocessor property">#include &lt;GL/glu.h></span>
+<span class="token preprocessor property">#include &lt;GL/glaux.h></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+一般还需要：<code>#include &lt;stdio.h&gt;、#include &lt;stdlib.h&gt;、#include &lt;math.h&gt;</code></li>
+</ol>
+<p><font size="4" color="red">使用OpenGL实用函数工具包GLUT时的环境配置：</font></p>
+<ol>
+<li>文件拷贝（这三个文件百度很容易找到）：<br>头文件glut.h拷贝到：\VC6.0安装目录\VC98\Include\GL目录下<br>连接库glut32.lib拷贝到：\VC6.0安装目录\VC98\Lib目录下<br>运行库glut32.dll拷贝到：C:\Windows\SysWOW64目录下（这时64位系统下的，如果是32位系统应该拷贝到：C:\Windows\System32）</li>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615963.png" alt=""></li>
+<li>在源文件里加上头文件：<code>#include &lt;GL/glut.h&gt;</code></li>
+</ol>
+<p>【注】：OpenGL不需要单独下载安装，因为OpenGL是跟着驱动走的，只要装了显卡驱动，一般都会有OpenGL的。<br>&nbsp;  </p>
+<hr>
+<p>但是原生的OpenGL不支持窗口管理、跨平台等功能，所以就有了很多热心人写了工具来支持这些功能，比如glut、glfw等等。 它们都是一些函数库，这些库免去了所有跨平台的问题，同时也提供了窗口、OpenGL环境等渲染所需的功能。比较流行的库主要有GLUT、SDL、SFML、GLFW。但是glut太老了，最后一个版本都是90年代的。这里我们主要用GLFW。</p>
+<p><font size="5" color="orange">GLFW</font><br>GLFW（OpenGL For Window）是一个轻量级的、开源的、跨平台的library，是一个跨平台的OpenGL应用框架，支持OpenGL和 OpenGL ES，用于管理窗口、读取输入、处理事件等，并且可以给我们创建一个OpenGL环境。</p>
+<p>下面将介绍GLFW的构建过程。</p>
+<p><font size="5" color="orange">构建GLFW</font></p>
+<p><font size="4" color="orange">下载GLFW源文件</font><br>GLFW可以从<a href="http://www.glfw.org/download.html" target="_blank" rel="external">官网</a>下载。当然是可以直接上面已经编译好的二进制文件，但是反正它有源码了，我们自己来编译一把，体验多多。而且使用源码编译出来的glwf库，可以完美适应自己的CPU/OS，编译好的二进制库就不一定了，所以先下载源码把（如果是下载编译好的二进制文件，尽量下32位的，64位可能会有很诡异的错误）。</p>
+<p>但是从源码编译也有一个问题：不是所有人的IDE（ Integrated Development  Environment）都是相同的，这就意味着用自己的IDE编译出来的库或其他文件可能别人并不能用，项目整合时会出现不兼容。比如有的用VS，有的用XCode，在VS上面写的项目要与和在XCode上面写的项目进行整合，但是IDE不同，很多项目文件会不兼容，比较原始的办法就是把VS上的源文件一个一个复制到XCode上，再在XCode上编译（或者相反），如果工程很大源文件很多，这样做是很要命的。而CMake可以根据源文件和一些简单的配置信息，生成对应OS下的IDE的项目文件，比如可以在用CMake把VS下的源文件直接整体编译为XCode项目，然后就可以直接和别人的XCode项目进行整合，还是很节省效率的。</p>
+<p><font size="4">CMake</font><br>CMake是一个可以根据源文件生成多个IDE下的项目/解决方案的工具（CMake可以从这里<a href="https://cmake.org/download/" target="_blank" rel="external">下载</a>），我用的是Win32-x86 Installer。</p>
+<p>安装完成后进入\bin文件夹选择cmake-gui.exe，再分别选择源码文件夹和用于生成项目的目标文件夹（需要自己新建一个文件夹），如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912521589.png" alt=""><br>点击Configure按钮，CMake会要求选择目标IDE环境（即想要生成哪种IDE下的项目/解决方案），由于我用的是VS2015，所以选择了VS 14 2015，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912561803.png" alt=""><br>点击finish，  当出现configuring done后，点击generate，出现generating done以后，在新建的build文件夹内就可以看到生成的项目文件了。我的文件夹如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912612555.png" alt=""></p>
+<p><font size="4" color="red">编译</font><br>但是这些项目文件中还没有Debug文件夹，无法拿到我们进行OpenGL编程所需要的库文件，那么打开GLFW.sln编译一下把，在VS编辑器菜单上点击生成/生成解决方案（Build/Build Solution），然后编译好的库glfw3.lib就会出现在build/src/Debug文件夹内了。接下来把这个库链接到项目上，就可以进行OpenGL编程了。</p>
+<p><font size="4" color="red">链接</font><br>在链接到项目之前，得让IDE能够找到该库文件在哪里。新建一个将要写入OpenGL代码的VS项目，建好后在‘解决方案资源管理器’中右键项目名称，点击属性，在VC++目录（VC++ Directories）中点击包含目录（Include Directories），添加glfw源码的include文件夹。再点击库目录（Library Directories），添加glfw3.lib。现在VS能找到所需要的文件了。我添加的如下图（我是把包括后面glew要用到的文件一起放在文件夹内的，然后直接添加的文件夹。当然也可以向上面说的一个文件一个文件地添加）：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14791284794.png" alt=""></p>
+<p>接下来是链接。还是在属性里点击链接器（Linker）/输入（Input），在附加依赖项（Additional Dependencies）中添加上glfw3.lib，当然还需要把OpenGL也链接上，添加opengl32.lib（只要有显卡驱动一般都会有opengl，opengl32.lib是安装VS时自带的）。如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/1479128480.png" alt=""><br>&nbsp; </p>
+<hr>
+<p>下面就可以在项目中使用OpenGL的函数了。其实OpenGL只是一种标准/规范，具体怎么实现要看驱动怎么来实现这种显卡支持规范（通俗点说就是提供接口函数），由于存在着很多不同版本的OpenGL驱动，不能够在编译的时候（compile-time）就确定静态链接哪个OpenGL函数，需要在运行时（run-time）指定所需要的函数地址，然后把地址存储在函数指针中以备后用（有点像先声明后定义）。在Windows中类似如下代码段：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//定义函数原型</span>
+typedef <span class="token keyword">void</span><span class="token punctuation">(</span><span class="token operator">*</span>GL_GENBUFFERS<span class="token punctuation">)</span><span class="token punctuation">(</span>GLsizei<span class="token punctuation">,</span> GLuint<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//寻找函数并分配给它一个函数指针</span>
+GL_GENBUFFERS glGenBuffers <span class="token operator">=</span> <span class="token punctuation">(</span>GL_GENBUFFERS<span class="token punctuation">)</span><span class="token function">wglGetProcAddress</span><span class="token punctuation">(</span><span class="token string">"glGenBuffers"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//现在可以正常使用OpenGL函数了</span>
+GLuint buffer<span class="token punctuation">;</span>
+<span class="token function">glGenBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如你所见，想使用一个OpenGL函数太麻烦了，每个函数都得先被声明。不过为了解决这个问题，一个工具GLEW应运而生。<br>&nbsp;</p>
+<hr>
+<p><font size="5">GLEW</font><br>GLEW（OpenGL Extension Wrangler Library）是一个跨平台的C++扩展库，基于OpenGL图形接口。由于目前Windows只支持OpenGL1.1的函数，但是现在OpenGL都已反正到4了，要使用这些OpenGL的高级特性，就必须下载最新的扩展，除此之外，不同的显卡公司，也会发布一些只有自家显卡才能支持的扩展函数。如果我们想要使用这些函数，就不得不去寻找最新的glext.h（glext.h使我们可以调用常见的更高版本的OpenGL函数，但是必须在源文件中包含此头文件，并将显卡驱动更新到最新版，glext.h可以在<a href="http://blog.csdn.net/epluguo/article/details/19302003?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">这里</a>找到，不保证最新，也有可能会有些函数接口找不到）。但是有了GLEW扩展库，就再也不用担心找不到这些函数的接口了，因为GLEW能自动识别你的平台所能支持的全部OpenGL高级扩展函数。也就是说，只要包含一个glew.h头文件，就能使用gl、glu、glext、wgl、glx的全部函数。并且GLEW支持目前流行的各种操作系统。当然了，我们之前得问题也迎刃而解了，可以直接使用函数，不用先声明了。下面来看看GLWF环境的搭建。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">构建GLEW</font><br>由于GLEW是一个库，所以我们还是需要把它的库文件和头文件链接到我们的项目中。GLEW可以从中<a href="http://glew.sourceforge.net/index.html" target="_blank" rel="external">这里</a>下载。当然还是可以和前面GLFW一样从源码编译出lib库文件。这里我直接下载编译好的二进制文件Binaries了。下载好后找到<code>\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32</code>路径下的glew32s.lib文件，把这个文件添加到项目属性的库目录里，再把<code>\glew-2.0.0-win32\glew-2.0.0</code>路径下的include文件夹添加到项目属性的包含目录里（我是把这里glew和之前glfw的库文件和头文件放在了两个新建文件夹下：一个Libs文件夹、一个Includes文件夹，再把这两个文件夹添加到项目属性的相应目录里。人懒省事~。可以参考前面GLFW标题后链接标题下的第一张图。）</p>
+<p>这里使用的是GLEW的静态库，即glew32s.lib。而且GLWF3默认也是被编译为静态库的。</p>
+<p>如果使用GLEW的静态库，必须在包含GLEW之前定义一个预处理变量GLEW_STATIC。如下：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#DEFINE GLEW_STATIC</span>
+<span class="token preprocessor property">#include &lt;GL/glew.h></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>如果想要使用GLEW的动态库，需要移除对GLEW_STATIC的定义，而且需要把.dll复制到二进制代码所在的文件夹里。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">测试环境是否构建成功<font><br>在自己新建的并且构建好环境的项目中，写入如下代码：</font></font></p>
+<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">// GLEW</span>
+<span class="token preprocessor property">#<span class="token directive keyword">define</span> GLEW_STATIC</span>
+<span class="token preprocessor property">#include &lt;GL/glew.h></span>
+
+<span class="token comment" spellcheck="true">// GLFW</span>
+<span class="token preprocessor property">#include &lt;GLFW/glfw3.h></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">glfwInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glfwWindowHint</span><span class="token punctuation">(</span>GLFW_CONTEXT_VERSION_MAJOR<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glfwWindowHint</span><span class="token punctuation">(</span>GLFW_CONTEXT_VERSION_MINOR<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glfwWindowHint</span><span class="token punctuation">(</span>GLFW_OPENGL_PROFILE<span class="token punctuation">,</span> GLFW_OPENGL_CORE_PROFILE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glfwWindowHint</span><span class="token punctuation">(</span>GLFW_RESIZABLE<span class="token punctuation">,</span> GL_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+如果出现了很多未定义引用错误，就是还没有构建成功了<span class="token operator">~</span>。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>【注】：</p>
+<ul>
+<li>静态链接库是会在编译的时候整合到我们的二进制文件中，这样做的好处是不必保持跟踪这额外的文件，只需要发布单独的二进制文件。缺点是最后的可执行文件会变得更大，而且当一个库有一个更新的版本时需要重新编译整个应用程序。</li>
+<li>动态链接库就是.dll或.so文件，库的代码是与我们的二进制代码分开存在的，它可以使最终的可执行文件更小，更新的时候也更容易，不足之处是必须在最终的应用程序中发布dll文件。<br>&nbsp; </li>
+</ul>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2016/10/18/OpenGL1概述及环境配置/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2016/10/18/OpenGL1概述及环境配置/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

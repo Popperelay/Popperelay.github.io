@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >Mathjax简介及其语法</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">Mathjax简介</font><br><a id="more"></a><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
+<hr>
+<p><font size="5" color="orange">Mathjax语法</font></p>
+<p><font size="4" color="red">Mathjax公式排版方式</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用<code>$...$</code>），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displayed是公式独立成段（使用<code>$$...$$</code>），例如<code>$$f(x)=3 \times x$$</code>，$$f(x)=3 \times x$$是一个displayed公式。<br>【注】：</p>
+<ul>
+<li>右键点击公式，可查看公式代码、设置显示效果和渲染模式（点击打开的公式代码没有包含$，自己在写公式时加上即可）。</li>
+<li>两个独立成段的displayed公式之间必须以空行分开，否则显示不出来。即应该是下面这样：<br>```csharp<br>$$…$$</li>
+</ul>
+<p>$$…$$</p>
+<pre><code>
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的希腊字母&lt;/font&gt;
+![](http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147764777424.png)
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的上标下标&lt;/font&gt;
+上标使用^，下标使用_。例如x_i^2是：$x_i^2$。
+【注】：
+- 10^10得到的是$10^10$，而10^{10}才是$10^{10}$。
+-  x^5^6会报错，因为有二义性，必须使用大括号来加以界定，如：{x^5}^6：${x^5}^6$ 或者x^{5^6}：$x^{5^6}$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的括号&lt;/font&gt;
+- 小括号与方括号：小括号还是原始的()，方括号也是原始的[]。如(2+3)[4+4]：$(2+3)[4+4]$
+- 大括号：{}由于被用来界定分组（如上文中的10^{10}），所以大括号需要用\{和\}来表示，也可以使用\lbrace和\rbrace来表示。如\{a\*b\}：$\{a\*b\}$，\lbrace a\*b \rbrace：$\lbrace a\*b \rbrace$。
+- 尖括号：使用\langle和\rangle表示。如\langle x \rangle：$\langle x \rangle$。
+- 向上取整：使用\lceil和\rceil表示。如\lceil x \rceil：$\lceil x \rceil$。
+- 向下取整：使用\lfloor和\rfloor表示。如\lfloor x \rfloor：$\lfloor x \rfloor$。
+- 不可见括号：使用.表示。
+
+【注】：这些括号都是不会随着公式大小进行缩放的。如果需要括号大小自适应公式大小，可以在相应的左括号前面加上/left，右括号前面加上/right。如下所示：
+$$\lbrace \sum_{i=0}^n i^2 \rbrace \tag{1}$$
+
+$$\left\lbrace \sum_{i=0}^n i^2 \right\rbrace \tag{2}$$
+
+公式2的括号就是经过缩放的（右键点击公式能看到公式源码）。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的求和与积分&lt;/font&gt;
+求和符号使用\sum来表示，用下标_来表示求和下限，用上标^来表示求和上限。如\sum_1^n：$\sum_1^n$。
+
+积分符号使用\int来表示，同样用上下标表示积分的上下限。如\int_1^\infty：$\int_1^\infty$。
+
+与此类似的符号还有：二重积分\iint：$\iint$，连乘\prod：$\prod$，并\bigcup：$\bigcup$，交\bigcap：$\bigcap$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的分数&lt;/font&gt;
+分数有两种表示方式：
+- 使用\frac ab来表示，\frac作用于其后的两个组a、b，结果为$\frac ab$。如果分子或分母不是单个字符，使用{}进行分组即可（也就是用大括号括起来）。
+- 使用a \over b来分隔分子分母。如a+1 \over b+1：$a+1 \over b+1$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的根号&lt;/font&gt;
+根号使用\sqrt[]{}来表示。如\sqrt[4]{\frac xy}：$\sqrt[4]{\frac xy}$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的三角函数&lt;/font&gt;
+使用\sin来表示正弦函数，如$\sin x$。其他三角函数类似。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的特殊符号&lt;/font&gt;
+- 求极限符号：使用\lim\_{x \to y}表示。如$\lim\_{1 \to \infty}$。
+- 比较运算符：
+ - 小于$\lt$：\lt。
+ - 大于$gt$：\gt
+ - 小于等于$\le$：\le。
+ - 大于等于$\ge$：\ge。
+
+ 可以在这些运算符前面加上\not，如\not \gt：$\not \gt$。
+- 常见计算运算符：
+ - 加$+$：直接在公式中使用+即可。
+ - 减$-$：直接在公式中使用-即可。
+ - 乘$\times$：\times。
+ - 除$\div$：\div。
+ - 加减$\pm$：\pm。
+ - 减加$\mp$：\mp。
+ - 点乘$\cdot$：\cdot。如x \cdot y：$x \cdot y$。
+
+- 集合运算符：
+ - 并$\cup$：\cup
+ - 交$\cap$：\cap
+ - 舍$\setminus$：\setminus
+ - 包含于$\subset$：\subset
+ - 真包含于$\subseteq$：\subseteq
+ - 非真包含于$\subsetneq$：\subsetneq
+ - 包含$\supset$：\supset
+ - 属于$\in$：\in
+ - 不属于$\notin$：\notin
+ - 空集$\varnothing$：\varnothing 
+- 排列使用$n+1 \choose 2k$：使用a \choose y或者\binom ab来表示。
+- 箭头：\to：$\to$，\rightarrow：$\rightarrow$，\leftarrow：$\leftarrow$，\Rightarrow：$\Rightarrow$，\Leftarrow：$\Leftarrow$，\mapsto：$\mapsto$。
+- 逻辑运算符：\land：$\land$， \lor：$\lor$， \lnot：$\lnot$， \forall：$\forall$，\exists：$\exists$，\top：$\top$，\bot：$\bot$，\vdash：$\vdash$， \vDash：$\vDash$。
+- 模运算符：\pmod。如b \pmod n：$b\ pmod n$。
+- 省略号：\cdots位置居中：$\cdots$；\ldots位置稍低：$\ldots$。
+- \star：$\star$，\ast：$\ast$，\oplus：$\oplus$，\circ：$\circ$，\bullet：$\bullet$，\approx：$\approx$，\sim：$\sim$，\cong：$\cong$，\equiv：$\equiv$，\prec：$\prec$，\infty：$\infty$，\nabla：$\nabla$，\partial：$\partial$。
+
+【注】：使用[Detexify](http://detexify.kirelabs.org/classify.html)，可以在它的网页上画出你想要的符号，Detexify会给出相似的符号及其公式代码。但是不能保证它给出的符号可以在Mathjax中使用，可以参考[supported-latex-commands](http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands)确定MathJax是否支持此符号。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的空格&lt;/font&gt;
+因为Mathjax通过内部策略自己管理公式内部的空间，因此a   b的显示结果依然是：$a   b$。想要在ab之间加入间隙，可以使用\,、\;、\quad、\qquad等，间隙依次增加，如$a\,b$、$a\;b$、$a \quad b$、$a \qquad b$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的顶部符号&lt;/font&gt;
+对于单字符\hat：$\hat x$，多字符\widehat：$\widehat {xy}$。类似的还有：\overline：$\overline {xyz}$、\vec：$\vec x$、\overrightarrow：$\overrightarrow x$、\dot：$\dot x$、\ddot：$\ddot x$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的表格&lt;/font&gt;
+使用`$$\begin{array}{列样式}...\end{array}$$`这样的样式来创建表格。
+- 列样式可以是c（居中）、l（左对齐）、r（右对齐）。
+- 每行之间使用\\\\来分隔（本来是\\，但是在markdown中第一个\被解释为转义字符，所以需要\\\\），每列之间使用&amp;来分隔。
+- 在列样式中写入|可表示一条竖线，在每行前面加上\hline可在本行前加入一条直线。
+
+例如：
+```csharp
+$$
+\begin{array}{|c|l|c|r|}
+\hline
+n &amp; Left &amp; Center &amp; Right \\\\
+\hline
+1 &amp; 0.24 &amp; 1 &amp; 125 \\\\
+\hline
+2 &amp; -1 &amp; 189 &amp; -8 \\\\
+\hline
+3 &amp; -20 &amp; 2000 &amp; 1+10i \\\\
+\hline
+\end{array}
+$$
+</code></pre><p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\<br>\hline<br>\end{array}<br>$$</p>
+<p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\来分隔，列之间依然使用&amp;来分隔。<br>例如：</p>
+<pre class="line-numbers language-csharp"><code class="language-csharp">$$
+\begin<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token operator">&amp;</span> x <span class="token operator">&amp;</span> x<span class="token operator">^</span><span class="token number">2</span> \\\\
+<span class="token number">1</span> <span class="token operator">&amp;</span> y <span class="token operator">&amp;</span> y<span class="token operator">^</span><span class="token number">2</span> \\\\
+<span class="token number">1</span> <span class="token operator">&amp;</span> z <span class="token operator">&amp;</span> z<span class="token operator">^</span><span class="token number">2</span> \\\\
+\end<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
+$$
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>效果：<br>$$<br>\begin{matrix}<br>1 &amp; x &amp; x^2 \\<br>1 &amp; y &amp; y^2 \\<br>1 &amp; z &amp; z^2 \\<br>\end{matrix}<br>$$</p>
+<ul>
+<li>给矩阵加括号：<ul>
+<li>可以用前文中提到的括号再配以\left和\right。</li>
+<li>也可以使用特殊的matrix，即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为pmatrix、bmatrix、Bmatrix、vmatrix、Vmatrix。<br>如pmatrix：$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{pmatrix}$、bmatrix：&amp;\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{bmatrix}$、Bmatrix：$\begin{Bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Bmatrix}$、<br>vmatrix：$\begin{vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{vmatrix}$、<br>Vmatrix：$\begin{Vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Vmatrix}$。</li>
+</ul>
+</li>
+<li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\<br>\end{pmatrix}<br>$$</li>
+<li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<pre class="line-numbers language-csharp"><code class="language-csharp">$$ 
+\left <span class="token punctuation">[</span>
+\begin<span class="token punctuation">{</span>array<span class="token punctuation">}</span><span class="token punctuation">{</span>cc<span class="token operator">|</span>c<span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token operator">&amp;</span> <span class="token number">2</span> <span class="token operator">&amp;</span> <span class="token number">3</span> \\\\
+<span class="token number">4</span> <span class="token operator">&amp;</span> <span class="token number">5</span> <span class="token operator">&amp;</span> <span class="token number">6</span> \\\\
+\end<span class="token punctuation">{</span>array<span class="token punctuation">}</span>
+\right <span class="token punctuation">]</span>
+$$
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+效果：<br>$$<br>\left [<br>\begin{array}{cc|c}<br>1 &amp; 2 &amp; 3 \\<br>4 &amp; 5 &amp; 6 \\<br>\end{array}<br>\right ]<br>$$<font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br>&amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br>&amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。<br><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}<br>$$<br><font size="4" color="red">方程组</font></li>
+</ul>
+<ol>
+<li>可以使用<code>\begin{array}...\end{array}</code>与<code>\left{ ... \right.</code>，配合表示方程组。例如：<br>$$<br>\left\{<br>\begin{array}{c}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{array}<br>\right.<br>$$</li>
+<li>也可以使用<code>\begin{cases}...\end{cases}</code>。例如：<br>$$<br>\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{cases}<br>$$</li>
+</ol>
+<p>&nbsp;</p>
+<hr>
+<p>【注】：本文主要参考<a href="http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/" target="_blank" rel="external">《Mathjax与LaTex公式简介》</a>一文，更多详细内容请参考此文。</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2016/10/27/Mathjax语法/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2016/10/27/Mathjax语法/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

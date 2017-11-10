@@ -1,0 +1,786 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >老张培训笔记第二课面向对象设计原则</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>感谢老张！<br><a id="more"></a></p>
+<hr>
+<ol>
+<li>新增加代码的是否是必须的？判断标准是：<ul>
+<li>程序不会因为新增加的代码而发生连锁反应</li>
+<li>新增加的代码不用了解源程序过多的细节</li>
+</ul>
+</li>
+<li>枚举就不是一个好的设计风格，因为枚举类型增加时，需要去修改原有的代码，需要去了解源程序与枚举相关的很多地方。</li>
+<li>开闭原则：团队开发中，需求增加时，只增加自己的代码，不应该更改已有的代。即对扩展开放，对修改关闭。开闭原则是面向对象最重要的设计原则，其关键在于抽象。</li>
+<li><p>案例：绘制圆和正方形。<br>最粗暴的做法如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include <iostream>
+
+ class CCircle {
+ public:
+     void draw() {
+         std::cout << "Drawing cirlce..." << std::endl;
+     }
+ };
+
+ class CSquare {
+ public:
+     void draw() {
+         std::cout << "Drawing square..." << std::endl;
+     }
+ };
+
+ int main() {
+     enum EShapeType {
+         Circle, Square
+     };
+     EShapeType shapeType[] = { Circle, Square };
+     for (int i = 0; i < sizeof(shapeType) / sizeof(EShapeType); i++) {
+         switch (shapeType[i]) {
+         case Circle:
+             CCircle circle;
+             circle.draw();
+             break;
+         case Square:
+             CSquare square;
+             square.draw();
+             break;
+         default:
+             break;
+         }
+     }
+     return 0;
+ }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当需求增加时，比如再绘制一个三角形，那么需要加上或更改如下代码：</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> class CTriangle {
+ public:
+     void draw() {
+         std::cout << "Drawing triangle..." << std::endl;
+
+     }
+ };
+
+ int main() {
+     enum EShapeType {
+         Circle, Square, Triangle
+     };
+     EShapeType shapeType[] = { Circle, Square, Triangle };
+     for (int i = 0; i < sizeof(shapeType) / sizeof(EShapeType); i++) {
+         switch (shapeType[i]) {
+         case Circle:
+             CCircle circle;
+             circle.draw();
+             break;
+         case Square:
+             CSquare square;
+             square.draw();
+             break;
+         case Triangle:
+             CTriangle triangle;
+             triangle.draw();
+         default:
+             break;
+         }
+     }
+     return 0;
+ }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>增加的这些代码都是必须的吗？增加的Triangle类是必须的，毕竟多了一种图元，但是改动的枚举类型和增加的case语句是必须的吗？而且需求增加时，改动了原来已有的代码。尤其是程序比较大以后，可能有很多地方都与这些枚举类型有关，那么需求一变，和这些枚举相关的代码都需要随之作出改变，而且还需要事先比较了解整个程序，才能不把程序改坏。很显然不符合开闭原则。这一切的根源都在于枚举的使用，只要使用了枚举就必然伴随类似switch-case的语句，枚举一变，和枚举相关的地方都要变，关联太大，可能会有连锁反应。switch几乎都不符合开闭原则，但是如果switch的是系统枚举值，是无法避免的，系统枚举值很少的话也无伤大雅，这时的函数允许超过50行。</p>
+<p>可以为这些图元定义一个虚基类CShape，通过虚基类指针以多态的方式来调用所有子类的绘制函数：</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include <iostream>
+ #include <vector>
+
+ class CShape {
+ public:
+     virtual void drawV() = 0;
+ };
+
+ class CTriangle : public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing triangle..." << std::endl;
+     }
+ };
+
+ class CQuad : public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing Quad..." << std::endl;
+     }
+ };
+
+ class CCircle :public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing circle..." << std::endl;
+     }
+ };
+
+ int main() {
+     std::vector<CShape*> shapes;
+     shapes.push_back(new CQuad());
+     shapes.push_back(new CCircle());
+     shapes.push_back(new CTriangle());
+     for (unsigned int i = 0; i < shapes.size(); i++) {
+         shapes[i]->drawV();
+     }
+     return 0;
+ }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当要绘制的图元类型增加时，只需要增加一个继承自CShape的子类，再将其对象加入到vector容器里就ok。很明显没有枚举、switch-case牵一发动全身的麻烦。 符合开闭原则。</p>
+</li>
+<li><p>现实中，没有任何一个程序或软件100%符合开闭原则。因为需求千奇百怪，不可能考虑到每一种情况，不可能对每一种需求都做到开闭原则。比如4中的程序，如果需求变为：按用户指定的顺序来绘制所有图元。此时4中的程序就必须针对该需求作出改变了，实现代码如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include <iostream>
+ #include <algorithm>
+ #include <vector>
+
+ class CShape {
+ private:
+     int priority;
+
+ public:
+     virtual void drawV() = 0;
+
+     void setPriority(int iPriority) {
+         priority = iPriority;
+     }
+
+     friend bool operator<(const CShape& iShape1, const CShape& iShape2) {
+         return iShape1.priority < iShape2.priority;
+     }
+
+     friend bool priorityLess(CShape* shape1, CShape* shape2) {
+         return *shape1 < *shape2;
+     }
+ };
+
+ class CTriangle : public CShape{
+ public:
+     CTriangle(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Drawing triangle..." << std::endl;
+     }
+ };
+
+ class CQuad : public CShape {
+ public:
+     CQuad(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Drawing Quad..." << std::endl;
+     }
+ };
+
+ class CCircle :public CShape {
+ public:
+     CCircle(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Draw circle..." << std::endl;
+     }
+ };
+
+ int main() {
+     std::vector<CShape*> shapes;
+     shapes.push_back(new CQuad(2));
+     shapes.push_back(new CCircle(1));
+     shapes.push_back(new CTriangle(3));
+     sort(begin(shapes), end(shapes), priorityLess);
+     for (unsigned int i = 0; i < 3; i++) {
+         shapes[i]->drawV();
+     }
+     return 0;
+ }
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的程序值得注意的是：</p>
+<ul>
+<li>可以使用STL中的sort函数对类对象进行排序，不过需要重载&lt;运算符，因为sort内部是将两个对象进行小于比较来排序的（或者直接用自定义的比较函数作为sort的第三个参数来排序）。</li>
+<li>使用sort进行排序，必须是针对对象，而不能是对象指针，否则将会是对指针进行排序，指针实际上是4个字节的整型数据，也就是在对整型数据排序了，这样就根本不会进入到对&lt;符号的重载函数里。但是要实现多态，必须使用对象指针或者引用，所以上面的程序给sort函数指定了第三个参数：priorityLess函数，执行sort函数时会先调用该函数，在该函数里将对象指针shape1、shape2转换为对象<em>shape1、</em>shape2，再将这两个对象进行小于比较，这样就会进入到自定义的&lt;符号重载函数里，按照优先级priority来确定对象的小于关系是否成立。这样就能正常工作了，如果没有priorityLess函数，将是对对象指针这个int型数据在进行排序，多次运行程序时将得到不同的结果，显然是错误的。</li>
+</ul>
+</li>
+<li><p>在实际开发中，需要通过重构不断改善原有的设计（这是很频繁的）。</p>
+</li>
+<li>重构的目标是：需求变化时尽量满足开闭原则。</li>
+<li>在敏捷开发中应该拒绝不成熟的抽象，避免过度设计。</li>
+<li><p>案例：母亲给孩子讲故事。</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include <iostream>
+
+ class CBook {
+ public:
+     void getContent() {
+         std::cout << "This is a book..." << std::endl;
+     }
+ };
+
+ class CMother {
+ public:
+     void read(CBook *vBook) {
+         std::cout << "Mother is reading: ";
+         vBook->getContent();
+     }
+ };
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>大多数初学者的实现方案都会是像上诉代码一样，这种设计是有问题的。CMother为什么要依赖于CBook呢？母亲除了给孩子读书，就不能读报纸这些了吗？如果要求母亲除了读书还能读报，最粗暴的就是再增加一个CNewspaper类，然后给read函数增加一个CNewspaper指针。很明显，这不符合开闭原则，需求增加时，改变了原有的CMother类。</p>
+<p>可以考虑用抽象，将书、报纸等抽象出一个虚基类：出版物类CPublication，让CMother的read函数依赖于这个抽象类，而非具体的类，这样所有继承自这个抽象类的书、报纸等等子类都能被母亲类阅读了：</p>
+<pre class="line-numbers language-c++"><code class="language-c++"> #include <iostream>
+
+ class CPublication {
+ public:
+     virtual void getContentV() = 0;
+ };
+
+ class CBook : public CPublication{
+ public:
+     virtual void getContentV() override {
+         std::cout << "This is a book..." << std::endl;
+     }
+ };
+
+ class CNewspaper : public CPublication {
+ public:
+     virtual void getContentV() override {
+         std::cout << "This is a newspaper..." << std::endl;
+     }
+ };
+
+ class CMother {
+ public:
+     void read(CPublication *vPublication) {
+         std::cout << "Mother is reading: ";
+         vPublication->getContentV();
+     }
+ };
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>像上面代码CMother类的read函数一样，代码不依赖于具体类，而是依赖于抽象的类，这就是依赖倒置原则。</p>
+</li>
+<li><p>开闭原则是面向对象设计的目标，依赖倒置原则是实现开闭特性的主要手段。</p>
+</li>
+<li><p>案例：纠结的正方形和矩形。<br>讲道理，正方形是矩形的特例，让正方形派生自矩形，好像没有什么不对：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+
+class CRectangle {
+private:
+    double m_Width;
+    double m_Height;
+
+public:
+    virtual void setWidthV(double w) { m_Width = w; }
+    virtual void setHeightV(double h) { m_Height = h; }
+    double getArea() { return m_Width*m_Height; }
+};
+
+class CSquare : public CRectangle {
+public:
+    void setWidthV(double w) { 
+        CRectangle::setWidthV(w); 
+        CRectangle::setHeightV(w);
+    }
+
+    void setWidthH(double h) {
+        CRectangle::setWidthV(h);
+        CRectangle::setHeightV(h);
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>若现在有一个函数：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void g(CRectangle* vioRect) {
+    vioRect->setWidthV(5);
+    vioRect->setHeightV(4);
+    assert(vioRect->getArea() == 20);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果外界传给函数g的实参是一个CSquare类指针，但是函数内部并不知道传入的是正方形，还是当做普通矩形来处理，这样一来assert语句将无法通过。也就是说对普通的基类对象可以通过，但是换成子类却无法通过。根源在于在基类CRectangle中长度和宽度的设置互不影响，但是子类CSquare不满足这个条件，实际上就不应该把正方形作为矩形的子类，应该分为两个独立的类。</p>
+<p>这个正方形和矩形的例子体现了Liskov替换原则：把基类替换成它的子类，程序不应该产生任何错误和异常。这是判断抽象是否正确的重要依据。</p>
+</li>
+<li><p>案例：业务需要数据库操作。<br>最粗暴的就不赘述了。由于可能会有多种数据库，我们将多种数据库先抽象出一个数据库的基类：CDBUtility。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+
+class CDBUtility {
+public:
+    virtual void buildConnectionV() = 0;
+};
+
+class CMySQLUtility : public CDBUtility{
+public:
+    virtual void buildConnectionV() override {
+        std::cout << "Building connection to MySQL..." << std::endl;
+    }
+};
+
+class COracleUtility : public CDBUtility {
+public:
+    virtual void buildConnectionV() override {
+        std::cout << "Building connection to Oracle..." << std::endl;
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果现在业务需要使用Oracle数据库，可以让业务类继承COracleUtility 类，就可以使用这个类中的方法了：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CCustomerDAO : public COracleUtility {
+public:
+    void doSomething() {
+        buildConnectionV();
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是这种派生是不符合开闭原则的，当业务使用的数据库发生变化时，需要去更改业务类所继承的父类，改动了原有的CCustomerDAO 类代码。而且让业务类继承数据库类，看着就怪怪的。</p>
+<p>应该让数据库类成为业务类的成员变量，通过这个成员变量去使用数据库类中的方法：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CCustomerDAO{
+private:
+    CDBUtility* m_pDBUtility;
+
+public:
+    void setDBUtility(CDBUtility *vUtility) {
+        m_pDBUtility = vUtility;
+    }
+    void doSomething() {
+        m_pDBUtility->buildConnectionV();
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以在main函数中动态地指定业务使用何种数据库：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int main() {
+    CCustomerDAO CustomerDAO;
+    CustomerDAO.setDBUtility(new COracleUtility());
+    CustomerDAO.doSomething();
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样一来无论业务使用何种数据库，只需要在main函数中修改传入的数据库类型即可，而不用去更改原有的类设计。不过这时候main函数不符合开闭原则了，需要修改main函数，后面会讲如何使main函数符合开闭原则的方法。</p>
+<p>这个例子体现了合成复用的原则：尽量使用对象成员，而不是继承的方式来达到复用的目的。</p>
+</li>
+<li><p>绘制图元的一种具体实现方案如下：先将图元转化为像素点，再绘制出所有像素点。代码设计如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+#include <vector>
+
+class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        std::cout << "Drawing pixels on window..." << std::endl;
+    }
+};
+
+class CRectangle : public CShape{
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+};
+
+class CTriangle : public CShape {
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on triangle..." << std::endl;
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在需求变为：在不同操作系统上，比如windows和linux，实现不同图元的绘制。</p>
+<p>前面的虚基类只针对不同图元生成像素点给出了虚函数接口，现在再针对不同操作系统上绘制像素点来增加一个接口：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        _drawPixelsV();
+    }
+
+protected:
+    virtual void _drawPixelsV() = 0;
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在Windows上绘制矩形就可以用下面的类来实现：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CRectangleOnWindows : public CShape{
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+
+protected:
+    virtual void _drawPixelsV() override {
+        std::cout << "Drawing pixels on windows..." << std::endl;
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在Linux上绘制矩形用下面的类：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CRectangleOnLinux : public CShape {
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+
+protected:
+    virtual void _drawPixelsV() override {
+        std::cout << "Drawing pixels on linux..." << std::endl;
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>问题很明显了，还有在window和linux上绘制三角形、圆的类还没写呢，如果有m个图元要在n个平台上绘制，那么就会有m*n个类。导致这个问题的根本原因就在于：在一个基类里面有两个独立的变化，通过继承来实现这两种变化，类的数量肯定会很多。</p>
+<p>解决方案就是把这两个对立的变化分别作为两个基类：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        std::cout << "Drawing pixels on kinds of platform..." << std::endl;
+    }
+};
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么这两个基类如何联系起来呢？让CShape继承CPlatform？显然不合常理。让子类去多重继承这两个基类？这样的话子类就需要去同时实现<code>generatePixelV()</code>和<code>drawPixels()</code>这两个虚函数接口，实现在不同平台下绘制不同图元又会产生出m*n个子类。而且合成复用原则建议少用继承，所以这里可以考虑遵循合成复用原则：将CPlatform类对象作为CShape类的成员变量：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+    CPlatform* m_Platform;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        m_Platform->drawPixels(m_Pixels);
+    }
+
+    void setPlatform(CPlatform* vPlatform) {
+        m_Platform = vPlatform;
+    }
+};
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这两个基类的各自的子类只要实现一个虚函数就可以了，互不影响：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+#include <vector>
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+
+class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+    CPlatform *m_pPlatform;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        m_pPlatform->drawPixels(m_Pixels);
+    }
+
+    void setPlatform(CPlatform* vPlatform) {
+        m_pPlatform = vPlatform;
+    }
+};
+
+class CRectangle : public CShape{
+public:
+    virtual void generatePixelV() {
+        std::cout << "Generating pixels on rectangle...";
+    }
+};
+
+class CCircle : public CShape {
+public:
+    virtual void generatePixelV() {
+        std::cout << "Generating pixels on circle...";
+    }
+};
+
+class CWindows : public CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) {
+        std::cout << "Drawing pixels on windows..." << std::endl;
+    }
+};
+
+class CLinux : public CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) {
+        std::cout << "Drawing pixels on linux..." << std::endl;
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在主函数中可以通过设置子类对象的m_pPlatform变量来指定在哪个平台下绘制图元：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int main() {
+    CRectangle Rect;
+    Rect.setPlatform(new CWindows());
+    Rect.drawShape();
+    Rect.setPlatform(new CLinux());
+    Rect.drawShape();
+
+    CCircle Circle;
+    Circle.setPlatform(new CWindows());
+    Circle.drawShape();
+    Circle.setPlatform(new CLinux());
+    Circle.drawShape();
+
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">Generating pixels on rectangle...Drawing pixels on windows...
+Generating pixels on rectangle...Drawing pixels on linux...
+Generating pixels on circle...Drawing pixels on windows...
+Generating pixels on circle...Drawing pixels on linux...
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>优势很明显，只用m+n个类再加上两个基类，就可以完成在m个平台上绘制n个图元的工作。</p>
+<p>这用的实际上就是桥接模式。</p>
+<p>桥接模式：独立的变化因素应该封装到独立的类中。比如需要在不同的操作系统上绘制矩形、圆、三角形等图元。操作系统是一个独立的变化因素，应该将它单独封装到一个类中，提供在不同操作系统上画像素点的方法。图元是另一个独立的变化因素，也应该将它单独封装到一个类中，提供将不同图元转化为像素点的方法。</p>
+</li>
+<li><p>函数不应该超过50行，类不应该超过400行。</p>
+</li>
+<li>小结：<ul>
+<li>开闭原则是面向对象设计的最基本原则</li>
+<li>依赖倒置原则是实现开闭原则的主要手段，其实就是抽象、多态。</li>
+<li>Liskov替换原则用来判断抽象是否正确，保证依赖倒置的正确性。</li>
+<li>但完全通过集成来实现开闭原则，可能导致类爆炸，可以用合成复用原则来解决，它是实现开闭原则的另一种手段。</li>
+</ul>
+</li>
+</ol>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/07/18/老张培训笔记第二课/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/07/18/老张培训笔记第二课/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C测试笔记</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <ol>
+<li>C语言中默认没有bool类型。需要加上stdbool.h头文件以后才能使用bool类型。<a id="more"></a></li>
+<li>符号常量（用define定义的）和变量不同，符号常量是不占内存的，只是一个临时符号，预编译后这个符号就不存在了。</li>
+<li>变量名实际上是以一个名字代表的一个存储地址。编译链接时，编译系统会给每一个变量名分配对应的内存地址。</li>
+<li>常变量（用const定义的）和常量不同，常变量具有变量的基本属性，有类型，占存储单元，而常量只是一个数，没有名字不占内存。</li>
+<li>编码中常用的字符’1’、’A’等等，在内存中是以ASCII码存储的，占一个字节。字符’1’和整数1是不同的，整数1是以整数存储方式（二进制补码）存储的，占4个字节。例如：<pre class="line-numbers language-c++"><code class="language-c++">char c = '1';
+printf("%d",c);
+char a = 1;
+printf("%d",a);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+输出结果是49和1。</li>
+<li>字符型char也有signed和unsigned。</li>
+<li>表达式如下：<pre class="line-numbers language-c++"><code class="language-c++">printf("%7.2f\n",12.345678f);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+输出结果如下：<pre class="line-numbers language-c++"><code class="language-c++">12.35
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+整数部分12前面还有两个空格，%7.2表示输出结果总共占7列（包括小数点），保留两位小数并且会有四舍五入。</li>
+<li>c语言中没有string类型，但是却可以使用<code>strlen</code>、’strcpy’等字符串函数：<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+int main() {
+ char str[4] = "acd";
+ char str1[4];
+ strcpy(str1,str);
+ printf("%d\n",strlen(str));
+ printf("%s",str1);
+ return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+输出结果是：<pre class="line-numbers language-c++"><code class="language-c++">3
+adc
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+注意上面字符数组str的长度是4，这样赋值后C语言会自动在末尾添加一个<code>\0</code>。末尾有’\0’的字符数组才相当于字符串，才可以使用这些字符串函数。如果把str数组的长度改为3，是得不到正确结果的：<pre class="line-numbers language-c++"><code class="language-c++">char str[3] = "acd";     //不能正常使用字符串函数
+char str[] = "acd";      //可以正常使用字符串函数
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+使用这些字符串函数时不需要加额外的头文件。</li>
+<li>float型小数只能保证6位有效数字，double型小数只能保证15位有效数字。</li>
+<li><code>printf(&quot;%-10.6f&quot;, a);</code>是左对齐的，不足的列数在右端用空格补齐；<br><code>printf(&quot;%10.6f&quot;, a);</code>是右对齐的，不足的列数在左端用空格补齐。</li>
+<li>指数格式输出：<pre class="line-numbers language-c++"><code class="language-c++">printf("%e\n", 123.456);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+输出结果是：<pre class="line-numbers language-c++"><code class="language-c++">1.234560e+002
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>如果想输出‘%’，应该使用两个’%’：<pre class="line-numbers language-c++"><code class="language-c++">printf("%%");
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>如果是<code>scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c);</code>，则应该像这样输入<code>1 2 3</code>，以空格或者回车来分隔每个输入的数据。<br>但如果是<code>scanf(&quot;%d,%d,%d&quot;, &amp;a, &amp;b, &amp;c);</code>，则需要像这样输入<code>1,2,3</code>，需要加上逗号。</li>
+<li>C语言中求log_10 x 的函数是<code>log10</code>，也有<code>log</code>函数，不过它求的是lnx。</li>
+<li><p>求最大公约数的核心思想：<br>对于辗转相除法（欧几里德算法），核心点在于m、n和m%n的最大公约数是相等的，一直除余到0后，得到的除数或者说被除数就是最大公约数：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int gcd(int m,int n){
+  if(m<n){
+      int t;
+      t=m;
+      m=n;
+      n=t;
+  }
+  while(m%n!=0){
+      int k=n;
+      n=m%n;
+      m=k;
+  }
+  return n;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于更相减损法，核心点在于m、n和m-n的最大公约数是相等的，一直相减到差是0后，得到的减数或者说被减数就是最大公约数：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int gcd(int m,int n){
+  if(m<n){
+      int t;
+      t=m;
+      m=n;
+      n=t;
+  }
+
+  int k;
+  while((k=m-n)!=0){
+      if(k>n){
+          m=k;
+      }
+      else{
+          m=n;
+          n=k;
+      }
+  }
+  return m;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>仔细想一想，其实辗转相除法和更相减损法的核心思想是一样的，更相减损法是两个数和它们的差的公约数相等，辗转相除法不过是多做了几次差变成了余数而已。</p>
+<p>最小公倍数就是两个数的成绩除以最大公约数。</p>
+</li>
+<li><p>虽然通常情况下不能定义数组的大小为变量，即a[n]是非法的，只能是a[10]这种的；但是在自定义函数中，如果数组大小n是函数的参数，那么a[n]是合法的：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+
+void func(int n);
+int main() {
+    int n = 10;
+    func(n);
+    return 0;
+}
+
+void func(int n) {
+    int a[n];
+    int i;
+    for (i = 0; i<n; i++) {
+        a[i] = i;
+    }
+    for (i = 0; i<n; i++) {
+        printf("%d ", a[i]);
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果是：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">0 1 2 3 4 5 6 7 8 9
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>如下程序：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+
+int main() {
+    char a[]={'i',' ','a','m',' ','a',' ','b','o','y'};
+    char b[]={'i',' ','a','m',' ','a',' ','b','o','y','\0'};
+    char c[]="i am a boy";
+    printf("%s\n",a);
+    printf("%s\n",b);
+    printf("%s\n",c);
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果是：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">i am a boy?@
+i am a boy
+i am a boy
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>说明使用{ }对字符数组赋值时，系统不会自动在末尾加’\0’，而使用” “的形式对字符数组赋值时，系统会自动在末尾加’\0’。末尾有’\0’的字符数组才相当于字符串。</p>
+</li>
+<li>一次输入多个字符串时，以空格分隔开：<pre class="line-numbers language-c++"><code class="language-c++">char str1[5],str2[5],str3[5];
+scanf("%s%s%s",str1,str2,str3);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+输入是应该像下面这样：<pre class="line-numbers language-c++"><code class="language-c++">How are you?
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+如果只定义了一个<code>char str[15]; scanf(&quot;%s&quot;,str);</code>，如果还是像上面那样输入，因为是以空格作为字符串分隔标志的，所以传入str的就只有How。</li>
+<li>字符串输入函数<code>gets(str);</code>可以接受字符串中有空格。</li>
+<li><code>strncpy(str1, str2, n);</code>表示用字符串str2的前n个字符复制到str1中，取代str1的<strong>前n个字符</strong>。如下面的程序：<pre class="line-numbers language-c++"><code class="language-c++">char str1[]="i am a boy";
+char str2[]="she is";
+strncpy(str1,str2,6);
+printf("%s\n",str1);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+输出结果是：<pre class="line-numbers language-c++"><code class="language-c++">she is boy
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>将字符串转换为小写的函数：<code>strlwr(str)</code>。<br>将字符串转化为大写的函数：<code>strupr(str)</code>。<br>注意它们的返回类型是void。</li>
+<li><p>魔方阵：各行、各列、对角线的和都相等的n*n矩阵（矩阵元素是从1到n*n）。<br>注意偶数阶（n为偶数）的魔方阵是不存在的。</p>
+<p>求解魔方阵的算法如下：</p>
+<ol>
+<li>把1放在第一行的中间位置</li>
+<li>从2开始直到n*n的数，准备放在前一个数的右上角（行减1，列加1）。如果行减到小于0，则行变为n-1，如果列加到大于n-1，则列变为0。</li>
+<li>如果要放置的位置已经被占了，则把这个数直接放在上一个数的下面（行加1，列不变）。</li>
+</ol>
+<p>实现代码如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void MagicMatrix(int n){  //n不要大于10
+    if(n%2==0){
+        printf("not!\n");
+        return;
+    }
+    int a[10][10]={0};
+    int i,j;
+    int k=n/2;
+    int col=k,row=0;
+    int lastRow,lastCol;
+    a[0][k]=1;
+    for(i=2;i<=n*n;i++){
+        lastRow=row;
+        lastCol=col;
+        col++;
+        if(col>n-1)
+            col=0;
+        row--;
+        if(row<0)
+            row=n-1;
+        if(a[row][col]==0)
+            a[row][col]=i;
+        else{
+            row = lastRow+1;
+            col = lastCol;
+            a[row][col]=i;
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            printf("%d ",a[i][j]);
+        }
+        printf("\n");
+    }
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>C语言中memset函数的头文件是string.h。</li>
+<li><p>汉诺塔问题：A塔上有64个盘子，大的在下，小的在上，还有两座空的B塔和C塔。每次只移动一个盘子，而且移动过程中所有塔都是大盘在下，小盘在上，要求把A盘上的64个盘子移到C盘。</p>
+<p>分析：这是一个递归问题。</p>
+<ol>
+<li>要从A移动n个盘子到C，需要先把n-1个盘子移动到B，</li>
+<li>然后把A最下面的大盘子移动到C，</li>
+<li>再把B上的n-1个盘子移动到C。</li>
+</ol>
+<p>移动n-1个盘子，这就是递归问题。只不过是从哪个盘子移动到哪个盘子变了而已，第二步是从A移动到C，第三步是从B移动到C，这个我们在递归调用的时候调整一下参数顺序就ok了。</p>
+<p>代码实现如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+
+void Hanoi(int n,char one,char two,char three);
+int main() {
+    Hanoi(3,'A','B','C');
+    return 0;
+}
+
+void Hanoi(int n,char one,char two,char three){
+    if(n==1){
+        printf("%c->%c\n",one,three);
+        return;
+    }
+    Hanoi(n-1,one,three,two);
+    printf("%c->%c\n",one,three);
+    Hanoi(n-1,two,one,three);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出结果如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">A->C
+A->B
+C->B
+A->C
+B->A
+B->C
+A->C
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>C语言变量存储类别有4种：自动的（auto）、静态的（static）、寄存器的（ register）、外部的（extern）。</li>
+<li>静态局部变量（在函数中定义的static变量）是在编译时赋初值的，即只赋值一次，以后每次调用函数时不再重新赋初值，而是保留上一次函数调用结束后的值。如果不对静态局部变量赋初值，编译时会自动赋为0或者空字符<code>\0</code>，但是如果不对自动变量赋初值，它的值就会是不确定的。因为静态局部变量是存放在静态存储区的，程序执行过程中不会改变位置，而自动变量是存放在动态存储区的，在每次函数结束后都会释放存储单元，下次调用时又重新分配存储单元，而所分配的存储单元中的内容是不可知的。</li>
+<li>寄存器变量使用register声明的变量，如下：<pre class="line-numbers language-c++"><code class="language-c++">register int i;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+寄存器变量用于存储那些使用非常频繁的变量，比如在10000次循环中每次都要用到的变量。其实现在的编译系统通常都能识别使用频繁的变量，从而自动把这些变量放到寄存器里，不需要程序设计者指定。所以用register声明变量的必要性不大。</li>
+<li><p>extern外部变量：<br>其实用extern声明的外部变量是强制把变量的作用域扩大了。比如在同一个文件中，变量在后面声明的，但是在前面就想要用到这个变量，那么可以在用这个变量时，使用extern声明一下这个变量，把它的作用域扩展到此声明处。如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int main(){
+    extern int A,B,C;
+    ...
+}
+
+int A,B,C;
+
+int max(int a, int b){
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>还可以使用extern把全局变量的作用域扩展到另一个文件：比如在一个程序文件中声明了全局变量Num，在另一个程序文件里也想使用这个变量，那么可以在另一文件中用extern对Num扩大作用域，即<code>extern Num;</code>。在编译连接时，系统会由此知道Num有外部链接，就会从别的文件找到已定义的Num变量，并把作用域扩展到本文件。</p>
+</li>
+<li>把全局变量的作用域强制限制在本文件，可以使用static关键字声明。这样有利于不同文件独立，即使在不同文件中定义了同名的全局变量，甚至使用了extern关键字，都会互不影响。</li>
+<li><p>注意对于全局变量来说，无论是否用static关键字声明，它都是存储在静态存储区的，这一点和局部变量不同：</p>
+<ul>
+<li>对局部变量用static关键字声明，会把它分配在静态存储区，该变量在整个程序执行期间不释放其存储单元，知道程序结束。</li>
+<li>对全局变量用static声明，是限制该变量的作用域只限于本文件模块（即被声明的文件中）。</li>
+</ul>
+<p>【注】：全局变量是指在函数外部定义的变量，不一定是在文件开头处定义的外部变量。也就是说这里的全局变量就是外部变量。</p>
+</li>
+<li>在函数定义时用static声明，是把该函数作为静态函数，限制在本文件中使用，如果在函数定义时用extern声明，则该函数可以在其他文件中使用，在其他文件中使用时需要先用extern声明该函数，表示该函数是在其他文件中定义的。其实在C语言中可以省写extern，因为函数在本质上就是外部的。可以知道，函数原型声明其实就是扩大函数的作用域（到本文件的该函数前面区域，甚至扩大到其他文件都可以）。函数原型会通知编译系统，该函数在本文件稍后定义，或在另一文件中定义。利用函数原型扩展函数作用域最常见的例子就是<code>#include &lt;....h&gt;</code>，因为通常在 #include指定的头文件中包含了很多函数原型，以此来扩展函数作用域到本文件。</li>
+<li>变量名其实就是地址的别名，可以通过变量名直接访问到对应地址中的内容；而指针是另一个变量，它存储着别的变量所对应的地址，访问时，指针变量会根据自己对应的地址去取出地址里的内容，而这个内容就是另一个变量的地址，再根据取出来的这个地址，就可以去访问另一个变量里存储的内容了。总之，通常所说的指针是一个存储着别人的地址的变量。</li>
+<li>如果指针是字符型的，那么指针加1，是使它存储的地址值加1；如果是整型的，那么指针加1，是使它存储的地址值加4。</li>
+<li>指针运算符*和自加运算符++是同等优先级的，所以*p++等价于*(p++)，都是先取*p，再使p加1。*(++p)是先使p加1，再取*。</li>
+<li>对于二维数组a[m][n]来说，a表示首行（第0行）的首地址，a+1表示第1行的首地址，就是指向a[1]，和&amp;a[1]等价。注意对于二维数组来说，a[i]只是第i行的首地址，是个指针，a[i]和*(a+i)等价，a[i][j]和*(*(a+i)+j)等价。要表示二维数组中某个元素的值，应该是两层指针*。还有，&amp;a[0]与a等价，都是指向第0行的，a[0]是指向第0行第0列的；&amp;a[1]与a+1等价，都是指向第1行的。总之a、a+i等是二维指针，有两个**，a[0]等是一维指针，有1个*。<br>如下面的程序：<pre class="line-numbers language-c++"><code class="language-c++">int a[2][2]={0};
+printf("%d\n",a);
+printf("%d\n",*a);
+printf("%d\n",**a);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+输出结果如下：<pre class="line-numbers language-c++"><code class="language-c++">2686720
+2686720
+0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>可以使用指针指向的字符串来代替printf函数中的格式字符串：<pre class="line-numbers language-c++"><code class="language-c++">char* format;
+format = "a=%d,b=%f\n";
+printf(format,a,b);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+它相当于：<pre class="line-numbers language-c++"><code class="language-c++">printf("a=%d,b=%f\n",a,b);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+只要改变format所指向的字符串，就可以改变输入输出的格式，这种printf称为可变格式输出函数。当然用字符数组代替上面的指针也是可以的。</li>
+<li><p>函数指针：指向函数代码存储空间首地址的指针。如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">int (*p)(int,int);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个p就是指向函数的指针变量，它可以指向函数类型为int且有两个int型参数的函数。除了用函数名来调用函数，我们还可以通过函数指针来调用函数：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+
+int max(int a,int b);
+int main() {
+    int a=1,b=2;
+    int(*p)(int,int);
+    p=max;
+    printf("max is %d\n",(*p)(a,b));
+    return 0;
+}
+
+int max(int a,int b){
+    return a>b?a:b;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其实就是用函数指针*p代替了函数名max而已。</p>
+<p>函数指针可以作为其他函数的参数，这样在不同情况下通过传入不同的实参，就能实现调用不同的函数。</p>
+</li>
+<li><code>int *p[4]</code>和<code>int (*p)[4]</code>是不一样的，前者是指针数组（有4个指针的数组），后者是指向一维数组的指针变量。</li>
+<li>带参数的main函数：<pre class="line-numbers language-c++"><code class="language-c++">int main(int argc, char* argv[]){
+    ...
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+main函数也是可以带有参数的，argc是argument count的缩写，表示参数个数，argv是argument vector的缩写，是一个char*指针数组，数组中的每一个元素指向命令行中的一个字符串。由于main函数是有操作系统调用的，所以它的参数也是由操作系统提供。通常在命令行状态下，我们可以通过类似DOS界面给main函数指定参数。在DOS下的命令行一般形式是：<pre class="line-numbers language-c++"><code class="language-c++">可执行文件名  参数1  参数2......参数n
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+它们之间用空格分开。可执行文件里应该包含main函数，且实际上应该还要包含文件路径。如果我们给出的命令行像这样：<pre class="line-numbers language-c++"><code class="language-c++">file1 China Beijing
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+main函数像这样：<pre class="line-numbers language-c++"><code class="language-c++">int main(int argc, char* argv[]){
+    while(argc>1){
+        ++argv;
+        printf("%s\n",argv);
+        --argc;
+    }
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+执行程序后会输出如下：<pre class="line-numbers language-c++"><code class="language-c++">China
+Beijing
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>C语言里的动态分配内存相关函数（声明在stdlib.h头文件中）：<ul>
+<li>malloc函数：<br>函数原型是：<code>void* malloc(unsigned int size);</code>，用于在内存的动态存储区中分配一个长度为size字节的连续空间。</li>
+<li>calloc函数：<br>函数原型是：<code>void* calloc(unsigned n, unsigned size);</code>，用于在内存的动态存储区分配n个长度为size字节的连续空间。例如：<code>p=calloc(50,4);</code>。</li>
+<li>free函数：<br>函数原型是：<code>void free(void* p);</code>，用于释放指针变量p所指向的动态空间。</li>
+<li>realloc函数：<br>函数原型是：<code>void* realloc(void* p, unsigned int size);</code>，用于改变指针p所指向的动态空间的大小为size字节。</li>
+</ul>
+</li>
+<li>约瑟夫环：n个人围成一圈，从任意某个人从1开始报数，报到第m个的人拖出去，剩下的人接着从1开始报数，报到第m个的人再拖出去，……，如此循环，问最后一个人是原来的第几个人。该问题可用<a href="http://blog.163.com/soonhuisky@126/blog/static/157591739201321341221179/" target="_blank" rel="external">数学方法</a>解决，也可用循环链表实现。</li>
+<li>下面的程序是正确的：<pre class="line-numbers language-c++"><code class="language-c++">int* p;
+p=malloc(sizeof(int));
+p[2]=200;
+printf("%d\n",p[2]);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+但是如果把第二行去掉，会报错，这是因为没有指明指针p指向哪个位置，p[2]是无意义的。</li>
+<li>使用union声明的共用体，它里面的所有成员都是从同一个位置开始存放的（覆盖技术）。每一瞬间只能存放一个成员。</li>
+<li>用typedef声明新类型名：<pre class="line-numbers language-c++"><code class="language-c++">typedef int Interger;   //指定用Integer为类型名，作用与int相同
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>文件分为ASCII文件和二进制文件。比如整数10000，用ASCII码存储到文件时，占用5个字节；而以二进制形式存储到文件时，只占用4个字节。</li>
+<li><p>C语言使用<code>File* fopen(文件名，文件打开方式);</code>来打开文件；<br>使用<code>int fclose(File*)</code>来关闭文件；<br>使用<code>char fgetc(File*)</code>来从文件读取一个字符，使用<code>char fputc(char, File*)</code>来把一个字符写入到文件。<br>使用<code>char* fgets(char* str, int n, File* fp)</code>来从文件读取n-1个字符到str字符串中（末尾加’\0’）。<br>使用<code>int fputs(str, fp)</code>来把字符串输出到文件。</p>
+<p>例如，从一个文件中读取数据写入到另一个文件中：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fin,*fout;
+    char ch;
+    fin=fopen("test1.txt","r");
+    if(fin==NULL){
+        printf("open file1 failed!\n");
+    }
+    fout=fopen("test2.txt","w");
+    if(fout==NULL){
+        printf("open file2 failed\n");
+    }
+    while(!feof(fin)){
+        ch=fgetc(fin);
+        fputc(ch,fout);
+    }
+    fclose(fin);
+    fclose(fout);
+    return 0;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>上面是对文件以字符的形式进行输入输出，还可以格式化的方式读写文件：</li>
+</ol>
+<ul>
+<li>fprintf函数：<pre class="line-numbers language-c++"><code class="language-c++">fprintf(fout, "%d%f", i, f);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>fscanf函数：<pre class="line-numbers language-c++"><code class="language-c++">fscanf(fin, "%d%f", &i, &f);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+由于fprintf函数在输出时要将内存中的二进制转换为字符，fscanf函数在输入时要将文件中的ASCII码字符转换为二进制在保存到内存变量中，这种转换要花费很多时间，所以我们通常使用fread和fwrite函数来代替他俩进行二进制的读写。</li>
+</ul>
+<ol>
+<li>fread函数一次从文件中读取一个数据块，fwrite函数向文件写一个数据块。它们都是以二进制形式进行读写的。<ul>
+<li>fread函数原型：<code>fread(buffer, size, count, fp);</code><br>buffer是存储从文件读出的数据的内存起始地址，size是每个数据项的字节数，count要读取的数据项个数，fp是文件指针。</li>
+<li>fwrite函数原型：<code>fwrite(buffer, size, count, fp);</code><br>buffer是准备写入文件的内存数据的内存起始地址，size、count、fp同上。</li>
+</ul>
+</li>
+<li>更改文件读写位置的相关函数：<ul>
+<li><code>void rewind(FILE* fp)</code>函数：强制将文件读写位置更改为文件开头。</li>
+<li>fseek函数：函数原型是：<code>fseek(文件指针，位移量，起始点);</code><br>起始点有0、1、2三个选项，0表示文件开头，1表示当前位置，2表示文件末尾。位移量是以起始点为基准，向前移动的字节数。注意位移量数据类型是long型。例如：<pre class="line-numbers language-c++"><code class="language-c++">fseek(fp, 100L, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>long ftell(FILE* p)函数：读出当前的文件读写位置。返回的是当前位置相对于文件开头的位移量。</li>
+</ul>
+</li>
+<li>牛顿迭代法求方程f(x)=0的根，实际上是从估计值x0开始，不断对fx切线方程，该切线与x轴（y=0）的交点x1会比x0更加精确（更容易使得f(x)=0），然后以x2求fx的切线，得到与x轴的交点x3…直到前后两次交点的差值满足一定的精度（小于某个值）。</li>
+<li>long类型通常是4个字节。</li>
+</ol>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/04/19/C测试笔记/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/04/19/C测试笔记/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

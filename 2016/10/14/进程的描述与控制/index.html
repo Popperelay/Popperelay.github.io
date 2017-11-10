@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >进程的描述与控制</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
+<ul>
+<li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<pre class="line-numbers language-csharp"><code class="language-csharp">进程p1：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+进程p2：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+但是我们知道这只是高级语言的程序语句，计算机却是逐指令进行执行的，所以还需要把上诉高级语言转换成编译后的基本指令序列：（其中r1和r2是两个通用寄存器）<pre class="line-numbers language-csharp"><code class="language-csharp">进程p1：
+r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//将counter对应内存的数据送寄存器r1</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//累加1</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//将r1中的累加结果送往counter对应的内存中</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-csharp"><code class="language-csharp">进程p2：
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//将counter对应内存的数据送寄存器r1</span>
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//累加1</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//将r1中的累加结果送往counter对应的内存中</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+当进程p1和进程p2逐指令并发执行时，若指令执行顺序如下：<pre class="line-numbers language-csharp"><code class="language-csharp">r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>  
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span> 
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> 
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+则执行后的结果是counter等于1，显然这不是我们想要的结果，原因就在于程序的并发执行上。<br>若指令顺序如下：<pre class="line-numbers language-csharp"><code class="language-csharp">r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>  
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span> 
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> 
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+则执行后的结果是counter等于2。而程序并发执行时，两个程序的指令谁先执行谁后执行是不确定的，也就造成了程序并发执行时结果的不唯一性。</li>
+</ul>
+<hr>
+<p><font size="5" color="orange">进程的描述</font><br>因为并发执行的程序可能是同一个程序在不同数据集合上的执行，也可能是不同的程序在不同的数据集合上的执行，它们共享系统资源，所以在并发执行中，仅仅用程序来作为描述单位是不够的，还应该加上程序的数据集合。所以，进程破壳出生了。</p>
+<p><font size="4" color="red">什么是进程</font></p>
+<ul>
+<li>简单的定义：进程是程序在一个数据集合上的运行过程。</li>
+<li>详细的定义：进程是由正文段、用户数据段、系统数据段共同组成的一个执行环境（正文段存放被执行的机器指令；用户数据段存放进程在执行时直接进行操作的所有数据；系统数据段存放程序的运行环境，是进程实体最重要的一部分）。</li>
+</ul>
+<p><font size="4" color="red">进程和程序的比较</font></p>
+<ul>
+<li>程序是静态的，进程是动态的 。程序是一组二进制代码，而进程对应着程序执行的过程，程序执行过程中运行环境是不断变化的。</li>
+<li>几个进程能并发地执行相同的程序代码，同一个进程也能顺序地执行几个程序（进程和程序是多对多的关系）。</li>
+</ul>
+<p><font size="4" color="red">进程控制块PCB</font><br>操作系统中那么多进程，用什么来唯一标识呢？答案是<strong>进程控制块</strong>（PCB，Process Control Block），一种操作系统管理进程所使用的数据结构。<br>进程控制块用于描述进程及控制进程运行所需的全部信息。每个进程都有PCB，它是操作系统感知进程存在的唯一标志。</p>
+<p>那么进程控制块PCB中包含哪些内容呢？</p>
+<ul>
+<li>进程标识符信息PID（Process Identifier）<br>PCB之所以能够唯一标识某个进程，就是依赖于PCB中的进程标识符，它用于唯一标识一个进程。当然出于其它一些方面的性能考虑，PCB中同时存有本进程的标识符、其父进程的标识符、子进程的标识符。</li>
+<li>处理机状态信息<br>所有进程共享处理机CPU，当一个进程需要被暂停执行，交出CPU使用权时，需要把当前进程CPU寄存器的值保存到内存中（即PCB中）（保存现场），以防止被覆盖，以便该进程再次获得CPU时，能从内存（PCB）中加载寄存器的值，恢复进程上次被暂停时的CPU环境，使进程能够从上次被中断处继续执行。<br>那么需要保存的CPU状态信息有哪些呢？<ul>
+<li>通用寄存器。用户程序可以访问的寄存器，用于暂存信息。</li>
+<li>指令计数器。里面存放了CPU要访问的<strong>下一条指令</strong>的地址。</li>
+<li>程序状态字PSW。里面含有状态信息，如条件码、执行方式、中断屏蔽标志灯。</li>
+<li>用户栈指针。每个用户进程都有一个或多个与之相关的系统栈，用于存放过程和系统调用参数及调用地址。栈指针指向该栈的栈顶。</li>
+</ul>
+</li>
+<li>进程调度信息<ul>
+<li>进程状态信息</li>
+<li>进程优先级</li>
+<li>进程调度所需的其他信息</li>
+<li>事件</li>
+</ul>
+</li>
+<li>进程控制信息<ul>
+<li>程序和数据的地址</li>
+<li>进程同步和通信机制</li>
+<li>资源清单</li>
+<li>链接指针</li>
+</ul>
+</li>
+</ul>
+<p><font size="4" color="red">进程的组织方式</font><br>系统中那么多进程，它们是如何联系在一起的呢？也就是说操作系统是通过怎样的方式把它们聚在一块的？<br>我们先来想想，需要把所有进程拿出来连在一起吗？这当然是很不划算的，因为有的进程是很大的，而且在地址空间上不一定连续，这样做会有很大的时间空间上的开销。上面讲了进程控制块PCB可以唯一标识一个进程，所以把PCB组织在一起就够了。</p>
+<ul>
+<li>链接方式<br>把系统中具有相同状态的进程的PCB用其中的链接字链接成一个队列，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600366.png" alt=""></li>
+<li>索引方式<br>系统根据所有进程的状态，建立几张索引表，索引表的每一个表项指向一个PCB的物理块，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600412.png" alt=""></li>
+</ul>
+<p><font size="4" color="red">进程的三种基本状态</font></p>
+<ul>
+<li>就绪状态<br>就绪状态是进程一旦获得CPU就可以投入运行的状态。把多个处于就绪状态的进程组织在一起，形成一个或多个就绪队列。</li>
+<li>执行状态<br>执行状态是进程获得CPU正在运行的状态。（单CPU系统中，任意时刻只会有一个进程处于执行状态）</li>
+<li>阻塞状态<br>阻塞状态是进程由于<strong>等待资源或由于某个事件的发生而暂停执行</strong>的状态。把多个处于阻塞状态的进程组织在一起，形成一个或多个阻塞队列。</li>
+</ul>
+<p>【注】：新创建进程的状态一般被设置为就绪状态</p>
+<p>三种基本状态之间的转换关系如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600462.png" alt=""></p>
+<hr>
+<p><font size="5" color="orange">进程的控制</font></p>
+<p><font size="4" color="red">进程的创建</font><br>创建新进程包括在主存中为进程分配地址空间、建立操作系统用于管理进程的数据结构（如进程控制块）等操作。<br>在Linux系统中，除了0号进程（swapper进程）外的其他进程都是由其父进程创建的。<br>调用创建新进程的系统调用来创建进程的一般步骤为：</p>
+<ol>
+<li>申请空白PCB</li>
+<li>为新进程分配资源</li>
+<li>初始化进程控制块</li>
+<li>将新进程插入就绪队列</li>
+</ol>
+<p>Linux2.6.11中创建进程的常用系统调用有fork()。</p>
+<p><font size="4" color="red">进程的阻塞</font><br>进程阻塞的简化过程大致如下：</p>
+<ol>
+<li>暂停进程的执行，将进程的状态改为阻塞状态</li>
+<li>将进程插入相应的阻塞队列</li>
+<li>转进程调度程序。重新进程进程调度</li>
+</ol>
+<p><font size="4" color="red">进程的唤醒</font><br>进程唤醒的简化过程大致如下：</p>
+<ol>
+<li>将进程从阻塞队列中移除</li>
+<li>将进程状态由阻塞状态改为就绪状态</li>
+<li>将进程插入就绪队列</li>
+</ol>
+<p><font size="4" color="red">进程的终止</font><br>进程终止的简化工程大致如下：</p>
+<ol>
+<li>从进程PCB中读进程状态</li>
+<li>若进程正在执行状态，则终止进程的执行</li>
+<li>若进程有子孙进程，则在大多数情况下需要终止其子孙进程</li>
+<li>释放资源</li>
+<li>将终止进程的PCB移出（从相应的PCB组织方式中移除）</li>
+</ol>
+<p>【注】：如果一个进程终止，它的所有子进程也被终止，这称为级联终止，通常是由操作系统进行的。在Unix系统中，如果父进程终止，那么其他所有子进程会把init进程作为它们新的父进程。</p>
+<hr>
+<p><font size="5" color="orange">线程（Thread）</font></p>
+<p><font size="4" color="red">要线程何用？</font><br>由于进程所占的空间太大，并且独享它占有的所有资源，在进程创建、撤销、切换时，都有较大的时空开销，会降低并发程度。所以，引入了线程。让线程作为独立调度和分配的单位，线程不独立占有资源（少量基本资源还是要独占的，如程序计数器、寄存器组、栈等），而是与其他线程共享同一进程的资源，减小了系统时空开销，提高了操作系统的并发程度。</p>
+<p><font size="4" color="red">什么是线程</font><br>线程只是比进程更小的执行单位，是被系统独立调度和分派的基本单位。线程和进程及其相似，包括状态、分类、调度切换等等都和进程是一样的。所以不再赘述。<br>【注】：</p>
+<ul>
+<li>CPU只能感知到内核级线程的存在，而感知不到用户级线程的存在。所以：<ul>
+<li>对于用户级线程，CPU的调度单位还是进程；而对于内核级线程，CPU的调度单位是线程</li>
+<li>当用户级线程被阻塞时，对应的整个用户级进程也会被阻塞；而内核级线程被阻塞时，对应的内核级进程不会被阻塞，OS内核可以去调度同一个内核级进程内的其他内核级线程</li>
+<li>内核级线程进行系统调用只阻塞该线程，而用户级线程进行系统调用要阻塞线程所属的进程</li>
+<li>内核级线程的CPU时间以线程为单位进行分配，每个线程独享一个CPU时间片；而用户级线程的CPU时间以进程为单位进行分配，同一进程里的多个线程共享一个CPU时间片</li>
+</ul>
+</li>
+<li>由于用户级线程的调度与切换不需要OS内核的参与，所以用户级线程切换比较快；而内核级线程在调度和切换时需要进行用户态/内核态的切换，所以内核级线程切换比较慢</li>
+<li>线程控制块TCB采用链接方式来组织，没有PCB的索引方式</li>
+<li>进程之间的通信必须采用OS提供的进程间通信机制，而同一进程中的各线程间可以通过直接读写全局变量来进行通信，无需操作系统的参与</li>
+<li>由于一个进程内的多个线程共享资源，所以一个线程对资源的任何修改，都会影响到同一个进程中的其他线程的执行环境。所以，需要对各种线程的活动进行同步，保证多个线程以互斥的方式访问临界资源，使它们互不干扰。如本文开头的加法例子，如果不对共享的临界资源counter加以访问控制，任由线程随意并发执行，则可能会导致错误结果。</li>
+</ul>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2016/10/14/进程的描述与控制/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2016/10/14/进程的描述与控制/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
