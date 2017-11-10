@@ -58,6 +58,19 @@ pre[class*="language-"] {
 	white-space: normal;
 }
 
+/* Plugin styles: Line Numbers */
+pre[class*="language-"].line-numbers {
+	padding-left: 0;
+}
+
+pre[class*="language-"].line-numbers code {
+	padding-left: 3.8em;
+}
+
+pre[class*="language-"].line-numbers .line-numbers-rows {
+	left: 0;
+}
+
 .token.comment,
 .token.prolog,
 .token.doctype,
