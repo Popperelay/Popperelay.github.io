@@ -121,13 +121,13 @@
 <p>所以，在算术表达式中不要使用char和bool，只有在存放字符或布尔值时才使用它们。因为类型char在一些机器上是有符号的，而在另一些机器上又是无符号的，所以如果使用char进行运算特别容易出问题。如果需要使用一个不大的整数，那么明确指定它的类型是signed char或者unsigned char。int、short、long和long long都是有符号的。</p>
 </li>
 <li>执行浮点数运算时选用double，这是因为float通常精度不够而且双精度浮点数和单精度浮点数的计算代价相差无几。事实上，对于某些机器来说，双精度运算甚至比单精度还快。</li>
-<li>可以给无符号char赋以可表示范围之外的值，但是有符号char却不能，否则它的值将是未定义的：<pre class=" language-c++"><code class="language-c++"> unsigned char c = 256;  //c的值等于0
- signed char c2 = 256;   //c2的值未定义
- std::cout << (int)c << " " << (int)c2 << std::endl;
+<li>可以给无符号char赋以可表示范围之外的值，但是有符号char却不能，否则它的值将是未定义的：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//c的值等于0</span>
+ <span class="token keyword">signed</span> <span class="token keyword">char</span> c2 <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//c2的值未定义</span>
+ std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>c <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>c2 <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
 </code></pre>
  虽然上面的程序可能正常运行，但是c2的值确实是未定义的。当给有符号类型赋以一个超出它可表示范围之外的值时，结果是未定义的。此时，程序可能继续工作、可能崩溃、也可能产生垃圾数据。</li>
-<li>不要在表达式中混用带符号和无符号类型。<br>比如对于无符号数的自减操作：<pre class=" language-c++"><code class="language-c++"> for (unsigned int u = 10; u >= 0; --u)
-     std::cout << u << std::endl;
+<li>不要在表达式中混用带符号和无符号类型。<br>比如对于无符号数的自减操作：<pre class=" language-cpp"><code class="language-cpp"> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> u <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>u<span class="token punctuation">)</span>
+     std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> u <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
 </code></pre>
 这个程序会陷入死循环。因为u是无符号数，减到0时，再减1会变成unsigned int类型可表示的最大整数，永远不会小于0。<br>再比如在混用带符号数和无符号数的表达式中，带符号数会自动转换为无符号数：<pre class=" language-c++"><code class="language-c++"> unsigned u = 10;
  int i = -42;
