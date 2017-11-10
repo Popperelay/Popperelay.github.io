@@ -65,7 +65,6 @@ pre[class*="language-"].line-numbers {
 }
 
 pre[class*="language-"].line-numbers code {
-	padding-top: 55px;
 	padding-left: 3.8em;
 }
 
