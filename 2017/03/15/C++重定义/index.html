@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -115,18 +115,63 @@
             <div class="typo" style="padding: 3rem;">
                 <p>有时候我们编译工程会出现重定义的编译错误，在同一个源文件里定义两个相同的变量就不说了，这是最低级的错误。我们来说一下其他可能造成重定义的原因和解决办法。<a id="more"></a></p>
 <ol>
-<li>没有在头文件最前面加<code>#pragma once</code>：<br>如果我们在同一个文件中包含了某个头文件两次：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"A.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"A.h"</span></span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>那么在A里面定义的变量就会出现重定义的错误。</p>
-<ol>
+<li>没有在头文件最前面加<code>#pragma once</code>：<br>如果我们在同一个文件中包含了某个头文件两次：<pre class=" language-c++"><code class="language-c++">#include "A.h"
+#include "A.h"
+</code></pre>
+那么在A里面定义的变量就会出现重定义的错误。</li>
 <li>我们在某个文件中包含了A.h和B.h，但是在B.h里面也包含了A.h，那么就会造成A.h里面变量的重定义。</li>
 </ol>
 <p>这种重复包含头文件，就会造成头文件被重复编译，出现重定义的编译错误。即使没有出现重定义的错误，但是这样重复编译头文件，也会使编译效率低下。一个解决办法是在头文件前面加上<code>#pragma once</code>，它的意思是让该头文件只编译一次。</p>
-<p>但是如果在不同的头文件中定义了相同的类型，即使是加上了<code>#pragma once</code>，也会出现重定义。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">----A.h文件：-----</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="keyword">int</span> A;  <span class="comment">//全局变量</span></div><div class="line"></div><div class="line">----B.h文件：-----</div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></div><div class="line"><span class="keyword">int</span> A;  <span class="comment">//同样的全局变量</span></div><div class="line"></div><div class="line">----主程序：------</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"A.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"B.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但是如果在不同的头文件中定义了相同的类型，即使是加上了<code>#pragma once</code>，也会出现重定义。如下：</p>
+<pre class=" language-c++"><code class="language-c++">----A.h文件：-----
+#pragma once
+int A;  //全局变量
+
+----B.h文件：-----
+#pragma once
+int A;  //同样的全局变量
+
+----主程序：------
+#include "A.h"
+#include "B.h"
+int main() {
+    return 0;
+}
+</code></pre>
 <p>还有一种会出现重定义的可能是在映射虚拟盘的时候，可参考<a href="http://www.cnblogs.com/baiyanhuang/archive/2009/09/17/1730732.html" target="_blank" rel="external">这篇文章</a>。</p>
-<p>其实避免上述重定义的最好解决办法是使用<code>#ifndef/#define/#endif</code>，以这样的方式来保证头文件里的相同内容只被编译一次：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">----A.h文件：-----</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> A_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> A_H</span></div><div class="line"><span class="keyword">int</span> A;  <span class="comment">//全局变量</span></div><div class="line">...</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !A_H</span></span></div><div class="line"></div><div class="line">----B.h文件：-----</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> A_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> A_H</span></div><div class="line"><span class="keyword">int</span> A;  <span class="comment">//同样的全局变量</span></div><div class="line">...</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !A_H</span></span></div><div class="line"></div><div class="line">----主程序：------</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"A.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"B.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样<code>int A</code>就不会被多次编译了。要实现整个头文件只被编译一次（代替#pragma once的作用），可以这样做（把原来的整个头文件放在#define 和#endif的中间）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//#pragma once</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> A_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> A_H</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></div><div class="line">	...</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// !A_H</span></span></div></pre></td></tr></table></figure></p>
+<p>其实避免上述重定义的最好解决办法是使用<code>#ifndef/#define/#endif</code>，以这样的方式来保证头文件里的相同内容只被编译一次：</p>
+<pre class=" language-c++"><code class="language-c++">----A.h文件：-----
+#ifndef A_H
+#define A_H
+int A;  //全局变量
+...
+#endif // !A_H
+
+----B.h文件：-----
+#ifndef A_H
+#define A_H
+int A;  //同样的全局变量
+...
+#endif // !A_H
+
+----主程序：------
+#include "A.h"
+#include "B.h"
+int main() {
+    return 0;
+}
+</code></pre>
+<p>这样<code>int A</code>就不会被多次编译了。要实现整个头文件只被编译一次（代替#pragma once的作用），可以这样做（把原来的整个头文件放在#define 和#endif的中间）：</p>
+<pre class=" language-c++"><code class="language-c++">//#pragma once
+#ifndef A_H
+#define A_H
+
+class A {
+    ...
+};
+
+#endif // !A_H
+</code></pre>
 <p>使用#ifndef虽然比较古老，但是却有很好的稳定性和可移植性。<br>&nbsp;</p>
 <hr>
 <p>参考文献：<br><a href="http://www.cnblogs.com/baiyanhuang/archive/2009/09/17/1730732.html" target="_blank" rel="external">http://www.cnblogs.com/baiyanhuang/archive/2009/09/17/1730732.html</a><br><a href="http://blog.csdn.net/abc5382334/article/details/18052757" target="_blank" rel="external">http://blog.csdn.net/abc5382334/article/details/18052757</a></p>

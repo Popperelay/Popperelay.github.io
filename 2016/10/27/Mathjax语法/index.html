@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -119,93 +119,120 @@
 <p><font size="4" color="red">Mathjax公式排版方式</font><br>Mathjax公式排版有两种方式：inline和displayed。inline方式是把公式内嵌（使用<code>$...$</code>），例如<code>$f(x)=3 \times x$</code>，$f(x)=3 \times x$这是一个inline公式；而displayed是公式独立成段（使用<code>$$...$$</code>），例如<code>$$f(x)=3 \times x$$</code>，$$f(x)=3 \times x$$是一个displayed公式。<br>【注】：</p>
 <ul>
 <li>右键点击公式，可查看公式代码、设置显示效果和渲染模式（点击打开的公式代码没有包含$，自己在写公式时加上即可）。</li>
-<li>两个独立成段的displayed公式之间必须以空行分开，否则显示不出来。即应该是下面这样：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$...$$</div><div class="line"></div><div class="line">$$...$$</div></pre></td></tr></table></figure>
-</li>
+<li>两个独立成段的displayed公式之间必须以空行分开，否则显示不出来。即应该是下面这样：<br>```csharp<br>$$…$$</li>
 </ul>
-<p><font size="4" color="red">公式中的希腊字母</font><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147764777424.png" alt=""></p>
-<p><font size="4" color="red">公式中的上标下标</font><br>上标使用^，下标使用_。例如x_i^2是：$x_i^2$。<br>【注】：</p>
-<ul>
-<li>10^10得到的是$10^10$，而10^{10}才是$10^{10}$。</li>
-<li>x^5^6会报错，因为有二义性，必须使用大括号来加以界定，如：{x^5}^6：${x^5}^6$ 或者x^{5^6}：$x^{5^6}$。</li>
-</ul>
-<p><font size="4" color="red">公式中的括号</font></p>
-<ul>
-<li>小括号与方括号：小括号还是原始的()，方括号也是原始的[]。如(2+3)[4+4]：$(2+3)[4+4]$</li>
-<li>大括号：{}由于被用来界定分组（如上文中的10^{10}），所以大括号需要用{和}来表示，也可以使用\lbrace和\rbrace来表示。如{a*b}：${a*b}$，\lbrace a*b \rbrace：$\lbrace a*b \rbrace$。</li>
-<li>尖括号：使用\langle和\rangle表示。如\langle x \rangle：$\langle x \rangle$。</li>
-<li>向上取整：使用\lceil和\rceil表示。如\lceil x \rceil：$\lceil x \rceil$。</li>
-<li>向下取整：使用\lfloor和\rfloor表示。如\lfloor x \rfloor：$\lfloor x \rfloor$。</li>
-<li>不可见括号：使用.表示。</li>
-</ul>
-<p>【注】：这些括号都是不会随着公式大小进行缩放的。如果需要括号大小自适应公式大小，可以在相应的左括号前面加上/left，右括号前面加上/right。如下所示：<br>$$\lbrace \sum_{i=0}^n i^2 \rbrace \tag{1}$$</p>
-<p>$$\left\lbrace \sum_{i=0}^n i^2 \right\rbrace \tag{2}$$</p>
-<p>公式2的括号就是经过缩放的（右键点击公式能看到公式源码）。</p>
-<p><font size="4" color="red">公式中的求和与积分</font><br>求和符号使用\sum来表示，用下标_来表示求和下限，用上标^来表示求和上限。如\sum_1^n：$\sum_1^n$。</p>
-<p>积分符号使用\int来表示，同样用上下标表示积分的上下限。如\int_1^\infty：$\int_1^\infty$。</p>
-<p>与此类似的符号还有：二重积分\iint：$\iint$，连乘\prod：$\prod$，并\bigcup：$\bigcup$，交\bigcap：$\bigcap$。</p>
-<p><font size="4" color="red">公式中的分数</font><br>分数有两种表示方式：</p>
-<ul>
-<li>使用\frac ab来表示，\frac作用于其后的两个组a、b，结果为$\frac ab$。如果分子或分母不是单个字符，使用{}进行分组即可（也就是用大括号括起来）。</li>
-<li>使用a \over b来分隔分子分母。如a+1 \over b+1：$a+1 \over b+1$。</li>
-</ul>
-<p><font size="4" color="red">公式中的根号</font><br>根号使用\sqrt[]{}来表示。如\sqrt[4]{\frac xy}：$\sqrt[4]{\frac xy}$。</p>
-<p><font size="4" color="red">公式中的三角函数</font><br>使用\sin来表示正弦函数，如$\sin x$。其他三角函数类似。</p>
-<p><font size="4" color="red">公式中的特殊符号</font></p>
-<ul>
-<li>求极限符号：使用\lim_{x \to y}表示。如$\lim_{1 \to \infty}$。</li>
-<li><p>比较运算符：</p>
-<ul>
-<li>小于$\lt$：\lt。</li>
-<li>大于$gt$：\gt</li>
-<li>小于等于$\le$：\le。</li>
-<li>大于等于$\ge$：\ge。</li>
-</ul>
-<p>可以在这些运算符前面加上\not，如\not \gt：$\not \gt$。</p>
-</li>
-<li><p>常见计算运算符：</p>
-<ul>
-<li>加$+$：直接在公式中使用+即可。</li>
-<li>减$-$：直接在公式中使用-即可。</li>
-<li>乘$\times$：\times。</li>
-<li>除$\div$：\div。</li>
-<li>加减$\pm$：\pm。</li>
-<li>减加$\mp$：\mp。</li>
-<li>点乘$\cdot$：\cdot。如x \cdot y：$x \cdot y$。</li>
-</ul>
-</li>
-<li><p>集合运算符：</p>
-<ul>
-<li>并$\cup$：\cup</li>
-<li>交$\cap$：\cap</li>
-<li>舍$\setminus$：\setminus</li>
-<li>包含于$\subset$：\subset</li>
-<li>真包含于$\subseteq$：\subseteq</li>
-<li>非真包含于$\subsetneq$：\subsetneq</li>
-<li>包含$\supset$：\supset</li>
-<li>属于$\in$：\in</li>
-<li>不属于$\notin$：\notin</li>
-<li>空集$\varnothing$：\varnothing </li>
-</ul>
-</li>
-<li>排列使用$n+1 \choose 2k$：使用a \choose y或者\binom ab来表示。</li>
-<li>箭头：\to：$\to$，\rightarrow：$\rightarrow$，\leftarrow：$\leftarrow$，\Rightarrow：$\Rightarrow$，\Leftarrow：$\Leftarrow$，\mapsto：$\mapsto$。</li>
-<li>逻辑运算符：\land：$\land$， \lor：$\lor$， \lnot：$\lnot$， \forall：$\forall$，\exists：$\exists$，\top：$\top$，\bot：$\bot$，\vdash：$\vdash$， \vDash：$\vDash$。</li>
-<li>模运算符：\pmod。如b \pmod n：$b\ pmod n$。</li>
-<li>省略号：\cdots位置居中：$\cdots$；\ldots位置稍低：$\ldots$。</li>
-<li>\star：$\star$，\ast：$\ast$，\oplus：$\oplus$，\circ：$\circ$，\bullet：$\bullet$，\approx：$\approx$，\sim：$\sim$，\cong：$\cong$，\equiv：$\equiv$，\prec：$\prec$，\infty：$\infty$，\nabla：$\nabla$，\partial：$\partial$。</li>
-</ul>
-<p>【注】：使用<a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="external">Detexify</a>，可以在它的网页上画出你想要的符号，Detexify会给出相似的符号及其公式代码。但是不能保证它给出的符号可以在Mathjax中使用，可以参考<a href="http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands" target="_blank" rel="external">supported-latex-commands</a>确定MathJax是否支持此符号。</p>
-<p><font size="4" color="red">公式中的空格</font><br>因为Mathjax通过内部策略自己管理公式内部的空间，因此a   b的显示结果依然是：$a   b$。想要在ab之间加入间隙，可以使用\,、\;、\quad、\qquad等，间隙依次增加，如$a\,b$、$a\;b$、$a \quad b$、$a \qquad b$。</p>
-<p><font size="4" color="red">公式中的顶部符号</font><br>对于单字符\hat：$\hat x$，多字符\widehat：$\widehat {xy}$。类似的还有：\overline：$\overline {xyz}$、\vec：$\vec x$、\overrightarrow：$\overrightarrow x$、\dot：$\dot x$、\ddot：$\ddot x$。</p>
-<p><font size="4" color="red">公式中的表格</font><br>使用<code>$$\begin{array}{列样式}...\end{array}$$</code>这样的样式来创建表格。</p>
-<ul>
-<li>列样式可以是c（居中）、l（左对齐）、r（右对齐）。</li>
-<li>每行之间使用\\来分隔（本来是\，但是在markdown中第一个\被解释为转义字符，所以需要\\），每列之间使用&amp;来分隔。</li>
-<li>在列样式中写入|可表示一条竖线，在每行前面加上\hline可在本行前加入一条直线。</li>
-</ul>
-<p>例如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$$</div><div class="line">\begin&#123;array&#125;&#123;|c|l|c|r|&#125;</div><div class="line">\hline</div><div class="line">n &amp; Left &amp; Center &amp; Right \\\\</div><div class="line">\hline</div><div class="line"><span class="number">1</span> &amp; <span class="number">0.24</span> &amp; <span class="number">1</span> &amp; <span class="number">125</span> \\\\</div><div class="line">\hline</div><div class="line"><span class="number">2</span> &amp; <span class="number">-1</span> &amp; <span class="number">189</span> &amp; <span class="number">-8</span> \\\\</div><div class="line">\hline</div><div class="line"><span class="number">3</span> &amp; <span class="number">-20</span> &amp; <span class="number">2000</span> &amp; <span class="number">1</span>+<span class="number">10</span>i \\\\</div><div class="line">\hline</div><div class="line">\end&#123;array&#125;</div><div class="line">$$</div></pre></td></tr></table></figure></p>
-<p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\<br>\hline<br>\end{array}<br>$$</p>
-<p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\来分隔，列之间依然使用&amp;来分隔。<br>例如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$$</div><div class="line">\begin&#123;matrix&#125;</div><div class="line"><span class="number">1</span> &amp; x &amp; x^<span class="number">2</span> \\\\</div><div class="line"><span class="number">1</span> &amp; y &amp; y^<span class="number">2</span> \\\\</div><div class="line"><span class="number">1</span> &amp; z &amp; z^<span class="number">2</span> \\\\</div><div class="line">\end&#123;matrix&#125;</div><div class="line">$$</div></pre></td></tr></table></figure></p>
+<p>$$…$$</p>
+<pre><code>
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的希腊字母&lt;/font&gt;
+![](http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147764777424.png)
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的上标下标&lt;/font&gt;
+上标使用^，下标使用_。例如x_i^2是：$x_i^2$。
+【注】：
+- 10^10得到的是$10^10$，而10^{10}才是$10^{10}$。
+-  x^5^6会报错，因为有二义性，必须使用大括号来加以界定，如：{x^5}^6：${x^5}^6$ 或者x^{5^6}：$x^{5^6}$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的括号&lt;/font&gt;
+- 小括号与方括号：小括号还是原始的()，方括号也是原始的[]。如(2+3)[4+4]：$(2+3)[4+4]$
+- 大括号：{}由于被用来界定分组（如上文中的10^{10}），所以大括号需要用\{和\}来表示，也可以使用\lbrace和\rbrace来表示。如\{a\*b\}：$\{a\*b\}$，\lbrace a\*b \rbrace：$\lbrace a\*b \rbrace$。
+- 尖括号：使用\langle和\rangle表示。如\langle x \rangle：$\langle x \rangle$。
+- 向上取整：使用\lceil和\rceil表示。如\lceil x \rceil：$\lceil x \rceil$。
+- 向下取整：使用\lfloor和\rfloor表示。如\lfloor x \rfloor：$\lfloor x \rfloor$。
+- 不可见括号：使用.表示。
+
+【注】：这些括号都是不会随着公式大小进行缩放的。如果需要括号大小自适应公式大小，可以在相应的左括号前面加上/left，右括号前面加上/right。如下所示：
+$$\lbrace \sum_{i=0}^n i^2 \rbrace \tag{1}$$
+
+$$\left\lbrace \sum_{i=0}^n i^2 \right\rbrace \tag{2}$$
+
+公式2的括号就是经过缩放的（右键点击公式能看到公式源码）。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的求和与积分&lt;/font&gt;
+求和符号使用\sum来表示，用下标_来表示求和下限，用上标^来表示求和上限。如\sum_1^n：$\sum_1^n$。
+
+积分符号使用\int来表示，同样用上下标表示积分的上下限。如\int_1^\infty：$\int_1^\infty$。
+
+与此类似的符号还有：二重积分\iint：$\iint$，连乘\prod：$\prod$，并\bigcup：$\bigcup$，交\bigcap：$\bigcap$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的分数&lt;/font&gt;
+分数有两种表示方式：
+- 使用\frac ab来表示，\frac作用于其后的两个组a、b，结果为$\frac ab$。如果分子或分母不是单个字符，使用{}进行分组即可（也就是用大括号括起来）。
+- 使用a \over b来分隔分子分母。如a+1 \over b+1：$a+1 \over b+1$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的根号&lt;/font&gt;
+根号使用\sqrt[]{}来表示。如\sqrt[4]{\frac xy}：$\sqrt[4]{\frac xy}$。
+
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的三角函数&lt;/font&gt;
+使用\sin来表示正弦函数，如$\sin x$。其他三角函数类似。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的特殊符号&lt;/font&gt;
+- 求极限符号：使用\lim\_{x \to y}表示。如$\lim\_{1 \to \infty}$。
+- 比较运算符：
+ - 小于$\lt$：\lt。
+ - 大于$gt$：\gt
+ - 小于等于$\le$：\le。
+ - 大于等于$\ge$：\ge。
+
+ 可以在这些运算符前面加上\not，如\not \gt：$\not \gt$。
+- 常见计算运算符：
+ - 加$+$：直接在公式中使用+即可。
+ - 减$-$：直接在公式中使用-即可。
+ - 乘$\times$：\times。
+ - 除$\div$：\div。
+ - 加减$\pm$：\pm。
+ - 减加$\mp$：\mp。
+ - 点乘$\cdot$：\cdot。如x \cdot y：$x \cdot y$。
+
+- 集合运算符：
+ - 并$\cup$：\cup
+ - 交$\cap$：\cap
+ - 舍$\setminus$：\setminus
+ - 包含于$\subset$：\subset
+ - 真包含于$\subseteq$：\subseteq
+ - 非真包含于$\subsetneq$：\subsetneq
+ - 包含$\supset$：\supset
+ - 属于$\in$：\in
+ - 不属于$\notin$：\notin
+ - 空集$\varnothing$：\varnothing 
+- 排列使用$n+1 \choose 2k$：使用a \choose y或者\binom ab来表示。
+- 箭头：\to：$\to$，\rightarrow：$\rightarrow$，\leftarrow：$\leftarrow$，\Rightarrow：$\Rightarrow$，\Leftarrow：$\Leftarrow$，\mapsto：$\mapsto$。
+- 逻辑运算符：\land：$\land$， \lor：$\lor$， \lnot：$\lnot$， \forall：$\forall$，\exists：$\exists$，\top：$\top$，\bot：$\bot$，\vdash：$\vdash$， \vDash：$\vDash$。
+- 模运算符：\pmod。如b \pmod n：$b\ pmod n$。
+- 省略号：\cdots位置居中：$\cdots$；\ldots位置稍低：$\ldots$。
+- \star：$\star$，\ast：$\ast$，\oplus：$\oplus$，\circ：$\circ$，\bullet：$\bullet$，\approx：$\approx$，\sim：$\sim$，\cong：$\cong$，\equiv：$\equiv$，\prec：$\prec$，\infty：$\infty$，\nabla：$\nabla$，\partial：$\partial$。
+
+【注】：使用[Detexify](http://detexify.kirelabs.org/classify.html)，可以在它的网页上画出你想要的符号，Detexify会给出相似的符号及其公式代码。但是不能保证它给出的符号可以在Mathjax中使用，可以参考[supported-latex-commands](http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands)确定MathJax是否支持此符号。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的空格&lt;/font&gt;
+因为Mathjax通过内部策略自己管理公式内部的空间，因此a   b的显示结果依然是：$a   b$。想要在ab之间加入间隙，可以使用\,、\;、\quad、\qquad等，间隙依次增加，如$a\,b$、$a\;b$、$a \quad b$、$a \qquad b$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的顶部符号&lt;/font&gt;
+对于单字符\hat：$\hat x$，多字符\widehat：$\widehat {xy}$。类似的还有：\overline：$\overline {xyz}$、\vec：$\vec x$、\overrightarrow：$\overrightarrow x$、\dot：$\dot x$、\ddot：$\ddot x$。
+&lt;font size=&quot;4&quot; color=&quot;red&quot;&gt;公式中的表格&lt;/font&gt;
+使用`$$\begin{array}{列样式}...\end{array}$$`这样的样式来创建表格。
+- 列样式可以是c（居中）、l（左对齐）、r（右对齐）。
+- 每行之间使用\\\\来分隔（本来是\\，但是在markdown中第一个\被解释为转义字符，所以需要\\\\），每列之间使用&amp;来分隔。
+- 在列样式中写入|可表示一条竖线，在每行前面加上\hline可在本行前加入一条直线。
+
+例如：
+```csharp
+$$
+\begin{array}{|c|l|c|r|}
+\hline
+n &amp; Left &amp; Center &amp; Right \\\\
+\hline
+1 &amp; 0.24 &amp; 1 &amp; 125 \\\\
+\hline
+2 &amp; -1 &amp; 189 &amp; -8 \\\\
+\hline
+3 &amp; -20 &amp; 2000 &amp; 1+10i \\\\
+\hline
+\end{array}
+$$
+</code></pre><p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\<br>\hline<br>\end{array}<br>$$</p>
+<p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\来分隔，列之间依然使用&amp;来分隔。<br>例如：</p>
+<pre class=" language-csharp"><code class="language-csharp">$$
+\begin<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token operator">&amp;</span> x <span class="token operator">&amp;</span> x<span class="token operator">^</span><span class="token number">2</span> \\\\
+<span class="token number">1</span> <span class="token operator">&amp;</span> y <span class="token operator">&amp;</span> y<span class="token operator">^</span><span class="token number">2</span> \\\\
+<span class="token number">1</span> <span class="token operator">&amp;</span> z <span class="token operator">&amp;</span> z<span class="token operator">^</span><span class="token number">2</span> \\\\
+\end<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
+$$
+</code></pre>
 <p>效果：<br>$$<br>\begin{matrix}<br>1 &amp; x &amp; x^2 \\<br>1 &amp; y &amp; y^2 \\<br>1 &amp; z &amp; z^2 \\<br>\end{matrix}<br>$$</p>
 <ul>
 <li>给矩阵加括号：<ul>
@@ -214,13 +241,17 @@
 </ul>
 </li>
 <li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\<br>\end{pmatrix}<br>$$</li>
-<li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$$ </div><div class="line">\left [</div><div class="line">  \begin&#123;array&#125;&#123;cc|c&#125;</div><div class="line">  <span class="number">1</span> &amp; <span class="number">2</span> &amp; <span class="number">3</span> \\\\</div><div class="line">  <span class="number">4</span> &amp; <span class="number">5</span> &amp; <span class="number">6</span> \\\\</div><div class="line">  \end&#123;array&#125;</div><div class="line">\right ]</div><div class="line">$$</div></pre></td></tr></table></figure>
-</li>
+<li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<pre class=" language-csharp"><code class="language-csharp">$$ 
+\left <span class="token punctuation">[</span>
+\begin<span class="token punctuation">{</span>array<span class="token punctuation">}</span><span class="token punctuation">{</span>cc<span class="token operator">|</span>c<span class="token punctuation">}</span>
+<span class="token number">1</span> <span class="token operator">&amp;</span> <span class="token number">2</span> <span class="token operator">&amp;</span> <span class="token number">3</span> \\\\
+<span class="token number">4</span> <span class="token operator">&amp;</span> <span class="token number">5</span> <span class="token operator">&amp;</span> <span class="token number">6</span> \\\\
+\end<span class="token punctuation">{</span>array<span class="token punctuation">}</span>
+\right <span class="token punctuation">]</span>
+$$
+</code></pre>
+效果：<br>$$<br>\left [<br>\begin{array}{cc|c}<br>1 &amp; 2 &amp; 3 \\<br>4 &amp; 5 &amp; 6 \\<br>\end{array}<br>\right ]<br>$$<font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br>&amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br>&amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。<br><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}<br>$$<br><font size="4" color="red">方程组</font></li>
 </ul>
-<p>效果：<br>$$<br>\left [<br>  \begin{array}{cc|c}<br>  1 &amp; 2 &amp; 3 \\<br>  4 &amp; 5 &amp; 6 \\<br>  \end{array}<br>\right ]<br>$$</p>
-<p><font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br> &amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br> &amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br> &amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。</p>
-<p><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}<br>$$</p>
-<p><font size="4" color="red">方程组</font></p>
 <ol>
 <li>可以使用<code>\begin{array}...\end{array}</code>与<code>\left{ ... \right.</code>，配合表示方程组。例如：<br>$$<br>\left\{<br>\begin{array}{c}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{array}<br>\right.<br>$$</li>
 <li>也可以使用<code>\begin{cases}...\end{cases}</code>。例如：<br>$$<br>\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{cases}<br>$$</li>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -118,7 +118,23 @@
 <p>NVIDIA Fermi 架构里存在拷贝引擎硬件，专门用于GPU到CPU之间以DMA的方式进行双向数据传输。Quadro中高端显卡会有两个拷贝引擎硬件，一个用于从GPU上下载数据到CPU，一个用于CPU上传数据到GPU。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_1.png" alt=""></p>
 <p><font size="5" color="orange">CPU上异步纹理传输：CPU Asynchronous Texture Transfers</font></p>
 <hr>
-<p>使用多个PBO异步传输数据的图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_2.png" alt=""><br>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">GLuint pbo[<span class="number">2</span>]; <span class="comment">// The ping-pong pbo ? s</span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> curPBO = <span class="number">0</span>;</div><div class="line"><span class="comment">// Bind current pbo for app-&gt;pbo transfer</span></div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[curPBO]);</div><div class="line">GLubyte *ptr;</div><div class="line">ptr = (GLubyte *)glMapBufferRange(GL_PIXEL_UNPACK_BUFFER_ARB, <span class="number">0</span>, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);</div><div class="line"><span class="built_in">memcpy</span>(ptr, pData , width * height * <span class="keyword">sizeof</span>(GLubyte) * nComponents);</div><div class="line">glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);</div><div class="line">glBindTexture(GL_TEXTURE_2D , texId);</div><div class="line"><span class="comment">// Bind next pbo for upload from pbo to texture object</span></div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[<span class="number">1</span> - curPBO]);</div><div class="line">glTexSubImage2D(GL_TEXTURE_2D , <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, width , height, GL_RGBA, GL_UNSIGNED_BYTE, <span class="number">0</span>);</div><div class="line">glBindBuffer(GL_PIXEL_UNPACK_BUFFER, <span class="number">0</span>);</div><div class="line">glBindTexture(GL_TEXTURE_2D , <span class="number">0</span>);</div><div class="line">curPBO = <span class="number">1</span> - curPBO;</div></pre></td></tr></table></figure></p>
+<p>使用多个PBO异步传输数据的图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/FermiTransfer_Insight29_2.png" alt=""><br>代码如下：</p>
+<pre class=" language-c++"><code class="language-c++">GLuint pbo[2]; // The ping-pong pbo ? s
+unsigned int curPBO = 0;
+// Bind current pbo for app->pbo transfer
+glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[curPBO]);
+GLubyte *ptr;
+ptr = (GLubyte *)glMapBufferRange(GL_PIXEL_UNPACK_BUFFER_ARB, 0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+memcpy(ptr, pData , width * height * sizeof(GLubyte) * nComponents);
+glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
+glBindTexture(GL_TEXTURE_2D , texId);
+// Bind next pbo for upload from pbo to texture object
+glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo[1 - curPBO]);
+glTexSubImage2D(GL_TEXTURE_2D , 0, 0, 0, width , height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+glBindTexture(GL_TEXTURE_2D , 0);
+curPBO = 1 - curPBO;
+</code></pre>
 <p>注意这只是在单个渲染线程上，不同PBO的数据传输在并行执行，属于CPU异步输出。并没有用到GPU的Copy引擎。</p>
 <p><font size="5" color="orange">GPU上异步纹理传输：GPU Asynchronous Texture Transfers</font></p>
 <hr>

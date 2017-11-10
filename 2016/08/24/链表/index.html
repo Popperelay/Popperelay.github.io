@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -199,22 +199,22 @@
 }
 </code></pre><p>注：</p>
 </li>
-<li>其中的头插法和尾插法都只是向链表中插入了一个节点，如果需要插入多个节点，多次调用即可。这是非整表创建的一种方式，如果需要整表创建，可在LinkedList类中加入如下代码：<pre><code>//头插法整表创建
-public void CreateListHead(int n) {
-    for (int i = 0; i &lt; n; i++) {
-        Object data;
-        data=Console.ReadLine();
-        InsertHead(data);
-    }
-}
-//尾插法整表创建
-public void CreateListTail(int n) {
-    for (int i = 0; i &lt; n; i++) {
-        object data;
-        data = Console.ReadLine();
-        InsertTail(data);
-    }
-}
+<li>其中的头插法和尾插法都只是向链表中插入了一个节点，如果需要插入多个节点，多次调用即可。这是非整表创建的一种方式，如果需要整表创建，可在LinkedList类中加入如下代码：<pre><code>  //头插法整表创建
+  public void CreateListHead(int n) {
+      for (int i = 0; i &lt; n; i++) {
+          Object data;
+          data=Console.ReadLine();
+          InsertHead(data);
+      }
+  }
+  //尾插法整表创建
+  public void CreateListTail(int n) {
+      for (int i = 0; i &lt; n; i++) {
+          object data;
+          data = Console.ReadLine();
+          InsertTail(data);
+      }
+  }
 </code></pre></li>
 <li>在代码中节点的数据类型是Object，而在实际问题中最好换成相应的数据类型，否则像<code>list.InsertTail(1);</code>等等传入数值时，将会发生多次装箱拆箱过程，浪费资源</li>
 </ul>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -145,9 +145,33 @@
 </ul>
 </li>
 </ul>
-<p>除此之外，也可以使用glMapBufferRange函数配合 GL_MAP_INVALIDATE_BUFFER_BIT或者GL<em>MAP</em> INVALIDATE_RANGE_BIT参数，来让VBO对应的固定内存失效，也就是对VBO和固定内存进行解绑，固定内存将对VBO不可见，这时通过映射后的指针向固定内存里写入数据，但是却不会将固定内存的数据传到VBO里，也就是不会影响glDrawElements使用的VBO显存数据，这样就可以在传数据的同时，驱动线程也并行执行glDrawElements。当使用映射指针传输完数据后，调用glUnmapBuffer函数，会重新让固定内存对VBO可见，这时才会开始把固定内存里的数据传入到VBO里：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">glBindBuffer(GL_ARRAY_BUFFER , my_buffer_object);</div><div class="line"><span class="keyword">void</span> *mydata_ptr = glMapBufferRange(GL_ARRAY_BUFFER , <span class="number">0</span>, data_size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);</div><div class="line"><span class="comment">// Fill mydata_ptr with useful data</span></div><div class="line">glUnmapBuffer(GL_ARRAY_BUFFER);</div></pre></td></tr></table></figure></p>
+<p>除此之外，也可以使用glMapBufferRange函数配合 GL_MAP_INVALIDATE_BUFFER_BIT或者GL<em>MAP</em> INVALIDATE_RANGE_BIT参数，来让VBO对应的固定内存失效，也就是对VBO和固定内存进行解绑，固定内存将对VBO不可见，这时通过映射后的指针向固定内存里写入数据，但是却不会将固定内存的数据传到VBO里，也就是不会影响glDrawElements使用的VBO显存数据，这样就可以在传数据的同时，驱动线程也并行执行glDrawElements。当使用映射指针传输完数据后，调用glUnmapBuffer函数，会重新让固定内存对VBO可见，这时才会开始把固定内存里的数据传入到VBO里：</p>
+<pre class=" language-c++"><code class="language-c++">glBindBuffer(GL_ARRAY_BUFFER , my_buffer_object);
+void *mydata_ptr = glMapBufferRange(GL_ARRAY_BUFFER , 0, data_size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+// Fill mydata_ptr with useful data
+glUnmapBuffer(GL_ARRAY_BUFFER);
+</code></pre>
 <p><font size="4" color="red">缺点</font><br>但是上面两种方法只要和渲染操作一起同时使用，还是会造成高昂的同步代价（为什么？？？），而且使用glMapBufferRange里的这些参数标志，还会涉及到驱动器内存管理，这可能会带来10倍的性能消耗，所以不推荐使用这两种方式来避免隐式同步。可以使用接下来的异步缓存映射。</p>
-<p><font size="4" color="red">更好的方法：异步缓存映射方法避免隐式同步</font><br>首先需要给glMapBufferRange函数传递 GL_MAP_UNSYNCHRONIZED_BIT标志，告诉OpenGL驱动不需要任何同步操作和重新分配内存操作，然后使用多个VBO缓存（通常3个就足够了，因为函数延迟一般不会超过两帧），每一帧使用各自的缓冲区进行数据读写和渲染。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_7.png" alt=""><br>不过需要保证一个缓存区不会被多帧使用，比如第0帧在使用buffer[0]进行glDrawBufferRange，而第1帧也在使用buffer[0]进行glMapBufferRange。可以通过glFencSync和glClientWaitSync函数来实现：先调用glClientWaitSync函数对缓存对象对应的同步对象加锁，防止其他帧的函数也进来访问该缓存对象，使用glMapBufferRange函数取得的内存指针，写完数据后，开始绘制，绘制完后释放同步对象，这时其他帧的函数才能进来访问该缓存对象。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> buffer_number = frame_number++ % <span class="number">3</span>;</div><div class="line"><span class="comment">// Wait until buffer is free to use, in most cases this should not wait</span></div><div class="line"><span class="comment">// because we are using three buffers in chain , glClientWaitSync</span></div><div class="line"><span class="comment">// function can be used for check if the TIMEOUT is zero</span></div><div class="line">GLenum result = glClientWaitSync(fences[buffer_number], <span class="number">0</span>, TIMEOUT);</div><div class="line"><span class="keyword">if</span> (result == GL_TIMEOUT_EXPIRED || result == GL_WAIT_FAILED)</div><div class="line">&#123;</div><div class="line">    <span class="comment">// Something is wrong</span></div><div class="line">&#125;</div><div class="line">glDeleteSync(fences[buffer_number]);</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER , buffers[buffer_number]);</div><div class="line"><span class="keyword">void</span> *ptr = glMapBufferRange(GL_ARRAY_BUFFER , offset, size, GL_MAP_WRITE_BIT | GL_MAP_UNSYNCHRONIZED_BIT);</div><div class="line"><span class="comment">// Fill ptr with useful data</span></div><div class="line">glUnmapBuffer(GL_ARRAY_BUFFER);</div><div class="line"><span class="comment">// Use buffer in draw operation</span></div><div class="line">glDrawArray(...);</div><div class="line"><span class="comment">// Put fence into command queue</span></div><div class="line">fences[buffer_number] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">更好的方法：异步缓存映射方法避免隐式同步</font><br>首先需要给glMapBufferRange函数传递 GL_MAP_UNSYNCHRONIZED_BIT标志，告诉OpenGL驱动不需要任何同步操作和重新分配内存操作，然后使用多个VBO缓存（通常3个就足够了，因为函数延迟一般不会超过两帧），每一帧使用各自的缓冲区进行数据读写和渲染。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_7.png" alt=""><br>不过需要保证一个缓存区不会被多帧使用，比如第0帧在使用buffer[0]进行glDrawBufferRange，而第1帧也在使用buffer[0]进行glMapBufferRange。可以通过glFencSync和glClientWaitSync函数来实现：先调用glClientWaitSync函数对缓存对象对应的同步对象加锁，防止其他帧的函数也进来访问该缓存对象，使用glMapBufferRange函数取得的内存指针，写完数据后，开始绘制，绘制完后释放同步对象，这时其他帧的函数才能进来访问该缓存对象。</p>
+<pre class=" language-c++"><code class="language-c++">const int buffer_number = frame_number++ % 3;
+// Wait until buffer is free to use, in most cases this should not wait
+// because we are using three buffers in chain , glClientWaitSync
+// function can be used for check if the TIMEOUT is zero
+GLenum result = glClientWaitSync(fences[buffer_number], 0, TIMEOUT);
+if (result == GL_TIMEOUT_EXPIRED || result == GL_WAIT_FAILED)
+{
+    // Something is wrong
+}
+glDeleteSync(fences[buffer_number]);
+glBindBuffer(GL_ARRAY_BUFFER , buffers[buffer_number]);
+void *ptr = glMapBufferRange(GL_ARRAY_BUFFER , offset, size, GL_MAP_WRITE_BIT | GL_MAP_UNSYNCHRONIZED_BIT);
+// Fill ptr with useful data
+glUnmapBuffer(GL_ARRAY_BUFFER);
+// Use buffer in draw operation
+glDrawArray(...);
+// Put fence into command queue
+fences[buffer_number] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+</code></pre>
 <p>大多数情况下都是不需要同步的，因为我们还有第3个缓冲区，足够应用程序线程和驱动线程使用了。</p>
 <p>其中glFenceSync函数用于发出信号，让阻塞在同步对象里的glWaitSync和glClientWaitSync命令变为非阻塞状态，返回释放的同步对象的名字；glWaitSync会导致OpenGL服务端被阻塞，直到指定的同步对象发出释放信号或者等待超时；glClientWaitSync会导致OpenGL客户端（应用程序）被阻塞，直到指定的同步对象发出释放信号或者等待超时。</p>
 <p><font size="5" color="orange">下载Download</font></p>
@@ -155,9 +179,40 @@
 <p><font size="4" color="red">使用PBO下载数据</font><br>大多数情况下我们都是从GPU上下载纹理到CPU，这时就需要用到glReadPixels和PBO了（直接glGetTexImage很慢）。先将数据渲染到纹理，再使用glReadPixels将纹理数据读入到PBO中，值得注意的是，在为PBO缓存对象分配内存空间时，即调用glBufferData时，需要指定usage参数为GL_*_READ形式，这样OpenGL就会把PBO放在驱动的固定内存里，可以直接被应用程序通过映射指针来访问。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_8.png" alt=""><br>但是应用程序需要同步等待数据从GPU完全传输到驱动内存里以后，才可以调用glMapBuffer来访问驱动固定内存里的数据，那么怎么避免这个等待呢？</p>
 <p><font size="4" color="red">在read和map之间做一些别的工作来避免闲置等待</font><br>在调用glReadPixels函数后，做一些无关的CPU操作，等DMA数据传输完以后，再调用glMapBuffer函数。这种方法其实不实用，因为不好控制执行多少CPU操作数据才会传输完，而且这样做会增加代码的难度，难以写出高效的代码。</p>
 <p><font size="4" color="red">错帧调用map来避免闲置等待</font><br>在调用glReadPixels函数的前一帧或者后两帧，再调用glMapBuffer函数。因为这时候数据通常都已经传输完了。这种方法也需要多缓冲来实现（用多缓冲来控制前一帧或者后两帧使用map来读取对应缓冲）。</p>
-<p><font size="4" color="red">信号锁明确告知数据传输完成时间点，结合多张纹理来避免闲置等待</font><br>和上传时的异步缓存映射方法一样，使用信号锁。先调用glReadPixels函数，将数据从GPU传到驱动内存里，传输完后调用glFenceSync函数释放同步对象，在glMapBuffer之前，先判断同步对象是否被释放，如果被释放则说明数据已经全部从GPU传到了驱动内存里，立即开始映射数据到应用程序内存：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (rb_tail != rb_head)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> tmp_tail = (rb_tail + <span class="number">1</span>) &amp; RB_BUFFERS_MASK;</div><div class="line">    GLenum res = glClientWaitSync(fences[tmp_tail], <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">if</span> (res == GL_ALREADY_SIGNALED || res == GL_CONDITION_SATISFIED)</div><div class="line">    &#123;</div><div class="line">        rb_tail = tmp_tail;</div><div class="line">        glDeleteSync(sc-&gt;_fence);</div><div class="line">        glBindBuffer(GL_PIXEL_PACK_BUFFER, buffers[rb_tail ]);</div><div class="line">        glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);</div><div class="line">        <span class="comment">// Process data</span></div><div class="line">        glUnmapBuffer(GL_PIXEL_PACK_BUFFER);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> tmp_head = (rb_head + <span class="number">1</span>) &amp; RB_BUFFERS_MASK;</div><div class="line"><span class="keyword">if</span> (tmp_head != rb_tail)</div><div class="line">&#123;</div><div class="line">    glReadBuffer(GL_BACK);</div><div class="line">    glBindBuffer(GL_PIXEL_PACK_BUFFER, buffers[rb_head]);</div><div class="line">    glReadPixels(<span class="number">0</span>, <span class="number">0</span>, width , height, GL_BGRA, GL_UNSIGNED_BYTE , (<span class="keyword">void</span>*)offset);</div><div class="line">    fences[tmp_head] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, <span class="number">0</span>);   <span class="comment">//new add</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// We are too fast</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">信号锁明确告知数据传输完成时间点，结合多张纹理来避免闲置等待</font><br>和上传时的异步缓存映射方法一样，使用信号锁。先调用glReadPixels函数，将数据从GPU传到驱动内存里，传输完后调用glFenceSync函数释放同步对象，在glMapBuffer之前，先判断同步对象是否被释放，如果被释放则说明数据已经全部从GPU传到了驱动内存里，立即开始映射数据到应用程序内存：</p>
+<pre class=" language-c++"><code class="language-c++">if (rb_tail != rb_head)
+{
+    const int tmp_tail = (rb_tail + 1) & RB_BUFFERS_MASK;
+    GLenum res = glClientWaitSync(fences[tmp_tail], 0, 0);
+    if (res == GL_ALREADY_SIGNALED || res == GL_CONDITION_SATISFIED)
+    {
+        rb_tail = tmp_tail;
+        glDeleteSync(sc->_fence);
+        glBindBuffer(GL_PIXEL_PACK_BUFFER, buffers[rb_tail ]);
+        glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
+        // Process data
+        glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+    }
+}
+const int tmp_head = (rb_head + 1) & RB_BUFFERS_MASK;
+if (tmp_head != rb_tail)
+{
+    glReadBuffer(GL_BACK);
+    glBindBuffer(GL_PIXEL_PACK_BUFFER, buffers[rb_head]);
+    glReadPixels(0, 0, width , height, GL_BGRA, GL_UNSIGNED_BYTE , (void*)offset);
+    fences[tmp_head] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);   //new add
+}
+else
+{
+    // We are too fast
+}
+</code></pre>
 <p>由于有多张纹理在同时从GPU传到CPU里，所以一个被阻塞，另一个可能还在继续传输数据，这样相当于同步等待的时间也没有被浪费，被其他纹理传输利用起来了。</p>
-<p>在AMD显卡上，glUnmapBuffer有时候是同步的，如果需要异步，需要用AMD_pinned_memory扩展。在NVIDIA显卡上，先使用glReadPixels把数据读到一个缓存（GPU上的一个临时buffer）里，再使用glCopyBufferSubData把这个缓存里的数据拷贝到CPU缓存里，速度会快两倍：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">glBindBuffer(GL_COPY_READ_BUFFER, source_buffer);</div><div class="line">glBindBuffer(GL_COPY_WRITE_BUFFER, dest_buffer);</div><div class="line">glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, source_offset , write_offset , data_size);</div></pre></td></tr></table></figure></p>
+<p>在AMD显卡上，glUnmapBuffer有时候是同步的，如果需要异步，需要用AMD_pinned_memory扩展。在NVIDIA显卡上，先使用glReadPixels把数据读到一个缓存（GPU上的一个临时buffer）里，再使用glCopyBufferSubData把这个缓存里的数据拷贝到CPU缓存里，速度会快两倍：</p>
+<pre class=" language-c++"><code class="language-c++">glBindBuffer(GL_COPY_READ_BUFFER, source_buffer);
+glBindBuffer(GL_COPY_WRITE_BUFFER, dest_buffer);
+glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, source_offset , write_offset , data_size);
+</code></pre>
 <p><font size="5" color="orange">多线程和共享上下文</font></p>
 <hr>
 <p><font size="4" color="red">线程和上下文</font><br>每一个用到OpenGL函数的额外线程都需要有自己的上下文，并且需要显式地连接到第一个上下文以便共享OpenGL对象，驱动程序会为每一个线程创建一个命令队列。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_9.png" alt=""></p>

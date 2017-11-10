@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -119,20 +119,27 @@
 <p>观察矩阵就是把世界坐标系通过矩阵变换转化为观察坐标系。那么观察坐标系是怎么构成的呢？</p>
 <p>观察坐标系的组成需要有4个要素构成：</p>
 <ul>
-<li><p>摄像机的世界坐标，用来作为观察坐标系的原点，对应下面第一幅图中的摄像机位置。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机位置</span></div><div class="line">vec3 cameraPos = vec3(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3.0f</span>);</div></pre></td></tr></table></figure>
+<li>摄像机的世界坐标，用来作为观察坐标系的原点，对应下面第一幅图中的摄像机位置。<pre class=" language-c++"><code class="language-c++">          //摄像机位置
+          vec3 cameraPos = vec3(0.0, 0.0, 3.0f);
+</code></pre>
 </li>
-<li><p>观察坐标系的+z轴。通常用摄像机照射的目标位置到指向摄像机位置的向量来表示，对应下面第二幅图中的蓝色轴。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机目标位置</span></div><div class="line">vec3 cameraTarget = vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);</div><div class="line"><span class="comment">//摄像机+z轴（从目标位置指向摄像机）</span></div><div class="line">vec3 targetToCamera = normalize(cameraPos - cameraTarget);</div></pre></td></tr></table></figure>
+<li>观察坐标系的+z轴。通常用摄像机照射的目标位置到指向摄像机位置的向量来表示，对应下面第二幅图中的蓝色轴。<pre class=" language-c++"><code class="language-c++">          //摄像机目标位置
+          vec3 cameraTarget = vec3(0.0f, 0.0f, 0.0f);
+          //摄像机+z轴（从目标位置指向摄像机）
+          vec3 targetToCamera = normalize(cameraPos - cameraTarget);
+</code></pre>
 </li>
-<li><p>观察坐标系的+x轴。需要先有一个上向量，指明摄像机的正上方。再用上向量和+z轴做叉乘，得到+x轴，对应下面第三幅图（灰色的是上向量，红色的是+x轴）：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机上向量</span></div><div class="line">vec3 upVector = vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</div><div class="line"><span class="comment">//摄像机+x轴（上向量和+z轴的叉乘）</span></div><div class="line">vec3 cameraRight = normalize(cross(upVector, targetToCamera));</div></pre></td></tr></table></figure>
+<li>观察坐标系的+x轴。需要先有一个上向量，指明摄像机的正上方。再用上向量和+z轴做叉乘，得到+x轴，对应下面第三幅图（灰色的是上向量，红色的是+x轴）：<pre class=" language-c++"><code class="language-c++">          //摄像机上向量
+          vec3 upVector = vec3(0.0f, 1.0f, 0.0f);
+          //摄像机+x轴（上向量和+z轴的叉乘）
+          vec3 cameraRight = normalize(cross(upVector, targetToCamera));
+</code></pre>
 </li>
-<li><p>观察坐标系的+y轴。由+z轴和+x轴做叉乘得到，对应下面第四幅图中的绿色轴：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机+y轴（+z轴和+x轴的叉乘）</span></div><div class="line">vec3 cameraUp = normalize(cross(targetToCamera, cameraRight));</div></pre></td></tr></table></figure>
-</li>
+<li>观察坐标系的+y轴。由+z轴和+x轴做叉乘得到，对应下面第四幅图中的绿色轴：<pre class=" language-c++"><code class="language-c++">          //摄像机+y轴（+z轴和+x轴的叉乘）
+          vec3 cameraUp = normalize(cross(targetToCamera, cameraRight));
+</code></pre>
+<img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149233046198.png" alt=""><br>有了原点、x、y、z轴，我们就可以构建摄像机坐标系（观察坐标系）了。<br>&nbsp;</li>
 </ul>
-<p><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149233046198.png" alt=""><br>有了原点、x、y、z轴，我们就可以构建摄像机坐标系（观察坐标系）了。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">世界坐标系转化到观察坐标系</font><br>怎么把世界坐标系转到到观察坐标系呢？先上一个线性代数中的定理（证明可参考相关线性代数教材）：</p>
 <blockquote>
@@ -144,9 +151,18 @@
 <p>通过具体例子或者证明，都可以很得到这两种方法得到的view矩阵最终是相等的。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">LookAt矩阵</font><br>上面两种方法得到的view矩阵也叫作LookAt矩阵，它会创建一个看着（look at）给定目标的观察矩阵，可以很高效地把世界坐标转化为观察坐标。</p>
-<p>当然，我们可以自己用代码定义和实现这个LookAt矩阵，把它封装成一个函数，专门用于求看着给定目标的观察矩阵。不过GLM已经给我们实现好了，它为我们提供了一个<code>lookAt</code>函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//观察矩阵</span></div><div class="line">mat4 view = lookAt(vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>), vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>), vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>));</div></pre></td></tr></table></figure></p>
+<p>当然，我们可以自己用代码定义和实现这个LookAt矩阵，把它封装成一个函数，专门用于求看着给定目标的观察矩阵。不过GLM已经给我们实现好了，它为我们提供了一个<code>lookAt</code>函数：</p>
+<pre class=" language-c++"><code class="language-c++">            //观察矩阵
+            mat4 view = lookAt(vec3(0.0f, 0.0f, 3.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+</code></pre>
 <p><code>lookAt</code>函数的第一个参数是摄像机的位置；第二个参数是目标的位置；第三个参数是摄像机的上向量。因为有这个三个参数就足以计算并构建出观察坐标系了（+z轴是目标指向摄像机，+x轴是上向量和+z轴的叉乘，+y轴是+z轴和+x轴的叉乘）。通过该函数就能构建出一个观察矩阵，以创建观察坐标系。</p>
-<p>下面上个demo，通过改变<code>lookAt</code>函数的第一个参数摄像机的位置，让它围绕目标转圈：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//观察矩阵</span></div><div class="line">GLfloat radius = <span class="number">10.0f</span>;</div><div class="line">GLfloat cameraX = radius*<span class="built_in">sin</span>(glfwGetTime());</div><div class="line">GLfloat cameraZ = radius*<span class="built_in">cos</span>(glfwGetTime());</div><div class="line">mat4 view = lookAt(vec3(cameraX, <span class="number">0.0f</span>, cameraZ), vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>), vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>));</div></pre></td></tr></table></figure></p>
+<p>下面上个demo，通过改变<code>lookAt</code>函数的第一个参数摄像机的位置，让它围绕目标转圈：</p>
+<pre class=" language-c++"><code class="language-c++">            //观察矩阵
+            GLfloat radius = 10.0f;
+            GLfloat cameraX = radius*sin(glfwGetTime());
+            GLfloat cameraZ = radius*cos(glfwGetTime());
+            mat4 view = lookAt(vec3(cameraX, 0.0f, cameraZ), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+</code></pre>
 <p>所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL8_Camera/LearnOpenGL8_Camera_1" target="_blank" rel="external">在这里</a>。</p>
 <p>编译运行后，结果类似如下：</p>
 <iframe height="498" width="510" src="https://learnopengl-cn.github.io/img/01/09/camera_circle.mp4" frameborder="0" 'allowfullscreen'=""></iframe>
@@ -158,28 +174,121 @@
 <p>上向量指定了相机的头顶方向。对于相机而言，指定了相机位置、相机目标位置后，虽然相机的位置不变、指向不变，但还是可以通过改变这个上向量而影响成像的。这类似于你眼睛的位置不变，看的方向不变，但还是可以通过转动脑袋来改变哪个方向是向上，这个上向量就好比头顶的方向。其实上向量方向不同时，叉乘后得到的x轴、y轴也会发生相应变化，观察坐标系都变了，肯定会影响成像结果。</p>
 <p>下面三张图片分别是上向量为（0,1,0）、（1,0,0）、（0,-1,0）的成像结果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261664.png" alt=""><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261735.png" alt=""><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261795.png" alt=""><br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">用键盘移动摄像机</font><br>当我们按下A、S、W、D时，摄像机会向前后左右移动，所以我们需要先给出或计算出摄像机前、右这两个方向（即-z轴和+x轴）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机位置</span></div><div class="line">vec3 cameraPos = vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>);</div><div class="line"><span class="comment">//上向量</span></div><div class="line">vec3 upVector = vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>);</div><div class="line"><span class="comment">//摄像机照射方向（观察坐标系-z轴）</span></div><div class="line">vec3 cameraFront = normalize(vec3(<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>));</div><div class="line"><span class="comment">//摄像机+x轴方向（观察坐标系+x轴）</span></div><div class="line">vec3 cameraRight = normalize(cross(upVector, -cameraFront));</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">用键盘移动摄像机</font><br>当我们按下A、S、W、D时，摄像机会向前后左右移动，所以我们需要先给出或计算出摄像机前、右这两个方向（即-z轴和+x轴）：</p>
+<pre class=" language-c++"><code class="language-c++">//摄像机位置
+vec3 cameraPos = vec3(0.0f, 0.0f, 3.0f);
+//上向量
+vec3 upVector = vec3(0.0f, 1.0f, 0.0f);
+//摄像机照射方向（观察坐标系-z轴）
+vec3 cameraFront = normalize(vec3(0, 0, -1));
+//摄像机+x轴方向（观察坐标系+x轴）
+vec3 cameraRight = normalize(cross(upVector, -cameraFront));
+</code></pre>
 <p>摄像机上方向就是摄像机前面的方向就是摄像机照射的方向，是观察坐标系的-z轴，也就是从摄像机指向目标位置；摄像机右方向就是观察坐标系的+x轴，是上向量和+z轴的叉乘。</p>
-<p>接下来就是响应按键了。最初在响应键盘的ESC键时，创建了一个<code>key_callback</code>回调函数来关闭窗口，现在我们还是在这个函数里响应其它按键：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//按键回调函数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">key_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> key, <span class="keyword">int</span> scancode, <span class="keyword">int</span> action, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_ESCAPE&amp;&amp;action == GLFW_PRESS) &#123;</div><div class="line">		glfwSetWindowShouldClose(window, GL_TRUE);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//响应键盘按键来移动摄像机</span></div><div class="line">	<span class="keyword">float</span> cameraSpeed = <span class="number">0.05f</span>;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_W) &#123;</div><div class="line">		cameraPos += cameraSpeed * vec3(cameraFront.x, <span class="number">0</span>, cameraFront.z);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_S) &#123;</div><div class="line">		cameraPos -= cameraSpeed * vec3(cameraFront.x, <span class="number">0</span>, cameraFront.z);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_D) &#123;</div><div class="line">		cameraPos += cameraSpeed * cameraRight;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_A) &#123;</div><div class="line">		cameraPos -= cameraSpeed * cameraRight;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来就是响应按键了。最初在响应键盘的ESC键时，创建了一个<code>key_callback</code>回调函数来关闭窗口，现在我们还是在这个函数里响应其它按键：</p>
+<pre class=" language-c++"><code class="language-c++">//按键回调函数
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+    if (key == GLFW_KEY_ESCAPE&&action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+    //响应键盘按键来移动摄像机
+    float cameraSpeed = 0.05f;
+    if (key == GLFW_KEY_W) {
+        cameraPos += cameraSpeed * vec3(cameraFront.x, 0, cameraFront.z);
+    }
+    if (key == GLFW_KEY_S) {
+        cameraPos -= cameraSpeed * vec3(cameraFront.x, 0, cameraFront.z);
+    }
+    if (key == GLFW_KEY_D) {
+        cameraPos += cameraSpeed * cameraRight;
+    }
+    if (key == GLFW_KEY_A) {
+        cameraPos -= cameraSpeed * cameraRight;
+    }
+}
+</code></pre>
 <p>每当有按键按下时，OpenGL就会自动调用该函数。</p>
-<p>接下来我们在使用<code>lookAt</code>函数构造观察矩阵时，传入的第二个参数目标位置，应该是摄像机位置加上摄像机照射方向向量（注意摄像机其实最关心的是它的照射方向，目标位置可以是照射方向上的任意一点，所以我们这里就直接加上了照射方向向量来得到目标位置）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//观察矩阵</span></div><div class="line">mat4 view = lookAt(cameraPos, cameraPos + cameraFront, upVector);</div></pre></td></tr></table></figure></p>
+<p>接下来我们在使用<code>lookAt</code>函数构造观察矩阵时，传入的第二个参数目标位置，应该是摄像机位置加上摄像机照射方向向量（注意摄像机其实最关心的是它的照射方向，目标位置可以是照射方向上的任意一点，所以我们这里就直接加上了照射方向向量来得到目标位置）：</p>
+<pre class=" language-c++"><code class="language-c++">        //观察矩阵
+        mat4 view = lookAt(cameraPos, cameraPos + cameraFront, upVector);
+</code></pre>
 <p>到此，我们就能通过WSAD键控制摄像机移动了。所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL8_Camera/LearnOpenGL8_Camera_2" target="_blank" rel="external">在这里</a>。</p>
 <p>编译运行后的结果类似如下：</p>
 <iframe height="498" width="510" src="https://learnopengl-cn.github.io/img/01/09/camera_inside.mp4" frameborder="0" 'allowfullscreen'=""></iframe>
 
 <p>但是这个摄像机不能同时朝两个方向移动（对角线移动），而且按下一个按键时，它会先顿一下才开始移动。这是因为大多数事件输入系统一次只能处理一个键盘输入。</p>
 <p>解决方案是我们在回调函数中只存储哪个按键被按下/释放的状态信息，记录到bool数组中（true表示按下）。在渲染循环中我们读取这些值，检查哪个按键是激活的，然后做出相应反应。</p>
-<p>由于<code>GLFW_KRY_W</code>等本身就是int类型的，所以我们可以用它们作为bool数组下标，对应相应的按键状态信息。为了能够存储更多的按键信息，我们定义bool数组（全局变量）如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//存储按键状态（按下/释放）的数组</span></div><div class="line"><span class="keyword">bool</span> keys[<span class="number">1024</span>];</div></pre></td></tr></table></figure></p>
-<p>然后在<code>key_callbak</code>函数中设置被按下/释放的按键为true/false：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//按键回调函数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">key_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> key, <span class="keyword">int</span> scancode, <span class="keyword">int</span> action, <span class="keyword">int</span> mode)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (key == GLFW_KEY_ESCAPE&amp;&amp;action == GLFW_PRESS) &#123;</div><div class="line">		glfwSetWindowShouldClose(window, GL_TRUE);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//响应键盘按键来设置相应按键状态</span></div><div class="line">	<span class="keyword">if</span> (action == GLFW_PRESS) &#123;</div><div class="line">		keys[key] = GL_TRUE;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(action==GLFW_RELEASE)&#123;</div><div class="line">		keys[key] = GL_FALSE;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后在渲染循环里读取按键状态，并做出相应反应。我们把这部分功能封装到<code>do_movement</code>函数中：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//根据按键状态移动摄像机</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_movement</span><span class="params">()</span> </span>&#123;</div><div class="line">	GLfloat cameraSpeed = <span class="number">5.0f</span>*deltaTime;</div><div class="line">	<span class="keyword">if</span> (keys[GLFW_KEY_W]) &#123;</div><div class="line">		cameraPos += cameraSpeed * vec3(cameraFront.x, <span class="number">0</span>, cameraFront.z);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (keys[GLFW_KEY_S]) &#123;</div><div class="line">		cameraPos -= cameraSpeed * vec3(cameraFront.x, <span class="number">0</span>, cameraFront.z);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (keys[GLFW_KEY_D]) &#123;</div><div class="line">		cameraPos += cameraSpeed*cameraRight;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (keys[GLFW_KEY_A]) &#123;</div><div class="line">		cameraPos -= cameraSpeed*cameraRight;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>最后就是在渲染循环中调用<code>do_movement</code>函数了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (!glfwWindowShouldClose(window)) &#123;</div><div class="line">		...</div><div class="line">		do_movement();</div><div class="line">		...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于<code>GLFW_KRY_W</code>等本身就是int类型的，所以我们可以用它们作为bool数组下标，对应相应的按键状态信息。为了能够存储更多的按键信息，我们定义bool数组（全局变量）如下：</p>
+<pre class=" language-c++"><code class="language-c++">//存储按键状态（按下/释放）的数组
+bool keys[1024];
+</code></pre>
+<p>然后在<code>key_callbak</code>函数中设置被按下/释放的按键为true/false：</p>
+<pre class=" language-c++"><code class="language-c++">//按键回调函数
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+    if (key == GLFW_KEY_ESCAPE&&action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+    //响应键盘按键来设置相应按键状态
+    if (action == GLFW_PRESS) {
+        keys[key] = GL_TRUE;
+    }
+    else if(action==GLFW_RELEASE){
+        keys[key] = GL_FALSE;
+    }
+}
+</code></pre>
+<p>然后在渲染循环里读取按键状态，并做出相应反应。我们把这部分功能封装到<code>do_movement</code>函数中：</p>
+<pre class=" language-c++"><code class="language-c++">//根据按键状态移动摄像机
+void do_movement() {
+    GLfloat cameraSpeed = 5.0f*deltaTime;
+    if (keys[GLFW_KEY_W]) {
+        cameraPos += cameraSpeed * vec3(cameraFront.x, 0, cameraFront.z);
+    }
+    if (keys[GLFW_KEY_S]) {
+        cameraPos -= cameraSpeed * vec3(cameraFront.x, 0, cameraFront.z);
+    }
+    if (keys[GLFW_KEY_D]) {
+        cameraPos += cameraSpeed*cameraRight;
+    }
+    if (keys[GLFW_KEY_A]) {
+        cameraPos -= cameraSpeed*cameraRight;
+    }
+}
+</code></pre>
+<p>最后就是在渲染循环中调用<code>do_movement</code>函数了：</p>
+<pre class=" language-c++"><code class="language-c++">while (!glfwWindowShouldClose(window)) {
+        ...
+        do_movement();
+        ...
+}
+</code></pre>
 <p>编译运行后会发现，可以同时向多个方向移动了，并且按下按钮时也会立刻移动了，操作灵活了很多。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">平衡不同处理器的移动速度</font><br>上面的摄像机移动速度是个常量，但是实际情况下根据处理器的能力不同，有些人可能会比其他人每秒绘制更多帧，也就是以更高的频率调用<code>do_movement</code>函数，结果就是，由于处理器性能不同，有些人可能移动很快，而有些人会移动很慢。尤其是在网游中，这是很不公平的，我们需要确保在所有硬件上的移动速度都一样。</p>
 <p>图形程序和游戏通常会跟踪一个时间差(deltaTime)变量，它储存了渲染上一帧所用的时间。我们把所有速度都去乘以deltaTime值。结果就是，如果我们的deltaTime很大，就意味着上一帧的渲染花费了更多时间，所以这一帧的速度需要变得更高，来平衡渲染所花去的时间。这样一来，渲染时间长的移动速度较快，渲染时间短的移动速度较慢，单位时间内的移动速度就都差不多了，这样每个用户的体验就都一样了。</p>
-<p>首先设置两个全局变量来计算<code>deltaTime</code>值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当前帧与上一帧的时间差</span></div><div class="line">GLfloat deltaTime = <span class="number">0.0f</span>;</div><div class="line"><span class="comment">//上一帧开始的时间</span></div><div class="line">GLfloat lastTime = <span class="number">0.0f</span>;</div></pre></td></tr></table></figure></p>
-<p>在每一帧（一帧可以看做一次渲染循环）开始时计算出deltaTime：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//渲染循环（游戏循环）</span></div><div class="line"><span class="keyword">while</span> (!glfwWindowShouldClose(window)) &#123;</div><div class="line">	<span class="comment">//计算deltaTime</span></div><div class="line">	GLfloat currentTime = glfwGetTime();</div><div class="line">	deltaTime = currentTime - lastTime;</div><div class="line">	lastTime = currentTime;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>现在我们有了deltaTime，在计算速度的时候可以将其考虑进去了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//根据按键状态移动摄像机</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_movement</span><span class="params">()</span> </span>&#123;</div><div class="line">	GLfloat cameraSpeed = <span class="number">5.0f</span>*deltaTime;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先设置两个全局变量来计算<code>deltaTime</code>值：</p>
+<pre class=" language-c++"><code class="language-c++">//当前帧与上一帧的时间差
+GLfloat deltaTime = 0.0f;
+//上一帧开始的时间
+GLfloat lastTime = 0.0f;
+</code></pre>
+<p>在每一帧（一帧可以看做一次渲染循环）开始时计算出deltaTime：</p>
+<pre class=" language-c++"><code class="language-c++">    //渲染循环（游戏循环）
+    while (!glfwWindowShouldClose(window)) {
+        //计算deltaTime
+        GLfloat currentTime = glfwGetTime();
+        deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
+        ...
+    }
+</code></pre>
+<p>现在我们有了deltaTime，在计算速度的时候可以将其考虑进去了：</p>
+<pre class=" language-c++"><code class="language-c++">//根据按键状态移动摄像机
+void do_movement() {
+    GLfloat cameraSpeed = 5.0f*deltaTime;
+    ...
+}
+</code></pre>
 <p>编译运行后的结果类似如下：</p>
 <iframe height="498" width="510" src="https://learnopengl-cn.github.io/img/01/09/camera_smooth.mp4" frameborder="0" 'allowfullscreen'=""></iframe>
 
@@ -190,36 +299,125 @@
 <p>大多数摄像机系统都支持往上下左右看，除非特殊情况一般不考虑滚转角，我们这里只关心俯仰角和偏航角。旋转摄像机的视角其实就是旋转摄像机的照射方向（也就是摄像机指向目标的向量<code>cameraToTarget</code>），摄像机的照射方向正好可以用俯仰角和偏航角来表示。为了计算简单，我们以摄像机所在位置为原点（计算结果后加上摄像机位置就是实际位置了），有如下图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148103336799.png" alt=""><br>其中摄像机方向就是从原点发出的那条黄色线，它的俯仰角设为pitch，偏航角设为yaw。设这条向量的长度为1，那么该向量坐标应该是<code>（cos(pitch)*cos(yaw),sin(pitch),cos(pitch)*sin(yaw)）</code>。由于摄像机在旋转过程中，摄像机到目标的距离应该是不变的，所以用该向量乘以这个恒定距离，就是摄像机指向目标的向量的实际坐标，再加上摄像机位置，就能得到旋转过程中目标的实际位置。把目标实际位置传参给<code>lookAt</code>函数，就能实现摄像机旋转了。</p>
 <p>但是俯仰角pitch和偏航角yaw怎么得到呢？我们把俯仰角和偏航角的初始值都设为0，用前后两帧鼠标位置的x差值作为偏航角的增量，y差值作为俯仰角的增量。这样就能从一开始得到每一帧里摄像机的俯仰角和偏航角了。</p>
 <p>下面我们来实现这个功能：</p>
-<p><font size="4" color="red">设置鼠标位置回调函数</font><br>首先为了让GLFW监听鼠标移动事件，我们需要注册鼠标位置回调函数（和键盘回调函数类似）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注册鼠标位置回调函数</span></div><div class="line">glfwSetCursorPosCallback(window, cursor_callback);</div></pre></td></tr></table></figure></p>
-<p>鼠标位置回调函数原型如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cursor_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xpos, <span class="keyword">double</span> ypos)</span></span>;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">设置鼠标位置回调函数</font><br>首先为了让GLFW监听鼠标移动事件，我们需要注册鼠标位置回调函数（和键盘回调函数类似）：</p>
+<pre class=" language-c++"><code class="language-c++">    //注册鼠标位置回调函数
+    glfwSetCursorPosCallback(window, cursor_callback);
+</code></pre>
+<p>鼠标位置回调函数原型如下：</p>
+<pre class=" language-c++"><code class="language-c++">void cursor_callback(GLFWwindow* window, double xpos, double ypos);
+</code></pre>
 <p><code>xpos</code>和<code>ypos</code>代表当前鼠标的位置，当我们用GLFW注册了鼠标位置回调函数后，鼠标一移动该函数就会被调用。</p>
-<p><font size="4" color="red">计算鼠标位移量</font><br>接下来我们在鼠标位置回调函数<code>cursor_callback</code>中计算出前后两帧的位移量：<br>需要先声明两个全局变量用以计算位移量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//上一帧鼠标位置</span></div><div class="line">GLfloat lastCursorX = WIDTH / <span class="number">2</span>;</div><div class="line">GLfloat lastCursorY = HEIGHT / <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
-<p>然后在回调函数中利用这两个全局变量进行计算：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">GLfloat sensitivity = <span class="number">0.03f</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cursor_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xpos, <span class="keyword">double</span> ypos)</span> </span>&#123;</div><div class="line">	<span class="comment">//计算前后两帧的鼠标位移量</span></div><div class="line">	GLfloat xOffset = (xpos - lastCursorX)*sensitivity;</div><div class="line">	GLfloat yOffset = (lastCursorY - ypos)*sensitivity;</div><div class="line">	lastCursorX = xpos;</div><div class="line">	lastCursorY = ypos;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">计算鼠标位移量</font><br>接下来我们在鼠标位置回调函数<code>cursor_callback</code>中计算出前后两帧的位移量：<br>需要先声明两个全局变量用以计算位移量：</p>
+<pre class=" language-c++"><code class="language-c++">//上一帧鼠标位置
+GLfloat lastCursorX = WIDTH / 2;
+GLfloat lastCursorY = HEIGHT / 2;
+</code></pre>
+<p>然后在回调函数中利用这两个全局变量进行计算：</p>
+<pre class=" language-c++"><code class="language-c++">GLfloat sensitivity = 0.03f;
+void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
+    //计算前后两帧的鼠标位移量
+    GLfloat xOffset = (xpos - lastCursorX)*sensitivity;
+    GLfloat yOffset = (lastCursorY - ypos)*sensitivity;
+    lastCursorX = xpos;
+    lastCursorY = ypos;
+    ...
+}
+</code></pre>
 <p>由于鼠标位移量每次太大了，不可能直接作为摄像机度数的增量，不然摄像机移动太快了。所以需要给位移量乘以<code>sensitivity</code>灵敏度值。要注意的是鼠标坐标原点在窗口左上角，当我们把鼠标从下往上拉时，我们应该是希望俯仰角增大。但是由于鼠标坐标原点在窗口左上角，+x轴向右，+y轴向下，所以鼠标如果从下往上，<code>xpos - lastCursorY</code>的值会是负数，导致俯仰角不断变小。这与我们期待的相反。应该是正数才对，改成<code>lastCursorY - ypos</code>才合适。</p>
-<p>由于<code>lastCursorX</code>和<code>lastCursorY</code>的初始值设在窗口中央，当我们的鼠标第一次从窗口外进入窗口内时，<code>xOffset</code>和<code>xOffset</code>就会很大，摄像机镜头就会突然旋转很大角度。为了避免这种突变，我们改动如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//鼠标位置回调函数</span></div><div class="line"><span class="keyword">bool</span> firstCursor = <span class="literal">true</span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cursor_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xpos, <span class="keyword">double</span> ypos)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (firstCursor) &#123;</div><div class="line">		lastCursorX = xpos;</div><div class="line">		lastCursorY = ypos;</div><div class="line">		firstCursor = <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//计算前后两帧的鼠标位移量</span></div><div class="line">	GLfloat sensitivity = <span class="number">0.03f</span>;</div><div class="line">	GLfloat xOffset = (xpos - lastCursorX) * sensitivity;</div><div class="line">	GLfloat yOffset = (lastCursorY - ypos) * sensitivity;</div><div class="line">	lastCursorX = xpos;</div><div class="line">	lastCursorY = ypos;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于<code>lastCursorX</code>和<code>lastCursorY</code>的初始值设在窗口中央，当我们的鼠标第一次从窗口外进入窗口内时，<code>xOffset</code>和<code>xOffset</code>就会很大，摄像机镜头就会突然旋转很大角度。为了避免这种突变，我们改动如下：</p>
+<pre class=" language-c++"><code class="language-c++">//鼠标位置回调函数
+bool firstCursor = true;
+void cursor_callback(GLFWwindow* window, double xpos, double ypos) {
+    if (firstCursor) {
+        lastCursorX = xpos;
+        lastCursorY = ypos;
+        firstCursor = false;
+    }
+    //计算前后两帧的鼠标位移量
+    GLfloat sensitivity = 0.03f;
+    GLfloat xOffset = (xpos - lastCursorX) * sensitivity;
+    GLfloat yOffset = (lastCursorY - ypos) * sensitivity;
+    lastCursorX = xpos;
+    lastCursorY = ypos;
+    ...
+}
+</code></pre>
 <p>增加了一个<code>firstCursor</code>变量来判断鼠标是否是第一次进入窗口（隐藏鼠标开启的情况下），如果是，就让<code>lastCursorX</code>和<code>lastCursorY</code>等于当前的鼠标位置值，从而避免了镜头突变。</p>
 <p><font size="4" color="red">计算偏航角和俯仰角</font><br>接下来就可以用鼠标x位移量和y位移量来作为摄像机偏航角和俯仰角的增量了。在此之前我们需要声明两个全局变量表示偏航角和俯仰角，但是它们的初始值不是随意指定的。</p>
-<p>摄像机俯仰角和偏航角的初始值，与摄像机照射方向（即<code>cameraDirection</code>）的初始值有关，因为需要满足之前推导出的照射方向向量公式：<code>（cos(pitch)*cos(yaw),sin(pitch),cos(pitch)*sin(yaw)）</code>。根据<code>cameraDirection</code>的初始值和该公式，可以求出俯仰角pitch和偏航角yaw的初始值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机俯仰角（弧度）</span></div><div class="line">GLfloat Pitch = <span class="built_in">asin</span>(cameraFront.y);</div><div class="line"><span class="comment">//摄像机偏航角（弧度）</span></div><div class="line"><span class="comment">//GLfloat Yaw = asin(sqrt((1 - cameraFront.y * cameraFront.y)));</span></div><div class="line">GLfloat Yaw = <span class="built_in">asin</span>(cameraFront.z / <span class="built_in">cos</span>(Pitch));</div></pre></td></tr></table></figure></p>
+<p>摄像机俯仰角和偏航角的初始值，与摄像机照射方向（即<code>cameraDirection</code>）的初始值有关，因为需要满足之前推导出的照射方向向量公式：<code>（cos(pitch)*cos(yaw),sin(pitch),cos(pitch)*sin(yaw)）</code>。根据<code>cameraDirection</code>的初始值和该公式，可以求出俯仰角pitch和偏航角yaw的初始值：</p>
+<pre class=" language-c++"><code class="language-c++">//摄像机俯仰角（弧度）
+GLfloat Pitch = asin(cameraFront.y);
+//摄像机偏航角（弧度）
+//GLfloat Yaw = asin(sqrt((1 - cameraFront.y * cameraFront.y)));
+GLfloat Yaw = asin(cameraFront.z / cos(Pitch));
+</code></pre>
 <p>如上，偏航角的求法有两种，一种是根绝三角函数公式，另一种是直接根据向量公式做除法。注意，求出来的是弧度，不是度数。</p>
-<p>有了初始值，接下来就需要在鼠标位置回调函数求每一帧的俯仰角pitch和偏航角yaw了（就是累加鼠标位移量）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算偏航角和俯仰角（弧度）</span></div><div class="line">Yaw += radians(xOffset);</div><div class="line">Pitch += radians(yOffset);</div></pre></td></tr></table></figure></p>
-<p>摄像机的俯仰角还需要有一些限制，不能让用户看到高于89度和低于-89度的地方，因为在90度和-90度时，视角会发生逆转。所以俯仰角需要在-89度到89度之间：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//俯仰角限制在-89度~89度之间</span></div><div class="line"><span class="keyword">if</span> (Pitch &gt; radians(<span class="number">89.0f</span>)) &#123;</div><div class="line">	Pitch = radians(<span class="number">89.0f</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (Pitch &lt; radians(<span class="number">-89.0f</span>)) &#123;</div><div class="line">	Pitch = radians(<span class="number">89.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有了初始值，接下来就需要在鼠标位置回调函数求每一帧的俯仰角pitch和偏航角yaw了（就是累加鼠标位移量）：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算偏航角和俯仰角（弧度）
+    Yaw += radians(xOffset);
+    Pitch += radians(yOffset);
+</code></pre>
+<p>摄像机的俯仰角还需要有一些限制，不能让用户看到高于89度和低于-89度的地方，因为在90度和-90度时，视角会发生逆转。所以俯仰角需要在-89度到89度之间：</p>
+<pre class=" language-c++"><code class="language-c++">    //俯仰角限制在-89度~89度之间
+    if (Pitch > radians(89.0f)) {
+        Pitch = radians(89.0f);
+    }
+    else if (Pitch < radians(-89.0f)) {
+        Pitch = radians(89.0f);
+    }
+</code></pre>
 <p>偏航角不需要限制了，因为我们希望用户能够在水平面上360转圈看。</p>
-<p><font size="4" color="red">计算摄像机到目标的向量</font><br>然后就是求出，摄像机旋转之后新的摄像机照射方向（即-z轴）（该照射方向向量从一开始就一直是归一化的）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机到目标的向量</span></div><div class="line">cameraFront.x = <span class="built_in">cos</span>(Pitch) * <span class="built_in">cos</span>(Yaw);</div><div class="line">cameraFront.y = <span class="built_in">sin</span>(Pitch);</div><div class="line">cameraFront.z = <span class="built_in">cos</span>(Pitch) * <span class="built_in">sin</span>(Yaw);</div><div class="line">cameraFront = normalize(cameraFront);</div><div class="line">cameraRight = normalize(cross(upVector, -cameraFront));</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">传参给lookAt函数</font><br>最后，我们需要把求出来的，旋转中的摄像机到目标的向量，传参给<code>lookAt</code>函数，让它和摄像机位置相加，得到旋转中的目标位置，作为<code>lookAt</code>函数的第二个参数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//观察矩阵</span></div><div class="line">mat4 view = lookAt(cameraPos, cameraPos + cameraFront, upVector);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">计算摄像机到目标的向量</font><br>然后就是求出，摄像机旋转之后新的摄像机照射方向（即-z轴）（该照射方向向量从一开始就一直是归一化的）：</p>
+<pre class=" language-c++"><code class="language-c++">    //摄像机到目标的向量
+    cameraFront.x = cos(Pitch) * cos(Yaw);
+    cameraFront.y = sin(Pitch);
+    cameraFront.z = cos(Pitch) * sin(Yaw);
+    cameraFront = normalize(cameraFront);
+    cameraRight = normalize(cross(upVector, -cameraFront));
+</code></pre>
+<p><font size="4" color="red">传参给lookAt函数</font><br>最后，我们需要把求出来的，旋转中的摄像机到目标的向量，传参给<code>lookAt</code>函数，让它和摄像机位置相加，得到旋转中的目标位置，作为<code>lookAt</code>函数的第二个参数：</p>
+<pre class=" language-c++"><code class="language-c++">            //观察矩阵
+            mat4 view = lookAt(cameraPos, cameraPos + cameraFront, upVector);
+</code></pre>
 <p>到此，摄像机可以旋转了，源码在缩放后面一起给出。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">用鼠标滚轮缩放摄像机视角</font><br>我们再来实现一个用鼠标滚轮缩放摄像机视角的功能。</p>
 <p>摄像机视角是由投影矩阵<code>perspective</code>函数的第一个参数fov（视野，field of view）来指定的。我们通常在指定的视野大小在45度。这个视野指定了我们可以看到场景中多大的范围。当视野变小时，场景投影出来的空间就会减小，更小的投影空间变换到固定尺寸的窗口上，会产生放大了的感觉。</p>
-<p>需要先设置一个摄像机视野的全局变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//摄像机视野</span></div><div class="line">GLfloat fov = <span class="number">45.0f</span>;</div></pre></td></tr></table></figure></p>
-<p>同鼠标位置和按键一样，我们先注册一个鼠标滚轮回调函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//注册鼠标滚轮回调函数</span></div><div class="line">glfwSetScrollCallback(window, scroll_callback);</div></pre></td></tr></table></figure></p>
-<p>接着我们需要在鼠标滚轮回调函数中，把鼠标滚轮y值的偏移量作为视野的增量，来计算视野值，并且把视野值限制在1到45度之间：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//鼠标滚轮回调函数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">scroll_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">double</span> xoffset, <span class="keyword">double</span> yoffset)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (fov &gt;= <span class="number">1.0f</span>&amp;&amp; fov &lt;= <span class="number">45.0f</span>) &#123;</div><div class="line">		fov -= yoffset;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (fov &lt; <span class="number">1.0f</span>) &#123;</div><div class="line">		fov = <span class="number">1.0f</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (fov &gt; <span class="number">45.0f</span>) &#123;</div><div class="line">		fov = <span class="number">45.0f</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>需要先设置一个摄像机视野的全局变量：</p>
+<pre class=" language-c++"><code class="language-c++">//摄像机视野
+GLfloat fov = 45.0f;
+</code></pre>
+<p>同鼠标位置和按键一样，我们先注册一个鼠标滚轮回调函数：</p>
+<pre class=" language-c++"><code class="language-c++">    //注册鼠标滚轮回调函数
+    glfwSetScrollCallback(window, scroll_callback);
+</code></pre>
+<p>接着我们需要在鼠标滚轮回调函数中，把鼠标滚轮y值的偏移量作为视野的增量，来计算视野值，并且把视野值限制在1到45度之间：</p>
+<pre class=" language-c++"><code class="language-c++">//鼠标滚轮回调函数
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    if (fov >= 1.0f&& fov <= 45.0f) {
+        fov -= yoffset;
+    }
+    if (fov < 1.0f) {
+        fov = 1.0f;
+    }
+    else if (fov > 45.0f) {
+        fov = 45.0f;
+    }
+}
+</code></pre>
 <p>当滚动鼠标滚轮时，yoffset值表示我们竖直滚动的大小。</p>
-<p>最后，把视野值传参给投影矩阵函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//投影矩阵</span></div><div class="line">mat4 projection = perspective(radians(fov), (GLfloat)WIDTH / (GLfloat)HEIGHT, <span class="number">0.1f</span>, <span class="number">100.0f</span>);</div></pre></td></tr></table></figure></p>
+<p>最后，把视野值传参给投影矩阵函数：</p>
+<pre class=" language-c++"><code class="language-c++">        //投影矩阵
+        mat4 projection = perspective(radians(fov), (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+</code></pre>
 <p>到此，我们的摄像机就实现了按键移动、鼠标旋转、滚轮缩放的功能。所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL8_Camera/LearnOpenGL8_Camera_3" target="_blank" rel="external">在这里</a>。</p>
 <p>编译运行后的结果类似如下：</p>
 <iframe height="498" width="510" src="https://learnopengl-cn.github.io/img/01/09/camera_mouse.mp4" frameborder="0" 'allowfullscreen'=""></iframe>
 
-<p><font size="5" color="orange">隐藏鼠标</font><br>如果我们想要隐藏窗口上的鼠标，可以使用<code>glfwSetInputMode</code>函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//隐藏鼠标</span></div><div class="line">glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">隐藏鼠标</font><br>如果我们想要隐藏窗口上的鼠标，可以使用<code>glfwSetInputMode</code>函数：</p>
+<pre class=" language-c++"><code class="language-c++">    //隐藏鼠标
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+</code></pre>
 <p>第一个参数是窗口对象，第二个参数是要设置的输入模式，我们这里要改变的是鼠标输入这种方式，第三个参数指明不显示鼠标。</p>
 <p>编译运行后，可以发现无论我们怎么移动鼠标，它都不会显示了，而且有一点好处：不管把鼠标移得多远，它也不会离开窗口。<br>&nbsp;</p>
 <hr>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -118,35 +118,63 @@
 <hr>
 <ul>
 <li><p>对于<code>const int *m;</code>，const修饰的是整型变量<code>*m</code>，不是指针变量<code>m</code>，所以*m是不可变的，m是可变的，即：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> *m;</div><div class="line"><span class="keyword">int</span> *n;</div><div class="line">m = n;      <span class="comment">//合法，m所指向的对象是可变的</span></div><div class="line">*m = <span class="number">14</span>;    <span class="comment">//不合法，m指向的对象的内容是不可变的</span></div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">const int *m;
+int *n;
+m = n;      //合法，m所指向的对象是可变的
+*m = 14;    //不合法，m指向的对象的内容是不可变的
+</code></pre>
 <p><code>const int *m</code>和<code>int const *m</code>是一样的。</p>
 </li>
 <li><p>对于<code>int * const m;</code>，const修饰的是指针变量m，所以m是不可变的，但*m是可变的，即：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> p;</div><div class="line"><span class="keyword">int</span> * <span class="keyword">const</span> m = &amp;p;</div><div class="line"><span class="keyword">int</span> *n;</div><div class="line">m = n;      <span class="comment">//不合法，m所指向的对象是不可变的</span></div><div class="line">*m = <span class="number">14</span>;    <span class="comment">//合法，m指向的对象的内容是可变的</span></div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">int p;
+int * const m = &p;
+int *n;
+m = n;      //不合法，m所指向的对象是不可变的
+*m = 14;    //合法，m指向的对象的内容是可变的
+</code></pre>
 <p>而且<code>int * const m</code>是必须在定义时赋初值的，否则m将指向随机的内存地址，这个内存地址是可能会变的，即m会变，则不符合const修饰的只读属性，所以必须在定义时为其指定一个确切的地址，而且一经赋值就不能再变了。</p>
 </li>
-<li><p>对于<code>const int m</code>，const修饰的是m，m的值是不可变的，如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> n;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> m = n;</div><div class="line"><span class="keyword">int</span> p = m;      <span class="comment">//合法，因为p是m的复制，不共用地址，不是同一个变量，可以有不同的读写属性</span></div><div class="line"><span class="keyword">int</span>&amp; q = m;     <span class="comment">//不合法，因为p和m共用地址，是同一个变量，但p和m却具有不同的读写属性，不合语义</span></div></pre></td></tr></table></figure>
-<p>在定义m时也是需要赋初值的，因为m的值是一经确定不能再改变的，它需要从一开始就知道自己的值是多少，不能后续再通过赋值语句来确定自己的值，即<code>m = 14;</code>是非法的。<code>int&amp; q = m</code>不合法是因为m是只读的，q是可读可写的，但是m和q共用一个地址，实际上是同一个变量，但却有不同的读写属性，即可以通过改变q来改变m的值，这是不符合const语义的，所以它不合法。而<code>int p = m</code>合法是因为p是m的复制，和m不共用地址，不是同一个变量，可以拥有不同的读写属性，改变p并不会影响到m。</p>
-</li>
+<li>对于<code>const int m</code>，const修饰的是m，m的值是不可变的，如下：<pre class=" language-c++"><code class="language-c++">int n;
+const int m = n;
+int p = m;      //合法，因为p是m的复制，不共用地址，不是同一个变量，可以有不同的读写属性
+int& q = m;     //不合法，因为p和m共用地址，是同一个变量，但p和m却具有不同的读写属性，不合语义
+</code></pre>
+在定义m时也是需要赋初值的，因为m的值是一经确定不能再改变的，它需要从一开始就知道自己的值是多少，不能后续再通过赋值语句来确定自己的值，即<code>m = 14;</code>是非法的。<code>int&amp; q = m</code>不合法是因为m是只读的，q是可读可写的，但是m和q共用一个地址，实际上是同一个变量，但却有不同的读写属性，即可以通过改变q来改变m的值，这是不符合const语义的，所以它不合法。而<code>int p = m</code>合法是因为p是m的复制，和m不共用地址，不是同一个变量，可以拥有不同的读写属性，改变p并不会影响到m。</li>
 </ul>
 <p>【注】：</p>
 <ul>
-<li><p>上面的<code>const int *m</code>可以不用赋初值，是因为const虽然修饰的是<code>*m</code>，<code>*m</code>是不可以直接赋值改变的，但是指针m指向的内容（即<code>*m</code>）是可以通过改变m来间接改变的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> *k;</div><div class="line"><span class="keyword">int</span> m = <span class="number">10</span>;</div><div class="line"><span class="keyword">int</span> n = <span class="number">20</span>;</div><div class="line">k = &amp;m;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; *k &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">k = &amp;n;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; *k &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
-<p>输出如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">10</span></div><div class="line"><span class="number">20</span></div></pre></td></tr></table></figure>
+<li>上面的<code>const int *m</code>可以不用赋初值，是因为const虽然修饰的是<code>*m</code>，<code>*m</code>是不可以直接赋值改变的，但是指针m指向的内容（即<code>*m</code>）是可以通过改变m来间接改变的：<pre class=" language-c++"><code class="language-c++">const int *k;
+int m = 10;
+int n = 20;
+k = &m;
+cout << *k << endl;
+k = &n;
+cout << *k << endl;
+</code></pre>
+输出如下：<pre class=" language-c++"><code class="language-c++">10
+20
+</code></pre>
 </li>
 </ul>
 <p><font size="5" color="orange">用const修饰函数参数</font></p>
 <hr>
-<p>如果函数参数需要作输出参数用，那么该参数就不能用const修饰，因为一旦用const修饰，该参数就无法在函数内部做任何改变，输入的是什么值，输出的将还是同样的值，强制对该参数赋值会编译报错，无法达到向函数外输出有效数据的作用。但是如果函数参数只作输入参数用，使用const修饰可以保证函数内部不会意外改动该参数，尤其是当函数参数是地址、引用等地址类型时，使用const能够起到保护作用，使函数实参不会被改变。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">copyString</span><span class="params">(<span class="keyword">char</span>* strDest, <span class="keyword">const</span> <span class="keyword">char</span>* strSrc)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>如果函数参数需要作输出参数用，那么该参数就不能用const修饰，因为一旦用const修饰，该参数就无法在函数内部做任何改变，输入的是什么值，输出的将还是同样的值，强制对该参数赋值会编译报错，无法达到向函数外输出有效数据的作用。但是如果函数参数只作输入参数用，使用const修饰可以保证函数内部不会意外改动该参数，尤其是当函数参数是地址、引用等地址类型时，使用const能够起到保护作用，使函数实参不会被改变。如下：</p>
+<pre class=" language-c++"><code class="language-c++">void copyString(char* strDest, const char* strSrc);
+</code></pre>
 <p>strSrc是输入参数，在字符串复制时并不希望改变它，所以用const将它修饰为只读的，函数内部如果企图改变strSrc的内容，编译器将报错。strDest是输出参数，将复制过后的字符串传到函数外部的对应实参。</p>
-<p>对于采用值传递的参数，由于函数会自动产生临时变量来复制实参，此时的函数参数（形参）和其实参具有不同的地址，即实参已经受到了保护，形参改变时并不会影响到其实参，所以无需加const修饰。例如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>不需要用const来修饰采用值传递的形参x：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> x)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>对于采用值传递的参数，由于函数会自动产生临时变量来复制实参，此时的函数参数（形参）和其实参具有不同的地址，即实参已经受到了保护，形参改变时并不会影响到其实参，所以无需加const修饰。例如：</p>
+<pre class=" language-c++"><code class="language-c++">void func1(int x);
+</code></pre>
+<p>不需要用const来修饰采用值传递的形参x：</p>
+<pre class=" language-c++"><code class="language-c++">void func(const int x);
+</code></pre>
 <p>同样地，无需将<code>void func(A a)</code>写为<code>void func(const A a)</code>，A为我们自定义的类、结构体等数据类型，非<a href="http://www.cnblogs.com/zrtqsk/p/4369864.html" target="_blank" rel="external">C++基本数据类型</a>。</p>
-<p>对于非C++基本数据类型的参数而言，像<code>void func(A a)</code>这样直接传递对象效率会比较低，因为函数内部会再产生一个A类型的临时对象a来复制对应实参，而临时对象将会产生构造、复制、析构等时间内存开销。为了提高效率，可以将函数改为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(A&amp; a)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>这样函数参数将采用址传递，形参只是实参的别名，共用同一个地址空间，不会产生临时对象。但是a可能只需要做输入参数用，并不希望函数内部改变参数a的内容，这时就可以将参数a用const来修饰为只读的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> A&amp; a)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>对于非C++基本数据类型的参数而言，像<code>void func(A a)</code>这样直接传递对象效率会比较低，因为函数内部会再产生一个A类型的临时对象a来复制对应实参，而临时对象将会产生构造、复制、析构等时间内存开销。为了提高效率，可以将函数改为：</p>
+<pre class=" language-c++"><code class="language-c++">void func(A& a);
+</code></pre>
+<p>这样函数参数将采用址传递，形参只是实参的别名，共用同一个地址空间，不会产生临时对象。但是a可能只需要做输入参数用，并不希望函数内部改变参数a的内容，这时就可以将参数a用const来修饰为只读的：</p>
+<pre class=" language-c++"><code class="language-c++">void func(const A& a);
+</code></pre>
 <p>这样既达到了提高效率的目的，也保护了参数a对应的实参。那么为了提高效率是否应该将<code>void func(int x);</code>改为<code>void func(int&amp; x);</code>呢？不需要的，因为C++基本数据类型在赋值/复制时没有构造、析构的过程，复制也非常快，基本类型的值传递和引用传递效率几乎一致。注：这里x只作输入参数用，如果需要作输出参数，还是要采用址传递的。</p>
 <p>综上：</p>
 <ul>
@@ -156,11 +184,37 @@
 <p><font size="5" color="orange">用const修饰函数返回值</font></p>
 <hr>
 <p>如果函数返回值采用值传递方式，用const修饰是没有价值的，因为函数会把返回值复制到外部的临时变量中，对函数内部的返回变量已经起到了保护作用。如果函数返回值采用址传递方式，比如指针，用const修饰返回值，能够保证函数返回值（即指针）的内容不能被修改，<strong>该返回值只能赋给const修饰的同类型指针</strong>。</p>
-<p>若返回值是非基本数据类型，将<code>A get();</code>改为<code>const A&amp; get()</code>确实可以提高效率，但是要注意函数到底是想返回一个对象的拷贝还是对象的别名，不然程序容易出错。比如外界想对get函数返回的对象值作进一步处理，但是又不想影响到A对象中的成员，那么无论使用<code>A&amp; get()</code>还是<code>const A&amp; get()</code>都达不到效果，还是得使用<code>A get()</code>。其实函数返回值采用引用传递的场合并不多，一般出现在类的赋值函数中，目的是为了实现链式表达式。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></div><div class="line">	<span class="keyword">const</span> A&amp; <span class="keyword">operator</span>= (<span class="keyword">const</span> A&amp; other);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	A a, b, c;</div><div class="line">	a = b = c;     <span class="comment">//合法</span></div><div class="line">	(a = b) = c;   <span class="comment">//不合法</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>若返回值是非基本数据类型，将<code>A get();</code>改为<code>const A&amp; get()</code>确实可以提高效率，但是要注意函数到底是想返回一个对象的拷贝还是对象的别名，不然程序容易出错。比如外界想对get函数返回的对象值作进一步处理，但是又不想影响到A对象中的成员，那么无论使用<code>A&amp; get()</code>还是<code>const A&amp; get()</code>都达不到效果，还是得使用<code>A get()</code>。其实函数返回值采用引用传递的场合并不多，一般出现在类的赋值函数中，目的是为了实现链式表达式。如下：</p>
+<pre class=" language-c++"><code class="language-c++">class A {
+    const A& operator= (const A& other);
+};
+
+int main(){
+    A a, b, c;
+    a = b = c;     //合法
+    (a = b) = c;   //不合法
+}
+</code></pre>
 <p>在a=b=c时，先执行b=c，返回值是const A类型，再将它作为参数传给other，最后赋值给A类型的a；但是在(a=b)=c时，先执行a=b，返回值是const A类型，接下来会将c作为参数传给other，最后赋值给const A类型，这与const变量只读冲突，所以是不合法的。</p>
 <p><font size="5" color="orange">用const修饰成员函数</font></p>
 <hr>
-<p>用const修饰成员函数用于保证函数内部不会修改数据成员，且不能调用其他非const成员函数（因为其他非const成员函数可能会修改数据成员）。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Test() &#123;</div><div class="line">		value = <span class="number">100</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>&amp; <span class="title">GetValue</span><span class="params">()</span> <span class="keyword">const</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span>&amp; Test::GetValue() <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> value;   <span class="comment">//value此时具有const属性，不合法</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>用const修饰成员函数用于保证函数内部不会修改数据成员，且不能调用其他非const成员函数（因为其他非const成员函数可能会修改数据成员）。如下：</p>
+<pre class=" language-c++"><code class="language-c++">class Test
+{
+private:
+    int value;
+public:
+    Test() {
+        value = 100;
+    }
+    int& GetValue() const;
+
+};
+int& Test::GetValue() const
+{
+    return value;   //value此时具有const属性，不合法
+}
+</code></pre>
 <p>由于每个非static非const的成员函数都有一个隐含的this，所以用const修饰函数相当于是在修饰this，由于函数的作用域只在函数内部，所以只在函数内部时this指针是const类型的，是只读的，也就是说在const修饰的函数内部，this的任何成员变量和成员函数都是只读的。所以上面<code>GetValue</code>函数里，value（即this.value）也是const类型的，返回的是const int类型，但函数指定的返回值却是int&amp;，这与前面讲的<code>int&amp; q = m</code>是一样的道理，不合法。</p>
 <p>可以这样改：</p>
 <ol>
@@ -171,12 +225,50 @@
 <li>将函数改为<code>const int&amp; Test::GetValue() const</code>。</li>
 <li>将函数改为<code>int Test::GetValue() const</code>。</li>
 <li>将函数后面的const去掉。</li>
-<li>return的不是成员变量，即如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>&amp; Test::GetValue() <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> tempValue = value;</div><div class="line">	<span class="keyword">return</span> tempValue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>return的不是成员变量，即如下：<pre class=" language-c++"><code class="language-c++">int& Test::GetValue() const
+{
+  int tempValue = value;
+  return tempValue;
+}
+</code></pre>
 </li>
 </ul>
 <p>对于第4种将&amp;去掉，其原理与上面讲的<code>int p = m</code>是一致的，非地址类型是直接复制的，前后不是同一个变量，可以有不同的读写属性。</p>
-<p>如果将value改为指针类型，如下程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> *value;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Test() &#123;</div><div class="line">		value = <span class="keyword">new</span> <span class="keyword">int</span>();</div><div class="line">		*value = <span class="number">100</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">GetValue</span><span class="params">()</span> <span class="keyword">const</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span>* Test::GetValue() <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> value; <span class="comment">//value此时具有const属性</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面程序是不会报错的，但是函数返回的是指针，与上文返回引用有什么不同吗？上文返回引用是报错的。这是因为这里返回的指针，而函数返回类型也是指针类型的，指针本身就相当于一个4字节的整型变量，存储着其他变量的地址，所以这里还是相当于上面第4种修改方式，是两个int型变量之间的复制。<br>如果把程序改成下面这样是会出错的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	Test() &#123;</div><div class="line">		value = <span class="number">100</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">GetValue</span><span class="params">()</span> <span class="keyword">const</span></span>;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="keyword">int</span>* Test::GetValue() <span class="keyword">const</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> &amp;value;   <span class="comment">//value此时具有const属性，不合法</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果将value改为指针类型，如下程序：</p>
+<pre class=" language-c++"><code class="language-c++">class Test
+{
+private:
+    int *value;
+public:
+    Test() {
+        value = new int();
+        *value = 100;
+    }
+    int* GetValue() const;
+
+};
+int* Test::GetValue() const
+{
+    return value; //value此时具有const属性
+}
+</code></pre>
+<p>上面程序是不会报错的，但是函数返回的是指针，与上文返回引用有什么不同吗？上文返回引用是报错的。这是因为这里返回的指针，而函数返回类型也是指针类型的，指针本身就相当于一个4字节的整型变量，存储着其他变量的地址，所以这里还是相当于上面第4种修改方式，是两个int型变量之间的复制。<br>如果把程序改成下面这样是会出错的：</p>
+<pre class=" language-c++"><code class="language-c++">class Test
+{
+private:
+    int value;
+public:
+    Test() {
+        value = 100;
+    }
+    int* GetValue() const;
+
+};
+int* Test::GetValue() const
+{
+    return &value;   //value此时具有const属性，不合法
+}
+</code></pre>
 <p>原理还是一样的，const int类型的返回值value和函数返回的int*类型的临时变量具有相同的地址，实际上是同一个变量，但却具有不同的读写属性，返回的临时变量是可写的，但value只读，所以是不合法的。<br>&nbsp;</p>
 <hr>
 <p>参考文献：<a href="http://blog.csdn.net/zheng19880607/article/details/23883437" target="_blank" rel="external">C++ const修饰成员函数</a></p>

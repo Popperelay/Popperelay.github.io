@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -117,8 +117,28 @@
 <hr>
 <p><font size="5" color="orange">GLSL概述</font><br>在OpenGL中着色器是用GLSL语言来编写的，它是为图形计算量身定制的，尤其是向量和矩阵运算。</p>
 <p>着色器的开头总是要声明GLSL的版本，用于匹配对应的OpenGL版本。接着是输入变量和输出变量、uniform和main函数。和大多数程序一样，着色器的入口点也是main函数，在main函数中我们处理所有的输入变量，并且用输出变量输出结果。</p>
-<p>着色器一般都形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version version_number</span></div><div class="line"></div><div class="line"><span class="keyword">in</span> type in_variable_name;</div><div class="line"><span class="keyword">in</span> type in_variable_name;</div><div class="line"></div><div class="line"><span class="keyword">out</span> type out_variable_name;</div><div class="line"></div><div class="line">uniform type uniform_name;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//处理输入并进行一些图形操作</span></div><div class="line">	...</div><div class="line">	<span class="comment">//输出处理的结果到输出变量</span></div><div class="line">	out_variable_name=...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对于顶点着色器，每个输入变量也叫顶点属性（vertex attribute）。由于硬件有限，我们能够声明的顶点属性是有上限的。不同的硬件上限可能不同，想知道你的电脑最多能支持多少个顶点属性的话，可以查询一下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GLint maxVertexAttribs;</div><div class="line">glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &amp;maxVertexAttribs);</div><div class="line">cout &lt;&lt; maxVertexAttribs &lt;&lt; endl;</div></pre></td></tr></table></figure></p>
+<p>着色器一般都形如：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#version version_number</span>
+
+<span class="token keyword">in</span> type in_variable_name<span class="token punctuation">;</span>
+<span class="token keyword">in</span> type in_variable_name<span class="token punctuation">;</span>
+
+<span class="token keyword">out</span> type out_variable_name<span class="token punctuation">;</span>
+
+uniform type uniform_name<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//处理输入并进行一些图形操作</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token comment" spellcheck="true">//输出处理的结果到输出变量</span>
+    out_variable_name<span class="token operator">=</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>对于顶点着色器，每个输入变量也叫顶点属性（vertex attribute）。由于硬件有限，我们能够声明的顶点属性是有上限的。不同的硬件上限可能不同，想知道你的电脑最多能支持多少个顶点属性的话，可以查询一下：</p>
+<pre class=" language-csharp"><code class="language-csharp">GLint maxVertexAttribs<span class="token punctuation">;</span>
+<span class="token function">glGetIntegerv</span><span class="token punctuation">(</span>GL_MAX_VERTEX_ATTRIBS<span class="token punctuation">,</span> <span class="token operator">&amp;</span>maxVertexAttribs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> maxVertexAttribs <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
 <p>通常情况下至少会返回16个，大部分情况够用了。OpenGL也确保至少16个包含4分量的顶点属性可用。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">GLSL中的向量</font><br>前面提到GLSL对向量提供了特别支持，下面来看一下。GLSL中的向量是一个可以包含有1、2、3或4个分量的容器，分量的类型可以是基础类型中的任意一个。根据分量类型和支持的分量个数，有如下几种向量（n代表分量数量）：</p>
@@ -130,9 +150,18 @@
 <li>dvecn：包含n个double分量的向量</li>
 </ul>
 <p>除此之外，GLSL还允许对颜色使用rgba向量，对纹理使用stpq向量。</p>
-<p>GLSL所支持的向量有很灵活的分量组成方式，叫做重组（swizzling）。重组允许像这样的语法：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vec2 someVec;</div><div class="line">vec4 differentVec = someVec.xyxx;</div><div class="line">vec3 anotherVec = differentVec.zyw;</div><div class="line">vec4 otherVec = someVec.xxxx + anotherVec.yxzy;</div></pre></td></tr></table></figure></p>
+<p>GLSL所支持的向量有很灵活的分量组成方式，叫做重组（swizzling）。重组允许像这样的语法：</p>
+<pre class=" language-csharp"><code class="language-csharp">vec2 someVec<span class="token punctuation">;</span>
+vec4 differentVec <span class="token operator">=</span> someVec<span class="token punctuation">.</span>xyxx<span class="token punctuation">;</span>
+vec3 anotherVec <span class="token operator">=</span> differentVec<span class="token punctuation">.</span>zyw<span class="token punctuation">;</span>
+vec4 otherVec <span class="token operator">=</span> someVec<span class="token punctuation">.</span>xxxx <span class="token operator">+</span> anotherVec<span class="token punctuation">.</span>yxzy<span class="token punctuation">;</span>
+</code></pre>
 <p>可以利用向量现有的分量重组成其它个数的向量。</p>
-<p>当然向量（或其分量）还可以作为另一个向量的构造参数：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vec2 vect = vec2(<span class="number">0.5</span>f, <span class="number">0.7</span>f);</div><div class="line">vec4 result = vec4(vect, <span class="number">0.0</span>f, <span class="number">0.0</span>f);</div><div class="line">vec4 otherResult = vec4(result.xyz, <span class="number">1.0</span>f);</div></pre></td></tr></table></figure></p>
+<p>当然向量（或其分量）还可以作为另一个向量的构造参数：</p>
+<pre class=" language-csharp"><code class="language-csharp">vec2 vect <span class="token operator">=</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.7f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 result <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>vect<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec4 otherResult <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>xyz<span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">输入与输出</font><br>每个着色器都应当有输入和输出，这样才能进行数据交流和传递嘛！GLSL定义了in和out关键字来实现输入输出。</p>
@@ -142,17 +171,52 @@
 </ul>
 <p>还有渲染管线上的最后一个着色器——像素着色器，也有点不同。它需要有一个vec4颜色输出变量，因为像素着色器需要生产一个最终输出的颜色。如果在像素着色器中没有定义输出颜色，OpenGL会把物体渲染为白色（或黑色）。</p>
 <p>如果我们打算从一个着色器向另一个着色器发送数据，我们必须在发送方着色器中声明一个输出，在接收方着色器声明一个同名输入。当名字和类型都一样的时候，OpenGL就会把两个变量链接到一起，它们之间就可以发送数据了（这是在链接程序对象时完成的）。</p>
-<p>接下来上个demo，让顶点着色器为像素着色器决定颜色：<br>顶点着色器：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//顶点着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* vertexShaderSource =</div><div class="line"><span class="string">"#version 330 core\n"</span></div><div class="line"><span class="string">"layout (location=0) in vec3 position;\n"</span></div><div class="line"><span class="string">"out vec4 vertexColor;\n"</span></div><div class="line"><span class="string">"void main()&#123;\n"</span></div><div class="line"><span class="string">"gl_Position=vec4(position.x,position.y,position.z,1.0f);\n"</span></div><div class="line"><span class="string">"vertexColor=vec4(0.5,0.0f,0.0f,1.0f);\n"</span></div><div class="line"><span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
-<p>像素着色器：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//像素着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* fragmentShaderSource =</div><div class="line"><span class="string">"#version 330 core\n"</span></div><div class="line"><span class="string">"in vec4 vertexColor;\n"</span></div><div class="line"><span class="string">"out vec4 color;\n"</span></div><div class="line"><span class="string">"void main()&#123;\n"</span></div><div class="line"><span class="string">"color=vertexColor;\n"</span></div><div class="line"><span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
+<p>接下来上个demo，让顶点着色器为像素着色器决定颜色：<br>顶点着色器：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//顶点着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> vertexShaderSource <span class="token operator">=</span>
+<span class="token string">"#version 330 core\n"</span>
+<span class="token string">"layout (location=0) in vec3 position;\n"</span>
+<span class="token string">"out vec4 vertexColor;\n"</span>
+<span class="token string">"void main(){\n"</span>
+<span class="token string">"gl_Position=vec4(position.x,position.y,position.z,1.0f);\n"</span>
+<span class="token string">"vertexColor=vec4(0.5,0.0f,0.0f,1.0f);\n"</span>
+<span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
+<p>像素着色器：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//像素着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> fragmentShaderSource <span class="token operator">=</span>
+<span class="token string">"#version 330 core\n"</span>
+<span class="token string">"in vec4 vertexColor;\n"</span>
+<span class="token string">"out vec4 color;\n"</span>
+<span class="token string">"void main(){\n"</span>
+<span class="token string">"color=vertexColor;\n"</span>
+<span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
 <p>可以看到我们在顶点着色器中声明了一个vertexColor变量作为输出，并且在顶点着色器的main函数中为这个输出变量赋了值；然后在像素着色器中声明了一个同名同类型的输入变量，并在其main函数中令输出变量color等于该输入变量。当链接程序对象后，像素着色器的vertexColor就和顶点着色器的vertexColor链接在一起了，因为我们在顶点着色器中设置的是深红色的，所以在像素着色器中输出的结果也是深红色的：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147973357727.png" alt=""><br>我们完成了顶点着色器向像素着色器发送数据！<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">全局变量uniform</font><br>上面我们完成了一个着色器向另一个着色器发送数据，那么能不能从应用程序向像素着色器发送一个颜色呢？我们可以使用全局变量unifrom来实现。</p>
 <p>uniform是一种从CPU中的应用向GPU中的着色器发送数据的方式。但是uniform和顶点属性不同，uniform变量是全局的，在每个着色器程序都是独一无二的，可以在渲染管线的任意一个阶段访问。而且uniform变量会一直保存它们的数据，直到它们被重置或更新。</p>
 <p>一般我们都是在着色器代码中声明uniform变量，形如<code>uniform vec4 ourColor</code>。</p>
 <p>下面上一个demo，我们通过uniform变量来设置三角形颜色。</p>
-<p>像素着色器：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//像素着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* fragmentShaderSource =</div><div class="line"><span class="string">"#version 330 core\n"</span></div><div class="line"><span class="string">"out vec4 color;\n"</span></div><div class="line"><span class="string">"uniform vec4 ourColor;\n"</span></div><div class="line"><span class="string">"void main()&#123;\n"</span></div><div class="line"><span class="string">"color=ourColor;\n"</span></div><div class="line"><span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
+<p>像素着色器：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//像素着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> fragmentShaderSource <span class="token operator">=</span>
+<span class="token string">"#version 330 core\n"</span>
+<span class="token string">"out vec4 color;\n"</span>
+<span class="token string">"uniform vec4 ourColor;\n"</span>
+<span class="token string">"void main(){\n"</span>
+<span class="token string">"color=ourColor;\n"</span>
+<span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
 <p>我们在像素着色器中声明了一个uniform变量ourColor，并且把像素着色器的输出颜色设置为uniform变量的值。</p>
-<p>下面我们到应用程序里，去给这个在像素着色器中声明的uniform变量赋值。首先需要找到这个uniform变量在着色器程序对象中的位置，我们使用<code>glGetUniformLocation</code>函数来完成。然后就可以使用<code>glUniform4f</code>函数来给uniform变量赋值了：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//激活着色器程序对象</span></div><div class="line">glUseProgram(shaderProgram);</div><div class="line"><span class="comment">//找到uniform变量在着色器程序对象中的位置</span></div><div class="line">GLint ourColorLocation = glGetUniformLocation(shaderProgram, <span class="string">"ourColor"</span>);</div><div class="line"><span class="comment">//给uniform变量赋值</span></div><div class="line">glUniform4f(ourColorLocation, <span class="number">0.0</span>f, <span class="number">1.0</span>f, <span class="number">0.0</span>f, <span class="number">1.0</span>f);</div></pre></td></tr></table></figure></p>
+<p>下面我们到应用程序里，去给这个在像素着色器中声明的uniform变量赋值。首先需要找到这个uniform变量在着色器程序对象中的位置，我们使用<code>glGetUniformLocation</code>函数来完成。然后就可以使用<code>glUniform4f</code>函数来给uniform变量赋值了：</p>
+<pre class=" language-csharp"><code class="language-csharp">        <span class="token comment" spellcheck="true">//激活着色器程序对象</span>
+        <span class="token function">glUseProgram</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//找到uniform变量在着色器程序对象中的位置</span>
+        GLint ourColorLocation <span class="token operator">=</span> <span class="token function">glGetUniformLocation</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">,</span> <span class="token string">"ourColor"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//给uniform变量赋值</span>
+        <span class="token function">glUniform4f</span><span class="token punctuation">(</span>ourColorLocation<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p><code>glGetUniformLocation</code>函数第一个参数是链接后的着色器程序对象，第二个参数是我们要查找的uniform变量，返回GLint类型变量，代表找到的位置值。<code>glUniform4f</code>函数的第一参数是uniform变量的位置值，接下来几个参数就是R、G、B、A了。<br>【注】：</p>
 <ul>
 <li>查询uniform变量位置和给uniform变量赋值在<code>glUseProgram</code>前后都可以。</li>
@@ -166,23 +230,93 @@
 </li>
 </ul>
 <p>上面我们找到了在着色器程序对象中uniform变量ourColor的位置，并给它赋值为绿色（0,1,0,1），在渲染后就会在窗口上出现一个绿色的三角形。</p>
-<p>现在我们把效果做的再灵动点：让三角形的颜色随着时间不断变化。想一想其实很简单吧，只需要把上面程序中的绿色改为随时间变化的颜色就可以了：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 更新颜色</span></div><div class="line">GLfloat timeValue = glfwGetTime();</div><div class="line">GLfloat greenValue = sin(timeValue) / <span class="number">2</span> + <span class="number">0.5</span>;</div><div class="line"><span class="comment">//给uniform变量赋值</span></div><div class="line">glUniform4f(ourColorLocation, <span class="number">0.0</span>f, greenValue, <span class="number">0.0</span>f, <span class="number">1.0</span>f);</div><div class="line"><span class="comment">//激活着色器程序对象</span></div><div class="line">glUseProgram(shaderProgram);</div></pre></td></tr></table></figure></p>
+<p>现在我们把效果做的再灵动点：让三角形的颜色随着时间不断变化。想一想其实很简单吧，只需要把上面程序中的绿色改为随时间变化的颜色就可以了：</p>
+<pre class=" language-csharp"><code class="language-csharp">        <span class="token comment" spellcheck="true">// 更新颜色</span>
+        GLfloat timeValue <span class="token operator">=</span> <span class="token function">glfwGetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GLfloat greenValue <span class="token operator">=</span> <span class="token function">sin</span><span class="token punctuation">(</span>timeValue<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//给uniform变量赋值</span>
+        <span class="token function">glUniform4f</span><span class="token punctuation">(</span>ourColorLocation<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> greenValue<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//激活着色器程序对象</span>
+        <span class="token function">glUseProgram</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p><code>glfwGetTime</code>函数会获取运行的秒数，然后使用sin函数让颜色值在0到1之间变化，把结果存储到greenValue变量里。再使用这个不断变化（每一次循环greenValue的值都会改变）的变量去给uniform变量赋值，这样像素着色器输出的颜色值也就是在随着时间不断变化了。</p>
 <p>所有源码<a href="https://github.com/Popperelay/BlogCode/blob/master/LearnOpenGL4_Shader/LearnOpenGL4_Shader_1/main.cpp" target="_blank" rel="external">在这里</a>。</p>
 <p>编译运行后的结果如下：</p>
 <p><iframe height="498" width="510" src="http://player.youku.com/embed/XMTI3OTI5MjY5Ng==" frameborder="0" 'allowfullscreen'=""></iframe><br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">多个顶点属性</font><br>可以看到上面的三角形内部点都是相同的颜色，或者三角形的每个顶点都是相同的颜色，这是因为三个顶点都是使用像素着色器中的输出颜色来绘制的，那三角形的这三个顶点肯定同色了，而在使用GL_TRIANGLES方式进行绘制时，三角形内部点的颜色是由三个顶点的颜色值插值计算得到，由于三个顶点同色，插值后的结果当然还是和顶点一样的颜色，所以整个三角形中的所有点就都是一个颜色。归根结底就是因为三角形的三个顶点同色造成的，现在如果我们想要三角形中点不同色，那就需要给这三个顶点赋不同的颜色值了。也就是每个顶点现在应该要有两种顶点属性：顶点位置坐标、顶点颜色：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//三角形顶点的坐标和颜色</span></div><div class="line">GLfloat vertices[] = &#123;</div><div class="line">	<span class="comment">//位置坐标        //颜色</span></div><div class="line">	<span class="number">-0.5</span>f,<span class="number">-0.5</span>f,<span class="number">0.0</span>f, <span class="number">1.0</span>f,<span class="number">0.0</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">0.5</span>f, <span class="number">-0.5</span>f,<span class="number">0.0</span>f, <span class="number">0.0</span>f,<span class="number">1.0</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">0.0</span>f, <span class="number">0.5</span>f, <span class="number">0.0</span>f, <span class="number">0.0</span>f,<span class="number">0.0</span>f,<span class="number">1.0</span>f</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>输入的顶点数据变了，顶点属性也增加了，所以我们还需要使用<code>glVertexAttribPointer</code>函数重新解析顶点数据：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//告诉OpenGL如何解析显存中的顶点位置属性数据</span></div><div class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">6</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</div><div class="line"><span class="comment">//打开顶点位置属性数组</span></div><div class="line">glEnableVertexAttribArray(<span class="number">0</span>);</div><div class="line"><span class="comment">//告诉OpenGL如何解析显存中的顶点颜色属性数据</span></div><div class="line">glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">6</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)(<span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat)));</div><div class="line"><span class="comment">//打开顶点颜色属性数组</span></div><div class="line">glEnableVertexAttribArray(<span class="number">1</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">多个顶点属性</font><br>可以看到上面的三角形内部点都是相同的颜色，或者三角形的每个顶点都是相同的颜色，这是因为三个顶点都是使用像素着色器中的输出颜色来绘制的，那三角形的这三个顶点肯定同色了，而在使用GL_TRIANGLES方式进行绘制时，三角形内部点的颜色是由三个顶点的颜色值插值计算得到，由于三个顶点同色，插值后的结果当然还是和顶点一样的颜色，所以整个三角形中的所有点就都是一个颜色。归根结底就是因为三角形的三个顶点同色造成的，现在如果我们想要三角形中点不同色，那就需要给这三个顶点赋不同的颜色值了。也就是每个顶点现在应该要有两种顶点属性：顶点位置坐标、顶点颜色：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//三角形顶点的坐标和颜色</span>
+    GLfloat vertices<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//位置坐标        //颜色</span>
+        <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">1.0f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span><span class="token number">1.0f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span><span class="token number">1.0f</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>输入的顶点数据变了，顶点属性也增加了，所以我们还需要使用<code>glVertexAttribPointer</code>函数重新解析顶点数据：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//告诉OpenGL如何解析显存中的顶点位置属性数据</span>
+    <span class="token function">glVertexAttribPointer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> GL_FALSE<span class="token punctuation">,</span> <span class="token number">6</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GLfloat<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>GLvoid<span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//打开顶点位置属性数组</span>
+    <span class="token function">glEnableVertexAttribArray</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//告诉OpenGL如何解析显存中的顶点颜色属性数据</span>
+    <span class="token function">glVertexAttribPointer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> GL_FALSE<span class="token punctuation">,</span> <span class="token number">6</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GLfloat<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>GLvoid<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GLfloat<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//打开顶点颜色属性数组</span>
+    <span class="token function">glEnableVertexAttribArray</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>对于顶点位置坐标属性，它的location为0，由三个float组成，不需要规范化，因为从位置属性开始每隔6个float数据（3个位置坐标、3个颜色），才会再次回到位置属性，所以步长是6*sizeof(GLfloat)，第一个位置属性在缓冲中的偏移量是0；对于顶点颜色属性，它的location为1，由三个float组成，不需要规范化，颜色属性也是6个float数据一个轮回，所以步长也是6*sizeof(GLfloat)，第一个颜色属性是在3个float坐标分量（x、y、z）之后才开始的，所以偏移量是(GLvoid*)(3*sizeof(GLfloat))。</p>
-<p>然后需要在顶点着色器中增加一个颜色输入属性，然后把颜色输出（以便传递给像素着色器）：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//顶点着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* vertexShaderSource =</div><div class="line"><span class="string">"#version 330 core\n"</span></div><div class="line"><span class="string">"layout (location=0) in vec3 position;\n"</span>  <span class="comment">//位置变量的属性位置值为0</span></div><div class="line"><span class="string">"layout (location=1) in vec3 color;\n"</span>     <span class="comment">//颜色变量的属性位置值为1</span></div><div class="line"><span class="string">"out vec3 ourColor;\n"</span></div><div class="line"><span class="string">"void main()&#123;\n"</span></div><div class="line"><span class="string">"gl_Position=vec4(position,1.0f);\n"</span></div><div class="line"><span class="string">"ourColor=color;\n"</span></div><div class="line"><span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
-<p>接着在像素着色器接收颜色，并把它赋值给输出颜色变量：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//像素着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* fragmentShaderSource =</div><div class="line"><span class="string">"#version 330 core\n"</span></div><div class="line"><span class="string">"in vec3 ourColor;\n"</span></div><div class="line"><span class="string">"out vec4 color;\n"</span></div><div class="line"><span class="string">"void main()&#123;\n"</span></div><div class="line"><span class="string">"color=vec4(ourColor,1.0f);\n"</span></div><div class="line"><span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
+<p>然后需要在顶点着色器中增加一个颜色输入属性，然后把颜色输出（以便传递给像素着色器）：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//顶点着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> vertexShaderSource <span class="token operator">=</span>
+<span class="token string">"#version 330 core\n"</span>
+<span class="token string">"layout (location=0) in vec3 position;\n"</span>  <span class="token comment" spellcheck="true">//位置变量的属性位置值为0</span>
+<span class="token string">"layout (location=1) in vec3 color;\n"</span>     <span class="token comment" spellcheck="true">//颜色变量的属性位置值为1</span>
+<span class="token string">"out vec3 ourColor;\n"</span>
+<span class="token string">"void main(){\n"</span>
+<span class="token string">"gl_Position=vec4(position,1.0f);\n"</span>
+<span class="token string">"ourColor=color;\n"</span>
+<span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
+<p>接着在像素着色器接收颜色，并把它赋值给输出颜色变量：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//像素着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> fragmentShaderSource <span class="token operator">=</span>
+<span class="token string">"#version 330 core\n"</span>
+<span class="token string">"in vec3 ourColor;\n"</span>
+<span class="token string">"out vec4 color;\n"</span>
+<span class="token string">"void main(){\n"</span>
+<span class="token string">"color=vec4(ourColor,1.0f);\n"</span>
+<span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
 <p>这样我们就能给三角形三个顶点赋不同的颜色值了，并且三角形内部的点会由三个顶点颜色插值得到。</p>
 <p>全部源码<a href="https://github.com/Popperelay/BlogCode/blob/master/LearnOpenGL4_Shader/LearnOpenGL4_Shader_2/main.cpp" target="_blank" rel="external">在这里</a>。</p>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147978386887.png" alt=""><br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">自定义着色器类</font><br>从上面的程序里可以看到，主函数main太庞杂了，我们希望减轻main函数的负担，把有关着色器的内容拿出来，单独封装成一个类，用于读取、编译、管理着色器，也便于程序理解和移植。</p>
-<p>前面是直接把着色器代码写到字符串里，很不方便，IDE也没法检查是否有语法错误。所以我们选择把着色器代码单独写在另一个文件里，要用的时候从文件里读出来。读文件的代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//从指定路径的文件中读取着色器源码</div><div class="line">const GLchar* shader::GetShaderSourceFromFile(const GLchar* shaderPath) &#123;</div><div class="line">	//以二进制方式打开指定路径的文件</div><div class="line">	ifstream fin(shaderPath, ios::binary);</div><div class="line">	//检测是否成功打开文件</div><div class="line">	if (!fin) &#123;</div><div class="line">		cout &lt;&lt; "Cannot open input file" &lt;&lt; endl;</div><div class="line">		exit(1);</div><div class="line">	&#125;</div><div class="line">	//将读指针设置到文件尾</div><div class="line">	fin.seekg(0, ios::end);</div><div class="line">	//读出当前文件位置，以获取文件长度</div><div class="line">	int length = fin.tellg();</div><div class="line">	//定义长度为length+1的字符串来存储文件内容</div><div class="line">	char* shaderSource = new char[length + 1];</div><div class="line">	//重新将读指针设置到文件头</div><div class="line">	fin.seekg(0, ios::beg);</div><div class="line">	//读出整个文件</div><div class="line">	fin.read(shaderSource, length);</div><div class="line">	//给字符串末尾加上字符串结束符'\0'</div><div class="line">	shaderSource[length] = '\0';</div><div class="line">	fin.close();</div><div class="line">	return shaderSource;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>前面是直接把着色器代码写到字符串里，很不方便，IDE也没法检查是否有语法错误。所以我们选择把着色器代码单独写在另一个文件里，要用的时候从文件里读出来。读文件的代码如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//从指定路径的文件中读取着色器源码</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> shader<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">GetShaderSourceFromFile</span><span class="token punctuation">(</span><span class="token keyword">const</span> GLchar<span class="token operator">*</span> shaderPath<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//以二进制方式打开指定路径的文件</span>
+    ifstream <span class="token function">fin</span><span class="token punctuation">(</span>shaderPath<span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//检测是否成功打开文件</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fin<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open input file"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//将读指针设置到文件尾</span>
+    fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>end<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//读出当前文件位置，以获取文件长度</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> fin<span class="token punctuation">.</span><span class="token function">tellg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//定义长度为length+1的字符串来存储文件内容</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> shaderSource <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">[</span>length <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//重新将读指针设置到文件头</span>
+    fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>beg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//读出整个文件</span>
+    fin<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>shaderSource<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//给字符串末尾加上字符串结束符'\0'</span>
+    shaderSource<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+    fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> shaderSource<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>这里把读文件写在一个名为<code>GetShaderSourceFromFile</code>的函数里，函数返回的就是从文件里读出的着色器代码。注释很详细，就不再赘述了，关于C++的文件IO可以参考<a href="http://popperelay.com/2016/11/24/C++%E6%96%87%E4%BB%B6IO/" target="_blank" rel="external">《C++文件的输入输出》</a>。</p>
 <p>其余的代码和之前差不多，只是关于着色器的都转移到了类里而已，全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL4_Shader/LearnOpenGL4_Shader_3" target="_blank" rel="external">在这里</a>：<br>&nbsp;</p>
 <hr>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -123,20 +123,55 @@
 <p><code>glBufferData</code>函数可以把数据从CPU传递到GPU，并且能够在GPU上开辟一块大小等于其第二个参数的内存，然后把来自CPU的数据存储到这片内存里。如果第三个参数data传递的是NULL，那么OpenGL只会帮我们分配内存，而不会填充它。这对后面的<code>glBufferSubData</code>函数很有用。</p>
 <p><font size="4" color="red">glBufferSubData函数</font><br>函数原型为：<code>glBufferSubData(GLenum targrt, GLintptr offset, GLsizeiptr size, const void* data)</code></p>
 <p><code>glBufferSubData</code>函数也可以把数据从CPU传递到GPU，但是它不会再GPU上开辟内存，所以在调用该函数之前，必须调用<code>glBufferData</code>函数分配好足够的内存，然后该函数才能把来自CPU的数据放到这片内存的指定位置。</p>
-<p><code>glBufferData</code>函数是从开辟的内存的起始地址开始，把所有数据一次性地填充到这片内存里，而<code>glBufferSubData</code>函数是从开辟的内存的offset位置开始，把数据填充到这片内存的指定位置上，只要不越界就可以（不超过开辟的内存的结束地址）。例如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glBufferSubData(GL_ARRAY_BUFFER, <span class="number">24</span>, <span class="keyword">sizeof</span>(data), &amp;data); <span class="comment">// 范围： [24, 24 + sizeof(data)]</span></div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">glMapBuffer和memcpy函数</font><br>使用<code>glMapBuffer</code>函数可以返回一个当前绑定缓冲的内存的地址，是一个指针，我们可以把这个返回的内存地址作为<code>memcpy</code>函数的参数，从而把数据传递到该内存地址所指定的位置：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">glBindBuffer(GL_ARRAY_BUFFER, buffer);</div><div class="line"><span class="comment">// 获取当前绑定缓存buffer的内存地址</span></div><div class="line"><span class="keyword">void</span>* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);</div><div class="line"><span class="comment">// 向缓冲中写入数据</span></div><div class="line"><span class="built_in">memcpy</span>(ptr, data, <span class="keyword">sizeof</span>(data));</div><div class="line"><span class="comment">// 完成够别忘了告诉OpenGL我们不再需要它了</span></div><div class="line">glUnmapBuffer(GL_ARRAY_BUFFER);</div></pre></td></tr></table></figure></p>
+<p><code>glBufferData</code>函数是从开辟的内存的起始地址开始，把所有数据一次性地填充到这片内存里，而<code>glBufferSubData</code>函数是从开辟的内存的offset位置开始，把数据填充到这片内存的指定位置上，只要不越界就可以（不超过开辟的内存的结束地址）。例如：</p>
+<pre class=" language-c++"><code class="language-c++">glBufferSubData(GL_ARRAY_BUFFER, 24, sizeof(data), &data); // 范围： [24, 24 + sizeof(data)]
+</code></pre>
+<p><font size="4" color="red">glMapBuffer和memcpy函数</font><br>使用<code>glMapBuffer</code>函数可以返回一个当前绑定缓冲的内存的地址，是一个指针，我们可以把这个返回的内存地址作为<code>memcpy</code>函数的参数，从而把数据传递到该内存地址所指定的位置：</p>
+<pre class=" language-c++"><code class="language-c++">glBindBuffer(GL_ARRAY_BUFFER, buffer);
+// 获取当前绑定缓存buffer的内存地址
+void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+// 向缓冲中写入数据
+memcpy(ptr, data, sizeof(data));
+// 完成够别忘了告诉OpenGL我们不再需要它了
+glUnmapBuffer(GL_ARRAY_BUFFER);
+</code></pre>
 <p>别忘了调用<code>glUnmapBuffer</code>函数告诉OpenGL我们已经用完指针了，需要解映射，这样这个地址指针将不再可用。</p>
 <p>把数据直接映射到缓冲区上使用<code>glMapBuffer</code>很有用，因为它不用把它存储在临时内存里，可以从文件读取数据然后直接复制到缓冲的内存里。而<code>glBufferData</code>和<code>glBufferSubData</code>是需要先开辟临时内存，再存储到对应的缓冲内存里。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">分批处理顶点数据</font><br>使用<code>glVertexAttribPointer</code>函数可以指定缓冲中顶点数组的属性的布局（layout）。我们之前一直是把顶点属性交叉存放在顶点数组里的，比如123123123123这种交叉布局，这个时候是使用<code>glBufferData</code>函数来传递数据，，而且每种属性下<code>glVertexAttribPointer</code>函数的步长参数stride应该设置为sizeof(123)，即所有属性大小之和。注：1、2、3可能还是几个GL_FLOAT大小。</p>
-<p>其实我们还可以把顶点属性连续放置，比如111222333这种批量方式，这时传递数据应该使用<code>glBufferSubData</code>函数了，使用该函数指定每种属性的起始位置和该属性的所有数据大小。示例如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">GLfloat positions[] = &#123; ... &#125;;</div><div class="line">GLfloat normals[] = &#123; ... &#125;;</div><div class="line">GLfloat tex[] = &#123; ... &#125;;</div><div class="line"><span class="comment">// 填充缓冲</span></div><div class="line">glBufferSubData(GL_ARRAY_BUFFER, <span class="number">0</span>, <span class="keyword">sizeof</span>(positions), &amp;positions);</div><div class="line">glBufferSubData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(positions), <span class="keyword">sizeof</span>(normals), &amp;normals);</div><div class="line">glBufferSubData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(positions) + <span class="keyword">sizeof</span>(normals), <span class="keyword">sizeof</span>(tex), &amp;tex);</div></pre></td></tr></table></figure></p>
-<p>在使用<code>glVertexAttribPointer</code>函数解析顶点数据时，每种属性下的步长就应该是对应属性的GL_FLOAT大小了。而且偏移量应该是批量属性开始的位置，不再像是交叉属性在第一组里的偏移量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), <span class="number">0</span>);  </div><div class="line">glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)(<span class="keyword">sizeof</span>(positions)));  </div><div class="line">glVertexAttribPointer(</div><div class="line">  <span class="number">2</span>, <span class="number">2</span>, GL_FLOAT, GL_FALSE, <span class="number">2</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)(<span class="keyword">sizeof</span>(positions) + <span class="keyword">sizeof</span>(normals)));</div></pre></td></tr></table></figure></p>
+<p>其实我们还可以把顶点属性连续放置，比如111222333这种批量方式，这时传递数据应该使用<code>glBufferSubData</code>函数了，使用该函数指定每种属性的起始位置和该属性的所有数据大小。示例如下：</p>
+<pre class=" language-c++"><code class="language-c++">GLfloat positions[] = { ... };
+GLfloat normals[] = { ... };
+GLfloat tex[] = { ... };
+// 填充缓冲
+glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), &positions);
+glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), sizeof(normals), &normals);
+glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(normals), sizeof(tex), &tex);
+</code></pre>
+<p>在使用<code>glVertexAttribPointer</code>函数解析顶点数据时，每种属性下的步长就应该是对应属性的GL_FLOAT大小了。而且偏移量应该是批量属性开始的位置，不再像是交叉属性在第一组里的偏移量：</p>
+<pre class=" language-c++"><code class="language-c++">glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);  
+glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)(sizeof(positions)));  
+glVertexAttribPointer(
+  2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)(sizeof(positions) + sizeof(normals)));
+</code></pre>
 <p>当然，选用哪种方式全凭喜好了，效率上没有多大区别。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">复制缓冲</font><br>当我们的缓冲被数据填充以后，可能打算让其他缓冲也能够分享这些数据或者打算把缓冲的内容复制到另一个缓冲里。<code>glCopyBufferSubData</code>函数让我们能够相对容易地把一个缓冲里的数据复制到另一个缓冲里。函数原型如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">glCopyBufferSubData</span><span class="params">(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)</span></span>;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">复制缓冲</font><br>当我们的缓冲被数据填充以后，可能打算让其他缓冲也能够分享这些数据或者打算把缓冲的内容复制到另一个缓冲里。<code>glCopyBufferSubData</code>函数让我们能够相对容易地把一个缓冲里的数据复制到另一个缓冲里。函数原型如下：</p>
+<pre class=" language-c++"><code class="language-c++">void glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
+</code></pre>
 <p><code>readtarget</code>和<code>writetarget</code>是复制的来源缓冲目标和目的缓冲目标，例如我们可以从<code>VERTEX_ARRAY_BUFFER</code>复制到<code>VERTEX_ELEMENT_ARRAY_BUFFER</code>。该函数的意思就是从源目标<code>readtarget</code>缓冲的<code>readoffset</code>位置开始，复制<code>size</code>大小的数据到目的目标<code>writetarget</code>缓冲的<code>writeoffset</code>位置开始的内存区里。</p>
-<p>但是如果我们的源和目的都是顶点数组缓冲<code>(GL_VERTEX_ARRAY_BUFFER)</code>怎么办？我们显然不能把源和目的都设置为它。为此，OpenGL 给我们设了额外的两个缓冲目标：<code>GL_COPY_READ_BUFFER</code>和<code>GL_COPY_WRITE_BUFFER</code>。这时我们可以使用下面的代码来实现两个顶点数组缓冲之间的数据复制：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">GLfloat vertexData[] = &#123; ... &#125;;</div><div class="line">glBindBuffer(GL_COPY_READ_BUFFER, vbo1);</div><div class="line">glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);</div><div class="line">glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">sizeof</span>(vertexData));</div></pre></td></tr></table></figure></p>
-<p>也可以只把目标缓冲设为<code>GL_COPY_WRITE_BUFFER</code>，如下代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">GLfloat vertexData[] = &#123; ... &#125;;</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, vbo1);</div><div class="line">glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);</div><div class="line">glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">sizeof</span>(vertexData));</div></pre></td></tr></table></figure></p>
+<p>但是如果我们的源和目的都是顶点数组缓冲<code>(GL_VERTEX_ARRAY_BUFFER)</code>怎么办？我们显然不能把源和目的都设置为它。为此，OpenGL 给我们设了额外的两个缓冲目标：<code>GL_COPY_READ_BUFFER</code>和<code>GL_COPY_WRITE_BUFFER</code>。这时我们可以使用下面的代码来实现两个顶点数组缓冲之间的数据复制：</p>
+<pre class=" language-c++"><code class="language-c++">GLfloat vertexData[] = { ... };
+glBindBuffer(GL_COPY_READ_BUFFER, vbo1);
+glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);
+glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, sizeof(vertexData));
+</code></pre>
+<p>也可以只把目标缓冲设为<code>GL_COPY_WRITE_BUFFER</code>，如下代码：</p>
+<pre class=" language-c++"><code class="language-c++">GLfloat vertexData[] = { ... };
+glBindBuffer(GL_ARRAY_BUFFER, vbo1);
+glBindBuffer(GL_COPY_WRITE_BUFFER, vbo2);
+glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, sizeof(vertexData));
+</code></pre>
 <p>下一篇文章里我们将会讨论uniform缓冲对象，到时候我们会充分利用<code>glBufferSubData</code>函数。<br>&nbsp; </p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>

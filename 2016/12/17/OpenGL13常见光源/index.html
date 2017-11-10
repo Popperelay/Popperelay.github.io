@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -122,13 +122,77 @@
 <p>它们的图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148179453303.png" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">定向光Directional Light</font><br>定向光源类似于太阳，光源很远，每条光线接近于平行，所有光线都是同一个方向。定向光的方向和光源在哪个位置无关，因为无限远嘛。</p>
-<p>由于定向光方向是一个固定值，所以在计算漫反射光时，就不需要用光源位置和片元位置来计算入射光线方向了，直接使用定向光方向这个固定值就可以（对所有片元来说入射光方向都是这个值）。我们先把定向光方向加入光源结构体里：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定向光源</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	vec3 direction;</div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">&#125;;</div><div class="line">uniform Light light;       <span class="comment">//光源变量</span></div></pre></td></tr></table></figure></p>
+<p>由于定向光方向是一个固定值，所以在计算漫反射光时，就不需要用光源位置和片元位置来计算入射光线方向了，直接使用定向光方向这个固定值就可以（对所有片元来说入射光方向都是这个值）。我们先把定向光方向加入光源结构体里：</p>
+<pre class=" language-c++"><code class="language-c++">//定向光源
+struct Light{
+    vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+uniform Light light;       //光源变量
+</code></pre>
 <p>对于定向光来说，就不需要定义光源位置了，因为定向光源是无限远的，而且也用不上。</p>
-<p>当然，需要给这个定向光方向赋值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置定向光的方向</span></div><div class="line">glUniform3f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.direction"</span>), <span class="number">1.0f</span>, <span class="number">-1.0f</span>, <span class="number">-1.0f</span>);</div></pre></td></tr></table></figure></p>
-<p>在计算漫反射光时，入射光方向需要变一下，现在是定向光方向的反方向（因为入射光方向需要从片元到光源，而定向光方向是从光源到片元的）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vec3 lightDir=normalize(-light.direction); <span class="comment">//光线入射方向的单位向量</span></div></pre></td></tr></table></figure></p>
-<p>为了清晰地看出定向光对所有物体都有相同的影响，我们还是画10个箱子出来：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">glBindVertexArray(lightObjectVAO);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">	mat4 lightObject_model;</div><div class="line">	lightObject_model = translate(lightObject_model, cubeTranlate[i]);</div><div class="line">	lightObject_model = rotate(lightObject_model, radians(<span class="number">105.0f</span>), vec3(<span class="number">0.5f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>));</div><div class="line">	glUniformMatrix4fv(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"model"</span>), <span class="number">1</span>, GL_FALSE, value_ptr(lightObject_model));</div><div class="line">	glDrawElements(GL_TRIANGLES, <span class="number">36</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</div><div class="line">&#125;</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>当然，需要给这个定向光方向赋值：</p>
+<pre class=" language-c++"><code class="language-c++">        //设置定向光的方向
+        glUniform3f(glGetUniformLocation(lightObject.shaderProgram, "light.direction"), 1.0f, -1.0f, -1.0f);
+</code></pre>
+<p>在计算漫反射光时，入射光方向需要变一下，现在是定向光方向的反方向（因为入射光方向需要从片元到光源，而定向光方向是从光源到片元的）：</p>
+<pre class=" language-c++"><code class="language-c++">    vec3 lightDir=normalize(-light.direction); //光线入射方向的单位向量
+</code></pre>
+<p>为了清晰地看出定向光对所有物体都有相同的影响，我们还是画10个箱子出来：</p>
+<pre class=" language-c++"><code class="language-c++">        glBindVertexArray(lightObjectVAO);
+        for (int i = 0; i < 10; i++) {
+            mat4 lightObject_model;
+            lightObject_model = translate(lightObject_model, cubeTranlate[i]);
+            lightObject_model = rotate(lightObject_model, radians(105.0f), vec3(0.5f, 1.0f, 1.0f));
+            glUniformMatrix4fv(glGetUniformLocation(lightObject.shaderProgram, "model"), 1, GL_FALSE, value_ptr(lightObject_model));
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        }
+        glBindVertexArray(0);
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148180680412.png" alt=""><br>在场景中移动摄像机，会感觉有一个太阳一样的光源照射在这些物体上。</p>
-<p>下面是受光物体的像素着色器源码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"><span class="comment">//材质结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span>&#123;</span></div><div class="line">	sampler2D diffuse;</div><div class="line">	sampler2D specular;</div><div class="line">	<span class="keyword">float</span> shininess;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//定向光源</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	<span class="comment">//vec3 position;  //定向光不再需要光源位置了，因为它是无限远的</span></div><div class="line">	vec3 direction;</div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">&#125;;</div><div class="line">in vec3 Normal;</div><div class="line">in vec3 positionInWorld;</div><div class="line">in vec2 TexCoords;</div><div class="line">out vec4 color;</div><div class="line">uniform Material material; <span class="comment">//材质变量</span></div><div class="line">uniform Light light;       <span class="comment">//光源变量</span></div><div class="line">uniform vec3 viewPos;      <span class="comment">//观察位置</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//计算最终的环境光</span></div><div class="line">	vec3 ambientColor=light.ambient * vec3(texture(material.diffuse,TexCoords));  <span class="comment">//环境光</span></div><div class="line">	<span class="comment">//计算最终的漫反射光</span></div><div class="line">	vec3 normal=normalize(Normal);  <span class="comment">//单位法向量</span></div><div class="line">	vec3 lightDir=normalize(-light.direction); <span class="comment">//光线入射方向的单位向量</span></div><div class="line">	<span class="keyword">float</span> diffuseFactor=max(dot(normal,lightDir),<span class="number">0.0</span>); <span class="comment">//漫反射系数（两个向量夹角的余弦）</span></div><div class="line">	vec3 diffuseColor=diffuseFactor * light.diffuse * vec3(texture(material.diffuse,TexCoords));   <span class="comment">//漫反射光</span></div><div class="line">	<span class="comment">//计算最终的镜面反射光</span></div><div class="line">	vec3 reflectDir=normalize(reflect(-lightDir,normal));   <span class="comment">//反射光方向</span></div><div class="line">	vec3 viewDir=normalize(viewPos-positionInWorld);  <span class="comment">//观察方向</span></div><div class="line">	<span class="keyword">float</span> specularFactor=<span class="built_in">pow</span>(max(dot(reflectDir,viewDir),<span class="number">0.0</span>),material.shininess); <span class="comment">//镜面反射系数</span></div><div class="line">	vec3 specularColor=specularFactor * light.specular * vec3(texture(material.specular,TexCoords)); <span class="comment">//镜面反射光</span></div><div class="line">	</div><div class="line">	color=vec4(ambientColor+diffuseColor+specularColor,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是受光物体的像素着色器源码：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+//材质结构体
+struct Material{
+    sampler2D diffuse;
+    sampler2D specular;
+    float shininess;
+};
+//定向光源
+struct Light{
+    //vec3 position;  //定向光不再需要光源位置了，因为它是无限远的
+    vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+in vec3 Normal;
+in vec3 positionInWorld;
+in vec2 TexCoords;
+out vec4 color;
+uniform Material material; //材质变量
+uniform Light light;       //光源变量
+uniform vec3 viewPos;      //观察位置
+
+void main(){
+    //计算最终的环境光
+    vec3 ambientColor=light.ambient * vec3(texture(material.diffuse,TexCoords));  //环境光
+    //计算最终的漫反射光
+    vec3 normal=normalize(Normal);  //单位法向量
+    vec3 lightDir=normalize(-light.direction); //光线入射方向的单位向量
+    float diffuseFactor=max(dot(normal,lightDir),0.0); //漫反射系数（两个向量夹角的余弦）
+    vec3 diffuseColor=diffuseFactor * light.diffuse * vec3(texture(material.diffuse,TexCoords));   //漫反射光
+    //计算最终的镜面反射光
+    vec3 reflectDir=normalize(reflect(-lightDir,normal));   //反射光方向
+    vec3 viewDir=normalize(viewPos-positionInWorld);  //观察方向
+    float specularFactor=pow(max(dot(reflectDir,viewDir),0.0),material.shininess); //镜面反射系数
+    vec3 specularColor=specularFactor * light.specular * vec3(texture(material.specular,TexCoords)); //镜面反射光
+
+    color=vec4(ambientColor+diffuseColor+specularColor,1.0f);
+}
+</code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">点光源Point Light</font><br>点光源就是我们之前一直用的那种光源，它类似于一个灯泡在向四周发光。它需要用点光源位置和片元位置去计算入射光方向。</p>
@@ -140,11 +204,37 @@
 <li>上表中的距离d是我们想要点光源照射到的距离（球半径），比如第一行，当距离到达7的时候亮度几乎为0。</li>
 </ul>
 <p><font size="4" color="red">实现衰减的点光源</font><br>下面我们在像素着色器中来计算这个衰减系数，实现点光源的衰减效果。</p>
-<p>由于按公式计算衰减系数，我们需要常数项、一次项、二次项这三个系数，所以我们先把它们定义到点光源结构体中：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//点光源结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	vec3 position;</div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">	<span class="keyword">float</span> constant; <span class="comment">//常数项</span></div><div class="line">	<span class="keyword">float</span> linear;   <span class="comment">//一次项</span></div><div class="line">	<span class="keyword">float</span> quadric;  <span class="comment">//二次项</span></div><div class="line">&#125;;</div><div class="line">uniform Light light;       <span class="comment">//光源变量</span></div></pre></td></tr></table></figure></p>
-<p>这里我们希望点光源覆盖50的距离，从表中找到对应的各项系数，在主程序中把它们赋值给点光源结构体的相应变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置点光源衰减公式的常数项、一次项、二次项</span></div><div class="line">glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.constant"</span>), <span class="number">1.0f</span>);</div><div class="line">glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.linear"</span>), <span class="number">0.09f</span>);</div><div class="line">glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.quadric"</span>), <span class="number">0.032</span>);</div></pre></td></tr></table></figure></p>
-<p>有了衰减公式中的这些系数，还需要片元到点光源的距离，我们就能在像素着色器中计算出衰减系数了。我们可以使用GLSL的内置函数<code>length</code>来计算片元到点光源的距离：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> distance=length(light.position-positionInWorld);</div></pre></td></tr></table></figure></p>
-<p>然后使用距离和这些系数来计算衰减系数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> attenuation=<span class="number">1.0f</span>/(light.constant+light.linear*distance+light.quadric*distance*distance);</div></pre></td></tr></table></figure></p>
-<p>最后，需要让点光源的每种成分光都执行这种衰减，即乘上衰减系数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//点光源的每种成分光都执行衰减</span></div><div class="line">ambientColor*=attenuation;</div><div class="line">diffuseColor*=attenuation;</div><div class="line">specularColor*=attenuation;</div></pre></td></tr></table></figure></p>
+<p>由于按公式计算衰减系数，我们需要常数项、一次项、二次项这三个系数，所以我们先把它们定义到点光源结构体中：</p>
+<pre class=" language-c++"><code class="language-c++">//点光源结构体
+struct Light{
+    vec3 position;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float constant; //常数项
+    float linear;   //一次项
+    float quadric;  //二次项
+};
+uniform Light light;       //光源变量
+</code></pre>
+<p>这里我们希望点光源覆盖50的距离，从表中找到对应的各项系数，在主程序中把它们赋值给点光源结构体的相应变量：</p>
+<pre class=" language-c++"><code class="language-c++">        //设置点光源衰减公式的常数项、一次项、二次项
+        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.constant"), 1.0f);
+        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.linear"), 0.09f);
+        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.quadric"), 0.032);
+</code></pre>
+<p>有了衰减公式中的这些系数，还需要片元到点光源的距离，我们就能在像素着色器中计算出衰减系数了。我们可以使用GLSL的内置函数<code>length</code>来计算片元到点光源的距离：</p>
+<pre class=" language-c++"><code class="language-c++">    float distance=length(light.position-positionInWorld);
+</code></pre>
+<p>然后使用距离和这些系数来计算衰减系数：</p>
+<pre class=" language-c++"><code class="language-c++">    float attenuation=1.0f/(light.constant+light.linear*distance+light.quadric*distance*distance);
+</code></pre>
+<p>最后，需要让点光源的每种成分光都执行这种衰减，即乘上衰减系数：</p>
+<pre class=" language-c++"><code class="language-c++">    //点光源的每种成分光都执行衰减
+    ambientColor*=attenuation;
+    diffuseColor*=attenuation;
+    specularColor*=attenuation;
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148181038051.png" alt=""><br>可以看到离点光源远的物体明显越来越暗了。</p>
 <p><font size="4" color="red">全部源码</font><br>实现衰减的点光源的全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL13_CommonLightSource/LearnOpenGL13_CommonLightSource_1" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
@@ -156,24 +246,103 @@
 <li>Cutoff：聚光灯的张角，即图中的$\phi$</li>
 </ul>
 <p>我们要做的就是：判断片元是不是在聚光灯照射的范围内。比如图中圈出来的那个片元，聚光灯到该片元的方向是那条黑线，和红线灯轴的夹角（称为偏轴角）为$\theta$，如果$\theta \lt \phi$，则片元在聚光范围内，应该受到光照；否则，片元落在聚光范围外，将得不到光照。</p>
-<p><font size="4" color="red">实现聚光</font><br>聚光灯可以由灯轴方向、灯位置、张角来确定，需要把它们添加到像素着色器的聚光灯结构体中：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//聚光灯结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	vec3 position;   <span class="comment">//聚光灯位置</span></div><div class="line">	vec3 lightAxis;  <span class="comment">//灯轴方向</span></div><div class="line">	<span class="keyword">float</span> cutOff;    <span class="comment">//张角</span></div><div class="line"></div><div class="line">	<span class="keyword">float</span> constant; <span class="comment">//常数项</span></div><div class="line">	<span class="keyword">float</span> linear;   <span class="comment">//一次项</span></div><div class="line">	<span class="keyword">float</span> quadric;  <span class="comment">//二次项</span></div><div class="line"></div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">&#125;;</div><div class="line">uniform Light light;       <span class="comment">//光源变量</span></div><div class="line">``</div><div class="line">聚光也有随着距离衰减的效果，所以我们保留了点光源的参数和相应计算。</div><div class="line"></div><div class="line">接下来需要对新添加的这三个元素赋值：`</div><div class="line">```c++</div><div class="line">		<span class="comment">//设置聚光灯的位置、灯轴、张角</span></div><div class="line">		glUniform3f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.position"</span>), mycamera.cameraPos.x, mycamera.cameraPos.y, mycamera.cameraPos.z);</div><div class="line">		glUniform3f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.lightAxis"</span>), mycamera.cameraToTarget.x, mycamera.cameraToTarget.y, mycamera.cameraToTarget.z);</div><div class="line">		glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.cutOff"</span>), <span class="built_in">cos</span>(radians(<span class="number">12.5f</span>)));</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">实现聚光</font><br>聚光灯可以由灯轴方向、灯位置、张角来确定，需要把它们添加到像素着色器的聚光灯结构体中：</p>
+<pre class=" language-c++"><code class="language-c++">//聚光灯结构体
+struct Light{
+    vec3 position;   //聚光灯位置
+    vec3 lightAxis;  //灯轴方向
+    float cutOff;    //张角
+
+    float constant; //常数项
+    float linear;   //一次项
+    float quadric;  //二次项
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+uniform Light light;       //光源变量
+``
+聚光也有随着距离衰减的效果，所以我们保留了点光源的参数和相应计算。
+
+接下来需要对新添加的这三个元素赋值：`
+```c++
+        //设置聚光灯的位置、灯轴、张角
+        glUniform3f(glGetUniformLocation(lightObject.shaderProgram, "light.position"), mycamera.cameraPos.x, mycamera.cameraPos.y, mycamera.cameraPos.z);
+        glUniform3f(glGetUniformLocation(lightObject.shaderProgram, "light.lightAxis"), mycamera.cameraToTarget.x, mycamera.cameraToTarget.y, mycamera.cameraToTarget.z);
+        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.cutOff"), cos(radians(12.5f)));
+</code></pre>
 <p>因为在游戏中，很多时候聚光都用在主角身上，所以我们把聚光灯的位置设为了摄像机的位置，灯轴设为了摄像机照射的方向（从摄像机指向目标的向量），张角这里我们设为了12.5度的余弦值，因为后面用点乘计算出来的片元偏轴角是余弦值，所以我们这里张角也用余弦值，否则用<code>acos</code>转化为弧度的话计算代价是很高昂的。<br>【注】：</p>
 <ul>
 <li>在特殊需要下，聚光灯也可以在其他位置，其他朝向，可以自定义</li>
 </ul>
-<p>有了聚光灯的这三个值，我们就可以在像素着色器中，计算片元的偏轴角了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算聚光灯下片元的偏轴角（余弦值）</span></div><div class="line"><span class="keyword">float</span> theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));</div></pre></td></tr></table></figure></p>
-<p>然后让片元的偏轴角$\theta$余弦值和聚光灯的张角$\phi$余弦值作比较，如果大于，则说明片元在聚光范围内，执行跟点光源一样的光照计算；否则该片元就显示黑色，表示没有受到光照：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算聚光灯下片元的偏轴角（余弦值）</span></div><div class="line"><span class="keyword">float</span> theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));</div><div class="line"><span class="keyword">if</span>(theta &gt; light.cutOff)&#123;</div><div class="line">	<span class="comment">//执行和点光源一样的光照计算</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;  <span class="comment">//片元在聚光范围外呈现黑色</span></div><div class="line">	color=vec4(<span class="number">0.0f</span>,<span class="number">0.0f</span>,<span class="number">0.0f</span>,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148198128403.png" alt=""><br>当然，片元超出聚光范围后不一定只能是黑色，也可以是其他颜色，看我们怎么设置了。如果片元超出聚光范围后，呈现环境光颜色：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">else</span>&#123;  <span class="comment">//片元在聚光范围外时使用环境光，使其不至于完全黑暗</span></div><div class="line">	color=vec4(light.ambient*vec3(texture(material.diffuse,TexCoords)),<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有了聚光灯的这三个值，我们就可以在像素着色器中，计算片元的偏轴角了：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算聚光灯下片元的偏轴角（余弦值）
+    float theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));
+</code></pre>
+<p>然后让片元的偏轴角$\theta$余弦值和聚光灯的张角$\phi$余弦值作比较，如果大于，则说明片元在聚光范围内，执行跟点光源一样的光照计算；否则该片元就显示黑色，表示没有受到光照：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算聚光灯下片元的偏轴角（余弦值）
+    float theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));
+    if(theta > light.cutOff){
+        //执行和点光源一样的光照计算
+    }
+    else{  //片元在聚光范围外呈现黑色
+        color=vec4(0.0f,0.0f,0.0f,1.0f);
+    }
+</code></pre>
+<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148198128403.png" alt=""><br>当然，片元超出聚光范围后不一定只能是黑色，也可以是其他颜色，看我们怎么设置了。如果片元超出聚光范围后，呈现环境光颜色：</p>
+<pre class=" language-c++"><code class="language-c++">    else{  //片元在聚光范围外时使用环境光，使其不至于完全黑暗
+        color=vec4(light.ambient*vec3(texture(material.diffuse,TexCoords)),1.0f);
+    }
+</code></pre>
 <p>那么显示结果会是下面这样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148197856581.png" alt=""></p>
 <p><font size="4" color="red">软化边缘</font><br>上面的聚光灯看起来有点假，因为聚光边缘有个硬边。在像素着色器的逻辑中，片元一旦操作聚光范围，它就会理解黑下来，变成环境光，却没有任何平滑减弱的过度。真实的聚光在它的边界应该是慢慢向外减弱的。</p>
-<p>为了实现聚光在边缘的平滑减弱，我们给聚光灯定义一个内张角$\phi$和外张角$\gamma$：内张角还是原来的张角，外张角比内张角稍大：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//聚光灯结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	vec3 position;   <span class="comment">//聚光灯位置</span></div><div class="line">	vec3 lightAxis;  <span class="comment">//灯轴方向</span></div><div class="line">	<span class="keyword">float</span> inCutOff;  <span class="comment">//内张角</span></div><div class="line">	<span class="keyword">float</span> outCutOff; <span class="comment">//外张角</span></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.inCutOff"</span>), <span class="built_in">cos</span>(radians(<span class="number">12.5f</span>)));</div><div class="line">glUniform1f(glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.outCutOff"</span>), <span class="built_in">cos</span>(radians(<span class="number">17.5f</span>)));</div></pre></td></tr></table></figure>
-<p>在内张角里的片元还是像上面一样，执行和点光源一样的光照计算；处在内张角和外张角之间的片元，亮度$I$在内张角余弦外张角余弦之间线性插值：<br>$$<br>\begin{equation}<br>I = \frac{\theta - \gamma}{\phi - \gamma}<br>\end{equation}<br>$$<br>如果片元在内张角里面，这个值会大于1，我们把它截断为1；如果片元在外张角外面，这个值会小于0，我们把它截断为0：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算聚光灯下片元的偏轴角（余弦值）</span></div><div class="line"><span class="keyword">float</span> theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));</div><div class="line"><span class="comment">//计算片元在聚光灯下的光强</span></div><div class="line"><span class="keyword">float</span> intensity=clamp((theta-light.outCutOff)/(light.inCutOff-light.outCutOff),<span class="number">0.0</span>,<span class="number">1.0</span>);</div></pre></td></tr></table></figure></p>
-<p>这样一来，乘以光照计算出来的颜色值后，在内张角里面的片元会正常执行光照，在外张角外面的片元会显示黑色，在内外张角之间的片元会插值变暗（不再需要if-else了，如果想要在外张角外显示其他颜色，那还是需要的）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//聚光的每种成分光都执行衰减和亮度插值</span></div><div class="line">ambientColor*=attenuation*intensity;</div><div class="line">diffuseColor*=attenuation*intensity;</div><div class="line">specularColor*=attenuation*intensity;</div><div class="line"></div><div class="line">color=vec4(ambientColor+diffuseColor+specularColor,<span class="number">1.0f</span>);</div></pre></td></tr></table></figure></p>
+<p>为了实现聚光在边缘的平滑减弱，我们给聚光灯定义一个内张角$\phi$和外张角$\gamma$：内张角还是原来的张角，外张角比内张角稍大：</p>
+<pre class=" language-c++"><code class="language-c++">//聚光灯结构体
+struct Light{
+    vec3 position;   //聚光灯位置
+    vec3 lightAxis;  //灯轴方向
+    float inCutOff;  //内张角
+    float outCutOff; //外张角
+    ...
+}
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.inCutOff"), cos(radians(12.5f)));
+        glUniform1f(glGetUniformLocation(lightObject.shaderProgram, "light.outCutOff"), cos(radians(17.5f)));
+</code></pre>
+<p>在内张角里的片元还是像上面一样，执行和点光源一样的光照计算；处在内张角和外张角之间的片元，亮度$I$在内张角余弦外张角余弦之间线性插值：<br>$$<br>\begin{equation}<br>I = \frac{\theta - \gamma}{\phi - \gamma}<br>\end{equation}<br>$$<br>如果片元在内张角里面，这个值会大于1，我们把它截断为1；如果片元在外张角外面，这个值会小于0，我们把它截断为0：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算聚光灯下片元的偏轴角（余弦值）
+    float theta=dot(normalize(positionInWorld-light.position),normalize(light.lightAxis));
+    //计算片元在聚光灯下的光强
+    float intensity=clamp((theta-light.outCutOff)/(light.inCutOff-light.outCutOff),0.0,1.0);
+</code></pre>
+<p>这样一来，乘以光照计算出来的颜色值后，在内张角里面的片元会正常执行光照，在外张角外面的片元会显示黑色，在内外张角之间的片元会插值变暗（不再需要if-else了，如果想要在外张角外显示其他颜色，那还是需要的）：</p>
+<pre class=" language-c++"><code class="language-c++">        //聚光的每种成分光都执行衰减和亮度插值
+        ambientColor*=attenuation*intensity;
+        diffuseColor*=attenuation*intensity;
+        specularColor*=attenuation*intensity;
+
+        color=vec4(ambientColor+diffuseColor+specularColor,1.0f);
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148198233165.png" alt=""><br>使用聚光的全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL13_CommonLightSource/LearnOpenGL13_CommonLightSource_2" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">多个光源</font><br>为了简介、提高代码重用率，我们把各种光源的计算分别写成一个函数：对定向光的计算写在<code>CalcDirLight</code>函数中，对点光源的计算写在<code>CalcPointLight</code>函数中，对聚光的计算写在<code>CalcSpotLight</code>函数中。这三个函数的代码和原来的几乎一样，只不过是拿出来放到了函数里而已。</p>
-<p>当我们要使用多个光源时，就可以直接使用这几个光源函数了，一般都是下面这种使用结构：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">out vec4 color;</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM_POINT_LIGHTS 4  </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//添加定向光计算结果到输出颜色里</span></div><div class="line">	vec3 result = CalcDirLight();</div><div class="line">	<span class="comment">//添加点光源计算结果到输出颜色里</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;NUM_POINT_LIGHTS; i++)&#123;</div><div class="line">		result += CalcPointLight();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//添加聚光计算结果到输出颜色里</span></div><div class="line">	result += CalcSpotLight();</div><div class="line"></div><div class="line">	color=vec4(result,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当我们要使用多个光源时，就可以直接使用这几个光源函数了，一般都是下面这种使用结构：</p>
+<pre class=" language-c++"><code class="language-c++">out vec4 color;
+#define NUM_POINT_LIGHTS 4  
+void main(){
+    //添加定向光计算结果到输出颜色里
+    vec3 result = CalcDirLight();
+    //添加点光源计算结果到输出颜色里
+    for(int i=0; i<NUM_POINT_LIGHTS; i++){
+        result += CalcPointLight();
+    }
+    //添加聚光计算结果到输出颜色里
+    result += CalcSpotLight();
+
+    color=vec4(result,1.0f);
+}
+</code></pre>
 <p>其中<code>NUM_POINT_LIGHTS</code>表示点光源的数目，是一个预编译指令，这样我们才能用它来作为数组下标。</p>
 <p>这里，我们在场景中创建1个定向光、4个点光源和1个聚光。代码很好理解，所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL13_CommonLightSource/LearnOpenGL13_CommonLightSource_3" target="_blank" rel="external">在这里</a>。</p>
 <p>其余代码和上一篇文章<a href="http://popperelay.com/2016/12/14/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE/" target="_blank" rel="external">《OpenGL12：光照贴图》</a>一样。<br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148241070837.png" alt=""><br>&nbsp;</p>

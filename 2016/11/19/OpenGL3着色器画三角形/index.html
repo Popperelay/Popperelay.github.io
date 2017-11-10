@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -140,18 +140,42 @@
 <p>应该说这个图形输送管道还是挺复杂的，包含很多要配置的部分。但是大多数场合，我们必须做的只是顶点和像素着色器。几何着色器和细分着色器是可选的，通常使用默认的着色器就行了。<br>&nbsp;</p>
 <hr>
 <p>在开始绘制之前，我们必须给OpenGL输入一些顶点数据。</p>
-<p><font size="5" color="orange">顶点输入</font><br>OpenGL是一个3D图形库，所以我们在OpenGL中指定的坐标都是3D的，即包括x、y、z坐标。因为我们想要渲染一个三角形，所以我们需要指定三角形的3个顶点的3D坐标。为了简单起见，这里我们直接使用标准化设备坐标（x、y、z都在-1到1之间），存储在GLfloat数组中：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//三角形顶点坐标</span></div><div class="line">GLfloat vertices[] = &#123;</div><div class="line">	<span class="number">-0.5</span>f,<span class="number">-0.5</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">0.5</span>f,<span class="number">-0.5</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">0.0</span>f,<span class="number">0.5</span>f,<span class="number">0.0</span>f</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">顶点输入</font><br>OpenGL是一个3D图形库，所以我们在OpenGL中指定的坐标都是3D的，即包括x、y、z坐标。因为我们想要渲染一个三角形，所以我们需要指定三角形的3个顶点的3D坐标。为了简单起见，这里我们直接使用标准化设备坐标（x、y、z都在-1到1之间），存储在GLfloat数组中：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//三角形顶点坐标</span>
+    GLfloat vertices<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token number">0.0f</span><span class="token punctuation">,</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
 <p>由于我们要画的是一个2D的三角形，所以就把3个顶点的z坐标都设为0了，即每个顶点的深度（depth）都是一样的，看上去就像是2D的。</p>
 <p>【注】：</p>
 <ul>
 <li>标准化设备坐标会通过glViewport函数提供的数据，进行视口变换，最后转换为屏幕空间坐标。这通常都是在顶点着色器中进行的，这些屏幕空间坐标最终会作为像素属性输入到像素着色器。</li>
 </ul>
 <p>现在有了这样的顶点数据，我们需要把它输入发送给GPU，从而进入顶点着色器阶段。</p>
-<p>在发送顶点数据之间，我们需要建立一个顶点数组对象VAO（vertex array object），用于记录顶点数据的存储和如何使用的细节信息。后面我们会告示OpenGL这些顶点数据是怎么存储的以及GPU应该怎么读出来，当我们需要用相同的顶点数据画多个三角形时，就不用每次都去指定这些顶点数据的存储方式和使用方式了，很节省效率：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//生成顶点数组对象VAO，记录数据的存储和如何使用的细节信息</span></div><div class="line">GLuint VAO; </div><div class="line">glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</div></pre></td></tr></table></figure></p>
-<p>由于CPU把数据发送到显卡相对较慢，但是GPU中顶点着色器却能很快获得顶点。如果从CPU一个顶点一个顶点地发送到显卡，无疑会造成GPU等待，浪费资源。所以我们希望把多个顶点数据一起从CPU发送到显存，这里我们使用顶点缓存对象VBO（vertex buffer object）来实际负责这些顶点数据的存储（包括存储空间和存储过程），它会在<strong>GPU</strong>内存上存储大批顶点：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//生顶点缓冲对象VBO，负责实际数据的存储</span></div><div class="line">GLuint VBO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</div></pre></td></tr></table></figure></p>
-<p>正如<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《OpenGL1：OpenGL概述及环境配置》</a>一文里“OpenGL中的对象”中所诉，接下来要做的就是给顶点数组对象绑定目标（顶点数组）：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//给顶点数组对象绑定目标(顶点数组，不需要参数)</span></div><div class="line">glBindVertexArray(VAO);</div></pre></td></tr></table></figure></p>
-<p>再给顶点缓冲对象绑定目标（数组内存）：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//给顶点缓冲对象绑定目标（数组内存）</span></div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</div></pre></td></tr></table></figure></p>
-<p>已经在显卡上开辟好存储这些顶点的空间了，接下来我们需要顶点数据复制到显存缓冲中：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//把顶点数据复制到显卡的缓冲内存中</span></div><div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</div></pre></td></tr></table></figure></p>
+<p>在发送顶点数据之间，我们需要建立一个顶点数组对象VAO（vertex array object），用于记录顶点数据的存储和如何使用的细节信息。后面我们会告示OpenGL这些顶点数据是怎么存储的以及GPU应该怎么读出来，当我们需要用相同的顶点数据画多个三角形时，就不用每次都去指定这些顶点数据的存储方式和使用方式了，很节省效率：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//生成顶点数组对象VAO，记录数据的存储和如何使用的细节信息</span>
+    GLuint VAO<span class="token punctuation">;</span> 
+    <span class="token function">glGenVertexArrays</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>VAO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>由于CPU把数据发送到显卡相对较慢，但是GPU中顶点着色器却能很快获得顶点。如果从CPU一个顶点一个顶点地发送到显卡，无疑会造成GPU等待，浪费资源。所以我们希望把多个顶点数据一起从CPU发送到显存，这里我们使用顶点缓存对象VBO（vertex buffer object）来实际负责这些顶点数据的存储（包括存储空间和存储过程），它会在<strong>GPU</strong>内存上存储大批顶点：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//生顶点缓冲对象VBO，负责实际数据的存储</span>
+    GLuint VBO<span class="token punctuation">;</span>
+    <span class="token function">glGenBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>VBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>正如<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《OpenGL1：OpenGL概述及环境配置》</a>一文里“OpenGL中的对象”中所诉，接下来要做的就是给顶点数组对象绑定目标（顶点数组）：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//给顶点数组对象绑定目标(顶点数组，不需要参数)</span>
+    <span class="token function">glBindVertexArray</span><span class="token punctuation">(</span>VAO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>再给顶点缓冲对象绑定目标（数组内存）：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//给顶点缓冲对象绑定目标（数组内存）</span>
+    <span class="token function">glBindBuffer</span><span class="token punctuation">(</span>GL_ARRAY_BUFFER<span class="token punctuation">,</span> VBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>已经在显卡上开辟好存储这些顶点的空间了，接下来我们需要顶点数据复制到显存缓冲中：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//把顶点数据复制到显卡的缓冲内存中</span>
+    <span class="token function">glBufferData</span><span class="token punctuation">(</span>GL_ARRAY_BUFFER<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>vertices<span class="token punctuation">)</span><span class="token punctuation">,</span> vertices<span class="token punctuation">,</span> GL_STATIC_DRAW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>glBufferData函数用来把用户定义的数据复制到当前绑定缓冲里。它的第一个参数是我们希望复制到上面的缓冲类型，这里是数组缓冲这种类型GL_ARRAY_BUFFER；第二个参数是我们希望传递给缓冲的数据大小（字节）；第三个参数是我们希望发送的真实数据；第四个参数指定了我们希望显卡如何管理给定的数据，有三种形式：</p>
 <ul>
 <li>GL_STATIC_DRAW：数据不会或几乎不会改变。</li>
@@ -161,7 +185,10 @@
 <p>我们要画的三角形的位置数据不会改变，每次渲染调用时都保持原样，所以它使用的类型最好是GL_STATIC_DRAW。如果一个缓冲中的数据将频繁被改变，那么使用的类型就是GL_DYNAMIC_DRAW或GL_STREAM_DRAW，因为这样能确保图形卡把数据放在高速写入的内存部分。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">告诉OpenGL如何读取顶点数据</font><br>到现在我们只是把一堆顶点数据放到了显存的缓冲区中了，但是显卡并不知道这些顶点数据是怎么存放的，该连续多少个字节的数据才表示一个顶点坐标？不知道这些信息就无法用OpenGL函数一个一个地分开读出顶点数据。</p>
-<p>下面我们使用    <code>glVertexAttribPointer</code>函数来告知OpenGL如何识别解析显存缓冲中的顶点数据：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//告诉OpenGL如何识别显存中的顶点数据</span></div><div class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GLfloat), (GLvoid*)<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>下面我们使用    <code>glVertexAttribPointer</code>函数来告知OpenGL如何识别解析显存缓冲中的顶点数据：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//告诉OpenGL如何识别显存中的顶点数据</span>
+    <span class="token function">glVertexAttribPointer</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> GL_FALSE<span class="token punctuation">,</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>GLfloat<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>GLvoid<span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <ul>
 <li>它的第一个参数指定我们要配置哪一个顶点属性。因为我们在后面的顶点着色器中使用了<code>layout (location=0)</code>来定义顶点属性的位置值为0，所以这里要把这个参数设为0。</li>
 <li>第二个参数指定每个属性数据由几个分量组成。因为在本例中，顶点着色器中就一个坐标属性，由3个float组成，所以这个参数设为3（这个参数的值只能是1、2、3、4中的一个）。</li>
@@ -170,15 +197,35 @@
 <li>第五个参数叫做步长，表示相同属性每隔多少字节出现一次。当顶点属性紧密排列时，可以填0，由OpenGL代替我们计算出该值。本例中每隔3*sizeof(GLfloat)字节属性就会重复出现了，即又是x、y、z了。</li>
 <li>最后一个参数表示当前绑定到GL_ARRAY_BUFFER缓冲对象的缓冲区中，顶点对应属性的第一个分量距离缓冲起点的偏移量，以字节为单位计算。因为最后一个参数的类型是GLvoid*，而我们的顶点数据就是从数据起点开始的，所以这里设为（GLvoid*）0。</li>
 </ul>
-<p>现在已经告诉OpenGL应该怎么从缓冲中解析顶点数据了，接着需要使用<code>glEnableVertexAttribArray</code>函数打开顶点属性数组，让这些顶点数据可以用于渲染图形。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//打开顶点属性数组</span></div><div class="line">glEnableVertexAttribArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<p>当然，最后不要忘了解绑VBO和VAO。解绑了之后才能让它们脱离具体的目标，从而再去复用，绑定别的目标：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解绑VBO</span></div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, <span class="number">0</span>);</div><div class="line"><span class="comment">//解绑VAO</span></div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>现在已经告诉OpenGL应该怎么从缓冲中解析顶点数据了，接着需要使用<code>glEnableVertexAttribArray</code>函数打开顶点属性数组，让这些顶点数据可以用于渲染图形。</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//打开顶点属性数组</span>
+    <span class="token function">glEnableVertexAttribArray</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>当然，最后不要忘了解绑VBO和VAO。解绑了之后才能让它们脱离具体的目标，从而再去复用，绑定别的目标：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//解绑VBO</span>
+    <span class="token function">glBindBuffer</span><span class="token punctuation">(</span>GL_ARRAY_BUFFER<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//解绑VAO</span>
+    <span class="token function">glBindVertexArray</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">顶点着色器源码</font><br>顶点着色器是几个着色器中的一个，它是可编程的。现代OpenGL需要我们至少设置一个顶点着色器和一个像素着色器。</p>
-<p>我们需要做的第一件事是用着色器语言GLSL写顶点着色器，然后编译这个着色器，这样我们就可以在接下来的程序中使用这个顶点着色器了。下面是一个非常基础的顶点着色器源码：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//顶点着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* vertexShaderSource = </div><div class="line">	<span class="string">"#version 330 core\n"</span></div><div class="line">	<span class="string">"layout (location=0) in vec3 position;\n"</span></div><div class="line">	<span class="string">"void main()&#123;\n"</span></div><div class="line">	<span class="string">"gl_Position=vec4(position.x,position.y,position.z,1.0);\n"</span></div><div class="line">	<span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
+<p>我们需要做的第一件事是用着色器语言GLSL写顶点着色器，然后编译这个着色器，这样我们就可以在接下来的程序中使用这个顶点着色器了。下面是一个非常基础的顶点着色器源码：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//顶点着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> vertexShaderSource <span class="token operator">=</span> 
+    <span class="token string">"#version 330 core\n"</span>
+    <span class="token string">"layout (location=0) in vec3 position;\n"</span>
+    <span class="token string">"void main(){\n"</span>
+    <span class="token string">"gl_Position=vec4(position.x,position.y,position.z,1.0);\n"</span>
+    <span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
 <p>在引号中的就是我们的顶点着色器源码，现在把它存储在一个字符串中，方便后面用着色器名字直接使用着色器。每个着色器都起始于一个版本声明，这是因为要让高版本的GLSL和OpenGL相匹配（GLSL330对应OpenGL3.3）。我们同样在后面显示地表示我们会用core profile功能。</p>
 <p>然后就是在顶点着色器中使用in关键字声明所有的<strong>输入</strong>属性。因为现在我们只关心位置数据（position），所以我们使用<code>in vec3 position</code>，同时需要指定属性的索引，即<code>layout (location = 0)</code>，何在一起就是<code>layout (location=0) in vec3 position;</code>。</p>
-<p>接下来在着色器的main函数（注意是着色器的main函数）中，我们设置顶点着色器的输出，gl_Position为内置变量（以gl前缀开头的变量一般都表示内置变量），表示顶点输出位置。我们必须把输入的位置数据赋值给预定义的gl_Position（该变量是vec4类型）：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    gl_Position = vec4(position.x, position.y, position.z, <span class="number">1.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来在着色器的main函数（注意是着色器的main函数）中，我们设置顶点着色器的输出，gl_Position为内置变量（以gl前缀开头的变量一般都表示内置变量），表示顶点输出位置。我们必须把输入的位置数据赋值给预定义的gl_Position（该变量是vec4类型）：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    gl_Position <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>position<span class="token punctuation">.</span>x<span class="token punctuation">,</span> position<span class="token punctuation">.</span>y<span class="token punctuation">,</span> position<span class="token punctuation">.</span>z<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>gl_Position会作为顶点着色器的输出发送到图形输送管道的下一阶段。在后续文章会解释vec4的第4个参数为什么是1.0f。</p>
 <p>【注】：</p>
 <ul>
@@ -188,54 +235,164 @@
 <hr>
 <p><font size="5" color="orange">编译着色器</font><br>上面我们已经写了一个顶点着色器源码，但是为了让OpenGL能够使用它，我们必须在运行时动态编译它的源码。</p>
 <p>通常的流程都是：创建着色器对象 → 把着色器源码附加到着色器对象 → 编译着色器 → 检测编译是否成功。</p>
-<p><font size="4" color="red">创建着色器对象</font><br>使用<code>glCreateShader</code>函数创建着色器，参数是着色器类型：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建顶点着色器对象</span></div><div class="line">GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">附加着色器源码到着色器对象</font><br>使用<code>glShaderSource</code>函数把着色器源码添加到新创建的着色器对象上：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//把着色器源码附加到着色器对象</span></div><div class="line">glShaderSource(vertexShader, <span class="number">1</span>, &amp;vertexShaderSource, NULL);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">创建着色器对象</font><br>使用<code>glCreateShader</code>函数创建着色器，参数是着色器类型：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//创建顶点着色器对象</span>
+    GLuint vertexShader <span class="token operator">=</span> <span class="token function">glCreateShader</span><span class="token punctuation">(</span>GL_VERTEX_SHADER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">附加着色器源码到着色器对象</font><br>使用<code>glShaderSource</code>函数把着色器源码添加到新创建的着色器对象上：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//把着色器源码附加到着色器对象</span>
+    <span class="token function">glShaderSource</span><span class="token punctuation">(</span>vertexShader<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>vertexShaderSource<span class="token punctuation">,</span> NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>第一个参数是着色器对象；第二个参数指定了源码中有多少个字符串，这里只有一个；第三个参数是顶点着色器真正的源码；第四个参数可以设置为NULL，表示每个字符串都没有终止，直到遇到’\0’。</p>
-<p><font size="4" color="red">编译着色器</font><br>使用<code>glCompileShader</code>函数来编译着色器，参数是着色器对象：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//编译顶点着色器</span></div><div class="line">glCompileShader(vertexShader);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">检测编译是否成功</font><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//检测编译是否成功</div><div class="line">GLint success; //编译结果</div><div class="line">GLchar infoLog[512]; //错误信息</div><div class="line">glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &amp;success);</div><div class="line">if (!success) &#123;</div><div class="line">	glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);</div><div class="line">	std::cout &lt;&lt; "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" &lt;&lt; infoLog &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">编译着色器</font><br>使用<code>glCompileShader</code>函数来编译着色器，参数是着色器对象：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//编译顶点着色器</span>
+    <span class="token function">glCompileShader</span><span class="token punctuation">(</span>vertexShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">检测编译是否成功</font></p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//检测编译是否成功</span>
+    GLint success<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//编译结果</span>
+    GLchar infoLog<span class="token punctuation">[</span><span class="token number">512</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//错误信息</span>
+    <span class="token function">glGetShaderiv</span><span class="token punctuation">(</span>vertexShader<span class="token punctuation">,</span> GL_COMPILE_STATUS<span class="token punctuation">,</span> <span class="token operator">&amp;</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">glGetShaderInfoLog</span><span class="token punctuation">(</span>vertexShader<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> NULL<span class="token punctuation">,</span> infoLog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        std<span class="token punctuation">:</span><span class="token punctuation">:</span>cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> infoLog <span class="token operator">&lt;</span><span class="token operator">&lt;</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
 <p>首先定义一个整型success来表示是否成功编译，还需要一个存储错误消息的容器infoLog（如果有错误的话），然后用<code>glGetShaderiv</code>函数来检查是否编译成功了。如果编译失败，用<code>glGetShaderInfoLog</code>函数来获取错误信息，然后打印它。</p>
 <p>函数<code>glGetShaderInfoLog</code>的第一个参数是编译失败的着色器，第二个参数是存储错误信息的数组大小，第三个参数是返回的错误信息字符串的长度，如果不需要可以为NULL，第四个参数是存储错误信息的字符数组。<br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">像素着色器源码</font><br>像素着色器是最终我们打算创建的用于渲染三角形的着色器。像素着色器的全部，都是用来计算像素的最后颜色输出。为了简单点，我们的像素着色器只输出橘黄色（每个颜色的强度都是在0到1之间的浮点数，三种颜色可以调配处1600万中不同颜色，颜色值的第4个参数表示alpha透明度）：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//像素着色器</span></div><div class="line"><span class="keyword">const</span> GLchar* fragmentShaderSource =</div><div class="line">	<span class="string">"#version 330 core\n"</span></div><div class="line">	<span class="string">"out vec4 color;\n"</span></div><div class="line">	<span class="string">"void main()&#123;\n"</span></div><div class="line">	<span class="string">"color=vec4(1.0,0.5f,0.2f,1.0f);\n"</span></div><div class="line">	<span class="string">"&#125;\0"</span>;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">像素着色器源码</font><br>像素着色器是最终我们打算创建的用于渲染三角形的着色器。像素着色器的全部，都是用来计算像素的最后颜色输出。为了简单点，我们的像素着色器只输出橘黄色（每个颜色的强度都是在0到1之间的浮点数，三种颜色可以调配处1600万中不同颜色，颜色值的第4个参数表示alpha透明度）：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//像素着色器</span>
+<span class="token keyword">const</span> GLchar<span class="token operator">*</span> fragmentShaderSource <span class="token operator">=</span>
+    <span class="token string">"#version 330 core\n"</span>
+    <span class="token string">"out vec4 color;\n"</span>
+    <span class="token string">"void main(){\n"</span>
+    <span class="token string">"color=vec4(1.0,0.5f,0.2f,1.0f);\n"</span>
+    <span class="token string">"}\0"</span><span class="token punctuation">;</span>
+</code></pre>
 <p>像素着色器只需要一个输出变量，这个变量是一个表示最终输出颜色的vec4向量。可以用out关键字来声明输出变量，命名为color，即<code>out vec4 color;</code>。然后在像素着色器的main函数中给输出变量color指定橘黄色，透明度为1（不透明），即<code>color = vec4(1.0f, 0.5f, 0.2f, 1.0f);</code>。<br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">编译像素着色器</font><br>编译像素着色器的过程与顶点着色器一致，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//创建像素着色器对象</div><div class="line">	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);</div><div class="line">	//把像素着色器源码附加到像素着色器对象</div><div class="line">	glShaderSource(fragmentShader, 1, &amp;fragmentShaderSource, NULL);</div><div class="line">	//编译像素着色器源码</div><div class="line">	glCompileShader(fragmentShader);</div><div class="line">	//检测是否编译成功</div><div class="line">	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &amp;success);</div><div class="line">	if (!success) &#123;</div><div class="line">		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);</div><div class="line">		std::cout &lt;&lt; "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" &lt;&lt; infoLog &lt;&lt; std::endl;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">编译像素着色器</font><br>编译像素着色器的过程与顶点着色器一致，如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//创建像素着色器对象</span>
+    GLuint fragmentShader <span class="token operator">=</span> <span class="token function">glCreateShader</span><span class="token punctuation">(</span>GL_FRAGMENT_SHADER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//把像素着色器源码附加到像素着色器对象</span>
+    <span class="token function">glShaderSource</span><span class="token punctuation">(</span>fragmentShader<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>fragmentShaderSource<span class="token punctuation">,</span> NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//编译像素着色器源码</span>
+    <span class="token function">glCompileShader</span><span class="token punctuation">(</span>fragmentShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//检测是否编译成功</span>
+    <span class="token function">glGetShaderiv</span><span class="token punctuation">(</span>fragmentShader<span class="token punctuation">,</span> GL_COMPILE_STATUS<span class="token punctuation">,</span> <span class="token operator">&amp;</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">glGetShaderInfoLog</span><span class="token punctuation">(</span>fragmentShader<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> NULL<span class="token punctuation">,</span> infoLog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        std<span class="token punctuation">:</span><span class="token punctuation">:</span>cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> infoLog <span class="token operator">&lt;</span><span class="token operator">&lt;</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p>顶点着色器和像素着色器都已经编译了，剩下的事情就是把两个着色器对象链接到一个着色器程序中，它是用来渲染的。</p>
 <p><font size="5" color="orange">着色器程序</font><br>着色器程序对象（shader program object）是多个着色器最后链接的版本。如果要使用刚才编译好的着色器我们必须把它们链接为一个着色器程序对象，然后当渲染物体的时候激活这个着色器程序，才能进行利用着色器进行渲染。</p>
 <p>把着色器链接为一个程序就等于把每个着色器的输出链接到下一个着色器的输入。当然，如果你的输出和输入不匹配，那么将得到一个链接错误。</p>
-<p><font size="4" color="red">创建着色器程序对象</font><br>首先需要使用glCreateShader函数创建着色器程序对象：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建着色器程序对象</span></div><div class="line">GLuint shaderProgram = glCreateProgram();</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">附加链接</font><br>然后需要把着色器附加到着色器程序对象上，然后链接起来：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//把着色器附加到着色器程序对象上，然后链接起来</span></div><div class="line">glAttachShader(shaderProgram, vertexShader);</div><div class="line">glAttachShader(shaderProgram, fragmentShader);</div><div class="line">glLinkProgram(shaderProgram);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">检测是否链接成功</font><br>接下来是需要检测一下链接是否成功，和检测是否成功编译类似：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//检查是否链接成功</div><div class="line">glGetProgramiv(shaderProgram, GL_LINK_STATUS, &amp;success);</div><div class="line">if (!success) &#123;</div><div class="line">	glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);</div><div class="line">	std::cout &lt;&lt; "ERROR::PROGRAM::LINKING_FAILED\n" &lt;&lt; std::endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">删除着色器对象</font><br>最后是删除着色器对象，因为它们已经被成功链接到着色器程序对象了，不再需要着色器对象了，应该释放它们：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//删除着色器对象</span></div><div class="line">glDeleteShader(vertexShader);</div><div class="line">glDeleteShader(fragmentShader);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">创建着色器程序对象</font><br>首先需要使用glCreateShader函数创建着色器程序对象：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//创建着色器程序对象</span>
+    GLuint shaderProgram <span class="token operator">=</span> <span class="token function">glCreateProgram</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">附加链接</font><br>然后需要把着色器附加到着色器程序对象上，然后链接起来：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//把着色器附加到着色器程序对象上，然后链接起来</span>
+    <span class="token function">glAttachShader</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">,</span> vertexShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glAttachShader</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">,</span> fragmentShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glLinkProgram</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">检测是否链接成功</font><br>接下来是需要检测一下链接是否成功，和检测是否成功编译类似：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//检查是否链接成功</span>
+    <span class="token function">glGetProgramiv</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">,</span> GL_LINK_STATUS<span class="token punctuation">,</span> <span class="token operator">&amp;</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">glGetProgramInfoLog</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> NULL<span class="token punctuation">,</span> infoLog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        std<span class="token punctuation">:</span><span class="token punctuation">:</span>cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"ERROR::PROGRAM::LINKING_FAILED\n"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> std<span class="token punctuation">:</span><span class="token punctuation">:</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p><font size="4" color="red">删除着色器对象</font><br>最后是删除着色器对象，因为它们已经被成功链接到着色器程序对象了，不再需要着色器对象了，应该释放它们：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//删除着色器对象</span>
+    <span class="token function">glDeleteShader</span><span class="token punctuation">(</span>vertexShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glDeleteShader</span><span class="token punctuation">(</span>fragmentShader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">在游戏循环中渲染三角形</font><br>在顶点输入、顶点着色器、像素着色器、着色器程序对象等过程都完成后，迎来了最终的三角形渲染。</p>
 <p>OpenGL的glDrawArrays函数为我们提供了绘制物体的能力，它使用当前激活的着色器、前面定义的顶点属性和顶点数组对象VAO来绘制基本图形。</p>
-<p>所以我们需要先激活着色器程序对象，再绑定VAO完成顶点输入初始化，接着使用<code>glDrawArrays</code>函数来画三角形，最后解绑VAO：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//激活着色器程序对象</span></div><div class="line">		glUseProgram(shaderProgram);</div><div class="line">		<span class="comment">//绑定VAO，完成顶点输入初始化</span></div><div class="line">		glBindVertexArray(VAO);</div><div class="line">		<span class="comment">//绘图</span></div><div class="line">		glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);</div><div class="line">		<span class="comment">//解绑VAO</span></div><div class="line">		glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>所以我们需要先激活着色器程序对象，再绑定VAO完成顶点输入初始化，接着使用<code>glDrawArrays</code>函数来画三角形，最后解绑VAO：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//激活着色器程序对象</span>
+        <span class="token function">glUseProgram</span><span class="token punctuation">(</span>shaderProgram<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//绑定VAO，完成顶点输入初始化</span>
+        <span class="token function">glBindVertexArray</span><span class="token punctuation">(</span>VAO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//绘图</span>
+        <span class="token function">glDrawArrays</span><span class="token punctuation">(</span>GL_TRIANGLES<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//解绑VAO</span>
+        <span class="token function">glBindVertexArray</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>glDrawArrays函数的第一个参数是我们打算绘制的OpenGL基本图形的类型，这里是三角形GL_TRIANGLES；第二个参数是我们打算绘制的那个顶点数组的起始位置的索引；最后一个参数是我们打算绘制多少个顶点。</p>
-<p>当然，在退出渲染后，不要忘了清除掉顶点数组对象VAO和顶点缓冲对象VBO：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//删除VAO、VBO</span></div><div class="line">glDeleteVertexArrays(<span class="number">1</span>, &amp;VAO);</div><div class="line">glDeleteBuffers(<span class="number">1</span>, &amp;VBO);</div></pre></td></tr></table></figure></p>
+<p>当然，在退出渲染后，不要忘了清除掉顶点数组对象VAO和顶点缓冲对象VBO：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//删除VAO、VBO</span>
+    <span class="token function">glDeleteVertexArrays</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>VAO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glDeleteBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>VBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp;  </p>
 <hr>
 <p>到此为止，我们已经完成了一个三角形的绘制，全部源码<a href="https://github.com/Popperelay/BlogCode/blob/master/LearnOpenGL3_CreateTriangle/main1.cpp" target="_blank" rel="external">在这里</a>。<br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147939271602.png" alt=""><br>&nbsp;  </p>
 <hr>
 <p>下面我们再来看一个，画矩形该怎么画？我们可以绘制两个三角形来组成一个矩形，事实上OpenGL主要就是绘制三角形，我们看到的很多复杂图形，包括3D图形，都是很多个小的三角形拼凑起来的。</p>
-<p>画两个三角形的时候，如果直接用顶点去画，将需要2个三角形6个顶点：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">GLfloat vertices[] = &#123;</div><div class="line">    <span class="comment">// 第一个三角形</span></div><div class="line">    <span class="number">0.5</span>f, <span class="number">0.5</span>f, <span class="number">0.0</span>f,   <span class="comment">// 右上角</span></div><div class="line">    <span class="number">0.5</span>f, <span class="number">-0.5</span>f, <span class="number">0.0</span>f,  <span class="comment">// 右下角</span></div><div class="line">    <span class="number">-0.5</span>f, <span class="number">0.5</span>f, <span class="number">0.0</span>f,  <span class="comment">// 左上角 </span></div><div class="line">    <span class="comment">// 第二个三角形</span></div><div class="line">    <span class="number">0.5</span>f, <span class="number">-0.5</span>f, <span class="number">0.0</span>f,  <span class="comment">// 右下角</span></div><div class="line">    <span class="number">-0.5</span>f, <span class="number">-0.5</span>f, <span class="number">0.0</span>f, <span class="comment">// 左下角</span></div><div class="line">    <span class="number">-0.5</span>f, <span class="number">0.5</span>f, <span class="number">0.0</span>f   <span class="comment">// 左上角</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>画两个三角形的时候，如果直接用顶点去画，将需要2个三角形6个顶点：</p>
+<pre class=" language-csharp"><code class="language-csharp">GLfloat vertices<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 第一个三角形</span>
+    <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// 右上角</span>
+    <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 右下角</span>
+    <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 左上角 </span>
+    <span class="token comment" spellcheck="true">// 第二个三角形</span>
+    <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">// 右下角</span>
+    <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 左下角</span>
+    <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span>   <span class="token comment" spellcheck="true">// 左上角</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
 <p>但是这两个三角形其实有两个顶点是重合的，指定了右下角和左上角的顶点两次！一个矩形应该只有4个顶点而不是6个，这样就产生了50%的额外开销。如果我们有一个模型是大量的三角形拼凑起来的，这将会产生更大的浪费。最好的解决方案当然是每个顶点只存储一次，而在绘制的时候只需要指定打算绘制的那个顶点的索引就可以了。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">用索引缓冲对象绘制矩形</font><br>恰巧的是，OpenGL提供了用索引缓冲进行绘制的工作方式。用索引缓冲对象EBO（elements buffer object）是一个像VBO一样的缓冲，专门存储索引，OpenGL调用这些顶点的索引来绘制。</p>
-<p><font size="4" color="red">索引数组</font><br>首先我们需要定义一个浮点型数组，来存储矩形的四个顶点坐标；再定义一个整型数组，来存储组成矩形的两个三角形的顶点索引：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//三角形顶点坐标</span></div><div class="line">GLfloat vertices[] = &#123;</div><div class="line">	<span class="number">0.5</span>f,<span class="number">0.5</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">0.5</span>f,<span class="number">-0.5</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">-0.5</span>f,<span class="number">-0.5</span>f,<span class="number">0.0</span>f,</div><div class="line">	<span class="number">-0.5</span>f,<span class="number">0.5</span>f,<span class="number">0.0</span>f</div><div class="line">&#125;;</div><div class="line"><span class="comment">//顶点索引</span></div><div class="line">GLuint indices[] = &#123;</div><div class="line">	<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,  <span class="comment">//第一个三角形</span></div><div class="line">	<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>   <span class="comment">//第二个三角形</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">索引缓冲对象</font><br>接下来就是在主函数中生成索引缓冲对象EBO，负责索引数据的存储：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//生成索引缓冲对象EBO，负责索引数据的存储</span></div><div class="line">GLuint EBO;</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;EBO);</div></pre></td></tr></table></figure></p>
-<p>和VBO一样，接着需要给EBO绑定目标：索引数组内存：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//给索引缓冲对象绑定目标（索引数组缓冲）</span></div><div class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</div></pre></td></tr></table></figure></p>
-<p>然后就是把索引数据复制到显卡的索引数组缓冲中了：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//把索引数据复制到显卡的缓冲内存中</span></div><div class="line">glBufferData(GL_ELEMENT_ARRAY_BUFFER, <span class="keyword">sizeof</span>(indices), indices, GL_STATIC_DRAW);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">索引数组</font><br>首先我们需要定义一个浮点型数组，来存储矩形的四个顶点坐标；再定义一个整型数组，来存储组成矩形的两个三角形的顶点索引：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//三角形顶点坐标</span>
+    GLfloat vertices<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span><span class="token punctuation">,</span>
+        <span class="token operator">-</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.5f</span><span class="token punctuation">,</span><span class="token number">0.0f</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//顶点索引</span>
+    GLuint indices<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">//第一个三角形</span>
+        <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span>   <span class="token comment" spellcheck="true">//第二个三角形</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">索引缓冲对象</font><br>接下来就是在主函数中生成索引缓冲对象EBO，负责索引数据的存储：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//生成索引缓冲对象EBO，负责索引数据的存储</span>
+    GLuint EBO<span class="token punctuation">;</span>
+    <span class="token function">glGenBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>EBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>和VBO一样，接着需要给EBO绑定目标：索引数组内存：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//给索引缓冲对象绑定目标（索引数组缓冲）</span>
+    <span class="token function">glBindBuffer</span><span class="token punctuation">(</span>GL_ELEMENT_ARRAY_BUFFER<span class="token punctuation">,</span> EBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后就是把索引数据复制到显卡的索引数组缓冲中了：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token comment" spellcheck="true">//把索引数据复制到显卡的缓冲内存中</span>
+    <span class="token function">glBufferData</span><span class="token punctuation">(</span>GL_ELEMENT_ARRAY_BUFFER<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>indices<span class="token punctuation">)</span><span class="token punctuation">,</span> indices<span class="token punctuation">,</span> GL_STATIC_DRAW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>【注】：</p>
 <ul>
 <li>对EBO的操作还是应该在VAO绑定和解绑之间的，因为需要让VAO记录下来EBO的存储过程和细节。这样在用索引进行绘制时，还是只需要绑定VAO即可，不用再去对EBO进行一些列的绑定、复制数据等操作。</li>
 </ul>
-<p><font size="4" color="red">更改绘制方式</font><br>因为现在是改用索引缓冲进行渲染了，所以需要把<code>glDrawArrays</code>函数改为<code>glDrawElements</code>函数：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//绘图</span></div><div class="line">glDrawElements(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">更改绘制方式</font><br>因为现在是改用索引缓冲进行渲染了，所以需要把<code>glDrawArrays</code>函数改为<code>glDrawElements</code>函数：</p>
+<pre class=" language-csharp"><code class="language-csharp">        <span class="token comment" spellcheck="true">//绘图</span>
+        <span class="token function">glDrawElements</span><span class="token punctuation">(</span>GL_TRIANGLES<span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> GL_UNSIGNED_INT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>第一个参数指定了绘制模式；第二个参数是我们打算绘制的顶点数；第三个参数是索引的类型；最后一个参数指定索引被存储的位置（或者说是起始索引在EBO中的偏移量；如果没有使用EBO但是还想使用索引进行绘制，这里可以传递一个索引数组）。</p>
-<p><font size="4" color="red">渲染后删除EBO</font><br>当然，绘制完后不要忘了删除索引缓冲对象EBO：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glDeleteBuffers(<span class="number">1</span>, &amp;EBO);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">渲染后删除EBO</font><br>当然，绘制完后不要忘了删除索引缓冲对象EBO：</p>
+<pre class=" language-csharp"><code class="language-csharp">    <span class="token function">glDeleteBuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>EBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p>到此，我们已经绘制了一个由两个三角形组成的矩形，全部源码<a href="https://github.com/Popperelay/BlogCode/blob/master/LearnOpenGL3_CreateTriangle/main2.cpp" target="_blank" rel="external">在这里</a>。<br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14795454835.png" alt=""><br>&nbsp;</p>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -115,14 +115,35 @@
             <div class="typo" style="padding: 3rem;">
                 <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
 <ul>
-<li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">进程p1：...;counter=counter+<span class="number">1</span>;...</div><div class="line">进程p2：...;counter=counter+<span class="number">1</span>;...</div></pre></td></tr></table></figure>
-</li>
+<li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<pre class=" language-csharp"><code class="language-csharp">进程p1：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+进程p2：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+但是我们知道这只是高级语言的程序语句，计算机却是逐指令进行执行的，所以还需要把上诉高级语言转换成编译后的基本指令序列：（其中r1和r2是两个通用寄存器）<pre class=" language-csharp"><code class="language-csharp">进程p1：
+r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//将counter对应内存的数据送寄存器r1</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//累加1</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//将r1中的累加结果送往counter对应的内存中</span>
+</code></pre>
+<pre class=" language-csharp"><code class="language-csharp">进程p2：
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//将counter对应内存的数据送寄存器r1</span>
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//累加1</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//将r1中的累加结果送往counter对应的内存中</span>
+</code></pre>
+当进程p1和进程p2逐指令并发执行时，若指令执行顺序如下：<pre class=" language-csharp"><code class="language-csharp">r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>  
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span> 
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> 
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>
+</code></pre>
+则执行后的结果是counter等于1，显然这不是我们想要的结果，原因就在于程序的并发执行上。<br>若指令顺序如下：<pre class=" language-csharp"><code class="language-csharp">r1<span class="token operator">=</span>counter<span class="token punctuation">;</span>
+r1<span class="token operator">=</span>r1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>  
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r1<span class="token punctuation">;</span>
+r2<span class="token operator">=</span>counter<span class="token punctuation">;</span> 
+r2<span class="token operator">=</span>r2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> 
+counter<span class="token punctuation">:</span><span class="token operator">=</span>r2<span class="token punctuation">;</span>
+</code></pre>
+则执行后的结果是counter等于2。而程序并发执行时，两个程序的指令谁先执行谁后执行是不确定的，也就造成了程序并发执行时结果的不唯一性。</li>
 </ul>
-<p>但是我们知道这只是高级语言的程序语句，计算机却是逐指令进行执行的，所以还需要把上诉高级语言转换成编译后的基本指令序列：（其中r1和r2是两个通用寄存器）<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">进程p1：</div><div class="line">r1=counter;      <span class="comment">//将counter对应内存的数据送寄存器r1</span></div><div class="line">r1=r1+<span class="number">1</span>;         <span class="comment">//累加1</span></div><div class="line">counter:=r1;     <span class="comment">//将r1中的累加结果送往counter对应的内存中</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">进程p2：</div><div class="line">r2=counter;      <span class="comment">//将counter对应内存的数据送寄存器r1</span></div><div class="line">r2=r2+<span class="number">1</span>;         <span class="comment">//累加1</span></div><div class="line">counter:=r2;     <span class="comment">//将r1中的累加结果送往counter对应的内存中</span></div></pre></td></tr></table></figure>
-<p>当进程p1和进程p2逐指令并发执行时，若指令执行顺序如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">r1=counter;</div><div class="line">r1=r1+<span class="number">1</span>;  </div><div class="line">r2=counter; </div><div class="line">r2=r2+<span class="number">1</span>; </div><div class="line">counter:=r2;</div><div class="line">counter:=r1;</div></pre></td></tr></table></figure></p>
-<p>则执行后的结果是counter等于1，显然这不是我们想要的结果，原因就在于程序的并发执行上。<br>若指令顺序如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">r1=counter;</div><div class="line">r1=r1+<span class="number">1</span>;  </div><div class="line">counter:=r1;</div><div class="line">r2=counter; </div><div class="line">r2=r2+<span class="number">1</span>; </div><div class="line">counter:=r2;</div></pre></td></tr></table></figure></p>
-<p>则执行后的结果是counter等于2。而程序并发执行时，两个程序的指令谁先执行谁后执行是不确定的，也就造成了程序并发执行时结果的不唯一性。</p>
 <hr>
 <p><font size="5" color="orange">进程的描述</font><br>因为并发执行的程序可能是同一个程序在不同数据集合上的执行，也可能是不同的程序在不同的数据集合上的执行，它们共享系统资源，所以在并发执行中，仅仅用程序来作为描述单位是不够的，还应该加上程序的数据集合。所以，进程破壳出生了。</p>
 <p><font size="4" color="red">什么是进程</font></p>

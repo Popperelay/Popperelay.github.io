@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -126,7 +126,11 @@
 <p>创建流对象 → 打开文件 → 读写操作 → 关闭文件。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">创建流对象</font><br>建立流的过程其实就是定义流类的对象。因为与文件IO有关的类fstream、ifstream和ofstream都包含在头文件fstream，所以首先需要在程序中包含此头文件：<code>#include &lt;fstream&gt;</code>。</p>
-<p>接下来使用流类来定义流对象，例如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ifstream <span class="keyword">in</span>;</div><div class="line">ofstream <span class="keyword">out</span>;</div><div class="line">fstream both;</div></pre></td></tr></table></figure></p>
+<p>接下来使用流类来定义流对象，例如：</p>
+<pre class=" language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
+ofstream <span class="token keyword">out</span><span class="token punctuation">;</span>
+fstream both<span class="token punctuation">;</span>
+</code></pre>
 <p>分别定义了输入流对象in、输出流对象out、输入输出流对象both。</p>
 <p>其实常用的cin和cout也是流对象，只是已经在头文件iostream中事先定义好了，我们不需要再去自己定义了。<br>&nbsp; </p>
 <hr>
@@ -145,26 +149,114 @@
 <li>ios::binary：以二进制方式打开一个文件，默认情况下是以文本方式打开文件。</li>
 </ul>
 <p>对于ifstream对象，文件打开方式默认为ios::in；对于ofstream对象，文件打开方式默认为ios::out。</p>
-<p>当一个文件需要多种方式打开时，可以用操作符“|”把几种方式连接在一起。例如，打开一个用于输入和输出的二进制文件：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fstream mystream;</div><div class="line">mystream.open("test.dat",ios::in|ios::out|ios::binary);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">定义流对象同时打开文件</font><br>可以在定义文件流对象时指定文件路径，来同时打开文件。形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">ofstream <span class="title">out</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div></pre></td></tr></table></figure></p>
-<p>由于这种方式没有指定打开方式，所以使用的是默认打开方式，依旧是：ifstream对象为ios::in打开方式，ofstream对象为ios::out打开方式。所以上面的打开文件代码相当于：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ofstream <span class="keyword">out</span>;</div><div class="line"><span class="keyword">out</span>.open(<span class="string">"test.dat"</span>);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">检测打开文件是否成功</font><br>执行打开文件操作后，还需要检测打开文件是否成功，如果打开失败，与文件相联系的流对象（比如上面的out）的值将是0。检测代码形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="keyword">out</span>)&#123;</div><div class="line">    cout&lt;&lt;<span class="string">"Cannot open file!"</span>&lt;&lt;endl;</div><div class="line">    <span class="comment">//其它处理</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当一个文件需要多种方式打开时，可以用操作符“|”把几种方式连接在一起。例如，打开一个用于输入和输出的二进制文件：</p>
+<pre class=" language-csharp"><code class="language-csharp">fstream mystream<span class="token punctuation">;</span>
+mystream<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">,</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">in</span><span class="token operator">|</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token keyword">out</span><span class="token operator">|</span>ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">定义流对象同时打开文件</font><br>可以在定义文件流对象时指定文件路径，来同时打开文件。形如：</p>
+<pre class=" language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>由于这种方式没有指定打开方式，所以使用的是默认打开方式，依旧是：ifstream对象为ios::in打开方式，ofstream对象为ios::out打开方式。所以上面的打开文件代码相当于：</p>
+<pre class=" language-csharp"><code class="language-csharp">ofstream <span class="token keyword">out</span><span class="token punctuation">;</span>
+<span class="token keyword">out</span><span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><font size="4" color="red">检测打开文件是否成功</font><br>执行打开文件操作后，还需要检测打开文件是否成功，如果打开失败，与文件相联系的流对象（比如上面的out）的值将是0。检测代码形如：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">out</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cout<span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token string">"Cannot open file!"</span><span class="token operator">&lt;</span><span class="token operator">&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//其它处理</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">文件读写</font><br>文件打开以后，就可以进行文件读写了。但是由于数据组织方式不同，文本文件和二进制文件的读写是不一样的（二进制文件在打开时还需要显式指定ios::binary打开方式，默认是以文本方式打开）。</p>
 <p><font size="4" color="red">文本文件的读写</font><br>其实和cin、cout一样，使用<code>流对象&gt;&gt;</code>把数据从文件输入到内存，使用<code>流对象&lt;&lt;</code>把数据从内存输出到文件。</p>
-<p>下面上个demo，先建立一个输出文件，向它写入数据，然后关闭文件，在按输入方式打开它，并读取信息，保存到变量中，在屏幕上显示出来：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#include "stdafx.h"</span></div><div class="line"><span class="meta">#include &lt;iostream&gt;</span></div><div class="line"><span class="meta">#include &lt;fstream&gt;</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//定义输出流对象，同时打开文件</span></div><div class="line">	<span class="function">ofstream <span class="title">fout</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div><div class="line">	<span class="comment">//检测文件是否打开成功</span></div><div class="line">	<span class="keyword">if</span> (!fout) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//把一个字符串写到磁盘文件test.dat中</span></div><div class="line">	fout &lt;&lt; <span class="string">"hello!\n"</span>;</div><div class="line">	<span class="comment">//把一个十进制整数和一个十六进制整数写到test.dat中</span></div><div class="line">	fout &lt;&lt; <span class="number">100</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; hex &lt;&lt; <span class="number">100</span> &lt;&lt; endl;</div><div class="line">	<span class="comment">//关闭文件</span></div><div class="line">	fout.close();</div><div class="line"></div><div class="line">	<span class="comment">//定义输入流对象，同时打开文件</span></div><div class="line">	<span class="function">ifstream <span class="title">fin</span>(<span class="params"><span class="string">"test.dat"</span></span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!fin) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file!"</span> &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">char</span>* s=<span class="keyword">new</span> <span class="keyword">char</span>();</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="keyword">int</span> j;</div><div class="line">	<span class="comment">//从磁盘文件test.dat中读取一个字符串赋给s，读取一个整数赋给i</span></div><div class="line">	fin &gt;&gt; s &gt;&gt; i &gt;&gt; j;</div><div class="line">	<span class="comment">//在屏幕上显示</span></div><div class="line">	cout &lt;&lt; s &lt;&lt; endl &lt;&lt; i &lt;&lt; endl &lt;&lt; j &lt;&lt; endl;</div><div class="line">	fin.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>编译运行后，会在该源文件同路径下，创建出一个test.dat文件，文件中内容如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hello!</div><div class="line"><span class="number">100</span> <span class="number">64</span></div></pre></td></tr></table></figure></p>
-<p>并且在屏幕上会输出如下结果：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hello!</div><div class="line"><span class="number">100</span></div><div class="line"><span class="number">64</span></div></pre></td></tr></table></figure></p>
+<p>下面上个demo，先建立一个输出文件，向它写入数据，然后关闭文件，在按输入方式打开它，并读取信息，保存到变量中，在屏幕上显示出来：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include &lt;iostream></span>
+<span class="token preprocessor property">#include &lt;fstream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//定义输出流对象，同时打开文件</span>
+    ofstream <span class="token function">fout</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//检测文件是否打开成功</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open output file!"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//把一个字符串写到磁盘文件test.dat中</span>
+    fout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"hello!\n"</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//把一个十进制整数和一个十六进制整数写到test.dat中</span>
+    fout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token number">100</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">' '</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> hex <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token number">100</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//关闭文件</span>
+    fout<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//定义输入流对象，同时打开文件</span>
+    ifstream <span class="token function">fin</span><span class="token punctuation">(</span><span class="token string">"test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fin<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open input file!"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> s<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//从磁盘文件test.dat中读取一个字符串赋给s，读取一个整数赋给i</span>
+    fin <span class="token operator">></span><span class="token operator">></span> s <span class="token operator">></span><span class="token operator">></span> i <span class="token operator">></span><span class="token operator">></span> j<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//在屏幕上显示</span>
+    cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> s <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl <span class="token operator">&lt;</span><span class="token operator">&lt;</span> i <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl <span class="token operator">&lt;</span><span class="token operator">&lt;</span> j <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>编译运行后，会在该源文件同路径下，创建出一个test.dat文件，文件中内容如下：</p>
+<pre class=" language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
+<span class="token number">100</span> <span class="token number">64</span>
+</code></pre>
+<p>并且在屏幕上会输出如下结果：</p>
+<pre class=" language-csharp"><code class="language-csharp">hello<span class="token operator">!</span>
+<span class="token number">100</span>
+<span class="token number">64</span>
+</code></pre>
 <p>64是100的二进制。</p>
 <p><font size="4" color="red">二进制文件的读写</font><br>二进制文件的读写不再是使用&gt;&gt;或&lt;&lt;，而是使用类istream和类ostream的成员函数来进行读写。</p>
 <p>根据每次读写的数据量不同，二进制文件的读写有两种方式：一种是使用成员函数get和put；另一种是使用成员函数read和write。</p>
 <ul>
 <li><p>使用get和put函数读写二进制文件：<br>get函数是类istream的成员函数，put函数是类ostream的成员函数，它们每次都只是读写一个字节（字符）。</p>
 <p>上个demo体会一下，将a到z的26个英文字母写入二进制文件，而后从该文件中读出并在屏幕上显示出来：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">#include "stdafx.h"</span></div><div class="line"> <span class="meta">#include &lt;iostream&gt;</span></div><div class="line"> <span class="meta">#include &lt;fstream&gt;</span></div><div class="line"> <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="function">ofstream <span class="title">outb</span>(<span class="params"><span class="string">"binary.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!outb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>); <span class="comment">//退出程序，和abort()作用一样</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">char</span> ch = <span class="string">'a'</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) &#123;</div><div class="line">		<span class="comment">//输出字符到磁盘文件binary.dat中</span></div><div class="line">		outb.put(ch);</div><div class="line">		ch++;</div><div class="line">	&#125;</div><div class="line">	outb.close();</div><div class="line"></div><div class="line">	<span class="function">ifstream <span class="title">inb</span>(<span class="params"><span class="string">"binary.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!inb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file"</span> &lt;&lt; endl;</div><div class="line">		abort();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span> (inb.<span class="keyword">get</span>(ch)) &#123;</div><div class="line">		<span class="comment">//从磁盘文件中读取字符赋给ch</span></div><div class="line">		cout &lt;&lt; ch;</div><div class="line">	&#125;</div><div class="line">	inb.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include &lt;iostream></span>
+<span class="token preprocessor property">#include &lt;fstream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ofstream <span class="token function">outb</span><span class="token punctuation">(</span><span class="token string">"binary.dat"</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>outb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open output file!"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+      <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//退出程序，和abort()作用一样</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">char</span> ch <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">26</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//输出字符到磁盘文件binary.dat中</span>
+      outb<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      ch<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  outb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  ifstream <span class="token function">inb</span><span class="token punctuation">(</span><span class="token string">"binary.dat"</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>inb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open input file"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+      <span class="token function">abort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>inb<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//从磁盘文件中读取字符赋给ch</span>
+      cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> ch<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>编译运行后，会在该源文件同路径下，创建出一个binary.dat，文件内容是26个小写英文字符对应的二进制（用记事本等工具打开后二进制会转为字符，所以用记事本打开看到的不是二进制，而是26个英文字母），并且屏幕上回输出如下结果：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+</code></pre>
 </li>
 <li><p>使用read和write函数读写二进制文件：</p>
 <ul>
@@ -172,16 +264,66 @@
 <li>write函数是类ostream的成员函数，形如<code>outb.write(const char* buf,int len);</code> 。用于将字符指针buf所给出地址开始的len个字节的内容，不加转换地写到与输出文件流对象outb相关联的磁盘文件中。</li>
 </ul>
 <p>再上个demo体会一下，将课程结构体以二进制形式一次性存放到磁盘文件中：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">#include "stdafx.h"</span></div><div class="line"> <span class="meta">#include &lt;iostream&gt;</span></div><div class="line"> <span class="meta">#include &lt;fstream&gt;</span></div><div class="line"> <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="title">std</span>;</div><div class="line"> </div><div class="line"> <span class="comment">//课程结构体</span></div><div class="line"><span class="keyword">struct</span> Course &#123;</div><div class="line">	<span class="keyword">char</span> courseName[<span class="number">20</span>];</div><div class="line">	<span class="keyword">int</span> score;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//课程结构体实例</span></div><div class="line">	Course course = &#123; <span class="string">"computer"</span>,<span class="number">100</span> &#125;;</div><div class="line"></div><div class="line">	<span class="function">ofstream <span class="title">outb</span>(<span class="params"><span class="string">"binary2.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!outb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open output file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//将课程结构体实例写入磁盘文件binary2.dat中</span></div><div class="line">	outb.write((<span class="keyword">char</span>*)&amp;course, <span class="keyword">sizeof</span>(course));</div><div class="line">	outb.close();</div><div class="line"></div><div class="line">	<span class="comment">//课程结构体实例，用于存储从文件中读取的数据</span></div><div class="line">	Course inCourse;</div><div class="line"></div><div class="line">	<span class="function">ifstream <span class="title">inb</span>(<span class="params"><span class="string">"binary2.dat"</span>, ios::binary</span>)</span>;</div><div class="line">	<span class="keyword">if</span> (!inb) &#123;</div><div class="line">		cout &lt;&lt; <span class="string">"Cannot open input file!"</span> &lt;&lt; endl;</div><div class="line">		exit(<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//从磁盘文件binary2中读取数据存入inCourse结构体实例中</span></div><div class="line">	inb.read((<span class="keyword">char</span>*)&amp;inCourse, <span class="keyword">sizeof</span>(inCourse));</div><div class="line">	cout &lt;&lt; <span class="string">"courseName:"</span> &lt;&lt; inCourse.courseName &lt;&lt; <span class="string">' '</span> &lt;&lt; <span class="string">"score:"</span> &lt;&lt; inCourse.score &lt;&lt; endl;</div><div class="line">	inb.close();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include &lt;iostream></span>
+<span class="token preprocessor property">#include &lt;fstream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//课程结构体</span>
+<span class="token keyword">struct</span> Course <span class="token punctuation">{</span>
+  <span class="token keyword">char</span> courseName<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> score<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">//课程结构体实例</span>
+  Course course <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">"computer"</span><span class="token punctuation">,</span><span class="token number">100</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  ofstream <span class="token function">outb</span><span class="token punctuation">(</span><span class="token string">"binary2.dat"</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>outb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open output file!"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+      <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//将课程结构体实例写入磁盘文件binary2.dat中</span>
+  outb<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>course<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>course<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  outb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">//课程结构体实例，用于存储从文件中读取的数据</span>
+  Course inCourse<span class="token punctuation">;</span>
+
+  ifstream <span class="token function">inb</span><span class="token punctuation">(</span><span class="token string">"binary2.dat"</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>inb<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"Cannot open input file!"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+      <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//从磁盘文件binary2中读取数据存入inCourse结构体实例中</span>
+  inb<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>inCourse<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>inCourse<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"courseName:"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> inCourse<span class="token punctuation">.</span>courseName <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">' '</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token string">"score:"</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> inCourse<span class="token punctuation">.</span>score <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+  inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>编译运行后，在源文件同路径下回创建出一个binary2.dat文件，用记事本打开结果如下：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">computer            d</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">computer            d
+</code></pre>
 <p>因为用记事本打开时会自动将二进制转换为字符，而数字100对应的二进制正好是字母d的ASCII码，所以数字100转变成了字母d。并且屏幕上会出现如下结果：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">courseName:computer score:<span class="number">100</span></div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">courseName<span class="token punctuation">:</span>computer score<span class="token punctuation">:</span><span class="token number">100</span>
+</code></pre>
 </li>
 </ul>
-<p><font size="4" color="red">检测读文件是否结束</font><br>在文件结束的地方有一个标志位，记为EOF（end of file）。采用文件流方式读文件时，使用成员函数<code>eof</code>可以检测到这个结束符：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ifstream <span class="keyword">in</span>;</div><div class="line">...</div><div class="line"><span class="keyword">if</span>(!<span class="keyword">in</span>.eof())&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">检测读文件是否结束</font><br>在文件结束的地方有一个标志位，记为EOF（end of file）。采用文件流方式读文件时，使用成员函数<code>eof</code>可以检测到这个结束符：</p>
+<pre class=" language-csharp"><code class="language-csharp">ifstream <span class="token keyword">in</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">in</span><span class="token punctuation">.</span><span class="token function">eof</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>函数<code>eof</code>如果返回值为0，未达到文件尾；如果返回值非0，表示到达文件尾。</p>
-<p>其实前面在使用get函数读文件时：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (inb.<span class="keyword">get</span>(ch)) &#123;</div><div class="line">    <span class="comment">//从磁盘文件中读取字符赋给ch</span></div><div class="line">    cout &lt;&lt; ch;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>其实前面在使用get函数读文件时：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">while</span> <span class="token punctuation">(</span>inb<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//从磁盘文件中读取字符赋给ch</span>
+    cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> ch<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
 <p>get函数在读取字符的同时，也通过返回值是否为0，判断是否到达文件尾。</p>
 <p><font size="4" color="red">二进制文件的随机读写</font><br>文本文件一般是顺序读写的，但二进制文件还支持从任意位置开始读写，即随机读写。主要是靠设置读指针和写指针的位置来实现。</p>
 <p>类istream提供了3个成员函数来设置读指针位置（下面的g是get的缩写）：</p>
@@ -208,17 +350,55 @@
 </ul>
 </li>
 </ul>
-<p>把读指针位置设置为文件尾ios::end，再使用<code>tellg</code>函数可以获得整个文件的长度：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fin.seekg(0, ios::end);</div><div class="line">	int length = fin.tellg();</div></pre></td></tr></table></figure></p>
-<p>知道了整个文件的长度，再使用<code>read</code>函数就可以一次性读出整个文件。上个demo，现在已经有一个binary.dat文件，文件内容如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div><div class="line">ABC</div></pre></td></tr></table></figure></p>
-<p>实现代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#include "stdafx.h"</div><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;fstream&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main() &#123;</div><div class="line">	ifstream fin("binary.dat", ios::binary);</div><div class="line">	//设置读指针到文件尾</div><div class="line">	fin.seekg(0, ios::end);</div><div class="line">	//读出当前读指针的位置，从而得到文件长度</div><div class="line">	int length = fin.tellg();</div><div class="line">	//新建字符串str存储文件内容。</div><div class="line">	//需要在读出所有内容后给字符串加'\0'，所以长度设为length+1</div><div class="line">	char* str = new char[length + 1];</div><div class="line">	//把读指针重新设到文件头</div><div class="line">	fin.seekg(0, ios::beg);</div><div class="line">	//一次性读出整个文件</div><div class="line">	fin.read(str, length);</div><div class="line">	//给str加上字符串结束符'\0'</div><div class="line">	str[length] = '\0';</div><div class="line">	cout &lt;&lt; str &lt;&lt; endl;</div><div class="line">	fin.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>编译运行后，在屏幕上的输出结果如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">abcdefghijklmnopqrstuvwxyz</div><div class="line">ABC</div></pre></td></tr></table></figure></p>
+<p>把读指针位置设置为文件尾ios::end，再使用<code>tellg</code>函数可以获得整个文件的长度：</p>
+<pre class=" language-csharp"><code class="language-csharp">fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>end<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> fin<span class="token punctuation">.</span><span class="token function">tellg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>知道了整个文件的长度，再使用<code>read</code>函数就可以一次性读出整个文件。上个demo，现在已经有一个binary.dat文件，文件内容如下：</p>
+<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+ABC
+</code></pre>
+<p>实现代码如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include </span><span class="token string">"stdafx.h"</span>
+<span class="token preprocessor property">#include&lt;iostream></span>
+<span class="token preprocessor property">#include&lt;fstream></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ifstream <span class="token function">fin</span><span class="token punctuation">(</span><span class="token string">"binary.dat"</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>binary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//设置读指针到文件尾</span>
+    fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>end<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//读出当前读指针的位置，从而得到文件长度</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> fin<span class="token punctuation">.</span><span class="token function">tellg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//新建字符串str存储文件内容。</span>
+    <span class="token comment" spellcheck="true">//需要在读出所有内容后给字符串加'\0'，所以长度设为length+1</span>
+    <span class="token keyword">char</span><span class="token operator">*</span> str <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">char</span><span class="token punctuation">[</span>length <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//把读指针重新设到文件头</span>
+    fin<span class="token punctuation">.</span><span class="token function">seekg</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> ios<span class="token punctuation">:</span><span class="token punctuation">:</span>beg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//一次性读出整个文件</span>
+    fin<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//给str加上字符串结束符'\0'</span>
+    str<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;</span><span class="token operator">&lt;</span> str <span class="token operator">&lt;</span><span class="token operator">&lt;</span> endl<span class="token punctuation">;</span>
+    fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>编译运行后，在屏幕上的输出结果如下：</p>
+<pre class=" language-csharp"><code class="language-csharp">abcdefghijklmnopqrstuvwxyz
+ABC
+</code></pre>
 <p>【注】：</p>
 <ul>
 <li>成员函数<code>get</code>、<code>put</code>、<code>read</code>、<code>write</code>函数不仅可以用于二进制文件，也可以用于文本文件</li>
 <li>当要将文件完整读入时，最好使用二进制方式打开ios::binary，因为如果以文本文件方式打开的话，文件流会把一些非字符的数据过滤掉，我们将读取不到那些内容。<br>&nbsp; </li>
 </ul>
 <hr>
-<p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">in</span>.close();</div><div class="line"><span class="keyword">out</span>.close();</div><div class="line">inb.close();</div><div class="line">outb.close();</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">关闭文件</font><br>输入输出操作完成后，应该将文件关闭，否则可能丢失数据。所谓关闭，其实是将所打开的磁盘文件与流对象断开联系，关闭后流对象就不能再对该文件进行输入输出操作了。使用close成员函数实现，形如：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">in</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">out</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+inb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+outb<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">C++字符串流的输入输出</font><br>C++字符串流的输入输出与文件IO类似。文件IO是内存和磁盘文件之间传递数据，而字符串流IO是内存和字符串流之间传递数据。</p>
@@ -234,8 +414,15 @@
 <li>它们都包含在sstream.h头文件中。</li>
 <li>也是通过字符串流对象配合&gt;&gt;和&lt;&lt;运算符来进行IO操作：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string line=&quot;ourStr&quot;;</div><div class="line">istringstream ins(line);</div><div class="line">string str;</div><div class="line">ins&gt;&gt;str;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">string line;</div><div class="line">ostringstream outs;</div><div class="line">outs&lt;&lt;&quot;ourStr&quot;;</div><div class="line">cout&lt;&lt;outs.str()&lt;&lt;endl;</div></pre></td></tr></table></figure>
+<pre><code>string line=&quot;ourStr&quot;;
+istringstream ins(line);
+string str;
+ins&gt;&gt;str;
+</code></pre><pre><code>string line;
+ostringstream outs;
+outs&lt;&lt;&quot;ourStr&quot;;
+cout&lt;&lt;outs.str()&lt;&lt;endl;
+</code></pre>
             </div>
 
             <!-- Post Comments -->

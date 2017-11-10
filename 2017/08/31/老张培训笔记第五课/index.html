@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -135,14 +135,90 @@
 <p><font size="5" color="orange">最常见的方式</font></p>
 <hr>
 <p>通常最容易想到的就是按C语言的方式在主程序里通过if-else的判断来实现这种逐级处理。</p>
-<p>我们先把请假请求封装成一个类，当中有一个表示请假天数的成员变量（封装成类是为了后续需求变化考虑，因为可能请假可能不仅考虑到天数，还考虑到职位、在团队里的重要性等等）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLeaveRequest</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CLeaveRequest() &#123;&#125;</div><div class="line">	CLeaveRequest(<span class="keyword">int</span> vLeaveDays) : m_LeaveDays(vLeaveDays) &#123;&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getLeaveDays</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_LeaveDays; &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> m_LeaveDays;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>我们再创建一个员工的基类（依赖倒置原则），它只有一个表示审批动作本身的函数，至于通不通过我们在主程序里通过if-else去实现：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LeaveRequest.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CEmployee</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>然后实现员工类的3个子类，它们各自有自己具体的审批动作：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTeamLeader</span> :</span> <span class="keyword">public</span> CEmployee&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of"</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by team leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CProjectLeader</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of"</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by project leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CHR</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of"</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by HR."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>然后我们在主函数里创建请求以及三类员工的对象：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"TeamLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ProjectLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"HR.h"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CTeamLeader *pTeamLeader = <span class="keyword">new</span> CTeamLeader;</div><div class="line">	CProjectLeader *pProjectLeader = <span class="keyword">new</span> CProjectLeader;</div><div class="line">	CHR *pHR = <span class="keyword">new</span> CHR;</div><div class="line">	CLeaveRequest *pLeaveRequest = <span class="keyword">new</span> CLeaveRequest(<span class="number">25</span>);</div></pre></td></tr></table></figure></p>
-<p>然后从TeamLeader开始，使用if-else判断请假类里的天数是否满足他的天数限制，如果不满足，则看是否满足他的上司的天数限制，以此类推：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">	<span class="keyword">if</span> (pLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">10</span>) &#123;</div><div class="line">		pTeamLeader-&gt;approveLeaveV(pLeaveRequest);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (pLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">20</span>) &#123;</div><div class="line">			pProjectLeader-&gt;approveLeaveV(pLeaveRequest);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (pLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">30</span>) &#123;</div><div class="line">				pHR-&gt;approveLeaveV(pLeaveRequest);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> &#123;</div><div class="line">				<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The only way to get "</span> &lt;&lt; pLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" leave days to quit the company."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>程序输出的结果如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The leave request of <span class="number">25</span> days has been approved by HR.</div></pre></td></tr></table></figure></p>
+<p>我们先把请假请求封装成一个类，当中有一个表示请假天数的成员变量（封装成类是为了后续需求变化考虑，因为可能请假可能不仅考虑到天数，还考虑到职位、在团队里的重要性等等）：</p>
+<pre class=" language-c++"><code class="language-c++">class CLeaveRequest {
+public:
+    CLeaveRequest() {}
+    CLeaveRequest(int vLeaveDays) : m_LeaveDays(vLeaveDays) {}
+
+    int getLeaveDays() const { return m_LeaveDays; }
+
+private:
+    int m_LeaveDays;
+};
+</code></pre>
+<p>我们再创建一个员工的基类（依赖倒置原则），它只有一个表示审批动作本身的函数，至于通不通过我们在主程序里通过if-else去实现：</p>
+<pre class=" language-c++"><code class="language-c++">#include "LeaveRequest.h"
+
+class CEmployee{
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const = 0;
+};
+</code></pre>
+<p>然后实现员工类的3个子类，它们各自有自己具体的审批动作：</p>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CTeamLeader : public CEmployee{
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by team leader." << std::endl;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CProjectLeader : public CEmployee {
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by project leader." << std::endl;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CHR : public CEmployee {
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of" << vLeaveRequest->getLeaveDays() << " days has been approved by HR." << std::endl;
+    }
+};
+</code></pre>
+<p>然后我们在主函数里创建请求以及三类员工的对象：</p>
+<pre class=" language-c++"><code class="language-c++">#include "TeamLeader.h"
+#include "ProjectLeader.h"
+#include "HR.h"
+
+int main() {
+    CTeamLeader *pTeamLeader = new CTeamLeader;
+    CProjectLeader *pProjectLeader = new CProjectLeader;
+    CHR *pHR = new CHR;
+    CLeaveRequest *pLeaveRequest = new CLeaveRequest(25);
+</code></pre>
+<p>然后从TeamLeader开始，使用if-else判断请假类里的天数是否满足他的天数限制，如果不满足，则看是否满足他的上司的天数限制，以此类推：</p>
+<pre class=" language-c++"><code class="language-c++">    if (pLeaveRequest->getLeaveDays() < 10) {
+        pTeamLeader->approveLeaveV(pLeaveRequest);
+    }
+    else {
+        if (pLeaveRequest->getLeaveDays() < 20) {
+            pProjectLeader->approveLeaveV(pLeaveRequest);
+        }
+        else {
+            if (pLeaveRequest->getLeaveDays() < 30) {
+                pHR->approveLeaveV(pLeaveRequest);
+            }
+            else {
+                std::cout << "The only way to get " << pLeaveRequest->getLeaveDays() << " leave days to quit the company." << std::endl;
+            }
+        }
+    }
+}
+</code></pre>
+<p>程序输出的结果如下：</p>
+<pre class=" language-c++"><code class="language-c++">The leave request of 25 days has been approved by HR.
+</code></pre>
 <p>但是这多重if-else明显不符合开闭原则，审批条件和审批流程完全在客户端实现，即客户端和审批业务耦合太紧。</p>
 <p><font size="5" color="orange">责任链模式</font></p>
 <hr>
@@ -152,41 +228,315 @@
 <li>怎么知道自己权限不够？</li>
 <li>怎么知道自己上级是谁？</li>
 </ul>
-<p>我们先看怎么知道自己的上级，某个员工要知道自己的上级是谁，其实很简单，在员工基类里加一个表示上级的成员变量就可以了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LeaveRequest.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CEmployee</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CEmployee() :m_Superior(<span class="literal">NULL</span>) &#123;&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setSuperior</span><span class="params">(CEmployee *vSuperior)</span> </span>&#123; m_Superior = vSuperior; &#125;</div><div class="line">	<span class="function"><span class="keyword">const</span> CEmployee* <span class="title">getSuperior</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_Superior; &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">const</span> CEmployee *m_Superior;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>每级员工都知道自己的权限天数是多少，不满足则交给他的上级m_Superior来处理：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTeamLeader</span> :</span> <span class="keyword">public</span> CEmployee&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="keyword">if</span> (vLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">10</span>)</div><div class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by team leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">if</span>(getSuperior())</div><div class="line">				getSuperior()-&gt;approveLeaveV(vLeaveRequest);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CProjectLeader</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="keyword">if</span> (vLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">20</span>)</div><div class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by project leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">if</span> (getSuperior())</div><div class="line">				getSuperior()-&gt;approveLeaveV(vLeaveRequest);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CHR</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approveLeaveV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="keyword">if</span> (vLeaveRequest-&gt;getLeaveDays() &lt; <span class="number">30</span>)</div><div class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by HR."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The only way to get "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" leave days to quit the company."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>这时主函数就变得很简单了，只需要把请求交给底层的TeamLeader就行，它会自动逐级上交审批请求的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"TeamLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ProjectLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"HR.h"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CTeamLeader *pTeamLeader = <span class="keyword">new</span> CTeamLeader;</div><div class="line">	CProjectLeader *pProjectLeader = <span class="keyword">new</span> CProjectLeader;</div><div class="line">	CHR *pHR = <span class="keyword">new</span> CHR;</div><div class="line">	CLeaveRequest *pLeaveRequest = <span class="keyword">new</span> CLeaveRequest(<span class="number">25</span>);</div><div class="line"></div><div class="line">	pTeamLeader-&gt;setSuperior(pProjectLeader);</div><div class="line">	pProjectLeader-&gt;setSuperior(pHR);</div><div class="line"></div><div class="line">	pTeamLeader-&gt;approveLeaveV(pLeaveRequest);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们先看怎么知道自己的上级，某个员工要知道自己的上级是谁，其实很简单，在员工基类里加一个表示上级的成员变量就可以了：</p>
+<pre class=" language-c++"><code class="language-c++">#include "LeaveRequest.h"
+
+class CEmployee{
+public:
+    CEmployee() :m_Superior(NULL) {}
+
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const = 0;
+
+    void setSuperior(CEmployee *vSuperior) { m_Superior = vSuperior; }
+    const CEmployee* getSuperior() const { return m_Superior; }
+
+private:
+    const CEmployee *m_Superior;
+};
+</code></pre>
+<p>每级员工都知道自己的权限天数是多少，不满足则交给他的上级m_Superior来处理：</p>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CTeamLeader : public CEmployee{
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        if (vLeaveRequest->getLeaveDays() < 10)
+            std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by team leader." << std::endl;
+        else
+            if(getSuperior())
+                getSuperior()->approveLeaveV(vLeaveRequest);
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CProjectLeader : public CEmployee {
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        if (vLeaveRequest->getLeaveDays() < 20)
+            std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by project leader." << std::endl;
+        else
+            if (getSuperior())
+                getSuperior()->approveLeaveV(vLeaveRequest);
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include "Employee.h"
+
+class CHR : public CEmployee {
+public:
+    virtual void approveLeaveV(const CLeaveRequest *vLeaveRequest) const override {
+        if (vLeaveRequest->getLeaveDays() < 30)
+            std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by HR." << std::endl;
+        else
+            std::cout << "The only way to get " << vLeaveRequest->getLeaveDays() << " leave days to quit the company." << std::endl;
+    }
+};
+</code></pre>
+<p>这时主函数就变得很简单了，只需要把请求交给底层的TeamLeader就行，它会自动逐级上交审批请求的：</p>
+<pre class=" language-c++"><code class="language-c++">#include "TeamLeader.h"
+#include "ProjectLeader.h"
+#include "HR.h"
+
+int main() {
+    CTeamLeader *pTeamLeader = new CTeamLeader;
+    CProjectLeader *pProjectLeader = new CProjectLeader;
+    CHR *pHR = new CHR;
+    CLeaveRequest *pLeaveRequest = new CLeaveRequest(25);
+
+    pTeamLeader->setSuperior(pProjectLeader);
+    pProjectLeader->setSuperior(pHR);
+
+    pTeamLeader->approveLeaveV(pLeaveRequest);
+}
+</code></pre>
 <p>这就是责任链模式：在具有上下级关系的一串对象中，每一级对象都含有其直接上级对象的指针。这样就将请求的处理者组织成一条链，客户端无需关心请求的处理细节以及请求的传递，只需要将请求发送到链上，实现请求的发送者和处理者解耦。请求会沿着链向上传递。但是，很明显的，系统性能会受到一定影响。</p>
-<p>但是上面代码里，三类员工的approveLeaveV函数有没有太像了？几乎只有一个10、20、30不同，外加审批通过后作出的反应不同（这里是输出的字符串不同）。这代码明显重复得太厉害了，确定写的时候没有CtrlC、CtrlV？有没有什么办法能够减少重复代码？如果能够把这段approveLeaveV函数代码移到基类CEmployee当然就可以减少每个子类重复写了，但是那两个不同的地方怎么处理？<br>先看第一个不同地方：每一级员工的权限天数不一样，我们在基类里设置一个表示权限天数的变量就可以了，子类在创建后分别给这个变量赋以不同的值就OK：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CEmployee</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	...</div><div class="line">	<span class="function"><span class="keyword">void</span>  <span class="title">setMaxApproveDays</span><span class="params">(<span class="keyword">int</span> vMaxApproveDays)</span> </span>&#123; m_MaxApproveDays = vMaxApproveDays; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>   <span class="title">getMaxApproveDays</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_MaxApproveDays; &#125;</div><div class="line">	...</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">const</span> CEmployee *m_Superior;</div><div class="line">	<span class="keyword">int</span> m_MaxApproveDays;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>那么第二个不同的地方：审批通过后的反应不同，这个我们可以用多态啊！在基类里设置一个表示审批通过的函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CEmployee</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	...</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approvePassedV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line">	...</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">const</span> CEmployee *m_Superior;</div><div class="line">	<span class="keyword">int</span> m_MaxApproveDays;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>把这两个不同的地方都用基类的变量或者虚函数处理掉以后，就可以把approvePassedV函数搬到基类了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Employee.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LeaveRequest.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CEmployee</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CEmployee() :m_Superior(<span class="literal">NULL</span>), m_MaxApproveDays(<span class="number">0</span>) &#123;&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">approveLeave</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (vLeaveRequest-&gt;getLeaveDays() &lt; getMaxApproveDays())</div><div class="line">			approvePassedV(vLeaveRequest);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">if</span> (getSuperior())</div><div class="line">				getSuperior()-&gt;approveLeave(vLeaveRequest);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span>  <span class="title">setSuperior</span><span class="params">(CEmployee *vSuperior)</span> </span>&#123; m_Superior = vSuperior; &#125;</div><div class="line">	<span class="function"><span class="keyword">const</span> CEmployee* <span class="title">getSuperior</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_Superior; &#125;</div><div class="line">	<span class="function"><span class="keyword">void</span>  <span class="title">setMaxApproveDays</span><span class="params">(<span class="keyword">int</span> vMaxApproveDays)</span> </span>&#123; m_MaxApproveDays = vMaxApproveDays; &#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>   <span class="title">getMaxApproveDays</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_MaxApproveDays; &#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approvePassedV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">const</span> CEmployee *m_Superior;</div><div class="line">	<span class="keyword">int</span> m_MaxApproveDays;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>子类会去分别重写这个虚函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CTeamLeader.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTeamLeader</span> :</span> <span class="keyword">public</span> CEmployee&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approvePassedV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by team leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CProjectLeader.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CProjectLeader</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approvePassedV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by project leader."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CHR.h:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Employee.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CHR</span> :</span> <span class="keyword">public</span> CEmployee &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">approvePassedV</span><span class="params">(<span class="keyword">const</span> CLeaveRequest *vLeaveRequest)</span> <span class="keyword">const</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The leave request of "</span> &lt;&lt; vLeaveRequest-&gt;getLeaveDays() &lt;&lt; <span class="string">" days has been approved by HR."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">main.cpp:</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"TeamLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ProjectLeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"HR.h"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CTeamLeader *pTeamLeader = <span class="keyword">new</span> CTeamLeader;</div><div class="line">	CProjectLeader *pProjectLeader = <span class="keyword">new</span> CProjectLeader;</div><div class="line">	CHR *pHR = <span class="keyword">new</span> CHR;</div><div class="line">	CLeaveRequest *pLeaveRequest = <span class="keyword">new</span> CLeaveRequest(<span class="number">25</span>);</div><div class="line"></div><div class="line">	pTeamLeader-&gt;setSuperior(pProjectLeader);</div><div class="line">	pProjectLeader-&gt;setSuperior(pHR);</div><div class="line">	pTeamLeader-&gt;setMaxApproveDays(<span class="number">10</span>);</div><div class="line">	pProjectLeader-&gt;setMaxApproveDays(<span class="number">20</span>);</div><div class="line">	pHR-&gt;setMaxApproveDays(<span class="number">30</span>);</div><div class="line"></div><div class="line">	pTeamLeader-&gt;approveLeave(pLeaveRequest);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是上面代码里，三类员工的approveLeaveV函数有没有太像了？几乎只有一个10、20、30不同，外加审批通过后作出的反应不同（这里是输出的字符串不同）。这代码明显重复得太厉害了，确定写的时候没有CtrlC、CtrlV？有没有什么办法能够减少重复代码？如果能够把这段approveLeaveV函数代码移到基类CEmployee当然就可以减少每个子类重复写了，但是那两个不同的地方怎么处理？<br>先看第一个不同地方：每一级员工的权限天数不一样，我们在基类里设置一个表示权限天数的变量就可以了，子类在创建后分别给这个变量赋以不同的值就OK：</p>
+<pre class=" language-c++"><code class="language-c++">class CEmployee{
+public:
+    ...
+    void  setMaxApproveDays(int vMaxApproveDays) { m_MaxApproveDays = vMaxApproveDays; }
+    int   getMaxApproveDays() const { return m_MaxApproveDays; }
+    ...
+
+private:
+    const CEmployee *m_Superior;
+    int m_MaxApproveDays;
+};
+</code></pre>
+<p>那么第二个不同的地方：审批通过后的反应不同，这个我们可以用多态啊！在基类里设置一个表示审批通过的函数：</p>
+<pre class=" language-c++"><code class="language-c++">class CEmployee{
+public:
+    ...
+    virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const = 0;
+    ...
+
+private:
+    const CEmployee *m_Superior;
+    int m_MaxApproveDays;
+};
+</code></pre>
+<p>把这两个不同的地方都用基类的变量或者虚函数处理掉以后，就可以把approvePassedV函数搬到基类了：</p>
+<pre class=" language-c++"><code class="language-c++">Employee.h:
+#include "LeaveRequest.h"
+
+class CEmployee{
+public:
+    CEmployee() :m_Superior(NULL), m_MaxApproveDays(0) {}
+
+    void approveLeave(const CLeaveRequest *vLeaveRequest) const {
+        if (vLeaveRequest->getLeaveDays() < getMaxApproveDays())
+            approvePassedV(vLeaveRequest);
+        else
+            if (getSuperior())
+                getSuperior()->approveLeave(vLeaveRequest);
+    }
+
+    void  setSuperior(CEmployee *vSuperior) { m_Superior = vSuperior; }
+    const CEmployee* getSuperior() const { return m_Superior; }
+    void  setMaxApproveDays(int vMaxApproveDays) { m_MaxApproveDays = vMaxApproveDays; }
+    int   getMaxApproveDays() const { return m_MaxApproveDays; }
+
+    virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const = 0;
+
+private:
+    const CEmployee *m_Superior;
+    int m_MaxApproveDays;
+};
+</code></pre>
+<p>子类会去分别重写这个虚函数：</p>
+<pre class=" language-c++"><code class="language-c++">CTeamLeader.h:
+#include <iostream>
+#include "Employee.h"
+
+class CTeamLeader : public CEmployee{
+public:
+    virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by team leader." << std::endl;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">CProjectLeader.h:
+#include <iostream>
+#include "Employee.h"
+
+class CProjectLeader : public CEmployee {
+public:
+    virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by project leader." << std::endl;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">CHR.h:
+#include <iostream>
+#include "Employee.h"
+
+class CHR : public CEmployee {
+public:
+    virtual void approvePassedV(const CLeaveRequest *vLeaveRequest) const override {
+        std::cout << "The leave request of " << vLeaveRequest->getLeaveDays() << " days has been approved by HR." << std::endl;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">main.cpp:
+#include "TeamLeader.h"
+#include "ProjectLeader.h"
+#include "HR.h"
+
+int main() {
+    CTeamLeader *pTeamLeader = new CTeamLeader;
+    CProjectLeader *pProjectLeader = new CProjectLeader;
+    CHR *pHR = new CHR;
+    CLeaveRequest *pLeaveRequest = new CLeaveRequest(25);
+
+    pTeamLeader->setSuperior(pProjectLeader);
+    pProjectLeader->setSuperior(pHR);
+    pTeamLeader->setMaxApproveDays(10);
+    pProjectLeader->setMaxApproveDays(20);
+    pHR->setMaxApproveDays(30);
+
+    pTeamLeader->approveLeave(pLeaveRequest);
+}
+</code></pre>
 <p>这样一来，就减少了子类里重复的代码，看起来更简洁，扩展性也更好。主要是要通过这个过程了解怎样把子类的相似代码抽象到父类中，体会抽象、多态的思想，尽可能用更少的代码去实现相同的功能。</p>
 <p><font size="5" color="orange">另一个案例</font></p>
 <hr>
-<p>案例：某公司需要实现验证客户信息的功能（姓名、地址、电话号码、社保号码等），实现了一个抽象类来完成这些功能：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidation</span> &#123;</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidName</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidAddress</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidPhoneNumber</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidSSN</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>为了加快开发进度，购买了别人的产品，其中提供了类CLegacyInfoValidation，但是只完成了部分功能，而且只有动态链接库和头文件，卖方没有提供源码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLegacyInfoValidation</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isNameValid</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isAddressValid</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isPhoneNumberValid</span><span class="params">()</span></span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>案例：某公司需要实现验证客户信息的功能（姓名、地址、电话号码、社保号码等），实现了一个抽象类来完成这些功能：</p>
+<pre class=" language-c++"><code class="language-c++">class CInfoValidation {
+    virtual bool isValidName() = 0;
+    virtual bool isValidAddress() = 0;
+    virtual bool isValidPhoneNumber() = 0;
+    virtual bool isValidSSN() = 0;
+};
+</code></pre>
+<p>为了加快开发进度，购买了别人的产品，其中提供了类CLegacyInfoValidation，但是只完成了部分功能，而且只有动态链接库和头文件，卖方没有提供源码：</p>
+<pre class=" language-c++"><code class="language-c++">class CLegacyInfoValidation {
+public:
+    bool isNameValid();
+    bool isAddressValid();
+    bool isPhoneNumberValid();
+};
+</code></pre>
 <p>可见少了一个严重SSN的功能，而且卖方提供的接口和已有的抽象类接口不一致，那么应该怎么复用别人已经实现好的功能呢？</p>
 <p><font size="5" color="orange">最码农的做法</font></p>
 <hr>
-<p>最直接也是最码农的做法，就是把自己抽象类的接口改成和别人接口形式一样，让自己的抽象类CInfoValidation 派生别人的类CLegacyInfoValidation ，再增加一个验证SSN的函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LegacyInfoValidation.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidation</span> :</span> <span class="keyword">public</span> CLegacyInfoValidation &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isSSNValid</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>这样就能在自己的抽象类里复用别人实现的其他3个功能了，但是这明显不符合开闭原则，改动了已有代码，导致程序中依赖原始接口的代码必须发生相应修改：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ValidateInfo</span><span class="params">(CInfoValidation *vValidator)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!vValidator-&gt;isValidName())			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	<span class="keyword">if</span> (!vValidator-&gt;isValidAddress())		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	<span class="keyword">if</span> (!vValidator-&gt;isValidPhoneNumber())  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	<span class="keyword">if</span> (!vValidator-&gt;isValidSSN())			<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最直接也是最码农的做法，就是把自己抽象类的接口改成和别人接口形式一样，让自己的抽象类CInfoValidation 派生别人的类CLegacyInfoValidation ，再增加一个验证SSN的函数：</p>
+<pre class=" language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
+
+class CInfoValidation : public CLegacyInfoValidation {
+public:
+    virtual bool isSSNValid() {...}
+};
+</code></pre>
+<p>这样就能在自己的抽象类里复用别人实现的其他3个功能了，但是这明显不符合开闭原则，改动了已有代码，导致程序中依赖原始接口的代码必须发生相应修改：</p>
+<pre class=" language-c++"><code class="language-c++">bool ValidateInfo(CInfoValidation *vValidator) {
+    if (!vValidator->isValidName())            return false;
+    if (!vValidator->isValidAddress())        return false;
+    if (!vValidator->isValidPhoneNumber())  return false;
+    if (!vValidator->isValidSSN())            return false;
+}
+</code></pre>
 <p>其中vValidator调用的函数名都要改。。。</p>
-<p><font size="5" color="orange">类适配器模式</font><br>别人实现了前三个验证，公司自己实现第四个验证，想要复用别人的函数完全可以靠继承嘛！上面最码农的做法也是靠继承来复用的，但是它改变了原有的类设计，我们完全可以不改嘛，在自己原有的isValidName函数里调用别人的isNameValid函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LegacyInfoValidation.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidation</span> :</span><span class="keyword">public</span> CLegacyInfoValidation &#123;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidName</span><span class="params">()</span> </span>&#123;</div><div class="line">		isNameValid();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidAddress</span><span class="params">()</span> </span>&#123;</div><div class="line">		isAddressValid();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidPhoneNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">		isPhoneNumberValid();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidSSN</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">类适配器模式</font><br>别人实现了前三个验证，公司自己实现第四个验证，想要复用别人的函数完全可以靠继承嘛！上面最码农的做法也是靠继承来复用的，但是它改变了原有的类设计，我们完全可以不改嘛，在自己原有的isValidName函数里调用别人的isNameValid函数：</p>
+<pre class=" language-c++"><code class="language-c++">#include "LegacyInfoValidation.h"
+
+class CInfoValidation :public CLegacyInfoValidation {
+    virtual bool isValidName() {
+        isNameValid();
+    }
+    virtual bool isValidAddress() {
+        isAddressValid();
+    }
+    virtual bool isValidPhoneNumber() {
+        isPhoneNumberValid();
+    }
+    virtual bool isValidSSN() = 0;
+};
+</code></pre>
 <p>这样程序中依赖原始接口的代码就不需要改变了（比如上面ValidateInfo函数中的方法调用就不需要改动了），但是这还是或多或少改动了原有的CInfoValidation 类代码。</p>
-<p>如果想一点都不改动，只是增加新代码，也就是既想用CLegacyInfoValidation 类的三个方法，又想用CInfoValidation 类的isValidSSN方法，想用到两个类的方法，我们可以多重继承啊，派生一个新的类：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"InfoValidation.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LegacyInfoValidation.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidationAdapter</span> :</span> <span class="keyword">public</span> CInfoValidation, <span class="keyword">private</span> CLegacyInfoValidation&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidName</span><span class="params">()</span> override </span>&#123;</div><div class="line">		isNameValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidAddress</span><span class="params">()</span> override </span>&#123;</div><div class="line">		isAddressValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidPhoneNumber</span><span class="params">()</span> override </span>&#123;</div><div class="line">		isPhoneNumberValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidSSN</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(...)</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidation</span> &#123;</span></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidName</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidAddress</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidPhoneNumber</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidSSN</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLegacyInfoValidation</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isNameValid</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isAddressValid</span><span class="params">()</span></span>;</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isPhoneNumberValid</span><span class="params">()</span></span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>如果想一点都不改动，只是增加新代码，也就是既想用CLegacyInfoValidation 类的三个方法，又想用CInfoValidation 类的isValidSSN方法，想用到两个类的方法，我们可以多重继承啊，派生一个新的类：</p>
+<pre class=" language-c++"><code class="language-c++">#include "InfoValidation.h"
+#include "LegacyInfoValidation.h"
+
+class CInfoValidationAdapter : public CInfoValidation, private CLegacyInfoValidation{
+public:
+    virtual bool isValidName() override {
+        isNameValid();
+    }
+
+    virtual bool isValidAddress() override {
+        isAddressValid();
+    }
+
+    virtual bool isValidPhoneNumber() override {
+        isPhoneNumberValid();
+    }
+
+    virtual bool isValidSSN() {
+        if(...)
+            return true;
+    }
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">class CInfoValidation {
+    virtual bool isValidName() = 0;
+    virtual bool isValidAddress() = 0;
+    virtual bool isValidPhoneNumber() = 0;
+    virtual bool isValidSSN() = 0;
+};
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">class CLegacyInfoValidation {
+public:
+    bool isNameValid();
+    bool isAddressValid();
+    bool isPhoneNumberValid();
+};
+</code></pre>
 <p>一样的，程序中依赖原始接口的代码还是不用改，比如之前的ValidateInfo方法中的函数调用，不过传入的CInfoValidation对象指针应该是来自新的CInfoValidationAdapter 类对象了，而不是原始的CInfoValidation 类对象。但是这基本上是在客户端才做出的改动，影响很小。</p>
 <p>这就是类对象适配器：通过类继承来复用别的类的函数代码。</p>
 <p><font size="5" color="orange">对象适配器模式</font></p>
 <hr>
 <p>上面的代码有个比较麻烦的地方，新的类是通过多重继承得到的，当程序变得复杂以后，这可能会带来一些不必要的麻烦，比如野指针、类爆炸等等。</p>
-<p>可以通过合成复用原则来解决这个问题，不派生CLegacyInfoValidation 类，而是使用该类对象作为新的类的成员变量，通过变量对象来使用CLegacyInfoValidation 的函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"InfoValidation.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"LegacyInfoValidation.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CInfoValidationAdapter</span> :</span> <span class="keyword">public</span> CInfoValidation&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidName</span><span class="params">()</span> override </span>&#123;</div><div class="line">		m_LegacyValidator.isNameValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidAddress</span><span class="params">()</span> override </span>&#123;</div><div class="line">		m_LegacyValidator.isAddressValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidPhoneNumber</span><span class="params">()</span> override </span>&#123;</div><div class="line">		m_LegacyValidator.isPhoneNumberValid();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">isValidSSN</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (...)</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	CLegacyInfoValidation m_LegacyValidator;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以通过合成复用原则来解决这个问题，不派生CLegacyInfoValidation 类，而是使用该类对象作为新的类的成员变量，通过变量对象来使用CLegacyInfoValidation 的函数：</p>
+<pre class=" language-c++"><code class="language-c++">#include "InfoValidation.h"
+#include "LegacyInfoValidation.h"
+
+class CInfoValidationAdapter : public CInfoValidation{
+public:
+    virtual bool isValidName() override {
+        m_LegacyValidator.isNameValid();
+    }
+
+    virtual bool isValidAddress() override {
+        m_LegacyValidator.isAddressValid();
+    }
+
+    virtual bool isValidPhoneNumber() override {
+        m_LegacyValidator.isPhoneNumberValid();
+    }
+
+    virtual bool isValidSSN() {
+        if (...)
+            return true;
+    }
+
+private:
+    CLegacyInfoValidation m_LegacyValidator;
+}
+</code></pre>
 <p>为什么使用CLegacyInfoValidation 类对象作为成员变量，而不使用CInfoValidation类对象，这个道理很简单啊~。因为程序里原本可能会有很多依赖原有抽象类CInfoValidation的地方，我们让新类派生自CInfoValidation类，就可以使用多态了，原来存在依赖的代码不用做任何修改，只是在传入对象参数的时候，实参由原来的CInfoValidation类对象，改成了现在的CInfoValidationAdapter 子类对象而已。</p>
 <p>这就是对象适配器模式：通过合成复用（对象成员），来复用别的类的函数代码。</p>
 

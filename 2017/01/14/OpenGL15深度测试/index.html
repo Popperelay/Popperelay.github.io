@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -118,21 +118,52 @@
 <p>在决定是否绘制一个片段时，首先让该片段的深度值与当前深度缓冲区对应位置上的深度值作比较，如果小于深度缓冲区中的值，则用该片段的颜色值和深度值去更新颜色缓冲区和深度缓冲区；否则，说明三维空间中该片段在对应屏幕像素后面，被挡住了，将丢弃该片段。这个过程就叫做深度测试（Depth Testing）。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">在OpenGL中使用深度测试</font><br>深度缓冲区一般由窗口管理系统（例如GLFW）来自动创建，深度值一般是16位、24位或32位，位数越高，深度的精确度越高。大多数系统的深度缓冲区都是24位。</p>
-<p>要在OpenGL中使用深度测试，需要先开启深度测试，因为默认是关闭的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glEnable(GL_DEPTH_TEST);</div></pre></td></tr></table></figure></p>
-<p>而且在每一次渲染循环开始之前，还需要清除深度缓冲区，否则深度缓冲区将保留上一次进行深度测试时所写的深度值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div></pre></td></tr></table></figure></p>
-<p>有的时候我们需要进行深度测试，但不希望更新深度缓冲区，这时可以用<code>glDepthMask</code>函数将深度掩码设置为<code>GL_FALSE</code>来关闭深度缓冲区写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glDepthMask(GL_FALSE);</div></pre></td></tr></table></figure></p>
+<p>要在OpenGL中使用深度测试，需要先开启深度测试，因为默认是关闭的：</p>
+<pre class=" language-c++"><code class="language-c++">    glEnable(GL_DEPTH_TEST);
+</code></pre>
+<p>而且在每一次渲染循环开始之前，还需要清除深度缓冲区，否则深度缓冲区将保留上一次进行深度测试时所写的深度值：</p>
+<pre class=" language-c++"><code class="language-c++">    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+</code></pre>
+<p>有的时候我们需要进行深度测试，但不希望更新深度缓冲区，这时可以用<code>glDepthMask</code>函数将深度掩码设置为<code>GL_FALSE</code>来关闭深度缓冲区写入：</p>
+<pre class=" language-c++"><code class="language-c++">    glDepthMask(GL_FALSE);
+</code></pre>
 <p>【注】：</p>
 <ul>
 <li>使用<code>glDepthMask</code>函数来关闭深度缓冲区写入，只在深度测试被启用的时候有效。</li>
 </ul>
-<p><font size="4" color="red">深度测试函数</font><br>上面说片段深度值小于深度缓冲区对应深度值的时候，深度测试通过。其实也可以是其他关系，比如大于、等于等等。这就需要我们使用’glDepthFunc’函数来设置什么时候通过深度测试了，因为默认情况下是小于的时候才通过深度测试：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glDepthFunc(GL_LESS);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">深度测试函数</font><br>上面说片段深度值小于深度缓冲区对应深度值的时候，深度测试通过。其实也可以是其他关系，比如大于、等于等等。这就需要我们使用’glDepthFunc’函数来设置什么时候通过深度测试了，因为默认情况下是小于的时候才通过深度测试：</p>
+<pre class=" language-c++"><code class="language-c++">glDepthFunc(GL_LESS);
+</code></pre>
 <p>除了小于<code>GL_LESS</code>以外，还有其他比较运算符：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148431155779.png" alt=""><br>下面我们把<code>glDepthFunc</code>函数的参数设为<code>GL_ALWAYS</code>来看看效果，源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL15_DepthTest/LearnOpenGL15_DepthTest_1" target="_blank" rel="external">这里</a>。</p>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148438222783.png" alt=""><br>可以看到<code>GL_ALWAYS</code>和我们没有启用深度测试得到了相同的效果。深度测试总是通过，所以后绘制的片段肯定会覆盖之前绘制的片段。在上面的程序中我们先绘制立方体，再绘制的地面，所以地面就把立方体遮住了。<br>把参数设为<code>GL_LESS</code>后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148438222864.png" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">可视化深度值</font><br>深度测试是在像素着色器运行之后（也在模板测试运行之后），在屏幕空间中执行的。屏幕空间坐标与OpenGL的<code>glViewport</code>函数定义的视口（viewport）直接相关，可以在像素着色器中通过GLSL的内置变量<code>gl_FragCoord</code>来获取片段的屏幕空间坐标。<code>gl_FragCoord</code>的x和y元素表示片段的屏幕空间坐标（(0,0)是左下角），而它的z元素就是片段的实际深度值。</p>
-<p>我们把地面的顶点坐标更改如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//地面的顶点坐标、纹理坐标</span></div><div class="line">GLfloat planeVertices[] = &#123;</div><div class="line">	<span class="comment">//位置坐标            //纹理坐标</span></div><div class="line">	<span class="number">5.0f</span>,  <span class="number">-0.05f</span>,  <span class="number">5.0f</span>,  <span class="number">2.0f</span>, <span class="number">0.0f</span>,</div><div class="line">	<span class="number">-5.0f</span>, <span class="number">-0.05f</span>,  <span class="number">5.0f</span>,  <span class="number">0.0f</span>, <span class="number">0.0f</span>,</div><div class="line">	<span class="number">-5.0f</span>, <span class="number">-0.05f</span>, <span class="number">-5.0f</span>,  <span class="number">0.0f</span>, <span class="number">2.0f</span>,</div><div class="line"></div><div class="line">	<span class="number">5.0f</span>,  <span class="number">-0.05f</span>,  <span class="number">5.0f</span>,  <span class="number">2.0f</span>, <span class="number">0.0f</span>,</div><div class="line">	<span class="number">-5.0f</span>, <span class="number">-0.05f</span>, <span class="number">-5.0f</span>,  <span class="number">0.0f</span>, <span class="number">2.0f</span>,</div><div class="line">	<span class="number">5.0f</span>,  <span class="number">-0.05f</span>, <span class="number">-5.0f</span>,  <span class="number">2.0f</span>, <span class="number">2.0f</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>我们把地面的顶点坐标更改如下：</p>
+<pre class=" language-c++"><code class="language-c++">    //地面的顶点坐标、纹理坐标
+    GLfloat planeVertices[] = {
+        //位置坐标            //纹理坐标
+        5.0f,  -0.05f,  5.0f,  2.0f, 0.0f,
+        -5.0f, -0.05f,  5.0f,  0.0f, 0.0f,
+        -5.0f, -0.05f, -5.0f,  0.0f, 2.0f,
+
+        5.0f,  -0.05f,  5.0f,  2.0f, 0.0f,
+        -5.0f, -0.05f, -5.0f,  0.0f, 2.0f,
+        5.0f,  -0.05f, -5.0f,  2.0f, 2.0f
+    };
+</code></pre>
 <p>地面在y方向上更靠近摄像机了（摄像机在y=0的位置上）。</p>
-<p>再把像素着色器更改如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line">in vec2 TexCoords;</div><div class="line">out vec4 color;</div><div class="line"></div><div class="line">uniform sampler2D texture1;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//color = texture(texture1,TexCoords);</span></div><div class="line">	color = vec4(vec3(gl_FragCoord.z),<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再把像素着色器更改如下：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+in vec2 TexCoords;
+out vec4 color;
+
+uniform sampler2D texture1;
+
+void main(){
+    //color = texture(texture1,TexCoords);
+    color = vec4(vec3(gl_FragCoord.z),1.0f);
+}
+</code></pre>
 <p>我们让箱子和地面不输出纹理颜色，而只是输出深度值。源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL15_DepthTest/LearnOpenGL15_DepthTest_2" target="_blank" rel="external">这里</a>。得到结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14843822296.png" alt=""><br>可以看到地面靠近摄像机的地方有些黑色，说明深度值比较小，但是黑色部分很少。它向白色的过渡变化并不是均匀的，近的地方深度值变化很快，只远离几英寸就让暗色完全变亮了，剩余的部分大多都是亮色。</p>
 <p>这是因为片段在屏幕空间里的深度值和它们在三维空间里的z值并不是线性关系。z很小的时候（准确的是靠近摄像机的时候），片元的深度值变化得会很快，能够很好地反映出摄像机近处物体的空间位置关系；但是当z比较大的时候，物体远离摄像机，远处的物体谁在前谁在后通常都不会太影响我们的视觉效果，这时远离摄像机的片元的深度值就不需要变化那么快了。而OpenGL的深度值恰好符合这种视觉规律：z较小时深度变化快，z较大时深度变化慢。</p>
 <p>通常深度值$F_depth$和z具有如下关系：<br>$$<br>\begin{equation}<br>F_{depth} = \frac{1/z - 1/near}{1/far - 1/near}<br>\end{equation}<br>$$</p>

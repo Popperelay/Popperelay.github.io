@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -115,10 +115,29 @@
             <div class="typo" style="padding: 3rem;">
                 <p>递归：在函数或者方法里调用自身，且有明确的递归结束条件。<br><a id="more"></a></p>
 <hr>
-<p>下面来看一个基本递归（一般意义下的递归）<br>问题：计算n!<br>计算公式为：n!=nx(n-1)x(n-2)……2x1<br>递归公式为：<img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721542273.png" alt=""><br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Recursion</span>(<span class="params"><span class="keyword">int</span> n</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>)  <span class="comment">//0的阶乘也等于1</span></div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> n * Recursion(n - <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面来看一个基本递归（一般意义下的递归）<br>问题：计算n!<br>计算公式为：n!=nx(n-1)x(n-2)……2x1<br>递归公式为：<img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721542273.png" alt=""><br>代码如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Recursion</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//0的阶乘也等于1</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">return</span> n <span class="token operator">*</span> <span class="token function">Recursion</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>在上面的每一次递归中，都需要在栈中开辟一块新的空间，用来保存当前方法的参数、局部变量、返回地址等等，便于后面递归返回时能够回溯到正确的位置和状态。如果递归深度太大，栈中就会保存大量的递归之前的数据，可能会造成栈溢出。</p>
 <hr>
-<p>下面再来看一下尾递归<br>问题还是：计算n!<br>代码如下：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用时currentValue传入1</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Recursion</span>(<span class="params"><span class="keyword">int</span> n, <span class="keyword">int</span> currentValue</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span> currentValue;</div><div class="line">    <span class="keyword">else</span> </div><div class="line">        <span class="keyword">return</span> Recursion(n - <span class="number">1</span>, n * currentValue);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面再来看一下尾递归<br>问题还是：计算n!<br>代码如下：</p>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//调用时currentValue传入1</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">Recursion</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> currentValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> currentValue<span class="token punctuation">;</span>
+    <span class="token keyword">else</span> 
+        <span class="token keyword">return</span> <span class="token function">Recursion</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">*</span> currentValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>比较上诉两份代码，可以看到第一份代码的递归调用是在倒数第二步进行的（先递归调用再做乘法），而第二份代码的递归调用是在最后一步进行的。<br>所以，顾名思义，<strong>尾递归：对函数自身的递归调用在函数体的最后一步</strong></p>
 <p>还有更有意思的，由于尾递归是在最后一步调用的自身，所以在调用返回后应该就直接退出调用函数了（因为它已经是函数体最后一步了），也就是说返回到函数体的哪个位置（返回地址）不需要了，递归到最后一层时直接退出，不再需要回溯了。而且调用函数的参数、局部变量等等也不会再用到，那么就没有必要在尾递归调用的时候在栈中开辟新的空间去存储调用之前的状态信息了。很多编译器会自动识别并这样优化尾递归（部分高级语言不支持）。这样，尾递归就带来了性能上的很大提升。</p>
 <p>在第一份基本递归的代码中，由于递归调用是在倒数第二步进行的，再递归返回后还需要与方法的参数n相乘，这样就不得不在栈中开辟一块新的空间，来存储调用之前的参数n、返回地址等等。如果不开辟新的空间，下次进入递归的函数内部时，由于递归函数本身就有参数、局部变量等等，就有可能把递归调用之前的n给覆写了，导致递归返回时，跟它相乘的n不是正确的n，导致结果错误。</p>

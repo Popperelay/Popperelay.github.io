@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -139,16 +139,51 @@
 <p>下面来看看在OpenGL中怎么用代码实现这些坐标变换。</p>
 <p><font size="5" color="orange">GLM</font><br>由于高版本的OpenGL没有自带任何的矩阵和向量知识，低版本中的<code>glTranslate</code>、<code>glRotate</code>、<code>glScale</code>等等都不能再用了。所以现在我们使用GLM，它是专门为OpenGL量身定制的数学库，易于使用。</p>
 <p>GLM（OpenGL Mathematics），是一个只有头文件的库，也就是我们只需包含对应的头文件就可以使用了（包含整个glm文件夹，方法参考<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《OpenGL1：OpenGL概述及环境配置》</a>一文），不用链接和编译。</p>
-<p><font size="4" color="red">坐标变换头文件</font><br>我们需要的GLM的大多数功能基本上都在下面3个头文件里：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//GLM</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLM/glm/glm.hpp&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLM/glm//gtc/matrix_transform.hpp&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLM/glm/gtc/type_ptr.hpp&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> glm;</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">定义变换矩阵</font><br>接下来需要定义坐标变换矩阵，使用<code>mat4</code>类型：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义变换矩阵（单位矩阵）</span></div><div class="line">mat4 transform;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">坐标变换头文件</font><br>我们需要的GLM的大多数功能基本上都在下面3个头文件里：</p>
+<pre class=" language-c++"><code class="language-c++">//GLM
+#include <GLM/glm/glm.hpp>
+#include <GLM/glm//gtc/matrix_transform.hpp>
+#include <GLM/glm/gtc/type_ptr.hpp>
+using namespace glm;
+</code></pre>
+<p><font size="4" color="red">定义变换矩阵</font><br>接下来需要定义坐标变换矩阵，使用<code>mat4</code>类型：</p>
+<pre class=" language-c++"><code class="language-c++">        //定义变换矩阵（单位矩阵）
+        mat4 transform;
+</code></pre>
 <p>按这种方式定义好的变换矩阵，初始值一般都是单位矩阵。</p>
-<p><font size="4" color="red">坐标变换（平移旋转缩放）</font><br>我们先对上一篇文章中的纹理，进行旋转变换：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//随着时间绕z轴旋转</span></div><div class="line">transform = rotate(transform, (GLfloat)glfwGetTime()*<span class="number">1.0f</span>, vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>));</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">坐标变换（平移旋转缩放）</font><br>我们先对上一篇文章中的纹理，进行旋转变换：</p>
+<pre class=" language-c++"><code class="language-c++">        //随着时间绕z轴旋转
+        transform = rotate(transform, (GLfloat)glfwGetTime()*1.0f, vec3(0.0f, 0.0f, 1.0f));
+</code></pre>
 <p>使用glm命名空间里的<code>rotate</code>函数，第一个参数是旋转之前的变换矩阵；第二个参数是旋转角度（弧度值），这里旋转角度随着时间不断增加，图形将会一直旋转；第三个参数是旋转轴。</p>
-<p>接下来对图形进行变换：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//平移（0.5，-0.5，0）</span></div><div class="line">transform = translate(transform, vec3(<span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>));</div></pre></td></tr></table></figure></p>
+<p>接下来对图形进行变换：</p>
+<pre class=" language-c++"><code class="language-c++">        //平移（0.5，-0.5，0）
+        transform = translate(transform, vec3(0.5f, -0.5f, 0.0f));
+</code></pre>
 <p>使用glm命名空间里的<code>translate</code>函数，第一个参数是平移之前的变换矩阵（准备拿去平移的矩阵）；第二个参数是位移向量，指定了平移的方向和距离。</p>
-<p><font size="4" color="red">发送变换矩阵给着色器</font><br>变换矩阵已经搞定了，但是怎么把矩阵传递给着色器呢？我们使用uniform变量来实现：在顶点着色器里定义一个mat4类型的uniform变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//顶点着色器</span></div><div class="line"><span class="meta">#version 330 core</span></div><div class="line">layout (location=<span class="number">0</span>) in vec3 position;  <span class="comment">//顶点位置变量的属性位置值为0</span></div><div class="line">layout (location=<span class="number">1</span>) in vec3 color;     <span class="comment">//顶点颜色变量的属性位置值为1</span></div><div class="line">layout (location=<span class="number">2</span>) in vec2 texCoord;  <span class="comment">//顶点纹理坐标的属性位置值为2</span></div><div class="line">out vec3 ourColor;</div><div class="line">out vec2 TexCoord;</div><div class="line"><span class="comment">//坐标变换矩阵</span></div><div class="line">uniform mat4 transform;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	gl_Position=transform*vec4(position,<span class="number">1.0f</span>);</div><div class="line">	ourColor=color;</div><div class="line">	TexCoord=vec2(texCoord.x,<span class="number">1</span>-texCoord.y);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">发送变换矩阵给着色器</font><br>变换矩阵已经搞定了，但是怎么把矩阵传递给着色器呢？我们使用uniform变量来实现：在顶点着色器里定义一个mat4类型的uniform变量：</p>
+<pre class=" language-c++"><code class="language-c++">//顶点着色器
+#version 330 core
+layout (location=0) in vec3 position;  //顶点位置变量的属性位置值为0
+layout (location=1) in vec3 color;     //顶点颜色变量的属性位置值为1
+layout (location=2) in vec2 texCoord;  //顶点纹理坐标的属性位置值为2
+out vec3 ourColor;
+out vec2 TexCoord;
+//坐标变换矩阵
+uniform mat4 transform;
+void main(){
+    gl_Position=transform*vec4(position,1.0f);
+    ourColor=color;
+    TexCoord=vec2(texCoord.x,1-texCoord.y);
+}
+</code></pre>
 <p>在顶点着色器的main函数里，让内置变量<code>gl_Position</code>的值等于变换矩阵和顶点坐标向量的乘积，这样就能把图形顶点进行坐标变换了（注意变换矩阵必须<strong>左乘</strong>顶点坐标向量）。</p>
-<p>接下里就需要在主函数里对这个mat4类型的uniform变量赋值了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取uniform全局变量transform（变换矩阵）的位置</span></div><div class="line">GLint transformLoc = glGetUniformLocation(myshader.shaderProgram, <span class="string">"transform"</span>);</div><div class="line"><span class="comment">//给uniform变量（变换矩阵）赋矩阵值</span></div><div class="line">glUniformMatrix4fv(transformLoc, <span class="number">1</span>, GL_FALSE, value_ptr(transform));</div></pre></td></tr></table></figure></p>
+<p>接下里就需要在主函数里对这个mat4类型的uniform变量赋值了：</p>
+<pre class=" language-c++"><code class="language-c++">        //获取uniform全局变量transform（变换矩阵）的位置
+        GLint transformLoc = glGetUniformLocation(myshader.shaderProgram, "transform");
+        //给uniform变量（变换矩阵）赋矩阵值
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, value_ptr(transform));
+</code></pre>
 <p>首先获取到这个mat4类型的uniform变量的位置，再使用<code>glUniformMatrix4fv</code>函数对它赋值，该函数的第一个参数是获取到的uniform变量的位置；第二个参数是要传递多少个矩阵，这里是1；第三个参数指明是否要对矩阵进行转置（交换矩阵的行和列），OpenGL通常使用列主序的矩阵布局，而GLM的矩阵默认就是列朱旭，所以不需要转置矩阵，我们填GL_FALSE。最后一个参数是真正的矩阵数据，但是GLM矩阵并不是OpenGL所希望接受的数据形式，所以需要先用GLM自带的函数<code>value_ptr</code>来进行转换。<br>&nbsp;</p>
 <hr>
 <p>到此，关于坐标变换的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL6_Transform" target="_blank" rel="external">在这里</a>。</p>

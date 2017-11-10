@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -124,16 +124,192 @@
 <li>枚举就不是一个好的设计风格，因为枚举类型增加时，需要去修改原有的代码，需要去了解源程序与枚举相关的很多地方。</li>
 <li>开闭原则：团队开发中，需求增加时，只增加自己的代码，不应该更改已有的代。即对扩展开放，对修改关闭。开闭原则是面向对象最重要的设计原则，其关键在于抽象。</li>
 <li><p>案例：绘制圆和正方形。<br>最粗暴的做法如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing cirlce..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CSquare</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing square..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">enum</span> EShapeType &#123;</div><div class="line">		Circle, Square</div><div class="line">	&#125;;</div><div class="line">	EShapeType shapeType[] = &#123; Circle, Square &#125;;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(shapeType) / <span class="keyword">sizeof</span>(EShapeType); i++) &#123;</div><div class="line">		<span class="keyword">switch</span> (shapeType[i]) &#123;</div><div class="line">		<span class="keyword">case</span> Circle:</div><div class="line">			CCircle circle;</div><div class="line">			circle.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Square:</div><div class="line">			CSquare square;</div><div class="line">			square.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> #include <iostream>
+
+ class CCircle {
+ public:
+     void draw() {
+         std::cout << "Drawing cirlce..." << std::endl;
+     }
+ };
+
+ class CSquare {
+ public:
+     void draw() {
+         std::cout << "Drawing square..." << std::endl;
+     }
+ };
+
+ int main() {
+     enum EShapeType {
+         Circle, Square
+     };
+     EShapeType shapeType[] = { Circle, Square };
+     for (int i = 0; i < sizeof(shapeType) / sizeof(EShapeType); i++) {
+         switch (shapeType[i]) {
+         case Circle:
+             CCircle circle;
+             circle.draw();
+             break;
+         case Square:
+             CSquare square;
+             square.draw();
+             break;
+         default:
+             break;
+         }
+     }
+     return 0;
+ }
+</code></pre>
 <p>当需求增加时，比如再绘制一个三角形，那么需要加上或更改如下代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">enum</span> EShapeType &#123;</div><div class="line">		Circle, Square, Triangle</div><div class="line">	&#125;;</div><div class="line">	EShapeType shapeType[] = &#123; Circle, Square, Triangle &#125;;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(shapeType) / <span class="keyword">sizeof</span>(EShapeType); i++) &#123;</div><div class="line">		<span class="keyword">switch</span> (shapeType[i]) &#123;</div><div class="line">		<span class="keyword">case</span> Circle:</div><div class="line">			CCircle circle;</div><div class="line">			circle.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Square:</div><div class="line">			CSquare square;</div><div class="line">			square.draw();</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> Triangle:</div><div class="line">			CTriangle triangle;</div><div class="line">			triangle.draw();</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> class CTriangle {
+ public:
+     void draw() {
+         std::cout << "Drawing triangle..." << std::endl;
+
+     }
+ };
+
+ int main() {
+     enum EShapeType {
+         Circle, Square, Triangle
+     };
+     EShapeType shapeType[] = { Circle, Square, Triangle };
+     for (int i = 0; i < sizeof(shapeType) / sizeof(EShapeType); i++) {
+         switch (shapeType[i]) {
+         case Circle:
+             CCircle circle;
+             circle.draw();
+             break;
+         case Square:
+             CSquare square;
+             square.draw();
+             break;
+         case Triangle:
+             CTriangle triangle;
+             triangle.draw();
+         default:
+             break;
+         }
+     }
+     return 0;
+ }
+</code></pre>
 <p>增加的这些代码都是必须的吗？增加的Triangle类是必须的，毕竟多了一种图元，但是改动的枚举类型和增加的case语句是必须的吗？而且需求增加时，改动了原来已有的代码。尤其是程序比较大以后，可能有很多地方都与这些枚举类型有关，那么需求一变，和这些枚举相关的代码都需要随之作出改变，而且还需要事先比较了解整个程序，才能不把程序改坏。很显然不符合开闭原则。这一切的根源都在于枚举的使用，只要使用了枚举就必然伴随类似switch-case的语句，枚举一变，和枚举相关的地方都要变，关联太大，可能会有连锁反应。switch几乎都不符合开闭原则，但是如果switch的是系统枚举值，是无法避免的，系统枚举值很少的话也无伤大雅，这时的函数允许超过50行。</p>
 <p>可以为这些图元定义一个虚基类CShape，通过虚基类指针以多态的方式来调用所有子类的绘制函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CQuad</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing Quad..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> :</span><span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing circle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;CShape*&gt; shapes;</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CQuad());</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CCircle());</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CTriangle());</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; shapes.size(); i++) &#123;</div><div class="line">		shapes[i]-&gt;drawV();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> #include <iostream>
+ #include <vector>
+
+ class CShape {
+ public:
+     virtual void drawV() = 0;
+ };
+
+ class CTriangle : public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing triangle..." << std::endl;
+     }
+ };
+
+ class CQuad : public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing Quad..." << std::endl;
+     }
+ };
+
+ class CCircle :public CShape {
+ public:
+     void drawV() override {
+         std::cout << "Drawing circle..." << std::endl;
+     }
+ };
+
+ int main() {
+     std::vector<CShape*> shapes;
+     shapes.push_back(new CQuad());
+     shapes.push_back(new CCircle());
+     shapes.push_back(new CTriangle());
+     for (unsigned int i = 0; i < shapes.size(); i++) {
+         shapes[i]->drawV();
+     }
+     return 0;
+ }
+</code></pre>
 <p>当要绘制的图元类型增加时，只需要增加一个继承自CShape的子类，再将其对象加入到vector容器里就ok。很明显没有枚举、switch-case牵一发动全身的麻烦。 符合开闭原则。</p>
 </li>
 <li><p>现实中，没有任何一个程序或软件100%符合开闭原则。因为需求千奇百怪，不可能考虑到每一种情况，不可能对每一种需求都做到开闭原则。比如4中的程序，如果需求变为：按用户指定的顺序来绘制所有图元。此时4中的程序就必须针对该需求作出改变了，实现代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> priority;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setPriority</span><span class="params">(<span class="keyword">int</span> iPriority)</span> </span>&#123;</div><div class="line">		priority = iPriority;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> CShape&amp; iShape1, <span class="keyword">const</span> CShape&amp; iShape2) &#123;</div><div class="line">		<span class="keyword">return</span> iShape1.priority &lt; iShape2.priority;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">friend</span> <span class="keyword">bool</span> <span class="title">priorityLess</span><span class="params">(CShape* shape1, CShape* shape2)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> *shape1 &lt; *shape2;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> :</span> <span class="keyword">public</span> CShape&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CTriangle(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CQuad</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CQuad(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing Quad..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> :</span><span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	CCircle(<span class="keyword">int</span> iPriority) &#123;</div><div class="line">		setPriority(iPriority);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Draw circle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;CShape*&gt; shapes;</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CQuad(<span class="number">2</span>));</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CCircle(<span class="number">1</span>));</div><div class="line">	shapes.push_back(<span class="keyword">new</span> CTriangle(<span class="number">3</span>));</div><div class="line">	sort(begin(shapes), end(shapes), priorityLess);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">		shapes[i]-&gt;drawV();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> #include <iostream>
+ #include <algorithm>
+ #include <vector>
+
+ class CShape {
+ private:
+     int priority;
+
+ public:
+     virtual void drawV() = 0;
+
+     void setPriority(int iPriority) {
+         priority = iPriority;
+     }
+
+     friend bool operator<(const CShape& iShape1, const CShape& iShape2) {
+         return iShape1.priority < iShape2.priority;
+     }
+
+     friend bool priorityLess(CShape* shape1, CShape* shape2) {
+         return *shape1 < *shape2;
+     }
+ };
+
+ class CTriangle : public CShape{
+ public:
+     CTriangle(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Drawing triangle..." << std::endl;
+     }
+ };
+
+ class CQuad : public CShape {
+ public:
+     CQuad(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Drawing Quad..." << std::endl;
+     }
+ };
+
+ class CCircle :public CShape {
+ public:
+     CCircle(int iPriority) {
+         setPriority(iPriority);
+     }
+
+     void drawV() override {
+         std::cout << "Draw circle..." << std::endl;
+     }
+ };
+
+ int main() {
+     std::vector<CShape*> shapes;
+     shapes.push_back(new CQuad(2));
+     shapes.push_back(new CCircle(1));
+     shapes.push_back(new CTriangle(3));
+     sort(begin(shapes), end(shapes), priorityLess);
+     for (unsigned int i = 0; i < 3; i++) {
+         shapes[i]->drawV();
+     }
+     return 0;
+ }
+</code></pre>
 <p>上面的程序值得注意的是：</p>
 <ul>
 <li>可以使用STL中的sort函数对类对象进行排序，不过需要重载&lt;运算符，因为sort内部是将两个对象进行小于比较来排序的（或者直接用自定义的比较函数作为sort的第三个参数来排序）。</li>
@@ -145,53 +321,348 @@
 <li>重构的目标是：需求变化时尽量满足开闭原则。</li>
 <li>在敏捷开发中应该拒绝不成熟的抽象，避免过度设计。</li>
 <li><p>案例：母亲给孩子讲故事。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBook</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is a book..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMother</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(CBook *vBook)</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Mother is reading: "</span>;</div><div class="line">		vBook-&gt;getContent();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> #include <iostream>
+
+ class CBook {
+ public:
+     void getContent() {
+         std::cout << "This is a book..." << std::endl;
+     }
+ };
+
+ class CMother {
+ public:
+     void read(CBook *vBook) {
+         std::cout << "Mother is reading: ";
+         vBook->getContent();
+     }
+ };
+</code></pre>
 <p>大多数初学者的实现方案都会是像上诉代码一样，这种设计是有问题的。CMother为什么要依赖于CBook呢？母亲除了给孩子读书，就不能读报纸这些了吗？如果要求母亲除了读书还能读报，最粗暴的就是再增加一个CNewspaper类，然后给read函数增加一个CNewspaper指针。很明显，这不符合开闭原则，需求增加时，改变了原有的CMother类。</p>
 <p>可以考虑用抽象，将书、报纸等抽象出一个虚基类：出版物类CPublication，让CMother的read函数依赖于这个抽象类，而非具体的类，这样所有继承自这个抽象类的书、报纸等等子类都能被母亲类阅读了：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CPublication</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getContentV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CBook</span> :</span> <span class="keyword">public</span> CPublication&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getContentV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is a book..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNewspaper</span> :</span> <span class="keyword">public</span> CPublication &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getContentV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"This is a newspaper..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMother</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(CPublication *vPublication)</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Mother is reading: "</span>;</div><div class="line">		vPublication-&gt;getContentV();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++"> #include <iostream>
+
+ class CPublication {
+ public:
+     virtual void getContentV() = 0;
+ };
+
+ class CBook : public CPublication{
+ public:
+     virtual void getContentV() override {
+         std::cout << "This is a book..." << std::endl;
+     }
+ };
+
+ class CNewspaper : public CPublication {
+ public:
+     virtual void getContentV() override {
+         std::cout << "This is a newspaper..." << std::endl;
+     }
+ };
+
+ class CMother {
+ public:
+     void read(CPublication *vPublication) {
+         std::cout << "Mother is reading: ";
+         vPublication->getContentV();
+     }
+ };
+</code></pre>
 <p>像上面代码CMother类的read函数一样，代码不依赖于具体类，而是依赖于抽象的类，这就是依赖倒置原则。</p>
 </li>
 <li><p>开闭原则是面向对象设计的目标，依赖倒置原则是实现开闭特性的主要手段。</p>
 </li>
 <li><p>案例：纠结的正方形和矩形。<br>讲道理，正方形是矩形的特例，让正方形派生自矩形，好像没有什么不对：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRectangle</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">double</span> m_Width;</div><div class="line">	<span class="keyword">double</span> m_Height;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">setWidthV</span><span class="params">(<span class="keyword">double</span> w)</span> </span>&#123; m_Width = w; &#125;</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">setHeightV</span><span class="params">(<span class="keyword">double</span> h)</span> </span>&#123; m_Height = h; &#125;</div><div class="line">	<span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> m_Width*m_Height; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CSquare</span> :</span> <span class="keyword">public</span> CRectangle &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setWidthV</span><span class="params">(<span class="keyword">double</span> w)</span> </span>&#123; </div><div class="line">		CRectangle::setWidthV(w); </div><div class="line">		CRectangle::setHeightV(w);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setWidthH</span><span class="params">(<span class="keyword">double</span> h)</span> </span>&#123;</div><div class="line">		CRectangle::setWidthV(h);</div><div class="line">		CRectangle::setHeightV(h);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+
+class CRectangle {
+private:
+    double m_Width;
+    double m_Height;
+
+public:
+    virtual void setWidthV(double w) { m_Width = w; }
+    virtual void setHeightV(double h) { m_Height = h; }
+    double getArea() { return m_Width*m_Height; }
+};
+
+class CSquare : public CRectangle {
+public:
+    void setWidthV(double w) { 
+        CRectangle::setWidthV(w); 
+        CRectangle::setHeightV(w);
+    }
+
+    void setWidthH(double h) {
+        CRectangle::setWidthV(h);
+        CRectangle::setHeightV(h);
+    }
+};
+</code></pre>
 <p>若现在有一个函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">(CRectangle* vioRect)</span> </span>&#123;</div><div class="line">	vioRect-&gt;setWidthV(<span class="number">5</span>);</div><div class="line">	vioRect-&gt;setHeightV(<span class="number">4</span>);</div><div class="line">	assert(vioRect-&gt;getArea() == <span class="number">20</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">void g(CRectangle* vioRect) {
+    vioRect->setWidthV(5);
+    vioRect->setHeightV(4);
+    assert(vioRect->getArea() == 20);
+}
+</code></pre>
 <p>如果外界传给函数g的实参是一个CSquare类指针，但是函数内部并不知道传入的是正方形，还是当做普通矩形来处理，这样一来assert语句将无法通过。也就是说对普通的基类对象可以通过，但是换成子类却无法通过。根源在于在基类CRectangle中长度和宽度的设置互不影响，但是子类CSquare不满足这个条件，实际上就不应该把正方形作为矩形的子类，应该分为两个独立的类。</p>
 <p>这个正方形和矩形的例子体现了Liskov替换原则：把基类替换成它的子类，程序不应该产生任何错误和异常。这是判断抽象是否正确的重要依据。</p>
 </li>
 <li><p>案例：业务需要数据库操作。<br>最粗暴的就不赘述了。由于可能会有多种数据库，我们将多种数据库先抽象出一个数据库的基类：CDBUtility。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CDBUtility</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">buildConnectionV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CMySQLUtility</span> :</span> <span class="keyword">public</span> CDBUtility&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">buildConnectionV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Building connection to MySQL..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">COracleUtility</span> :</span> <span class="keyword">public</span> CDBUtility &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">buildConnectionV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Building connection to Oracle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+
+class CDBUtility {
+public:
+    virtual void buildConnectionV() = 0;
+};
+
+class CMySQLUtility : public CDBUtility{
+public:
+    virtual void buildConnectionV() override {
+        std::cout << "Building connection to MySQL..." << std::endl;
+    }
+};
+
+class COracleUtility : public CDBUtility {
+public:
+    virtual void buildConnectionV() override {
+        std::cout << "Building connection to Oracle..." << std::endl;
+    }
+};
+</code></pre>
 <p>如果现在业务需要使用Oracle数据库，可以让业务类继承COracleUtility 类，就可以使用这个类中的方法了：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCustomerDAO</span> :</span> <span class="keyword">public</span> COracleUtility &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">		buildConnectionV();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CCustomerDAO : public COracleUtility {
+public:
+    void doSomething() {
+        buildConnectionV();
+    }
+};
+</code></pre>
 <p>但是这种派生是不符合开闭原则的，当业务使用的数据库发生变化时，需要去更改业务类所继承的父类，改动了原有的CCustomerDAO 类代码。而且让业务类继承数据库类，看着就怪怪的。</p>
 <p>应该让数据库类成为业务类的成员变量，通过这个成员变量去使用数据库类中的方法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCustomerDAO</span>&#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	CDBUtility* m_pDBUtility;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setDBUtility</span><span class="params">(CDBUtility *vUtility)</span> </span>&#123;</div><div class="line">		m_pDBUtility = vUtility;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">		m_pDBUtility-&gt;buildConnectionV();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CCustomerDAO{
+private:
+    CDBUtility* m_pDBUtility;
+
+public:
+    void setDBUtility(CDBUtility *vUtility) {
+        m_pDBUtility = vUtility;
+    }
+    void doSomething() {
+        m_pDBUtility->buildConnectionV();
+    }
+};
+</code></pre>
 <p>可以在main函数中动态地指定业务使用何种数据库：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CCustomerDAO CustomerDAO;</div><div class="line">	CustomerDAO.setDBUtility(<span class="keyword">new</span> COracleUtility());</div><div class="line">	CustomerDAO.doSomething();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">int main() {
+    CCustomerDAO CustomerDAO;
+    CustomerDAO.setDBUtility(new COracleUtility());
+    CustomerDAO.doSomething();
+    return 0;
+}
+</code></pre>
 <p>这样一来无论业务使用何种数据库，只需要在main函数中修改传入的数据库类型即可，而不用去更改原有的类设计。不过这时候main函数不符合开闭原则了，需要修改main函数，后面会讲如何使main函数符合开闭原则的方法。</p>
 <p>这个例子体现了合成复用的原则：尽量使用对象成员，而不是继承的方式来达到复用的目的。</p>
 </li>
 <li><p>绘制图元的一种具体实现方案如下：先将图元转化为像素点，再绘制出所有像素点。代码设计如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_Pixels;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawShape</span><span class="params">()</span> </span>&#123;</div><div class="line">		generatePixelV();</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on window..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRectangle</span> :</span> <span class="keyword">public</span> CShape&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on rectangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTriangle</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on triangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include <vector>
+
+class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        std::cout << "Drawing pixels on window..." << std::endl;
+    }
+};
+
+class CRectangle : public CShape{
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+};
+
+class CTriangle : public CShape {
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on triangle..." << std::endl;
+    }
+};
+</code></pre>
 <p>现在需求变为：在不同操作系统上，比如windows和linux，实现不同图元的绘制。</p>
 <p>前面的虚基类只针对不同图元生成像素点给出了虚函数接口，现在再针对不同操作系统上绘制像素点来增加一个接口：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_Pixels;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawShape</span><span class="params">()</span> </span>&#123;</div><div class="line">		generatePixelV();</div><div class="line">		_drawPixelsV();</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> _drawPixelsV() = <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        _drawPixelsV();
+    }
+
+protected:
+    virtual void _drawPixelsV() = 0;
+};
+</code></pre>
 <p>在Windows上绘制矩形就可以用下面的类来实现：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRectangleOnWindows</span> :</span> <span class="keyword">public</span> CShape&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on rectangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> _drawPixelsV() override &#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on windows..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CRectangleOnWindows : public CShape{
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+
+protected:
+    virtual void _drawPixelsV() override {
+        std::cout << "Drawing pixels on windows..." << std::endl;
+    }
+};
+</code></pre>
 <p>在Linux上绘制矩形用下面的类：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRectangleOnLinux</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> override </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on rectangle..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">protected</span>:</div><div class="line">	<span class="keyword">virtual</span> <span class="keyword">void</span> _drawPixelsV() override &#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on linux..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CRectangleOnLinux : public CShape {
+public:
+    virtual void generatePixelV() override {
+        std::cout << "Generating pixels on rectangle..." << std::endl;
+    }
+
+protected:
+    virtual void _drawPixelsV() override {
+        std::cout << "Drawing pixels on linux..." << std::endl;
+    }
+};
+</code></pre>
 <p>问题很明显了，还有在window和linux上绘制三角形、圆的类还没写呢，如果有m个图元要在n个平台上绘制，那么就会有m*n个类。导致这个问题的根本原因就在于：在一个基类里面有两个独立的变化，通过继承来实现这两种变化，类的数量肯定会很多。</p>
 <p>解决方案就是把这两个对立的变化分别作为两个基类：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_Pixels;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawShape</span><span class="params">()</span> </span>&#123;</div><div class="line">		generatePixelV();</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on kinds of platform..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CPlatform</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawPixels</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; vPixels)</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        std::cout << "Drawing pixels on kinds of platform..." << std::endl;
+    }
+};
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+</code></pre>
 <p>那么这两个基类如何联系起来呢？让CShape继承CPlatform？显然不合常理。让子类去多重继承这两个基类？这样的话子类就需要去同时实现<code>generatePixelV()</code>和<code>drawPixels()</code>这两个虚函数接口，实现在不同平台下绘制不同图元又会产生出m*n个子类。而且合成复用原则建议少用继承，所以这里可以考虑遵循合成复用原则：将CPlatform类对象作为CShape类的成员变量：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_Pixels;</div><div class="line">	CPlatform* m_Platform;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawShape</span><span class="params">()</span> </span>&#123;</div><div class="line">		generatePixelV();</div><div class="line">		m_Platform-&gt;drawPixels(m_Pixels);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setPlatform</span><span class="params">(CPlatform* vPlatform)</span> </span>&#123;</div><div class="line">		m_Platform = vPlatform;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CPlatform</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawPixels</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; vPixels)</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+    CPlatform* m_Platform;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        m_Platform->drawPixels(m_Pixels);
+    }
+
+    void setPlatform(CPlatform* vPlatform) {
+        m_Platform = vPlatform;
+    }
+};
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+</code></pre>
 <p>这两个基类的各自的子类只要实现一个虚函数就可以了，互不影响：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CPlatform</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawPixels</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; vPixels)</span> </span>= <span class="number">0</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CShape</span> &#123;</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; m_Pixels;</div><div class="line">	CPlatform *m_pPlatform;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>= <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">drawShape</span><span class="params">()</span> </span>&#123;</div><div class="line">		generatePixelV();</div><div class="line">		m_pPlatform-&gt;drawPixels(m_Pixels);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setPlatform</span><span class="params">(CPlatform* vPlatform)</span> </span>&#123;</div><div class="line">		m_pPlatform = vPlatform;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRectangle</span> :</span> <span class="keyword">public</span> CShape&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on rectangle..."</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CCircle</span> :</span> <span class="keyword">public</span> CShape &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">generatePixelV</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Generating pixels on circle..."</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CWindows</span> :</span> <span class="keyword">public</span> CPlatform &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawPixels</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; vPixels)</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on windows..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CLinux</span> :</span> <span class="keyword">public</span> CPlatform &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">drawPixels</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; vPixels)</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drawing pixels on linux..."</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+#include <vector>
+
+class CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) = 0;
+};
+
+class CShape {
+private:
+    std::vector<std::pair<int, int>> m_Pixels;
+    CPlatform *m_pPlatform;
+
+public:
+    virtual void generatePixelV() = 0;
+
+    void drawShape() {
+        generatePixelV();
+        m_pPlatform->drawPixels(m_Pixels);
+    }
+
+    void setPlatform(CPlatform* vPlatform) {
+        m_pPlatform = vPlatform;
+    }
+};
+
+class CRectangle : public CShape{
+public:
+    virtual void generatePixelV() {
+        std::cout << "Generating pixels on rectangle...";
+    }
+};
+
+class CCircle : public CShape {
+public:
+    virtual void generatePixelV() {
+        std::cout << "Generating pixels on circle...";
+    }
+};
+
+class CWindows : public CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) {
+        std::cout << "Drawing pixels on windows..." << std::endl;
+    }
+};
+
+class CLinux : public CPlatform {
+public:
+    virtual void drawPixels(const std::vector<std::pair<int, int>>& vPixels) {
+        std::cout << "Drawing pixels on linux..." << std::endl;
+    }
+};
+</code></pre>
 <p>在主函数中可以通过设置子类对象的m_pPlatform变量来指定在哪个平台下绘制图元：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	CRectangle Rect;</div><div class="line">	Rect.setPlatform(<span class="keyword">new</span> CWindows());</div><div class="line">	Rect.drawShape();</div><div class="line">	Rect.setPlatform(<span class="keyword">new</span> CLinux());</div><div class="line">	Rect.drawShape();</div><div class="line"></div><div class="line">	CCircle Circle;</div><div class="line">	Circle.setPlatform(<span class="keyword">new</span> CWindows());</div><div class="line">	Circle.drawShape();</div><div class="line">	Circle.setPlatform(<span class="keyword">new</span> CLinux());</div><div class="line">	Circle.drawShape();</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">int main() {
+    CRectangle Rect;
+    Rect.setPlatform(new CWindows());
+    Rect.drawShape();
+    Rect.setPlatform(new CLinux());
+    Rect.drawShape();
+
+    CCircle Circle;
+    Circle.setPlatform(new CWindows());
+    Circle.drawShape();
+    Circle.setPlatform(new CLinux());
+    Circle.drawShape();
+
+    return 0;
+}
+</code></pre>
 <p>运行结果如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Generating pixels on rectangle...Drawing pixels on windows...</div><div class="line">Generating pixels on rectangle...Drawing pixels on linux...</div><div class="line">Generating pixels on circle...Drawing pixels on windows...</div><div class="line">Generating pixels on circle...Drawing pixels on linux...</div></pre></td></tr></table></figure>
+<pre class=" language-c++"><code class="language-c++">Generating pixels on rectangle...Drawing pixels on windows...
+Generating pixels on rectangle...Drawing pixels on linux...
+Generating pixels on circle...Drawing pixels on windows...
+Generating pixels on circle...Drawing pixels on linux...
+</code></pre>
 <p>优势很明显，只用m+n个类再加上两个基类，就可以完成在m个平台上绘制n个图元的工作。</p>
 <p>这用的实际上就是桥接模式。</p>
 <p>桥接模式：独立的变化因素应该封装到独立的类中。比如需要在不同的操作系统上绘制矩形、圆、三角形等图元。操作系统是一个独立的变化因素，应该将它单独封装到一个类中，提供在不同操作系统上画像素点的方法。图元是另一个独立的变化因素，也应该将它单独封装到一个类中，提供将不同图元转化为像素点的方法。</p>

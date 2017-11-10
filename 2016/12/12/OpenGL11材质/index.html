@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -115,30 +115,124 @@
             <div class="typo" style="padding: 3rem;">
                 <p><font size="5" color="orange">材质概述</font><br>在真实世界里，每个物体会对光产生不同的反应。<a id="more"></a>钢看起来比陶瓷花瓶更闪闪发光，木头箱子肯定不会像钢箱子那样对光产生很强的反射。每个物体对镜面高光也有不同的反应。有些物体不会散射（scatter）很多光却会反射（reflect）很多光，结果看起来就有一个较小的高光点（highlight）；有些物体散射了很多，它们就会产生一个半径更大的高光（这其实就是镜面高光系数的体现）。如果我们想要模拟不同物体接受光照后的效果，就需要考虑物体的材质属性， 利用材质属性模拟出不同的效果。材质就是不同光属性组成的一个结构体。最终用材质颜色来代替<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10》</a>中的物体本身颜色<code>objectColor</code>。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">定义材质结构体</font><br>在OpenGL10中，我们使用了冯氏光照模型来模拟复杂的光照，它有三种元素：环境光颜色、漫反射光颜色、镜面反射光颜色，我们这里再加上镜面高光系数，一起作为材质的属性，在像素着色器中组成材质结构体：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//材质结构体</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span>&#123;</span></div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">	<span class="keyword">float</span> shininess;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">定义材质结构体</font><br>在OpenGL10中，我们使用了冯氏光照模型来模拟复杂的光照，它有三种元素：环境光颜色、漫反射光颜色、镜面反射光颜色，我们这里再加上镜面高光系数，一起作为材质的属性，在像素着色器中组成材质结构体：</p>
+<pre class=" language-c++"><code class="language-c++">//材质结构体
+struct Material{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+</code></pre>
 <p>其中<code>ambientColor</code>材质属性定义了在环境光照下这个物体反射的是什么颜色，通常这个值和物体本身颜色相同；<code>diffuseColor</code>材质属性定义了在漫反射光照下物体的颜色；<code>specularColor</code>材质属性定义了在镜面光照下的反射颜色；<code>shininess</code>材质属性定义了镜面高光系数。</p>
 <p>这些属性指定了物体在不同光照下的颜色效果，用这些颜色来代替物体本身的颜色。让物体在环境光、漫反射光、镜面光下有不同的颜色，不同的颜色组合，就有了不同的材质。</p>
-<p>当然，要使用这个材质结构体，我们还要定义一个结构变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uniform Material material; <span class="comment">//材质变量</span></div></pre></td></tr></table></figure></p>
+<p>当然，要使用这个材质结构体，我们还要定义一个结构变量：</p>
+<pre class=" language-c++"><code class="language-c++">uniform Material material; //材质变量
+</code></pre>
 <p>定义为uniform变量后，我们就可以在主程序中设置这个材质的各个属性值。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">为材质赋值</font><br>我们可以在主程序中为这个uniform变量material赋值，不过在<code>glGetUniformLocation</code>函数中，填写uniform变量名称时需要带上结构体变量名字作为前缀：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置材质的环境属性</span></div><div class="line">GLint matAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"material.ambient"</span>);</div><div class="line">glUniform3f(matAmbientLoc, <span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>);</div><div class="line"><span class="comment">//设置材质的漫反射属性</span></div><div class="line">GLint matDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"material.diffuse"</span>);</div><div class="line">glUniform3f(matDiffuseLoc, <span class="number">1.0f</span>, <span class="number">0.5f</span>, <span class="number">0.31f</span>);</div><div class="line"><span class="comment">//设置材质的镜面反射属性</span></div><div class="line">GLint matSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"material.specular"</span>);</div><div class="line">glUniform3f(matSpecularLoc, <span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>);</div><div class="line"><span class="comment">//设置材质的镜面高光系数属性</span></div><div class="line">GLint matShininessLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"material.shininess"</span>);</div><div class="line">glUniform1f(matShininessLoc, <span class="number">32.0f</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">为材质赋值</font><br>我们可以在主程序中为这个uniform变量material赋值，不过在<code>glGetUniformLocation</code>函数中，填写uniform变量名称时需要带上结构体变量名字作为前缀：</p>
+<pre class=" language-c++"><code class="language-c++">        //设置材质的环境属性
+        GLint matAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, "material.ambient");
+        glUniform3f(matAmbientLoc, 1.0f, 0.5f, 0.31f);
+        //设置材质的漫反射属性
+        GLint matDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, "material.diffuse");
+        glUniform3f(matDiffuseLoc, 1.0f, 0.5f, 0.31f);
+        //设置材质的镜面反射属性
+        GLint matSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, "material.specular");
+        glUniform3f(matSpecularLoc, 0.5f, 0.5f, 0.5f);
+        //设置材质的镜面高光系数属性
+        GLint matShininessLoc = glGetUniformLocation(lightObject.shaderProgram, "material.shininess");
+        glUniform1f(matShininessLoc, 32.0f);
+</code></pre>
 <p>这里我们把<code>ambient</code>和<code>diffuse</code>属性都设置为我们想要让物体所呈现的颜色（物体本身颜色是珊瑚红，这里也设置为珊瑚红）；由于我们不希望<code>specular</code>镜面反射属性对这个物体产生过于强烈的影响，所以设置成了（0.5f,0.5f,0.5f）；把镜面高光系数<code>shininess</code>依旧设置为32。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">更新三光的计算方式</font><br>我们已经使用材质颜色来代替物体本身颜色了，所以我们需要更新环境光、漫反射光、镜面光的计算方式。</p>
-<p>对于环境光，我们使用材质的环境光属性乘上光源颜色，就是片元最终的环境光颜色了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算最终的环境光</span></div><div class="line">vec3 ambientColor=lightColor*material.ambient;  <span class="comment">//环境光</span></div></pre></td></tr></table></figure></p>
-<p>对于漫反射光，我们依旧需要先计算出漫反射系数，漫反射系数、光源颜色和材质的漫反射属性的乘积，就是最终的漫反射光颜色：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算最终的漫反射光</span></div><div class="line">vec3 normal=normalize(Normal);  <span class="comment">//单位法向量</span></div><div class="line">vec3 lightDir=normalize(lightPos-positionInWorld); <span class="comment">//光线入射方向的单位向量</span></div><div class="line"><span class="keyword">float</span> diffuseFactor=max(dot(normal,lightDir),<span class="number">0.0</span>); <span class="comment">//漫反射系数（两个向量夹角的余弦）</span></div><div class="line">vec3 diffuseColor=diffuseFactor*lightColor*material.diffuse;   <span class="comment">//漫反射光</span></div></pre></td></tr></table></figure></p>
-<p>对于镜面光，依旧需要先计算出镜面反射系数，镜面反射系数、光源颜色和材质的镜面反射属性的乘积，就是最终的镜面反射光颜色：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//计算最终的镜面反射光</span></div><div class="line">vec3 reflectDir=normalize(reflect(-lightDir,normal));   <span class="comment">//反射光方向</span></div><div class="line">vec3 viewDir=normalize(viewPos-positionInWorld);  <span class="comment">//观察方向</span></div><div class="line"><span class="keyword">float</span> specularFactor=<span class="built_in">pow</span>(max(dot(reflectDir,viewDir),<span class="number">0.0</span>),material.shininess); <span class="comment">//镜面反射系数</span></div><div class="line">vec3 specularColor=specularFactor*lightColor*material.diffuse; <span class="comment">//镜面反射光</span></div></pre></td></tr></table></figure></p>
+<p>对于环境光，我们使用材质的环境光属性乘上光源颜色，就是片元最终的环境光颜色了：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算最终的环境光
+    vec3 ambientColor=lightColor*material.ambient;  //环境光
+</code></pre>
+<p>对于漫反射光，我们依旧需要先计算出漫反射系数，漫反射系数、光源颜色和材质的漫反射属性的乘积，就是最终的漫反射光颜色：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算最终的漫反射光
+    vec3 normal=normalize(Normal);  //单位法向量
+    vec3 lightDir=normalize(lightPos-positionInWorld); //光线入射方向的单位向量
+    float diffuseFactor=max(dot(normal,lightDir),0.0); //漫反射系数（两个向量夹角的余弦）
+    vec3 diffuseColor=diffuseFactor*lightColor*material.diffuse;   //漫反射光
+</code></pre>
+<p>对于镜面光，依旧需要先计算出镜面反射系数，镜面反射系数、光源颜色和材质的镜面反射属性的乘积，就是最终的镜面反射光颜色：</p>
+<pre class=" language-c++"><code class="language-c++">    //计算最终的镜面反射光
+    vec3 reflectDir=normalize(reflect(-lightDir,normal));   //反射光方向
+    vec3 viewDir=normalize(viewPos-positionInWorld);  //观察方向
+    float specularFactor=pow(max(dot(reflectDir,viewDir),0.0),material.shininess); //镜面反射系数
+    vec3 specularColor=specularFactor*lightColor*material.diffuse; //镜面反射光
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148164024107.png" alt=""><br>有点太亮了~~~<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">分解光源颜色</font><br>上面的物体太亮了。主要是因为物体的环境属性、漫反射属性、镜面反射属性都是直接乘以光源颜色，但是我们的这个光源是环境光、漫反射光和镜面光组合在一起的，应该是环境光只对材质的环境属性起作用，不应该对材质的漫反射属性起作用。光源的成分和材质的属性应该是一一对应的。</p>
-<p>所以，直接乘以光源颜色是不对的，会造成物体太亮。我们应该把光源颜色分解为环境光颜色、漫反射光颜色和镜面反射光颜色。和材质一样，我们也使用结构体来实现：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//光源</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Light</span>&#123;</span></div><div class="line">	vec3 position;</div><div class="line">	vec3 ambient;</div><div class="line">	vec3 diffuse;</div><div class="line">	vec3 specular;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>当然，同样需要定义一个光源结构体变量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uniform Light light;       <span class="comment">//光源变量</span></div></pre></td></tr></table></figure></p>
-<p>接下里需要为光源结构体的这几个属性赋值了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置光源的位置</span></div><div class="line">GLint lightPosLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.position"</span>);</div><div class="line">glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);</div><div class="line"><span class="comment">//设置光源的环境光成分</span></div><div class="line">GLint lightAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.ambient"</span>);</div><div class="line">glUniform3f(lightAmbientLoc, <span class="number">0.2f</span>, <span class="number">0.2f</span>, <span class="number">0.2f</span>);</div><div class="line"><span class="comment">//设置光源的漫反射光成分</span></div><div class="line">GLint lightDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.diffuse"</span>);</div><div class="line">glUniform3f(lightDiffuseLoc, <span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>);</div><div class="line"><span class="comment">//设置光源的镜面反射光成分</span></div><div class="line">GLint lightSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.specular"</span>);</div><div class="line">glUniform3f(lightSpecularLoc, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>);</div></pre></td></tr></table></figure></p>
+<p>所以，直接乘以光源颜色是不对的，会造成物体太亮。我们应该把光源颜色分解为环境光颜色、漫反射光颜色和镜面反射光颜色。和材质一样，我们也使用结构体来实现：</p>
+<pre class=" language-c++"><code class="language-c++">//光源
+struct Light{
+    vec3 position;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+</code></pre>
+<p>当然，同样需要定义一个光源结构体变量：</p>
+<pre class=" language-c++"><code class="language-c++">uniform Light light;       //光源变量
+</code></pre>
+<p>接下里需要为光源结构体的这几个属性赋值了：</p>
+<pre class=" language-c++"><code class="language-c++">        //设置光源的位置
+        GLint lightPosLoc = glGetUniformLocation(lightObject.shaderProgram, "light.position");
+        glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+        //设置光源的环境光成分
+        GLint lightAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, "light.ambient");
+        glUniform3f(lightAmbientLoc, 0.2f, 0.2f, 0.2f);
+        //设置光源的漫反射光成分
+        GLint lightDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, "light.diffuse");
+        glUniform3f(lightDiffuseLoc, 0.5f, 0.5f, 0.5f);
+        //设置光源的镜面反射光成分
+        GLint lightSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, "light.specular");
+        glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+</code></pre>
 <p>环境光ambient通常设置为一个比较低的亮度，因为我们不希望环境色太过显眼；漫反射光是我们想要的光源颜色，通常是白色，这里我们把这个光调暗一点，看起来会更自然，设置为（0.5,0.5,0.5）；镜面反射光颜色通常被设置为（1.0f,1.0f,1.0f）的全强度发光。</p>
-<p>最后我们需要再次更新三光的计算方式，把原来的光源颜色替换成对应的光源分量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//计算最终的环境光</span></div><div class="line">	vec3 ambientColor=light.ambient*material.ambient;  <span class="comment">//环境光</span></div><div class="line">	<span class="comment">//计算最终的漫反射光</span></div><div class="line">	vec3 normal=normalize(Normal);  <span class="comment">//单位法向量</span></div><div class="line">	vec3 lightDir=normalize(light.position-positionInWorld); <span class="comment">//光线入射方向的单位向量</span></div><div class="line">	<span class="keyword">float</span> diffuseFactor=max(dot(normal,lightDir),<span class="number">0.0</span>); <span class="comment">//漫反射系数（两个向量夹角的余弦）</span></div><div class="line">	vec3 diffuseColor=diffuseFactor*light.diffuse*material.diffuse;   <span class="comment">//漫反射光</span></div><div class="line">	<span class="comment">//计算最终的镜面反射光</span></div><div class="line">	vec3 reflectDir=normalize(reflect(-lightDir,normal));   <span class="comment">//反射光方向</span></div><div class="line">	vec3 viewDir=normalize(viewPos-positionInWorld);  <span class="comment">//观察方向</span></div><div class="line">	<span class="keyword">float</span> specularFactor=<span class="built_in">pow</span>(max(dot(reflectDir,viewDir),<span class="number">0.0</span>),material.shininess); <span class="comment">//镜面反射系数</span></div><div class="line">	vec3 specularColor=specularFactor*light.specular*material.specular; <span class="comment">//镜面反射光</span></div><div class="line"></div><div class="line">	color=vec4(ambientColor+diffuseColor+specularColor,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最后我们需要再次更新三光的计算方式，把原来的光源颜色替换成对应的光源分量：</p>
+<pre class=" language-c++"><code class="language-c++">void main(){
+    //计算最终的环境光
+    vec3 ambientColor=light.ambient*material.ambient;  //环境光
+    //计算最终的漫反射光
+    vec3 normal=normalize(Normal);  //单位法向量
+    vec3 lightDir=normalize(light.position-positionInWorld); //光线入射方向的单位向量
+    float diffuseFactor=max(dot(normal,lightDir),0.0); //漫反射系数（两个向量夹角的余弦）
+    vec3 diffuseColor=diffuseFactor*light.diffuse*material.diffuse;   //漫反射光
+    //计算最终的镜面反射光
+    vec3 reflectDir=normalize(reflect(-lightDir,normal));   //反射光方向
+    vec3 viewDir=normalize(viewPos-positionInWorld);  //观察方向
+    float specularFactor=pow(max(dot(reflectDir,viewDir),0.0),material.shininess); //镜面反射系数
+    vec3 specularColor=specularFactor*light.specular*material.specular; //镜面反射光
+
+    color=vec4(ambientColor+diffuseColor+specularColor,1.0f);
+}
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148164024164.png" alt=""><br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">不同的光源颜色</font><br>上面我们给光源的各个成分赋了一个固定的颜色，现在我们把颜色变一变，让它随着时间不停变换。由于镜面反射光通常都设为白色（1.0f,1.0f,1.0f），所以我们这里只改变环境光和漫反射光：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//随着时间变化的环境光</span></div><div class="line"><span class="function">vec3 <span class="title">ambientColor</span><span class="params">(<span class="number">0.2f</span>, <span class="number">0.2f</span>, <span class="number">0.2f</span>)</span></span>;</div><div class="line">ambientColor *= vec3(<span class="built_in">sin</span>(glfwGetTime()* <span class="number">2</span>), <span class="built_in">sin</span>(glfwGetTime()*<span class="number">0.7</span>), <span class="built_in">sin</span>(glfwGetTime()*<span class="number">1.3</span>));</div><div class="line"><span class="comment">//随着时间变化的漫反射光</span></div><div class="line"><span class="function">vec3 <span class="title">diffuseColor</span><span class="params">(<span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>)</span></span>;</div><div class="line">diffuseColor *= ambientColor;</div><div class="line"><span class="comment">//设置光源的环境光成分</span></div><div class="line">GLint lightAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.ambient"</span>);</div><div class="line">glUniform3f(lightAmbientLoc, ambientColor.x, ambientColor.y, ambientColor.z);</div><div class="line"><span class="comment">//设置光源的漫反射光成分</span></div><div class="line">GLint lightDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.diffuse"</span>);</div><div class="line">glUniform3f(lightDiffuseLoc, diffuseColor.x, diffuseColor.y, diffuseColor.z);</div><div class="line"><span class="comment">//设置光源的镜面反射光成分</span></div><div class="line">GLint lightSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, <span class="string">"light.specular"</span>);</div><div class="line">glUniform3f(lightSpecularLoc, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">不同的光源颜色</font><br>上面我们给光源的各个成分赋了一个固定的颜色，现在我们把颜色变一变，让它随着时间不停变换。由于镜面反射光通常都设为白色（1.0f,1.0f,1.0f），所以我们这里只改变环境光和漫反射光：</p>
+<pre class=" language-c++"><code class="language-c++">        //随着时间变化的环境光
+        vec3 ambientColor(0.2f, 0.2f, 0.2f);
+        ambientColor *= vec3(sin(glfwGetTime()* 2), sin(glfwGetTime()*0.7), sin(glfwGetTime()*1.3));
+        //随着时间变化的漫反射光
+        vec3 diffuseColor(0.5f, 0.5f, 0.5f);
+        diffuseColor *= ambientColor;
+        //设置光源的环境光成分
+        GLint lightAmbientLoc = glGetUniformLocation(lightObject.shaderProgram, "light.ambient");
+        glUniform3f(lightAmbientLoc, ambientColor.x, ambientColor.y, ambientColor.z);
+        //设置光源的漫反射光成分
+        GLint lightDiffuseLoc = glGetUniformLocation(lightObject.shaderProgram, "light.diffuse");
+        glUniform3f(lightDiffuseLoc, diffuseColor.x, diffuseColor.y, diffuseColor.z);
+        //设置光源的镜面反射光成分
+        GLint lightSpecularLoc = glGetUniformLocation(lightObject.shaderProgram, "light.specular");
+        glUniform3f(lightSpecularLoc, 1.0f, 1.0f, 1.0f);
+</code></pre>
 <p>注意这里环境光和漫反射光的三个颜色分量随时间变换的快慢应该不要一致，上面是分别给<code>glfwGetTime</code>函数乘以了2、0.7、1.3。如果不这样做的话，三个颜色分量步调就会一直，只能看到原有的颜色变暗了，没有明显的颜色跨度。<br>&nbsp;</p>
 <hr>
 <p>到此，所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL11_Material" target="_blank" rel="external">在这里</a>。</p>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -129,29 +129,200 @@
 <li>渲染深度纹理。</li>
 <li>正常渲染场景，同时采样深度纹理来判断片元是否在阴影中。</li>
 </ol>
-<p>用代码表示如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 首先渲染深度贴图</span></div><div class="line">glViewport(<span class="number">0</span>, <span class="number">0</span>, SHADOW_WIDTH, SHADOW_HEIGHT);</div><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);</div><div class="line">    glClear(GL_DEPTH_BUFFER_BIT);</div><div class="line">    ConfigureShaderAndMatrices();</div><div class="line">    RenderScene();</div><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line"><span class="comment">// 2. 像往常一样渲染场景，但这次使用深度贴图</span></div><div class="line">glViewport(<span class="number">0</span>, <span class="number">0</span>, SCR_WIDTH, SCR_HEIGHT);</div><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">ConfigureShaderAndMatrices();</div><div class="line">glBindTexture(GL_TEXTURE_2D, depthMap);</div><div class="line">RenderScene();</div></pre></td></tr></table></figure></p>
-<p><font size="5" color="orange">渲染深度纹理</font><br>我们需要从光源的视角去渲染得到一张场景的深度纹理，最后需要用它来计算阴影。为了将场景的深度保存到纹理中，我们需要用到帧缓冲，并且为它添加深度纹理附件：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">GLuint DepthMap;</div><div class="line">	glGenTextures(<span class="number">1</span>, &amp;DepthMap);</div><div class="line">	glBindTexture(GL_TEXTURE_2D, DepthMap);</div><div class="line">	glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_DEPTH_COMPONENT, WIDTH, HEIGHT, <span class="number">0</span>, GL_DEPTH_COMPONENT, GL_FLOAT, <span class="literal">NULL</span>);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</div><div class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);</div><div class="line">	glBindTexture(GL_TEXTURE_2D, <span class="number">0</span>);</div><div class="line"></div><div class="line">	GLuint DepthMapFBO;</div><div class="line">	glGenFramebuffers(<span class="number">1</span>, &amp;DepthMapFBO);</div><div class="line">	glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);</div><div class="line">	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, DepthMap, <span class="number">0</span>);</div><div class="line">	glDrawBuffer(GL_NONE);</div><div class="line">	glReadBuffer(GL_NONE);</div><div class="line">	<span class="keyword">if</span> (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Framebuffer is not complete!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>用代码表示如下：</p>
+<pre class=" language-c++"><code class="language-c++">// 1. 首先渲染深度贴图
+glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    ConfigureShaderAndMatrices();
+    RenderScene();
+glBindFramebuffer(GL_FRAMEBUFFER, 0);
+// 2. 像往常一样渲染场景，但这次使用深度贴图
+glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ConfigureShaderAndMatrices();
+glBindTexture(GL_TEXTURE_2D, depthMap);
+RenderScene();
+</code></pre>
+<p><font size="5" color="orange">渲染深度纹理</font><br>我们需要从光源的视角去渲染得到一张场景的深度纹理，最后需要用它来计算阴影。为了将场景的深度保存到纹理中，我们需要用到帧缓冲，并且为它添加深度纹理附件：</p>
+<pre class=" language-c++"><code class="language-c++">GLuint DepthMap;
+    glGenTextures(1, &DepthMap);
+    glBindTexture(GL_TEXTURE_2D, DepthMap);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, WIDTH, HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    GLuint DepthMapFBO;
+    glGenFramebuffers(1, &DepthMapFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, DepthMap, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "Framebuffer is not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+</code></pre>
 <p>上面的代码首先创建了一张<code>GL_DEPTH_COMPONENT</code>格式的纹理，然后将它绑定到帧缓冲的深度附件上。</p>
-<p>接下来我们需要从光源视角去渲染场景。先来看看着色器怎么写吧：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">layout (location = <span class="number">0</span>) in vec3 position;</div><div class="line"></div><div class="line">uniform mat4 LightSpaceMVP;  <span class="comment">//projection * view * model</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	gl_Position = LightSpaceMVP * vec4(position,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来我们需要从光源视角去渲染场景。先来看看着色器怎么写吧：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+
+layout (location = 0) in vec3 position;
+
+uniform mat4 LightSpaceMVP;  //projection * view * model
+
+void main()
+{
+    gl_Position = LightSpaceMVP * vec4(position,1.0f);
+}
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+
+void main()
+{
+}
+</code></pre>
 <p>可以看到渲染深度纹理的着色器相当简单，在顶点着色器里只是需要一个在光源视角下的MVP矩阵（投影矩阵、观察矩阵和物体模型矩阵的乘积），来计算在光源视角下的顶点坐标。片元着色器可以是空的，因为我们只想得到深度，所以没有必要在片元着色器里输出颜色。<br>【注】：</p>
 <ul>
 <li>直接使用MVP矩阵，是为了避免每一个顶点着色器都去执行模型矩阵、观察矩阵、投影矩阵的乘法运算，减少GPU的运算量，只需要每帧在应用程序里计算一次MVP矩阵，然后传给顶点着色器即可。这样还减少了传输带宽，毕竟只需要给GPU传一个MVP矩阵，而不是三个矩阵。</li>
 </ul>
-<p>加下来需要我们在应用程序里算好这个LightSpaceMVP矩阵了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mat4 View = lookAt(lightPos, lightPos + lightDirection, vec3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>));</div><div class="line">mat4 Projection = ortho(<span class="number">-6.0</span>, <span class="number">6.0</span>, <span class="number">-6.0</span>, <span class="number">6.0</span>, <span class="number">0.1</span>, <span class="number">20.0</span>);</div><div class="line">mat4 LightSpaceVP = Projection * View;</div><div class="line">mat4 CubeModel;</div><div class="line">CubeModel = translate(CubeModel, glm::vec3(<span class="number">-1.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>));</div><div class="line">mat4 LightSpaceMVPCube = LightSpaceVP * CubeModel;</div><div class="line">mat4 PlaneModel;</div><div class="line">PlaneModel = mat4();</div><div class="line">mat4 LightSpaceMVPPlane = LightSpaceVP * PlaneModel;</div></pre></td></tr></table></figure></p>
+<p>加下来需要我们在应用程序里算好这个LightSpaceMVP矩阵了：</p>
+<pre class=" language-c++"><code class="language-c++">mat4 View = lookAt(lightPos, lightPos + lightDirection, vec3(0, 1, 0));
+mat4 Projection = ortho(-6.0, 6.0, -6.0, 6.0, 0.1, 20.0);
+mat4 LightSpaceVP = Projection * View;
+mat4 CubeModel;
+CubeModel = translate(CubeModel, glm::vec3(-1.0f, 0.0f, -1.0f));
+mat4 LightSpaceMVPCube = LightSpaceVP * CubeModel;
+mat4 PlaneModel;
+PlaneModel = mat4();
+mat4 LightSpaceMVPPlane = LightSpaceVP * PlaneModel;
+</code></pre>
 <p>场景里面有两个物体：地面和箱子，它们都需要在上面的着色器下绘制一次，由于它们的模型矩阵不同，所以它们的MVP矩阵需要分开算。观察矩阵通过平行光源的位置和方向来计算，投影矩阵是一个正交投影矩阵（因为场景里用的是平行光源）。</p>
-<p>然后我们绑定自定义帧缓冲，激活着色器渲染场景，就可以渲染出深度纹理了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);</div><div class="line">glClear(GL_DEPTH_BUFFER_BIT);</div><div class="line"></div><div class="line">GenerateDepthMap_Shader.Use();</div><div class="line">glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, <span class="string">"LightSpaceMVP"</span>), <span class="number">1</span>, GL_FALSE, value_ptr(LightSpaceMVPCube));</div><div class="line">glBindVertexArray(cubeVAO);</div><div class="line">glDrawElements(GL_TRIANGLES, <span class="number">36</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</div><div class="line"></div><div class="line">glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, <span class="string">"LightSpaceMVP"</span>), <span class="number">1</span>, GL_FALSE, value_ptr(LightSpaceMVPPlane));</div><div class="line">glBindVertexArray(planeVAO);</div><div class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<p>我们可以用一张窗口四边形来渲染这张深度贴图：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line">glClearColor(<span class="number">0.3f</span>, <span class="number">0.4f</span>, <span class="number">0.5f</span>, <span class="number">1.0f</span>);</div><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">	</div><div class="line">RenderDepthMap_Shader.Use();</div><div class="line">glBindVertexArray(windowQuadVAO);</div><div class="line">glBindTexture(GL_TEXTURE_2D, DepthMap);</div><div class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure></p>
+<p>然后我们绑定自定义帧缓冲，激活着色器渲染场景，就可以渲染出深度纹理了：</p>
+<pre class=" language-c++"><code class="language-c++">glBindFramebuffer(GL_FRAMEBUFFER, DepthMapFBO);
+glClear(GL_DEPTH_BUFFER_BIT);
+
+GenerateDepthMap_Shader.Use();
+glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, "LightSpaceMVP"), 1, GL_FALSE, value_ptr(LightSpaceMVPCube));
+glBindVertexArray(cubeVAO);
+glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+glUniformMatrix4fv(glGetUniformLocation(GenerateDepthMap_Shader.shaderProgram, "LightSpaceMVP"), 1, GL_FALSE, value_ptr(LightSpaceMVPPlane));
+glBindVertexArray(planeVAO);
+glDrawArrays(GL_TRIANGLES, 0, 6);
+glBindVertexArray(0);
+</code></pre>
+<p>我们可以用一张窗口四边形来渲染这张深度贴图：</p>
+<pre class=" language-c++"><code class="language-c++">glBindFramebuffer(GL_FRAMEBUFFER, 0);
+glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+RenderDepthMap_Shader.Use();
+glBindVertexArray(windowQuadVAO);
+glBindTexture(GL_TEXTURE_2D, DepthMap);
+glDrawArrays(GL_TRIANGLES, 0, 6);
+glBindVertexArray(0);
+</code></pre>
 <p>渲染结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%844.png" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL28_ShadowMap/LearnOpenGL28_ShadowMap_1" target="_blank" rel="external">这里</a>。</p>
 <p><font size="5" color="orange">渲染阴影</font></p>
 <hr>
 <p>我们先来看看着色器怎么写。</p>
-<p>顶点着色器和正常渲染场景时一样，只是多了计算顶点在光源视角下的裁剪坐标这一步：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">layout (location = <span class="number">0</span>) in vec3 position;</div><div class="line">layout (location = <span class="number">1</span>) in vec2 texCoords;</div><div class="line">layout (location = <span class="number">2</span>) in vec3 normal;</div><div class="line"></div><div class="line">out vec2 VS_TexCoords;</div><div class="line">out vec3 VS_Normal;</div><div class="line">out vec3 VS_WorldPos;</div><div class="line">out vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">uniform mat4 u_LightSpaceMVP;  <span class="comment">//projection * view * model</span></div><div class="line">uniform mat4 u_Model;</div><div class="line">uniform mat4 u_View;</div><div class="line">uniform mat4 u_Projection;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	VS_TexCoords = texCoords;</div><div class="line">	VS_Normal = transpose(inverse(mat3(u_Model))) * normal;</div><div class="line">	VS_WorldPos = vec3(u_Model * vec4(position, <span class="number">1.0f</span>));</div><div class="line">	gl_Position = u_Projection * u_View * vec4(VS_WorldPos, <span class="number">1.0f</span>);</div><div class="line">	VS_LightSpacePos = u_LightSpaceMVP * vec4(position, <span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>顶点着色器和正常渲染场景时一样，只是多了计算顶点在光源视角下的裁剪坐标这一步：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec2 texCoords;
+layout (location = 2) in vec3 normal;
+
+out vec2 VS_TexCoords;
+out vec3 VS_Normal;
+out vec3 VS_WorldPos;
+out vec4 VS_LightSpacePos;
+
+uniform mat4 u_LightSpaceMVP;  //projection * view * model
+uniform mat4 u_Model;
+uniform mat4 u_View;
+uniform mat4 u_Projection;
+
+void main()
+{
+    VS_TexCoords = texCoords;
+    VS_Normal = transpose(inverse(mat3(u_Model))) * normal;
+    VS_WorldPos = vec3(u_Model * vec4(position, 1.0f));
+    gl_Position = u_Projection * u_View * vec4(VS_WorldPos, 1.0f);
+    VS_LightSpacePos = u_LightSpaceMVP * vec4(position, 1.0f);
+}
+</code></pre>
 <p>其中u_LightSpaceMVP是光源视角下的模型矩阵、观察矩阵和投影矩阵的乘积。</p>
-<p>将计算得到的顶点在光源视角下的裁剪坐标VS_LightSpacePos，传递给片元着色器，来计算阴影：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">in vec2 VS_TexCoords;</div><div class="line">in vec3 VS_Normal;</div><div class="line">in vec3 VS_WorldPos;</div><div class="line">in vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">out vec4 Color;</div><div class="line"></div><div class="line">uniform sampler2D u_DiffuseMapSampler1;</div><div class="line">uniform sampler2D u_DepthMapSampler2;</div><div class="line">uniform vec3 u_LightPos;</div><div class="line">uniform vec3 u_LightDirection;</div><div class="line">uniform vec3 u_ViewPos;</div><div class="line">uniform vec3 u_LightColor;</div><div class="line"></div><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;</div><div class="line"></div><div class="line">	<span class="keyword">float</span> AmbientStrength = <span class="number">0.3f</span>;</div><div class="line">	vec3  AmbientColor = AmbientStrength * ObjectColor;</div><div class="line"></div><div class="line">	vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);</div><div class="line">	<span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.01</span>)</div><div class="line">	&#123;</div><div class="line">		Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	vec3 Normal = normalize(VS_Normal);</div><div class="line">	vec3 LightDir = normalize(-u_LightDirection);</div><div class="line">	<span class="keyword">float</span> DiffuseFactor = max(dot(Normal, LightDir), <span class="number">0.0</span>);</div><div class="line">	vec3 DiffuseColor = DiffuseFactor * u_LightColor;</div><div class="line"></div><div class="line">	vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);</div><div class="line">	vec3 HalfDir = normalize(LightDir + ViewDir);</div><div class="line">	<span class="keyword">float</span> SpecularFactor = <span class="built_in">pow</span>(max(dot(HalfDir, Normal), <span class="number">0.0f</span>), <span class="number">32</span>);</div><div class="line">	vec3 SpecularColor = SpecularFactor * u_LightColor;</div><div class="line"></div><div class="line">	Color = vec4((AmbientColor + DiffuseColor + SpecularColor) * ObjectColor, <span class="number">1.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其中在片元着色器里，我们需要计算插值后的片元在光源视角下的深度：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>原理跟简单，就是模拟了一下透视除法，让xyz分量分别除以w分量（其实不除也可以，因为在我们的demo里用的是平行光，光源视角下的投影矩阵是正交投影，所以w分量其实是1，但是如果不是平行光，这一步还是必须要做的）。但是透视除法之后的坐标范围还是-1到1，而之后我们需要用这个坐标去查找之前的深度纹理，而且其z分量应该代表片元在光源视角下的深度，所以不应该有负数，我们需要把-1到1的范围映射到0到1，所以才有了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div></pre></td></tr></table></figure></p>
-<p>然后我们就可以根据这个坐标（片元在光源视角下的裁剪坐标并且映射到了0到1的范围）的xy值，去之前保存下来的深度纹理里查找场景在这个xy位置上距离光源最近的深度值，如果当前片元在光源视角下的深度值大于从纹理中查找到的深度值，则说明这个片元被挡住了，应该在阴影里：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.01</span>)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将计算得到的顶点在光源视角下的裁剪坐标VS_LightSpacePos，传递给片元着色器，来计算阴影：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+
+in vec2 VS_TexCoords;
+in vec3 VS_Normal;
+in vec3 VS_WorldPos;
+in vec4 VS_LightSpacePos;
+
+out vec4 Color;
+
+uniform sampler2D u_DiffuseMapSampler1;
+uniform sampler2D u_DepthMapSampler2;
+uniform vec3 u_LightPos;
+uniform vec3 u_LightDirection;
+uniform vec3 u_ViewPos;
+uniform vec3 u_LightColor;
+
+vec3 getDepthInLightSpace(vec4 vLightSpacePos)
+{
+    vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;
+    Temp = Temp * 0.5 + 0.5;
+    return Temp;
+}
+
+void main()
+{
+    vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;
+
+    float AmbientStrength = 0.3f;
+    vec3  AmbientColor = AmbientStrength * ObjectColor;
+
+    vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);
+    if(LightClipSpacePos.z >= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + 0.01)
+    {
+        Color = vec4(AmbientColor * ObjectColor, 1.0);
+        return;
+    }
+
+    vec3 Normal = normalize(VS_Normal);
+    vec3 LightDir = normalize(-u_LightDirection);
+    float DiffuseFactor = max(dot(Normal, LightDir), 0.0);
+    vec3 DiffuseColor = DiffuseFactor * u_LightColor;
+
+    vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);
+    vec3 HalfDir = normalize(LightDir + ViewDir);
+    float SpecularFactor = pow(max(dot(HalfDir, Normal), 0.0f), 32);
+    vec3 SpecularColor = SpecularFactor * u_LightColor;
+
+    Color = vec4((AmbientColor + DiffuseColor + SpecularColor) * ObjectColor, 1.0);
+}
+</code></pre>
+<p>其中在片元着色器里，我们需要计算插值后的片元在光源视角下的深度：</p>
+<pre class=" language-c++"><code class="language-c++">vec3 getDepthInLightSpace(vec4 vLightSpacePos)
+{
+    vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;
+    Temp = Temp * 0.5 + 0.5;
+    return Temp;
+}
+</code></pre>
+<p>原理跟简单，就是模拟了一下透视除法，让xyz分量分别除以w分量（其实不除也可以，因为在我们的demo里用的是平行光，光源视角下的投影矩阵是正交投影，所以w分量其实是1，但是如果不是平行光，这一步还是必须要做的）。但是透视除法之后的坐标范围还是-1到1，而之后我们需要用这个坐标去查找之前的深度纹理，而且其z分量应该代表片元在光源视角下的深度，所以不应该有负数，我们需要把-1到1的范围映射到0到1，所以才有了：</p>
+<pre class=" language-c++"><code class="language-c++">    Temp = Temp * 0.5 + 0.5;
+</code></pre>
+<p>然后我们就可以根据这个坐标（片元在光源视角下的裁剪坐标并且映射到了0到1的范围）的xy值，去之前保存下来的深度纹理里查找场景在这个xy位置上距离光源最近的深度值，如果当前片元在光源视角下的深度值大于从纹理中查找到的深度值，则说明这个片元被挡住了，应该在阴影里：</p>
+<pre class=" language-c++"><code class="language-c++">if(LightClipSpacePos.z >= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + 0.01)
+{
+    Color = vec4(AmbientColor * ObjectColor, 1.0);
+    return;
+}
+</code></pre>
 <p>这里对阴影的处理方式是让片元的颜色等于环境光颜色，不再对它做漫反射和镜面反射光照了。</p>
 <p>对于不满足这个条件，即不在阴影里的片元，照常执行blinn-phong光照即可。</p>
 <p>剩下的就是在应用程序里把着色器需要的顶点数据和uniform变量传进来就可以了，由于这些内容和之前的文章里几乎是一样的，所以不再赘述了，所有源码都在<a href="">这里</a>。</p>
@@ -163,8 +334,21 @@
 <li>这里只是举了个例子，最大精度不一定是6位小数，也不一定是四舍五入，要视具体运行环境和硬件决定。</li>
 </ul>
 <p>那么我们怎么避免这种深度精度问题呢？</p>
-<p>我们可以在判断条件上加一个很小的偏移量：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + <span class="number">0.0009</span>)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%847.png" alt=""><br>可以看到虽然很大程度上解决了条纹状问题，但是由于偏移量加得太小，在箱子的垂直表面上，坡度很大，导致上面还是有一些黑点，有两种方法可以解决：一种是加大偏移量，但是有可能会产生彼得潘效应（后文会介绍），另一种就是利用表面法线和光线的夹角来计算出一个偏移值，这样对于坡度大的地方偏移就大、对坡度小的地方偏移就很小：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> Offset = max(<span class="number">0.0009</span>, <span class="number">0.0025</span> * (<span class="number">1.0</span> - dot(Normal, LightDir)));</div><div class="line"><span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + Offset)</div><div class="line">&#123;</div><div class="line">	Color = vec4(AmbientColor * ObjectColor, <span class="number">1.0</span>);</div><div class="line">	<span class="keyword">return</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以在判断条件上加一个很小的偏移量：</p>
+<pre class=" language-c++"><code class="language-c++">if(LightClipSpacePos.z >= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + 0.0009)
+{
+    Color = vec4(AmbientColor * ObjectColor, 1.0);
+    return; 
+}
+</code></pre>
+<p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%847.png" alt=""><br>可以看到虽然很大程度上解决了条纹状问题，但是由于偏移量加得太小，在箱子的垂直表面上，坡度很大，导致上面还是有一些黑点，有两种方法可以解决：一种是加大偏移量，但是有可能会产生彼得潘效应（后文会介绍），另一种就是利用表面法线和光线的夹角来计算出一个偏移值，这样对于坡度大的地方偏移就大、对坡度小的地方偏移就很小：</p>
+<pre class=" language-c++"><code class="language-c++">float Offset = max(0.0009, 0.0025 * (1.0 - dot(Normal, LightDir)));
+if(LightClipSpacePos.z >= texture(u_DepthMapSampler2, LightClipSpacePos.xy).r + Offset)
+{
+    Color = vec4(AmbientColor * ObjectColor, 1.0);
+    return; 
+}
+</code></pre>
 <p>运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%848.png" alt=""></p>
 <p>但是，偏移量加多少合适需要多次微调，加少了会有黑点，加多了会有彼得潘效应，其实即使是上面的代码，运行程序后拉近看依然有彼得潘效应。想要调出合适的偏移量很难，很容易出现彼得潘效应。下面来看看什么是彼得潘效应。</p>
 <p><font size="4" color="red">彼得潘效应</font><br>当偏移加的偏大时，可以看到阴影相对实际物体的偏移，如下图所示（这个偏移值加得很大0.01）：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%849.png" alt=""><br>看起来像箱子漂浮在地面之上，但是实际上从顶点数据来看箱子是紧贴着地面的，这种错觉就是彼得潘效应（童话里彼得潘是个会飞的男孩……）。</p>
@@ -173,19 +357,100 @@
 <p>有两个解决方案：</p>
 <ol>
 <li>把正交投影矩阵的参数加大，让正交视锥能包含更大的区域。</li>
-<li>如果当前正交视锥之外没有物体（或者没有需要投射阴影的物体），可以让视锥外的片元索引深度纹理得到的深度值总是1.0，这样这些片元就不会处在阴影里了。其实也就是想用绝对值大于1的坐标去索引深度纹理，总是得到1.0这个值，所以我们可以把深度纹理的环绕方式设为GL_CLAMP_TO_BORDER，让超出1.0的坐标永远得到的都是边界上的值，同时要设置边界颜色的r分量为1.0：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);</div><div class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);</div><div class="line">GLfloat BorderColor[] = &#123; <span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span> &#125;;</div><div class="line">glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, BorderColor);</div></pre></td></tr></table></figure>
-</li>
+<li>如果当前正交视锥之外没有物体（或者没有需要投射阴影的物体），可以让视锥外的片元索引深度纹理得到的深度值总是1.0，这样这些片元就不会处在阴影里了。其实也就是想用绝对值大于1的坐标去索引深度纹理，总是得到1.0这个值，所以我们可以把深度纹理的环绕方式设为GL_CLAMP_TO_BORDER，让超出1.0的坐标永远得到的都是边界上的值，同时要设置边界颜色的r分量为1.0：<pre class=" language-c++"><code class="language-c++">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+GLfloat BorderColor[] = { 1.0,0.0,0.0,1.0 };
+glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, BorderColor);
+</code></pre>
+结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8411.png" alt=""></li>
 </ol>
-<p>结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8411.png" alt=""></p>
 <p>可以发现在视锥横截面之外的片元都不再处于阴影里了，远处还有片元处于阴影里，是因为那块区域超过视锥的远平面，计算出来的深度值是大于1.0的，会永远比从深度纹理中取出来的值要大，所以会处于阴影里。有两种解决方案：</p>
 <ol>
 <li>在正交投影矩阵里加大远平面的距离。</li>
-<li>在片元着色器里计算裁剪坐标的时候，如果最后发现裁剪坐标的z值大于1.0，则把其z值强制更改为0：<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="keyword">if</span>(Temp.z &gt; <span class="number">1.0</span>)</div><div class="line">		Temp.z = <span class="number">0.0</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>在片元着色器里计算裁剪坐标的时候，如果最后发现裁剪坐标的z值大于1.0，则把其z值强制更改为0：<pre class=" language-c++"><code class="language-c++">vec3 getDepthInLightSpace(vec4 vLightSpacePos)
+{
+ vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;
+ Temp = Temp * 0.5 + 0.5;
+ if(Temp.z > 1.0)
+     Temp.z = 0.0;
+ return Temp;
+}
+</code></pre>
 </li>
 </ol>
 <p>运行结果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8412.png" alt=""><br>到此的所有源码都在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL28_ShadowMap/LearnOpenGL28_ShadowMap_2" target="_blank" rel="external">这里</a>。其中解开一些注释代码就能看到这一小节说过的各种结果。</p>
 <p><font size="4" color="red">PCF</font><br>拉近了看，会发现阴影边缘走样很严重，有明显的锯齿，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8413.png" alt=""><br>这是因为深度纹理的分辨率有限，多个片元可能对应同一个阴影，这样采样计算阴影时就会产生锯齿边。当然可以通过增加深度纹理分辨率的方式来降低锯齿块。但是这样会增加很多内存开销。</p>
-<p>我们可以用一种叫做PCF（percentage-closer filtering）的技术来得到更柔和一点的阴影：对片元裁剪坐标的四周多次采样，对采样的结果（在或者不在阴影里）求均值。实现代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line"></div><div class="line">in vec2 VS_TexCoords;</div><div class="line">in vec3 VS_Normal;</div><div class="line">in vec3 VS_WorldPos;</div><div class="line">in vec4 VS_LightSpacePos;</div><div class="line"></div><div class="line">out vec4 Color;</div><div class="line"></div><div class="line">uniform sampler2D u_DiffuseMapSampler1;</div><div class="line">uniform sampler2D u_DepthMapSampler2;</div><div class="line">uniform vec3 u_LightPos;</div><div class="line">uniform vec3 u_LightDirection;</div><div class="line">uniform vec3 u_ViewPos;</div><div class="line">uniform vec3 u_LightColor;</div><div class="line"></div><div class="line"><span class="function">vec3 <span class="title">getDepthInLightSpace</span><span class="params">(vec4 vLightSpacePos)</span></span></div><div class="line">&#123;</div><div class="line">	vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;</div><div class="line">	Temp = Temp * <span class="number">0.5</span> + <span class="number">0.5</span>;</div><div class="line">	<span class="comment">//远平面外的深度值更改为0.0</span></div><div class="line">	<span class="keyword">if</span>(Temp.z &gt; <span class="number">1.0</span>)</div><div class="line">		Temp.z = <span class="number">0.0</span>;</div><div class="line">	<span class="keyword">return</span> Temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;</div><div class="line"></div><div class="line">	<span class="comment">//Ambient Lighting</span></div><div class="line">	<span class="keyword">float</span> AmbientStrength = <span class="number">0.3f</span>;</div><div class="line">	vec3  AmbientColor = AmbientStrength * ObjectColor;</div><div class="line"></div><div class="line">	vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);</div><div class="line"></div><div class="line">	vec3 Normal = normalize(VS_Normal);</div><div class="line">	vec3 LightDir = normalize(-u_LightDirection);</div><div class="line"></div><div class="line">	<span class="comment">//PCF阴影测试</span></div><div class="line">	<span class="keyword">float</span> Offset = max(<span class="number">0.002</span>, <span class="number">0.0025</span> * (<span class="number">1.0</span> - dot(Normal, LightDir)));</div><div class="line">	<span class="keyword">float</span> Shadow = <span class="number">0.0</span>;</div><div class="line">	vec2 texelSize = <span class="number">1.0</span> / textureSize(u_DepthMapSampler2, <span class="number">0</span>);</div><div class="line">	</div><div class="line">	<span class="keyword">if</span>(LightClipSpacePos.z != <span class="number">0.0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">-1</span>; x &lt;= <span class="number">1</span>; ++x)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> y = <span class="number">-1</span>; y &lt;= <span class="number">1</span>; ++y)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span>(LightClipSpacePos.z &gt;= texture(u_DepthMapSampler2, LightClipSpacePos.xy + vec2(x, y) * texelSize).r + Offset)</div><div class="line">					Shadow += <span class="number">1.0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	Shadow /= <span class="number">9.0</span>;</div><div class="line">	</div><div class="line">	<span class="comment">//Diffuse Lighting</span></div><div class="line">	<span class="keyword">float</span> DiffuseFactor = max(dot(Normal, LightDir), <span class="number">0.0</span>);</div><div class="line">	vec3 DiffuseColor = DiffuseFactor * u_LightColor;</div><div class="line"></div><div class="line">	<span class="comment">//Specular Lighting</span></div><div class="line">	vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);</div><div class="line">	vec3 HalfDir = normalize(LightDir + ViewDir);</div><div class="line">	<span class="keyword">float</span> SpecularFactor = <span class="built_in">pow</span>(max(dot(HalfDir, Normal), <span class="number">0.0f</span>), <span class="number">32</span>);</div><div class="line">	vec3 SpecularColor = SpecularFactor * u_LightColor;</div><div class="line"></div><div class="line">	Color = vec4((AmbientColor + (<span class="number">1.0</span> - Shadow) * (DiffuseColor + SpecularColor)) * ObjectColor, <span class="number">1.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以用一种叫做PCF（percentage-closer filtering）的技术来得到更柔和一点的阴影：对片元裁剪坐标的四周多次采样，对采样的结果（在或者不在阴影里）求均值。实现代码如下：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+
+in vec2 VS_TexCoords;
+in vec3 VS_Normal;
+in vec3 VS_WorldPos;
+in vec4 VS_LightSpacePos;
+
+out vec4 Color;
+
+uniform sampler2D u_DiffuseMapSampler1;
+uniform sampler2D u_DepthMapSampler2;
+uniform vec3 u_LightPos;
+uniform vec3 u_LightDirection;
+uniform vec3 u_ViewPos;
+uniform vec3 u_LightColor;
+
+vec3 getDepthInLightSpace(vec4 vLightSpacePos)
+{
+    vec3 Temp = (vLightSpacePos / vLightSpacePos.w).xyz;
+    Temp = Temp * 0.5 + 0.5;
+    //远平面外的深度值更改为0.0
+    if(Temp.z > 1.0)
+        Temp.z = 0.0;
+    return Temp;
+}
+
+void main()
+{
+    vec3 ObjectColor = texture(u_DiffuseMapSampler1, VS_TexCoords).rgb;
+
+    //Ambient Lighting
+    float AmbientStrength = 0.3f;
+    vec3  AmbientColor = AmbientStrength * ObjectColor;
+
+    vec3 LightClipSpacePos = getDepthInLightSpace(VS_LightSpacePos);
+
+    vec3 Normal = normalize(VS_Normal);
+    vec3 LightDir = normalize(-u_LightDirection);
+
+    //PCF阴影测试
+    float Offset = max(0.002, 0.0025 * (1.0 - dot(Normal, LightDir)));
+    float Shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_DepthMapSampler2, 0);
+
+    if(LightClipSpacePos.z != 0.0)
+    {
+        for(int x = -1; x <= 1; ++x)
+        {
+            for(int y = -1; y <= 1; ++y)
+            {
+                if(LightClipSpacePos.z >= texture(u_DepthMapSampler2, LightClipSpacePos.xy + vec2(x, y) * texelSize).r + Offset)
+                    Shadow += 1.0;
+            }
+        }
+    }
+    Shadow /= 9.0;
+
+    //Diffuse Lighting
+    float DiffuseFactor = max(dot(Normal, LightDir), 0.0);
+    vec3 DiffuseColor = DiffuseFactor * u_LightColor;
+
+    //Specular Lighting
+    vec3 ViewDir = normalize(u_ViewPos - VS_WorldPos);
+    vec3 HalfDir = normalize(LightDir + ViewDir);
+    float SpecularFactor = pow(max(dot(HalfDir, Normal), 0.0f), 32);
+    vec3 SpecularColor = SpecularFactor * u_LightColor;
+
+    Color = vec4((AmbientColor + (1.0 - Shadow) * (DiffuseColor + SpecularColor)) * ObjectColor, 1.0);
+}
+</code></pre>
 <p>其中texelSize 是深度纹理中每个纹素的大小。</p>
 <p>运行结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL28%E9%98%B4%E5%BD%B1%E6%98%A0%E5%B0%8414.png" alt=""><br>可以发现，阴影边缘确实较之前柔和了一些。</p>
 <p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL28_ShadowMap/LearnOpenGL28_ShadowMap_3" target="_blank" rel="external">这里</a>。</p>
@@ -194,10 +459,14 @@
 <p>之前用的是正交投影来渲染深度纹理，这对于平行光比较适用，但是对于点光源和聚光灯，透视投影更适合。只是透视投影渲染得到的深度纹理里的深度值是非线性的，有两种就解决方案：</p>
 <ol>
 <li>在片元着色器里，计算片元在光源视角下的裁剪坐标时，手动做一次透视除法，这样也就变为非线性的深度。</li>
-<li>不在片元着色器里计算片元的裁剪坐标，计算到它在观察空间里的深度就好了，然后把从深度纹理中的非线性深度转变为观察空间里的线性深度。怎么转换呢？可以参考<a href="http://popperelay.cn/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">《OpenGL15：深度测试》</a>里说过的非线性深度公式：<br>$$<br>\begin{equation}<br>F_{depth} = \frac{1/z - 1/near}{1/far - 1/near}<br>\end{equation}<br>$$<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">LinearizeDepth</span><span class="params">(<span class="keyword">float</span> depth)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">float</span> z = depth * <span class="number">2.0</span> - <span class="number">1.0</span>; <span class="comment">// Back to NDC </span></div><div class="line">    <span class="keyword">return</span> (<span class="number">2.0</span> * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>不在片元着色器里计算片元的裁剪坐标，计算到它在观察空间里的深度就好了，然后把从深度纹理中的非线性深度转变为观察空间里的线性深度。怎么转换呢？可以参考<a href="http://popperelay.cn/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">《OpenGL15：深度测试》</a>里说过的非线性深度公式：<br>$$<br>\begin{equation}<br>F_{depth} = \frac{1/z - 1/near}{1/far - 1/near}<br>\end{equation}<br>$$<pre class=" language-c++"><code class="language-c++">float LinearizeDepth(float depth)
+{
+ float z = depth * 2.0 - 1.0; // Back to NDC 
+ return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
+}
+</code></pre>
+&nbsp; </li>
 </ol>
-<p>&nbsp; </p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 

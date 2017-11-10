@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -125,21 +125,39 @@
 <p>下图是单采样对应的光栅化过程：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148902896869.png" alt=""><br>下图是多采样对应的光栅化过程：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148902896923.png" alt=""><br>用过多采样，绘制的三角形的边缘部分，因为有了和背景颜色的混合，从而减轻了走样现象，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148902896972.png" alt=""><br>开启MSAA以后，不仅颜色会多采样，深度和模板测试也同样会多采样，每个子样本都会去存储颜色值、深度值和模板值。也就是说所需要的颜色、深度和模板缓冲大小都会增加。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">在OpenGL中使用MSAA</font><br>为了在OpenGL中使用MSAA，我们需要一个更大的缓冲来存储多采样点的采样结果，称之为多样本缓冲。</p>
-<p>我们所使用的GLFW窗口系统就给我们提供了这个多样本缓冲，来代替默认的颜色缓冲。我们需要用<code>glfwWindowHint</code>来设置：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glfwWindowHint(GLFW_SAMPLES, <span class="number">4</span>);</div></pre></td></tr></table></figure></p>
+<p>我们所使用的GLFW窗口系统就给我们提供了这个多样本缓冲，来代替默认的颜色缓冲。我们需要用<code>glfwWindowHint</code>来设置：</p>
+<pre class=" language-c++"><code class="language-c++">glfwWindowHint(GLFW_SAMPLES, 4);
+</code></pre>
 <p>它会告诉OpenGL。每个像素使用一个包含4个子样本的颜色缓冲。</p>
-<p>接下来我们需要使用<code>glEnable</code>函数来开启多采样：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glEnable(GL_MULTISAMPLE);</div></pre></td></tr></table></figure></p>
+<p>接下来我们需要使用<code>glEnable</code>函数来开启多采样：</p>
+<pre class=" language-c++"><code class="language-c++">glEnable(GL_MULTISAMPLE);
+</code></pre>
 <p>由于实际的多采样算法在OpenGL驱动光栅化里已经实现了，所以我们不需要做别的了。运行效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148902600407.png" alt=""><br>可以看到还是有很明显的抗锯齿效果的。</p>
 <p>直接使用<code>glEnable</code>开启多采样，实现反正样的源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL25_MSAA/LearnOpenGL25_MSAA_1" target="_blank" rel="external">这里</a>。</p>
 <p><font size="5" color="orange">离屏MSAA</font></p>
 <hr>
 <p>有的时候需要让MSAA的效果渲染到我们自定义的帧缓冲中。</p>
 <p>我们首先为自定义的帧缓冲创建多采样纹理，来存储多采样结果。</p>
-<p><font size="4" color="red">多采样纹理附件</font><br>创建多采样纹理和普通纹理的不同之处在于，使用<code>glTexImage2DMultisample</code>函数来代替<code>glTexImage2D</code>，而且纹理目标得改为<code>GL_TEXTURE_2D_MULTISAMPLE</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex);</div><div class="line">glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);</div><div class="line">glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, <span class="number">0</span>);</div><div class="line">``` </div><div class="line">第二个参数samples是我们打算让纹理拥有的样本数。最后一个参数设置为`GL_TRUE`，可以让图像上的每一个纹理像素使用相同的样本位置，以及同样的子样本数量。</div><div class="line"></div><div class="line">创建好多采样纹理后，我们还是使用`glFramebufferTexture2D`函数来把它附加到帧缓冲上，不过纹理类型改为`GL_TEXTURE_2D_MULTISAMPLE`：</div><div class="line">```c++</div><div class="line">glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, tex, <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<p><font size="4" color="red">多采样渲染缓冲对象附件</font><br>除了多采样纹理附件外，我们还可以使用渲染缓冲对象rbo。跟以前不同的是，在为渲染缓冲分配内存的时候，要将<code>glRenderbufferStorage</code>改为<code>glRenderbufferStorageMultisample</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glRenderbufferStorageMultisample(GL_RENDERBUFFER, <span class="number">4</span>, GL_DEPTH24_STENCIL8, width, height);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">多采样纹理附件</font><br>创建多采样纹理和普通纹理的不同之处在于，使用<code>glTexImage2DMultisample</code>函数来代替<code>glTexImage2D</code>，而且纹理目标得改为<code>GL_TEXTURE_2D_MULTISAMPLE</code>：</p>
+<pre class=" language-c++"><code class="language-c++">glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex);
+glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);
+glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+</code></pre>
+<p>第二个参数samples是我们打算让纹理拥有的样本数。最后一个参数设置为<code>GL_TRUE</code>，可以让图像上的每一个纹理像素使用相同的样本位置，以及同样的子样本数量。</p>
+<p>创建好多采样纹理后，我们还是使用<code>glFramebufferTexture2D</code>函数来把它附加到帧缓冲上，不过纹理类型改为<code>GL_TEXTURE_2D_MULTISAMPLE</code>：</p>
+<pre class=" language-c++"><code class="language-c++">glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, tex, 0);
+</code></pre>
+<p><font size="4" color="red">多采样渲染缓冲对象附件</font><br>除了多采样纹理附件外，我们还可以使用渲染缓冲对象rbo。跟以前不同的是，在为渲染缓冲分配内存的时候，要将<code>glRenderbufferStorage</code>改为<code>glRenderbufferStorageMultisample</code>：</p>
+<pre class=" language-c++"><code class="language-c++">glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, width, height);
+</code></pre>
 <p>注意上面的4就是我们设置的样本数量。</p>
 <p><font size="4" color="red">渲染到多采样帧缓冲</font><br>绑定我们自定义的帧缓冲以后，正常绘制就能把颜色、深度、模板等信息写入多采样帧缓冲。但是多采样缓冲有点特别，不能直接使用渲染得到的缓冲图像，比如在着色器中进行采样作后处理。</p>
 <p>这是因为多采样图像包含了比普通图像更多的信息，我们需要压缩（或还原）图像。通常用<code>glBlitFramebuffer</code>函数来还原多采样帧缓冲，它会从一个帧缓冲中复制一个区域粘贴到另一个帧缓冲里，同时会将多采样缓冲还原。</p>
-<p><code>glBlitFramebuffer</code>函数把一个4屏幕坐标源区域传递到另一个也是4空间坐标的目标区域。在这之前，我们需要先设置读缓冲区（源区域）和写缓冲区（目标区域）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">glBindFramebuffer(GL_READ_FRAMEBUFFER, multisampledFBO);</div><div class="line">glBindFramebuffer(GL_DRAW_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line">glBlitFramebuffer(<span class="number">0</span>, <span class="number">0</span>, width, height, <span class="number">0</span>, <span class="number">0</span>, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);</div></pre></td></tr></table></figure></p>
+<p><code>glBlitFramebuffer</code>函数把一个4屏幕坐标源区域传递到另一个也是4空间坐标的目标区域。在这之前，我们需要先设置读缓冲区（源区域）和写缓冲区（目标区域）：</p>
+<pre class=" language-c++"><code class="language-c++">glBindFramebuffer(GL_READ_FRAMEBUFFER, multisampledFBO);
+glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+</code></pre>
 <p>编译运行后，我们将得到和之前一样的结果，边缘锯齿明显减少了：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148902600494.png" alt=""><br>【注】：</p>
 <ul>
 <li>渲染到自定义的帧缓冲时，不需要使用<code>glfwWindowHint</code>和开启反走样。因为在指定缓冲附件的时候，我们已经指明了使用多采样缓冲附件。</li>
@@ -147,15 +165,46 @@
 <p>渲染到自定义帧缓冲的反走样源码（不用开启OpenGL的反走样）在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL25_MSAA/LearnOpenGL25_MSAA_2" target="_blank" rel="external">这里</a>。</p>
 <p><font size="5" color="orange">多采样纹理转换为普通2D纹理</font></p>
 <hr>
-<p>上面我们把多采样缓冲还原到默认缓冲了，可以正常渲染出MSAA效果。但是如果我们不想还原到默认缓冲，需要继续做后处理怎么办？原理其实一样的，我们就不还原到默认缓冲，而是还原到另一个自定义的帧缓冲，只是这次的帧缓冲使用正常的缓冲附件，而非多采样缓冲附件。伪代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建多采样的fbo</span></div><div class="line">GLuint msFBO;</div><div class="line">...</div><div class="line"><span class="comment">//创建正常的fbo</span></div><div class="line">GLuint intermediateFBO;</div><div class="line">...</div><div class="line"></div><div class="line"><span class="keyword">while</span>(!glfwWindowShouldClose(window))</div><div class="line">&#123;</div><div class="line">    ...</div><div class="line"></div><div class="line">    glBindFramebuffer(msFBO);</div><div class="line">    ClearFrameBuffer();</div><div class="line">    DrawScene();</div><div class="line">    <span class="comment">// 将多采样缓冲还原到普通的自定义帧缓冲</span></div><div class="line">    glBindFramebuffer(GL_READ_FRAMEBUFFER, msFBO);</div><div class="line">    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);</div><div class="line">    glBlitFramebuffer(<span class="number">0</span>, <span class="number">0</span>, width, height, <span class="number">0</span>, <span class="number">0</span>, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);</div><div class="line">    <span class="comment">// 将得到的普通自定义帧缓冲的纹理图贴到屏幕四边形上</span></div><div class="line">    glBindFramebuffer(GL_FRAMEBUFFER, <span class="number">0</span>);</div><div class="line">    ClearFramebuffer();</div><div class="line">    glBindTexture(GL_TEXTURE_2D, screenTexture);</div><div class="line">    DrawPostProcessingQuad();  </div><div class="line"></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面我们把多采样缓冲还原到默认缓冲了，可以正常渲染出MSAA效果。但是如果我们不想还原到默认缓冲，需要继续做后处理怎么办？原理其实一样的，我们就不还原到默认缓冲，而是还原到另一个自定义的帧缓冲，只是这次的帧缓冲使用正常的缓冲附件，而非多采样缓冲附件。伪代码如下：</p>
+<pre class=" language-c++"><code class="language-c++">//创建多采样的fbo
+GLuint msFBO;
+...
+//创建正常的fbo
+GLuint intermediateFBO;
+...
+
+while(!glfwWindowShouldClose(window))
+{
+    ...
+
+    glBindFramebuffer(msFBO);
+    ClearFrameBuffer();
+    DrawScene();
+    // 将多采样缓冲还原到普通的自定义帧缓冲
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, msFBO);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    // 将得到的普通自定义帧缓冲的纹理图贴到屏幕四边形上
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    ClearFramebuffer();
+    glBindTexture(GL_TEXTURE_2D, screenTexture);
+    DrawPostProcessingQuad();  
+
+    ...
+}
+</code></pre>
 <p>如果我们实现之前在<a href="http://popperelay.com/2017/01/21/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2/" target="_blank" rel="external">《OpenGL19：帧缓冲》</a>中的后处理效果，比如模糊kernel，结果会像这样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14890260054.png" alt=""></p>
 <p>将多采样纹理转换为普通2D纹理，实现反走样的所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL25_MSAA/LearnOpenGL25_MSAA_3" target="_blank" rel="external">这里</a>。</p>
 <p>由于屏幕纹理重新变回了只有一个采样点的普通纹理，有些后处理，比如边缘检测（edge-detection）将会再次导致锯齿边问题。为了修正此问题，我们应该对这个屏幕纹理进行模糊处理，或者自定义抗锯齿算法。</p>
 <p>注意开启多采样会明显降低性能，样本越多越明显，MSAA4是最常用的。</p>
 <p><font size="5" color="orange">自定义反走样算法</font></p>
 <hr>
-<p>其实也可以直接把一个多采样纹理图像传到着色器里，就是不需要先还原。这个时候我们就得将uniform采样器定义为sampler2DMS了，而不是sampler2D：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">uniform sampler2DMS screenTextureMS;</div></pre></td></tr></table></figure></p>
-<p>然后使用<code>texelFetch</code>函数来获取每个样本的信息（比如样本颜色）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vec4 colorSample = texelFetch(screenTextureMS, TexCoords, <span class="number">3</span>);</div></pre></td></tr></table></figure></p>
+<p>其实也可以直接把一个多采样纹理图像传到着色器里，就是不需要先还原。这个时候我们就得将uniform采样器定义为sampler2DMS了，而不是sampler2D：</p>
+<pre class=" language-c++"><code class="language-c++">uniform sampler2DMS screenTextureMS;
+</code></pre>
+<p>然后使用<code>texelFetch</code>函数来获取每个样本的信息（比如样本颜色）：</p>
+<pre class=" language-c++"><code class="language-c++">vec4 colorSample = texelFetch(screenTextureMS, TexCoords, 3);
+</code></pre>
 <p>3是指我们想获取像素中第4个样本的信息。</p>
 <p>获取到像素中每个样本的信息后，我们就可以自定义反走样算法，来决定如何生成最终的像素颜色。能够获取到MSAA中每个样本的颜色、深度、模板等信息，有时候还是很需要的！<br>&nbsp; </p>
 <hr>

@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -127,9 +127,21 @@
 <li>关闭模板缓冲写入</li>
 <li>利用模板缓冲中的值，绘制后续场景</li>
 </ol>
-<p>首先我们需要开启模板测试：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glEnable(GL_STENCIL_TEST);</div></pre></td></tr></table></figure></p>
-<p>而且像颜色缓冲和深度缓冲一样，每次渲染循环之前，需要先清空模板缓冲：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);</div></pre></td></tr></table></figure></p>
-<p>同样，和深度测试的<code>glDepthMask</code>函数一样，模板缓冲也有一个类似的函数<code>glStencilMask</code>，它用于控制模板缓冲区的写入，使用位掩码的方式决定是否可以写入模板缓冲区。使用的较多的是0x00表示禁止写入，0xFF表示允许任何写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 0xFF == 0b11111111</span></div><div class="line"><span class="comment">//此时，模板值与它进行按位与运算结果是模板值，模板缓冲可写</span></div><div class="line">glStencilMask(<span class="number">0xFF</span>);</div><div class="line"></div><div class="line"><span class="comment">// 0x00 == 0b00000000 == 0</span></div><div class="line"><span class="comment">//此时，模板值与它进行按位与运算结果是0，模板缓冲不可写</span></div><div class="line">glStencilMask(<span class="number">0x00</span>);</div></pre></td></tr></table></figure></p>
+<p>首先我们需要开启模板测试：</p>
+<pre class=" language-c++"><code class="language-c++">    glEnable(GL_STENCIL_TEST);
+</code></pre>
+<p>而且像颜色缓冲和深度缓冲一样，每次渲染循环之前，需要先清空模板缓冲：</p>
+<pre class=" language-c++"><code class="language-c++">        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+</code></pre>
+<p>同样，和深度测试的<code>glDepthMask</code>函数一样，模板缓冲也有一个类似的函数<code>glStencilMask</code>，它用于控制模板缓冲区的写入，使用位掩码的方式决定是否可以写入模板缓冲区。使用的较多的是0x00表示禁止写入，0xFF表示允许任何写入：</p>
+<pre class=" language-c++"><code class="language-c++">// 0xFF == 0b11111111
+//此时，模板值与它进行按位与运算结果是模板值，模板缓冲可写
+glStencilMask(0xFF);
+
+// 0x00 == 0b00000000 == 0
+//此时，模板值与它进行按位与运算结果是0，模板缓冲不可写
+glStencilMask(0x00);
+</code></pre>
 <p><font size="4" color="red">模板函数</font><br>和深度测试一样，对于模板测试，我们也可以选择在什么条件下通过模板测试（使用<code>glStencilFunc</code>函数来完成），而且还可以选择以何种方式更新模板缓冲（比如通过模板测试后模板值不变、讲模板值变为0或者替换为另一个值等等，这使用<code>glStencilOp</code>函数来完成）。</p>
 <ul>
 <li><p><code>glStencilFunc</code>函数（指定模板测试通过条件）：<br>函数原型：<code>void glStencilFunc(GLenum func,GLint ref,GLuint mask)</code>：</p>
@@ -143,11 +155,10 @@
 <li>比较的方式是：如果func指定的是在<code>GL_LESS</code>条件下通过测试，其实是在<code>(ref &amp; mask) &lt; (stencil &amp; mask)</code>的条件下才通过测试；如果指定的是<code>GL_GEQUAL</code>，就相当于<code>(ref &amp; mask) &gt;= (stencil &amp; mask)</code>。</li>
 </ul>
 <p>为了比较时简单直接，我们通常将mask设为0xFF：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilFunc(GL_EQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<pre class=" language-c++"><code class="language-c++">  glStencilFunc(GL_EQUAL, 1, 0xFF);
+</code></pre>
 <p>表示当前模板缓冲区中值为1的部分通过模板测试，这部分片元将被保留，其余的则被丢弃。</p>
-<ul>
+</li>
 <li><p><code>glStencilOp</code>函数（指定模板缓冲更新方式）：<br>函数原型：<code>void glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass)</code>：</p>
 <ul>
 <li>参数sfail：如果模板测试失败将采取的动作</li>
@@ -158,21 +169,80 @@
 </li>
 </ul>
 <hr>
-<p><font size="5" color="orange">绘制矩形模板</font><br>首先我们设置好矩形的顶点属性并解析：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//模板矩形的顶点坐标</span></div><div class="line">GLfloat stencilRectVertices[] = &#123;</div><div class="line">	<span class="number">0.5f</span>,  <span class="number">0.5f</span>, <span class="number">0.0f</span>,</div><div class="line">	<span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,</div><div class="line">   <span class="number">-0.5f</span>,  <span class="number">0.5f</span>, <span class="number">0.0f</span>,</div><div class="line">     </div><div class="line">   <span class="number">-0.5f</span>,  <span class="number">0.5f</span>, <span class="number">0.0f</span>,</div><div class="line">    <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,</div><div class="line">   <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//模板矩形stencilRectVAO和数据解析</span></div><div class="line">GLuint stencilRectVAO, stencilRectVBO;</div><div class="line">glGenVertexArrays(<span class="number">1</span>, &amp;stencilRectVAO);</div><div class="line">glBindVertexArray(stencilRectVAO);</div><div class="line">glGenBuffers(<span class="number">1</span>, &amp;stencilRectVBO);</div><div class="line">glBindBuffer(GL_ARRAY_BUFFER, stencilRectVBO);</div><div class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(stencilRectVertices), &amp;stencilRectVertices, GL_STATIC_DRAW);</div><div class="line">glEnableVertexAttribArray(<span class="number">0</span>);</div><div class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(GL_FLOAT), (GLvoid*)<span class="number">0</span>);</div><div class="line">glBindVertexArray(<span class="number">0</span>);</div></pre></td></tr></table></figure>
-<p>画这个模板矩形，当然也需要着色器（最简单的那种着色器就可以）：<br>模板矩形的顶点着色器（写在stencilRect.vertex中）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line">layout (location=<span class="number">0</span>) in vec3 position;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	gl_Position = vec4(position,<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>模板矩形的像素着色器（写在stencilRect.fragment中）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#version 330 core</span></div><div class="line">out vec4 color;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	color = vec4(<span class="number">1.0f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当然，需要开启模板缓冲：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glEnable(GL_STENCIL_TEST);</div></pre></td></tr></table></figure></p>
-<p>在渲染循环开始的时候，清除模板缓冲区：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);</div></pre></td></tr></table></figure></p>
-<p>我们将要绘制一个矩形，用它来更新模板缓冲，但是不希望这个矩形被显示出来，所以绘制矩形之前需要先用掩码禁用颜色缓冲和深度缓冲：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);</div><div class="line">glDepthMask(GL_FALSE);</div></pre></td></tr></table></figure></p>
-<p>然后我们使用位掩码设置允许模板缓冲区写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilMask(<span class="number">0xFF</span>);</div></pre></td></tr></table></figure></p>
-<p>接下来我们设置将要绘制的矩形片段总是通过模板测试，而且通过测试之后，把对应模板值设为1：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glStencilFunc(GL_ALWAYS, <span class="number">1</span>, <span class="number">0xFF</span>);</div><div class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);</div></pre></td></tr></table></figure></p>
+<p><font size="5" color="orange">绘制矩形模板</font><br>首先我们设置好矩形的顶点属性并解析：</p>
+<pre class=" language-c++"><code class="language-c++">    //模板矩形的顶点坐标
+    GLfloat stencilRectVertices[] = {
+        0.5f,  0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+       -0.5f,  0.5f, 0.0f,
+
+       -0.5f,  0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+       -0.5f, -0.5f, 0.0f
+    };
+</code></pre>
+<pre class=" language-c++"><code class="language-c++">    //模板矩形stencilRectVAO和数据解析
+    GLuint stencilRectVAO, stencilRectVBO;
+    glGenVertexArrays(1, &stencilRectVAO);
+    glBindVertexArray(stencilRectVAO);
+    glGenBuffers(1, &stencilRectVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, stencilRectVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(stencilRectVertices), &stencilRectVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);
+    glBindVertexArray(0);
+</code></pre>
+<p>画这个模板矩形，当然也需要着色器（最简单的那种着色器就可以）：<br>模板矩形的顶点着色器（写在stencilRect.vertex中）：</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+layout (location=0) in vec3 position;
+
+void main(){
+    gl_Position = vec4(position,1.0f);
+}
+</code></pre>
+<p>模板矩形的像素着色器（写在stencilRect.fragment中）</p>
+<pre class=" language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+
+void main(){
+    color = vec4(1.0f);
+}
+</code></pre>
+<p>当然，需要开启模板缓冲：</p>
+<pre class=" language-c++"><code class="language-c++">    glEnable(GL_STENCIL_TEST);
+</code></pre>
+<p>在渲染循环开始的时候，清除模板缓冲区：</p>
+<pre class=" language-c++"><code class="language-c++">        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+</code></pre>
+<p>我们将要绘制一个矩形，用它来更新模板缓冲，但是不希望这个矩形被显示出来，所以绘制矩形之前需要先用掩码禁用颜色缓冲和深度缓冲：</p>
+<pre class=" language-c++"><code class="language-c++">        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glDepthMask(GL_FALSE);
+</code></pre>
+<p>然后我们使用位掩码设置允许模板缓冲区写入：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilMask(0xFF);
+</code></pre>
+<p>接下来我们设置将要绘制的矩形片段总是通过模板测试，而且通过测试之后，把对应模板值设为1：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+</code></pre>
 <p>当矩形片段通过模板测试和深度测试后，会用函数<code>glStencilFunc</code>的ref参数（这里是1）来替换对应模板值。</p>
-<p>接下来我们就可以来画这个矩形了（注意，由于禁用了颜色缓冲和深度缓冲，这个矩形不会被画到窗口上，只是被画到了模板缓冲里）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">stencilRect_shader.Use();</div><div class="line">glBindVertexArray(stencilRectVAO);</div><div class="line">glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">6</span>);</div></pre></td></tr></table></figure></p>
+<p>接下来我们就可以来画这个矩形了（注意，由于禁用了颜色缓冲和深度缓冲，这个矩形不会被画到窗口上，只是被画到了模板缓冲里）：</p>
+<pre class=" language-c++"><code class="language-c++">        stencilRect_shader.Use();
+        glBindVertexArray(stencilRectVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+</code></pre>
 <p>矩形模板已经绘制好了，接下来我们开始绘制<a href="http://popperelay.com/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">上一篇文章</a>里的箱子和地面。</p>
-<p>肯定需要先把禁用了的颜色缓冲和深度缓冲重新开启：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);</div><div class="line">glDepthMask(GL_TRUE);</div></pre></td></tr></table></figure></p>
-<p>绘制箱子和地面的时候，应该不会去改变模板缓冲中的值，所以我们禁用模板缓冲区写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilMask(<span class="number">0x00</span>);</div></pre></td></tr></table></figure></p>
-<p>我们希望用矩形模板来绘制箱子和地面，只有被包含在矩形内的部分才被绘制出来，其余的被丢弃。由于在模板缓冲中已经被我们绘制了一个矩形（由好多1构成的一个矩形），所以绘制箱子和地面时，我们设置片段模板值等于1时才通过模板测试（模板值不会改变）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glStencilFunc(GL_EQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);</div><div class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);</div></pre></td></tr></table></figure></p>
+<p>肯定需要先把禁用了的颜色缓冲和深度缓冲重新开启：</p>
+<pre class=" language-c++"><code class="language-c++">        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDepthMask(GL_TRUE);
+</code></pre>
+<p>绘制箱子和地面的时候，应该不会去改变模板缓冲中的值，所以我们禁用模板缓冲区写入：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilMask(0x00);
+</code></pre>
+<p>我们希望用矩形模板来绘制箱子和地面，只有被包含在矩形内的部分才被绘制出来，其余的被丢弃。由于在模板缓冲中已经被我们绘制了一个矩形（由好多1构成的一个矩形），所以绘制箱子和地面时，我们设置片段模板值等于1时才通过模板测试（模板值不会改变）：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilFunc(GL_EQUAL, 1, 0xFF);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+</code></pre>
 <p>接下来就按照<a href="http://popperelay.com/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">上一篇文章</a>里的方式来绘制箱子和地面即可：<br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148446758101.png" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL16_StencilTest/LearnOpenGL16_StencilTest_1" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">物体轮廓outline</font><br>接下来我们再使用模板测试来实现一个很有意识的效果：物体轮廓（object outline），如下图这样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148446778193.png" alt=""><br>给箱子添加轮廓的大致思路如下：</p>
@@ -181,17 +251,38 @@
 <li>绘制出地面，绘制时禁用模板缓冲。因为我们的模板跟地面没关系，不希望在绘制地面时受到影响。</li>
 <li>禁用模板缓冲，绘制稍微大一点的纯色箱子（或者其他想要的边框颜色都行），同时设置模板值不等于1的片段无法通过模板测试，将会被丢弃。这样我们就能给之前的箱子绘出一个边框了。</li>
 </ol>
-<p><font size="4" color="red">绘制箱子</font><br>因为我们要在绘制箱子的同时，把箱子模板画入模板缓冲中，所以需要先设置模板测试总是通过，并且通过后用1替换模板值，当然还需要允许模板缓冲写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Draw Cube，绘制箱子的同时绘制箱子模板</span></div><div class="line">glStencilFunc(GL_ALWAYS, <span class="number">1</span>, <span class="number">0xFF</span>);</div><div class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);</div><div class="line">glStencilMask(<span class="number">0xFF</span>);</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">绘制箱子</font><br>因为我们要在绘制箱子的同时，把箱子模板画入模板缓冲中，所以需要先设置模板测试总是通过，并且通过后用1替换模板值，当然还需要允许模板缓冲写入：</p>
+<pre class=" language-c++"><code class="language-c++">        //Draw Cube，绘制箱子的同时绘制箱子模板
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+        glStencilMask(0xFF);
+        ...
+</code></pre>
 <p>剩下的就是照常绘制箱子了，不再赘述，可参考文末的源码。</p>
-<p><font size="4" color="red">绘制地面</font><br>绘制地面的时候，模板缓冲应该不受影响，所以需要先禁用模板缓冲写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Draw Plane，绘制地面时应禁用模板写入</span></div><div class="line">glStencilMask(<span class="number">0x00</span>);</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">绘制地面</font><br>绘制地面的时候，模板缓冲应该不受影响，所以需要先禁用模板缓冲写入：</p>
+<pre class=" language-c++"><code class="language-c++">        //Draw Plane，绘制地面时应禁用模板写入
+        glStencilMask(0x00);
+        ...
+</code></pre>
 <p>接下里就是照常绘制地面了，不再赘述。</p>
-<p><font size="4" color="red">绘制箱子轮廓</font><br>绘制箱子轮廓，其实就是绘制一个模板值不等于1的稍微大一点的箱子。需要设置模板测试通过的条件是模板值不等于1：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilFunc(GL_NOTEQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);</div></pre></td></tr></table></figure></p>
-<p>而且，利用箱子模板绘制箱子轮廓时，模板缓冲不能受到影响，需要禁用模板缓冲写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilMask(<span class="number">0x00</span>);</div></pre></td></tr></table></figure></p>
+<p><font size="4" color="red">绘制箱子轮廓</font><br>绘制箱子轮廓，其实就是绘制一个模板值不等于1的稍微大一点的箱子。需要设置模板测试通过的条件是模板值不等于1：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+</code></pre>
+<p>而且，利用箱子模板绘制箱子轮廓时，模板缓冲不能受到影响，需要禁用模板缓冲写入：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilMask(0x00);
+</code></pre>
 <p>接下来就是照常绘制稍微大一点的箱子了，这里我们是绘制一个1.1倍大小的箱子，可参见文末源码。而且这个稍大的边框箱子和实际箱子不是同一套着色器，因为它们的颜色不同（实际箱子是纹理颜色，而边框箱子我们用的纯色，着色器代码也可参见文末源码）。</p>
-<p>最后，绘制完箱子轮廓后，不要忘了重新允许模板缓冲写入：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glStencilMask(<span class="number">0xFF</span>);</div></pre></td></tr></table></figure></p>
+<p>最后，绘制完箱子轮廓后，不要忘了重新允许模板缓冲写入：</p>
+<pre class=" language-c++"><code class="language-c++">        glStencilMask(0xFF);
+</code></pre>
 <p>其实，每当改变深度缓冲、模板缓冲等写入方式时，利用完了让它们恢复到最初状态是个很好的习惯，不容易出错。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148447497001.png" alt=""><br>可以看到下轮廓和地面交界的地方，轮廓只显示了很细的一条线，这是因为下轮廓片段的深度值大于交界处地面片段的深度值，被挡住了，在深度测试时被丢弃了。解决办法是在画轮廓时关闭深度测试：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">glDisable(GL_DEPTH_TEST); <span class="comment">//保证轮廓不被挡住</span></div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>轮廓画完了以后，不要忘了重新开启深度测试：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">glEnable(GL_DEPTH_TEST);</div></pre></td></tr></table></figure></p>
+<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148447497001.png" alt=""><br>可以看到下轮廓和地面交界的地方，轮廓只显示了很细的一条线，这是因为下轮廓片段的深度值大于交界处地面片段的深度值，被挡住了，在深度测试时被丢弃了。解决办法是在画轮廓时关闭深度测试：</p>
+<pre class=" language-c++"><code class="language-c++">        glDisable(GL_DEPTH_TEST); //保证轮廓不被挡住
+        ...
+</code></pre>
+<p>轮廓画完了以后，不要忘了重新开启深度测试：</p>
+<pre class=" language-c++"><code class="language-c++">        glEnable(GL_DEPTH_TEST);
+</code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148447497145.png" alt=""><br>&nbsp;</p>
 <hr>
 <p>箱子轮廓的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL16_StencilTest/LearnOpenGL16_StencilTest_2" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>

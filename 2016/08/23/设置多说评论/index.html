@@ -27,7 +27,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
 	
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
     
 		
 <!-- Layouts -->
@@ -118,7 +118,7 @@
 <ol>
 <li>在<a href="http://duoshuo.com/" target="_blank" rel="external">多说官网</a> 点击我要安装，创建自己的多说域名，其中<a href="http://xxx.duoshuo.com" target="_blank" rel="external">http://xxx.duoshuo.com</a> 中的xxx就是自己的duoshuo_shortname</li>
 <li>打开 <code>主题路径\_config.yml</code>，修改(\增加)duoshuo_shortname为<code>duoshuo_shortname: xxx</code>(xxx参考第一步，注意:后面有一个空格)</li>
-<li>打开<code>主题路径\layout\_partial\comment.ejs</code>(不同主题路径可能不一样)，将<section></section>之间的代码替换为如下：<pre><code>&lt;h2 class=&quot;title&quot;&gt;&lt;%= __(&apos;comment&apos;) %&gt;&lt;/h2&gt;
+<li>打开<code>主题路径\layout\_partial\comment.ejs</code>(不同主题路径可能不一样)，将<section></section>之间的代码替换为如下：<pre><code>&lt;h2 class=&quot;title&quot;&gt;&lt;%= __(&#39;comment&#39;) %&gt;&lt;/h2&gt;
 &lt;% if(theme.duoshuo_shortname) { %&gt;
 &lt;!-- 多说评论框 start --&gt;
   &lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%- page.path %&gt;&quot; data-title=&quot;&lt;%- page.title %&gt;&quot; data-url=&quot;&lt;%- page.permalink %&gt;&quot;&gt;&lt;/div&gt;
@@ -127,12 +127,12 @@
  &lt;script type=&quot;text/javascript&quot;&gt;
  var duoshuoQuery = {short_name:&quot;duoshuo_shortname&quot;};   &lt;!-- 替换这里的duoshuo_shortname为第一步的xxx --&gt;
      (function() {
-         var ds = document.createElement(&apos;script&apos;);
-         ds.type = &apos;text/javascript&apos;;ds.async = true;
-         ds.src = (document.location.protocol == &apos;https:&apos; ? &apos;https:&apos; : &apos;http:&apos;) + &apos;//static.duoshuo.com/embed.unstable.js&apos;;
-         ds.charset = &apos;UTF-8&apos;;
-         (document.getElementsByTagName(&apos;head&apos;)[0] 
-          || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);
+         var ds = document.createElement(&#39;script&#39;);
+         ds.type = &#39;text/javascript&#39;;ds.async = true;
+         ds.src = (document.location.protocol == &#39;https:&#39; ? &#39;https:&#39; : &#39;http:&#39;) + &#39;//static.duoshuo.com/embed.unstable.js&#39;;
+         ds.charset = &#39;UTF-8&#39;;
+         (document.getElementsByTagName(&#39;head&#39;)[0] 
+          || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(ds);
      })();
      &lt;/script&gt;
  &lt;!-- 多说公共JS代码 end --&gt; 
