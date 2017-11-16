@@ -61,7 +61,7 @@
 	            <a href="#s1">分类</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
 	                    </ul>
 	        </li>
 	        
@@ -118,8 +118,14 @@
 <p>无序列表：<br>- 撒旦<br>- 阿斯顿<br>- 阿达</p>
 <p>链接<br>[百度](<a href="http://baidu.com" target="_blank" rel="external">http://baidu.com</a>)<br>图片<br>![](<a href="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721517339.jpg" target="_blank" rel="external">http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721517339.jpg</a>)<br>引用<br>> 黄河远上白云间<br>> 一片孤城万仞山</p>
 <p>分割线<br>***<br>*斜体*<br>**粗体**</p>
-<p>表格(表格前要空一行，多一个|就会多一个单元格)</p>
-<p>ad &#124;   asd&#124;  ad<br>—&#124;:–:&#124;  –:<br>h   &nbsp;&nbsp;&#124;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j&#124; &nbsp; k<br>a  &nbsp;&nbsp;&#124;&nbsp;&nbsp;&nbsp; b  &#124;  &nbsp;b<br>代码框(行)<br>`void fun(){<br>     destroy();<br>}`</p>
+<p>表格(表格前要空一行，多一个|就会多一个单元格，其中冒号表示对齐方式)</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">
+ad <span class="token operator">|</span> asd<span class="token operator">|</span> ad
+<span class="token operator">:</span><span class="token operator">-</span> <span class="token operator">|</span> <span class="token operator">:</span><span class="token operator">-</span><span class="token operator">:</span> <span class="token operator">|</span> <span class="token operator">-</span><span class="token operator">:</span>
+h <span class="token operator">|</span> j <span class="token operator">|</span> k
+<span class="token number">1</span> <span class="token operator">|</span> <span class="token number">2</span> <span class="token operator">|</span> <span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码框(行)<br>`void fun(){<br>     destroy();<br>}`</p>
 <p>代码框(段落),如下格式(或每一行代码前面加4个空格，且代码段前有空行)<br>```csharp<br>void fun(){<br>    destroy();<br>}<br>```</p>
 <p>## 公式<br><code>$$J\_\alpha(x)=\sum _{m=0}^\infty \frac{(-1)^ m}{m! \, \Gamma (m + \alpha + 1)}{\left({\frac{x}{2}}\right)}^{2 m + \alpha }$$</code></p>
 <p>***<br><code>&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=&quot;YellowGreen&quot;&gt;文本框背景色&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></p>
@@ -150,19 +156,19 @@
 <table>
 <thead>
 <tr>
-<th>ad</th>
+<th style="text-align:left">ad</th>
 <th style="text-align:center">asd</th>
 <th style="text-align:right">ad</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>h</td>
+<td style="text-align:left">h</td>
 <td style="text-align:center">j</td>
 <td style="text-align:right">k</td>
 </tr>
 <tr>
-<td>1</td>
+<td style="text-align:left">1</td>
 <td style="text-align:center">2</td>
 <td style="text-align:right">3</td>
 </tr>

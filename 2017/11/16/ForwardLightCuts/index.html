@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >Forward Light Cuts</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">Introduction</font></p>
+<hr>
+<ol>
+<li><p>很多已有的辐射度缓存（Radiance Caching）方法会给场景中已经生成好的VPLs（即很多个虚拟点光源）建立树形结构，来计算给定点的入射辐射度（Incoming Radiance）。它们会把VPL作为树的叶子结点，然后把相似度相近的两个光源合成一个父结点。父结点中包含两个光源的总亮度值和轴对称包围盒（AABB）信息。重复该步骤，一直到只剩下一个结点为止，即根结点。这个过程有点像哈夫曼树的构建过程，只是这里是以光源的相识度作为标准而已。</p>
+<p> 其中相似度通过如下公式来计算：<br> $$<br> W = I_c(\alpha_c^2 + c^2(1 - \cos\belta_c)^2)<br> $$<br> 其中$I_c$为两个光源的亮度之和，$\alpha_c$表示两个光源轴对齐包围盒（AABB）的对角线长度。对于聚光灯，常量c控制着空间大小与聚光灯方向相似性的相对缩放比例，常量c的大小与场景包围盒的对角线长度有关，$\belta_c$则是两个光源包围锥体的半角。对于点光源和平行光，常量c恒为0 。W的值越小，则两个光源的相似度越高。</p>
+<p> 但是这类方法至少有两个缺点：</p>
+<ul>
+<li>对于动态场景，每帧都要重新建树。</li>
+<li>VPL太多。</li>
+</ul>
+</li>
+<li>《Forward Light Cuts》这篇文章解决了这两个问题：<ul>
+<li>用场景的三角形自己来触发创建VPL（使用几何着色器和细分着色器），其中会把太大的三角形（Divergent Triangle）进一步细分，把太过密集的三角形（Small Triangle）简化，即抛弃小三角形，不在上面创建VPL。</li>
+<li>提出了一种随机聚类方法，把VPLs的子集和其影响到的有界区域关联起来，以此来计算其中某个点的辐射度。</li>
+</ul>
+</li>
+<li>FLC方法的优点是可以适应完全动态的场景，无需任何像树这样的层次数据结构。</li>
+</ol>
+<p><font size="5" color="orange"> Previous Work</font></p>
+<hr>
+<ol>
+<li>基于屏幕空间的方法用深度缓冲来替代实际的场景，虽然能够降低光照计算的复杂度，而且拥有很好的实时性和适应完全的动态场景，但是这类方法都依赖于深度剔除和多视角渲染，这样就需要考虑到离摄像机最近深度，以及视锥之外的场景了，这样一来，还是会导致渲染速率急剧下降，而且还存在一些视角依赖的问题，比如拖影（Ghosting Artifacts）。值得注意的是，在基于屏幕空间的方法中，VPL是在几何、细分着色器里基于每个三角形，借助GPU硬件的优势来生成的。</li>
+<li><p>基于模型空间的方法能够避免这些视角依赖问题，比如立即辐射度（Indirect Radiance）方法，而RSM（Reflective Shadow Maps）方法更进一步，它提出了从光源视角（也叫光源空间）下生成VPLs的方法，在后来的发展中，又在RSM的基础上加上了针对RSM Pixels的聚类策略，只保留相关的光源，从而减少VPL的数量。但是在大场景下还是需要大量的VPL。</p>
+<p> 这个问题可以用分层的方案来解决，典型的比如Light Cuts、Point-Based Global Illumination，它们可以用LOD点采样广场的形式来管理VPL，后来又用clustring shading（分开着色的改进版）来进一步达到大规模光源+复杂场景的实时性能。</p>
+<p> 但是，这些基于模型空间的方法都是需要树形结构的，需要把建树的过程分摊到多帧来完成才能降低对帧率的影响，但是这却阻碍了完全动态场景的实现。</p>
+</li>
+<li>使用立即辐射度方法模拟间接光照有个难题：VPL和像素之间的可见性怎么确定。有很多方法来解决这个问题，比如用可以快速生成的不完全阴影贴图（Imperfect Shadow Maps，ISM），来近似计算可见性；再比如可以用虚拟面光源（Virtual Area Lights，VALs）方法能够减少可见性查询的次数，再从软阴影贴图计算软阴影时就能近似计算出可见性。后来又有人提出了记录VPL帧到帧的位置，直到VPL影响不到帧缓存里的像素才剔除它们，然后通过光线跟踪去采样VPLs来计算可见性。不过《Forward Light Cuts》这篇文章并没有解决可见性问题。</li>
+<li>DDS（Deep Screen Space）方法剔除同时利用屏幕空间和模型空间的辐射度缓存。和模型空间策略一样，它同样是在几何表面上生成VPLs；和屏幕空间策略一样，它也同样地利用几何着色器和细分着色器来生成VPLs。虽然DDS在小中型场景中表现很好，但是却无法适用于大型场景，因为该方法为了达到实时性，会自动去掉大场景里的一些几何形状（比如Divergent Triangle），而不是进一步去细化它。</li>
+<li>FLC方法比DDS更进一步，提出了一个Diffuse Global Illumination管线，用两个pass去细化和简化由几何驱动生成的VPL。优点是能够适应完全动态的大场景，而且无需任何层次数据结构。</li>
+</ol>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/11/16/ForwardLightCuts/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/11/16/ForwardLightCuts/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2017总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
