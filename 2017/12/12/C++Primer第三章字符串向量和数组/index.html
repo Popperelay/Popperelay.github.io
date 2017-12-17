@@ -203,71 +203,23 @@
 </li>
 <li>因为某些历史原因，也为了与C兼容，所以C++语言中的字符串字面值并不是标准库类型string的对象。切记，字符串字面值与string是不同的类型。</li>
 <li>可以把string对象和字符串字面值相加，但不能直接把两个字符串字面值相加（因为这两个字符串字面值都不是string对象，无法使用string类中才重载的字符串相加运算符）。</li>
-<li>在cctype头文件中定义了一组标准库函数可以用来处理字符：</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">isalnum(c)</td>
-<td>当c是字母或数字时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">isalpha(c)</td>
-<td>当c是字母时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">iscntrl(c)</td>
-<td>当c是控制字符时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">isdigit(c)</td>
-<td>当c是数字时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">isgraph(c)</td>
-<td>当c不是空格但可以打印时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">islower(c)</td>
-<td>当c是小写字母时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">isprint(c)</td>
-<td>当c是可打印字符时为真（即c是空格或c具有可视形式）</td>
-</tr>
-<tr>
-<td style="text-align:center">ispunct(c)</td>
-<td>当c是标点符号时为真（即c不是控制字符、数字、字母、可打印空白中的一种）</td>
-</tr>
-<tr>
-<td style="text-align:center">isspace(c)</td>
-<td>当c是空白时为真（即c是空格、制表符、回车符、换行符、进纸符的一种）</td>
-</tr>
-<tr>
-<td style="text-align:center">issupper(c)</td>
-<td>当c是大写字母时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">isxdigit(c)</td>
-<td>当c是十六进制数字时为真</td>
-</tr>
-<tr>
-<td style="text-align:center">tolower(c)</td>
-<td>如果c是大写字母，输出对应的小写字母；否则原样输出</td>
-</tr>
-<tr>
-<td style="text-align:center">tosupper(c)</td>
-<td>如果c是小写字母，输出对应的大写字母；否则原样输出</td>
-</tr>
-</tbody>
-</table>
-<ol>
+<li><p>在cctype头文件中定义了一组标准库函数可以用来处理字符：</p>
+<pre><code> 函数 | 含义
+ :-: | : -:
+ isalnum(c) | 当c是字母或数字时为真
+ isalpha(c) | 当c是字母时为真
+ iscntrl(c) | 当c是控制字符时为真
+ isdigit(c) | 当c是数字时为真
+ isgraph(c) | 当c不是空格但可以打印时为真
+ islower(c) | 当c是小写字母时为真
+ isprint(c) | 当c是可打印字符时为真（即c是空格或c具有可视形式）
+ ispunct(c) | 当c是标点符号时为真（即c不是控制字符、数字、字母、可打印空白中的一种）
+ isspace(c) | 当c是空白时为真（即c是空格、制表符、回车符、换行符、进纸符的一种）
+ issupper(c) | 当c是大写字母时为真
+ isxdigit(c) | 当c是十六进制数字时为真
+ tolower(c) | 如果c是大写字母，输出对应的小写字母；否则原样输出
+ tosupper(c) | 如果c是小写字母，输出对应的大写字母；否则原样输出
+</code></pre></li>
 <li><p>范围for语句：<br>  范围for语句遍历给定序列中的每个元素并对序列中的每个值执行某种操作，其语法形式是：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span>declaration <span class="token operator">:</span> expression<span class="token punctuation">)</span>
     statement
