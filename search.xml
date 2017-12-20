@@ -51,7 +51,7 @@
 这种方式虽然可以直接传递数组，但是缺点也很明显：数组大小是固定的。在后面第十六章会介绍怎样让它可以作用与任意大小数组的方式。</li>
 </ul>
 </li>
-<li><p>由于多维数组实际上是数组的数组，所以传递多维数组作为参数的形式如下：</p>
+<li><p>数组实际上是数组的数组，所以传递多维数组作为参数的形式如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">(</span><span class="token operator">*</span>vMatrix<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> vRowSize<span class="token punctuation">,</span> <span class="token keyword">int</span> vColSize<span class="token punctuation">)</span>
  <span class="token punctuation">{</span>
      <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> vRowSize<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
@@ -242,13 +242,13 @@
  <span class="token macro property">#<span class="token directive keyword">endif</span></span>
  <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p> 如果NDEBUG未定义，将执行#ifndef和#endif之间的代码；如果定义了NDEBUG，这些代码将被忽略掉。<br> 在VS环境下，<strong>FUNCTION</strong>表示当前调试的函数的名字。编译器为每个函数都定义了<strong>FUNCTION</strong>，它是const char的一个静态数组，用于存放函数的名字。</p>
+<p> 如果NDEBUG未定义，将执行#ifndef和#endif之间的代码；如果定义了NDEBUG，这些代码将被忽略掉。<br> 在VS环境下，__FUNCTION__表示当前调试的函数的名字。编译器为每个函数都定义了<strong>FUNCTION</strong>，它是const char的一个静态数组，用于存放函数的名字。</p>
 <p> 除此之外，C++编译器还定义了另外4个对程序调试很有用的名字：</p>
 <ul>
-<li><strong>FILE</strong>：存放当前文件名的字符串字面值</li>
-<li><strong>LINE</strong>：存放当前行号的整型字面值</li>
-<li><strong>TIME</strong>：存放文件编译时间的字符串字面值</li>
-<li><strong>DATE</strong>：存放文件编译器日期的字符串字面值</li>
+<li>__FILE__：存放当前文件名的字符串字面值</li>
+<li>__LINE__：存放当前行号的整型字面值</li>
+<li>__TIME__：存放文件编译时间的字符串字面值</li>
+<li>__DATE__：存放文件编译器日期的字符串字面值</li>
 </ul>
 </li>
 </ol>
