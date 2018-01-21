@@ -271,18 +271,68 @@
 <p> 所以对于那些确实要处理异常并继续执行的程序，就要加倍注意了。我们必须清楚异常何时发生，异常发生后程序应如何确保对象有效、资源无泄漏、程序处于合理状态，等等。</p>
 <p> 当然，对于那些异常发生后终止即可的程序，不需要太关心这些问题。</p>
 </li>
-<li><p>标准异常：<br> C++定义的标准异常分别定义在4个头文件中：</p>
-<ul>
+<li>标准异常：<br> C++定义的标准异常分别定义在4个头文件中：<ul>
 <li>exception头文件定义了最通用的异常类exception。它只报告异常的发生。不提供任何额外信息。</li>
-<li><p>stdexcept头文件定义了几种常用的异常类，详细信息如下：</p>
-<p><stdexcept>定义的异常类 | 含义<br>:-: | :-:<br>exception  | 最常见的问题<br>runtime_error  | 只有在运行时才能检测出的问题<br>range_error    | 运行时错误：生成的结果超出了有意义的值域范围<br>overflow_error     | 运行时错误：计算上溢<br>underflow_error  | 运行时错误：计算下溢<br>logic_error   | 程序逻辑错误<br>domain_error    |  逻辑错误：参数对应的结果值不存在<br>invalid_argument  | 逻辑错误：无效参数<br>length_error | 逻辑错误：试图创建一个超出类型最大长度的对象<br>out_of_range | 逻辑错误：使用一个超出有效范围的值</stdexcept></p>
-<p>我们只能以默认初始化的方式初始化exception、bad_alloc和bad_cast对象，不允许为这些对象提供初始值。</p>
-<p>其他异常类型的行为恰好相反：应该使用string对象或者C风格字符串初始化这些类型的对象，但是不允许使用默认初始化的方式。当创建此类对象时，必须提供初始值，该初始值含有错误相关的信息。</p>
-<p>异常类型只定义了一个名为what的成员函数，该函数没有任何参数，返回值是一个指向C风格字符串的const char*。该字符串的目的是提供关于异常的一些文本信息。如果异常类型有一个字符串初始值，则what返回该字符串，对于其他无初始值的异常类型来说，what返回的内容由编译器决定。<br>&nbsp; </p>
-</li>
+<li>stdexcept头文件定义了几种常用的异常类，详细信息如下：</li>
 </ul>
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><stdexcept>定义的异常类</stdexcept></th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">exception</td>
+<td style="text-align:center">最常见的问题</td>
+</tr>
+<tr>
+<td style="text-align:center">runtime_error</td>
+<td style="text-align:center">只有在运行时才能检测出的问题</td>
+</tr>
+<tr>
+<td style="text-align:center">range_error</td>
+<td style="text-align:center">运行时错误：生成的结果超出了有意义的值域范围</td>
+</tr>
+<tr>
+<td style="text-align:center">overflow_error</td>
+<td style="text-align:center">运行时错误：计算上溢</td>
+</tr>
+<tr>
+<td style="text-align:center">underflow_error</td>
+<td style="text-align:center">运行时错误：计算下溢</td>
+</tr>
+<tr>
+<td style="text-align:center">logic_error</td>
+<td style="text-align:center">程序逻辑错误</td>
+</tr>
+<tr>
+<td style="text-align:center">domain_error</td>
+<td style="text-align:center">逻辑错误：参数对应的结果值不存在</td>
+</tr>
+<tr>
+<td style="text-align:center">invalid_argument</td>
+<td style="text-align:center">逻辑错误：无效参数</td>
+</tr>
+<tr>
+<td style="text-align:center">length_error</td>
+<td style="text-align:center">逻辑错误：试图创建一个超出类型最大长度的对象</td>
+</tr>
+<tr>
+<td style="text-align:center">out_of_range</td>
+<td style="text-align:center">逻辑错误：使用一个超出有效范围的值</td>
+</tr>
+</tbody>
+</table>
+<pre><code>我们只能以默认初始化的方式初始化exception、bad_alloc和bad_cast对象，不允许为这些对象提供初始值。
+
+其他异常类型的行为恰好相反：应该使用string对象或者C风格字符串初始化这些类型的对象，但是不允许使用默认初始化的方式。当创建此类对象时，必须提供初始值，该初始值含有错误相关的信息。
+
+异常类型只定义了一个名为what的成员函数，该函数没有任何参数，返回值是一个指向C风格字符串的const char\*。该字符串的目的是提供关于异常的一些文本信息。如果异常类型有一个字符串初始值，则what返回该字符串，对于其他无初始值的异常类型来说，what返回的内容由编译器决定。
+</code></pre><p>&nbsp; </p>
 <hr>
 <p>参考文献：《C++Primer第五版》</p>
 
