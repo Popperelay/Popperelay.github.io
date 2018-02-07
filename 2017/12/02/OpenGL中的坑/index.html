@@ -215,7 +215,7 @@ GLuint rbo<span class="token punctuation">;</span>
 <hr>
 <ol>
 <li>在为帧缓冲添加纹理附件时，使用浮点型格式（GL_FLOAT），其帧率可能比使用无符号整型（GL_UNSIGNED_BYTE）低上一倍，所以在不需要用到-1到1之外的浮点型数据时，纹理格式还是最好使用（内部格式GL_RGBA等、外部格式GL_RGBA等，数据类型GL_UNSIGNED_BYTE）。因为OpenGL默认情况下会以无符号归一化格式存储纹理，纹素值在内存中以整数存储，整数在读进着色器时会转换到[0.0, 1.0]之间（如果指定是有符号归一化格式，如GL_R8_SNORM，则转换到[-1.0, 1.0]之间）。</li>
-<li>GL_RGBA、GL_RGB这些不带表示数字大小的纹理内部格式，就是以无符号归一化格式存储的。</li>
+<li>GL_RGBA、GL_RGB这些不带数字大小的纹理内部格式，就是以无符号归一化格式存储的。</li>
 </ol>
 
             </div>
