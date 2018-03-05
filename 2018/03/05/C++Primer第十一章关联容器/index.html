@@ -1,0 +1,621 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/C++Primer%E7%AC%AC11%E7%AB%A0.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C++Primer第十一章 关联容器</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">概述</font></p>
+<hr>
+<ol>
+<li>关联容器支持高效的关键字查找和访问。两个主要的关联容器是map和set。map是键值对集合，而set只是关键字集合，set支持高效的关键字查询工作：检查一个给定关键字是否存在set中。</li>
+<li>允许重复关键字的关联容器的名字中都包含单词multi；不保持关键字按顺序存储的容器的名字都以单词unordered开头。</li>
+<li>类型map和multimap定义在头文件map中，set和multiset定义在头文件set中，无序容器定义在头文件unordered_map和unordered_set中。</li>
+</ol>
+<p><font size="5" color="orange">使用关联容器</font></p>
+<hr>
+<ol>
+<li>当只想知道一个值是否存在时，set是最有用的。</li>
+<li>可以使用map来统计字符串中每个字符出现的次数：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>string Str <span class="token operator">=</span> <span class="token string">"The farthest distance in the world is not between death and life."</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>map<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span> size_t<span class="token operator">></span> CharCount<span class="token punctuation">;</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> e <span class="token operator">:</span> Str<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token operator">++</span>CharCount<span class="token punctuation">[</span>e<span class="token punctuation">]</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">auto</span> <span class="token operator">&amp;</span>e <span class="token operator">:</span> CharCount<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 当从一个map中提取一个元素时，会得到一个pair类型的对象，所以访问map中的元素时使用了first成员和second成员。</li>
+<li>对于上述例子，如果我们不想统计空格、标点符号等等字符，可以先用set来保存想要忽略的字符，只对不在set中的字符统计出现次数：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>string Str <span class="token operator">=</span> <span class="token string">"The farthest distance in the world is not between death and life."</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>map<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span> size_t<span class="token operator">></span> CharCount<span class="token punctuation">;</span>
+ std<span class="token operator">::</span>set<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token operator">></span> IgnoreSet<span class="token punctuation">{</span> <span class="token string">' '</span><span class="token punctuation">,</span><span class="token string">','</span><span class="token punctuation">,</span><span class="token string">'.'</span><span class="token punctuation">,</span><span class="token string">'!'</span><span class="token punctuation">,</span><span class="token string">':'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> e <span class="token operator">:</span> Str<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>IgnoreSet<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token operator">==</span>IgnoreSet<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//查找当前字符是否在忽略字符的集合中</span>
+         <span class="token operator">++</span>CharCount<span class="token punctuation">[</span>e<span class="token punctuation">]</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">auto</span> <span class="token operator">&amp;</span>e <span class="token operator">:</span> CharCount<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p><font size="5" color="orange">关联容器概述</font></p>
+<hr>
+<ol>
+<li>关联容器的迭代器都是双向的。</li>
+<li>map和set的关键字必须是唯一的，而multimap和multiset没有此限制：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">int</span> Array<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">ISet</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>Array<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>Array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>multiset<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">IMultiSet</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">begin</span><span class="token punctuation">(</span>Array<span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token operator">::</span><span class="token function">end</span><span class="token punctuation">(</span>Array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> ISet<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">//输出4</span>
+ std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> IMultiSet<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//输出8</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>默认情况下，标准库使用关键字类型的&lt;运算符来比较两个关键字。如果一个类型定义了“行为正常”的&lt;运算符，则它可以用作关键字类型。</li>
+<li>我们也可以使用关联容器的第二个模板参数来自定义比较操作（通常是一个函数指针类型）：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">bool</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token keyword">int</span> v1<span class="token punctuation">,</span> <span class="token keyword">int</span> v2<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> v1 <span class="token operator">></span> v2<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ std<span class="token operator">::</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>compare<span class="token punctuation">)</span><span class="token operator">*</span><span class="token operator">></span> <span class="token function">ISet</span><span class="token punctuation">(</span>compare<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ ISet<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//ISet中元素为：2 1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 我们使用decltype来指出自定义比较操作的类型，由于用decltype获得的是函数类型而非函数指针，所以还需要在后面加上一个*。在定义容器时，需要将比较函数的地址作为实参传入。当我们向set容器中添加元素时，通过调用compare函数来为这些元素排序。</li>
+<li>pair这个标准库类型定义在头文件utility中。pair的默认构造函数会对数据成员进行值初始化：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>pair<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> Pair1<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//默认值初始化，Pair1保存一个空string和整型值0</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ pair的数据成员是public的，两个成员分别命名为first和second。我们还可以使用make_pair(v1, v2)函数来生成一个pair，pair的类型根据参数的类型出来：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> Pair1 <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token string">"good"</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//Pair1的类型是pair&lt;string, int></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ol>
+<p><font size="5" color="orange">关联容器操作</font></p>
+<hr>
+<ol>
+<li>关联容器还定义了key_type等等类型别名：<ul>
+<li>key_type：关联容器的关键字类型</li>
+<li>mapped_type：值的类型，只适用于map</li>
+<li>value_type：关联容器中元素的类型。对于set就是关键字类型，和key_type相同；对于map，为pair<const key_type,="" mapped_type=""><pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>set<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token operator">::</span>value_type v1<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//v1是一个string</span>
+std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span><span class="token operator">::</span>value_type v2<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//v2是一个pair&lt;const string, int></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+对于map，value_type是一个pair类型，其fisrt成员保存const的关键字，second成员保存值。</const></li>
+</ul>
+</li>
+<li>一个set中的关键字也是const的。可以用一个set迭代器来读取元素的值，但不能修改，因为set迭代器是只读的。</li>
+<li>我们通常不对关联容器使用泛型算法。关键字是const这一特性意味着不能将关联容器传递给修改或重排容器元素的算法，因为这类算法需要向元素写入值，而set类型中的元素是const的，map的关键字也是const的。关联容器可用于只读取元素的算法。但是，很多这类算法都要搜索序列。由于关联容器中的元素不能通过它们的关键字进行快速查找，因此对其使用泛型算法几乎总是个坏主意。比如使用关联容器自己定义的find成员会比调用泛型find快得多。</li>
+<li><p>向关联容器中添加元素可以使用insert成员函数。对于set有两个版本：一个是接受范围迭代器，一个是接受初始值列表：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> IVec<span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ISet<span class="token punctuation">;</span><span class="token punctuation">;</span>
+ ISet<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>IVec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> IVec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//ISet现在有4个元素</span>
+ ISet<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//ISet现在有6个元素</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p> 向map中添加元素时，insert的参数是必须是pair：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span> Map1<span class="token punctuation">;</span>
+ Map1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">"First"</span><span class="token punctuation">,</span><span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ Map1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>std<span class="token operator">::</span>pair<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Second"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ Map1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">make_pair</span><span class="token punctuation">(</span><span class="token string">"Third"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ Map1<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span><span class="token operator">::</span><span class="token function">value_type</span><span class="token punctuation">(</span><span class="token string">"Forth"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ Map1<span class="token punctuation">.</span><span class="token function">emplace</span><span class="token punctuation">(</span><span class="token string">"Fifth"</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p> 除了用insert插入外，还可以使用emplace成员函数来插入元素，和insert不同的是，emplace可以直接从参数构造一个元素，所以上面代码插入Fifth，5时并没有加花括号，但是insert不行。</p>
+<p> 对于set和map这种不包含重复关键字的容器，添加单一元素的insert和emplace版本返回一个pair，告诉我们插入操作是否成功，pair的first成员是一个迭代器，指向具有给定关键字的元素；second成员是一个bool值，指出元素是插入成功，还是因为已经存在于容器中而插入失败。</p>
+<p> 对于multiset和multimap这种允许重复关键字的容器接受单个元素的insert和emplace操作返回一个指向新元素的迭代器，无须再返回一个bool值，因为插入总是成功的。</p>
+</li>
+<li>关联容器使用成员函数erase来进行删除操作，它的参数是一个要删除元素的关键字、或要删除元素的迭代器或者迭代器范围：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ISet<span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ ISet<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//删除ISet中关键字为1的元素</span>
+ ISet<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>ISet<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//删除ISet中第一个元素</span>
+ ISet<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>ISet<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">++</span>ISet<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//删除ISet中第一个迭代器到第二个迭代器之间的范围（不包括第二个迭代器指向的元素）</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+ 对于保存不重复关键字的容器，erase的返回值总是0或1，若返回值为0，则表明想要删除的元素并不在容器中。对于允许重复关键字的容器，删除元素的数量可能大于1。</li>
+<li><p>我们不能对一个multimap或unordered_multimap进行下标操作，因为这些容器中可能有多个值与一个关键字相关联。map和unordered_map的下标操作如下：</p>
+<ul>
+<li>c[k]：返回关键字为k的元素的引用；如果k不在c中，添加一个关键字为k的元素，对其进行值初始化</li>
+<li><p>c.at[k]：访问关键字为k的元素，带参数检查：若k不在c中，抛出一个out_of_range异常</p>
+<p>关联容器的下标运算符在查找关键字时，如果关键字不在容器中，可能会向容器中插入一个新元素，所以我们只可以对非const的map使用下标操作。</p>
+</li>
+</ul>
+</li>
+<li>如果只是想知道一个元素是否在map中，但不存在是并不想添加元素，在这种情况下就不能使用下标运算符，而应该使用at或者find成员函数。<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> Map1<span class="token punctuation">;</span>
+ <span class="token keyword">if</span> <span class="token punctuation">(</span>Map1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>                    <span class="token comment" spellcheck="true">//Map1中会加入一个{1, 0}键值对</span>
+ <span class="token punctuation">{</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">if</span> <span class="token punctuation">(</span>Map1<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">!=</span>Map1<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">//不会向Map1中插入新元素</span>
+ <span class="token punctuation">{</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">if</span> <span class="token punctuation">(</span>Map1<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 <span class="token comment" spellcheck="true">//抛出异常，不会向Map1中插入新元素</span>
+ <span class="token punctuation">{</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>对一个map进行下标操作时，会获得一个mapped_type对象，但当解引用一个map迭代器时，会得到一个value_type对象。</li>
+<li>在一个关联容器中查找元素的操作如下，其中lower_bound和upper_bound不适用于无序容器，下标和at操作只适用于非const的map和unordered_map：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">c.find(k)</td>
+<td>返回一个迭代器，指向第一个关键字为k的元素，若k不在容器中，则返回尾后迭代器</td>
+</tr>
+<tr>
+<td style="text-align:center">c.count(k)</td>
+<td>返回关键字等于k的元素数量</td>
+</tr>
+<tr>
+<td style="text-align:center">c.lower_bound(k)</td>
+<td>返回一个迭代器，指向第一个关键字不小于k的元素</td>
+</tr>
+<tr>
+<td style="text-align:center">c.upper_bound(k)</td>
+<td>返回一个迭代器，指向第一个关键字大于k的元素</td>
+</tr>
+<tr>
+<td style="text-align:center">c.equal_range(k)</td>
+<td>返回一个迭代器pair，表示关键字等于k的元素的范围，若k不存在，则pair的两个成员均等于c.end()</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>如果一个multimap或multiset中有多个元素具有相同的关键字，则这些元素在容器中会相邻存储。</li>
+<li>如果想要输出一个map中具有给定关键字的所有元素，可以使用以下三种方案：<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>multimap<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span> Map1<span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Lucy"</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Smith"</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> BobCount <span class="token operator">=</span> Map1<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> Iter <span class="token operator">=</span> Map1<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> BobCount<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>Iter<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> Iter<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>multimap<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span> Map1<span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Lucy"</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Smith"</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> Iter1 <span class="token operator">=</span> Map1<span class="token punctuation">.</span><span class="token function">lower_bound</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> Iter2 <span class="token operator">=</span> Map1<span class="token punctuation">.</span><span class="token function">upper_bound</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> CurIter <span class="token operator">=</span> Iter1<span class="token punctuation">;</span> CurIter <span class="token operator">!=</span> Iter2<span class="token punctuation">;</span> <span class="token operator">++</span>CurIter<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> CurIter<span class="token operator">-</span><span class="token operator">></span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> CurIter<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>multimap<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> size_t<span class="token operator">></span> Map1<span class="token punctuation">{</span> <span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Lucy"</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Smith"</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">"Bob"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">auto</span> IterRange <span class="token operator">=</span> Map1<span class="token punctuation">.</span><span class="token function">equal_range</span><span class="token punctuation">(</span><span class="token string">"Bob"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> CurIter <span class="token operator">=</span> IterRange<span class="token punctuation">.</span>first<span class="token punctuation">;</span> CurIter <span class="token operator">!=</span> IterRange<span class="token punctuation">.</span>second<span class="token punctuation">;</span> <span class="token operator">++</span>CurIter<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> CurIter<span class="token operator">-</span><span class="token operator">></span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> CurIter<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>C++Primer P391页中所述的单词转换程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span>std<span class="token operator">::</span>string<span class="token operator">></span> <span class="token function">buildMap</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vFileName<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> std<span class="token operator">::</span>string<span class="token operator">></span> TransformMap<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>ifstream <span class="token function">Fin</span><span class="token punctuation">(</span>vFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string Value<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string Key<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>Fin <span class="token operator">>></span> Key <span class="token operator">&amp;&amp;</span> <span class="token function">getline</span><span class="token punctuation">(</span>Fin<span class="token punctuation">,</span> Value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        TransformMap<span class="token punctuation">[</span>Key<span class="token punctuation">]</span> <span class="token operator">=</span> Value<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//跳过第一个空格</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> TransformMap<span class="token punctuation">;</span>
+    Fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+std<span class="token operator">::</span>string <span class="token function">transform</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vFileName<span class="token punctuation">,</span> std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> std<span class="token operator">::</span>string<span class="token operator">></span><span class="token operator">&amp;</span> vTransformMap<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string Result<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>ifstream <span class="token function">Fin</span><span class="token punctuation">(</span>vFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string Value<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string Line<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">getline</span><span class="token punctuation">(</span>Fin<span class="token punctuation">,</span>Line<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>istringstream <span class="token function">Stream</span><span class="token punctuation">(</span>Line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">bool</span> FirstWord <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>Stream <span class="token operator">>></span> Value<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>FirstWord<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                FirstWord <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                Result<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>vTransformMap<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>Value<span class="token punctuation">)</span> <span class="token operator">!=</span> vTransformMap<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Result<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>vTransformMap<span class="token punctuation">[</span>Value<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                Result<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>Value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        Result<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    Fin<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> std<span class="token operator">::</span>string<span class="token operator">></span> TransformMap <span class="token operator">=</span> <span class="token function">buildMap</span><span class="token punctuation">(</span><span class="token string">"TransformRules.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token function">transform</span><span class="token punctuation">(</span><span class="token string">"InputText.txt"</span><span class="token punctuation">,</span> TransformMap<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文件TransformRules.txt的内容如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">brb be right back
+k okay <span class="token operator">?</span>
+y why
+r are
+u you
+pic picture
+thk thanks
+18r later
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文件InputText.txt的内容如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">where r u
+y dont u send me a pic
+k thk 18r
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p><font size="5" color="orange">无序容器</font></p>
+<hr>
+<ol>
+<li>新标准定义了4个无序关联容器，这些容器不是使用比较运算符来组织元素，而是使用一个哈希函数和关键字类型的==运算符。在关键字类型的元素没有明显的序关系的情况下，无序容器是非常有用的。在某些应用中，维护元素的序代价非常高昂，此时无序容器也很有用。</li>
+<li>如果关键字类型固有就是无序的，或者性能测试发现问题可以用哈希技术解决，就可以使用无序容器。</li>
+<li><p>除了哈希管理操作之外，无序容器还提供了与有序容器相同的操作（find、insert等）。这意味着我们曾用于map和set的操作也能用于unordered_map和unordered_set。类似的，无序容器也有允许重复关键字的版本。</p>
+<p> 用无序容器重写之前统计字符串中字符出现次数的程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>string Str <span class="token operator">=</span> <span class="token string">"The farthest distance in the world is not between death and life."</span><span class="token punctuation">;</span>
+ std<span class="token operator">::</span>unordered_map<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span> size_t<span class="token operator">></span> CharCount<span class="token punctuation">;</span>
+ std<span class="token operator">::</span>unordered_set<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token operator">></span> IgnoreSet<span class="token punctuation">{</span> <span class="token string">' '</span><span class="token punctuation">,</span><span class="token string">','</span><span class="token punctuation">,</span><span class="token string">'.'</span><span class="token punctuation">,</span><span class="token string">'!'</span><span class="token punctuation">,</span><span class="token string">':'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> e <span class="token operator">:</span> Str<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>IgnoreSet<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token operator">==</span> IgnoreSet<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//查找当前字符是否在忽略字符的集合中</span>
+         <span class="token operator">++</span>CharCount<span class="token punctuation">[</span>e<span class="token punctuation">]</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">auto</span> <span class="token operator">&amp;</span>e <span class="token operator">:</span> CharCount<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>first <span class="token operator">&lt;&lt;</span> <span class="token string">":"</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>second <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>无序容器在存储上组织为一组桶，每个桶保存零个或多个元素。无序容器使用一个哈希函数将元素映射到桶。为了访问一个元素，容器首先计算元素的哈希值，它指出应该搜索哪个桶。容器将具有一个特定哈希值的所有元素保存在相同的桶中。如果容器允许重复关键字，所有具有相同关键字的元素都会在同一个桶中。因此，无序容器的性能依赖于哈希函数的质量和桶的数量和大小。</li>
+<li>计算一个元素的哈希值和在桶中搜索都是很快的操作。但是，如果一个桶中保存了很多元素，那么查找一个特定元素就需要大量比较操作（哈希表特性）。</li>
+<li>无序容器的管理操作如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">c.bucket_count()</td>
+<td>正在使用的桶的数目</td>
+</tr>
+<tr>
+<td style="text-align:center">c.max_bucket_count()</td>
+<td>容器能容纳的最多的桶的数量</td>
+</tr>
+<tr>
+<td style="text-align:center">c.bucket_size(n)</td>
+<td>第n个桶中有多少个元素</td>
+</tr>
+<tr>
+<td style="text-align:center">c.bucket(k)</td>
+<td>关键字为k的元素在哪个桶中</td>
+</tr>
+<tr>
+<td style="text-align:center">local_iterator</td>
+<td>可以用来访问桶中元素的迭代器类型</td>
+</tr>
+<tr>
+<td style="text-align:center">const_local_iterator</td>
+<td>桶迭代器的const版本</td>
+</tr>
+<tr>
+<td style="text-align:center">c.begin(n), c.end(n)</td>
+<td>桶n的首元素迭代器和尾后迭代器</td>
+</tr>
+<tr>
+<td style="text-align:center">c.cbegin(n), c.cend(n)</td>
+<td>与前两个函数类似，但是返回const_local_iterator</td>
+</tr>
+<tr>
+<td style="text-align:center">c.load_factor()</td>
+<td>每个桶的平均元素数量，返回float值</td>
+</tr>
+<tr>
+<td style="text-align:center">c.max_load_factor()</td>
+<td>c试图维护的平均桶大小，返回float值。c会在需要时添加新的桶，以使得load_factor &lt;= max_load_factor</td>
+</tr>
+<tr>
+<td style="text-align:center">c.rehash(n)</td>
+<td>重组存储，使得bucket_count &gt;= n且bucket_count &gt; size/max_load_factor</td>
+</tr>
+<tr>
+<td style="text-align:center">c.reserve(n)</td>
+<td>重组存储，使得c可以保存n个元素且不必rehash</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>无序容器使用一个hash<key_type>类型的对象来生成每个元素的哈希值。标准库为内置类型（包括指针）提供了hash模板。还未一些标准库类型，包括string和智能指针类型定义了hash。因此，我们可以直接定义关键字是内置类型（包括指针类型）、string或是智能指针类型的无序容器。但是，我们不能直接定义关键字类型为自定义类型的无序容器，必须先提供我们自己的hash模板版本（见16章），也可以在定义无序容器时增加生成hash值得函数模板参数和相等函数模板参数，来为自定义的类建立无序容器：</key_type></p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">class</span> <span class="token class-name">CData</span>
+ <span class="token punctuation">{</span>
+ <span class="token keyword">public</span><span class="token operator">:</span>
+     <span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> <span class="token function">getDataName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> m_DataName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+ <span class="token keyword">private</span><span class="token operator">:</span>
+     std<span class="token operator">::</span>string m_DataName<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+ size_t <span class="token function">hasher</span><span class="token punctuation">(</span><span class="token keyword">const</span> CData <span class="token operator">&amp;</span>vData<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//生成自定义类的hash值</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> std<span class="token operator">::</span>hash<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>vData<span class="token punctuation">.</span><span class="token function">getDataName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">bool</span> <span class="token function">equal</span><span class="token punctuation">(</span><span class="token keyword">const</span> CData <span class="token operator">&amp;</span>vData1<span class="token punctuation">,</span> <span class="token keyword">const</span> CData <span class="token operator">&amp;</span>vData2<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> vData1<span class="token punctuation">.</span><span class="token function">getDataName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> vData2<span class="token punctuation">.</span><span class="token function">getDataName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token comment" spellcheck="true">//定义元素类型为自定义类类型的无序容器，参数是桶大小、哈希函数指针和相等函数指针</span>
+ std<span class="token operator">::</span>unordered_set<span class="token operator">&lt;</span>CData<span class="token punctuation">,</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>hasher<span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">,</span> <span class="token keyword">decltype</span><span class="token punctuation">(</span>equal<span class="token punctuation">)</span><span class="token operator">*</span><span class="token operator">></span> <span class="token function">DataSet</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> hasher<span class="token punctuation">,</span> equal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&nbsp; </p>
+</li>
+</ol>
+<hr>
+<p>参考文献：《C++Primer第五版》</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/03/05/C++Primer第十一章关联容器/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/03/05/C++Primer第十一章关联容器/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2018总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
