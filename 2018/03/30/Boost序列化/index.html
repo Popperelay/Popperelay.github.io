@@ -274,7 +274,9 @@ std<span class="token operator">::</span>stringstream ss<span class="token punct
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>为了序列化自定义的类，serialize模板函数必须被定义，它在对象被序列化或反序列化时被调用。我们可以使用&amp;操作符来代替&lt;&lt;和&gt;&gt;，这样就不用在serialize函数里区分到底是序列化还是反序列化了。serialize函数应该是私有的，因为它不会再被别的对象调用了，而且需要将boost::serialization::access类声明为友元，这样才能让Boost.Serialization来序列化该类的私有成员。</p>
-<p><font size="5" color="orange">把serialize函数拆分为序列化函数save和反序列化函数load</font><br>上面那样把序列化和反序列都用serialize函数来实现是通常的做法，但是如果有时候想要序列化和反序列化执行一些不同的操作呢？当然就不能用同一个函数来实现了：</p>
+<p><font size="5" color="orange">把serialize函数拆分为序列化函数save和反序列化函数load</font></p>
+<hr>
+<p>上面那样把序列化和反序列都用serialize函数来实现是通常的做法，但是如果有时候想要序列化和反序列化执行一些不同的操作呢？当然就不能用同一个函数来实现了：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//把类内的serialize函数拆分为save和load，因为有的时候不想要序列化和反序列化都使用相同的serialize函数内容</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;boost/archive/text_oarchive.hpp></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;boost/archive/text_iarchive.hpp></span></span>
