@@ -395,8 +395,87 @@ The elapsed time is<span class="token operator">:</span> <span class="token numb
 <li>点对点通信函数是通过标签和通信子来匹配的，而集合通信函数不使用标签，只是通过通信子和调用的顺序来进行匹配。</li>
 </ul>
 <p>下表汇总了MPI中的集合通信函数：</p>
-<table><br>   <tr><br>      <td>数据移动</td><br>      <td>MPI_Bcast</td><br>      <td>一到多，数据广播</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Gather</td><br>      <td>多到一，数据汇合</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Gatherv</td><br>      <td>MPI_Gather的变种，数据块长度可以不同</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Allgather</td><br>      <td>MPI_Gather的变种，把结果值分发给每一个进程</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Allgatherv</td><br>      <td>MPI_Allgather的变种，数据块长度可以不同</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Scatter</td><br>      <td>一到多，数据分散</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Scatterv</td><br>      <td>MPI_Scatter的变种，数据块长度可以不同</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Alltoall</td><br>      <td>多到多，数据置换（全交换）</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Alltoallv</td><br>      <td>MPI_Alltoall的变种，数据块长度可以不同</td><br>   </tr><br>   <tr><br>      <td>数据聚集</td><br>      <td>MPI_Reduce</td><br>      <td>多到一，数据归约</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Allreduce</td><br>      <td>MPI_Reduce的变种，把结果值分发给每一个进程</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Reduce_Scatter</td><br>      <td>MPI_Reduce的变种，把结果值散射到每一个进程</td><br>   </tr><br>   <tr><br>      <td></td><br>      <td>MPI_Scan</td><br>      <td>扫描归约，各进程以此得到部分归约的结果</td><br>   </tr><br>   <tr><br>      <td>同步</td><br>      <td>MPI_Barrier</td><br>      <td>同步操作</td><br>   </tr><br>   <tr><br>      <td></td><br>   </tr><br></table>
-
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据移动</td>
+<td style="text-align:center">MPI_Bcast</td>
+<td style="text-align:center">一到多，数据广播</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Gather</td>
+<td style="text-align:center">到一，数据汇合</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Gatherv</td>
+<td style="text-align:center">MPI_Gather的变种，数据块长度可以不同</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Allgather</td>
+<td style="text-align:center">MPI_Gather的变种，把结果值分发给每一个进程</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Allgatherv</td>
+<td style="text-align:center">MPI_Allgather的变种，数据块长度可以不同</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Scatter</td>
+<td style="text-align:center">一到多，数据分散</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Scatterv</td>
+<td style="text-align:center">MPI_Scatter的变种，数据块长度可以不同</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Alltoall</td>
+<td style="text-align:center">多到多，数据置换（全交换）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Alltoallv</td>
+<td style="text-align:center">MPI_Alltoall的变种，数据块长度可以不同</td>
+</tr>
+<tr>
+<td style="text-align:center">数据聚集</td>
+<td style="text-align:center">MPI_Reduce</td>
+<td style="text-align:center">多到一，数据归约</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Allreduce</td>
+<td style="text-align:center">MPI_Reduce的变种，把结果值分发给每一个进程</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Reduce_Scatter</td>
+<td style="text-align:center">MPI_Reduce的变种，把结果值散射到每一个进程</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">MPI_Scan</td>
+<td style="text-align:center">扫描归约，各进程以此得到部分归约的结果</td>
+</tr>
+<tr>
+<td style="text-align:center">同步</td>
+<td style="text-align:center">MPI_Barrier</td>
+<td style="text-align:center">同步操作</td>
+</tr>
+</tbody>
+</table>
 <p>下面分别来具体看一下这些函数。</p>
 <p><font size="5" color="orange">归约</font></p>
 <hr>
