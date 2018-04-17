@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C++Primer第十八章 用于大型程序的工具</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p><font size="5" color="orange">异常处理</font></p>
+<hr>
+<ol>
+<li>因为跟在throw后面的语句将不再被执行，所以throw语句的用法有点类似于return语句。</li>
+<li>异常处理寻找匹配catch块的过程是一个栈展开过程。栈展开就是沿着函数调用链寻找catch块的过程。</li>
+<li>异常处理时，如果找不到匹配的catch块，程序将调用标准库函数terminate，它会终止程序的执行。</li>
+<li>如果在栈展开过程中退出了某个块，编译器将负责确保在这个块中创建的对象能被正确地销毁。</li>
+<li>析构函数总是会被执行的，但是函数中负责释放资源的代码却可能被跳过。如果一个块分配了资源，并且在负责释放这些资源的代码前发生了异常，则释放资源的代码将不会被执行。</li>
+<li>由于栈展开可能使用析构函数的考虑，析构函数不应该抛出不能被它自身处理的异常。换句话说，如果析构函数需要执行某个可能抛出异常的操作，则该操作应该被放置在一个try语句块当中，并且在析构函数<strong>内部</strong>得到处理。</li>
+<li>在实际的编程过程中，因为析构函数仅仅是释放资源，所以它不太可能抛出异常。所有标准库类型都能确保它们的析构函数不会发生异常。</li>
+<li>当我们抛出一条表达式时，该表达式的静态编译时类型决定了异常对象的类型。如果一条throw表达式解引用一个基类指针，而该指针实际指向的是派生类对象，则抛出的对象将被切掉一部分，只有基类部分被抛出。</li>
+<li>抛出指针要求在任何对应的处理代码存在的地方，指针所指的对象都必须存在。</li>
+<li>通常情况下，如果catch接受的异常与某个继承体系有关，则最好将该catch的参数定义成引用类型。</li>
+<li>在搜寻catch语句的过程中，我们最终找到的catch未必是异常的最佳匹配。相反，挑选出来的应该是第一个与异常匹配的catch语句。因此，越是专门的catch越应该置于整个catch列表的前端。</li>
+<li><p>在匹配catch块的过程中，允许的隐式类型转换是有限的：</p>
+<ul>
+<li>允许从非常量向常量的类型转换，也就是说，一条非常量对象的throw语句可以匹配一个接受常量引用的catch语句。</li>
+<li>允许从派生类向基类的类型转换。</li>
+<li>数组被转换成指向数组（元素）类型的指针，函数被转换成指向该函数类型的指针。</li>
+</ul>
+<p>除此之外，包括标准算术类型转换和类类型转换在内，其他所有转换规则都不能在匹配catch的过程中使用。</p>
+</li>
+<li>如果在多个catch语句的类型之间存在着继承关系，则我们应该把继承链最底端的类放在前面，而将继承链最顶端的类（基类）放在后面。</li>
+<li>有时，一个单独的catch语句不能完整地处理某个异常。在执行了某些校正操作之后，当前的catch可能会决定由调用链更上一层的函数接着处理异常。一条catch语句通过重新抛出的操作将异常传递给另外一个catch语句。这里的重新抛出仍然是一条throw语句，只不过不包含任何表达式：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">throw</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+空的throw语句只能出现在catch语句或catch语句直接或间接调用的函数之内。如果在处理代码之外的区域遇到了空throw语句，编译器将调用terminate。一个重新抛出语句并不指定新的表达式，而是将当前的异常对象沿着调用链向上传递。</li>
+<li>为了一次性捕获所有异常，我们在catch中使用省略号作为异常声明，这样的处理代码称为捕获所有异常的处理代码，形如catch(…)。一条捕获所有异常的语句可以与任意类型的异常匹配。catch(…)通常与重新抛出语句一起使用，其中catch执行当前局部能完成的工作，随后重新抛出异常：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">manip</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//这里的操作将引发并抛出一个异常</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//处理异常的某些特殊类型</span>
+        <span class="token keyword">throw</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>如果catch(…)与其他几个catch语句一起出现，则catch(…)必须在最后的位置。出现在捕获所有异常语句后面的catch语句将永远不会被匹配（最先匹配原则）。</li>
+<li>要想处理构造函数初始值抛出的异常，我们必须将构造函数写成<strong>函数try语句块</strong>的形式，即把初始值列表和构造函数体写到try语句块中：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">></span>
+CData<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token operator">::</span><span class="token function">CData</span><span class="token punctuation">(</span>T vData<span class="token punctuation">)</span> <span class="token keyword">try</span> <span class="token operator">:</span> <span class="token function">m_Data</span><span class="token punctuation">(</span>vData<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//构造函数体...</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>bad_alloc <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//异常处理...</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+关键字try出现在表示构造函数初始值列表的冒号以及表示构造函数体的花括号之前。</li>
+<li>处理构造函数初始值异常的唯一方法是将构造函数写成函数try语句块。</li>
+<li><p>如果编译器确认函数不会抛出异常，它就能执行某些特殊的优化操作，而这些优化操作并不适用于可能出错的代码。</p>
+<p>在C++11新标准宏，我们可以通过noexcept关键字来指定某个函数不会抛出异常：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">recoup</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//不会抛出异常</span>
+<span class="token keyword">void</span> <span class="token function">alloc</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//可能抛出异常</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>对于一个函数来说，noexcept说明要么出现在该函数的所有声明语句和定义语句中，要么一次也不出现。该说明应该在函数的尾置返回类型之前。我们也可以在函数指针的声明和定义中指定noexcept。在typedef或类型别名中则不能出现noexcept。在成员函数中，noexcept说明符需要跟在const及引用限定符之后，而在final、override或虚函数的=0之前。</p>
+</li>
+<li>编译器并不会在编译时检查noexcept说明。实际上，如果一个函数在说明了noexcept的同时又含有throw语句或者调用了可能抛出异常的其他函数，编译器将顺利编译通过。但是一旦一个noexcept函数抛出了异常，程序就会调用terminate以确保遵守不在运行时抛出异常的承诺。noexcept可以用在两种情况下：一是我们确认函数不会抛出异常，二是我们根本不知道该如何处理异常。</li>
+<li>noexcept说明符可以接受一个可选的实参，该实参必须能转换为bool类型：如果实参是true，则函数不会抛出异常；如果实参是false，则函数可能抛出异常：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">recoup</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//不会抛出异常</span>
+<span class="token keyword">void</span> <span class="token function">alloc</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//可能抛出异常</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>noexcept说明符的实参常常与noexcept一元运算符混合使用：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">noexcept</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当e调用的所有函数都做了不抛出说明且e本身不含有throw语句时，noexcept运算符的返回结果为true，否则返回false。</p>
+<p>noexcept说明符和noexcept运算符混合使用的例子如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token function">g</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//f和g的异常说明一致</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果函数g承诺了不会抛出异常，则f也不会抛出异常；如果g没有异常说明符noexcept，或者g虽然有异常说明符但是允许抛出异常（带false参数的noexcept），则f也可能抛出异常。</p>
+</li>
+<li><p>noexcept有两层含义：当跟在函数参数列表后面时它是异常说明符；而当作为noexcept异常说明的bool实参出现时，它是一个运算符。</p>
+</li>
+<li>如果一个虚函数承诺了它不会抛出异常，则后续派生出来的虚函数也必须作出同样的承诺；与之相反，如果基类的虚函数允许抛出异常，则派生类的对应函数既可以允许抛出异常，也可以不允许抛出异常。</li>
+<li>标准库异常类的继承体系如下图所示：<br><img src="" alt=""><br>继承体系的第二层将exception划分为两个大的类别：运行时错误和逻辑错误。运行时错误表示的是只有在程序运行时才能检测到的错误；而逻辑错误一般指的是我们可以在程序代码中发现的错误。</li>
+<li><p>我们通过继承上图中的类来自定义我们自己的异常类：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">CMismatchDataNameE</span> <span class="token operator">:</span><span class="token keyword">public</span> std<span class="token operator">::</span>logic_error                        <span class="token comment" spellcheck="true">//继承自标准库异常类logic_error的自定义异常类</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CMismatchDataNameE</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>vStr<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">logic_error</span><span class="token punctuation">(</span>vStr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token operator">~</span><span class="token function">CMismatchDataNameE</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">virtual</span> <span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span> <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> override                            <span class="token comment" spellcheck="true">//重写what虚函数</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>string <span class="token operator">*</span>pTempStr <span class="token operator">=</span> <span class="token keyword">new</span> std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span>logic_error<span class="token operator">::</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span>pTempStr <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">"\nDataName is not matched!"</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> pTempStr<span class="token operator">-</span><span class="token operator">></span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CData</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+    <span class="token function">CData</span><span class="token punctuation">(</span><span class="token keyword">int</span> vData<span class="token punctuation">,</span> <span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>vDataName<span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_Data</span><span class="token punctuation">(</span>vData<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_DataName</span><span class="token punctuation">(</span>vDataName<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    CData<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> CData <span class="token operator">&amp;</span>vData<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_DataName <span class="token operator">!=</span> vData<span class="token punctuation">.</span>m_DataName<span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token function">CMismatchDataNameE</span><span class="token punctuation">(</span><span class="token string">"ERROR"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                            <span class="token comment" spellcheck="true">//抛出异常</span>
+        m_Data <span class="token operator">+</span><span class="token operator">=</span> vData<span class="token punctuation">.</span>m_Data<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> m_Data <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>string m_DataName<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CData <span class="token function">Data1</span><span class="token punctuation">(</span><span class="token number">41</span><span class="token punctuation">,</span> <span class="token string">"Boy"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Data2</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">"Girl"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        CData Data3 <span class="token operator">=</span> Data1 <span class="token operator">+</span> Data2<span class="token punctuation">;</span>                                    <span class="token comment" spellcheck="true">//对可能发生异常的代码使用try进行异常检测</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span>CMismatchDataNameE e<span class="token punctuation">)</span>                                        <span class="token comment" spellcheck="true">//捕获异常</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p><font size="5" color="orange">命名空间</font></p>
+<hr>
+<ol>
+<li>命名空间为防止名字冲突提供了更加可控的机制。</li>
+<li>命名空间可以是不连续的，它可以定义在几个不同的部分。如下代码：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">namespace</span> nsp
+ <span class="token punctuation">{</span>
+     <span class="token comment" spellcheck="true">//相关声明</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+ 可能是定义了一个名为nsp的新命名空间，也可能是为已经存在的命名空间添加一些新成员。</li>
+<li>在通常情况下，我们不把#include放在命名空间内部。如果我们这么做了，隐含的意思是把头文件中所有的名字定义成该命名空间的成员。</li>
+<li><p>C++11引入了一种新的嵌套命名空间，称为内联命名空间。和普通的嵌套命名空间不同，内联命名空间中的名字可以被外层命名空间直接使用。定义内联命名空间的方式是在关键字namespace前面加inline：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">namespace</span> nsp
+ <span class="token punctuation">{</span>
+     <span class="token keyword">inline</span> <span class="token keyword">namespace</span> inlineNsp
+     <span class="token punctuation">{</span>
+         <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+ std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> nsp<span class="token operator">::</span>N <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>未命名的命名空间是指关键字namespace后紧跟花括号括起来的一系列声明语句。未命名的命名空间中定义的变量拥有静态生命周期：它们在使用前创建，并且直到程序结束才销毁。</p>
+<p> 一个未命名的命名空间可以在某个给定的文件内不连续，但是不能跨越多个文件。因为名字都没有~。也就是说未命名的命名空间仅在特定的文件内部有效，其作用范围不会横跨多个不同的文件。</p>
+</li>
+<li>定义在未命名空间中的名字可以直接使用，毕竟我们找不到什么命名空间的名字来限定它们；同样的，我们也不能对未命名的命名空间的成员使用作用域运算符。未命名的命名空间中定义的名字的作用域与该命名空间所在的作用域相同。</li>
+<li>在文件中进行静态声明的做法已经被C++标准取消了，现在的做法是使用未命名的命名空间。因为未命名空间中的变量拥有静态生命周期，相当于静态变量。</li>
+<li><p>应该尽量避免using指示。using指示一次性注入某个命名空间的所有名字，这种用法看似简单实则充满了风险：只使用一条语句就突然将命名空间中所有成员的名字变得可见了。如果应用程序使用了多个不同的库，而这些库中的名字通过using指示变得可见，则全局命名空间污染的问题将重新出现。</p>
+<p> 另一个风险是由using指示引发的二义性错误只有在使用了冲突名字的地方才能被发现。这种延后的检测意味着可能在特定库引入很久之后才爆发冲突。显然不符合软件开发原则。</p>
+</li>
+</ol>
+<p><font size="5" color="orange">多重继承与虚继承</font></p>
+<hr>
+<ol>
+<li>在多重继承中，基类的构造顺序用户派生列表中基类的出现顺序保持一致，而与派生类构造函数初始值列表中基类的顺序无关。</li>
+<li>当一个类有多个基类时，有可能出现派生类从两个或更多基类中继承了同名成员的情况。此时，不加前缀限定符直接使用该名字将引发二义性。</li>
+<li>不论虚基类在继承体系中出现了多少次，在派生类中都只包含唯一一个共享的虚基类子对象。比如，如果ZooAnimal派生出Bear、Raccon两个类，然后Panda又多重继承自这两个类，那么如果ZooAnimal不是虚基类的话，在Panda中就会有两份ZooAnimal的成员。显然不合理。所以，这时就需要把ZooAnimal声明成虚基类，保证在子类中只有一个虚基类子对象。</li>
+<li>指定虚基类的方式是在派生列表中添加关键字virtual：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token comment" spellcheck="true">//关键字virtua和public的顺序随意</span>
+ <span class="token keyword">class</span> <span class="token class-name">Raccoon</span> <span class="token operator">:</span> <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">public</span> ZooAnimal <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token keyword">class</span> <span class="token class-name">Bear</span> <span class="token operator">:</span> <span class="token keyword">virtual</span> pubic ZooAnimal <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+ virtual说明符表明了一种愿望：在后续的派生类当中共享虚基类的同一份实例。<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">class</span> <span class="token class-name">Panda</span> <span class="token operator">:</span> <span class="token keyword">public</span> Bear<span class="token punctuation">,</span> <span class="token keyword">public</span> Raccoon <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+ 因为Raccoon和Bear继承ZooAnimal的方式都是虚继承，所以在Panda中只有一个ZooAnimal基类部分。</li>
+<li>虚基类总是先于非虚基类构造，与它们在继承体系中的次序和位置无关。<br>&nbsp; </li>
+</ol>
+<hr>
+<p>参考文献：《C++Primer第五版》</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/04/17/C++Primer第十八章用于大型程序的工具/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/04/17/C++Primer第十八章用于大型程序的工具/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2018总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
