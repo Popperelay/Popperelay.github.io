@@ -200,7 +200,7 @@
 </ul>
 <p><font size="4" color="red">透视投影</font><br>透视投影的投影线汇于一点，会造成近大远小的透视效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148077209937.png" alt=""><br>透视投影的视见体是一个四棱台：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148077210356.png" alt=""><br>需要指定这个视见体的视野、宽高比、近平面和远平面，任何在视见体之外的坐标都会被裁减掉。在视见体内部的所有坐标都会被映射为标准化设备坐标。</p>
 <p>使用glm命名空间里的<code>perspective</code>函数来创建一个透视投影矩阵：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">mat4 proj = perspective(45.0f, (float)width/(float)height, 0.1f, 100.0f);
+<pre class="line-numbers language-c++"><code class="language-c++">mat4 proj = perspective(radians(45.0f), (float)width/(float)height, 0.1f, 100.0f);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该函数的第一个参数指定了视野fov（field of view）的值，并以此设置了观察空间的大小（如果想要一个真实的观察效果，它的值通常是45.0f，如果想要一个末日风格的结果可以把它设得稍大点）；第二个参数指定了视口的宽高比，由视口的宽除以高所得；第三四个参数指定了近平面和远平面的距离。所有在近平面和远平面内且处于视见体内的顶点都会被渲染。<br>【注】：</p>
 <ul>
