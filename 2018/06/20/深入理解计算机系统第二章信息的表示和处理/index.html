@@ -147,7 +147,7 @@
             <div class="typo" style="padding: 3rem;">
                 <p><font size="5" color="orange">信息存储</font></p>
 <hr>
-<p><font size="4" color="red">字数据大小</font><br>每台计算机都有一个字长（word size），指明指针数据的标称大小（normal size）。因为虚拟地址是以这样的一个字来编码的，所以字长决定的最重要的系统参数就是虚拟地址空间的最大大小。也就是说，对于一个字长为$\omega$位的机器而言，虚拟地址的范围为$0~2^\omega-1$，程序最多访问$2^\omega$个字节。</p>
+<p><font size="4" color="red">字数据大小</font><br>每台计算机都有一个字长（word size），指明指针数据的标称大小（normal size）。因为虚拟地址是以这样的一个字来编码的，所以字长决定的最重要的系统参数就是虚拟地址空间的最大大小。也就是说，对于一个字长为$\omega$位的机器而言，虚拟地址的范围为$0 \sim 2^\omega-1$，程序最多访问$2^\omega$个字节。</p>
 <p>我们将程序称为“32位程序”或“64位程序”时，区别在于该程序是如何编译的，而不是其运行的机器类型。即用32位还是64位指令来编译的：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">linux<span class="token operator">></span> gcc <span class="token operator">-</span>m32 prog<span class="token punctuation">.</span>c
 linux<span class="token operator">></span> gcc <span class="token operator">-</span>m64 prog<span class="token punctuation">.</span>c
@@ -230,7 +230,8 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <hr>
 <p><font size="4" color="red">整型数据类型</font><br>对于有符号数据类型，它们的取值范围不是对称的：负数的范围比正数的范围大1。</p>
 <p>C和C++都支持有符号（默认）和无符号数。Java只支持有符号数。</p>
-<p><font size="4" color="red">无符号数的编码</font><br>无符号数编码定义如下：<br>对向量$\vec x=[x<em>{\omega-1}, x</em>{\omega-2}, …, x<em>0]$：<br>$$<br>B2U</em>{\omega}(\vec x) \doteq \sum_{i=0}^{\omega-1} x_i 2^i<br>$$</p>
+<p><font size="4" color="red">无符号数的编码</font><br>无符号数编码定义如下：<br>对向量$\vec x=[x<em>{\omega-1}, x</em>{\omega-2}, …, x_0]$：</p>
+<p>$$<br>B2U<em>{\omega}(\vec x) \doteq \sum</em>{i=0}^{\omega-1} x_i 2^i<br>$$</p>
 <p><font size="4" color="red">补码编码</font><br>阿达</p>
 
             </div>
