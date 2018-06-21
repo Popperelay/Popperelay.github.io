@@ -21436,7 +21436,7 @@ $$J\_\<span class="token function">alpha</span><span class="token punctuation">(
     <entry>
       <title><![CDATA[Mathjax简介及其语法]]></title>
       <url>/2016/10/27/Mathjax%E8%AF%AD%E6%B3%95/</url>
-      <content type="html"><![CDATA[<p>$\vec x=[x<em>{w-1},x</em>{w-2},…, x_{0}]$</p>
+      <content type="html"><![CDATA[<p>(\vec x=[x<em>{w-1},x</em>{w-2},…, x_{0}])</p>
 <p><font size="5" color="orange">Mathjax简介</font><br><a id="more"></a><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">Mathjax语法</font></p>
