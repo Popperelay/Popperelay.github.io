@@ -146,7 +146,7 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-                <p>(\vec x=[x<em>{w-1},x</em>{w-2},…, x_0])</p>
+                <p>(\vec x=[x_{w-1},x_{w-2},…, x_0])</p>
 <p><font size="5" color="orange">Mathjax简介</font><br><a id="more"></a><br>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">Mathjax语法</font></p>
@@ -226,7 +226,7 @@
 <li>排列使用$n+1 \choose 2k$：使用a \choose y或者\binom ab来表示。</li>
 <li>箭头：\to：$\to$，\rightarrow：$\rightarrow$，\leftarrow：$\leftarrow$，\Rightarrow：$\Rightarrow$，\Leftarrow：$\Leftarrow$，\mapsto：$\mapsto$。</li>
 <li>逻辑运算符：\land：$\land$， \lor：$\lor$， \lnot：$\lnot$， \forall：$\forall$，\exists：$\exists$，\top：$\top$，\bot：$\bot$，\vdash：$\vdash$， \vDash：$\vDash$。</li>
-<li>模运算符：\pmod。如b \pmod n：$b\ pmod n$。</li>
+<li>模运算符：\pmod。如b \pmod n：$b pmod n$。</li>
 <li>省略号：\cdots位置居中：$\cdots$；\ldots位置稍低：$\ldots$。</li>
 <li>\star：$\star$，\ast：$\ast$，\oplus：$\oplus$，\circ：$\circ$，\bullet：$\bullet$，\approx：$\approx$，\sim：$\sim$，\cong：$\cong$，\equiv：$\equiv$，\prec：$\prec$，\infty：$\infty$，\nabla：$\nabla$，\partial：$\partial$。</li>
 </ul>
@@ -236,7 +236,7 @@
 <p><font size="4" color="red">公式中的表格</font><br>使用<code>$$\begin{array}{列样式}...\end{array}$$</code>这样的样式来创建表格。</p>
 <ul>
 <li>列样式可以是c（居中）、l（左对齐）、r（右对齐）。</li>
-<li>每行之间使用\\来分隔（本来是\，但是在markdown中第一个\被解释为转义字符，所以需要\\），每列之间使用&amp;来分隔。</li>
+<li>每行之间使用\\\\来分隔（本来是\\，但是在markdown中第一个\被解释为转义字符，所以需要\\\\），每列之间使用&amp;来分隔。</li>
 <li>在列样式中写入|可表示一条竖线，在每行前面加上\hline可在本行前加入一条直线。</li>
 </ul>
 <p>例如：</p>
@@ -254,8 +254,8 @@ n <span class="token operator">&amp;</span> Left <span class="token operator">&a
 \end<span class="token punctuation">{</span>array<span class="token punctuation">}</span>
 $$
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\<br>\hline<br>\end{array}<br>$$</p>
-<p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\来分隔，列之间依然使用&amp;来分隔。<br>例如：</p>
+<p>效果：<br>$$<br>\begin{array}{|c|l|c|r|}<br>\hline<br>n &amp; Left &amp; Center &amp; Right \\\\<br>\hline<br>1 &amp; 0.24 &amp; 1 &amp; 125 \\\\<br>\hline<br>2 &amp; -1 &amp; 189 &amp; -8 \\\\<br>\hline<br>3 &amp; -20 &amp; 2000 &amp; 1+10i \\\\<br>\hline<br>\end{array}<br>$$</p>
+<p><font size="4" color="red">公式中的矩阵</font><br>使用<code>$$\begin{matrix}...\end{matrix}$$</code>这样的形式来表示矩阵。矩阵的每行之间依然使用\\\\来分隔，列之间依然使用&amp;来分隔。<br>例如：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp">$$
 \begin<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
 <span class="token number">1</span> <span class="token operator">&amp;</span> x <span class="token operator">&amp;</span> x<span class="token operator">^</span><span class="token number">2</span> \\\\
@@ -264,14 +264,14 @@ $$
 \end<span class="token punctuation">{</span>matrix<span class="token punctuation">}</span>
 $$
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>效果：<br>$$<br>\begin{matrix}<br>1 &amp; x &amp; x^2 \\<br>1 &amp; y &amp; y^2 \\<br>1 &amp; z &amp; z^2 \\<br>\end{matrix}<br>$$</p>
+<p>效果：<br>$$<br>\begin{matrix}<br>1 &amp; x &amp; x^2 \\\\<br>1 &amp; y &amp; y^2 \\\\<br>1 &amp; z &amp; z^2 \\\\<br>\end{matrix}<br>$$</p>
 <ul>
 <li>给矩阵加括号：<ul>
 <li>可以用前文中提到的括号再配以\left和\right。</li>
-<li>也可以使用特殊的matrix，即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为pmatrix、bmatrix、Bmatrix、vmatrix、Vmatrix。<br>如pmatrix：$\begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{pmatrix}$、bmatrix：&amp;\begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{bmatrix}$、Bmatrix：$\begin{Bmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Bmatrix}$、<br>vmatrix：$\begin{vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{vmatrix}$、<br>Vmatrix：$\begin{Vmatrix} 1 &amp; 2 \\ 3 &amp; 4\\ \end{Vmatrix}$。</li>
+<li>也可以使用特殊的matrix，即替换<code>\begin{matrix}...\end{matrix}</code>中的matrix为pmatrix、bmatrix、Bmatrix、vmatrix、Vmatrix。<br>如pmatrix：$\begin{pmatrix} 1 &amp; 2 \\\ 3 &amp; 4\\\ \end{pmatrix}$、bmatrix：&amp;\begin{bmatrix} 1 &amp; 2 \\\ 3 &amp; 4\\\ \end{bmatrix}$、Bmatrix：$\begin{Bmatrix} 1 &amp; 2 \\\ 3 &amp; 4\\\ \end{Bmatrix}$、<br>vmatrix：$\begin{vmatrix} 1 &amp; 2 \\\ 3 &amp; 4\\\ \end{vmatrix}$、<br>Vmatrix：$\begin{Vmatrix} 1 &amp; 2 \\\ 3 &amp; 4\\\ \end{Vmatrix}$。</li>
 </ul>
 </li>
-<li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\<br>\end{pmatrix}<br>$$</li>
+<li>矩阵中的省略元素：<br>可以使用\cdots：$\cdots$、\ddots：$\ddots$、\vdots：$\vdots$来表示矩阵中的省略元素。例如：<br>$$<br>\begin{pmatrix}<br>1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\\\<br>1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a_2^n \\\\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\\\<br>1 &amp; a_m &amp; a_m^2 &amp; \cdots &amp; a_m^n \\\\<br>\end{pmatrix}<br>$$</li>
 <li>增广矩阵的表示：<br>增广矩阵需要使用前面的array来实现，而matrix办不到了。例如：<pre class="line-numbers language-csharp"><code class="language-csharp">$$ 
 \left <span class="token punctuation">[</span>
 \begin<span class="token punctuation">{</span>array<span class="token punctuation">}</span><span class="token punctuation">{</span>cc<span class="token operator">|</span>c<span class="token punctuation">}</span>
@@ -281,11 +281,11 @@ $$
 \right <span class="token punctuation">]</span>
 $$
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-效果：<br>$$<br>\left [<br>\begin{array}{cc|c}<br>1 &amp; 2 &amp; 3 \\<br>4 &amp; 5 &amp; 6 \\<br>\end{array}<br>\right ]<br>$$<font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\<br>&amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\<br>&amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\<br>&amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。<br><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\<br>3n+1, &amp; \text{if $n$ is odd}  \\<br>\end{cases}<br>$$<br><font size="4" color="red">方程组</font></li>
+效果：<br>$$<br>\left [<br>\begin{array}{cc|c}<br>1 &amp; 2 &amp; 3 \\\\<br>4 &amp; 5 &amp; 6 \\\\<br>\end{array}<br>\right ]<br>$$<font size="4" color="red">公式对齐</font><br>有时候可能需要一系列的公式中等号对齐，例如：<br>$$<br>\begin{align}<br>\sqrt{37} &amp; = \sqrt{\frac{73^2-1}{12^2}} \\\\<br>&amp; = \sqrt{\frac{73^2}{12^2}\cdot\frac{73^2-1}{73^2}} \\\ <br>&amp; = \sqrt{\frac{73^2}{12^2}}\sqrt{\frac{73^2-1}{73^2}} \\\\<br>&amp; = \frac{73}{12}\sqrt{1 - \frac{1}{73^2}} \\\ <br>&amp; \approx \frac{73}{12}\left(1 - \frac{1}{2\cdot73^2}\right)<br>\end{align}<br>$$<br>这需要使用形如<code>\begin{align}...\end{align}</code>的格式，其中需要使用&amp;来指明需要对齐的位置（右键可查看上诉公式的代码）。<br><font size="4" color="red">分类表达式</font><br>可使用形如<code>\begin{cases}...\end{cases}</code>的格式。其中使用\来分类，可使用&amp;指明需要对齐的位置。例如：<br>$$<br>f(n) =<br>\begin{cases}<br>n/2,  &amp; \text{if $n$ is even} \\\\<br>3n+1, &amp; \text{if $n$ is odd}  \\\\<br>\end{cases}<br>$$<br><font size="4" color="red">方程组</font></li>
 </ul>
 <ol>
-<li>可以使用<code>\begin{array}...\end{array}</code>与<code>\left{ ... \right.</code>，配合表示方程组。例如：<br>$$<br>\left\{<br>\begin{array}{c}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{array}<br>\right.<br>$$</li>
-<li>也可以使用<code>\begin{cases}...\end{cases}</code>。例如：<br>$$<br>\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\<br>a_2x+b_2y+c_2z=d_2 \\<br>a_3x+b_3y+c_3z=d_3 \\<br>\end{cases}<br>$$</li>
+<li>可以使用<code>\begin{array}...\end{array}</code>与<code>\left{ ... \right.</code>，配合表示方程组。例如：<br>$$<br>\left\{<br>\begin{array}{c}<br>a_1x+b_1y+c_1z=d_1 \\\ <br>a_2x+b_2y+c_2z=d_2 \\\ <br>a_3x+b_3y+c_3z=d_3 \\\\<br>\end{array}<br>\right.<br>$$</li>
+<li>也可以使用<code>\begin{cases}...\end{cases}</code>。例如：<br>$$<br>\begin{cases}<br>a_1x+b_1y+c_1z=d_1 \\\ <br>a_2x+b_2y+c_2z=d_2 \\\ <br>a_3x+b_3y+c_3z=d_3 \\\\<br>\end{cases}<br>$$</li>
 </ol>
 <p>&nbsp;</p>
 <hr>

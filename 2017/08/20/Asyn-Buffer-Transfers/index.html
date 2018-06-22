@@ -178,7 +178,7 @@
 </ul>
 </li>
 </ul>
-<p>除此之外，也可以使用glMapBufferRange函数配合 GL_MAP_INVALIDATE_BUFFER_BIT或者GL<em>MAP</em> INVALIDATE_RANGE_BIT参数，来让VBO对应的固定内存失效，也就是对VBO和固定内存进行解绑，固定内存将对VBO不可见，这时通过映射后的指针向固定内存里写入数据，但是却不会将固定内存的数据传到VBO里，也就是不会影响glDrawElements使用的VBO显存数据，这样就可以在传数据的同时，驱动线程也并行执行glDrawElements。当使用映射指针传输完数据后，调用glUnmapBuffer函数，会重新让固定内存对VBO可见，这时才会开始把固定内存里的数据传入到VBO里：</p>
+<p>除此之外，也可以使用glMapBufferRange函数配合 GL_MAP_INVALIDATE_BUFFER_BIT或者GL_MAP_ INVALIDATE_RANGE_BIT参数，来让VBO对应的固定内存失效，也就是对VBO和固定内存进行解绑，固定内存将对VBO不可见，这时通过映射后的指针向固定内存里写入数据，但是却不会将固定内存的数据传到VBO里，也就是不会影响glDrawElements使用的VBO显存数据，这样就可以在传数据的同时，驱动线程也并行执行glDrawElements。当使用映射指针传输完数据后，调用glUnmapBuffer函数，会重新让固定内存对VBO可见，这时才会开始把固定内存里的数据传入到VBO里：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">glBindBuffer(GL_ARRAY_BUFFER , my_buffer_object);
 void *mydata_ptr = glMapBufferRange(GL_ARRAY_BUFFER , 0, data_size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
 // Fill mydata_ptr with useful data

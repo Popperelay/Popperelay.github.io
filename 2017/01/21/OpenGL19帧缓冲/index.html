@@ -385,7 +385,7 @@ void main(){
 <hr>
 <p>在单独纹理图像上进行后处理的另一个好处是我们可以从纹理的其他部分进行采样。比如我们可以从当前纹理值的周围采样多个纹理值。这样我们可以使用一些图像处理技巧，来实现很多后处理效果。比如接下来的后处理效果中的Kernel效果。</p>
 <p><font size="5" color="orange">Kernel effects</font><br>kernel是一个长得有点像一个小矩阵的数值数组，通常是一个3x3的矩阵，而且所有元素加起来的和通常等于1。</p>
-<p><font size="4" color="red">锐化Kernel：麻醉效果</font><br>下面是一个锐化Kernel的例子：<br>$$<br>\begin{bmatrix}-1 &amp; -1 &amp; -1 \\ -1 &amp; 9 &amp; -1 \\ -1 &amp; -1 &amp; -1 \end{bmatrix}<br>$$<br>通过Kernel矩阵，将当前纹素扩展到周围9个纹素，然后通过加权和得到最终的当前片段颜色。</p>
+<p><font size="4" color="red">锐化Kernel：麻醉效果</font><br>下面是一个锐化Kernel的例子：<br>$$<br>\begin{bmatrix}-1 &amp; -1 &amp; -1 \\\ -1 &amp; 9 &amp; -1 \\\ -1 &amp; -1 &amp; -1 \end{bmatrix}<br>$$<br>通过Kernel矩阵，将当前纹素扩展到周围9个纹素，然后通过加权和得到最终的当前片段颜色。</p>
 <p>为了得到当前片段周围的9个纹素值，我们需要知道这9个纹素的坐标是多少，然后才能通过采样取得纹素值。所以，我们先定义一个纹理坐标偏移量，就是这9个纹理坐标离中心纹素坐标的偏移量：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">//离中心纹素的s或t距离
 const float offset = 1.0/300;
@@ -469,7 +469,7 @@ void main(){
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950443.png" alt=""><br>这是一个锐化的Kernel，就好像玩家吞了麻醉剂产生的幻觉一样。</p>
-<p><font size="4" color="red">kernel模糊效果Blur</font><br>创建模糊效果的kernel如下：<br>$$<br>\begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 2 &amp; 4 &amp; 2 \\ 1 &amp; 2 &amp; 1 \end{bmatrix} / 16<br>$$<br>我们像素着色器里的kernel数组现在变成：</p>
+<p><font size="4" color="red">kernel模糊效果Blur</font><br>创建模糊效果的kernel如下：<br>$$<br>\begin{bmatrix} 1 &amp; 2 &amp; 1 \\\ 2 &amp; 4 &amp; 2 \\\ 1 &amp; 2 &amp; 1 \end{bmatrix} / 16<br>$$<br>我们像素着色器里的kernel数组现在变成：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1.0 / 16, 2.0 / 16, 1.0 / 16,
         2.0 / 16, 4.0 / 16, 2.0 / 16,
@@ -477,7 +477,7 @@ void main(){
     );
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950506.png" alt=""></p>
-<p><font size="4" color="red">kernel边缘检测效果</font><br>边缘检测的kernel矩阵如下，和锐化kernel有点像：<br>$$<br>\begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; -8 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{bmatrix}<br>$$<br>现在的kernel数组变为：</p>
+<p><font size="4" color="red">kernel边缘检测效果</font><br>边缘检测的kernel矩阵如下，和锐化kernel有点像：<br>$$<br>\begin{bmatrix} 1 &amp; 1 &amp; 1 \\\ 1 &amp; -8 &amp; 1 \\\ 1 &amp; 1 &amp; 1 \end{bmatrix}<br>$$<br>现在的kernel数组变为：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1, 1, 1,
         1,-8, 1,
