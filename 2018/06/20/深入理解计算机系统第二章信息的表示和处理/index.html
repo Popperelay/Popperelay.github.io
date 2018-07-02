@@ -258,6 +258,48 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>输出的并不是我们通常想要的Little，二是Greater。这是因为在进行小于运算时，由于x是无符号数，所以有符号数-1会先被转换成无符号数4294967295U，所以实际上比较的是4294967295U&lt;0U，当然输出的就是Greater了。</p>
 <p><font size="4" color="red">扩展一个数字的位表示</font><br>要将一个无符号数转换为一个更大的数据类型，我们只要简单地在二进制位表示的开头添加0，这种运算被称为零扩展（zero extension）。要讲一个补码数字转换为一个更大的数据类型，可以执行一个符号扩展（sign extension），在二进制位表示的开头添加符号位。比如把0101扩展为8位变成00000101，把1101扩展为8位变成11111101。可以很简单地证明符号扩展以后的值和原来的值相等（即1101和11111101表示的是同一个数值）：<br>对向量$\vec x=[1,x_{\omega-2},x_{\omega-3},…,x_0]$，把它从$\omega$位扩展为$\omega+k$位，变成$ \vec {x^,}=[1,…,1,1,x_{\omega-2},x_{\omega-3,…,x_0}]$，$\vec{x^,}$是在$\vec{x}$前面扩展了$k$个1。证明如下：<br>$$<br>\begin{align}<br>B2T_{\omega+k}(\vec{x^,})&amp;=(-2^{\omega+k}*1+2^{\omega+k-1}*1+…+2^{\omega}*1+2^{\omega-1}*1)+(2^{\omega-2}*x_{\omega-2}+…+2^0*x_0)\\<br>&amp;=-2^{\omega-1}*1+2^{\omega-2}*x_{\omega-2}+…+2^0*x_0\\<br>&amp;=B2T_{\omega}(\vec x)<br>\end{align}<br>$$<br>其实道理很简单，就是[111]和[111111111]其实都表示的是-1的意思。</p>
+<p>当把short转换成unsigned（unsigned就是unsigned int）时，我们先要改变大小（从2字节扩展到4字节），之后再完成从有符号到无符号的转换。如下程序：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">short</span> sx <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">12345</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> uy <span class="token operator">=</span> sx<span class="token punctuation">;</span>
+<span class="token function">showBytes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte_pointer<span class="token punctuation">)</span><span class="token operator">&amp;</span>uy<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>程序在本机（小端法机器）输出如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">c7 cf ff ff
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输出结果也证明了short到unsigned的转换是先扩展大小，再从有符号转变为无符号数。如果是先从有符号转变为无符号数，uy会先变成无符号数0xcfc7，然后把该无符号数扩展为4字节0x0000cfc7；如果是先把有符号数扩展4字节，uy会先变0xffffcfc7，然后把该有符号数转换从成无符号数0xffffcfc7。</p>
+<p><font size="4" color="red">截断数字</font><br>截断无符号数：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2U_{k}(\vec {x^,})$，则$x^,=x\;mod\;2^k$。该原理背后的直觉就是：截去的部分变为0，就好像是对其取模$2^k$，前面那些位在该取模下结果都为0。</p>
+<p>截断补码数值：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2T_{k}(\vec {x^,})$，则$x^,=U2T_k(x\;mod\;2^k)$。该原理背后的直觉就是：和无符号数一样，在位级操作上把前k位变为0（把有符号当作无符号数来截断），然后再把截断后的二进制数解释为有符号补码数（相当于把无符号数转换为有符号补码数）。</p>
+<p><font size="4" color="red">关于有符号数与无符号数的建议</font><br>先看如下代码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">sumElements</span><span class="token punctuation">(</span><span class="token keyword">float</span> vArray<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> vLength<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> Result<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> vLength <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        Result <span class="token operator">+</span><span class="token operator">=</span> vArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当参数vLength等于0时，运行这段代码应该返回0.0。但是实际上，运行时会遇到一个内存错误（内存冲突，无法访问的地址）。这是因为0-1的结果是一个无符号数$UMax$，所以在i递增时，代码将会试图访问数组vArray以外的非法元素。解决方案是换成<code>&lt;vLength</code>，或者将参数vLength声明为有符号数。<br>再看下面的代码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">strLonger</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>vStr1<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>vStr2<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">strlen</span><span class="token punctuation">(</span>vStr1<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">strlen</span><span class="token punctuation">(</span>vStr2<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于strlen函数的返回值是无符号size_t类型，所以当字符串vStr1的长度小于字符串vStr2的长度时，由于是无符号数运算，所以函数最终返回的不是0，而是1，出现错误结果。解决方案是改成<code>return strlen(vStr1) &gt; strlen(vStr2);</code>。</p>
+<p>避免这类错误的一种方法就是绝不使用无符号数。实际上，除了C以外很少有语言支持无符号整数。因为这些语言的设计者认为无符号数带来的麻烦比益处多得多。比如Java只支持有符号整数，并且要求以补码运算来实现，正常的右移运算符&gt;&gt;被定义为执行算术右移，特殊的运算符&gt;&gt;&gt;被定义为逻辑右移。</p>
+<p><font size="5" color="orange">整数运算</font></p>
+<hr>
+<p>有时我们会发现，两个整数相加会得出一个负数，而比较表达式<code>x&lt;y</code>和比较表达式<code>x-y&lt;0</code>会产生不同的结果。这些都是由于计算机运算的有限性造成的（即一定字长的编码表示的数的范围有限）。</p>
+<p><font size="4" color="red">无符号加法</font><br>无符号数加法：<br>对满足$0\le x,y&lt;2^{\omega}$的$x$和$y$有：<br>$$<br>x+^u_{\omega}y=<br>\begin{cases}<br>x+y, &amp;x+y&lt;2^{\omega} &amp;正常 \\<br>x+y-2^{\omega}, &amp;2^{\omega}\le x+y&lt;2^{\omega+1} &amp;溢出<br>\end{cases}<br>$$<br>公式很好理解，就是溢出时，把溢出的那一位1给截掉。</p>
+<p>说一个算术运算溢出，是指完整的整数结果不能放到数据类型的字长限制中去。</p>
+<p>我们检测无符号数加法中的溢出，可以判断加法结果是否小于任何一个加数：<br>对在范围$0\le x,y\le UMax_{\omega}$中的$x$和$y$，令$s \doteq x+^u_{\omega}y$。则对计算$s$，当且仅当$s&lt;x$（或者等价地$s&lt;y$）时，发生了溢出。<br>对应程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">uAddOK</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sum <span class="token operator">></span> x <span class="token operator">&amp;&amp;</span> sum <span class="token operator">></span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>无符号数求反：<br>对满足$0 \le x<2^{\omega}$的任意$x$，其$\omega$位的无符号逆元$-^u_{\omega}x$由下式给出： $$="" -^u_{\omega}x="\begin{cases}" x,="" &x="0" \\="" 2^{\omega}-x,="">0<br>\end{cases}<br>$$<br>公式的原理很简单就不细说了。</2^{\omega}$的任意$x$，其$\omega$位的无符号逆元$-^u_{\omega}x$由下式给出：></p>
+<p><font size="4" color="red">补码加法</font><br>补码加法：<br>对满足$-2^{\omega-1}\le x，y\le 2^{\omega-1}-1$的整数$x$和$y$有：</p>
 
             </div>
 
