@@ -264,14 +264,14 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <p>输出如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token operator">-</span><span class="token number">1</span> <span class="token number">255</span> <span class="token number">255</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>从上面无符号数编码和补码编码的定义中，我们可以很容易看出当符号位为-1时：$B2U_{\omega}(\vec x)-B2T_{\omega}(\vec x)=2*2^{\omega-1}=2^{\omega}$，当然符号位为0时，这个差值为0。所以补码到无符号数的转换可以定义为如下：</p>
+<p>从上面无符号数编码和补码编码的定义中，我们可以很容易看出当符号位为-1时：$B2U_{\omega}(\vec x)-B2T_{\omega}(\vec x)=2*2^{\omega-1}=2^{\omega}$，当然符号位为0时，这个差值为0。所以：</p>
 <blockquote>
-<p>对满足$TMin_{\omega}\le x \le TMax_{\omega}$的$x$有：<br>$$<br>T2U_{\omega}(x)=<br>\begin{cases}<br>x+2^{\omega}, &amp; x&lt;0 \\<br>x, &amp; x \ge 0<br>\end{cases}<br>$$</p>
+<p>补码到无符号数的转换可以定义为如下：<br>对满足$TMin_{\omega}\le x \le TMax_{\omega}$的$x$有：<br>$$<br>T2U_{\omega}(x)=<br>\begin{cases}<br>x+2^{\omega}, &amp; x&lt;0 \\<br>x, &amp; x \ge 0<br>\end{cases}<br>$$</p>
 </blockquote>
 <p>再通俗解释一下，如果是4位长度的编码，从补码变为无符号数，最高有效位的权重从-8变为+8。因此，补码表示的负数如果看出无符号数，值会增加16。所以，补码的-5被强制转换为无符号数以后变成11，-1被变成15。</p>
-<p>从无符号数变成补码当然就是反过来了，比如对于8位长度的编码，当无符号数处在补码能够表示的非负数范围0~127时，转换后的补码值不变；但是当无符号数处在这个范围之外时，即128~255的范围，转换后的补码值就是将该数减去$2^8=256$。</p>
+<p>从无符号数变成补码当然就是反过来了，比如对于8位长度的编码，当无符号数处在补码能够表示的非负数范围0~127时，转换后的补码值不变；但是当无符号数处在这个范围之外时，即128~255的范围，转换后的补码值就是将该数减去$2^8=256$。所以：</p>
 <blockquote>
-<p>所以，无符号数到补码的转换可以定义为如下：<br>$$<br>U2T_{\omega}(u)=<br>\begin{cases}<br>u, &amp; u \le TMax_{\omega} \\<br>u-2^{\omega}, &amp; u &gt; TMax_{\omega}<br>\end{cases}<br>$$</p>
+<p>无符号数到补码的转换可以定义为如下：<br>$$<br>U2T_{\omega}(u)=<br>\begin{cases}<br>u, &amp; u \le TMax_{\omega} \\<br>u-2^{\omega}, &amp; u &gt; TMax_{\omega}<br>\end{cases}<br>$$</p>
 </blockquote>
 <p><font size="4" color="red">C语言中的有符号数与无符号数</font><br>尽管C语言标准没有指定有符号数要采用某种表示，但是几乎所有的机器都使用补码。通常，大多数数字都默认为是有符号的。例如当声明一个像12345或者0x1A2B这样的常量时，这个值就被认为是有符号的。要创建一个无符号常量，必须加上后缀字符‘U’或者‘u’，例如12345U或者0x1A2Bu。</p>
 <p>当执行一个运算时，如果它的一个运算数是有符号的而另一个是无符号的，那么C语言会隐式地将有符号参数强制类型转换为无符号数，并假设这两个数都是非负的，来执行这个运算。例如下面的代码：</p>
@@ -291,9 +291,13 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <p>输出结果也证明了short到unsigned的转换是先扩展大小，再从有符号转变为无符号数。如果是先从有符号转变为无符号数，uy会先变成无符号数0xcfc7，然后把该无符号数扩展为4字节0x0000cfc7；如果是先把有符号数扩展4字节，uy会先变0xffffcfc7，然后把该有符号数转换从成无符号数0xffffcfc7。</p>
 <p><font size="4" color="red">截断数字</font></p>
 <blockquote>
-<p>截断无符号数：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2U_{k}(\vec {x^,})$，则$x^,=x\;mod\;2^k$。该原理背后的直觉就是：截去的部分变为0，就好像是对其取模$2^k$，前面那些位在该取模下结果都为0。</p>
-<p>截断补码数值：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2T_{k}(\vec {x^,})$，则$x^,=U2T_k(x\;mod\;2^k)$。该原理背后的直觉就是：和无符号数一样，在位级操作上把前k位变为0（把有符号当作无符号数来截断），然后再把截断后的二进制数解释为有符号补码数（相当于把无符号数转换为有符号补码数）。</p>
+<p>截断无符号数：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2U_{k}(\vec {x^,})$，则$x^,=x\;mod\;2^k$。</p>
 </blockquote>
+<p>该原理背后的直觉就是：截去的部分变为0，就好像是对其取模$2^k$，前面那些位在该取模下结果都为0。</p>
+<blockquote>
+<p>截断补码数值：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2T_{k}(\vec {x^,})$，则$x^,=U2T_k(x\;mod\;2^k)$。</p>
+</blockquote>
+<p>该原理背后的直觉就是：和无符号数一样，在位级操作上把前k位变为0（把有符号当作无符号数来截断），然后再把截断后的二进制数解释为有符号补码数（相当于把无符号数转换为有符号补码数）。</p>
 <p><font size="4" color="red">关于有符号数与无符号数的建议</font><br>先看如下代码：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">sumElements</span><span class="token punctuation">(</span><span class="token keyword">float</span> vArray<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> vLength<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -320,7 +324,10 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 </blockquote>
 <p>公式很好理解，就是溢出时，把溢出的那一位1给截掉。</p>
 <p>说一个算术运算溢出，是指完整的整数结果不能放到数据类型的字长限制中去。</p>
-<p>我们检测无符号数加法中的溢出，可以判断加法结果是否小于任何一个加数：<br>对在范围$0\le x,y\le UMax_{\omega}$中的$x$和$y$，令$s \doteq x+^u_{\omega}y$。则对计算$s$，当且仅当$s&lt;x$（或者等价地$s&lt;y$）时，发生了溢出。<br>对应程序如下：</p>
+<blockquote>
+<p>我们检测无符号数加法中的溢出，可以判断加法结果是否小于任何一个加数：<br>对在范围$0\le x,y\le UMax_{\omega}$中的$x$和$y$，令$s \doteq x+^u_{\omega}y$。则对计算$s$，当且仅当$s&lt;x$（或者等价地$s&lt;y$）时，发生了溢出。</p>
+</blockquote>
+<p>对应程序如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">uAddOK</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> y<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">unsigned</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
@@ -339,7 +346,10 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 </blockquote>
 <p>当$x+^t_{\omega}y$小于$-2^{\omega-1}$时，产生负溢出；当它大于$2^{\omega-1}$时，产生正溢出。</p>
 <p>两个数的$\omega$位补码之和与无符号之和其实有完全相同的位级表示。所以当发生正溢出时（即第$\omega-1$位为0，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和减去$2^{\omega}$；当发生负溢出时（即即第$\omega-1$位为1，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和加上$2^{\omega}$（联系补码的定义公式比较容易理解）。</p>
-<p>检测补码加法的溢出，可以判断两个正数相加是否得到负数，或者两个负数相加是否得到正数：<br>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$，令$s\doteq x+^t_{\omega}y$。当且仅当$x&gt;0,y&gt;0$，但$s\le 0$时，计算s发生了正溢出；当且仅当$x&lt;0,y&lt;0$，但$s\ge 0$时，计算s发生了负溢出。对应程序如下：</p>
+<blockquote>
+<p>检测补码加法的溢出，可以判断两个正数相加是否得到负数，或者两个负数相加是否得到正数：<br>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$，令$s\doteq x+^t_{\omega}y$。当且仅当$x&gt;0,y&gt;0$，但$s\le 0$时，计算s发生了正溢出；当且仅当$x&lt;0,y&lt;0$，但$s\ge 0$时，计算s发生了负溢出。</p>
+</blockquote>
+<p>对应程序如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tAddOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
