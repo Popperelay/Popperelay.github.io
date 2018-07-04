@@ -231,7 +231,10 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <hr>
 <p><font size="4" color="red">整型数据类型</font><br>对于有符号数据类型，它们的取值范围不是对称的：负数的范围比正数的范围大1。</p>
 <p>C和C++都支持有符号（默认）和无符号数。Java只支持有符号数。</p>
-<p><font size="4" color="red">无符号数的编码</font><br>无符号数编码定义如下(B2U是Binary to Unsigned的缩写)：<br>对向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$：<br>$$<br>B2U_{\omega}(\vec x) \doteq \sum_{i=0}^{\omega-1} x_i 2^i<br>$$<br>也就是说无符号数编码其实就是每个二进制位对应的二次幂的加和。</p>
+<p><font size="4" color="red">无符号数的编码</font><br>无符号数编码定义如下(B2U是Binary to Unsigned的缩写)：</p>
+<blockquote>
+<p>对向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$：<br>$$<br>B2U_{\omega}(\vec x) \doteq \sum_{i=0}^{\omega-1} x_i 2^i<br>$$<br>也就是说无符号数编码其实就是每个二进制位对应的二次幂的加和。</p>
+</blockquote>
 <p><font size="4" color="red">补码编码</font><br>最常见的有符号数的计算机表示方式是补码形式。有符号数补码编码的定义如下（B2T是Binary to Two’s-complement的缩写）：<br>对向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$：<br>$$B2T_{\omega}(\vec x) \doteq -x_{\omega-1}2^{\omega-1}+\sum_{i=0}^{\omega-2}x_i2^i $$<br>也就是说补码编码实际上是最高位（符号位）的二次幂的负数，加上其余位的二次幂的和。如下：<br>$$B2T_4([1011])=-1 \cdot 2^3+ 0 \cdot 2^2+1\cdot2^1+1\cdot2^0=-8+0+2+1=-5$$<br>从无符号数编码和补码编码的定义上我们可以很容易得知，对于16位的编码，最小的无符号数$UMin_{\omega}$=0x0000=0，最大的无符号数$UMax_{\omega}$=0xFFFF=65535，最小的补码$TMin_{\omega}$=0x8000=-32768，最大的补码$TMax_{\omega}$=0x7FFF=32767。而且-1的补码编码是0xFFFF，0的补码编码是0x0000。</p>
 <p>也可以看到补码编码下负数的表示范围总比正数的表示范围大1，之所以会有这样的不对称性，是因为一半的位模式（符号位设置为1的数）表示负数，一般的位模式（符号位设置为0的数）表示<strong>非</strong>负数，然后0恰好是非负数，当然就导致补码编码能表示的正数比负数少了一个。</p>
 <p>有符号数还有其他两种表示方法：反码和原码。<br>反码编码(Ones’ Complement)定义如下：<br>$$B2O_{\omega}(\vec x) \doteq -x_{\omega-1}(2^{\omega-1}-1)+\sum_{i=0}^{\omega-2}x_i2^i$$<br>可以看到除了符号位的权是$-(2^{\omega-1}-1)$而不是$-2^{\omega-1}$以外，反码和补码的定义几乎是一样的。</p>
