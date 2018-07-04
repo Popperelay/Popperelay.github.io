@@ -161,6 +161,50 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <p>$$<br>-^u_{\omega}x=<br>\begin{cases}<br>x, &amp; x = 0\\<br>2^{\omega}-x, &amp; x&gt;0<br>\end{cases}<br>$$</p>
 <p>公式的原理很简单就不细说了。</p>
 <p><font size="4" color="red">补码加法</font><br>补码加法：<br>对满足$-2^{\omega-1}\le x，y\le 2^{\omega-1}-1$的整数$x$和$y$有：</p>
+<p>$$<br>x+^t_{\omega}y=<br>\begin{cases}<br>x+y-2^{\omega}, &amp;2^{\omega-1}\le x+y &amp;正溢出 \\<br>x+y, &amp;-2^{\omega-1} \le x+y&lt;2^{\omega-1} &amp;正常\\<br>x+y+2^{\omega}, &amp;x+y&lt;-2^{\omega-1} &amp;负溢出<br>\end{cases}<br>$$</p>
+<p>当$x+^t_{\omega}y$小于$-2^{\omega-1}$时，产生负溢出；当它大于$2^{\omega-1}$时，产生正溢出。</p>
+<p>两个数的$\omega$位补码之和与无符号之和其实有完全相同的位级表示。所以当发生正溢出时（即第$\omega-1$位为0，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和减去$2^{\omega}$；当发生负溢出时（即即第$\omega-1$位为1，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和加上$2^{\omega}$（联系补码的定义公式比较容易理解）。</p>
+<p>检测补码加法的溢出，可以判断两个正数相加是否得到负数，或者两个负数相加是否得到正数：<br>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$，令$s\doteq x+^t_{\omega}y$。当且仅当$x&gt;0,y&gt;0$，但$s\le 0$时，计算s发生了正溢出；当且仅当$x&lt;0,y&lt;0$，但$s\ge 0$时，计算s发生了负溢出。对应程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tAddOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> NegOver <span class="token operator">=</span> x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> sum <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> PosOver <span class="token operator">=</span> x <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> sum <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span>NegOver <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>PosOver<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是我们不能使用如下代码来判断补码加法是否溢出：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tAddOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>sum <span class="token operator">-</span> x <span class="token operator">==</span> y<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>sum <span class="token operator">-</span> y <span class="token operator">==</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>简单来说，从上面补码加法的定义公式可以看出，补码溢出时很像模数运算。而模数加法会形成一种数学结构，叫阿贝尔群，阿贝尔群是满足交换律和结合律的。也就是说无论加法是否溢出，<code>sum-x</code>，即<code>x+y-x</code>，始终都会求值得到y（因为补码加法会形成阿贝尔群，满足交换律和结合律），所以我们不能通过上面的代码来判断补码加法是否溢出，因为该函数总是返回1（还可以通过补码加法的定义公式来推导出总是求值得到y的原因，不再赘述）。</p>
+<p><font size="4" color="red">补码的非</font><br>对满足$TMin_{\omega}\le x\le TMax_{\omega}$的$x$，其补码的非（补码逆元）$-^t_{\omega}x$由下式给出：</p>
+<p>$$<br>-^t_{\omega}x=<br>\begin{cases}<br>TMin_{\omega}, &amp;x=TMin_{\omega} \\<br>-x, &amp;x&gt;TMin_{\omega}<br>\end{cases}<br>$$</p>
+<p>也就是说，对于$\omega$位的补码加法来说，$TMin_{\omega}$是自己的加法的逆（[100…]+[100…]=[000…]），而对其他任何数值$x$都有$-x$作为其加法的逆。</p>
+<p>执行位级补码非的第一种方法是对每一位求反，再对结果加1。在C语言中，我们可以说，对于任意整数值$x$，计算表达式<code>-x</code>和<code>~x+1</code>得到的结果完全一样。</p>
+<p>执行位级补码非的第二种方法是对最右边的1的左边所有二进制位求反（不包括这个1）。比如$x$的位级表示是$[x_{\omega-1},x_{\omega-2},…,x_{k+1},1,0,…,0]$，那么它的补码非的位级表示就是$[\sim x_{\omega-1},\sim x_{\omega-2},…,\sim x_{k+1},1,0,…,0]$。</p>
+<p><font size="4" color="red">无符号乘法</font><br>对满足$0\le x，y\le UMax_{\omega}$的整数$x$和$y$有：</p>
+<p>$$<br>x*^u_{\omega}y=(x \cdot y)mod~2^{\omega}<br>$$</p>
+<p><font size="4" color="red">补码乘法</font><br>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$有：</p>
+<p>$$<br>x*^t_{\omega}y=U2T_{\omega}((x \cdot y)mod~2^{\omega})<br>$$</p>
+<p>可以看到，无符号乘法和补码乘法在位级运算上是一样的，不同的只是在于解释结果二进制序列的方式（以无符号的方式还是以补码的方式去解释）。</p>
+<p>无符号数[101]和[011]作乘法过程如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_2.png" alt=""><br>有符号数[101]和[011]作乘法过程如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_3_2.png" alt=""><br>在做二进制乘法时，由于原来的乘数有3位，通常计算机会设置6位来保存乘数以及乘积，所以我们首先需要把3位的乘数扩展为6位，然后执行二进制乘法运算，在得到的乘积结果中截取低6位作为最后的结果（图中红色圈出的6位）。然后我们还需要把这6位截断为3位（因为乘数是3位意思也就是用3位二进制来存储一个数），可以看到具有相同二进制位表示的乘数相乘，无符号乘法和有符号乘法最终得到的3位乘积结果具有相同的位级表示（图中绿色圈出的3位）。它们完整的乘积位级表示可能会不同，但是截断后乘积的位级表示是相同的。这也刚好符合补码乘法的定义公式。</p>
+<p>检测补码乘法是否溢出，可以判断乘积乘积除以一个乘数以后是否得到另一个乘数。对应代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tMultOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> x<span class="token operator">*</span>y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span>x <span class="token operator">||</span> p <span class="token operator">/</span> x <span class="token operator">==</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>正如前文所述的，我们不能通过减法来判断加法是否溢出，但是却可以用除法来判断乘法是否溢出，这是因为补码加法会形成阿贝尔群，但是补码乘法不会形成阿贝尔群，因此补码乘法不满足交换律和结合律，即溢出时<code>x*y/x</code>不是等于y的。</p>
+<p><font size="4" color="red">乘以常数</font><br>因为乘法指令很慢，所需要的时钟周期很长（大多数机器需要10+个时钟周期），但是其他整数运算（例如加法、减法、位级运算和移位）只需要1个时钟周期。所以，编译器使用了一项重要的优化：试着用移位和加法运算的组合来代替乘以常数因子的乘法。</p>
+<p>我们先来看一下乘以2的幂的情况：</p>
+<blockquote>
+<p>设x为位模式$[x_{\omega-1},x_{\omega-2},…,x_0]$表示的无符号整数。那么，对于任何</p>
+</blockquote>
 ]]></content>
       
         <categories>
