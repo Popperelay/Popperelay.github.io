@@ -152,393 +152,393 @@
 <p><font size="5" color="orange">简单工厂</font></p>
 <hr>
 <p>最简单的实现方式如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 
-class CCar {
-public:
-    virtual void driveV() = 0;
-};
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar{
-public:
-    virtual void driveV() override{
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CCarFactory {
-public:
-    CCar* createCar(std::string vCarName) {
-        if ("Benz" == vCarName)
-            return new CBenz;
-        else if ("Audi" == vCarName)
-            return new CAudi;
-        else
-            return NULL;
-        }
-};
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Benz"</span> <span class="token operator">==</span> vCarName<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> CBenz<span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Audi"</span> <span class="token operator">==</span> vCarName<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> CAudi<span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    std::string CarName;
-    std::cin >> CarName;
-    CCarFactory CarFactory;
-    CCar* Car = CarFactory.createCar(CarName);
-    if(Car)
-        Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string CarName<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cin <span class="token operator">>></span> CarName<span class="token punctuation">;</span>
+    CCarFactory CarFactory<span class="token punctuation">;</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> CarFactory<span class="token punctuation">.</span><span class="token function">createCar</span><span class="token punctuation">(</span>CarName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>奔驰CBenz和奥迪CAudi都继承自基类车CCar。有一个专门的工厂类来负责实例对象的创建，被创建的实例都具有相同的父类，这就是简单工厂模式。</p>
 <p>其优点是只需要提供车的名字，就可以在工厂类里创建出对应的车类，不用去关心具体的创建过程。让对象的业务（即开车），与对象的创建（即造车）分离开来，降低了系统的耦合度。但是缺点也是很明显的，它不符合开闭原则，因为用到了类似switch-case的if-else语句，当增加新的车类型时，需要去修改工厂类的代码。</p>
 <p><font size="5" color="orange">工厂方法</font></p>
 <hr>
 <p>简单工厂是把所有车的创建都放在一个工厂里完成，但是随着车类型越来越多，每种车还需要在工厂里生产、装配、维护，工序变得更复杂，无疑这个工厂太繁重了。一个解决方案是：每种车都由一个专属的工厂来生产，这些工厂又被一个boss工厂来管理。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <vector>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 
-class CCar {
-public:
-    virtual void driveV() = 0;
-};
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar{
-public:
-    virtual void driveV() override{
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAbstractFactory {
-public:
-    virtual CCar* createCar() = 0;
-};
+<span class="token keyword">class</span> <span class="token class-name">CAbstractFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenzFactory : public CAbstractFactory{
-public:
-    virtual CCar* createCar() override {
-        return new CBenz();
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenzFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudiFactory : public CAbstractFactory {
-public:
-    virtual CCar* createCar() override {
-        return new CAudi();
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudiFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    CAbstractFactory* AbstractFactory = new CBenzFactory();
-    CCar* Car = AbstractFactory->createCar();
-    Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CAbstractFactory<span class="token operator">*</span> AbstractFactory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CBenzFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> AbstractFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当需要增加保时捷这种车时，只需要增加一个派生自CCar的CPorsche类，和一个派生自CAbstractFactory的CPorscheFactory工厂类。符合开闭原则。</p>
 <p>但是上面的代码需要用户知道奔驰车对应的工厂类名是什么，无法直接通过字符串来创建对应的车，还是需要加如下的代码：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CCar* createCar(const std::string& vCarName) {
-    if ("Benz" == vCarName) {
-        CAbstractFactory* AbstractFactory = new CBenzFactory();
-        return AbstractFactory->createCar();
-    }
-    else if ("Audi" == vCarName) {
-        CAbstractFactory* AbstractFactory = new CAudiFactory();
-        return AbstractFactory->createCar();
-    }
-}
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Benz"</span> <span class="token operator">==</span> vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        CAbstractFactory<span class="token operator">*</span> AbstractFactory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CBenzFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> AbstractFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"Audi"</span> <span class="token operator">==</span> vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        CAbstractFactory<span class="token operator">*</span> AbstractFactory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CAudiFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> AbstractFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样就还是无法满足开闭原则了。如果用户输入一个字符串，就直接给他创建一个对应的车该多好。需要让字符串和车联系在一起，很容易想到在车类里增加一个字符串变量<code>m_CarName</code>，标志这辆车的名字。如果用户输入的字符串和车对象里的名字匹配，就返回这辆车：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <vector>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 
-class CCar {
-private:
-    std::string m_CarName;
-public:
-    virtual void driveV() = 0;
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>string m_CarName<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    void setCarName(const std::string& vCarName) {
-        m_CarName = vCarName;
-    }
+    <span class="token keyword">void</span> <span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        m_CarName <span class="token operator">=</span> vCarName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    const std::string& getCarName() const {
-        return m_CarName;
-    }
-};
+    <span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> <span class="token function">getCarName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> m_CarName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-std::vector<CCar*> Cars;
+std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>CCar<span class="token operator">*</span><span class="token operator">></span> Cars<span class="token punctuation">;</span>
 
-class CAbstractFactory {
-public:
-    virtual void createCar() = 0;
+<span class="token keyword">class</span> <span class="token class-name">CAbstractFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    CCar* getCar(std::string vCarName) {
-        for (int i = 0; i < Cars.size(); i++) {
-            if (vCarName == Cars[i]->getCarName())
-                return Cars[i];
-        }
-        return NULL;
-    }
-};
+    CCar<span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> Cars<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>vCarName <span class="token operator">==</span> Cars<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getCarName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> Cars<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenzFactory : public CAbstractFactory {
-public:
-    virtual void createCar() override {
-        CCar* Car = new CBenz();
-        Car->setCarName("Benz");
-        Cars.push_back(Car);
-    }
+<span class="token keyword">class</span> <span class="token class-name">CBenzFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        CCar<span class="token operator">*</span> Car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Cars<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>Car<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CBenzFactory() {
-        createCar();
-    }
-};
+    <span class="token function">CBenzFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudiFactory : public CAbstractFactory {
-public:
-    virtual void createCar() override {
-        CCar* Car = new CAudi();
-        Car->setCarName("Audi");
-        Cars.push_back(Car);
-    }
+<span class="token keyword">class</span> <span class="token class-name">CAudiFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        CCar<span class="token operator">*</span> Car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Cars<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>Car<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CAudiFactory() {
-        createCar();
-    }
-};
+    <span class="token function">CAudiFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    CBenzFactory BenzFactory;
-    CAudiFactory AudiFactory;
-    CAbstractFactory* AbstractFactory = &BenzFactory;
-    CCar* Car = AbstractFactory->getCar("Porsche");
-    if (Car)
-        Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CBenzFactory BenzFactory<span class="token punctuation">;</span>
+    CAudiFactory AudiFactory<span class="token punctuation">;</span>
+    CAbstractFactory<span class="token operator">*</span> AbstractFactory <span class="token operator">=</span> <span class="token operator">&amp;</span>BenzFactory<span class="token punctuation">;</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> AbstractFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Porsche"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码是在每个工厂的构造函数里，把奥迪CAudi、奔驰CBenz等车创建好了存入仓库（即全局变量Cars）里，当用户需用某种车时，根据用户输入的字符串（车名）去仓库里找到这辆车返回给用户。具体方法时把用户输入的字符串和仓库里所有车的属性：车名，进行匹配。</p>
 <p>当需要增加保时捷时，只需要添加保时捷类和保时捷工厂类：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">class CPorsche :public CCar {
-    virtual void driveV() override {
-        std::cout << "Driving Porsche" << std::endl;
-    }
-};
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">CPorsche</span> <span class="token operator">:</span><span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Porsche"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CPorscheFactory :public CAbstractFactory {
-public:
-    virtual void createCar() override {
-        CCar* Car = new CPorsche();
-        Car->setCarName("Porsche");
-        Cars.push_back(Car);
-    }
+<span class="token keyword">class</span> <span class="token class-name">CPorscheFactory</span> <span class="token operator">:</span><span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        CCar<span class="token operator">*</span> Car <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CPorsche</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token string">"Porsche"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Cars<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>Car<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CPorscheFactory() {
-        createCar();
-    }
-};
+    <span class="token function">CPorscheFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在main函数开头添加对保时捷工厂对象：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CPorscheFactory PoscheFactory;
+<pre class="line-numbers language-cpp"><code class="language-cpp">CPorscheFactory PoscheFactory<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>很显然，这种设计是符合开闭原则的，并没有去改动已有的代码设计。但是需要将所有车对象都存储到仓库里，这无疑很占内存，如果暴发户在某一时刻只需要用到奔驰，但是上面的代码在这一刻实际上是奔驰、奥迪、宝马都已经生成了，是种内存浪费。其实上面的代码体现了对象池模式：事先将对象new好存储到对象池里，需要时从对象池里取出，不需要时放回对象池。对象池模式对需要频繁创建、销毁的对象很有好处，因为需要了去取，不需要了放回去，就省去了频繁的耗时好性能的new和delete操作（一次就好）。</p>
 <p>而且上面的代码有个问题：工厂模式存在的初衷就是代替new，在用户需要时才立即创建对象，上面代码是在用户需要之前就创建好了。这其实是个致命的问题，如果有两个暴发户都需要奔驰车，那么他们去工厂里拿的将是同一辆车（取到的奔驰车对象的地址是一样的），这明显不对。还是应该每个人都去找奔驰厂商，让厂商给他们每个人都new一辆奔驰。</p>
 <p>那我们这样考虑：当用户输入字符串时，去工业园区找对应的厂商（这里厂商的意思是具体的工厂对象，比如生产奔驰的工厂），让厂商立即造车。这样做就和new的功能一样了。更改一下上面的代码，取消车的字符串标志，移到厂商类里：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <vector>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 
-class CCar {
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
 
-public:
-    virtual void driveV() = 0;
-};
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAbstractFactory {
-private:
-    std::string m_CarName;
+<span class="token keyword">class</span> <span class="token class-name">CAbstractFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>string m_CarName<span class="token punctuation">;</span>
 
-public:
-    virtual CCar* createCar() = 0;
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-    void setCarName(const std::string& vCarName) {
-        m_CarName = vCarName;
-    }
+    <span class="token keyword">void</span> <span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        m_CarName <span class="token operator">=</span> vCarName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    const std::string& getCarName() const {
-        return m_CarName;
-    }
-};
+    <span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> <span class="token function">getCarName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> m_CarName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-std::vector<CAbstractFactory*> g_Factoris;
+std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>CAbstractFactory<span class="token operator">*</span><span class="token operator">></span> g_Factoris<span class="token punctuation">;</span>
 
-class CBenzFactory : public CAbstractFactory {
-public:
-    virtual CCar* createCar() override {
-        return new CBenz();
-    }
+<span class="token keyword">class</span> <span class="token class-name">CBenzFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CBenzFactory() {
-        setCarName("Benz");
-        g_Factoris.push_back(this);
-    }
-};
+    <span class="token function">CBenzFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        g_Factoris<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudiFactory : public CAbstractFactory {
-public:
-    virtual CCar* createCar() override {
-        return new CAudi();
-    }
+<span class="token keyword">class</span> <span class="token class-name">CAudiFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CAudiFactory() {
-        setCarName("Audi");
-        g_Factoris.push_back(this);
-    }
-};
+    <span class="token function">CAudiFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setCarName</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        g_Factoris<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-public:
-    CAbstractFactory* getCar(std::string vCarName) {
-        for (int i = 0; i < g_Factoris.size(); i++) {
-            if (vCarName == g_Factoris[i]->getCarName())
-                return g_Factoris[i];
-        }
-        return NULL;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CAbstractFactory<span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> g_Factoris<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>vCarName <span class="token operator">==</span> g_Factoris<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getCarName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> g_Factoris<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    CBenzFactory BenzFactory;
-    CAudiFactory AudiFactory;
-    CFactoryProducer FactoryProducer;
-    CCar* Car = FactoryProducer.getCar("Benz")->createCar();
-    if (Car)
-        Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CBenzFactory BenzFactory<span class="token punctuation">;</span>
+    CAudiFactory AudiFactory<span class="token punctuation">;</span>
+    CFactoryProducer FactoryProducer<span class="token punctuation">;</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> FactoryProducer<span class="token punctuation">.</span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>由于无法在CAbstractFactory 类里直接使用CAbstractFactory *类型的全局变量g_Factoris，所以上面的代码增加了一个工厂生成器的类CFactoryProducer ，用来根据字符串找出对应的厂商。</p>
 <p>上面的代码可以直接用字符串生成对应的车对象，符合开闭原则，而且和new的功能一样，对象是用户需要时才创建的。虽然在工业园区（即全局变量g_Factoris）里也需要事先保存所有的工厂对象，但是这比上一个方案要好一些，通常情况下车对象都比工厂对象要复杂、要大一些，工厂毕竟只需要new一个车对象就可以了，而车里可能还会添加很多其他的属性，诸如引擎、座椅、制动系统等等。</p>
 <p><font size="5" color="orange">直接通过字符串来生成对象的工厂模式</font></p>
 <hr>
 <p>而且这两个方案都有一个不好的地方：需要去遍历仓库里的所有车或者工业园区里的所有厂商，速度比较慢。能不能直接通过字符串去找到对应的厂商？可以的，这可以用map数据结构来实现，让字符串和对应的厂商类对象组成键值对，存入到map中。需要时直接根据字符串去map中找到对应的厂商。</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-class CCar {
-public:
-    virtual void driveV() = 0;
-};
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAbstractFactory {
-public:
-    virtual CCar* createCar() = 0;
-};
+<span class="token keyword">class</span> <span class="token class-name">CAbstractFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-std::map<std::string, CAbstractFactory*> g_FactoriesMap;
+std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> CAbstractFactory<span class="token operator">*</span><span class="token operator">></span> g_FactoriesMap<span class="token punctuation">;</span>
 
-class CBenzFactory : public CAbstractFactory {
-public:
-    virtual CCar* createCar() override {
-        return new CBenz();
-    }
+<span class="token keyword">class</span> <span class="token class-name">CBenzFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CBenzFactory(const std::string vCarName) {
-        g_FactoriesMap[vCarName] = this;
-    }
-};
+    <span class="token function">CBenzFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        g_FactoriesMap<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudiFactory : public CAbstractFactory {
-public:
-    virtual CCar* createCar() override {
-        return new CAudi();
-    }
+<span class="token keyword">class</span> <span class="token class-name">CAudiFactory</span> <span class="token operator">:</span> <span class="token keyword">public</span> CAbstractFactory <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    CAudiFactory(const std::string vCarName) {
-        g_FactoriesMap[vCarName] = this;
-    }
-};
+    <span class="token function">CAudiFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        g_FactoriesMap<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-public:
-    CAbstractFactory* getCar(std::string vCarName) {
-        if (g_FactoriesMap[vCarName]) {
-            return g_FactoriesMap[vCarName];
-        }
-        return NULL;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CAbstractFactory<span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>g_FactoriesMap<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> g_FactoriesMap<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    CBenzFactory BenzFactory("Benz");
-    CAudiFactory AudiFactory("Audi");
-    CFactoryProducer FactoryProducer;
-    CCar* Car = FactoryProducer.getCar("Audi")->createCar();
-    if (Car)
-        Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CBenzFactory <span class="token function">BenzFactory</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CAudiFactory <span class="token function">AudiFactory</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CFactoryProducer FactoryProducer<span class="token punctuation">;</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> FactoryProducer<span class="token punctuation">.</span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">createCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+        Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在上面的代码中用map来代替了之前的vector，这样就可以直接用字符串在map中找到对应的厂商了，不用去遍历map中的所有厂商。</p>
 <p>上面的代码还有可以改进的地方：</p>
@@ -547,662 +547,662 @@ int main() {
 <li>可以把全局变量g_FactoriesMap封装到CFactoryProducer类里。</li>
 <li>字符串和对应厂商注册到g_FactoriesMap这件事散落于产商的构造函数里，应该将它移到CFactoryProducer类里，毕竟现在g_FactoriesMap已经是它的数据成员了。</li>
 </ul>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-class CCar {
-public:
-    virtual void driveV() {};
-};
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Benz..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-class CAudi : public CCar {
-public:
-    virtual void driveV() override {
-        std::cout << "Driving Audi..." << std::endl;
-    }
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory;
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-private:
-    std::map<std::string, CCarFactory<CCar>*> g_Factories;
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span> g_Factories<span class="token punctuation">;</span>
 
-public:
-    CCarFactory<CCar>* getCar(std::string vCarName) {
-        if (g_Factories[vCarName]) {
-            return g_Factories[vCarName];
-        }
-        return NULL;
-    }
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory) {
-        g_Factories[vCarName] = vFactory;
-    }
-};
+    <span class="token keyword">void</span> <span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span> <span class="token operator">=</span> vFactory<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-CFactoryProducer g_FactoryProducer;
+CFactoryProducer g_FactoryProducer<span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory {
-public:
-    CCarFactory(const std::string vCarName) {
-        g_FactoryProducer.registerFactory(vCarName, reinterpret_cast<CCarFactory<CCar>*>(this));
-    }
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CCarFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        g_FactoryProducer<span class="token punctuation">.</span><span class="token function">registerFactory</span><span class="token punctuation">(</span>vCarName<span class="token punctuation">,</span> <span class="token keyword">reinterpret_cast</span><span class="token operator">&lt;</span>CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual CCar* createCarV() {
-        return new CarByFactory();
-    }
-};
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CarByFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-int main() {
-    CCarFactory<CBenz> BenzFactory("Benz");
-    CCarFactory<CAudi> AudiFactory("Audi");
-    CCarFactory<CCar>* CarFactory = g_FactoryProducer.getCar("Audi");
-    if (CarFactory) {
-        CCar* Car = CarFactory->createCarV();
-        if (Car)
-            Car->driveV();
-    }
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CCarFactory<span class="token operator">&lt;</span>CBenz<span class="token operator">></span> <span class="token function">BenzFactory</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CCarFactory<span class="token operator">&lt;</span>CAudi<span class="token operator">></span> <span class="token function">AudiFactory</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> CarFactory <span class="token operator">=</span> g_FactoryProducer<span class="token punctuation">.</span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>CarFactory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        CCar<span class="token operator">*</span> Car <span class="token operator">=</span> CarFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+            Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>把这些类写到不同文件中，代码如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CCar.h:
-#pragma once
-class CCar {
-public:
-    virtual void driveV() {};
-    virtual ~CCar() {}
-};
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCar<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CAudi.h:
-#pragma once
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CAudi<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-class CAudi :public CCar{
-public:
-    virtual void driveV() override;
-    ~CAudi() {}
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span><span class="token keyword">public</span> CCar<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CAudi.cpp
-#include "CAudi.h"
-#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp">CAudi<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CAudi.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-void CAudi::driveV() {
-    std::cout << "Driving Audi..." << std::endl;
-}
+<span class="token keyword">void</span> CAudi<span class="token operator">::</span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CBenz.h:
-#pragma once
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CBenz<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override;
-    ~CBenz(){}
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CBenz.h:
-#include "CBenz.h"
-#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp">CBenz<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CBenz.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-void CBenz::driveV() {
-    std::cout << "Driving Benz..." << std::endl;
-}
+<span class="token keyword">void</span> CBenz<span class="token operator">::</span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CCarFactory.h:
-#pragma once
-#include <iostream>
-#include "CCar.h"
-#include "CFactoryProducer.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCarFactory<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
 
-extern CFactoryProducer g_FactoryProducer;
+<span class="token keyword">extern</span> CFactoryProducer g_FactoryProducer<span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory {
-public:
-    CCarFactory(const std::string vCarName) {
-        g_FactoryProducer.registerFactory(vCarName, reinterpret_cast<CCarFactory<CCar>*>(this));
-    }
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CCarFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        g_FactoryProducer<span class="token punctuation">.</span><span class="token function">registerFactory</span><span class="token punctuation">(</span>vCarName<span class="token punctuation">,</span> <span class="token keyword">reinterpret_cast</span><span class="token operator">&lt;</span>CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual CCar* createCarV() {
-        return new CarByFactory();
-    }
-};
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CarByFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer .h:
-#pragma once
-#include <map>
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer <span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-class CCar;
+<span class="token keyword">class</span> <span class="token class-name">CCar</span><span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory;
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-private:
-    std::map<std::string, CCarFactory<CCar>*> g_Factories;
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span> g_Factories<span class="token punctuation">;</span>
 
-public:
-    CCarFactory<CCar>* getCar(std::string vCarName);
-    void registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory);
-};
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer.cpp
-#include "CFactoryProducer.h"
-#include "CCarFactory.h"
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-CCarFactory<CCar>* CFactoryProducer::getCar(std::string vCarName) {
-    if (g_Factories[vCarName]) {
-        return g_Factories[vCarName];
-    }
-    return NULL;
-}
+CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> CFactoryProducer<span class="token operator">::</span><span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void CFactoryProducer::registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory) {
-    g_Factories[vCarName] = vFactory;
-}
+<span class="token keyword">void</span> CFactoryProducer<span class="token operator">::</span><span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span> <span class="token operator">=</span> vFactory<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-CFactoryProducer g_FactoryProducer;
+CFactoryProducer g_FactoryProducer<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">main.cpp:
-#include "CFactoryProducer.h"
-#include "CCarFactory.h"
-#include "CBenz.h"
-#include "CAudi.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CBenz.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CAudi.h"</span></span>
 
-int main() {
-    CCarFactory<CBenz> AudiFactory("Benz");
-    CCarFactory<CAudi> BenzFactory("Audi");
-    CCarFactory<CCar>* CarFactory = g_FactoryProducer.getCar("Benz");
-    if (CarFactory) {
-        CCar* Car = CarFactory->createCarV();
-        if (Car)
-            Car->driveV();
-    }
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CCarFactory<span class="token operator">&lt;</span>CBenz<span class="token operator">></span> <span class="token function">AudiFactory</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CCarFactory<span class="token operator">&lt;</span>CAudi<span class="token operator">></span> <span class="token function">BenzFactory</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> CarFactory <span class="token operator">=</span> g_FactoryProducer<span class="token punctuation">.</span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>CarFactory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        CCar<span class="token operator">*</span> Car <span class="token operator">=</span> CarFactory<span class="token operator">-</span><span class="token operator">></span><span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span>
+            Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面代码有几个值得注意的地方：</p>
 <ul>
 <li>模板类、模板函数的声明和定义应该放在一个文件中。</li>
 <li>不要在头文件中定义全局变量。应该在cpp中定义，然后在头文件中用到时用extern声明一下。比如上面代码g_FactoryProducer在CFactoryProducer.cpp中定义，在CCarFactory.h中声明，扩大了该变量的作用域。</li>
-<li>在模板类CCarFactory中，createCarV函数使用了关键字virtual修饰，就会为当前的实体类创建虚表和虚指针，比如在执行<code>CCarFactory&lt;CBenz&gt; AudiFactory(&quot;Benz&quot;);</code>时，构造函数会把虚指针指向CBenz生的模板类对象AudiFactory，虚指针指向的虚表里保存了AudiFactory对象的createCarV函数的入口地址，即使在执行registerFactory函数后，将AudiFactory对象指针强制转换为了CCarFactory<ccar>*类型，但是虚指针指向的地址是不会变的，所以main函数中执行CarFactory-&gt;createCarV()函数时，还是调用的CCarFactory<cbenz>对象的createV函数，new的还是CBenz对象。这种模板类使用虚函数，来模拟多态的方式是很有意思的（其实多态本质上也是这种原理，可参考<a href="http://blog.csdn.net/menyangyang/article/details/24779257" target="_blank" rel="external">《virtual C++多态实现原理》</a>一文）。</cbenz></ccar></li>
+<li>在模板类CCarFactory中，createCarV函数使用了关键字virtual修饰，就会为当前的实体类创建虚表和虚指针，比如在执行<code>CCarFactory&lt;CBenz&gt; AudiFactory(&quot;Benz&quot;);</code>时，构造函数会把虚指针指向CBenz生的模板类对象AudiFactory，虚指针指向的虚表里保存了AudiFactory对象的createCarV函数的入口地址，即使在执行registerFactory函数后，将AudiFactory对象指针强制转换为了CCarFactory<ccar>*类型，但是虚指针指向的地址是不会变的，所以main函数中执行CarFactory-&gt;createCarV()函数时，还是调用的CCarFactory<cbenz>对象的createV函数，new的还是CBenz对象。这种模板类使用虚函数，来模拟多态的方式是很有意思的（其实多态本质上也是这种原理，可参考<a href="http://blog.csdn.net/menyangyang/article/details/24779257" target="_blank" rel="external">《virtual cpp多态实现原理》</a>一文）。</cbenz></ccar></li>
 <li>reinterpret_cast<t*>用于将一个指针强制转换为另一种毫不相干的指针类型，但是要慎用，可参考<a href="http://blog.csdn.net/coding_hello/article/details/2211466" target="_blank" rel="external">《reinterpret_cast的本质》</a>一文。上面代码由于是从子类参数模板指针，转换为父类参数模板指针，无法像子类指针向父类指针那样自动转换，所以需要用reinterpret_cast来强制转换。</t*></li>
 <li><p>dynamic_cast<t>用于类层次间的上行转换和下行转换，在下行转换时，会判断基类指针是否原本就是指向子类对象的，否则的话会返回NULL，所以它又称为类型安全的转换。</t></p>
-<pre class="line-numbers language-c++"><code class="language-c++">  class A {
-      virtual void f() {}
-  };
+<pre class="line-numbers language-cpp"><code class="language-cpp">  <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+      <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  class B : public A {
-      virtual void f() {}
-  };
+  <span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token operator">:</span> <span class="token keyword">public</span> A <span class="token punctuation">{</span>
+      <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  int main() {
-      A *pA = new A();
-      A *pA1 = new B();
-      B *pB = dynamic_cast<B*>(pA);   //返回NULL
-      B *pB1 = dynamic_cast<B*>(pA1); //返回的指针正确指向原先new出来的B对象
-      return 0;
-  }
+  <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      A <span class="token operator">*</span>pA <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      A <span class="token operator">*</span>pA1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      B <span class="token operator">*</span>pB <span class="token operator">=</span> <span class="token keyword">dynamic_cast</span><span class="token operator">&lt;</span>B<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>pA<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//返回NULL</span>
+      B <span class="token operator">*</span>pB1 <span class="token operator">=</span> <span class="token keyword">dynamic_cast</span><span class="token operator">&lt;</span>B<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>pA1<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//返回的指针正确指向原先new出来的B对象</span>
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意使用dynamic_cast转换时，基类必须要有虚函数，因为它本身就是用于多态类型指针之间的转换。</p>
 </li>
 <li><p>在CFactoryProducer .h中对要使用的类进行了声明，而不是直接包含如下头文件：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include "CCarFactory.h"
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>因为这样会造成CCarFactory.h头文件和CFactoryProducer .h头文件相互包含，会出错：C4430 缺少类型说明符-假定为int，原因可参考<a href="http://popperelay.com/2017/05/09/C++%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5/" target="_blank" rel="external">《编译链接错误》</a>一文第6条。</p>
+<p>因为这样会造成CCarFactory.h头文件和CFactoryProducer .h头文件相互包含，会出错：C4430 缺少类型说明符-假定为int，原因可参考<a href="http://popperelay.com/2017/05/09/cpp%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5/" target="_blank" rel="external">《编译链接错误》</a>一文第6条。</p>
 </li>
 <li><p>还有一点需要注意的是CCarFactory实体类对象是写在main函数中的，并没有写作全局对象，这样可以保证在执行其构造函数时另一个全局变量g_FactoryProducer已经初始化。</p>
 </li>
 </ul>
 <p><font size="5" color="orange">Bug来了，单例来了</font></p>
 <hr>
-<p>但是，上面程序中，我们是把CCarFactory实体类对象（AudiFactory等）写在main函数中的，将它们写到对应车类的cpp文件中更好，比如在CAudi.cpp中定义AudiFactory对象，因为毕竟改main函数也不符合开闭原则。这样一来程序就会有多个全局变量：AudiFactory、BenzFactory和g_FactoryProducer，运行程序会出错：读取访问权限冲突。这是因为C++全局变量初始化的顺序是不定的，在CCarFactory<cbenz>的构造函数中用到了g_FactoryProducer，这时候g_FactoryProducer可能还没有被初始化，导致程序运行出错。<br>【温馨提示：要找到这个错误原因还是有一定难度的，但是如果养成良好的编码习惯，在使用g_FactoryProducer之前先判断其是否为空，就会很快发现问题所在】</cbenz></p>
+<p>但是，上面程序中，我们是把CCarFactory实体类对象（AudiFactory等）写在main函数中的，将它们写到对应车类的cpp文件中更好，比如在CAudi.cpp中定义AudiFactory对象，因为毕竟改main函数也不符合开闭原则。这样一来程序就会有多个全局变量：AudiFactory、BenzFactory和g_FactoryProducer，运行程序会出错：读取访问权限冲突。这是因为cpp全局变量初始化的顺序是不定的，在CCarFactory<cbenz>的构造函数中用到了g_FactoryProducer，这时候g_FactoryProducer可能还没有被初始化，导致程序运行出错。<br>【温馨提示：要找到这个错误原因还是有一定难度的，但是如果养成良好的编码习惯，在使用g_FactoryProducer之前先判断其是否为空，就会很快发现问题所在】</cbenz></p>
 <p>很容易想到的解决方案就是：将g_FactoryProducer从对象改为指针，在CCarFactory构造函数中使用它之前先进行非空判断，如果空就初始化。增改代码如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer.cpp: 
-CFactoryProducer *g_FactoryProducer=new CFactoryProducer();
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer<span class="token punctuation">.</span>cpp<span class="token operator">:</span> 
+CFactoryProducer <span class="token operator">*</span>g_FactoryProducer<span class="token operator">=</span><span class="token keyword">new</span> <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CCarFactory.h:
-extern CFactoryProducer *g_FactoryProducer;
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCarFactory<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token keyword">extern</span> CFactoryProducer <span class="token operator">*</span>g_FactoryProducer<span class="token punctuation">;</span>
 
-public:
-    CCarFactory(const std::string vCarName) {
-        if (!g_FactoryProducer)
-            g_FactoryProducer = new CFactoryProducer();
-        g_FactoryProducer->registerFactory(vCarName, reinterpret_cast<CCarFactory<CCar>*>(this));
-    }
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CCarFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>g_FactoryProducer<span class="token punctuation">)</span>
+            g_FactoryProducer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        g_FactoryProducer<span class="token operator">-</span><span class="token operator">></span><span class="token function">registerFactory</span><span class="token punctuation">(</span>vCarName<span class="token punctuation">,</span> <span class="token keyword">reinterpret_cast</span><span class="token operator">&lt;</span>CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>好像并没有什么问题，但是运行发现并没有输出任何结果。这是因为在CCarFactory.h中初始化g_FactoryProducer后，是向该g_FactoryProducer中注册信息，但是在CFactoryProducer.cpp中又为g_FactoryProducer赋予了另外不同的内存地址，导致前后两者的g_FactoryProducer并不是指向同一个对象，造成最后并没有结果输出。</p>
 <p>解决这个问题的方法就是使用单例模式，让g_FactoryProducer只被创建一次（或者说只被初始化一次），所以我们需要将CFactoryProducer类改为单例类：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#pragma once
-#include <map>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-class CCar;
+<span class="token keyword">class</span> <span class="token class-name">CCar</span><span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory;
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-private:
-    std::map<std::string, CCarFactory<CCar>*> g_Factories;
-    static CFactoryProducer* g_FactoryProducer;
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span> g_Factories<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> g_FactoryProducer<span class="token punctuation">;</span>
 
-    CFactoryProducer() {}
+    <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-public:
-    CCar* getCar(std::string vCarName);
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CCar<span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    void registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory);
+    <span class="token keyword">void</span> <span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    static CFactoryProducer* getInstance() {
-        if (!g_FactoryProducer)
-            g_FactoryProducer = new CFactoryProducer();
-        return g_FactoryProducer;
-    }
-};
+    <span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>g_FactoryProducer<span class="token punctuation">)</span>
+            g_FactoryProducer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> g_FactoryProducer<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然，以前和g_FactoryProducer相关的地方都要改。如果运行出错：LNK2001 无法解析的外部符号，有可能是我们没有在cpp中对静态变量g_FactoryProducer初始化（静态变量必须初始化以后才能用）：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer* CFactoryProducer::g_FactoryProducer = NULL;
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer<span class="token operator">*</span> CFactoryProducer<span class="token operator">::</span>g_FactoryProducer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>由于在getInstance函数中，会先判断g_FactoryProducer 是否存在，如果不存在就会立即创建，所以在CCarFactory类构造函数中调用registerFactory函数时g_FactoryProducer一定初始化过了，不会再出现之前的读取访问权限冲突（g_FactoryProducer还没有被初始化而导致的空指针）：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer::getInstance()->registerFactory(vCarName, reinterpret_cast<CCarFactory<CCar>*>(this));
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer<span class="token operator">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">registerFactory</span><span class="token punctuation">(</span>vCarName<span class="token punctuation">,</span> <span class="token keyword">reinterpret_cast</span><span class="token operator">&lt;</span>CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其实上面CFactoryProducer类中的成员变量g_FactoryProducer不是必须的，因为它是静态变量，而且只在getInstance函数中使用到，所以可以直接在getInstance中初始化一个临时变量，然后返回即可：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">static CFactoryProducer* getInstance() {
-    static CFactoryProducer* g_FactoryProducer = NULL;
-    if (!g_FactoryProducer)
-        g_FactoryProducer = new CFactoryProducer();
-    return g_FactoryProducer;
-}
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> g_FactoryProducer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>g_FactoryProducer<span class="token punctuation">)</span>
+        g_FactoryProducer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> g_FactoryProducer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>下面给出工厂模式的所有源码：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">CCar.h
-#pragma once
-class CCar {
-public:
-    virtual ~CCar() {}
-    virtual void driveV() {};
-};
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCar<span class="token punctuation">.</span>h
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token keyword">class</span> <span class="token class-name">CCar</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CAudi.h
-#pragma once
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CAudi<span class="token punctuation">.</span>h
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-class CAudi :public CCar{
-public:
-    virtual void driveV() override;
-    ~CAudi() {}
-};
+<span class="token keyword">class</span> <span class="token class-name">CAudi</span> <span class="token operator">:</span><span class="token keyword">public</span> CCar<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CAudi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CAudi.cpp
-#include "CAudi.h"
-#include <iostream>
-#include "CCarFactory.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CAudi<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CAudi.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
 
-void CAudi::driveV() {
-    std::cout << "Driving Audi..." << std::endl;
-}
+<span class="token keyword">void</span> CAudi<span class="token operator">::</span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Audi..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-CCarFactory<CAudi> BenzFactory("Audi");
+CCarFactory<span class="token operator">&lt;</span>CAudi<span class="token operator">></span> <span class="token function">BenzFactory</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CBenz.h
-#pragma once
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CBenz<span class="token punctuation">.</span>h
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-class CBenz : public CCar {
-public:
-    virtual void driveV() override;
-    ~CBenz(){}
-};
+<span class="token keyword">class</span> <span class="token class-name">CBenz</span> <span class="token operator">:</span> <span class="token keyword">public</span> CCar <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CBenz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CBenz.cpp
-#include "CBenz.h"
-#include <iostream>
-#include "CCarFactory.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CBenz<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CBenz.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
 
-void CBenz::driveV() {
-    std::cout << "Driving Benz..." << std::endl;
-}
+<span class="token keyword">void</span> CBenz<span class="token operator">::</span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Driving Benz..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-CCarFactory<CBenz> AudiFactory("Benz");
+CCarFactory<span class="token operator">&lt;</span>CBenz<span class="token operator">></span> <span class="token function">AudiFactory</span><span class="token punctuation">(</span><span class="token string">"Benz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CCarFactory.h
-#pragma once
-#include <iostream>
-#include "CCar.h"
-#include "CFactoryProducer.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CCarFactory<span class="token punctuation">.</span>h
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
 
-extern CFactoryProducer *g_FactoryProducer;
+<span class="token keyword">extern</span> CFactoryProducer <span class="token operator">*</span>g_FactoryProducer<span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory {
-public:
-    CCarFactory(const std::string vCarName) {
-        CFactoryProducer::getInstance()->registerFactory(vCarName, reinterpret_cast<CCarFactory<CCar>*>(this));
-    }
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CCarFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        CFactoryProducer<span class="token operator">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">registerFactory</span><span class="token punctuation">(</span>vCarName<span class="token punctuation">,</span> <span class="token keyword">reinterpret_cast</span><span class="token operator">&lt;</span>CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual CCar* createCarV() {
-        return new CarByFactory();
-    }
-};
+    <span class="token keyword">virtual</span> CCar<span class="token operator">*</span> <span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token function">CarByFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer .h
-#pragma once
-#include <map>
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer <span class="token punctuation">.</span>h
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
 
-class CCar;
+<span class="token keyword">class</span> <span class="token class-name">CCar</span><span class="token punctuation">;</span>
 
-template <typename CarByFactory>
-class CCarFactory;
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> CarByFactory<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CCarFactory</span><span class="token punctuation">;</span>
 
-class CFactoryProducer {
-private:
-    std::map<std::string, CCarFactory<CCar>*> g_Factories;
+<span class="token keyword">class</span> <span class="token class-name">CFactoryProducer</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>map<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span><span class="token operator">></span> g_Factories<span class="token punctuation">;</span>
 
-    CFactoryProducer() {}
+    <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-public:
-    CCar* getCar(std::string vCarName);
+<span class="token keyword">public</span><span class="token operator">:</span>
+    CCar<span class="token operator">*</span> <span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    void registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory);
+    <span class="token keyword">void</span> <span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    static CFactoryProducer* getInstance() {
-        static CFactoryProducer* g_FactoryProducer = NULL;
-        if (!g_FactoryProducer)
-            g_FactoryProducer = new CFactoryProducer();
-        return g_FactoryProducer;
-    }
-};
+    <span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">static</span> CFactoryProducer<span class="token operator">*</span> g_FactoryProducer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>g_FactoryProducer<span class="token punctuation">)</span>
+            g_FactoryProducer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">CFactoryProducer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> g_FactoryProducer<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">CFactoryProducer.cpp
-#include "CFactoryProducer.h"
-#include "CCarFactory.h"
-#include "CCar.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">CFactoryProducer<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCarFactory.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CCar.h"</span></span>
 
-CCar* CFactoryProducer::getCar(std::string vCarName) {
-    if (g_Factories[vCarName]) {
-        return g_Factories[vCarName]->createCarV();
-    }
-    return NULL;
-}
+CCar<span class="token operator">*</span> CFactoryProducer<span class="token operator">::</span><span class="token function">getCar</span><span class="token punctuation">(</span>std<span class="token operator">::</span>string vCarName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">createCarV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void CFactoryProducer::registerFactory(const std::string& vCarName, CCarFactory<CCar>* vFactory) {
-    g_Factories[vCarName] = vFactory;
-}
+<span class="token keyword">void</span> CFactoryProducer<span class="token operator">::</span><span class="token function">registerFactory</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vCarName<span class="token punctuation">,</span> CCarFactory<span class="token operator">&lt;</span>CCar<span class="token operator">></span><span class="token operator">*</span> vFactory<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    g_Factories<span class="token punctuation">[</span>vCarName<span class="token punctuation">]</span> <span class="token operator">=</span> vFactory<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">main.cpp
-#include "CFactoryProducer.h"
-#include "CBenz.h"
-#include "CAudi.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">main<span class="token punctuation">.</span>cpp
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CFactoryProducer.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CBenz.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"CAudi.h"</span></span>
 
-int main() {
-    CCar* Car = CFactoryProducer::getInstance()->getCar("Audi");
-    if (Car) Car->driveV();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    CCar<span class="token operator">*</span> Car <span class="token operator">=</span> CFactoryProducer<span class="token operator">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getCar</span><span class="token punctuation">(</span><span class="token string">"Audi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Car<span class="token punctuation">)</span> Car<span class="token operator">-</span><span class="token operator">></span><span class="token function">driveV</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">单例模式里释放单例对象</font></p>
 <hr>
 <p>由于单例被创建的初衷，就是和main函数（或者整个程序）同生共死，当程序结束时，单例才完成它的使命。先看下面最简单的单例代码：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.h:
-#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-class CSingletonA {
-public:
-    static CSingletonA *getInstance(){
-        if (!m_pInstance)
-            m_pInstance = new CSingletonA;
-        return m_pInstance;
-    }
+<span class="token keyword">class</span> <span class="token class-name">CSingletonA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_pInstance<span class="token punctuation">)</span>
+            m_pInstance <span class="token operator">=</span> <span class="token keyword">new</span> CSingletonA<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> m_pInstance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void print() {
-        std::cout << "Singleton A" << std::endl;
-    }
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-private:
-    static CSingletonA *m_pInstance;
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span>m_pInstance<span class="token punctuation">;</span>
 
-    CSingletonA() {}
-};
+    <span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.cpp:
-#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-CSingletonA* CSingletonA::m_pInstance = NULL;
+CSingletonA<span class="token operator">*</span> CSingletonA<span class="token operator">::</span>m_pInstance <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">释放单例对象方法1：使用内部类对象</font><br>我们注意到，上面代码中，单例对象指针m_pInstance是由new动态分配在堆上的，在程序结束时，分配在堆上的内存是不会自动由操作系统释放的，必须我们调用delete来释放。而delete的时间应该是在程序结束时，由于在程序结束时系统会自动释放一些分配在栈上的内存，所以我们可以在系统释放栈内存时调用delete。具体做法是：在CSingletonA里，加一个内部类，该内部类的析构函数里调用delete删除单例对象指针，然后定义一个该内部类对象：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.h:
-#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-class CSingletonA {
-public:
-    class CGarbageCollection {
-    public:
-        virtual ~CGarbageCollection() {
-            if (m_pInstance)
-                delete m_pInstance;
-        }
-    };
+<span class="token keyword">class</span> <span class="token class-name">CSingletonA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">class</span> <span class="token class-name">CGarbageCollection</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CGarbageCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>m_pInstance<span class="token punctuation">)</span>
+                <span class="token keyword">delete</span> m_pInstance<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-    static CSingletonA *getInstance(){
-        if (!m_pInstance)
-            m_pInstance = new CSingletonA;
-        return m_pInstance;
-    }
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_pInstance<span class="token punctuation">)</span>
+            m_pInstance <span class="token operator">=</span> <span class="token keyword">new</span> CSingletonA<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> m_pInstance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void print() {
-        std::cout << "Singleton A" << std::endl;
-    }
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual ~CSingletonA() {
-        std::cout << "Singleton A deleted" << std::endl;
-    }
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A deleted"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-private:
-    static CSingletonA *m_pInstance;
-    static CGarbageCollection m_GarbageCollection;
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span>m_pInstance<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> CGarbageCollection m_GarbageCollection<span class="token punctuation">;</span>
 
-    CSingletonA() {}
-};
+    <span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.cpp:
-include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+include <span class="token string">"SingletonA.h"</span>
 
-CSingletonA* CSingletonA::m_pInstance = NULL;
-CSingletonA::CGarbageCollection CSingletonA::m_GarbageCollection;
+CSingletonA<span class="token operator">*</span> CSingletonA<span class="token operator">::</span>m_pInstance <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+CSingletonA<span class="token operator">::</span>CGarbageCollection CSingletonA<span class="token operator">::</span>m_GarbageCollection<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">main.cpp:
-#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-int main()
-{
-    CSingletonA::getInstance()->print();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CSingletonA<span class="token operator">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注意，内部类CGarbageCollection的对象m_GarbageCollection需要声明为静态的，这样它才会被存储在静态栈空间里，当程序结束（退出main函数）时，系统会释放m_GarbageCollection对象，调用其虚构函数，释放单例对象m_pInstance。所以输出结果如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">Singleton A
+<pre class="line-numbers language-cpp"><code class="language-cpp">Singleton A
 Singleton A deleted
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">释放单例对象方法2：不把单例对象写作指针类型</font><br>当然，既然是因为单例对象被动态创建在堆上，导致它无法被系统自动释放其内存，那么我们也可以不把单例对象写作指针类型，直接用对象类型：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-class CSingletonA {
-public:
-    static CSingletonA* getInstance(){
-        return &m_pInstance;
-    }
+<span class="token keyword">class</span> <span class="token class-name">CSingletonA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA<span class="token operator">*</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>m_pInstance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void print() {
-        std::cout << "Singleton A" << std::endl;
-    }
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual ~CSingletonA() {
-        std::cout << "Singleton A deleted" << std::endl;
-    }
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A deleted"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-private:
-    static CSingletonA m_pInstance;
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA m_pInstance<span class="token punctuation">;</span>
 
-    CSingletonA() {}
-};
+    <span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-CSingletonA CSingletonA::m_pInstance;
+CSingletonA CSingletonA<span class="token operator">::</span>m_pInstance<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>由于单例对象m_pInstance不是new动态创建的，而是被分配在程序栈空间里的，所以当程序结束时，会自动释放该内存，调用其析构函数，main函数不变输出结果和之前一样。这种方法虽然简单，但是会让单例对象在程序一开始就被分配内存，直到程序结束，但是第一种方法，单例对象只是在程序第一次调用getInstance函数时才被创建出来。</p>
 <p><font size="5" color="orange">单例继承</font><br>如果我们的单例类需要被继承怎么办？看下面的例子（SingletonA的代码和上面使用内部类对象时的一样）：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-class CSingletonB : public CSingletonA {
-public:
-    CSingletonB() {}
+<span class="token keyword">class</span> <span class="token class-name">CSingletonB</span> <span class="token operator">:</span> <span class="token keyword">public</span> CSingletonA <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CSingletonB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    void print() {
-        std::cout << "Sigleton B" << std::endl;
-    }
-};
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Sigleton B"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在其构造函数<code>CSingletonB() {}</code>处，会发生编译错误：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">error C2248: “CSingletonA::CSingletonA”: 无法访问 private 成员(在“CSingletonA”类中声明)
+<pre class="line-numbers language-cpp"><code class="language-cpp">error C2248<span class="token operator">:</span> “CSingletonA<span class="token operator">::</span>CSingletonA”<span class="token operator">:</span> 无法访问 <span class="token keyword">private</span> 成员<span class="token punctuation">(</span>在“CSingletonA”类中声明<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这是因为在执行CSingletonB 的构造函数时，会去访问父类CSingletonA 的构造函数，但是父类是一个单例类，其构造函数是私有的，这样子类就会访问不到，出现上面的编译错误。</p>
 <p><font size="4" color="red">单例继承1：保护的构造函数</font><br>最容易想到的就是，把父类的构造函数声明为保护的，这样子类就可以访问到了：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-class CSingletonA {
-public:
-    class CGarbageCollection {
-    public:
-        virtual ~CGarbageCollection() {
-            if (m_pInstance)
-                delete m_pInstance;
-        }
-    };
+<span class="token keyword">class</span> <span class="token class-name">CSingletonA</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">class</span> <span class="token class-name">CGarbageCollection</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CGarbageCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>m_pInstance<span class="token punctuation">)</span>
+                <span class="token keyword">delete</span> m_pInstance<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-    static CSingletonA *getInstance() {
-        if (!m_pInstance)
-            m_pInstance = new CSingletonA;
-        return m_pInstance;
-    }
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_pInstance<span class="token punctuation">)</span>
+            m_pInstance <span class="token operator">=</span> <span class="token keyword">new</span> CSingletonA<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> m_pInstance<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void print() {
-        std::cout << "Singleton A" << std::endl;
-    }
+    <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    virtual ~CSingletonA() {
-        std::cout << "Singleton A deleted" << std::endl;
-    }
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A deleted"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-private:
-    static CSingletonA *m_pInstance;
-    static CGarbageCollection m_GarbageCollection;
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span>m_pInstance<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> CGarbageCollection m_GarbageCollection<span class="token punctuation">;</span>
 
-protected:
-    CSingletonA() {}
-};
+<span class="token keyword">protected</span><span class="token operator">:</span>
+    <span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">单例继承2：把子类声明为父类的友元类</font><br>如果觉得把构造函数声明为保护的，封装性不好，可以把在父类中，把子类声明为其友元类，这样子类就可以访问到父类的任何私有成员或者函数了：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.h:
-#include <iostream>
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
-namespace NameSpaceB {
-    class CSingletonB;
-}
+<span class="token keyword">namespace</span> NameSpaceB <span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">CSingletonB</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-namespace NameSpaceA {
-    class CSingletonA {
-    public:
-        class CGarbageCollection {
-        public:
-            virtual ~CGarbageCollection() {
-                if (m_pInstance)
-                    delete m_pInstance;
-            }
-        };
+<span class="token keyword">namespace</span> NameSpaceA <span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">CSingletonA</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token keyword">class</span> <span class="token class-name">CGarbageCollection</span> <span class="token punctuation">{</span>
+        <span class="token keyword">public</span><span class="token operator">:</span>
+            <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CGarbageCollection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>m_pInstance<span class="token punctuation">)</span>
+                    <span class="token keyword">delete</span> m_pInstance<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-        static CSingletonA *getInstance() {
-            if (!m_pInstance)
-                m_pInstance = new CSingletonA;
-            return m_pInstance;
-        }
+        <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_pInstance<span class="token punctuation">)</span>
+                m_pInstance <span class="token operator">=</span> <span class="token keyword">new</span> CSingletonA<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> m_pInstance<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        void print() {
-            std::cout << "Singleton A" << std::endl;
-        }
+        <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        virtual ~CSingletonA() {
-            std::cout << "Singleton A deleted" << std::endl;
-        }
+        <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton A deleted"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-    private:
-        static CSingletonA *m_pInstance;
-        static CGarbageCollection m_GarbageCollection;
+    <span class="token keyword">private</span><span class="token operator">:</span>
+        <span class="token keyword">static</span> CSingletonA <span class="token operator">*</span>m_pInstance<span class="token punctuation">;</span>
+        <span class="token keyword">static</span> CGarbageCollection m_GarbageCollection<span class="token punctuation">;</span>
 
-        CSingletonA() {}
+        <span class="token function">CSingletonA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-        friend class NameSpaceB::CSingletonB;
-    };
-}
+        <span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">NameSpaceB</span><span class="token operator">::</span>CSingletonB<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonA.cpp:
-#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonA<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-NameSpaceA::CSingletonA* NameSpaceA::CSingletonA::m_pInstance = NULL;
-NameSpaceA::CSingletonA::CGarbageCollection NameSpaceA::CSingletonA::m_GarbageCollection;
+NameSpaceA<span class="token operator">::</span>CSingletonA<span class="token operator">*</span> NameSpaceA<span class="token operator">::</span>CSingletonA<span class="token operator">::</span>m_pInstance <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+NameSpaceA<span class="token operator">::</span>CSingletonA<span class="token operator">::</span>CGarbageCollection NameSpaceA<span class="token operator">::</span>CSingletonA<span class="token operator">::</span>m_GarbageCollection<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">SingletonB.h:
-#include "SingletonA.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">SingletonB<span class="token punctuation">.</span>h<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
 
-namespace NameSpaceB {
-    class CSingletonB : public NameSpaceA::CSingletonA {
-    public:
-        CSingletonB() {}
+<span class="token keyword">namespace</span> NameSpaceB <span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">CSingletonB</span> <span class="token operator">:</span> <span class="token keyword">public</span> NameSpaceA<span class="token operator">::</span>CSingletonA <span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token function">CSingletonB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-        void print() {
-            std::cout << "Singleton B" << std::endl;
-        }
-    };
-}
+        <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Singleton B"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-c++"><code class="language-c++">main.cpp:
-#include "SingletonA.h"
-#include "SingletonB.h"
+<pre class="line-numbers language-cpp"><code class="language-cpp">main<span class="token punctuation">.</span>cpp<span class="token operator">:</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonA.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"SingletonB.h"</span></span>
 
-int main()
-{
-    NameSpaceA::CSingletonA::getInstance()->print();
-    NameSpaceB::CSingletonB B;
-    B.print();
-    return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    NameSpaceA<span class="token operator">::</span>CSingletonA<span class="token operator">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    NameSpaceB<span class="token operator">::</span>CSingletonB B<span class="token punctuation">;</span>
+    B<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里把父类CSingletonA和子类CSingletonB 分别放在了两个命名空间里，在父类中声明子类为其友元类：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">friend class NameSpaceB::CSingletonB;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">NameSpaceB</span><span class="token operator">::</span>CSingletonB<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意父类要访问到另一个命名空间里的子类，需要做如下前置声明，来扩大子类的作用域：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">namespace NameSpaceB {
-    class CSingletonB;
-}
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> NameSpaceB <span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">CSingletonB</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>程序运行后输出如下：</p>
-<pre class="line-numbers language-c++"><code class="language-c++">Singleton A
+<pre class="line-numbers language-cpp"><code class="language-cpp">Singleton A
 Singleton B
 Singleton A deleted
 Singleton A deleted
