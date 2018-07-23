@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p>在OpenGL中，物体透明技术通常被叫做混合（Blending）。<a id="more"></a><br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">透明</font><br>透明是指物体自身颜色与它背面物体颜色不同程度的混合，而在OpenGL中就是使用混合技术来实现的，将当前要绘制的物体的颜色和颜色缓冲区中已经绘制了的物体颜色进行混合，最终决定当前物体的颜色。下图是一副全透明和半透明的窗子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148462342512.png" alt=""><br>物体的透明度是由片段颜色的alpha值（颜色向量的第4个元素）决定的，全透明的alpha值是0.0即透明度是100%，不透明的alpha值是1.0即透明度是0%。<br>&nbsp; </p>

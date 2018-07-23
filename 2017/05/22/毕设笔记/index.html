@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <ol>
 <li>在投影变换的过程中，就会剔除掉所有在视见体之外的片段，它们是不会从顶点着色器进入片元着色器的。也就是说那些在视见体之外的片段不会执行片元着色器。<a id="more"></a></li>
 <li>深度测试是在片元着色器的过程中的，即使是那些被挡住的片段也是会执行片元着色器里的内容（比如片元着色器里的所有光照计算），很明显的证明例子就是延迟着色，延迟着色的优点就是剔除掉了对那些被遮挡的片段的光照计算。虽然被遮挡的和没被遮挡的片段都会执行光照计算，但是最后留在帧缓冲里的都是没被遮挡的片段，因为开启了深度测试。</li>

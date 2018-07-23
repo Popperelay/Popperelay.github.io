@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p>看下面这个实际问题：<br><a id="more"></a><br>假设你是电信的工程师，需要为下面的9个村庄架设网线，村庄位置如下图所示。边上的数字表示村庄之间的距离。要求以最小的成本使这9个村庄的网线互通，应该怎么办？<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721569563.png" alt=""><br>最小成本，自然是需要连线的公里数最小。因为只需要9个村庄网线互通，不要求直接可达，所以设计路线至少应该是一颗生成树，9个结点，只铺设8条线路即可。但是图的生成树有很多个，我们需要代价最小的那棵生成树，即最小生成树。<br>要根据图找出这棵最小生成树，有两种算法：普里姆(Prim)算法、克鲁斯卡尔(Kruskal)算法。</p>
 <hr>
 <p><font size="5" color="orange">普里姆(Prim)算法</font><br>算法规则：</p>

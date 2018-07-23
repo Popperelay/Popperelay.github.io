@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
 <ul>
 <li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<pre class="line-numbers language-csharp"><code class="language-csharp">进程p1：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>

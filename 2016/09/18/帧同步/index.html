@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p>在现代多人游戏中，多个客户端之间的通讯，主要是同步多方状态。为了同步多方状态，主要有两个技术：<br><a id="more"></a></p>
 <ol>
 <li>状态同步<br>客户端发送游戏动作到服务器，服务器收到后，计算游戏行为的结果，然后以广播的方式下发游戏中各种状态，客户端收到状态后再根据状态显示内容。在回合制游戏中，大多都是这种方式</li>

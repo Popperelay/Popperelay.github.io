@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p>先来回顾一下图形显示的过程。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">图形显示的过程</font><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721606272.png" alt=""><br>可以看到，视频控制器是从帧缓存中读出数据不为0的单元进行显示。但是，正如图中所示，对于三角形，我们一般存储的都只是三个顶点的坐标，那么怎么根据这三个顶点的坐标得到对应的帧缓存数据呢？其实这就是图形的生成过程，从参数形式转换为点阵形式，便于光栅扫描生成相应的图形（参数形式和点阵形式可参考<a href="http://popperelay.com/2016/10/18/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E6%A6%82%E8%BF%B0/" target="_blank" rel="external">《图形学概述》</a>一文中的计算机图形表示方法）。</p>

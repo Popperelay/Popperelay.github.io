@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p>排序：将一组记录序列变成，在一组关键字的非递减(或非递增)排列下的映射记录序列。<br><a id="more"></a><br>比如下面这4个人的总分成绩为：<br>令狐冲 753，郭靖 573，杨过 682，张无忌 753<br>按照总分成绩这组关键字的非递减排列{573，682，753，753}，那么排序后的记录应该是：郭靖 573，杨过 682，令狐冲 753，张无忌 753<br>所以排序的依据是关键字之间的大小关系。</p>
 <hr>
 <p>排序的稳定性：当关键字相等时，如果排序前后对应记录的先后次序没有发生变化，则是稳定排序，如果变化了则是不稳定排序。如上面的例子有两个相等的关键字753，排序前令狐冲记录在张无忌记录前面，若排序后令狐冲记录还是在张无忌记录前面，则是稳定排序；若排序后令狐冲记录跑到了张无忌记录后面，则是不稳定排序。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772158907.png" alt=""></p>

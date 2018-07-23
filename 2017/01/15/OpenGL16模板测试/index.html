@@ -66,7 +66,6 @@
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
 </script>
 
-
 <!--  代码渲染  -->
 <link rel="stylesheet" href="/css/prism_undefined.css" />
 <link rel="stylesheet" href="/css/typo.css" />
@@ -146,6 +145,10 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
+				<div id="toc" class="toc-article">
+					<strong class="toc-title">文章目录</strong>
+					
+				</div>
                 <p><font size="5" color="orange">什么是模板测试</font><br><a id="more"></a><br>当像素着色器处理完片段之后，深度测试之前，模板测试（stencil test）就开始执行了，和深度测试一样，它能丢弃一些片段：如果片段的模板值和当前模板缓冲区的对应位置上的模板值，满足指定关系，则不会被丢弃。这就是模板测试。仍然保留下来的片段将进入深度测试阶段，深度测试又会丢弃一些片段。</p>
 <p>在渲染管线里包括很多种测试，它们的执行顺序如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148440287648.png" alt=""><br>&nbsp;</p>
 <hr>
