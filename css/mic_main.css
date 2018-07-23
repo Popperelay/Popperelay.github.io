@@ -4468,12 +4468,10 @@
   padding 1.2em 1em 0 1em
   max-width 28%
 }
-.toc-title
-{
+.toc-title {
   font-size 120%
 }
-#toc
-{
+#toc {
   line-height 1em
   font-size 0.9em
   float right
