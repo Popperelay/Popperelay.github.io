@@ -149,40 +149,8 @@
 <h3 id="2-1-室外光照模型"><a href="#2-1-室外光照模型" class="headerlink" title="2.1 室外光照模型"></a>2.1 室外光照模型</h3><p>室外场景中的物体会受到来自太阳和周围环境的光照，比如天空和周围的物体，场景中点p的光照辐射度可以表示为：<br>$$I_p(\lambda)=I_p^{sun}(\lambda)+I_p^{env}(\lambda) \tag{1}$$<br>其中$\lambda$表示R、G、B通道。</p>
 <p>因为太阳可以被模拟为一个平行光源，所以：<br>$$I_p^{sun}(\lambda)=s_p^{sun}L^{sun}(\lambda)[\rho_p(\lambda)(\boldsymbol{n_p}\cdot \boldsymbol{l})+k_p(\lambda)(\boldsymbol{n_p}\cdot \boldsymbol{h_p})^{\alpha_p}] \tag{2}$$<br>其中$L^{sun}$是日光的入射强度，$\boldsymbol{l}$是入射方向，$\boldsymbol{n_p}$是点$p$的表明法线向量，$\boldsymbol{h_p}$是点$p$处光线入射方向$\boldsymbol{l}$和观察方向的角平分线，$\rho_p$是漫反射系数，$k_p$和$\alpha_p$是点$p$处的镜面属性，$s_p^{sun} \in [0,1]$是日光遮蔽系数。</p>
 <p>环境光可以看作分布在球上的区域光源，我们忽略掉环境光镜面成分。本文实验显示，这种近似能够适当地保持模拟结果的准确性，同时节省大量计算量。我们用环境贴图来记录点$p$处的环境光，用$L_p^{env}$来表示环境光的分布。然后我们有：<br>$$I_p^{env}(\lambda)=\rho_p(\lambda)\int_{\Omega(\boldsymbol{n_p})}L_p^{env}(\boldsymbol{\omega},\lambda)(\boldsymbol{n_p}\cdot \boldsymbol{\omega})d\boldsymbol{\omega} \tag{3}$$<br>其中$\Omega(\boldsymbol{n_p})$是点$p$所在表面的上半球，$\boldsymbol{\omega}$是单位向量。我们使用球函数$Y_{lm}$（其中$l\ge0$而且$-l\le m \le l$）来近似计算这个积分。$I_p^{env}$可以用$Y_{lm}$的线性组合来表示[RH01]：<br>$$I_p^{env}(\lambda)=\rho_p(\lambda)\sum_{l,m}\hat{A}_lL_{lm,p}^{env}(\lambda)Y_{lm}(\boldsymbol{n_p}) \tag{4}$$<br>其中$\hat{A}_l$与$A=(\boldsymbol{n_p} \cdot \boldsymbol{\omega})$的组合系数相关，是一个常数；$L_{lm,p}^{env}(\lambda)$可以按照下式来计算：<br>$$L_{lm,p}^{env}(\lambda)=\int_{\theta=0}^{\pi}\int_{\phi=0}^{2\pi}L_p^{env}(\lambda,\theta,\phi)Y_{lm}(\theta,\phi)sin\theta ~d\theta d\phi \tag{5}$$<br>这个积分可以看作函数$L_p^{env}$和$Y_{lm}$的内积。另一方面，单位球表面$\Omega_p$可以被划分为$\Omega_p^{sky}$和$\Omega_p^{obj}$，它俩分别对应天空和周围物体。所以：<br>$$<br>\begin{align}<br>L_{lm,p}^{env}(\lambda)&amp;=L_{lm,p}^{sky}(\lambda)+L_{lm,p}^{obj}(\lambda) \\<br>&amp;=\sum_{(\theta,\phi)\in \Omega_p^{sky}}L_p^{env}(\lambda,\theta,\phi)Y_{lm}(\theta,\phi)sin\theta\Delta\theta\Delta\phi \\<br>&amp;+\sum_{(\theta,\phi)\in \Omega_p^{obj}}L_p^{env}(\lambda,\theta,\phi)Y_{lm}(\theta,\phi)sin\theta\Delta\theta\Delta\phi<br>\end{align} \tag{6}<br>$$<br>天空是一个不均匀的区域光源，它的光照分布很难从图像中计算出来。幸运地，Perez等人[PMI93]研究了天光分布并且提出了一个天空模型。该模型将天空元素$q$的绝对亮度$L_q$表示为关于实际天顶亮度$L_z^{sky}$、太阳的天顶角$\theta_s$、$q$的天顶角$\theta_q$和$q$相对于太阳的角度$\gamma_q$的函数：<br>$$L_q=L_z^{sky}\frac{f(\theta_q,\gamma_q)}{f(0,\theta_s)} \tag{7}$$<br>其中$f(\theta_q,\gamma_q)$是计算$q$的相对亮度的函数。对于一个光线入射方向$(\theta,\phi)$，记：<br>$$F(\theta,\phi)=\frac{f(\theta_q,\gamma(\theta,\phi))}{f(0,\theta_s)}$$<br>其中$\gamma(\theta,\phi)$是一个用来近似点$q$相对于太阳的角度的函数，综上：<br>$$L_{lm,p}^{sky}(\lambda)=L_z^{sky}(\lambda)\sum_{(\theta,\phi)\in \Omega_p^{sky}}F(\theta,\phi)Y_{lm}(\theta,\phi)sin\theta ~\Delta\theta \Delta\phi \tag{8}$$<br>令$R_{lm,p}^{sky}$表示公式8中的加和结果，再根据公式6有：<br>$$L_{lm,p}^{sky}=L_z^{sky}(\lambda)R_{lm,p}^{sky}+L_{lm,p}^{obj}(\lambda) \tag{9}$$<br>将它带回公式4有：<br>$$I_p^{env}(\lambda)=\rho_p(\lambda)[L_z^{sky}(\lambda)\sum_{l,m}\hat{A_l}R_{lm,p}^{sky}Y_{lm}(\boldsymbol{n_p})+\sum_{l,m}\hat{A_l}L_{lm,p}^{obj}Y_{lm}(\boldsymbol{n_p})] \tag{10}$$<br>令$P_p^{sky}=\sum_{l,m}\hat{A_l}R_{lm,p}^{sky}Y_{lm}(\boldsymbol{n_p})$、$E_p^{obj}(\lambda)=\sum_{l,m}\hat{A_l}L_{lm,p}^{obj}Y_{lm}(\boldsymbol{n_p})$，所以我们最终的室外场景光照模型是：<br>$$I_p(\lambda)=s_p^{sun}L^{sun}(\lambda)[\rho_p(\lambda)(\boldsymbol{n_p\cdot l})+k_p(\lambda)(\boldsymbol{n_p\cdot h_p})^{\alpha_p}]+\rho_p(\lambda)P_p^{sky}L_z^{sky}(\lambda)+\rho_p(\lambda)E_p^{obj}(\lambda) \tag{11}$$<br>表1列出了公式11中的部分变量：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">变量</th>
-<th style="text-align:center">定义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$P_p^{sky}$</td>
-<td style="text-align:center">$\sum_{l,m}\hat{A_l}R_{lm,p}^{sky}Y_{lm}(\boldsymbol{n_p})$</td>
-</tr>
-<tr>
-<td style="text-align:center">$E_p^{obj}$</td>
-<td style="text-align:center">$\sum_{l,m}\hat{A_l}L_{lm,p}^{obj}Y_{lm}(\boldsymbol{n_p})$</td>
-</tr>
-<tr>
-<td style="text-align:center">$R_{lm,p}^{sky}$</td>
-<td style="text-align:center">公式8中的加和部分，$L_{lm,p}^{sky}=L_z^{sky}R_{lm,p}^{sky}$</td>
-</tr>
-<tr>
-<td style="text-align:center">$L^{sun},L_z^{sky}$</td>
-<td style="text-align:center">光照参数（公式2，公式7）</td>
-</tr>
-<tr>
-<td style="text-align:center">$\hat{A_l},L_{lm,p}^{env}$</td>
-<td style="text-align:center">$I_p^{env}$的组合系数（公式4）</td>
-</tr>
-<tr>
-<td style="text-align:center">$L_{lm,p}^{sky},L_{lm,p}^{obj}$</td>
-<td style="text-align:center">$L_{lm,p}^{env}=L_{lm,p}^{sky}+L_{lm,p}^{obj}$（公式6）</td>
-</tr>
-</tbody>
-</table>
+<div><br><center><br>表1：公式11中的部分变量<br><br>变量 | 定义<br>:-: | :-:<br>$P_p^{sky}$ |  $\sum_{l,m}\hat{A_l}R_{lm,p}^{sky}Y_{lm}(\boldsymbol{n_p})$<br>$E_p^{obj}$ | $\sum_{l,m}\hat{A_l}L_{lm,p}^{obj}Y_{lm}(\boldsymbol{n_p})$<br>$R_{lm,p}^{sky}$ | 公式8中的加和部分，$L_{lm,p}^{sky}=L_z^{sky}R_{lm,p}^{sky}$<br>$L^{sun},L_z^{sky}$ |光照参数（公式2，公式7）<br>$\hat{A_l},L_{lm,p}^{env}$ | $I_p^{env}$的组合系数（公式4）<br>$L_{lm,p}^{sky},L_{lm,p}^{obj}$ | $L_{lm,p}^{env}=L_{lm,p}^{sky}+L_{lm,p}^{obj}$（公式6）<br></center><br></div>
+
 <h3 id="2-2-初始化数据采集"><a href="#2-2-初始化数据采集" class="headerlink" title="2.2 初始化数据采集"></a>2.2 初始化数据采集</h3><p>这节介绍我们采集数据的过程，这些数据用来计算室外光照模型的参数。</p>
 <h4 id="几何近似"><a href="#几何近似" class="headerlink" title="几何近似."></a>几何近似.</h4><p>为了部分恢复场景的的粗略几何信息，需要校准相机。我们自动或者交互地估计场景的灭点，然后可以求出相机参数。为了简化几何重建，我们设置地面的方程为$z=0$。然后用户在地面上画几条线，每一条都对应着一个垂直平面和地面的交线。这些平面就表示了场景的粗略几何形状。有了这些几何信息和相机参数，就可以计算出公式11中的$(\boldsymbol{n_p\cdot h_p})$。</p>
 <h4 id="合成环境贴图"><a href="#合成环境贴图" class="headerlink" title="合成环境贴图"></a>合成环境贴图</h4><p>为了近似光照模型中的$E_p^{obj}(\lambda)$，我们应该合成一张没有天空区域的环境贴图。用天空遮罩来近似地移除天空区域 [HEH07]。然后用 Lalonde方法来生成点$p$处期望的环境贴图。通过公式6，环境贴图会被用来计算$L_{lm,p}^{obj}(\lambda)$，然后$E_p^{obj}(\lambda)$就可以被计算出来了（公式10）。</p>
@@ -203,7 +171,7 @@
 <p>我们只考虑地面上的真实阴影，这个方法也可以扩展至那些阴影表面几何形状已知的复杂表面。假如我们插入一个虚拟物体到场景里，我们从虚拟物体的一个顶点$v$沿着日光方向发出一条射线$r$，计算它和地平面的交点，把交点记为$i$。如果$i$在阴影里，倘若$v$和$i$之间没有其他物体，那么$v$一定会在阴影里。这意味着$v$是否在阴影里仅仅取决于$i$的状态，$i$的状态可以通过$M_S^{img}$中对应的像素$p_i$来检测。</p>
 <p>接下来的问题是怎样合成遮蔽的虚拟物体上的阴影。注意$v$和$i$之间的关系可以被定义为一张纹理贴图。有了这张贴图，我们可以把阴影遮罩图像自动投影到虚拟物体的表面。因为阴影区域仅仅被环境光照亮，所以这个区域可以用一张阴影遮罩图像$M_S^{obj}$来表示。然后我们渲染虚拟物体两次，来获得虚拟物体的完整渲染结果，一次考虑日光光照，另一次考虑环境光，将这两个成分分别表示为$I_{obj}^{sun}$和$I_{obj}^{env}$。最终图像$I_{obj}$可以表示为：<br>$$I_{obj}=M_S^{obj}\odot I_{obj}^{sun}+I_{obj}^{env} \tag{17}$$<br>其中$\odot$是Hadamard乘积。</p>
 <p>注意，如果地面上的阴影是$v$和$i$之间的某个物体$O$所投射的，那么上述将失败，这也是我们方法的局限。为了避免这种情况，用户需要手动指出这些阴影区域，并从$M_S^{img}$中删除它们。最终的阴影图像称为阴影纹理。图5(a)和(b)展示了有我们方法估计的阴影纹理和阴影遮罩，虚拟物体的渲染结果如图5(c)所示。<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_5.png" alt=""></p>
-<p><center>图5：我们尝试将一个标准的佛陀整合到场景里。本文的阴影遮罩是在不知道遮挡对象的几何形状的情况下生成的。渲染结果表明地面上的阴影很自然地投射到虚拟物体上。</center></p>
+<p><center>图5：我们尝试将一个斯坦福佛陀整合到场景里。本文的阴影遮罩是在不知道遮挡对象的几何形状的情况下生成的。渲染结果表明地面上的阴影很自然地投射到虚拟物体上。</center></p>
 <h2 id="3-2-虚拟阴影处理"><a href="#3-2-虚拟阴影处理" class="headerlink" title="3.2 虚拟阴影处理"></a>3.2 虚拟阴影处理</h2><p>或者，虚拟物体也可以投射阴影到环境里，但是它只对$M_S^{img}$中值不为0的像素有效。由于我们已经得到了阴影遮罩图像$M_S^{img}$，所以可以避免虚拟和真实阴影之间的重叠错误。本文方法组成4个图像：前两个是原始场景分别在日光和环境光照射下的图像，表示为$I_{scene}^{sun}$和$I_{scene}^{env}$。后两个是包含虚拟物体的增强场景，分别在日光和环境光照射下的图像，表示为$I_{v-scene}^{sun}$和$I_{v-scene}^{env}$。使用阴影遮罩图像$M_S^{img}$，我们可以生成原始图像的增强阴影遮罩，它在像素$p$的值可以通过下式计算：<br>$$I_S(p)=\frac{I_{v-scene}^{sun}(p)M_S^{img}(p)+I_{v-scene}^{env}(p)}{I_{scene}^{sun}(p)M_S^{img}(p)+I_{scene}^{env}(p)} \tag{18}$$<br>对于一个像素$p$，如果$M_S^{img}(p_s)=0$，无论虚拟物体是否投射阴影到$p_s$上，$I_S(p_s)$的值都是$I_{v-scene}^{env}(p_s)/I_{scene}^{env}(p_s)$。如果$M_S^{img}(p)\ne0$，$I_{v-scene}^{sun}$才会对像素$p$有效（图6）。<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_6.png" alt=""></p>
 <p><center>图6：本文方法避免了真实阴影和虚拟阴影之间的重叠问题。(a)输入图像，(b)合成结果，阴影细节显示在图片底部，合成汽车的阴影在没有被真实阴影覆盖的地面上起作用了。</center></p>
 <h2 id="3-3-插入合成物体"><a href="#3-3-插入合成物体" class="headerlink" title="3.3 插入合成物体"></a>3.3 插入合成物体</h2><p>在本文方法获得室外光照参数、检测地面阴影区域和重建部分场景几何信息以后，用户就可以自如地将合成物体插入到场景里了。将室外场景的传统照片表示为$I$，最终的合成图像$I_{final}$可以由下式生成：<br>$$I_{final}=M\odot I_{obj}+(1-M)\odot I_S\odot I$$<br>其中，$M$是虚拟物体的遮罩（一种标量图像，在虚拟物体投影区域之外的像素值为0，投影区域之内的像素值在(0,1]之间）。</p>
