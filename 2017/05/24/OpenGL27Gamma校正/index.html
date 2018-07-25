@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p>现在的很多监视器都是<a href="http://popperelay.com/2016/10/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="external">阴极射线管显示器（CRT）或者LED显示器</a>，它们在显示颜色时并非按照线性方式工作，我们在程序中输出的颜色，最终显示到屏幕上亮度会减弱，这对于计算光照和实时渲染的图形质量有一定影响，需要我们进行Gamma校正。<br><a id="more"></a></p>
 <p><font size="5" color="orange">Gamma校正的概念及意义</font></p>
 <hr>

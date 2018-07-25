@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p>OpenGL本身没有摄像机的概念，是我们虚构的，我们通过把场景往反方向移动的方式来模拟出摄像机，产生一种我们在移动的感觉。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">摄像机坐标系（观察坐标系）</font><br>摄像机默认位置是在世界空间原点，通过观察矩阵把所有的世界坐标转化为相对于摄像机位置与方向的观察坐标。但是通过观察矩阵，摄像机不一定要在原点，也是可以移动的，这就有了我们在游戏中用键盘鼠标手柄等移动视角的效果。</p>

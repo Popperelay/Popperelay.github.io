@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">拷贝构造函数</font><br><a id="more"></a></p>
 <hr>
 <p><font size="4" color="red">什么是拷贝构造函数</font><br>拷贝构造函数是一种特殊的构造函数，其形参是本类对象的引用。它的作用是：在建立一个新对象时，使用一个已经存在的对象去初始化这个新对象。例如：</p>

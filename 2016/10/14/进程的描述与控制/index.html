@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
 <ul>
 <li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<pre class="line-numbers language-csharp"><code class="language-csharp">进程p1：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>

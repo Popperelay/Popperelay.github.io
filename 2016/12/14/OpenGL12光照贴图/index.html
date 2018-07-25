@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">为何需要光照贴图</font><br><a id="more"></a><br>在上一篇文章<a href="http://popperelay.com/2016/12/12/OpenGL11%E6%9D%90%E8%B4%A8/" target="_blank" rel="external">《OpenGL11：材质》</a>中，我们给整个立方体定义了一个材质，但是显示世界的物体往往不是同一种材料构成的，物体上的不同部分可能需要不同的材质。例如汽车的车身喷漆了往往很光亮，而轮胎的橡胶部分则比较暗淡。为了更好地模拟现实中物体接收光照的效果，我们应该为物体的不同部分指定不同的材质属性，而不是整个物体共用一个材质属性。</p>
 <p>要让不同的部分对应不同的材质属性，如果不同材质的部分比较多，要精确定义很多材质是很麻烦的。其实为不同部分对应不同的材质属性，有点类似于不同的像素根据纹理坐标获取不同的纹素，这里我们我们的解决方案类似，也是使用一张纹理的纹素来作为物体上对应位置的材质属性（环境属性、漫反射属性、镜面反射属性，这些属性都是vec3类型的颜色）。对应光照下的材质属性的这种纹理叫做光照贴图lighting maps。我们这里主要介绍漫反射贴图diffuse map和镜面反射贴图specular maps（当然除此之外还有其他类型的光照贴图）。<br>【注】：</p>
 <ul>

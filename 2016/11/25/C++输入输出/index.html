@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">C++输入输出系统的优势</font><br><a id="more"></a><br>C语言本身有自己的输入输出方式，作为升级版的C++为何还要建立一个输入输出系统呢？原因如下：</p>
 <ul>
 <li>C++的输入输出系统是类型安全的，也就是说它可以自动识别输出数据的类型，如<code>cout &lt;&lt; 5;</code>会自动识别出要输出的数据是字符串类型，但是如果用C的话就得写成<code>printf(&quot;%d&quot;,5);</code>。因为C++可以自动识别类型，所以可以有效防止格式控制符与输出数据的类型不一致的错误。</li>

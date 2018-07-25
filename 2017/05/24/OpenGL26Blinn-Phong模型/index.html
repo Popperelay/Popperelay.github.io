@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">Phong模型的缺陷</font><br><a id="more"></a></p>
 <hr>
 <p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong1.png" alt=""><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong2.png" alt=""><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>

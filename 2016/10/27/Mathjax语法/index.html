@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mathjax简介"><span class="toc-number">1.</span> <span class="toc-text">Mathjax简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mathjax语法"><span class="toc-number">2.</span> <span class="toc-text">Mathjax语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mathjax公式排版方式"><span class="toc-number">2.1.</span> <span class="toc-text">Mathjax公式排版方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的希腊字母"><span class="toc-number">2.2.</span> <span class="toc-text">公式中的希腊字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的上标下标"><span class="toc-number">2.3.</span> <span class="toc-text">公式中的上标下标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的括号"><span class="toc-number">2.4.</span> <span class="toc-text">公式中的括号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的求和与积分"><span class="toc-number">2.5.</span> <span class="toc-text">公式中的求和与积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的分数"><span class="toc-number">2.6.</span> <span class="toc-text">公式中的分数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的根号"><span class="toc-number">2.7.</span> <span class="toc-text">公式中的根号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的三角函数"><span class="toc-number">2.8.</span> <span class="toc-text">公式中的三角函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的特殊符号"><span class="toc-number">2.9.</span> <span class="toc-text">公式中的特殊符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的空格"><span class="toc-number">2.10.</span> <span class="toc-text">公式中的空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的顶部符号"><span class="toc-number">2.11.</span> <span class="toc-text">公式中的顶部符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的表格"><span class="toc-number">2.12.</span> <span class="toc-text">公式中的表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的矩阵"><span class="toc-number">2.13.</span> <span class="toc-text">公式中的矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式对齐"><span class="toc-number">2.14.</span> <span class="toc-text">公式对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分类表达式"><span class="toc-number">2.15.</span> <span class="toc-text">分类表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方程组"><span class="toc-number">2.16.</span> <span class="toc-text">方程组</span></a></li></ol></li></ol> -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mathjax简介"><span class="toc-number">1.</span> <span class="toc-text">Mathjax简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mathjax语法"><span class="toc-number">2.</span> <span class="toc-text">Mathjax语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mathjax公式排版方式"><span class="toc-number">2.1.</span> <span class="toc-text">Mathjax公式排版方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的希腊字母"><span class="toc-number">2.2.</span> <span class="toc-text">公式中的希腊字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的上标下标"><span class="toc-number">2.3.</span> <span class="toc-text">公式中的上标下标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的括号"><span class="toc-number">2.4.</span> <span class="toc-text">公式中的括号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的求和与积分"><span class="toc-number">2.5.</span> <span class="toc-text">公式中的求和与积分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的分数"><span class="toc-number">2.6.</span> <span class="toc-text">公式中的分数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的根号"><span class="toc-number">2.7.</span> <span class="toc-text">公式中的根号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的三角函数"><span class="toc-number">2.8.</span> <span class="toc-text">公式中的三角函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的特殊符号"><span class="toc-number">2.9.</span> <span class="toc-text">公式中的特殊符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的空格"><span class="toc-number">2.10.</span> <span class="toc-text">公式中的空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的顶部符号"><span class="toc-number">2.11.</span> <span class="toc-text">公式中的顶部符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的表格"><span class="toc-number">2.12.</span> <span class="toc-text">公式中的表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式中的矩阵"><span class="toc-number">2.13.</span> <span class="toc-text">公式中的矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公式对齐"><span class="toc-number">2.14.</span> <span class="toc-text">公式对齐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分类表达式"><span class="toc-number">2.15.</span> <span class="toc-text">分类表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方程组"><span class="toc-number">2.16.</span> <span class="toc-text">方程组</span></a></li></ol></li></ol>
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <h1 id="Mathjax简介"><a href="#Mathjax简介" class="headerlink" title="Mathjax简介"></a><font size="6" color="orange">Mathjax简介</font></h1><a id="more"></a>
 <p>Mathjax是一款运行在浏览器中的开源数学符号渲染引擎，使用Mathjax可以方便地在浏览器中显示数学公式，不需要使用图片。目前，Mathjax可以解析LateX、MathML和ASCIIMathML的标记语言。几乎支持所有的主流浏览器。<br>&nbsp; </p>
 <hr>

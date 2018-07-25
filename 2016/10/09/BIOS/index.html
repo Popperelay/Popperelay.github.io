@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p><font size="5" color="orange">什么是BIOS？</font><br><a id="more"></a><br>BIOS，Basic Input Output System基本输入输出系统，是最接近硬件的软件之一，是固化在计算机主板上的ROM芯片中的一组程序，直接对计算机系统中的输入输出设备进行硬件级的控制，为其他软件程序与硬件设备之间建立连接提供了基础，包含基本的中断服务程序、系统设置程序、加电自检程序和系统启动自举程序。<br>BIOS程序是计算机开机加电后第一个开始执行的程序，完成硬件检测及基本的设置功能，故BIOS为操作系统及其他自启动程序的开发和加载提供了接口，是计算机系统中最基础的系统软件。</p>
 <hr>
 <p><font size="5" color="orange">BIOS的住处：BIOS芯片</font><br>上面已经介绍过，BIOS程序被固化在ROM芯片中，所以保存BIOS程序的ROM加上其配套的电路就构成了BIOS芯片。<br>BIOS芯片通常是一块32针的双列直插式长方形或正方形集成电路，表面贴有“BIOS”字样的标签，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721617506.png" alt=""><br>BIOS芯片根据其ROM存储器特点的不同，分为EPROM和EEPROM两种类型。</p>

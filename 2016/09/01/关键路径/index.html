@@ -132,10 +132,35 @@
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
-				<div id="toc" class="toc-article">
+				<!-- <div id="toc" class="toc-article"> -->
+					<!-- <strong class="toc-title">文章目录</strong> -->
+					<!--  -->
+				<!-- </div> -->
+				
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
 					
-				</div>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
                 <p>先来看几个概念和式子：<br><a id="more"></a><br>关键路径：从源点到汇点具有最大长度的路径<br>关键活动：关键路径上的活动<br>事件：带权图中的顶点<br>活动：带权图中的边<br>事件(顶点)Vi的最早发生时间VE：源点到顶点的最长距离<br>事件(顶点)Vi的最晚发生时间VL：工期-结点到汇点的最长距离<br>活动的最早开始时间AE：对应有向边的起点的最早发生时间<br>活动的最晚开始时间AL：对应有向边的终点的最晚发生时间-该有向边的权值<br>关键活动：AE=AL的活动(边)</p>
 <p>求关键路径的步骤：</p>
 <ol>
