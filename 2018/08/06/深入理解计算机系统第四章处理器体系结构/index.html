@@ -185,7 +185,8 @@
 <li>pushq指令会把栈指针减8，并且将一个寄存器值写入内存中。因此当执行<code>pushq %rsp</code>时，到底入栈的是%rsp的原始值，还是%rsp减去8以后的值？Y86-64和x86-64都规定压入的是%rsp的原始值。</li>
 <li>popq指令在执行<code>popq %rsp</code>时，也有类似的歧义，Y86-64和x86-64都规定：执行这条指令后%rsp的值是从栈内存中弹出的值，而不是等于加上8以后的栈指针。</li>
 </ul>
-<h1 id="逻辑设计和硬件控制语言HCL"><a href="#逻辑设计和硬件控制语言HCL" class="headerlink" title="逻辑设计和硬件控制语言HCL"></a><font size="6" color="orange">逻辑设计和硬件控制语言HCL</font></h1><p>现代的硬件设计者都可以通过硬件描述语言（Hardware Description Language，HDL）来生成有效的电路设计。我们这里所用的HCL是HDL的简化版本。</p>
+<h1 id="逻辑设计和硬件控制语言HCL"><a href="#逻辑设计和硬件控制语言HCL" class="headerlink" title="逻辑设计和硬件控制语言HCL"></a><font size="6" color="orange">逻辑设计和硬件控制语言HCL</font></h1><hr>
+<p>现代的硬件设计者都可以通过硬件描述语言（Hardware Description Language，HDL）来生成有效的电路设计。我们这里所用的HCL是HDL的简化版本。</p>
 <p>在当前的技术中，逻辑1是用1.0伏特左右的高电压表示的，而逻辑0是用0.0伏特左右的低电压表示的。要实现一个数字系统需要三个主要的组成部分：计算对位进行操作的函数的组合逻辑、存储位的存储单元、控制存储器单元更新的时钟信号。</p>
 <h2 id="逻辑门"><a href="#逻辑门" class="headerlink" title="逻辑门"></a><font size="5" color="red">逻辑门</font></h2><p>最基本的逻辑门与、或、非如下图所示，它们对应的HCL符号分别是：&amp;&amp;、||、!：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC4%E7%AB%A0_7.png" alt=""></p>
 <h2 id="组合电路和HCL布尔表达式"><a href="#组合电路和HCL布尔表达式" class="headerlink" title="组合电路和HCL布尔表达式"></a><font size="5" color="red">组合电路和HCL布尔表达式</font></h2><p>将很多的逻辑门组合成一个网，就能构建计算块（computational block），称为组合电路（combinational circuits）。如何构建这些网有几个限制：</p>
