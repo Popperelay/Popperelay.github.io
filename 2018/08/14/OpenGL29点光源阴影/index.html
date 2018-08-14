@@ -393,7 +393,8 @@ uniform vec3 u_LightColor <span class="token operator">=</span> <span class="tok
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>传入对应的uniform参数，并做好场景渲染的操作以后，运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_3.jpg" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_2" target="_blank" rel="external">这里</a>。</p>
-<h1 id="PCF"><a href="#PCF" class="headerlink" title="PCF"></a><font size="6" color="orange">PCF</font></h1><p>由于点阴影贴图基于传统阴影映射的原则，所以它也存在由于精度产生的反走样问题：靠近阴影边缘，就能看到明显的锯齿边。我们可以使用和上一篇文章一样的PCF技术，通过采样周围多个样本，来对阴影进行滤波。不同的只是上一篇文章是2D纹理，只需要在两个方向上采样即可，而我们这里对cubemap深度纹理，需要在三个方向上采样：</p>
+<h1 id="PCF"><a href="#PCF" class="headerlink" title="PCF"></a><font size="6" color="orange">PCF</font></h1><hr>
+<p>由于点阴影贴图基于传统阴影映射的原则，所以它也存在由于精度产生的反走样问题：靠近阴影边缘，就能看到明显的锯齿边。我们可以使用和上一篇文章一样的PCF技术，通过采样周围多个样本，来对阴影进行滤波。不同的只是上一篇文章是2D纹理，只需要在两个方向上采样即可，而我们这里对cubemap深度纹理，需要在三个方向上采样：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">calculateShadow</span><span class="token punctuation">(</span>vec3 vWorldPos<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     vec3 Frag2Light <span class="token operator">=</span> vWorldPos <span class="token operator">-</span> u_LightPos<span class="token punctuation">;</span>
@@ -422,7 +423,8 @@ uniform vec3 u_LightColor <span class="token operator">=</span> <span class="tok
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码应该很好理解，就是采样了当前片元在xyz三个方向上的周围64个点的深度值，然后和当前片元的实际深度值作比较，累加阴影值最后求均值。</p>
 <p>运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_4.jpg" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_3" target="_blank" rel="external">这里</a>。</p>
-<h1 id="改进的PCF"><a href="#改进的PCF" class="headerlink" title="改进的PCF"></a><font size="6" color="orange">改进的PCF</font></h1><p>上面的PCF方面里，需要对每个片元采周围64个样本，太多了！而且其中大多数样本都是多余的，因为它们都是在原始方向向量的近处采样，这些采样点靠的太近，不够分散。不如在采样方向向量的垂直方向进行采样更有意义。</p>
+<h1 id="改进的PCF"><a href="#改进的PCF" class="headerlink" title="改进的PCF"></a><font size="6" color="orange">改进的PCF</font></h1><hr>
+<p>上面的PCF方面里，需要对每个片元采周围64个样本，太多了！而且其中大多数样本都是多余的，因为它们都是在原始方向向量的近处采样，这些采样点靠的太近，不够分散。不如在采样方向向量的垂直方向进行采样更有意义。</p>
 <p>我们使用一个有着20个偏移方向的数组：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">vec3 SampleOffsetDirections<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span> <span class="token operator">=</span> vec3<span class="token punctuation">[</span><span class="token punctuation">]</span>
 <span class="token punctuation">(</span>
