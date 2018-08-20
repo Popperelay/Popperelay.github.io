@@ -258,7 +258,7 @@ GLuint DepthRenderBuffer <span class="token operator">=</span> <span class="toke
     std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Framebuffer not complete!"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
 <span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>上面代码运行后会报错：Framebuffer not complete!这是因为在上面自定义的帧缓存中，其颜色附件是个cubemap，确实是分层的，但是它的深度附件（是一个渲染缓冲）却不是分层的，所以会报错。解决方案是要么去掉上面的深度附件，要么把深度附件改成分层的（用数组纹理或者3D纹理）。</p>
+<p>上面代码运行后会报错：Framebuffer not complete!（具体错误是：GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB）。这是因为在上面自定义的帧缓存中，其颜色附件是个cubemap，确实是分层的，但是它的深度附件（是一个渲染缓冲）却不是分层的，所以会报错。解决方案是要么去掉上面的深度附件，要么把深度附件改成分层的（用数组纹理或者3D纹理）。</p>
 
             </div>
 
