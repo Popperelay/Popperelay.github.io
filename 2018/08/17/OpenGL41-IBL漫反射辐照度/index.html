@@ -449,8 +449,8 @@ irradianceShader<span class="token punctuation">.</span><span class="token funct
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>现在，我们应该有了一个可以用于漫反射IBL的预计算的辐照度贴图。为了验证我们是否成功地对环境贴图进行了卷积，让我们将环境贴图替换为辐照度贴图，作为天空盒的环境采样器：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL41IBL%E6%BC%AB%E5%8F%8D%E5%B0%84%E8%BE%90%E7%85%A7%E5%BA%A6_8.png" alt=""><br>如果它看起来像环境贴图的一个高度模糊的版本，那么你已经成功地对环境贴图进行了卷积。</p>
 <h1 id="PBR和间接辐照度光照"><a href="#PBR和间接辐照度光照" class="headerlink" title="PBR和间接辐照度光照"></a><font size="6" color="orange">PBR和间接辐照度光照</font></h1><hr>
-<p>辐照度贴图表示从所有周围的间接光累积的反射积分的漫反射部分。可以看到光不是来自任何直接光源，而是来自周围环境，我们将间接的漫反射光和镜面光视为环境光，取代了我们之前设定的常数项。</p>
-<p>首先，一定要添加预先计算的辐照度图作为立方体采样器：</p>
+<p>辐照度贴图表示从所有周围的间接光累积的反射积分的漫反射部分。可以看到光不是来自任何直接光源，而是来自周围环境，我们将间接的漫反射光和镜面光视为环境光，来取代<a href="http://popperelay.cn/2018/08/16/OpenGL40PBR%E5%AE%9E%E7%8E%B0/" target="_blank" rel="external">上一篇文章</a>中我们为环境光设定的常数项（这部分要做的就是把漫反射辐照度贴图应用到PBR里）。</p>
+<p>首先，一定要添加预先计算的辐照度贴图作为立方体采样器：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">uniform samplerCube irradianceMap<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>给定场景中所有间接漫射光的辐照度贴图，获取影响片元的辐照度与给定表面法线进行单个纹理采样一样简单：</p>
