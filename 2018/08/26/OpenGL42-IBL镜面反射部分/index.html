@@ -1,0 +1,652 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_12.png);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL42 IBL镜面反射部分</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#预过滤HDR环境贴图"><span class="toc-text">预过滤HDR环境贴图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#蒙特卡洛积分和重要性采样"><span class="toc-text">蒙特卡洛积分和重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#低差异序列"><span class="toc-text">低差异序列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GGX重要性采样"><span class="toc-text">GGX重要性采样</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#生成预过滤mipmap层级"><span class="toc-text">生成预过滤mipmap层级</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#预过滤卷积瑕疵"><span class="toc-text">预过滤卷积瑕疵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高粗糙度下的cubemap接缝"><span class="toc-text">高粗糙度下的cubemap接缝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预过滤卷积中的亮点"><span class="toc-text">预过滤卷积中的亮点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#预计算BRDF"><span class="toc-text">预计算BRDF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#完成IBL反射"><span class="toc-text">完成IBL反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下一步？"><span class="toc-text">下一步？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#延伸阅读"><span class="toc-text">延伸阅读</span></a></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p>在上一篇文章中，我们将预计算的辐照度贴图作为光照的间接漫反射部分，把PBR和IBL结合了起来。<br>$$L_o(p,\omega_o)=\int_{\Omega}(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i \cdot n)})L_i(p,\omega_i)n\cdot\omega_id\omega_i$$<br>你会注意到Cook-Torrance镜面反射部分（被$k_s$乘的那部分）在积分上不是常数，而是取决于入射光方向以及观察方向。试图对所有入射光方向以及所有可能的观察方向进行积分，它俩（入射光方向和观察方向）的组合方式太多了，计算量太大不可能做到实时。Epic Games 公司提出了一种解决方案：为了做到实时，可以预先对镜面部分进行卷积，做了一个称为分割求和近似的折中。</p>
+<p>分割求和近似将反射率方程的镜面部分分成了两个独立的部分，我们可以对它们进行单独卷积，然后在基于IBL计算间接镜面反射的PBR着色器中，将它们组合起来。类似于我们卷积辐照度贴图的方式，分割求和近似需要HDR环境贴图作为其卷积输入。为了理解分割求和近似，我们再来看看反射率方程，不过这次只关注镜面反射部分（在上一篇文章中我们只关注了漫反射部分）：<br>$$L_o(p,\omega_o)=\int_{\Omega}k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)}L_i(p,\omega_i)n\cdot\omega_id\omega_i=\int_{\Omega}f_r(p,\omega_i,\omega_o)L_i(p,\omega_i)n\cdot\omega_id\omega_i$$<br>出于和辐照度卷积相同的（性能）原因，我们无法在要求得到合理可信的结果下，实时求解积分的镜面部分。所以我们最好预先计算这个积分，得到类似于镜面IBL贴图的东西，然后使用片元的法线来对这个贴图进行采样，从而求出镜面部分。但是，有个地方很棘手。我们能够预先计算出辐照度贴图，是因为积分只依赖于$\omega_i$，我们可以把常数漫反射项从积分中移出来。但是这一次，从BRDF就可以看出，积分不仅仅取决于$\omega_i$：<br>$$f_r(p,\omega_i,\omega_o)=\frac{DFG}{4(\omega_o\cdot n)(\omega_i \cdot n)}$$<br>这一次，积分也取决于$\omega_o$，我们无法用两个方向向量去采样预计算的cubemap。和前一篇文章一样，位置$p$与此无关。对$\omega_i$和$\omega_o$的每种可能组合都预计算该积分是不可能达到实时的。</p>
+<p>Epic Game公司提出的分割求和近似方法通过将预计算划分为两个独立的部分来解决这个问题，这两个独立的部分可以在后面再组合起来。分割求和近似将镜面积分划分成了两个独立的积分：<br>$$L_o(p,\omega_o)=\int_{\Omega}L_i(p,\omega_i)d\omega_i * \int_{\Omega}f_r(p,\omega_i,\omega_o)n\cdot \omega_id\omega_i$$<br>第一个部分（当进行卷积时）称为预过滤环境贴图，是一个预先计算的环境卷积贴图（类似于辐照度贴图），不过这次考虑了粗糙度。为了增加粗糙度的级别数，会使用更多散乱的采样向量来卷积环境贴图，从而产生更多模糊的反射。对于我们卷积的每个粗糙度级别，我们会将顺序模糊结果存储在预过滤贴图的mipmap层级中。例如，预过滤的环境贴图在其5个mipmap层级中存储5个不同粗糙度值下的预卷积结果，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_1.png" alt=""><br>我们使用Cook-Torrance BRDF的正态分布函数（NDF）生成采样向量及其散射强度，该函数以法线方向和观察方向作为其输入。由于在卷积环境贴图时事先不知道观察方向，所以Epic Games通过假设观察方向（也即是镜面反射方向）总是等于输出采样向量$\omega_o$来做了进一步的近似。代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 N <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>w_o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 R <span class="token operator">=</span> N<span class="token punctuation">;</span>
+vec3 V <span class="token operator">=</span> R<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>通过这种方式，预过滤的环境卷积不需要知道观察方向。这就意味着，当我们从一个角度观察镜面反射时，我们不会得到很好的grazing镜面反射，如下图所示（来自于一篇介绍移动霜冻的PBR文章）；不过，这通常被认为是一个还可以接受的妥协：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_2.png" alt=""><br>上面等式的第二个部分等于镜面积分的BRDF部分。如果我们假设每个方向的入射辐率都是纯白色的（即$L(p,x)= 1.0$），那么我们可以在给定输入参数：粗糙度、法线$n$和入射光方向$\omega_i$的夹角（或者直接是$n\cdot\omega_i$）的情况下，预先计算出BRDF的响应。Epic Games将在不同粗糙度下，预计算BRDF对每个法线和光线方向组合的响应，存储在2D查找纹理（lookup texture，LUT）中，称为BRDF积分贴图。2D查找纹理将比例（红色）和偏差值（绿色）提供给表面菲涅尔反射，为我们提供分割镜面反射积分的第二部分：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_3.png" alt=""><br>我们通过将平面的水平纹理坐标（范围在0.0和1.0之间）视为BRDF的输入$n\cdot\omega_i$，并将其垂直纹理坐标视为输入粗糙度值，来生成查找纹理LUT。 使用此BRDF积分贴图和预过滤的环境贴图，我们可以将两者结合起来获得镜面反射积分的结果：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> lod             <span class="token operator">=</span> <span class="token function">getMipLevelFromRoughness</span><span class="token punctuation">(</span>roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 prefilteredColor <span class="token operator">=</span> <span class="token function">textureCubeLod</span><span class="token punctuation">(</span>PrefilteredEnvMap<span class="token punctuation">,</span> refVec<span class="token punctuation">,</span> lod<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec2 envBRDF          <span class="token operator">=</span> <span class="token function">texture2D</span><span class="token punctuation">(</span>BRDFIntegrationMap<span class="token punctuation">,</span> <span class="token function">vec2</span><span class="token punctuation">(</span>NdotV<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>xy<span class="token punctuation">;</span>
+vec3 indirectSpecular <span class="token operator">=</span> prefilteredColor <span class="token operator">*</span> <span class="token punctuation">(</span>F <span class="token operator">*</span> envBRDF<span class="token punctuation">.</span>x <span class="token operator">+</span> envBRDF<span class="token punctuation">.</span>y<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在应该已经大致知道了Epic Games怎样用分割求和近似来估计反射率方程的间接镜面反射部分了。</p>
+<h1 id="预过滤HDR环境贴图"><a href="#预过滤HDR环境贴图" class="headerlink" title="预过滤HDR环境贴图"></a><font size="6" color="orange">预过滤HDR环境贴图</font></h1><hr>
+<p>预过滤环境贴图与我们如何对光照贴图进行卷积非常相似。 不同之处在于我们现在考虑粗糙度，并在预过滤贴图的mip层级中按顺序存储更粗糙的反射。</p>
+<p>首先，我们需要生成一个新的立方体贴图来保存预过滤的环境贴图数据。 为了确保我们为其mip层级分配足够的内存，我们简单地调用<code>glGenerateMipmap</code>来分配所需的内存量。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> prefilterMap<span class="token punctuation">;</span>
+<span class="token function">glGenTextures</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>prefilterMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> prefilterMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">glTexImage2D</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP_POSITIVE_X <span class="token operator">+</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_RGB16F<span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_RGB<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_S<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_T<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_R<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_MIN_FILTER<span class="token punctuation">,</span> GL_LINEAR_MIPMAP_LINEAR<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_MAG_FILTER<span class="token punctuation">,</span> GL_LINEAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">glGenerateMipmap</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，因为我们计划对<code>prefilterMap</code>采样其mipmap层级，所以需要确保将其缩小过滤器设置为<code>GL_LINEAR_MIPMAP_LINEAR</code>以启用三线性过滤。我们在其基本mip级别以128×128的每面分辨率存储预滤波的镜面反射。这对于大多数反射来说可能已经足够了，但如果有大量光滑材料（想想汽车反射），可能需要提高分辨率。</p>
+<p>在上一篇文章中，我们通过使用球面坐标生成均匀分布在半球$\Omega$上的采样向量，来对环境贴图进行卷积。 虽然这适用于辐照度，但对于镜面反射效果较差。 当涉及镜面反射时，基于表面的粗糙度，反射光或靠近或远离反射向量$r$，不过都是围绕着反射向量的：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_4.png" alt=""><br>可能的出射反射光的一般形状被称为镜面叶。随着粗糙度的增加，镜面叶的大小也会增加；而入射光方向不同时，镜面叶的形状也会发生变化。因此，镜面叶的形状高度依赖于材质。</p>
+<p>当涉及到微平面模型时，给定一些入射光的方向，我们可以把镜面叶看作是关于微平面半程向量的反射方向。由于大多数光线最终反射在微平面半程向量周围的镜面叶中，所以以一种类似的方式生成样本向量才是有意义的，否则就会被浪费掉。这个过程被称为重要性采样。</p>
+<h2 id="蒙特卡洛积分和重要性采样"><a href="#蒙特卡洛积分和重要性采样" class="headerlink" title="蒙特卡洛积分和重要性采样"></a><font size="5" color="red">蒙特卡洛积分和重要性采样</font></h2><p>为了充分掌握重要性抽样，我们首先深入研究称为蒙特卡罗积分的数学结构。蒙特卡洛积分主要围绕统计和概率理论的结合。蒙特卡洛帮助我们在不需要考虑所有群体的情况下，求解一个群体的统计量或价值的问题。</p>
+<p>例如，假设你想要计算一个国家所有公民的平均身高。 为了得到结果，你可以测量每个公民并平均他们的身高，这将为你提供你正在寻找的确切答案。但是，由于大多数国家人口众多，这不是一个现实的方法：需要花费太多精力和时间。</p>
+<p>另一种方法是选择一个小得多的完全随机（无偏）的人口子集，测量他们的身高并求均值。这个人口子集可能小到只有100人。虽然不如确切的答案准确，但你会得到一个相对接近真相的答案。这被称为大数定律。我们的想法是，如果你从总人口中测量一组较小的$N$个完全随机样本，结果将与真实答案相对接近，并随着样本数$N$的增加而变得更接近。</p>
+<p>蒙特卡罗积分建立在这个大数定律的基础上，并采用相同的方法来求解积分。不是为所有可能的（理论上无限的）样本值x求解积分，而是简单地从总人口中随机挑选N个样本值，再求平均。 随着N增加，我们保证得到的结果更接近积分的确切答案：<br>$$O =  \int\limits_{a}^{b} f(x) dx = \frac{1}{N} \sum_{i=0}^{N-1} \frac{f(x)}{pdf(x)}$$<br>为了求解积分，我们在群体$a$到$b$上取$N$个随机样本，将它们加在一起并除以样本总数来平均它们。 $pdf$代表概率密度函数，它告诉我们特定样本在整个样本集上出现的概率。 例如，人口高度的$pdf$看起来有点像这样：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_5.png" alt=""><br>从这张图中我们可以看到，如果我们选取了人口的任意随机样本，那么选中高度为1.70的人的样本的可能性更高，而选中样本高度为1.50的概率较低。</p>
+<p>当涉及蒙特卡罗积分时，一些样本可能比其他样本具有更高的生成概率。 这就是为什么对于任何一般的蒙特卡罗估计，我们根据$pdf$将采样值除以采样概率。 到目前为止，在我们估算积分的每个例子中，我们生成的样本是均匀的，具有完全相同的生成机会。 到目前为止，我们的估计是无偏的，这意味着在给定数量不断增加的样本的情况下，我们最终会收敛到积分的精确解。</p>
+<p>然而，有一些蒙特卡罗估计器是有偏差的，这意味着生成的样本不是完全随机的，而是集中于特定的值或方向。 这些有偏差的蒙特卡罗估计器具有更快的收敛速度，这意味着它们可以以更快的速率收敛到精确解，但由于它们的偏差性质，它们很可能永远不会收敛到精确解。 这通常是可接受的折衷，尤其是在计算机图形学中，因为只要结果在视觉上可接受，精确的解决方案就不太重要。 正如我们很快就会看到重要性采样（使用偏差估计器）所生成的样本偏向于特定方向，在这种情况下，我们通过将每个样本乘以或除以其对应的$pdf$来说明这一点。</p>
+<p>蒙特卡罗积分在计算机图形学中非常普遍，因为它是离散地并且有效地近似连续积分的一种相当直观的方式：对任何面积/体积进行采样（如半球$Ω$），在该区域内生成$N$个随机样本，然后求和，并权衡每个样本对最终结果的贡献。</p>
+<p>蒙特卡洛积分是一个广泛的数学主题，我们不会深入研究具体细节，但我们会提到有多种方法可以生成随机样本。 默认情况下，每个样本都是我们习惯的完全（伪）随机，但是通过利用半随机序列的某些属性，我们可以生成仍然是随机的但具有有趣属性的采样向量。 例如，我们可以对称为低差异序列的东西进行蒙特卡罗积分，这些序列仍然会生成随机样本，但每个样本分布更均匀：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_6.png" alt=""><br>当使用低差异序列生成蒙特卡罗采样向量时，该过程称为准蒙特卡罗积分。准蒙特卡罗方法具有更快的收敛速度，这使得它们对于性能繁重的应用而言是有意思的。</p>
+<p>鉴于我们新获得的蒙特卡罗和准蒙特卡罗积分知识，我们可以使用一个有趣的属性来实现更快的收敛速度，称为重要性采样。我们之前已经提到它，但是当涉及光的镜面反射时，反射光向量被约束在镜面叶中，其尺寸由表面的粗糙度决定。 镜面叶外的任何（准）随机生成的样本都与镜面积分无关，将样本生成集中在镜面叶内才是有意义的，当然代价是蒙特卡罗估计偏差。</p>
+<p>从本质上讲，重要性采样是：在一些受粗糙度限制的区域内生成样采样向量，该区域以微平面半程向量为轴环绕。通过将准蒙特卡罗采样与低差异序列相结合并使用重要性采样偏置采样向量，我们获得了高收敛率。因为我们可以以更快的速度解决问题，所以我们只需要更少的样本就可以达到足够的近似值。 因此，该组合甚至允许图形应用程序实时解决镜面反射积分，尽管它仍然比预先计算结果慢得多。</p>
+<h2 id="低差异序列"><a href="#低差异序列" class="headerlink" title="低差异序列"></a><font size="5" color="red">低差异序列</font></h2><p>在这篇文章中，我们将在给定基于准蒙特卡罗方法的随机低差异序列的情况下，使用重要性采样预先计算间接反射率方程的镜面反射部分。 我们将使用Holmers Dammertz详细描述的Hammersley序列。 Hammersley序列基于Van Der Corpus序列，后者反映了小数点周围的十进制数的二进制表示。</p>
+<p>使用一些巧妙的比特技巧，我们可以在着色器程序中非常有效地生成Van Der Corpus序列，我们使用该着色器在总共N个样本里获得样本i的Hammersley序列：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">RadicalInverse_VdC</span><span class="token punctuation">(</span>uint bits<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    bits <span class="token operator">=</span> <span class="token punctuation">(</span>bits <span class="token operator">&lt;&lt;</span> <span class="token number">16u</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span>bits <span class="token operator">>></span> <span class="token number">16u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bits <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0x55555555u</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1u</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0xAAAAAAAAu</span><span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bits <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0x33333333u</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">2u</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0xCCCCCCCCu</span><span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">2u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bits <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0x0F0F0F0Fu</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">4u</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0xF0F0F0F0u</span><span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">4u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bits <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0x00FF00FFu</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token number">8u</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>bits <span class="token operator">&amp;</span> <span class="token number">0xFF00FF00u</span><span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">8u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">float</span><span class="token punctuation">(</span>bits<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">2.3283064365386963e-10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// / 0x100000000</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// ----------------------------------------------------------------------------</span>
+vec2 <span class="token function">Hammersley</span><span class="token punctuation">(</span>uint i<span class="token punctuation">,</span> uint N<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">/</span><span class="token keyword">float</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">RadicalInverse_VdC</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>Hammersley</code>函数为我们提供了大小为<code>N</code>的总样本集的低差异样本<code>i</code>。</p>
+<blockquote>
+<p>不支持位操作时的Hammersley序列</p>
+<p>并非所有与OpenGL相关的驱动程序都支持位运算符（例如WebGL和OpenGL ES 2.0），在这种情况下，你可能希望使用不依赖于位运算符的替代版Van Der Corpus Sequence：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">VanDerCorpus</span><span class="token punctuation">(</span>uint n<span class="token punctuation">,</span> <span class="token operator">></span> uint base<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> invBase <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">/</span> <span class="token keyword">float</span><span class="token punctuation">(</span>base<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> denom   <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> result  <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span>uint i <span class="token operator">=</span> <span class="token number">0u</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">32u</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">></span> <span class="token number">0u</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            denom   <span class="token operator">=</span> <span class="token function">mod</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            result <span class="token operator">+</span><span class="token operator">=</span> denom <span class="token operator">*</span> invBase<span class="token punctuation">;</span>
+            invBase <span class="token operator">=</span> invBase <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">;</span>
+            n       <span class="token operator">=</span> <span class="token function">uint</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// ----------------------------------------------------------------------------</span>
+vec2 <span class="token function">HammersleyNoBitOps</span><span class="token punctuation">(</span>uint i<span class="token punctuation">,</span> uint N<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">/</span><span class="token keyword">float</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">VanDerCorpus</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">2u</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，由于旧硬件中的GLSL循环限制，序列循环会遍历所有可能的32位。这个版本性能较差，但可以在所有硬件上运行，即使是那些不支持位操作的硬件。</p>
+</blockquote>
+<h1 id="GGX重要性采样"><a href="#GGX重要性采样" class="headerlink" title="GGX重要性采样"></a><font size="5" color="red">GGX重要性采样</font></h1><p>我们将基于表面粗糙度，生成偏向于微表面半程向量（也是通常的反射方向）的样本矢量，而不是均匀或随机（蒙特卡罗）在积分的半球Ω上生成样本矢量。 采样过程与我们之前看到的类似：开始一个大循环，生成一个随机（低差异）序列值，使用序列值在切线空间中生成一个采样向量，将其转换到世界空间后来采样场景的辐射率。不同的是，我们现在使用低差异序列值作为输入来生成采样向量：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">const</span> uint SAMPLE_COUNT <span class="token operator">=</span> <span class="token number">4096u</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>uint i <span class="token operator">=</span> <span class="token number">0u</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SAMPLE_COUNT<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec2 Xi <span class="token operator">=</span> <span class="token function">Hammersley</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> SAMPLE_COUNT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另外，为了构建采样，我们需要一些方法来使采样向量朝向和偏置向某些表面粗糙度下的镜面叶。我们可以使用<a href="http://popperelay.cn/2018/08/14/OpenGL39-PBR%E7%90%86%E8%AE%BA/" target="_blank" rel="external">《OPENGL39 PBR理论》</a>中描述的NDF，将GGX NDF结合在Epic Games描述的球形采样向量过程中。至于怎样结合GGX让采样向量更靠近于某个方向（这里是法线方向（或者叫观察方向）），推导过程太长了，直接给出采样向量的球面坐标公式：<br>$$\theta_s = arctan(\frac{\alpha\sqrt{\xi_1}}{\sqrt{1-\xi_1}}) \\<br>\phi_s = 2\pi\xi_2$$<br>其中$\xi_1$和$\xi_2$就分别是二维Hammersley序列的<code>x</code>和<code>y</code>（具体可参考<a href="http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx" target="_blank" rel="external">这篇文章</a>）。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 <span class="token function">ImportanceSampleGGX</span><span class="token punctuation">(</span>vec2 Xi<span class="token punctuation">,</span> vec3 N<span class="token punctuation">,</span> <span class="token keyword">float</span> roughness<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> a <span class="token operator">=</span> roughness<span class="token operator">*</span>roughness<span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> phi <span class="token operator">=</span> <span class="token number">2.0</span> <span class="token operator">*</span> PI <span class="token operator">*</span> Xi<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> cosTheta <span class="token operator">=</span> <span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> Xi<span class="token punctuation">.</span>y<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">+</span> <span class="token punctuation">(</span>a<span class="token operator">*</span>a <span class="token operator">-</span> <span class="token number">1.0</span><span class="token punctuation">)</span> <span class="token operator">*</span> Xi<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//可以由上面arctan的公式推出来</span>
+    <span class="token keyword">float</span> sinTheta <span class="token operator">=</span> <span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> cosTheta<span class="token operator">*</span>cosTheta<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// from spherical coordinates to cartesian coordinates</span>
+    vec3 H<span class="token punctuation">;</span>
+    H<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token function">cos</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span> <span class="token operator">*</span> sinTheta<span class="token punctuation">;</span>
+    H<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token function">sin</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span> <span class="token operator">*</span> sinTheta<span class="token punctuation">;</span>
+    H<span class="token punctuation">.</span>z <span class="token operator">=</span> cosTheta<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// from tangent-space vector to world-space sample vector</span>
+    vec3 up        <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>N<span class="token punctuation">.</span>z<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0.999</span> <span class="token operator">?</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 tangent   <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token function">cross</span><span class="token punctuation">(</span>up<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 bitangent <span class="token operator">=</span> <span class="token function">cross</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> tangent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    vec3 sampleVec <span class="token operator">=</span> tangent <span class="token operator">*</span> H<span class="token punctuation">.</span>x <span class="token operator">+</span> bitangent <span class="token operator">*</span> H<span class="token punctuation">.</span>y <span class="token operator">+</span> N <span class="token operator">*</span> H<span class="token punctuation">.</span>z<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">normalize</span><span class="token punctuation">(</span>sampleVec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基于一些输入粗糙度和低差异序列值<code>Xi</code>，这给了我们一个在一定程度上靠向微表面半程向量的样本向量。 请注意，根据迪士尼最初的PBR研究，Epic Games使用平方粗糙度来获得更好的视觉效果。</p>
+<p>有了低差异的Hammersley序列和样本生成方式，我们可以最终确定预滤波器卷积着色器：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 330 core</span>
+out vec4 FragColor<span class="token punctuation">;</span>
+in vec3 localPos<span class="token punctuation">;</span>
+
+uniform samplerCube environmentMap<span class="token punctuation">;</span>
+uniform <span class="token keyword">float</span> roughness<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">float</span> PI <span class="token operator">=</span> <span class="token number">3.14159265359</span><span class="token punctuation">;</span>
+
+<span class="token keyword">float</span> <span class="token function">RadicalInverse_VdC</span><span class="token punctuation">(</span>uint bits<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec2 <span class="token function">Hammersley</span><span class="token punctuation">(</span>uint i<span class="token punctuation">,</span> uint N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 <span class="token function">ImportanceSampleGGX</span><span class="token punctuation">(</span>vec2 Xi<span class="token punctuation">,</span> vec3 N<span class="token punctuation">,</span> <span class="token keyword">float</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>        
+    vec3 N <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>localPos<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+    vec3 R <span class="token operator">=</span> N<span class="token punctuation">;</span>
+    vec3 V <span class="token operator">=</span> R<span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> uint SAMPLE_COUNT <span class="token operator">=</span> <span class="token number">1024u</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> totalWeight <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>   
+    vec3 prefilteredColor <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     
+    <span class="token keyword">for</span><span class="token punctuation">(</span>uint i <span class="token operator">=</span> <span class="token number">0u</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SAMPLE_COUNT<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        vec2 Xi <span class="token operator">=</span> <span class="token function">Hammersley</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> SAMPLE_COUNT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vec3 H  <span class="token operator">=</span> <span class="token function">ImportanceSampleGGX</span><span class="token punctuation">(</span>Xi<span class="token punctuation">,</span> N<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vec3 L  <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token number">2.0</span> <span class="token operator">*</span> <span class="token function">dot</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> H<span class="token punctuation">)</span> <span class="token operator">*</span> H <span class="token operator">-</span> V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">float</span> NdotL <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>NdotL <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            prefilteredColor <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>environmentMap<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb <span class="token operator">*</span> NdotL<span class="token punctuation">;</span>
+            totalWeight      <span class="token operator">+</span><span class="token operator">=</span> NdotL<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    prefilteredColor <span class="token operator">=</span> prefilteredColor <span class="token operator">/</span> totalWeight<span class="token punctuation">;</span>
+
+    FragColor <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>prefilteredColor<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>vec3 L  = normalize(2.0 * dot(V, H) * H - V);</code>是根据观察向量<code>V</code>和半程向量<code>H</code>，来求入射向量<code>L</code>，原理如下图（<code>V</code>和<code>L</code>都是单位向量，所以下图的四边形是一个菱形）（注意积分积的不是镜面叶里的反射向量，而是它们对应的入射向量）。<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_6_2.png" alt=""></p>
+<p>我们根据一些输入粗糙度预先过滤环境（这些粗糙度在预过滤立方体贴图的每个mipmap层级间变化（从0.0到1.0）），并将结果存储在<code>prefilteredColor</code>中。 得到的预过滤颜色除以总样品权重，其中对最终结果影响较小的样品（对于小<code>NdotL</code>）对最终权重的贡献较小（权重是以<code>NdotL</code>来衡量的，<code>L</code>越靠近<code>N</code>，对镜面反射的贡献越大）。</p>
+<h2 id="生成预过滤mipmap层级"><a href="#生成预过滤mipmap层级" class="headerlink" title="生成预过滤mipmap层级"></a><font size="5" color="red">生成预过滤mipmap层级</font></h2><p>剩下要做的是让OpenGL在多个mipmap级别上使用不同的粗糙度值对环境贴图进行预过滤。 这个实际上相当容易：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">prefilterShader<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+prefilterShader<span class="token punctuation">.</span><span class="token function">setInt</span><span class="token punctuation">(</span><span class="token string">"environmentMap"</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+prefilterShader<span class="token punctuation">.</span><span class="token function">setMat4</span><span class="token punctuation">(</span><span class="token string">"projection"</span><span class="token punctuation">,</span> captureProjection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glActiveTexture</span><span class="token punctuation">(</span>GL_TEXTURE0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> envCubemap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> captureFBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">int</span> maxMipLevels <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> mip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> mip <span class="token operator">&lt;</span> maxMipLevels<span class="token punctuation">;</span> <span class="token operator">++</span>mip<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// reisze framebuffer according to mip-level size.</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> mipWidth  <span class="token operator">=</span> <span class="token number">128</span> <span class="token operator">*</span> std<span class="token operator">::</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> mip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> mipHeight <span class="token operator">=</span> <span class="token number">128</span> <span class="token operator">*</span> std<span class="token operator">::</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> mip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glBindRenderbuffer</span><span class="token punctuation">(</span>GL_RENDERBUFFER<span class="token punctuation">,</span> captureRBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glRenderbufferStorage</span><span class="token punctuation">(</span>GL_RENDERBUFFER<span class="token punctuation">,</span> GL_DEPTH_COMPONENT24<span class="token punctuation">,</span> mipWidth<span class="token punctuation">,</span> mipHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">glViewport</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> mipWidth<span class="token punctuation">,</span> mipHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> roughness <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span>mip <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>maxMipLevels <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    prefilterShader<span class="token punctuation">.</span><span class="token function">setFloat</span><span class="token punctuation">(</span><span class="token string">"roughness"</span><span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        prefilterShader<span class="token punctuation">.</span><span class="token function">setMat4</span><span class="token punctuation">(</span><span class="token string">"view"</span><span class="token punctuation">,</span> captureViews<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">glFramebufferTexture2D</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> GL_COLOR_ATTACHMENT0<span class="token punctuation">,</span> 
+                               GL_TEXTURE_CUBE_MAP_POSITIVE_X <span class="token operator">+</span> i<span class="token punctuation">,</span> prefilterMap<span class="token punctuation">,</span> mip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">glClear</span><span class="token punctuation">(</span>GL_COLOR_BUFFER_BIT <span class="token operator">|</span> GL_DEPTH_BUFFER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">renderCube</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>该过程类似于辐照度贴图卷积，但这次我们将帧缓冲区的尺寸缩放到适当的mipmap比例，每个mip级别将尺寸缩小2倍。另外，我们在<code>glFramebufferTexture2D</code>的最后一个参数中指定渲染的mip级别（用于将当前渲染的结果存储到纹理的指定mip层级中），并且将我们预过滤的粗糙度传递给预过滤器着色器。</p>
+<p>这应该会得到一个适当的预过滤环境贴图，我们访问它的更高的mip级别时，它返回更模糊反射。如果我们在天空盒着色器中显示预过滤的环境立方体贴图，并在其着色器中强制采样稍高于第一个mip的级别，如下所示：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 envColor <span class="token operator">=</span> <span class="token function">textureLod</span><span class="token punctuation">(</span>environmentMap<span class="token punctuation">,</span> WorldPos<span class="token punctuation">,</span> <span class="token number">1.2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我们得到的结果确实看起来像原始环境的模糊版本：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_7.png" alt=""></p>
+<h1 id="预过滤卷积瑕疵"><a href="#预过滤卷积瑕疵" class="headerlink" title="预过滤卷积瑕疵"></a><font size="6" color="orange">预过滤卷积瑕疵</font></h1><hr>
+<p>虽然当前的预过滤器贴图在大多数情况下都能正常工作，但迟早会遇到几个与预过滤器卷积直接相关的渲染瑕疵。我们将列出这里最常见的内容，包括如何修复它们。</p>
+<h2 id="高粗糙度下的cubemap接缝"><a href="#高粗糙度下的cubemap接缝" class="headerlink" title="高粗糙度下的cubemap接缝"></a><font size="5" color="red">高粗糙度下的cubemap接缝</font></h2><p>在粗糙表面上采样预过滤贴图，意味着在一些较低的mip层级上对预过滤贴图进行采样。在采样cubemap时，在默认情况下，OpenGL并不会在立方体贴图面之间进行线性插值。因为较低的mip层级都是较低的分辨率，而预过滤贴图则是由一个更大的样本叶卷积而成的，所以缺少面间滤波就变得很明显了：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_8.png" alt=""><br>幸运的是，OpenGL为我们提供了通过启用<code>GL_TEXTURE_CUBE_MAP_SEAMLESS</code>来正确过滤立方体贴图面的选项：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">glEnable</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP_SEAMLESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>只需在应用程序启动时的某个位置启用此属性，接缝就会消失。</p>
+<h2 id="预过滤卷积中的亮点"><a href="#预过滤卷积中的亮点" class="headerlink" title="预过滤卷积中的亮点"></a><font size="5" color="red">预过滤卷积中的亮点</font></h2><p>由于镜面反射中的高频细节和光强度变化剧烈，镜面反射的卷积需要大量样本才能正确反映HDR环境反射的极端变化的性质。我们已经采集了大量样本，但在某些环境中，在一些较粗糙的mip级别上可能仍然不够，在这种情况下，你将开始看到明亮区域周围出现点状图案：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_9.png" alt=""><br>一种选择是进一步增加样本数，但这不足以应付所有环境。如Chetan Jags所述，我们可以通过（在预滤波器卷积期间）不直接对环境贴图进行采样来减少次瑕疵，而是基于积分的$PDF$和粗糙度对环境贴图的mip层级进行采样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> D   <span class="token operator">=</span> <span class="token function">DistributionGGX</span><span class="token punctuation">(</span>NdotH<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> pdf <span class="token operator">=</span> <span class="token punctuation">(</span>D <span class="token operator">*</span> NdotH <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">4.0</span> <span class="token operator">*</span> HdotV<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.0001</span><span class="token punctuation">;</span> 
+
+<span class="token keyword">float</span> resolution <span class="token operator">=</span> <span class="token number">512.0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// resolution of source cubemap (per face)</span>
+<span class="token keyword">float</span> saTexel  <span class="token operator">=</span> <span class="token number">4.0</span> <span class="token operator">*</span> PI <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">6.0</span> <span class="token operator">*</span> resolution <span class="token operator">*</span> resolution<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> saSample <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">(</span>SAMPLE_COUNT<span class="token punctuation">)</span> <span class="token operator">*</span> pdf <span class="token operator">+</span> <span class="token number">0.0001</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">float</span> mipLevel <span class="token operator">=</span> roughness <span class="token operator">==</span> <span class="token number">0.0</span> <span class="token operator">?</span> <span class="token number">0.0</span> <span class="token operator">:</span> <span class="token number">0.5</span> <span class="token operator">*</span> <span class="token function">log2</span><span class="token punctuation">(</span>saSample <span class="token operator">/</span> saTexel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为要从环境贴图中获取mip层级，所以别忘了对它启用三线性过滤：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> envCubemap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_MIN_FILTER<span class="token punctuation">,</span> GL_LINEAR_MIPMAP_LINEAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>然后在设置好立方体贴图的基本原理后，让OpenGL生成mipmap：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// convert HDR equirectangular environment map to cubemap equivalent</span>
+<span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true">// then generate mipmaps</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> envCubemap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glGenerateMipmap</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>显示效果非常好，并且应该在粗糙表面上的预过滤器贴图中删除了大多数亮点（即使不是全部的话也是大多数）。</p>
+<h1 id="预计算BRDF"><a href="#预计算BRDF" class="headerlink" title="预计算BRDF"></a><font size="6" color="orange">预计算BRDF</font></h1><hr>
+<p>在预过滤环境启动和运行的情况下，我们可以关注分割求和近似的第二部分：BRDF。 让我们再次简要回顾一下镜面分割求和近似：<br>$$L_o(p,\omega_o) = \int\limits_{\Omega} L_i(p,\omega_i) d\omega_i<em><br>\int\limits_{\Omega} f_r(p, \omega_i, \omega_o) n \cdot \omega_i d\omega_i$$<br>我们已经在不同粗糙度级别的预过滤贴图中预先计算了分割求和近似的左侧部分。右侧部分要求我们对于角度$n\cdot\omega_o$、表面粗糙度和菲涅尔方程的$F_0$来卷积BRDF方程。这个类似于在纯白色环境（或者说恒定为1.0的辐射率$L_i$）下，积分镜面BRDF。使用3个变量来积分BRDF有点多，但是我们可以把$F_0$移出镜面BRDF方程：<br>$$\int\limits_{\Omega} f_r(p, \omega_i, \omega_o) n \cdot \omega_i d\omega_i = \int\limits_{\Omega} f_r(p, \omega_i, \omega_o) \frac{F(\omega_o, h)}{F(\omega_o, h)} n \cdot \omega_i d\omega_i$$<br>其中$F$是菲涅尔方程。移动菲涅尔分母到BRDF下面会得到下面的等效式子：<br>$$\int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} F(\omega_o, h)  n \cdot \omega_i d\omega_i$$<br>用Fresnel-Schlick近似代替最右边的$F$会得到：<br>$$\int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} (F_0 + (1 - F_0){(1 - \omega_o \cdot h)}^5)  n \cdot \omega_i d\omega_i$$<br>用$\alpha$来代替$(1-\omega_o\cdot h)^5$，让求解$F_0$变得更简单：<br>$$\int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} (F_0 + (1 - F_0)\alpha)  n \cdot \omega_i d\omega_i$$<br>$$\int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} (F_0 </em> (1 - \alpha) + \alpha)  n \cdot \omega_i d\omega_i$$<br>再将其划分成两个积分：<br>$$\int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} (F_0 * (1 - \alpha))  n \cdot \omega_i d\omega_i<br>              +<br>    \int\limits_{\Omega} \frac{f_r(p, \omega_i, \omega_o)}{F(\omega_o, h)} (\alpha)  n \cdot \omega_i d\omega_i$$<br>这样，$F_0$在积分上是一个常数，所以我们可以把$F_0$移到积分外面。然后，我们把$\alpha$替换为它原来的形式，得到最终的分割求和BRDF方程：<br>$$F_0 \int\limits_{\Omega} f_r(p, \omega_i, \omega_o)(1 - {(1 - \omega_o \cdot h)}^5)  n \cdot \omega_i d\omega_i<br>              +<br>    \int\limits_{\Omega} f_r(p, \omega_i, \omega_o) {(1 - \omega_o \cdot h)}^5  n \cdot \omega_i d\omega_i$$<br>这两个积分分别表示对$F_0$的缩放比例和偏差。注意，由于原有的$f(p, \omega_i, \omega_o)$中有包含$F$项，所以这两个积分都需要从$f$中把$F$移除掉。</p>
+<p>以类似于之前卷积环境贴图的方式，我们可以在它们的输入（$n$和$ω_o$之间的角度、粗糙度）上卷积BRDF方程，并将卷积结果存储在纹理中。 我们将卷积结果存储在2D查找纹理（LUT）中，称为BRDF积分贴图。我们稍后在PBR光照着色器中使用它来获得最终的卷积间接镜面反射结果。</p>
+<p>BRDF卷积着色器在2D平面上操作，使用其2D纹理坐标直接作为BRDF卷积的输入（<code>NdotV</code>和<code>roughnes</code>）。 卷积码很大程度上类似于预滤波卷积，不同之处在于它现在根据我们的BRDF几何函数和NDF来处理采样向量（如前所述，这里面在计算$f_r(p,\omega_i,\omega_o)$时没有考虑菲涅尔）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec2 <span class="token function">IntegrateBRDF</span><span class="token punctuation">(</span><span class="token keyword">float</span> NdotV<span class="token punctuation">,</span> <span class="token keyword">float</span> roughness<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 V<span class="token punctuation">;</span>
+    V<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token function">sqrt</span><span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> NdotV<span class="token operator">*</span>NdotV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    V<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    V<span class="token punctuation">.</span>z <span class="token operator">=</span> NdotV<span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> A <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> B <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+
+    vec3 N <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> uint SAMPLE_COUNT <span class="token operator">=</span> <span class="token number">1024u</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>uint i <span class="token operator">=</span> <span class="token number">0u</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SAMPLE_COUNT<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        vec2 Xi <span class="token operator">=</span> <span class="token function">Hammersley</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> SAMPLE_COUNT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vec3 H  <span class="token operator">=</span> <span class="token function">ImportanceSampleGGX</span><span class="token punctuation">(</span>Xi<span class="token punctuation">,</span> N<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vec3 L  <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token number">2.0</span> <span class="token operator">*</span> <span class="token function">dot</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> H<span class="token punctuation">)</span> <span class="token operator">*</span> H <span class="token operator">-</span> V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">float</span> NdotL <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>z<span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">float</span> NdotH <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>H<span class="token punctuation">.</span>z<span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">float</span> VdotH <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> H<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>NdotL <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">float</span> G <span class="token operator">=</span> <span class="token function">GeometrySmith</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">,</span> L<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">float</span> G_Vis <span class="token operator">=</span> <span class="token punctuation">(</span>G <span class="token operator">*</span> VdotH<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>NdotH <span class="token operator">*</span> NdotV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">float</span> Fc <span class="token operator">=</span> <span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> VdotH<span class="token punctuation">,</span> <span class="token number">5.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            A <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> Fc<span class="token punctuation">)</span> <span class="token operator">*</span> G_Vis<span class="token punctuation">;</span>
+            B <span class="token operator">+</span><span class="token operator">=</span> Fc <span class="token operator">*</span> G_Vis<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    A <span class="token operator">/</span><span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">(</span>SAMPLE_COUNT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    B <span class="token operator">/</span><span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">(</span>SAMPLE_COUNT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">vec2</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// ----------------------------------------------------------------------------</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    vec2 integratedBRDF <span class="token operator">=</span> <span class="token function">IntegrateBRDF</span><span class="token punctuation">(</span>TexCoords<span class="token punctuation">.</span>x<span class="token punctuation">,</span> TexCoords<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    FragColor <span class="token operator">=</span> integratedBRDF<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>正如您所看到的，BRDF卷积是从数学到代码的直接转换。 我们将角度$θ$和粗糙度都作为输入，生成具有重要性采样的采样向量，在$D$和$G$上处理它（代码里面计算重要性采样的时候<code>ImportanceSampleGGX(Xi, N, roughness)</code>已经结合用到了正态分布$D$），并为每个样本求出相对于$F_0$的缩放比例和偏差，最后对它们求均值（至于代码中<code>G_Vis</code>的计算依据是什么暂时不得而知~）。</p>
+<p>你可能从<a href="http://popperelay.cn/2018/08/14/OpenGL39-PBR%E7%90%86%E8%AE%BA/" target="_blank" rel="external">《OPENGL39 PBR理论》</a>中回忆起BRDF的几何项与IBL一起使用时略有不同，因为它的$k$变量具有稍微不同的解释：<br>$$k_{direct} = \frac{(\alpha + 1)^2}{8} \\<br>k_{IBL} = \frac{\alpha^2}{2}$$<br>由于BRDF卷积是镜面IBL积分的一部分，所以我们将为Schlick-GGX几何函数使用$k_{IBL}$：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">GeometrySchlickGGX</span><span class="token punctuation">(</span><span class="token keyword">float</span> NdotV<span class="token punctuation">,</span> <span class="token keyword">float</span> roughness<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> a <span class="token operator">=</span> roughness<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> k <span class="token operator">=</span> <span class="token punctuation">(</span>a <span class="token operator">*</span> a<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> nom   <span class="token operator">=</span> NdotV<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> denom <span class="token operator">=</span> NdotV <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> k<span class="token punctuation">)</span> <span class="token operator">+</span> k<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> nom <span class="token operator">/</span> denom<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// ----------------------------------------------------------------------------</span>
+<span class="token keyword">float</span> <span class="token function">GeometrySmith</span><span class="token punctuation">(</span>vec3 N<span class="token punctuation">,</span> vec3 V<span class="token punctuation">,</span> vec3 L<span class="token punctuation">,</span> <span class="token keyword">float</span> roughness<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> NdotV <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> NdotL <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> L<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> ggx2 <span class="token operator">=</span> <span class="token function">GeometrySchlickGGX</span><span class="token punctuation">(</span>NdotV<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> ggx1 <span class="token operator">=</span> <span class="token function">GeometrySchlickGGX</span><span class="token punctuation">(</span>NdotL<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> ggx1 <span class="token operator">*</span> ggx2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，虽然$k$取<code>a</code>作为其参数，但我们没有将<code>roughness</code>平方后赋给<code>a</code>（我们前面的代码是这么做的）。我不确定这是否与Epic Games的部分或原始的迪士尼论文不一致，但是直接将<code>roughness</code>转换为<code>a</code>会给出与Epic Games版本完全相同的BRDF积分贴图。</p>
+<p>最后，为了存储BRDF卷积结果，我们生成一张512x512分辨率的2D纹理：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> brdfLUTTexture<span class="token punctuation">;</span>
+<span class="token function">glGenTextures</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>brdfLUTTexture<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// pre-allocate enough memory for the LUT texture.</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> brdfLUTTexture<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexImage2D</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_RG16F<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_RG<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> GL_TEXTURE_WRAP_S<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> GL_TEXTURE_WRAP_T<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> GL_TEXTURE_MIN_FILTER<span class="token punctuation">,</span> GL_LINEAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_2D<span class="token punctuation">,</span> GL_TEXTURE_MAG_FILTER<span class="token punctuation">,</span> GL_LINEAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意我们使用Epic Games建议的16位精度的浮点格式。要将环绕格式设置为<code>GL_CLAMP_TO_EDGE</code>，避免边缘采样走样。</p>
+<p>然后，我们再次使用相同的帧缓存，在NDC屏幕四边形上运行着色器：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> captureFBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindRenderbuffer</span><span class="token punctuation">(</span>GL_RENDERBUFFER<span class="token punctuation">,</span> captureRBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glRenderbufferStorage</span><span class="token punctuation">(</span>GL_RENDERBUFFER<span class="token punctuation">,</span> GL_DEPTH_COMPONENT24<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glFramebufferTexture2D</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> GL_COLOR_ATTACHMENT0<span class="token punctuation">,</span> GL_TEXTURE_2D<span class="token punctuation">,</span> brdfLUTTexture<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">glViewport</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+brdfShader<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glClear</span><span class="token punctuation">(</span>GL_COLOR_BUFFER_BIT <span class="token operator">|</span> GL_DEPTH_BUFFER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">RenderQuad</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>分割求和积分的卷积BRDF部分应该像下面这样：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_10.png" alt=""><br>利用预滤波环境贴图和BRDF 二维查找纹理，我们可以根据分割求和近似重建出间接镜面积分。然后，组合后的结果就是间接或环境镜面反射光。</p>
+<h1 id="完成IBL反射"><a href="#完成IBL反射" class="headerlink" title="完成IBL反射"></a><font size="6" color="orange">完成IBL反射</font></h1><p>为了使反射率方程的间接镜面反射部分运行起来，我们需要将分割求和近似的两个部分缝合在一起。让我们首先将预先计算的光照数据添加到PBR着色器的顶部：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">uniform samplerCube prefilterMap<span class="token punctuation">;</span>
+uniform sampler2D   brdfLUT<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>首先，我们通过使用反射向量对预过滤的环境地图进行采样来获得表面的间接镜面反射。 请注意，我们根据表面粗糙度对适当的mip层级进行采样，从而使较粗糙的表面得到更模糊镜面反射。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+    vec3 R <span class="token operator">=</span> <span class="token function">reflect</span><span class="token punctuation">(</span><span class="token operator">-</span>V<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>   
+
+    <span class="token keyword">const</span> <span class="token keyword">float</span> MAX_REFLECTION_LOD <span class="token operator">=</span> <span class="token number">4.0</span><span class="token punctuation">;</span>
+    vec3 prefilteredColor <span class="token operator">=</span> <span class="token function">textureLod</span><span class="token punctuation">(</span>prefilterMap<span class="token punctuation">,</span> R<span class="token punctuation">,</span>  roughness <span class="token operator">*</span> MAX_REFLECTION_LOD<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>    
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在预过滤步骤中，我们只将环境贴图最多卷积到最多5个mip级别（0到4），我们在此将其表示为<code>MAX_REFLECTION_LOD</code>，以确保我们不会在没有（相关）数据的情况下对某个mip层级进行采样。</p>
+<p>然后给出材料的粗糙度以及法线和视图矢量之间的角度以后，我们去BRDF查找纹理中进行采样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 F        <span class="token operator">=</span> <span class="token function">FresnelSchlickRoughness</span><span class="token punctuation">(</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> F0<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec2 envBRDF  <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>brdfLUT<span class="token punctuation">,</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rg<span class="token punctuation">;</span>
+vec3 specular <span class="token operator">=</span> prefilteredColor <span class="token operator">*</span> <span class="token punctuation">(</span>F <span class="token operator">*</span> envBRDF<span class="token punctuation">.</span>x <span class="token operator">+</span> envBRDF<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>给定来自BRDF查找纹理的相对于$F_0$（这里我们直接使用间接菲涅耳结果<code>F</code>）的缩放比例和偏差，我们把它与IBL反射率方程左边的预滤波部分组合起来，并重新构建近似积分结果<code>specular</code>。</p>
+<p>这给了我们反射率方程的间接镜面反射部分。现在，将它与上一篇文章中反射率方程的漫反射部分结合起来，得到完整的PBR IBL结果：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 F <span class="token operator">=</span> <span class="token function">FresnelSchlickRoughness</span><span class="token punctuation">(</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> F0<span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+vec3 kS <span class="token operator">=</span> F<span class="token punctuation">;</span>
+vec3 kD <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">-</span> kS<span class="token punctuation">;</span>
+kD <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">-</span> metallic<span class="token punctuation">;</span>      
+
+vec3 irradiance <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>irradianceMap<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+vec3 diffuse    <span class="token operator">=</span> irradiance <span class="token operator">*</span> albedo<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">float</span> MAX_REFLECTION_LOD <span class="token operator">=</span> <span class="token number">4.0</span><span class="token punctuation">;</span>
+vec3 prefilteredColor <span class="token operator">=</span> <span class="token function">textureLod</span><span class="token punctuation">(</span>prefilterMap<span class="token punctuation">,</span> R<span class="token punctuation">,</span>  roughness <span class="token operator">*</span> MAX_REFLECTION_LOD<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>   
+vec2 envBRDF  <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>brdfLUT<span class="token punctuation">,</span> <span class="token function">vec2</span><span class="token punctuation">(</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span> V<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> roughness<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>rg<span class="token punctuation">;</span>
+vec3 specular <span class="token operator">=</span> prefilteredColor <span class="token operator">*</span> <span class="token punctuation">(</span>F <span class="token operator">*</span> envBRDF<span class="token punctuation">.</span>x <span class="token operator">+</span> envBRDF<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+vec3 ambient <span class="token operator">=</span> <span class="token punctuation">(</span>kD <span class="token operator">*</span> diffuse <span class="token operator">+</span> specular<span class="token punctuation">)</span> <span class="token operator">*</span> ao<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>请注意，我们不会将<code>specular</code>乘以<code>kS</code>，因为我们已经做了菲涅耳乘法。</p>
+<p>现在，在粗糙度和金属属性不同的球体系列上运行这个精确的代码，我们终于可以在最终的PBR渲染器中看到它们的真实颜色：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_11.png" alt=""><br>我们甚再疯狂点，使用一些很酷的纹理PBR材质：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_12.png" alt=""><br>或者直接加载Andrew Maximov提供的很棒的免费<a href="http://artisaverb.info/PBT.html" target="_blank" rel="external">PBR3D模型</a>：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_13.png" alt=""><br>我相信我们都同意我们的照明现在看起来更有说服力。 更好的是，无论我们使用哪种环境贴图，我们的照明看起来都是物理上正确的。 下面你会看到几个不同的预先计算的HDR地图，完全改变了照明动态，但在不改变单个照明变量的情况下仍然看起来物理正确！<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_14.png" alt=""></p>
+<h2 id="下一步？"><a href="#下一步？" class="headerlink" title="下一步？"></a><font size="5" color="red">下一步？</font></h2><p>希望在本文结束时，您应该非常清楚地了解PBR的含义，甚至可以启动并运行实际的PBR渲染器。 在我们这些PBR文章中，我们在渲染循环之前，在应用程序开始时预先计算了所有相关的PBR基于图像的关照数据。这对于教育目的来说很好，但对于PBR的任何实际使用来说都不是很好。首先，预计算只需要进行一次，而不是每次启动。第二，当你使用多个环境贴图的那一刻，你必须在每次启动时预先计算每一个环境贴图，这往往会积累起来。</p>
+<p>出于这个原因，你通常只需做一次：将环境贴图预先计算为辐照度贴图和预过滤贴图，然后将其存储在磁盘上（请注意，BRDF积分贴图不依赖于环境贴图，因此你只需要计算或加载一次）。这意味着你需要提供自定义图像格式来存储HDR立方体贴图，包括其mip级别。或者，你将其存储（并加载）为可用格式之一（例如支持存储mip级别的.dds）。</p>
+<p>此外，我们已经在这些文章中描述了整个过程，包括生成预先计算的IBL图像，以帮助我们进一步理解PBR管道。 但是，通过使用<a href="https://github.com/dariomanesku/cmftStudio" target="_blank" rel="external">cmftStudio</a>或<a href="https://github.com/derkreature/IBLBaker" target="_blank" rel="external">IBLBaker</a>等几个很棒的工具为你生成这些预先计算的贴图，你将会得到同样精细的结果。</p>
+<p>我们跳过的一点是将预先计算的立方体贴图作为反射探针：立方体贴图插值和视差校正。 这是在场景中放置几个反射探针的过程，该探针在某个特定位置拍摄场景的立方体贴图快照，然后我们可以将其作为场景的该部分的IBL数据进行卷积。通过基于相机附近的几个探头之间进行插值，我们可以实现局部高细节基于图像的光照，这仅仅受到我们愿意放置的反射探头数量的限制。 这样，例如，当从场景的明亮室外部分移动到较暗的室内部分时，基于图像的光照可以正确地更新。我将在未来的某个地方写一篇关于反射探针的教程，但是现在我推荐下面的Chetan Jags的文章给你一个良好的开端。</p>
+<h1 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a><font size="6" color="orange">延伸阅读</font></h1><hr>
+<ul>
+<li><a href="http://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf" target="_blank" rel="external">Real Shading in Unreal Engine 4</a>：这篇文章说明了Epic Games的分割求和近似方法。我们的IBL PBR代码也是出自这篇文章。</li>
+<li><a href="http://www.trentreed.net/blog/physically-based-shading-and-image-based-lighting/" target="_blank" rel="external">Physically Based Shading and Image Based Lighting</a>：Trent Reed写的关于将镜面IBL实时集成到PBR管道中的很棒的博客。</li>
+<li><a href="https://chetanjags.wordpress.com/2015/08/26/image-based-lighting/" target="_blank" rel="external">Image Based Lighting</a>：Chetan Jags对基于镜面的基于图像的光照及其一些注意事项的大量叙述，包括光探针插值。</li>
+<li><a href="https://seblagarde.files.wordpress.com/2015/07/course_notes_moving_frostbite_to_pbr_v32.pdf" target="_blank" rel="external">Moving Frostbite to PBR</a>：关于将PBR集成到SébastienLagarde和Charles de Rousiers的AAA游戏引擎的写得很好的深入概述。</li>
+<li><a href="https://jmonkeyengine.github.io/wiki/jme3/advanced/pbr_part3.html" target="_blank" rel="external">Physically Based Rendering – Part Three</a>：JMonkeyEngine团队对IBL光照和PBR的高级概述。</li>
+<li><a href="https://placeholderart.wordpress.com/2015/07/28/implementation-notes-runtime-environment-map-filtering-for-image-based-lighting/" target="_blank" rel="external">Implementation Notes: Runtime Environment Map Filtering for Image Based Lighting</a>：Padraic Hennessy对预先滤HDR环境贴图和显著优化采样过程的大量叙述。<br>&nbsp; </li>
+</ul>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/08/26/OpenGL42-IBL镜面反射部分/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/08/26/OpenGL42-IBL镜面反射部分/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2018总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

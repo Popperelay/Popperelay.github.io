@@ -276,7 +276,7 @@ F0      <span class="token operator">=</span> <span class="token function">mix</
 <blockquote>
 <p>理论上来说，一个表面的金属度应该是二元的：要么是金属，要么不是金属。但是，大多数的渲染管线都运行在0.0到1.0之间线性的调配金属度。这主要是由于材质纹理精度不足以描述一个拥有诸如细沙/刮痕的金属表面，通过对这些小的非金属粒子/刮痕调整金属度值，我们可以获得非常好看的视觉效果。</p>
 </blockquote>
-<h2 id="Cook-Torrance反射率方程"><a href="#Cook-Torrance反射率方程" class="headerlink" title="Cook-Torrance反射率方程"></a><font size="5" color="red">Cook-Torrance反射率方程</font></h2><p>已经了解了cook-Torrance BRDF中的所有元素，现在我们可以将cook-Torrance BRDF纳入到最终的反射率方程中去了：<br>$$L_o(p,\omega_o)=\int_\Omega(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)})L_i(p,\omega_i)n\cdot \omega_id\omega_i$$<br>这个方程现在完整地描述了一个基于物理的渲染模型，它现在可以认为就是我们一般意义上理解的基于物理的渲染，即PBR。</p>
+<h2 id="Cook-Torrance反射率方程"><a href="#Cook-Torrance反射率方程" class="headerlink" title="Cook-Torrance反射率方程"></a><font size="5" color="red">Cook-Torrance反射率方程</font></h2><p>已经了解了cook-Torrance BRDF中的所有元素，现在我们可以将cook-Torrance BRDF纳入到最终的反射率方程中去了：<br>$$L_o(p,\omega_o)=\int_\Omega(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)})L_i(p,\omega_i)n\cdot \omega_id\omega_i$$<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_10_2.png" alt=""><br>这个方程现在完整地描述了一个基于物理的渲染模型，它现在可以认为就是我们一般意义上理解的基于物理的渲染，即PBR。</p>
 <h1 id="编写PBR材质"><a href="#编写PBR材质" class="headerlink" title="编写PBR材质"></a><font size="6" color="orange">编写PBR材质</font></h1><hr>
 <p>PBR渲染管线所需要的每一个表面参数都可以用纹理来定义或者建模。使用纹理可以让我们逐个片段的来控制每个表面上特定的点对于光线是如何响应（或者说叫反射）的：不论那个点金属的、粗糙或者平滑。</p>
 <p>下面是在一个PBR渲染管线中经常会碰到的纹理列表，以及将它们输入PBR渲染器所能得到的相应的视觉输出：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_11.png" alt=""></p>
