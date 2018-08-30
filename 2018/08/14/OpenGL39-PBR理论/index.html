@@ -187,7 +187,8 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果我们把立体角$\omega$和面积$A$看作是无穷小的，那么我们就能用辐射率来表示单束光线穿过空间中的一个点的通量。这就使我们可以计算得出作用于单个（片段）点上的单束光线的辐射率，实际上我们通常是把立体角$\omega$转变为方向向量$\omega$，然后把面$A$转换为点$p$。这样我们就能直接在着色器里使用辐射率来计算单束光线对每个片段的作用了。</p>
 <h2 id="辐照度"><a href="#辐照度" class="headerlink" title="辐照度"></a><font size="5" color="red">辐照度</font></h2><p>事实上，当涉及到辐射率时，我们通常关心的是所有投射到点$p$上的光线的总和，而这个总和就称为辐照度（Irradiance）。</p>
-<h2 id="反射率方程的含义"><a href="#反射率方程的含义" class="headerlink" title="反射率方程的含义"></a><font size="5" color="red">反射率方程的含义</font></h2><p>了解了辐射率和辐照度之后，我们再来看一下反射率方程：<br>$$L_o(p,\omega_o)=\int_{\Omega}f_r(p,\omega_i,\omega_o)L_i(p,w_i)n\cdot \omega_id\omega_i$$<br>我们知道在渲染方程中，$L$代表通过某个无限小的立体角在某个点上的辐射率，而立体角可以视作是入射方向向量$\omega_i$。我们使用入射光线和平面法线之间夹角的余弦值来计算反射能量，即公式中的$n\cdot \omega_i$。$\omega_o$表示观察方向，也就是出射方向。反射率公式计算了点$p$在观察方向$\omega_o$上被反射出来的辐射率的总和$L_o(p,\omega_o)$。也就是说：$L_o$表示了从$\omega_o$方向上观察，光线投射到点$p$上反射出来的辐照度。</p>
+<h2 id="反射率方程的含义"><a href="#反射率方程的含义" class="headerlink" title="反射率方程的含义"></a><font size="5" color="red">反射率方程的含义</font></h2><p>了解了辐射率和辐照度之后，我们再来看一下反射率方程：<br>$$L_o(p,\omega_o)=\int_{\Omega}f_r(p,\omega_i,\omega_o)L_i(p,\omega_i)n\cdot \omega_id\omega_i$$<br>我们知道在渲染方程中，$L$代表通过某个无限小的立体角在某个点上的辐射率，而立体角可以视作是入射方向向量$\omega_i$。我们使用入射光线和平面法线之间夹角的余弦值来计算反射能量，即公式中的$n\cdot \omega_i$。$\omega_o$表示观察方向，也就是出射方向。反射率公式计算了点$p$在观察方向$\omega_o$上被反射出来的辐射率的总和$L_o(p,\omega_o)$。也就是说：$L_o$表示了从$\omega_o$方向上观察，光线投射到点$p$上反射出来的辐照度。</p>
+<p>再通俗地解释一下：$L_o$表示的是从$\omega_o$方向观察点$p$时的颜色（辐照度），$f_r(p,\omega_i,\omega_o)$表示在点$p$上，从$\omega_o$方向反射出去的光照占从$\omega_i$方向入射进来的光照的比例，$L_i(p,\omega_i)$就表示从$\omega_i$方向入射到点$p$的光照（或者叫辐射率），$n\cdot\omega_i$表示的是光照的反射强度和光线入射方向与法线之间的夹角的关系（通常都是关系入射方向越靠近法线，反射强度会越大），$\int_{\Omega}…d\omega_i$表示在以点$p$的法线为轴的半球内，对所有入射光线的积分。</p>
 <h2 id="黎曼和近似求解积分"><a href="#黎曼和近似求解积分" class="headerlink" title="黎曼和近似求解积分"></a><font size="5" color="red">黎曼和近似求解积分</font></h2><p>因为反射率公式是基于物体表面上点$p$的辐照度来计算的，所以我们需要计算的就不只是单一的一个方向上的入射光，而是一个以点$p$为球心的半球领域$\Omega$内所有方向上的入射光。这个半球领域（Hemisphere）可以描述为以平面法线$n$为轴所环绕的半个球体：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_7.png" alt=""><br>反射率公式中存在积分$\int$，它的运算包含了半球领域$\Omega$内所有入射方向上的$d\omega_i$。积分运算的值等于一个函数曲线的面积，它的计算结果要么是解析解，要么就是数值解。由于渲染方程和反射率方程都没有解析解，所以我们会用离散的方法来求得这个积分的数值解：在半球领域$\Omega$中按一定的步长将反射率方程分散求解，然后再按照步长大小将所得到的结果平均化。这种方法被称为黎曼和（Riemann sum），可以用下面的代码粗略的演示一下用黎曼和求解这个积分的过程：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> steps <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
 <span class="token keyword">float</span> sum <span class="token operator">=</span> <span class="token number">0.0f</span><span class="token punctuation">;</span>
@@ -221,6 +222,7 @@ vec3 N    <span class="token operator">=</span> <span class="token punctuation">
 <p>上面的每一种函数都是用来估算相应的物理参数的，每种函数都有很多种形式，有的真实感很好，有的性能高效。Epic Games（美国一家游戏公司）对于这些函数的多种近似实现方式进行了大量的<a href="http://graphicrants.blogspot.nl/2013/08/specular-brdf-reference.html" target="_blank" rel="external">研究</a>。我们在这里介绍Epic Games在Unreal Engine 4中所使用的函数：D使用Trowbridge-Reitz GGX，F使用Fresnel-Schlick近似，G使用Smith’s Schlick-GGX。</p>
 <h3 id="正态分布函数"><a href="#正态分布函数" class="headerlink" title="正态分布函数"></a><font size="4" color="red">正态分布函数</font></h3><p>正态分布函数D（或者所NDF），从统计学上近似的表示了与某些（半程）向量$h$取向一致的微平面的比率。例如，给定向量$h$，如果我们的微平面中有35%与向量$h$取向一致，则正态分布函数NDF将会返回0.35。</p>
 <p>Trowbridge-Reitz GGX正态分布函数可以从统计学上来估算微平面的总体取向度，形式如下：<br>$$NDF_{GGXTR}(n,h,\alpha)=\frac{\alpha^2}{\pi((n\cdot h)^2(\alpha^2-1)+1)^2}$$<br>其中$h$表示用来与微平面取向做比较用的半程向量，$\alpha$表示表面粗糙度。</p>
+<p>通俗地来说，如果给GGX正态分布函数传入的$n$是宏观表面的法线，那么该函数就描述了有多少微平面的法线接近该宏观表面法线，越多的话高光区域就越亮，亮斑越小，反之就越暗，亮斑逐渐扩散。所以正态分布函数$D$返回的是一个标量。</p>
 <p>在shader中编写的Trowbridge-Reitz GGX正态分布函数是下面这个样子的：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">D_GGX_TR</span><span class="token punctuation">(</span>vec3 N<span class="token punctuation">,</span> vec3 H<span class="token punctuation">,</span> <span class="token keyword">float</span> a<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -237,7 +239,7 @@ vec3 N    <span class="token operator">=</span> <span class="token punctuation">
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="几何函数"><a href="#几何函数" class="headerlink" title="几何函数"></a><font size="4" color="red">几何函数</font></h3><p>几何函数从统计学上近似的求得了微平面间相互遮蔽的比率，这种相互遮蔽会损耗光线的能量。<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_8.png" alt=""><br>与NDF类似，几何函数采用表面粗糙度作为输入参数，粗糙度较高的表面其微平面间相互遮蔽的概率就较高。</p>
 <p>Schlick-GGX几何函数如下：<br>$$G_{SchlickGGX}(n,v,k)=\frac{n\cdot v}{(n\cdot v)(1-k)+k}$$<br>其中$k$是粗糙度$\alpha$的重映射，将几何函数用于直接光照或者IBL光照时，这个重映射是不同的：<br>$$<br>k_{direct}=\frac{(\alpha+1)^2}{8} \\<br>k_{IBL}=\frac{\alpha^2}{2}<br>$$</p>
-<p>为了有效地估算几何部分，需要将观察方向$v$（几何遮蔽）和光线入射方向向量$l$（几何阴影）都考虑进去。我们可以结合史密斯法（Smith’s method）来把两者都纳入其中：<br>$$G(n,v,l,k)=G_{sub}(n,v,k)G_{sub}(n,l,k)$$<br>结合史密斯法和Schlick-GGX得到的就是最终的Smith’s Schlick-GGX几何函数，使用它可以得到如下图所示的不同粗糙度的视觉效果：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_9.png" alt=""><br>几何函数是一个值域为[0.0, 1.0]的乘数，其中白色或者说1.0表示没有微平面阴影，而黑色或者说0.0表示微平面彻底被遮蔽。</p>
+<p>为了有效地估算几何部分，需要将光线入射方向向量$l$（几何阴影，Shadow，即入射光线可能被一些其他表面遮挡住）和观察方向$v$（几何遮蔽，Mask，即反射出去的光线也可能会被其他表面遮挡住）都考虑进去。我们可以结合史密斯法（Smith’s method）来把两者都纳入其中：<br>$$G(n,v,l,k)=G_{sub}(n,v,k)G_{sub}(n,l,k)$$<br>结合史密斯法和Schlick-GGX得到的就是最终的Smith’s Schlick-GGX几何函数，使用它可以得到如下图所示的不同粗糙度的视觉效果：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_9.png" alt=""><br>几何函数返回的是一个在[0.0, 1.0]之间的标量，其中白色或者说1.0表示没有微平面阴影，而黑色或者说0.0表示微平面彻底被遮蔽。</p>
 <p>在shader中编写的Smith’s Schlick-GGX几何函数如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">GeometrySchlickGGX</span><span class="token punctuation">(</span><span class="token keyword">float</span> NdotV<span class="token punctuation">,</span> <span class="token keyword">float</span> k<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -257,10 +259,10 @@ vec3 N    <span class="token operator">=</span> <span class="token punctuation">
     <span class="token keyword">return</span> ggx1 <span class="token operator">*</span> ggx2<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="菲涅尔方程"><a href="#菲涅尔方程" class="headerlink" title="菲涅尔方程"></a><font size="4" color="red">菲涅尔方程</font></h3><p>菲涅尔方程描述的是反射光线对比入射光线的比率，这个比率会随着我们观察的角度不同而不同。当光线碰到一个表面时，菲涅尔方程会根据观察角度告诉我们被反射的光线所占的百分比。利用这个反射比率和能力守恒原则，我们可以直接得出折射光线的比率。</p>
-<p>当垂直观察的时候，任何物体或者材质表面都有一个基础反射率（Base Reflectivity），但是如果以一定的角度往平面上看的时候所有反光都会变得明显起来。观察方向越靠近表面法线方向折射效果越明显，反之反射效果越明显，这被称之为菲涅尔现象。</p>
+<h3 id="菲涅尔方程"><a href="#菲涅尔方程" class="headerlink" title="菲涅尔方程"></a><font size="4" color="red">菲涅尔方程</font></h3><p>菲涅尔方程描述的是反射光线对比入射光线的比率（也就是镜面反射在入射光线中所占的比例），这个比率会随着我们观察的角度不同而不同。当光线碰到一个表面时，菲涅尔方程会根据观察角度告诉我们被反射的光线所占的百分比。利用这个反射比率和能力守恒原则，我们可以直接得出折射光线的比率。</p>
+<p>当垂直观察的时候，任何物体或者材质表面都有一个基础反射率（Base Reflectivity），但是如果以一定的角度往平面上看的时候所有反光都会变得明显起来。观察方向越靠近表面法线方向折射效果越明显，反之反射效果越明显，这被称之为菲涅尔现象（可以想象在观察水面的时候，垂直看向水面，我们越能清晰地看到水下的物体（源于折射光线比较多），而以水面平行的方向去看，就很难看到水下的物体了）。</p>
 <p>菲涅尔方程是一个相对复杂的方程式，不过我们可以用Fresnel-Schlick方法来求得近似解：<br>$$F_{Schlick}(n,v,F_0)=F_0+(1-F_0)(1-(n\cdot v))^5$$<br>其中$F_0$表示平面的基础反射率，它是利用所谓的折射指数（Indices of Refraction）计算得出的。</p>
-<p>下表列出了一些材质表面的基础反射率：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_10.png" alt=""><br>可以观察到，几乎所有电介质（相当于非金属）材质表面的基础反射率都不会高于0.17，而导体材质表面的基础反射率通常在0.5到1.0之间变化。此外，对于导体或者金属表面而言，基础反射率一般是带有色彩的，这也是为什么$F_0$要用RGB三原色来表示的原因，不过这种现象我们只能在金属表面观察得到。</p>
+<p>下表列出了一些材质表面的基础反射率：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Open39PBR%E7%90%86%E8%AE%BA_10.png" alt=""><br>可以观察到，几乎所有电介质（相当于非金属）材质表面的基础反射率都不会高于0.17，而导体材质表面的基础反射率通常在0.5到1.0之间变化。此外，对于导体或者金属表面而言，基础反射率一般是带有色彩的，因为不同波长的光线，照射到同一个物体表面的时候，反射和折射的比例并不总是相同的，所以我们要用RGB三原色来表示$F_0$（也是菲涅尔函数返回三元向量的原因）。</p>
 <p>由于金属表面会吸收所有折射光线而没有漫反射，所以我们可以直接使用其表面颜色纹理来作为它们的基础反射率，但是电介质不可以。所以我们引入一个叫金属度（Metalness）的参数，来描述一个材质表面是金属的还是非金属的。在shader里面用代码表示是这样的：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">vec3 F0 <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.04</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 F0      <span class="token operator">=</span> <span class="token function">mix</span><span class="token punctuation">(</span>F0<span class="token punctuation">,</span> surfaceColor<span class="token punctuation">.</span>rgb<span class="token punctuation">,</span> metalness<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -298,7 +300,7 @@ F0      <span class="token operator">=</span> <span class="token function">mix</
 <li><a href="http://blog.wolfire.com/2015/10/Physically-based-rendering" target="_blank" rel="external">Wolfire Games - Physically based rendering</a>：介绍了PBR，由Lukas Orsvärn所著。<br>&nbsp; </li>
 </ul>
 <hr>
-<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a>  <a href="https://blog.csdn.net/i_dovelemon/article/details/78945950" target="_blank" rel="external">基于物理的着色系统-直接光照</a></p>
 
             </div>
 

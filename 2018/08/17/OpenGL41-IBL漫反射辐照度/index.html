@@ -449,7 +449,7 @@ vec3 Kd <span class="token operator">=</span> <span class="token number">1.0</sp
 vec3 Irradiance <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_IrradianceMap<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
 vec3 Ambient <span class="token operator">=</span> Irradiance <span class="token operator">*</span> u_ObjectColor <span class="token operator">*</span> Kd <span class="token operator">*</span> u_AO<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>由于环境光来自以法线<code>N</code>为轴环绕的半球内的所有方向，因此没有单个半程向量来确定菲涅耳响应。为了模拟菲涅耳，我们用法线和观察向量之间的角度来计算菲涅耳。然而，早些时候我们使用微平面的半程向量作为菲涅耳方程的输入（会受到表面粗糙度的影响）。由于我们目前没有考虑任何粗糙度，因此表面的反射率总是会相对较高。间接光遵循直射光的相同性质，因此我们期望较粗糙的表面在表面边缘上反射较弱。由于我们没有考虑表面的粗糙度，间接的菲涅耳反射强度在粗糙的非金属表面上看起来很明显（为了演示目的略微夸大）：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL41IBL%E6%BC%AB%E5%8F%8D%E5%B0%84%E8%BE%90%E7%85%A7%E5%BA%A6_9.png" alt=""><br>我们可以通过SébastienLagarde描述的在Fresnel-Schlick方程中注入粗糙度项来缓解这个问题：</p>
+<p>由于环境光来自以法线<code>N</code>为轴环绕的半球内的所有方向，因此没有单个半程向量来确定菲涅耳响应（也就是无法无法确定一个单一的半程向量来作为菲涅尔函数的输入）。所以上面的代码里，为了模拟菲涅耳，使用的是法线和观察向量之间的角度来计算菲涅耳（而不是半程向量和观察向量的角度）。然而，早些时候我们使用微平面的半程向量作为菲涅耳方程的输入（会受到表面粗糙度的影响）。所有直接使用法线而不是微平面的半程向量作为输入，就没有考虑到任何粗糙度的影响，因此表面的反射率总是会相对较高。间接光遵循直射光的相同性质，因此我们期望较粗糙的表面在表面边缘上反射较弱。由于我们没有考虑表面的粗糙度，间接的菲涅耳反射强度在粗糙的非金属表面上看起来很明显（为了演示目的略微夸大）：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL41IBL%E6%BC%AB%E5%8F%8D%E5%B0%84%E8%BE%90%E7%85%A7%E5%BA%A6_9.png" alt=""><br>我们可以通过SébastienLagarde描述的在Fresnel-Schlick方程中注入粗糙度项来缓解这个问题：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//考虑上粗糙度的菲涅尔方程</span>
 vec3 <span class="token function">FresnelSchlickRoughness</span><span class="token punctuation">(</span><span class="token keyword">float</span> vCosTheta<span class="token punctuation">,</span> vec3 vF0<span class="token punctuation">,</span> <span class="token keyword">float</span> vRoughness<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -471,7 +471,7 @@ vec3 Ambient <span class="token operator">=</span> Irradiance <span class="token
 <li><a href="http://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/mathematics-of-shading" target="_blank" rel="external">The Mathematics of Shading</a>：ScratchAPixel简要介绍了本文中描述的几个数学，特别是极坐标和积分。<br>&nbsp; </li>
 </ul>
 <hr>
-<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a>  <a href="https://blog.csdn.net/i_dovelemon/article/details/79091105" target="_blank" rel="external">基于物理的着色系统-基于图像的光照（Diffuse篇）</a></p>
 
             </div>
 
