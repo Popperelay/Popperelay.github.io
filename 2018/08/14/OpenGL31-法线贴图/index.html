@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL31 法线贴图</h2></a>
             </div>
             <!-- Post -->
@@ -140,7 +140,7 @@
 				<div id="toc-article" class="toc-article">
 					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
-					
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为何要使用法线贴图"><span class="toc-text">为何要使用法线贴图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用法线贴图"><span class="toc-text">应用法线贴图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#上面法线贴图的限制"><span class="toc-text">上面法线贴图的限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用切线空间下的法线贴图"><span class="toc-text">应用切线空间下的法线贴图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#手动计算切向量和副切向量"><span class="toc-text">手动计算切向量和副切向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在世界空间下计算光照"><span class="toc-text">在世界空间下计算光照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在切线空间下计算光照"><span class="toc-text">在切线空间下计算光照</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对复杂物体应用法线贴图"><span class="toc-text">对复杂物体应用法线贴图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重正交化TBN向量"><span class="toc-text">重正交化TBN向量</span></a></li></ol>
 			   </div>
 			   <script type="text/javascript">
 				function showToc(){
@@ -157,7 +157,204 @@
 					};
 			   </script>
 				
-                
+                <h1 id="为何要使用法线贴图"><a href="#为何要使用法线贴图" class="headerlink" title="为何要使用法线贴图"></a><font size="6" color="orange">为何要使用法线贴图</font></h1><hr>
+<p>我们可以使用纹理来表现物体表面的细节，比如可以给一个四边形贴上砖块纹理，它变得就很像一堵墙了：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_1.png" alt=""><br>但是仔细观察会发现，给这面墙打上光时，墙面看起来很平滑，实际上我们更想要砖块之间缝隙（以及细小的空洞、颗粒）等等看起来更明显，也就是说砖块缝隙的反光不应该像上图那么强烈。</p>
+<p>其实上图里砖块缝隙反光之所以那么强烈，是因为整个墙面都用的是同一个法线向量（即四边形的法线向量），有没有什么办法让砖块缝隙可以使用不同的法线向量呢？一种解决方案是我们可以使用法线贴图（normal mapping）（或者叫凹凸贴图（bump mapping））。因为法线贴图里面存储了每个片元的法线，我们可以在片元着色器里从法线贴图里提取出每个片元对应的法线向量。下图是对这个墙面使用和不使用法线贴图下的光照对比：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_2.png" alt=""><br>可以看到细节得到了很明显的提升。</p>
+<h1 id="应用法线贴图"><a href="#应用法线贴图" class="headerlink" title="应用法线贴图"></a><font size="6" color="orange">应用法线贴图</font></h1><hr>
+<p>下面是墙面对应的法线贴图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_3.png" alt=""><br>之所以总体上偏向蓝色，是因为上面墙面四边形的法线是(0,0,1)，那么墙面上的每个片元的法线大致都偏向于（0,0,1），所以偏蓝色。</p>
+<p>将这个法线贴图应用于片元着色器的代码类似如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">uniform sampler2D u_WallNormalMap<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>           
+    <span class="token comment" spellcheck="true">// 从法线贴图范围[0,1]获取法线</span>
+    Normal <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_WallNormalMap<span class="token punctuation">,</span> v2f_TexCoord<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 将法线向量转换为范围[-1,1]</span>
+    Normal <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>Normal <span class="token operator">*</span> <span class="token number">2.0</span> <span class="token operator">-</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//把法线纹理中[0,1]范围内的法线，变换到[-1,1]之间</span>
+
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+    <span class="token comment" spellcheck="true">// 像往常那样处理光照</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为法线贴图中存储的法线向量坐标范围是[0,1]，所以我们需要对它们先乘以2再减1.0，来变换回正常的[-1,1]的范围。</p>
+<p>然后再使用这个法线向量，执行Blinn-Phong光照，就能得到如下图所示的结果：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_4.png" alt=""><br>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL31_NormalTexture/LearnOpenGL31_NormalTexture_1" target="_blank" rel="external">这里</a>。</p>
+<h1 id="上面法线贴图的限制"><a href="#上面法线贴图的限制" class="headerlink" title="上面法线贴图的限制"></a><font size="6" color="orange">上面法线贴图的限制</font></h1><p>上面的法线贴图是怎么来的？它是对上面立起来的那面墙的每个片元，设置了一个对应的法线向量，然后存储到纹理里，从而得到对应的法线贴图。但是如果我们的墙面不是立起来的，而是躺着或是其他任意角度呢？比如下面这样：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_5.png" alt=""><br>那么我们是不是还需要为这个躺着的墙面再做一张对应的法线贴图？如果还用的是原来立起来的那张法线贴图的话，就会出现上图所示的错误光照。</p>
+<p>仔细想想，之所以当墙面角度不同时会有不同的法线，是因为我们是在世界空间下去看待这个法线的。如果我们是以物体本身作为参照来创建法线，而不是像在世界空间下以世界坐标系作为参照来创建法线，那么就不会有上面的问题了。解决方案是我们可以在片元的切线空间里创建法线，切线空间是以片元表面的法线为z轴，以片元表面的切向量为x轴，以副切向量为y轴的坐标系空间。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_6.png" alt=""><br>但是片元的切向量有很多，我们应该选哪一条呢？如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_7.png" alt=""><br>理论上来说，哪条都是可以的。但是为了避免一些麻烦，我们通常选择和纹理坐标方向一致的 那条切向量，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_8.png" alt=""><br>副切向量当然就可以通过法线和切向量正交（叉乘）而来了。</p>
+<p>理论上是这样来找切向量和副切向量的，但是我们通常并不知道纹理坐标在世界空间里面对应的方向是多少，也就很难直接去确定切向量的方向。所以需要一些数学推导了。如下图所示：<br><img src="" alt=""><br>图中$T$和$B$分别是对应纹理坐标方向的切向量和副切向量，三角形$\Delta P_1P_2P_3$由于处于纹理空间中（以四边形所在平面，左下角为原点），所以我们可以把边$E_1$、$E_2$用$T$和$B$表示出来（值得注意的是$T、B、E_1、E_2$都是在世界空间下的向量）：<br>$$E_1 = (U_1-U_2)T + (V_1-V_2)B \\<br>E_2 = (U_3-U_2)T + (V_3-V_2)B$$<br>我们也可以写成这样：<br>$$<br>(E_{1x}, E_{1y}, E_{1z}) = \Delta U_1(T_x, T_y, T_z) + \Delta V_1(B_x, B_y, B_z) \\<br>(E_{2x}, E_{2y}, E_{2z}) = \Delta U_2(T_x, T_y, T_z) + \Delta V_2(B_x, B_y, B_z)<br>$$<br>我们可以把上面的方程组改写成等价的矩阵形式：<br>$$<br>\begin{bmatrix} E_{1x} &amp; E_{1y} &amp; E_{1z} \ E_{2x} &amp; E_{2y} &amp; E_{2z} \end{bmatrix} = \begin{bmatrix} \Delta U_1 &amp; \Delta V_1 \ \Delta U_2 &amp; \Delta V_2 \end{bmatrix} \begin{bmatrix} T_x &amp; T_y &amp; T_z \ B_x &amp; B_y &amp; B_z \end{bmatrix}<br>$$<br>我们的目标是要求出$T$和$B$，那么可以等式两边乘以逆矩阵，有：<br>$$<br>\begin{bmatrix} \Delta U_1 &amp; \Delta V_1 \ \Delta U_2 &amp; \Delta V_2 \end{bmatrix}^{-1} \begin{bmatrix} E_{1x} &amp; E_{1y} &amp; E_{1z} \ E_{2x} &amp; E_{2y} &amp; E_{2z} \end{bmatrix} = \begin{bmatrix} T_x &amp; T_y &amp; T_z \ B_x &amp; B_y &amp; B_z \end{bmatrix}<br>$$<br>我们可以通过1除以矩阵的行列式，再乘以它的伴随矩阵，来求一个方形矩阵的逆矩阵，所以：<br>$$\begin{bmatrix} T_x &amp; T_y &amp; T_z \ B_x &amp; B_y &amp; B_z \end{bmatrix}  = \frac{1}{\Delta U_1 \Delta V_2 - \Delta U_2 \Delta V_1} \begin{bmatrix} \Delta V_2 &amp; -\Delta V_1 \ -\Delta U_2 &amp; \Delta U_1 \end{bmatrix} \begin{bmatrix} E_{1x} &amp; E_{1y} &amp; E_{1z} \ E_{2x} &amp; E_{2y} &amp; E_{2z} \end{bmatrix}$$<br>有了这个等式，我们就可以根据三角形的两条边以及纹理坐标的差值计算出切向量$T$和副切向量$B$。</p>
+<p>这样我们就可以把从法线贴图中获取到的法线向量，乘以矩阵$(T,B,N)$来完成从切线空间到世界空间的转换。</p>
+<h1 id="应用切线空间下的法线贴图"><a href="#应用切线空间下的法线贴图" class="headerlink" title="应用切线空间下的法线贴图"></a><font size="6" color="orange">应用切线空间下的法线贴图</font></h1><hr>
+<p>现在我们把原来的法线贴图看作是在切线空间下的（实际上确实是在切线空间下，只不过这个朝向+z的立起来的墙面，其切线空间刚好和世界空间相等而已）。</p>
+<h2 id="手动计算切向量和副切向量"><a href="#手动计算切向量和副切向量" class="headerlink" title="手动计算切向量和副切向量"></a><font size="5" color="orange">手动计算切向量和副切向量</font></h2><p>先根据顶点坐标和纹理坐标计算出墙面的切向量和副切向量：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// positions</span>
+glm<span class="token operator">::</span>vec3 <span class="token function">pos1</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span>  <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec3 <span class="token function">pos2</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec3 <span class="token function">pos3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec3 <span class="token function">pos4</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// texture coordinates</span>
+glm<span class="token operator">::</span>vec2 <span class="token function">uv1</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec2 <span class="token function">uv2</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec2 <span class="token function">uv3</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec2 <span class="token function">uv4</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// normal vector</span>
+glm<span class="token operator">::</span>vec3 <span class="token function">nm</span><span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+glm<span class="token operator">::</span>vec3 edge1 <span class="token operator">=</span> pos2 <span class="token operator">-</span> pos1<span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec3 edge2 <span class="token operator">=</span> pos3 <span class="token operator">-</span> pos1<span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec2 deltaUV1 <span class="token operator">=</span> uv2 <span class="token operator">-</span> uv1<span class="token punctuation">;</span>
+glm<span class="token operator">::</span>vec2 deltaUV2 <span class="token operator">=</span> uv3 <span class="token operator">-</span> uv1<span class="token punctuation">;</span>
+
+GLfloat f <span class="token operator">=</span> <span class="token number">1.0f</span> <span class="token operator">/</span> <span class="token punctuation">(</span>deltaUV1<span class="token punctuation">.</span>x <span class="token operator">*</span> deltaUV2<span class="token punctuation">.</span>y <span class="token operator">-</span> deltaUV2<span class="token punctuation">.</span>x <span class="token operator">*</span> deltaUV1<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+tangent1<span class="token punctuation">.</span>x <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span>deltaUV2<span class="token punctuation">.</span>y <span class="token operator">*</span> edge1<span class="token punctuation">.</span>x <span class="token operator">-</span> deltaUV1<span class="token punctuation">.</span>y <span class="token operator">*</span> edge2<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+tangent1<span class="token punctuation">.</span>y <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span>deltaUV2<span class="token punctuation">.</span>y <span class="token operator">*</span> edge1<span class="token punctuation">.</span>y <span class="token operator">-</span> deltaUV1<span class="token punctuation">.</span>y <span class="token operator">*</span> edge2<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+tangent1<span class="token punctuation">.</span>z <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span>deltaUV2<span class="token punctuation">.</span>y <span class="token operator">*</span> edge1<span class="token punctuation">.</span>z <span class="token operator">-</span> deltaUV1<span class="token punctuation">.</span>y <span class="token operator">*</span> edge2<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+tangent1 <span class="token operator">=</span> glm<span class="token operator">::</span><span class="token function">normalize</span><span class="token punctuation">(</span>tangent1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+bitangent1<span class="token punctuation">.</span>x <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">-</span>deltaUV2<span class="token punctuation">.</span>x <span class="token operator">*</span> edge1<span class="token punctuation">.</span>x <span class="token operator">+</span> deltaUV1<span class="token punctuation">.</span>x <span class="token operator">*</span> edge2<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bitangent1<span class="token punctuation">.</span>y <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">-</span>deltaUV2<span class="token punctuation">.</span>x <span class="token operator">*</span> edge1<span class="token punctuation">.</span>y <span class="token operator">+</span> deltaUV1<span class="token punctuation">.</span>x <span class="token operator">*</span> edge2<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bitangent1<span class="token punctuation">.</span>z <span class="token operator">=</span> f <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">-</span>deltaUV2<span class="token punctuation">.</span>x <span class="token operator">*</span> edge1<span class="token punctuation">.</span>z <span class="token operator">+</span> deltaUV1<span class="token punctuation">.</span>x <span class="token operator">*</span> edge2<span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+bitangent1 <span class="token operator">=</span> glm<span class="token operator">::</span><span class="token function">normalize</span><span class="token punctuation">(</span>bitangent1<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+
+<span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> <span class="token comment" spellcheck="true">// 对平面的第二个三角形采用类似步骤计算切线和副切线</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>计算出来的切向量的值应该是(1,0,0)，副切向量应该是(0,1,0)，它们和法线(0,0,1)组成两两垂直的TBN矩阵。</p>
+<p>然后我们把计算出来的切向量和副切向量传到顶点着色器里，并计算出TBN矩阵：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 _Position<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span> in vec3 _Normal<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> in vec2 _TexCoord<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">)</span> in vec3 _Tangent<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">)</span> in vec3 _Bitangent<span class="token punctuation">;</span>
+
+uniform mat4 u_Projection<span class="token punctuation">;</span>
+uniform mat4 u_View<span class="token punctuation">;</span>
+uniform mat4 u_Model<span class="token punctuation">;</span>
+
+out mat3 v2f_TBN<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+    mat3 NormalMatrix <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span><span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">inverse</span><span class="token punctuation">(</span>u_Model<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 T <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Tangent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 B <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Bitangent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 N <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Normal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v2f_TBN <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> B<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意构造TBN矩阵的时候不要忘了乘以模型矩阵（也就是代码中的法线矩阵<code>NormalMatrix</code>）。</p>
+<p>那么我们就可以用这个TBN矩阵把法线从切线空间转换到世界空间了，然后统一在世界空间里进行光照计算。不过，还有另一种选择，我们可以用TBN矩阵的逆矩阵，把其它计算光照需要用到的观察点位置、光源位置、片元世界位置等等都转换到切线空间，然后在切线空间里进行光照计算。我们分别来看一下。</p>
+<h2 id="在世界空间下计算光照"><a href="#在世界空间下计算光照" class="headerlink" title="在世界空间下计算光照"></a><font size="5" color="orange">在世界空间下计算光照</font></h2><p>在世界空间下计算光照，我们需要把TBN矩阵从顶点着色器发送到片元着色器：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">out vec2 v2f_TexCoord<span class="token punctuation">;</span>
+out vec3 v2f_FragWorldPos<span class="token punctuation">;</span>
+out mat3 v2f_TBN<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+    v2f_TBN <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> B<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在片元着色器中我们用TBN矩阵来把法线贴图中的法线从切线空间变到世界空间：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 Normal<span class="token punctuation">;</span>
+Normal <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_WallNormalMap<span class="token punctuation">,</span> v2f_TexCoord<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+Normal <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>Normal <span class="token operator">*</span> <span class="token number">2.0</span> <span class="token operator">-</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//把法线纹理中[0,1]范围内的法线，变换到[-1,1]之间</span>
+Normal <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>v2f_TBN <span class="token operator">*</span> Normal<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//将法线从切线空间转换到世界空间</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们就可以使用这个在世界空间里的法线<code>Normal</code>，来在世界空间下进行光照计算了。</p>
+<p>运行结果如下(到此的所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL31_NormalTexture/LearnOpenGL31_NormalTexture_2" target="_blank" rel="external">这里</a>)：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_9.png" alt=""></p>
+<h2 id="在切线空间下计算光照"><a href="#在切线空间下计算光照" class="headerlink" title="在切线空间下计算光照"></a><font size="5" color="red">在切线空间下计算光照</font></h2><p>由于要把一些光照参数（观察向量等等）从世界空间转换到切线空间，所以我们先求出TBN矩阵的逆矩阵：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">mat3 InverseTBN <span class="token operator">=</span> <span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">mat3</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> B<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>之所以用<code>transpose</code>而不是<code>inverse</code>函数，是因为TBN矩阵是正交矩阵，而正交矩阵的逆矩阵就是其转置矩阵，所以这里直接用转置来求逆了，这样比用<code>inverse</code>来求逆计算量小得多。</p>
+<p>然后我们把光照需要用到的光源位置、视点位置、法线向量等等参数，在<strong>顶点着色器</strong>里从世界空间转换到切线空间：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">out vec3 v2f_FragPosInTangentSpace<span class="token punctuation">;</span>
+out vec3 v2f_ViewPosInTangentSpace<span class="token punctuation">;</span>
+out vec3 v2f_LightPosInTangentSpace<span class="token punctuation">;</span>
+
+uniform vec3 u_ViewPos<span class="token punctuation">;</span>
+uniform vec3 u_LightPos <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>    
+    <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+    v2f_FragPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> FragPosInWorldSpace<span class="token punctuation">.</span>xyz<span class="token punctuation">;</span>
+    v2f_ViewPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> u_ViewPos<span class="token punctuation">;</span>
+    v2f_LightPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> u_LightPos<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在片元着色器里，我们就可以使用这些已经在切线空间下的光照参数，来统一在切线空间下进行光照计算。</p>
+<p>运行结果和上面一样。所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL31_NormalTexture/LearnOpenGL31_NormalTexture_3" target="_blank" rel="external">这里</a>。</p>
+<p>值得注意的是，我们并没有把TBN逆矩阵传到片元着色器，然后在片元着色器里把光照参数从世界空间转换到切线空间，而是在顶点着色器里做的这件事，效果相差很小，但是计算量会小很多，是个很好的优化。</p>
+<h1 id="对复杂物体应用法线贴图"><a href="#对复杂物体应用法线贴图" class="headerlink" title="对复杂物体应用法线贴图"></a><font size="6" color="orange">对复杂物体应用法线贴图</font></h1><hr>
+<p>我们对前面的墙面可以手动来计算切线和副切线向量，但是对于有几十万个面片的复杂模型来说，稍微有点麻烦。幸好，模型加载库Assimp已经帮我们做好了。</p>
+<p>在我们使用Assimp从文件里面加载模型的时候，加上<code>aiProcess_CalcTangentSpace</code>标签，Assimp就会自动为每个加载的顶点计算出柔和的切线和副切线向量：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">const</span> aiScene<span class="token operator">*</span> scene <span class="token operator">=</span> importer<span class="token punctuation">.</span><span class="token function">ReadFile</span><span class="token punctuation">(</span>
+    path<span class="token punctuation">,</span> aiProcess_Triangulate <span class="token operator">|</span> aiProcess_FlipUVs <span class="token operator">|</span> aiProcess_CalcTangentSpace
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>然后我们可以通过下面的代码来获取Assimp计算出的切线向量（副切线向量没有必要了，因为可以在着色器里通过法线和切线向量叉乘得到）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Vertex 
+<span class="token punctuation">{</span>
+    vec3 position<span class="token punctuation">;</span>
+    vec3 normal<span class="token punctuation">;</span>
+    vec2 texCoords<span class="token punctuation">;</span>
+    vec3 Tangent<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+vertex<span class="token punctuation">.</span>Tangent <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span>aimesh<span class="token operator">-</span><span class="token operator">></span>mTangents<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span> aimesh<span class="token operator">-</span><span class="token operator">></span>mTangents<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">,</span> aimesh<span class="token operator">-</span><span class="token operator">></span>mTangents<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接着需要去更新网格类Mesh，让它把切线向量传入着色器，并且正确解析它：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">glVertexAttribPointer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> GL_FALSE<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>Vertex<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>GLvoid<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">offsetof</span><span class="token punctuation">(</span>Vertex<span class="token punctuation">,</span> Tangent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glEnableVertexAttribArray</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>当然，我们还必须更新我们的模型加载类，让它去把模型中的法线纹理加载进来：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//获取所有的法线纹理</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>GLuint i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> aimat<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetTextureCount</span><span class="token punctuation">(</span>aiTextureType_HEIGHT<span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    aiString str<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取第i个镜面反射纹理的存储路径</span>
+    aimat<span class="token operator">-</span><span class="token operator">></span><span class="token function">GetTexture</span><span class="token punctuation">(</span>aiTextureType_HEIGHT<span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token operator">&amp;</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    string texName <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">C_Str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//纹理名称</span>
+    string texPath <span class="token operator">=</span> directory <span class="token operator">+</span> <span class="token string">'/'</span> <span class="token operator">+</span> texName<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//纹理路径</span>
+    <span class="token keyword">bool</span> skip <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> loadedTextures<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>texPath <span class="token operator">==</span> loadedTextures<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>texPath<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            skip <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            textures<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>loadedTextures<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>skip<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Texture texture<span class="token punctuation">;</span>
+        TextureLoader textureLoader<span class="token punctuation">;</span>
+        texture<span class="token punctuation">.</span>id <span class="token operator">=</span> textureLoader<span class="token punctuation">.</span><span class="token function">LoadTexture</span><span class="token punctuation">(</span>texPath<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        texture<span class="token punctuation">.</span>samplerName <span class="token operator">=</span> <span class="token string">"u_NormalMap"</span> <span class="token operator">+</span> <span class="token function">IntToString</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        texture<span class="token punctuation">.</span>texPath <span class="token operator">=</span> texPath<span class="token punctuation">;</span>
+        textures<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>texture<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        loadedTextures<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>texture<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中，需要注意obj格式的模型文件，它导出的法线贴图有点不一样，Assimp用<code>aiTextureType_NORMAL</code>并不会去加载obj模型的法线贴图，需要用<code>aiTextureType_HEIGHT</code>才可以。</p>
+<p>程序运行的结果如下（所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL31_NormalTexture/LearnOpenGL31_NormalTexture_4" target="_blank" rel="external">这里</a>）：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL31%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE_10.png" alt=""><br>还有一点需要注意，使用<code>aiProcess_CalcTangentSpace</code>并不能总是很好地工作，因为计算切线是需要依据纹理坐标点，有些模型制作者有时候会使用一些纹理小技巧（比如镜像一个模型的纹理表面时，也镜像了另一半的纹理坐标），这时候Assimp算出来的切线结果通常就不太对了。</p>
+<h1 id="重正交化TBN向量"><a href="#重正交化TBN向量" class="headerlink" title="重正交化TBN向量"></a><font size="6" color="orange">重正交化TBN向量</font></h1><hr>
+<p>前面已经提到过，因为一个顶点可能会被多个面共享，所以Assimp通常会把算出来的多个切向量进行平均化，以获得更好更平滑的结果。但是平均化以后，TBN向量就有可能不再是相互正交的了，会导致法线贴图可能会稍稍偏移。</p>
+<p>我们可以使用一个叫做格拉姆-施密特正交化过程（Gram-Schmidt process）的数学技巧，来对TBN向量进行重正交化，这样每个向量又会重新垂直了。我们可以在顶点着色器中这样做（数学原理其实很简单，画一下图就知道了）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 T <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token function">vec3</span><span class="token punctuation">(</span>model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>tangent<span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 N <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span><span class="token function">vec3</span><span class="token punctuation">(</span>model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>normal<span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// re-orthogonalize T with respect to N</span>
+T <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>T <span class="token operator">-</span> <span class="token function">dot</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> N<span class="token punctuation">)</span> <span class="token operator">*</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// then retrieve perpendicular vector B with the cross product of T and N</span>
+vec3 B <span class="token operator">=</span> <span class="token function">cross</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+mat3 TBN <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> B<span class="token punctuation">,</span> N<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+
             </div>
 
             <!-- Post Comments -->
