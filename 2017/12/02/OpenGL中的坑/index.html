@@ -140,7 +140,7 @@
 				<div id="toc-article" class="toc-article">
 					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
-					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#重新链接着色器程序后uniform失效"><span class="toc-text">重新链接着色器程序后uniform失效</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#深度测试无效"><span class="toc-text">深度测试无效</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绑定TFB后不能再激活着色器"><span class="toc-text">绑定TFB后不能再激活着色器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#纹理格式里的坑"><span class="toc-text">纹理格式里的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几何着色器分层渲染中的坑"><span class="toc-text">几何着色器分层渲染中的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#把全屏的内容渲染到一张纹理里"><span class="toc-text">把全屏的内容渲染到一张纹理里</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为cubemap生成mipmap"><span class="toc-text">为cubemap生成mipmap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#纹理没有mipmap造成的闪烁"><span class="toc-text">纹理没有mipmap造成的闪烁</span></a></li></ol>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#重新链接着色器程序后uniform失效"><span class="toc-text">重新链接着色器程序后uniform失效</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#深度测试无效"><span class="toc-text">深度测试无效</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绑定TFB后不能再激活着色器"><span class="toc-text">绑定TFB后不能再激活着色器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#纹理格式里的坑"><span class="toc-text">纹理格式里的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几何着色器分层渲染中的坑"><span class="toc-text">几何着色器分层渲染中的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#把全屏的内容渲染到一张纹理里"><span class="toc-text">把全屏的内容渲染到一张纹理里</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为cubemap生成mipmap"><span class="toc-text">为cubemap生成mipmap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#纹理没有mipmap造成的闪烁"><span class="toc-text">纹理没有mipmap造成的闪烁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将硬件多重采样MSAA变成超采样"><span class="toc-text">将硬件多重采样MSAA变成超采样</span></a></li></ol>
 			   </div>
 			   <script type="text/javascript">
 				function showToc(){
@@ -282,6 +282,16 @@ GLuint DepthRenderBuffer <span class="token operator">=</span> <span class="toke
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="纹理没有mipmap造成的闪烁"><a href="#纹理没有mipmap造成的闪烁" class="headerlink" title="纹理没有mipmap造成的闪烁"></a><font size="6" color="orange">纹理没有mipmap造成的闪烁</font></h1><hr>
 <p>给纹理使用mipmap时，OpenGL会自动根据被映射对象的大小（单位是像素），自动决定使用纹理的哪个分辨率。但是如果不使用mipmap，那么映射到更小图像上的纹理将随着物体移动而闪烁。</p>
+<h1 id="将硬件多重采样MSAA变成超采样"><a href="#将硬件多重采样MSAA变成超采样" class="headerlink" title="将硬件多重采样MSAA变成超采样"></a><font size="6" color="orange">将硬件多重采样MSAA变成超采样</font></h1><hr>
+<p>我们通常开启硬件MSAA都是使用下面两句：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">glfwWindowHint</span><span class="token punctuation">(</span>GLFW_SAMPLES<span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glEnable</span><span class="token punctuation">(</span>GL_MULTISAMPLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这两句确实能够实现多重采样反走样的效果，也遵循MSAA的原理：片元着色器只计算一次，然后把计算所得的颜色赋给像素中的所有样本，最后根据样本有没有被图元覆盖来确定最终的像素颜色。也就是说实际上像素中每个样本的颜色是一样的。但是如果我们想要实现更好的反走样效果，比如在Sponza模型里面，BRDF光照后发现模型柱子上横着的边界一直在闪，这个时候想要去除闪的效果只开MSAA是不够的，还需要在片元着色器中用<code>sample</code>关键字来修饰输入变量：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">sample in vec2 TexCoords<span class="token punctuation">;</span>
+sample in vec3 Normal<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这样一来片元着色器就不是只对每个像素执行一次了，而是对像素中的每个样本都执行一次片元着色器（这就很像超采样SSAA了）。因为每个样本有不同的位置、法线等等，最终每个样本的颜色也会存在细微的差异，但是最终合成的像素颜色确实比单纯用MSAA要好。不过缺点也是很明显的：由于每个像素会运行多次片元着色器，会导致效率急剧下降。</p>
 
             </div>
 
