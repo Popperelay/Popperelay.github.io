@@ -1,0 +1,825 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >剑指Offer2基础知识树栈队列递归循环</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题7：重建二叉树"><span class="toc-text">面试题7：重建二叉树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题8：二叉树中序遍历的下一个节点"><span class="toc-text">面试题8：二叉树中序遍历的下一个节点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题9：用两个栈实现队列"><span class="toc-text">面试题9：用两个栈实现队列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题10：斐波那契数列"><span class="toc-text">面试题10：斐波那契数列</span></a></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p>二叉树中的两个特例是堆和红黑树。堆分为最大堆和最小堆。最大堆中根节点的值最大，最小堆中根节点的值最小。有很多需要快速找到最大值或者最小值的问题都可以用堆来解决。红黑树是把书中的节点定义为红、黑两种颜色，并通过规则确保从根节点到叶节点的最长路径的长度不超过最短路径的两倍。</p>
+<h1 id="面试题7：重建二叉树"><a href="#面试题7：重建二叉树" class="headerlink" title="面试题7：重建二叉树"></a><font size="6" color="orange">面试题7：重建二叉树</font></h1><hr>
+<p>题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序序列和中序序列的结果中都不包含重复的数字。</p>
+<p>根据前序和中序序列重建二叉树的核心是：前序的第一个节点是根节点，而中序里在这个根节点值左右两边的数分别是根节点的左子树和右子树。然后分别根据左右子树的前序和中序序列（如果中序序列里在根节点左边有m个数，那说明左子树里有m个节点，这m个数构成左子树的中序序列，对应前序序列根节点往右的m个树是左子树的前序序列，前序序列中还剩下的是右子树的前序序列），递归地创建左右子树。</p>
+<p>先写测试用例：</p>
+<ul>
+<li>普通二叉树</li>
+<li>完全二叉树</li>
+<li>左倾斜树</li>
+<li>右倾斜树</li>
+<li>空树</li>
+<li>只有根节点</li>
+<li>输入的前序和中序不匹配，无法创建对应的二叉树</li>
+</ul>
+<p>完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"BinaryTree.h"</span></span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">createBinaryTree</span><span class="token punctuation">(</span>SBinaryTreeNode<span class="token operator">*</span><span class="token operator">&amp;</span> pRoot<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> pPreOrderStart<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>pPreOrderEnd<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> pInOrderStart<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> pInOrderEnd<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> PreOrderLength <span class="token operator">=</span> pPreOrderEnd <span class="token operator">-</span> pPreOrderStart <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> InOrderLength <span class="token operator">=</span> pInOrderEnd <span class="token operator">-</span> pInOrderStart <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>PreOrderLength <span class="token operator">!=</span> InOrderLength<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Invalid preoder and inorder"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>PreOrderLength <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> RootValue <span class="token operator">=</span> <span class="token operator">*</span>pPreOrderStart<span class="token punctuation">;</span>
+        pRoot <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span>RootValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token operator">*</span> pInOrderTemp <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>pInOrderTemp <span class="token operator">=</span> pInOrderStart<span class="token punctuation">;</span> pInOrderTemp <span class="token operator">&lt;=</span> pInOrderEnd<span class="token punctuation">;</span> <span class="token operator">++</span>pInOrderTemp<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>pInOrderTemp <span class="token operator">==</span> RootValue<span class="token punctuation">)</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>pInOrderTemp <span class="token operator">!=</span> RootValue<span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//在中序里找不到前序的根节点</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span><span class="token punctuation">(</span>std<span class="token operator">::</span><span class="token function">exception</span><span class="token punctuation">(</span><span class="token string">"Invalid preoder and inorder"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> LeftLength <span class="token operator">=</span> pInOrderTemp <span class="token operator">-</span> pInOrderStart<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> RightLength <span class="token operator">=</span> pInOrderEnd <span class="token operator">-</span> pInOrderTemp<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>LeftLength <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">createBinaryTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">,</span> pPreOrderStart <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> pPreOrderStart <span class="token operator">+</span> LeftLength<span class="token punctuation">,</span> pInOrderStart<span class="token punctuation">,</span> pInOrderTemp <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>RightLength <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">createBinaryTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">,</span> pPreOrderStart <span class="token operator">+</span> LeftLength <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> pPreOrderEnd<span class="token punctuation">,</span> pInOrderTemp <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> pInOrderEnd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> pPreOrder<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> pInOrder<span class="token punctuation">,</span> <span class="token keyword">int</span> vLength<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Expect result: "</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> vLength<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> pPreOrder<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Actual result: "</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pRoot <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token function">createBinaryTree</span><span class="token punctuation">(</span>pRoot<span class="token punctuation">,</span> pPreOrder<span class="token punctuation">,</span> pPreOrder <span class="token operator">+</span> vLength <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> pInOrder<span class="token punctuation">,</span> pInOrder <span class="token operator">+</span> vLength <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printTree</span><span class="token punctuation">(</span>pRoot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token function">destroyTree</span><span class="token punctuation">(</span>pRoot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 普通二叉树</span>
+<span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> Length <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> PreOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> InOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">6</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span>PreOrder<span class="token punctuation">,</span> InOrder<span class="token punctuation">,</span> Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 完全二叉树</span>
+<span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> Length <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> PreOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> InOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span>PreOrder<span class="token punctuation">,</span> InOrder<span class="token punctuation">,</span> Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 左倾斜树</span>
+<span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> Length <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> preorder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> inorder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> inorder<span class="token punctuation">,</span> Length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 右倾斜树</span>
+<span class="token keyword">void</span> <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> preorder<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> inorder<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> inorder<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 树中只有根节点</span>
+<span class="token keyword">void</span> <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> preorder<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> inorder<span class="token punctuation">[</span>length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> inorder<span class="token punctuation">,</span> length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 空树</span>
+<span class="token keyword">void</span> <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 输入的前序和中序不匹配</span>
+<span class="token keyword">void</span> <span class="token function">test7</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> Length <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> PreOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> InOrder<span class="token punctuation">[</span>Length<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Expect result: Invalid preoder and inorder"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Actual result: "</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pRoot <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">createBinaryTree</span><span class="token punctuation">(</span>pRoot<span class="token punctuation">,</span> PreOrder<span class="token punctuation">,</span> PreOrder <span class="token operator">+</span> Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> InOrder<span class="token punctuation">,</span> InOrder <span class="token operator">+</span> Length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">destroyTree</span><span class="token punctuation">(</span>pRoot<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span>std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test7</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">struct</span> SBinaryTreeNode
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> m_Value<span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> m_pLeft<span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> m_pRight<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+SBinaryTreeNode<span class="token operator">*</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> vValue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">auto</span> pBinaryTreeNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">SBinaryTreeNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pBinaryTreeNode<span class="token operator">-</span><span class="token operator">></span>m_Value <span class="token operator">=</span> vValue<span class="token punctuation">;</span>
+    pBinaryTreeNode<span class="token operator">-</span><span class="token operator">></span>m_pLeft <span class="token operator">=</span> pBinaryTreeNode<span class="token operator">-</span><span class="token operator">></span>m_pRight <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> pBinaryTreeNode<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>SBinaryTreeNode<span class="token operator">*</span> pParent<span class="token punctuation">,</span> SBinaryTreeNode<span class="token operator">*</span> pLeft<span class="token punctuation">,</span> SBinaryTreeNode<span class="token operator">*</span> pRight<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pParent<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        pParent<span class="token operator">-</span><span class="token operator">></span>m_pLeft <span class="token operator">=</span> pLeft<span class="token punctuation">;</span>
+        pParent<span class="token operator">-</span><span class="token operator">></span>m_pRight <span class="token operator">=</span> pRight<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">destroyTree</span><span class="token punctuation">(</span>SBinaryTreeNode<span class="token operator">*</span> pRoot<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pRoot<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">destroyTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">destroyTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">delete</span> pRoot<span class="token punctuation">;</span>
+        pRoot <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">printTree</span><span class="token punctuation">(</span>SBinaryTreeNode<span class="token operator">*</span> pRoot<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pRoot<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> pRoot<span class="token operator">-</span><span class="token operator">></span>m_Value <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        <span class="token function">printTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printTree</span><span class="token punctuation">(</span>pRoot<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="面试题8：二叉树中序遍历的下一个节点"><a href="#面试题8：二叉树中序遍历的下一个节点" class="headerlink" title="面试题8：二叉树中序遍历的下一个节点"></a><font size="6" color="orange">面试题8：二叉树中序遍历的下一个节点</font></h1><hr>
+<p>题目：给定一棵二叉树和其中的一个节点，如何找出中序遍历序列的下一个节点？树中的节点除了有两个分别指向左、右子节点的指针，还有一个指向父节点的指针。</p>
+<p>画个图，根据该节点的位置可以分成三种情况：</p>
+<ul>
+<li>该节点有右子树，那么它在中序遍历中的下一个节点就是其右子树里的最左子节点。也就是说，从右子节点出发一直沿着指向左子节点的指针，我们就能找到它的下一个节点。</li>
+<li>该节点没有右子树，但是是它的父节点的左子节点。那么下一个节点就是该节点的父节点。</li>
+<li>该节点没有右子树，并且是它的父节点的右子节点。那么沿着指向父节点的指针一直向上遍历，直到发现某个祖宗节点本身是其父节点的左子节点，那么下一个节点就是该祖宗节点的父节点。如果不存在这样的祖宗节点（即一直遍历到了根节点（它的父节点是null）），那么该节点的下一个节点就不存在了，即为nullptr。</li>
+</ul>
+<p>先写测试用例：</p>
+<ul>
+<li>空树</li>
+<li>只有根节点的树</li>
+<li>左倾斜树</li>
+<li>右倾斜树</li>
+<li>普通二叉树</li>
+<li>完全二叉树</li>
+<li>下一个节点为当前节点的右子节点、右子树的最左节点、父节点、跨层的父节点、没有下一个节点。</li>
+</ul>
+<p>完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"BinaryTree.h"</span></span>
+
+SBinaryTreeNode<span class="token operator">*</span> <span class="token function">findNextNodeInOrder</span><span class="token punctuation">(</span><span class="token keyword">const</span> SBinaryTreeNode<span class="token operator">*</span> vCurrentNode<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNextNode <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vCurrentNode<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        pNextNode <span class="token operator">=</span> vCurrentNode<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>pNextNode<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">)</span>
+            pNextNode <span class="token operator">=</span> pNextNode<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        SBinaryTreeNode <span class="token operator">*</span>pParentNode <span class="token operator">=</span> vCurrentNode<span class="token operator">-</span><span class="token operator">></span>m_pParent<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>pParentNode<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            pNextNode <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> pNextNode<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>vCurrentNode <span class="token operator">==</span> pParentNode<span class="token operator">-</span><span class="token operator">></span>m_pLeft<span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//下面这两个if-else其实可以合在一起</span>
+            pNextNode <span class="token operator">=</span> pParentNode<span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">const</span> SBinaryTreeNode <span class="token operator">*</span>pCurrentNode <span class="token operator">=</span> vCurrentNode<span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>pParentNode <span class="token operator">&amp;&amp;</span> pCurrentNode <span class="token operator">==</span>pParentNode<span class="token operator">-</span><span class="token operator">></span>m_pRight<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                pCurrentNode <span class="token operator">=</span> pParentNode<span class="token punctuation">;</span>
+                pParentNode <span class="token operator">=</span> pParentNode<span class="token operator">-</span><span class="token operator">></span>m_pParent<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            pNextNode <span class="token operator">=</span> pParentNode<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> pNextNode<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vTestName<span class="token punctuation">,</span> <span class="token keyword">const</span> SBinaryTreeNode<span class="token operator">*</span> vCurrentNode<span class="token punctuation">,</span> <span class="token keyword">const</span> SBinaryTreeNode<span class="token operator">*</span> vNextNode<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"---------------"</span> <span class="token operator">&lt;&lt;</span> vTestName <span class="token operator">&lt;&lt;</span> <span class="token string">" begins: --------------"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Expected result: "</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vNextNode<span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> vNextNode<span class="token operator">-</span><span class="token operator">></span>m_Value<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Actual result: "</span><span class="token punctuation">;</span>
+    SBinaryTreeNode <span class="token operator">*</span>pNextNode <span class="token operator">=</span> <span class="token function">findNextNodeInOrder</span><span class="token punctuation">(</span>vCurrentNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pNextNode<span class="token punctuation">)</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> pNextNode<span class="token operator">-</span><span class="token operator">></span>m_Value<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 完全二叉树里找下一个节点</span>
+<span class="token comment" spellcheck="true">//            8</span>
+<span class="token comment" spellcheck="true">//        6      10</span>
+<span class="token comment" spellcheck="true">//       5 7    9  11</span>
+<span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode8 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode6 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode10 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode5 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode7 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode9 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode11 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode8<span class="token punctuation">,</span> pNode6<span class="token punctuation">,</span> pNode10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode6<span class="token punctuation">,</span> pNode5<span class="token punctuation">,</span> pNode7<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode10<span class="token punctuation">,</span> pNode9<span class="token punctuation">,</span> pNode11<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test1"</span><span class="token punctuation">,</span> pNode8<span class="token punctuation">,</span> pNode9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test2"</span><span class="token punctuation">,</span> pNode6<span class="token punctuation">,</span> pNode7<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test3"</span><span class="token punctuation">,</span> pNode10<span class="token punctuation">,</span> pNode11<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test4"</span><span class="token punctuation">,</span> pNode5<span class="token punctuation">,</span> pNode6<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test5"</span><span class="token punctuation">,</span> pNode7<span class="token punctuation">,</span> pNode8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test6"</span><span class="token punctuation">,</span> pNode9<span class="token punctuation">,</span> pNode10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test7"</span><span class="token punctuation">,</span> pNode11<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">destroyTree</span><span class="token punctuation">(</span>pNode8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 左倾斜树里找下一个节点</span>
+<span class="token comment" spellcheck="true">//            5</span>
+<span class="token comment" spellcheck="true">//          4</span>
+<span class="token comment" spellcheck="true">//        3</span>
+<span class="token comment" spellcheck="true">//      2</span>
+<span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode5 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode4 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode3 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode2 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode5<span class="token punctuation">,</span> pNode4<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode4<span class="token punctuation">,</span> pNode3<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode3<span class="token punctuation">,</span> pNode2<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test8"</span><span class="token punctuation">,</span> pNode5<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test9"</span><span class="token punctuation">,</span> pNode4<span class="token punctuation">,</span> pNode5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test10"</span><span class="token punctuation">,</span> pNode3<span class="token punctuation">,</span> pNode4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test11"</span><span class="token punctuation">,</span> pNode2<span class="token punctuation">,</span> pNode3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">destroyTree</span><span class="token punctuation">(</span>pNode5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 右倾斜树里找下一个节点</span>
+<span class="token comment" spellcheck="true">//        2</span>
+<span class="token comment" spellcheck="true">//         3</span>
+<span class="token comment" spellcheck="true">//          4</span>
+<span class="token comment" spellcheck="true">//           5</span>
+<span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode2 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode3 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode4 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode5 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode2<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> pNode3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode3<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> pNode4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">connectTreeNodes</span><span class="token punctuation">(</span>pNode4<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> pNode5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test12"</span><span class="token punctuation">,</span> pNode5<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test13"</span><span class="token punctuation">,</span> pNode4<span class="token punctuation">,</span> pNode5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test14"</span><span class="token punctuation">,</span> pNode3<span class="token punctuation">,</span> pNode4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test15"</span><span class="token punctuation">,</span> pNode2<span class="token punctuation">,</span> pNode3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">destroyTree</span><span class="token punctuation">(</span>pNode2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// 空树</span>
+<span class="token keyword">void</span> <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    SBinaryTreeNode<span class="token operator">*</span> pNode5 <span class="token operator">=</span> <span class="token function">createBinaryTreeNode</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Test16"</span><span class="token punctuation">,</span> pNode5<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">destroyTree</span><span class="token punctuation">(</span>pNode5<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="面试题9：用两个栈实现队列"><a href="#面试题9：用两个栈实现队列" class="headerlink" title="面试题9：用两个栈实现队列"></a><font size="6" color="orange">面试题9：用两个栈实现队列</font></h1><hr>
+<p>题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数appendTail和deleteHead，分别完成在队列尾插入节点和在队列头删除节点的功能。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stack></span></span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CQueue</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> vNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    T <span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>stack<span class="token operator">&lt;</span>T<span class="token operator">></span> m_Stack1<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>stack<span class="token operator">&lt;</span>T<span class="token operator">></span> m_Stack2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>核心思想在于：用一个栈stack1来入队，另一个栈stack2来出队。比如要入队a、b、c三个元素，可以将它们依次压栈到stack1里，如果现在要出队，按照队列先进先出的原则，应该先出队a，但是stack1的栈顶是c。所以需要依次把stack里的元素出栈到stack2里，这时stack2栈顶的元素就是c，直接弹出就可以了。如果现在要再入队一个元素d，可以直接把d压栈到stack1里，如果还要再出队，那直接从stack2里弹出就可以了，因为stack2里从栈顶到栈底的元素就是按照入队先后顺序排列的。</p>
+<p>所以，总结如下：</p>
+<ul>
+<li>入队时，将元素直接压栈到stack1。</li>
+<li>出队时，如果stack2不为空，则直接弹出stack2栈顶的元素；如果stack2为空，则把stack1里所有元素出栈到stack2里，再弹出stack2栈顶的元素。</li>
+</ul>
+<p>先写测试用例：</p>
+<ul>
+<li>往空的队列里添加、删除元素</li>
+<li>往非空的队列里添加、删除元素</li>
+<li>连续删除元素直到队列为空</li>
+</ul>
+<p>完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stack></span></span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">></span>
+<span class="token keyword">class</span> <span class="token class-name">CQueue</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+    <span class="token operator">~</span><span class="token function">CQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> vNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    T <span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>stack<span class="token operator">&lt;</span>T<span class="token operator">></span> m_Stack1<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>stack<span class="token operator">&lt;</span>T<span class="token operator">></span> m_Stack2<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">></span>
+<span class="token keyword">void</span> CQueue<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token operator">::</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> vNode<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    m_Stack1<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>vNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">></span>
+T CQueue<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token operator">::</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Stack2<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>m_Stack1<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            T<span class="token operator">&amp;</span> Data <span class="token operator">=</span> m_Stack1<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_Stack1<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            m_Stack2<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>Data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m_Stack2<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> std<span class="token operator">::</span><span class="token function">exception</span><span class="token punctuation">(</span><span class="token string">"Queue is empty."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    T <span class="token operator">&amp;</span>Head <span class="token operator">=</span> m_Stack2<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m_Stack2<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Head<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"Queue.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vTestName<span class="token punctuation">,</span> <span class="token keyword">char</span> vActual<span class="token punctuation">,</span> <span class="token keyword">char</span> vExpected<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"----------------"</span> <span class="token operator">&lt;&lt;</span> vTestName <span class="token operator">&lt;&lt;</span> <span class="token string">"----------------"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Expected Result: "</span> <span class="token operator">&lt;&lt;</span> vExpected <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Actual Result: "</span> <span class="token operator">&lt;&lt;</span> vActual <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CQueue<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token operator">></span> Queue<span class="token punctuation">;</span>
+
+    Queue<span class="token punctuation">.</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Queue<span class="token punctuation">.</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Queue<span class="token punctuation">.</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span> Head <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test1"</span><span class="token punctuation">,</span> Head<span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Head <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test2"</span><span class="token punctuation">,</span> Head<span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Queue<span class="token punctuation">.</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Head <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test3"</span><span class="token punctuation">,</span> Head<span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Queue<span class="token punctuation">.</span><span class="token function">appendTail</span><span class="token punctuation">(</span><span class="token string">'e'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Head <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test4"</span><span class="token punctuation">,</span> Head<span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Head <span class="token operator">=</span> Queue<span class="token punctuation">.</span><span class="token function">deleteHead</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test5"</span><span class="token punctuation">,</span> Head<span class="token punctuation">,</span> <span class="token string">'e'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果题目改成用两个队列来模拟栈，核心思想在于：如果元素a、b、c依次入队列queue1，则从队头删除的元素应该是a，但是栈需要按照后进先出的原则先删除c。所以可以把queue1中的元素依次出队列到queue2，直到queue1中只剩下一个元素c，然后把这个仅剩的元素输出去就是栈想要的结果。这时queue1变为空，queue2不为空。再有元素进来时，将它入队到非空的queue2，再出队时，同样先把queue2中的元素出队到queue1，直至只剩下一个元素，将它出队输出去。</p>
+<p>总结一下：用两个队列来模拟栈时，有元素进来就直接压入非空的那个队列（两个都空的话随便压哪个）；要弹出元素时，需要先把非空队列里除了队尾最后一个元素以外的其他元素全部压入另一个空队列里，最后把原队列里仅剩的一个元素弹出（有没有更简单的方法有待思考）。</p>
+<hr>
+<p>如果我们告诉面试官动态规划的思路之后，面试官还在提醒说在分解子问题的时候是不是存在某个特殊的选择，如果采用这个特殊的选择将一定能得到最优解。那么，通过面试官这样的提示意味着该面试题可能适用于贪心算法。当然，面试官也会要求应聘者正面贪心选择的确最终能得到最优解。</p>
+<p>通常基于递归实现的代码比基于循环实现的代码要简洁很多，更加容易实现。如果面试官没有特殊要求，则应聘者可以优先采用递归的方法编程。</p>
+<hr>
+<h1 id="面试题10：斐波那契数列"><a href="#面试题10：斐波那契数列" class="headerlink" title="面试题10：斐波那契数列"></a><font size="6" color="orange">面试题10：斐波那契数列</font></h1><hr>
+<p>题目一：求斐波那契数列的第n项。写一个函数，输入n，求斐波那契数列的第n项。斐波那契数列的定义如下：<br>$$<br>f(n)=<br>\begin{cases}<br>0, &amp;n=0 \\<br>1, &amp;n=1 \\<br>f(n-1)+f(n-2), &amp;n&gt;1<br>\end{cases}<br>$$<br>最常见也是最低效的当然是按照公式写的递归代码了，面试官一般不会满意：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">fibonacci_recursively</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">fibonacci_recursively</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fibonacci_recursively</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个递归过程中存在很多重复解决的子问题，比如在求f(9)时会去求f(8)和f(7)，而在求f(8)时会去求f(7)和f(6)，很显然f(7)重复计算了。可以画一棵递归树来看一下，会发现重复的节点数会随着n的增大而急剧增加，时间复杂度是以n的指数形式递增的。</p>
+<p>比较好的当然是自底向上递推了：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">fibonacci_iteratively</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> Result4nsub1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> Result4nsub2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> Result4n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        Result4n <span class="token operator">=</span> Result4nsub1 <span class="token operator">+</span> Result4nsub2<span class="token punctuation">;</span>
+        Result4nsub2 <span class="token operator">=</span> Result4nsub1<span class="token punctuation">;</span>
+        Result4nsub1 <span class="token operator">=</span> Result4n<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> Result4n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>除此之外，计算斐波那契数列还可以使用如下公式（速度更快）：<br>$$<br>\begin{bmatrix}<br>f(n) &amp; f(n-1) \\<br>f(n-1) &amp; f(n-2)<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>1 &amp; 1 \\<br>1 &amp; 0<br>\end{bmatrix}<br>^{n-1}<br>$$<br>也就是说斐波那契数列可以转换为求一个矩阵的乘方，而乘方又可以对半分，有如下性质：<br>$$<br>a^n=<br>\begin{cases}<br>a^{n/2}\cdot a^{n/2}, &amp;n为偶数\\<br>a^{(n-1)/2}\cdot a^{(n-1)/2}\cdot a, &amp;n为奇数<br>\end{cases}<br>$$<br>所以求n次方，可以先求n/2次数，然后平方就可以了。即使使用递归也可以把时间复杂度降为$O(logn)$。不过这种解法不太常考。</p>
+<p>题目二：青蛙跳台阶问题。一只青蛙依次可以跳上级台阶，也可以跳上2级台阶。求该青蛙跳上一个n级台阶总共有多少种跳法。</p>
+<p>我们可以用递归的思想来看这个问题（划分成子问题）：假设跳n级台阶的跳法数为f(n)，那么当n&gt;2时，第一次跳的时候有两种不同的选择：一是第一次只跳1级，此时跳法数目等于后面剩下的n-1级台阶的跳法数目，即f(n-1)；而是第一次跳2级，此时跳法数目等于后面剩下的n-2级台阶的跳法数目，即f(n-2)。所以跳n级台阶的跳法总数为f(n)=f(n-1)+f(n-2)。可以看出这实际上就是个斐波那契数列了。</p>
+<p>题目三：<br>在青蛙跳台阶的问题中，如果把条件改成：青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以一次跳上n级，此时该青蛙跳上一个m级台阶总共有多少种跳法？其实这个问题可以类似于有n把椅子，每把椅子上要么有人要么没人（有人就是青蛙跳过的地方），问总共的座次情况有多少种。由于没把椅子上要么有人，要么没人（最后一把椅子上一定有人，因为青蛙要跳到第n级台阶上），所以很简单总数是$2^{n-1}$。</p>
+<p>题目四：<br>用2x1的小矩形去横着或者竖着去无重叠覆盖一个2xn的大矩形，问总共有多少种方法。画个图就知道了，其实也是个斐波那契数列。</p>
+<hr>
+<p>参考文献：《剑指Offer》</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/02/12/剑指Offer2基础知识树栈队列递归循环/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/02/12/剑指Offer2基础知识树栈队列递归循环/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

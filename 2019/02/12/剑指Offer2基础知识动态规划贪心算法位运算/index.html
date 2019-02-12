@@ -1,0 +1,512 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >剑指Offer2基础知识动态规划贪心算法位运算</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题14：剪绳子"><span class="toc-text">面试题14：剪绳子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#面试题15：二进制中1的个数"><span class="toc-text">面试题15：二进制中1的个数</span></a></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p>动态规划现在是编程面试中的热门话题。如果面试题是求一个问题的最优解（通常是求最大值或者最小值），而且该问题能够分解成若干个子问题，并且子问题之间还有重叠的更小的子问题，就可以考虑用动态规划来解决这个问题。</p>
+<p>我们在应用动态规划之前要分析能够把大问题分解成小问题，分解后的每个小问题也存在最优解。如果把小问题的最优解组合起来能够得到整个问题的最优解，那么我们可以应用动态规划解决这个问题。</p>
+<p>动态规划的四个特点：</p>
+<ol>
+<li>求的是一个问题的最优解</li>
+<li>整体问题的最优解是依赖各个子问题的最优解</li>
+<li>把大问题分成若干个小问题，这些小问题之间还有相互重叠的更小的子问题</li>
+<li>为了避免重复求解子问题，可以用从下往上的顺序先计算小问题的最优解并存储下来，再以此为基础求取大问题的最优解。从上往下分析问题，从下往上求解问题。</li>
+</ol>
+<p>应用贪心算法时，都需要证明一个问题：为什么这样的贪心选择能得到最优解？</p>
+<h1 id="面试题14：剪绳子"><a href="#面试题14：剪绳子" class="headerlink" title="面试题14：剪绳子"></a><font size="6" color="orange">面试题14：剪绳子</font></h1><hr>
+<p>题目：给你一根长度为n的绳子，请把绳子剪成m段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为$k[0],k[1],…,k[m]$。请问$k[0]\times k[1]\times…\times k[m]$可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<p>从动态规划的角度出发，自上向下分析问题。假设$f(n)$是把长度为n的绳子剪成若干段后各段长度乘积的最大值。重要的是要找到关于$f(n)$的递归公式。剪第一刀的时候，有n-1种可能的选择，也就是剪出来的第一段的长度可能是$1,2,…,n-1$，第二段的长度对应是$n-1,n-2,…,1$，那么很显然，n段绳子最大分段乘积，等于它剪下来的这两段绳子的最大分段乘积，相乘的结果里最大的那个值，即$f(n)=max(f(i)\times f(n-i))$。其中i表示剪下来的第一段的长度，取值是$1 \sim n-1$。</p>
+<p>从公式里就可以看出会存在很多重复的子问题，所以我们可以自下向上求解。当n<2时，f(n)=0（因为题目中要求了n>1），当n=2时，f(n)=1，n=3时，f(n)=2。后面的f(n)就可以按照公式来求解了。</2时，f(n)=0（因为题目中要求了n></p>
+<p>先写测试用例：</p>
+<ul>
+<li>功能测试：绳子的初始长度大于5</li>
+<li>边界测试：绳子的初始长度分别为0、1、2、3、4。</li>
+</ul>
+<p>完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">int</span> <span class="token function">maxProduct4Rope</span><span class="token punctuation">(</span><span class="token keyword">int</span> vLength<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vLength <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vLength <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vLength <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ProductSet<span class="token punctuation">;</span>
+    ProductSet<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>vLength <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ProductSet<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    ProductSet<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//注意这里的ProductSet之所以会出现1、2、3而不是0、2、2，是因为后面要用到它们的值，</span>
+    ProductSet<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//所以在n=1、2、3时，它们是可以独立成一段的，并不代表f(n)（题目中f(n)要求绳子必须被砍成2段以上）</span>
+    ProductSet<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> vLength<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> CurrentMaxProduc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> i <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> CurrentProduct <span class="token operator">=</span> ProductSet<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> ProductSet<span class="token punctuation">[</span>i <span class="token operator">-</span> j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>CurrentProduct <span class="token operator">></span> CurrentMaxProduc<span class="token punctuation">)</span>
+                CurrentMaxProduc <span class="token operator">=</span> CurrentProduct<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        ProductSet<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> CurrentMaxProduc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ProductSet<span class="token punctuation">[</span>vLength<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> vTestName<span class="token punctuation">,</span> <span class="token keyword">int</span> vRopeLength<span class="token punctuation">,</span> <span class="token keyword">int</span> vExpectValue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"---------------"</span> <span class="token operator">&lt;&lt;</span> vTestName<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"begins: ---------------"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Expect result: "</span> <span class="token operator">&lt;&lt;</span> vExpectValue <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Actual result: "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">maxProduct4Rope</span><span class="token punctuation">(</span>vRopeLength<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test1"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test2"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test3"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test4"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test5"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test6"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test7</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test7"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test8</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test8"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test9</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">27</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test9"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test10</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">36</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test10"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//******************************************************************</span>
+<span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">void</span> <span class="token function">test11</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> length <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> expected <span class="token operator">=</span> <span class="token number">86093442</span><span class="token punctuation">;</span>
+    <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"test11"</span><span class="token punctuation">,</span> length<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test6</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test7</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test8</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test9</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test10</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">test11</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是，上面代码里对ProductSet[1]、ProductSet[2]、ProductSet[3]的初值，因为这几个数会参与后面绳子长度更大时的递推计算，所以它们不是真的代码f(n)，而是代表着可以不剪的情况下的最大乘积（题目中f(n)是不能不剪的，因为规定了n&gt;1）。</p>
+<p>从代码里很容易看出，用动态规划的时间复杂度是$O(n^2)$，空间复杂度是$O(n)$。</p>
+<p>其实我们还可以用贪心算法来求解：当$n\ge 5$时，应该尽可能多地剪长度为3的绳子；当剩下的绳子长度为4时，把绳子剪成两段长度为2的绳子。证明如下：<br>当$n\ge 5$时，可以证明$2(n-2)&gt;n$并且$3(n-3)&gt;n$，但是$4(n-4)&lt;n$。也就是说，当绳子剩下的长度大于或者等于5的时候，我们就把它剪成长度为3或者2的绳子段。又因为当$n\ge 5$时，$3(n-3)\ge 2(n-2)$，所以应该尽可能多地剪长度为3的绳子段。</p>
+<p>当绳子的长度为4时，当然是要剪成2x2的两段，才能使分段乘积最大。</p>
+<p>贪心算法求f(n)的代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">maxProduct4RopeByGreedy</span><span class="token punctuation">(</span><span class="token keyword">int</span> vLength<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>vLength <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">==</span> vLength<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">==</span> vLength<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> TimesOf3 <span class="token operator">=</span> vLength <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> vLength <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">)</span>            <span class="token comment" spellcheck="true">//如果余0，说明前面不断剪3之后，会剩下一段长度为5的，可以再接着剪3</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> TimesOf3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">==</span> vLength <span class="token operator">%</span> <span class="token number">3</span><span class="token punctuation">)</span>            <span class="token comment" spellcheck="true">//如果余1，说明前面不断剪3之后，会剩下一段长度为4的，这时不能再按3来剪了</span>
+        <span class="token keyword">return</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> TimesOf3 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>                            <span class="token comment" spellcheck="true">//如果余2，说明前面不断剪3之后，会剩下一段长度为5的，可以再接着剪3，剩下一段2</span>
+        <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> TimesOf3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="面试题15：二进制中1的个数"><a href="#面试题15：二进制中1的个数" class="headerlink" title="面试题15：二进制中1的个数"></a><font size="6" color="orange">面试题15：二进制中1的个数</font></h1><hr>
+<p>题目：请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。例如，把9表示成二进制是1001，有2位数是1，因此如果输入9，则函数输出2。</p>
+<p>最自然想到的一般都是把输入的整数n向右移位，每移1次都与1作与运算，来判断当前最低位是否为1，通过这样的方式来计算对应二进制中1的个数。代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">countNumber1InBinary</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> Count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token operator">++</span>Count<span class="token punctuation">;</span>
+        n <span class="token operator">=</span> n <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> Count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是当输入的n是负数时，会陷入死循环。</p>
+<p>所以我们改成对1进行左移，代替对n进行右移，这样能够正常实现目标：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">countNumber1InBinary</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> Count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> Flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>Flag<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&amp;</span> Flag<span class="token punctuation">)</span>
+            <span class="token operator">++</span>Count<span class="token punctuation">;</span>
+        Flag <span class="token operator">=</span> Flag <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> Count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但这只是常规解法，它的时间复杂度和n的位数有关，如果n是32位整型，那就需要移位32次。</p>
+<p>位运算还有一个很重要也很常用的性质：<br><strong>把一个整数减去1，再和原整数做与运算，会把该整数二进制里最右边的1变成0</strong>。所以我们可以用该方法来找出n中的二进制个数，它循环的次数和二进制中1的个数一样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">countNumber1InBinaryBynsub1</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> Count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token operator">++</span>Count<span class="token punctuation">;</span>
+        n <span class="token operator">=</span> n <span class="token operator">&amp;</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> Count<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>相似的问题还有：判断一个整数是不是2的整数次方，可以用<code>n&amp;(n-1)</code>来解决；判断一个整数m需要改变多少个二进制位才能变成另一个整数n，可以先对m和n作异或运算，再对异或结果求1的个数。</p>
+<hr>
+<p>参考文献：《剑指Offer》</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/02/12/剑指Offer2基础知识动态规划贪心算法位运算/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/02/12/剑指Offer2基础知识动态规划贪心算法位运算/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
