@@ -303,7 +303,7 @@ a <span class="token operator">=</span> a <span class="token operator">^</span> 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li>既然都可以使用位操作来实现两个数的加法了，那么扩展一下，也可以使用位操作来求两个数的平均数。只需要在上题的基础上，分别对不考虑进位时的SumWithoutCarry和进位结果Carry分别除以2就可以了，除以2可以用右移一位来代替，所以就是<code>(a^b)&gt;&gt;1+(a&amp;b)</code>，代码可以套用上题的，很简单不赘述了。</li>
-<li>将一个整数n的二进制序列中第i位到第j为替换为整数m所表示的序列（m的长度是j-i且小于n的二进制位数）。比如Input：N=10000000000，M=10101，i=2，j=6；Output：10001010100。<br>其实关键在于把n的第i位到第j位搞成0，再和m左移i位之后的结果做或操作就额可以成功换掉了，主要原因还是或的0不变性<code>a | 0 = a</code>。代码如下：<br>```cpp<br>//将n的二进制序列中的第i位到第j位替换为m所表示的二进制序列<br>int replaceBits(int n, int m, int i, int j)<br>{<pre><code>int AllOne = ~0;
+<li>将一个整数n的二进制序列中第i位到第j为替换为整数m所表示的序列（m的长度是j-i且小于n的二进制位数）。比如Input：N=10000000000，M=10101，i=2，j=6；Output：10001010100。<br>其实关键在于把n的第i位到第j位搞成0，再和m左移i位之后的结果做或操作就额可以成功换掉了，主要原理还是或的0不变性<code>a | 0 = a</code>。代码如下：<br>```cpp<br>//将n的二进制序列中的第i位到第j位替换为m所表示的二进制序列<br>int replaceBits(int n, int m, int i, int j)<br>{<pre><code>int AllOne = ~0;
 int RemainedRight = (1 &lt;&lt; i) - 1;
 int RemainedLeft = AllOne - ((1 &lt;&lt; j + 1) - 1);
 int Mask = RemainedLeft | RemainedRight;
@@ -350,7 +350,7 @@ re n :    1111110
 <li>赋值运算仅比“,”高，且从右向左结合。</li>
 </ul>
 </li>
-<li>取两个数的最小值，用位运算来做的话是：<code>y^((x^y)&amp;-(x&lt;y))</code>，按x<y和x>=y来分别讨论并利用异或运算的可结合性来化简这条语句就明白了。</y和x></li>
+<li>取两个数的最小值，用位运算来做的话是：<code>y^((x^y)&amp;-(x&lt;y))</code>，按x\<y和x\>=y来分别讨论并利用异或运算的可结合性来化简这条语句就明白了。</y和x\></li>
 <li>float值与0值比较的if语句：<code>if(x &gt; -0.000001 &amp;&amp; x &lt; 0.000001)</code>，之所以是0.000001是因为float型只能保证6位有效数字，double能保证10位有效数字。</li>
 <li>宏定义不分配内存，变量定义才会分配内存。</li>
 <li>宏替换不占运行时间，只占编译时间，函数调用占运行时间。</li>
@@ -399,7 +399,7 @@ void getMemory(char*&amp; p)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>malloc和new的区别：<ul>
-<li>malloc与free是C/C++语言的标准库函数，new/deleta是C++的运算符，所以malloc/free需要库文件支持，new/delete不需要；</li>
+<li>malloc与free是C/C++语言的标准库函数，new/delete是C++的运算符，所以malloc/free需要库文件支持，new/delete不需要；</li>
 <li>new自动计算需要分配的空间，而malloc需要手动计算字节数；</li>
 <li>new是类型安全的，而malloc不是。比如：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span><span class="token operator">*</span> p1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">float</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//编译时指出错误</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//编译时无法指出错误</span>
@@ -427,8 +427,8 @@ A <span class="token function">a</span><span class="token punctuation">(</span><
 a<span class="token punctuation">.</span><span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//报错</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 编译器实际上报错的是在最后一行，而不是它的上一行，因为编译器把a当作了一个函数声明，所以对一个函数名使用”.”运算符肯定是会报错的。</li>
-<li>被调用的函数一定要在调用之前进行定义，这句是错的，不是定义，而应该是声明。</li>
-<li><p>在C++程序中调用被C编译器编译后的函数，为什么要加“extern C”？<br>  C++语言是一种面向对象的编程语言，为了支持重载机制，在编译生成的汇编码中，要对函数的名字进行一些处理，加入比如函数的返回类型等信息。而在C语言中，只是简单的函数名字而已，不回加入其它的信息，也就是说：C++和C语言对产生的函数名字的处理时不一样的。这样在链接阶段若是按照C++的函数名规则去查找C编译器编译的函数，就会出现链接错误。所以extern “C”是在告诉编译器该函数是用C编译器编译的，请用C的方式来链接它们，从而解决了此问题。</p>
+<li>被调用的函数一定要在调用之前进行定义，这句话是错的，不是定义，而应该是声明。</li>
+<li><p>在C++程序中调用被C编译器编译后的函数，为什么要加“extern C”？<br>  C++语言是一种面向对象的编程语言，为了支持重载机制，在编译生成的汇编码中，要对函数的名字进行一些处理，加入比如函数的返回类型等信息。而在C语言中，只是简单的函数名字而已，不会加入其它的信息，也就是说：C++和C语言对产生的函数名字的处理时不一样的。这样在链接阶段若是按照C++的函数名规则去查找C编译器编译的函数，就会出现链接错误。所以extern “C”是在告诉编译器该函数是用C编译器编译的，请用C的方式来链接它们，从而解决了此问题。</p>
 <p>用法是在声明函数时，前面加上<code>extern &quot;C&quot;</code>：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">extern</span> <span class="token string">"C"</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -470,13 +470,13 @@ func<span class="token operator">*</span> <span class="token function">f3</span>
 <li>什么是野指针？野指针是指向不可用内存的指针（可能是指针没有被初始化，指向的地方是随机，也有可能是delete掉后没有被置位null导致它指向了不正确的内存，或者指针越界也会导致它指向不正确的内存，这些情况都统称它为野指针）。</li>
 <li>在调用成员函数时，形参this初始化为调用函数的对象的地址。</li>
 <li>对于类里的成员变量，如果它是内置类型，那么其初始值依赖于对象的作用域：如果类对象在局部作用域里，那么这些内置成员变量不会被初始化，是一个随机值；如果在全局作用域里，它们会被初始化为0（BSS全局未初始化区）。</li>
-<li>对于类类型的数据成员，若未在初始化裂变显示初始化，而是在函数体里赋值，则相当于先调用类的默认构造函数进行初始化，再在函数体中赋值，所以相比于直接利用初始化列表，它的效率较低。</li>
+<li>对于类类型的数据成员，若未在初始化列表显示初始化，而是在函数体里赋值，则相当于先调用类的默认构造函数进行初始化，再在函数体中赋值，所以相比于直接利用初始化列表，它的效率较低。</li>
 <li>const类型的成员变量和引用类型的成员变量，都必须在构造函数初始化列表中进行初始化（或者直接在声明时进行初始化）。</li>
 <li>为什么拷贝构造函数的参数是一个引用，如下：<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">CData</span><span class="token punctuation">(</span><span class="token keyword">const</span> CData<span class="token operator">&amp;</span> vData<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 如果不是引用的话，在参数传进来的时候是传值的方式，就会调用该类的拷贝构造函数，从而造成无穷递归地调用拷贝构造函数，所以拷贝构造函数的参数必须是一个引用。</li>
 <li>当类B从类A继承而来，而类A的析构函数不是虚函数，就会发生什么？<br>当基类指针pA指向用new出来的派生类对象B时，如果delete基类指针，只会运行基类的构造函数，而不会执行派生类的析构函数，派生类部分没有释放掉从而造成释放不彻底现象。</li>
-<li><p>对于类中的成员变量，会按照成员在类中声明次序来顺序构造成员，所以在析构时，会按照声明次序来逆序撤销成员（构造和析构的顺序必然是对称 的）。其实对于函数中生命的对象也是这样的，比如：</p>
+<li><p>对于类中的成员变量，会按照成员在类中声明次序来顺序构造成员，所以在析构时，会按照声明次序来逆序撤销成员（构造和析构的顺序必然是对称 的）。其实对于函数中声明的对象也是这样的，比如：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     A a<span class="token punctuation">;</span>
@@ -502,7 +502,7 @@ func<span class="token operator">*</span> <span class="token function">f3</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>之所以会返回类类型，是为了让=运算可以进行连等操作。那为什么需要是引用呢？这是因为加了&amp;后可以少一次复制（从=运算符退出的时候不用先拷贝到一个临时变量里），而且如果不用&amp;，<code>(DataA = DataB) = DataC;</code>这样的对象连等会达不到效果，A的值不会和C一样（因为括号外面的那次=操作，实际上左操作符是一个临时变量而不是对象DataA）。</p>
-<p>还需要注意的是，在重载=运算符的时候，应该首先判断传入的参数的地址是不是恰好等于this，这是因为如果类里有指针成员，需要先delete掉指针成员（防止内存泄漏），再访问参数对象里的指针，如果传入参数恰好等于this，直接delete掉的话后面就无法正确访问参数里面的这个指针随指向的内存了。</p>
+<p>还需要注意的是，在重载=运算符的时候，应该首先判断传入的参数的地址是不是恰好等于this，这是因为如果类里有指针成员，需要先delete掉指针成员（防止内存泄漏），再访问参数对象里的指针，如果传入参数恰好等于this，直接delete掉的话后面就无法正确访问参数里面的这个指针所指向的内存了。</p>
 </li>
 <li>并不是出现=运算符就是调用赋值构造函数，如下：<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>string <span class="token function">Str1</span><span class="token punctuation">(</span><span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Str2<span class="token punctuation">;</span>
 Str2 <span class="token operator">=</span> Str1<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//调用赋值运算符</span>
@@ -803,10 +803,10 @@ f3 function
 <li>用后缀表达式求值很简单：<br> 需要用到一个栈（称为求值栈）。从左至右扫描后缀表达式，遇到操作数则直接压入求值栈，若遇到运算符则从求值栈里弹出两个操作数按运算符求值，将得到的结果再压入求值栈中。扫描完后，栈顶存放的就是最终的运算结果。</li>
 <li>什么是Catalan数？有2n个数，它们的值要么是1要么是-1，抽取出前k个数构成一个子序列，如果它们的和&gt;=0，那么就称这个子序列满足Catalan性质。那满足这个Catalan性质的子序列到底有多少个呢？这个个数就是Catalan数：Cn=C(2n,n)/(n+1)。其中Cn表示第n个Catalan数，它是前述2n个数构成的序列中，满足Catalan性质的子序列个数，而C(2n,n)就是我们曾经常见的排列组合。</li>
 <li>有很多问题本质上就是Catalan数：<ul>
-<li>一个栈（容量无穷大）的进展序列为1,2,3,…,n，它对应的不同的出栈序列的个数就是Catalan数Cn。</li>
+<li>一个栈（容量无穷大）的入栈序列为1,2,3,…,n，它对应的不同的出栈序列的个数就是Catalan数Cn。</li>
 <li>有2n个人排成一行进入剧场。入场费5元。其中只有n个人有一张5元钞票，另外n人只有10元钞票，剧场无其他钞票，问有多少种方法使得只有有10元的人买票，售票处就有5元的钞票找零？Cn种。</li>
 <li>一个人在她住所以北n个街区和以东n个街区处工作。每天她走2n个街区去上班。如果她不可以穿越从加到办公室的对角线，那么有多少条可能的道路？Cn种。</li>
-<li>在圆上选择2n个点，将这些点成对连接起来使得所得到的n条先对不相交的方法数？Cn种。</li>
+<li>在圆上选择2n个点，将这些点成对连接起来使得所得到的n条线对不相交的方法数？Cn种。</li>
 <li>给定n个结点，能构成多少种不同的二叉树？Cn种。</li>
 <li>矩阵连乘：P=a1 x a2 x a3 x…x an，依据乘法结合律，不改变其顺序，只用括号表示成对的乘积，试问有几种括号化的方案？Cn种。</li>
 </ul>
@@ -833,7 +833,7 @@ f3 function
 <li>深度相同的情况下，满二叉树的叶子结点最多。</li>
 <li>无向图的全部顶点的度之和等于边数的两倍，这是因为每条边和两个顶点相关联。</li>
 <li>有向图的全部顶点的入度之和与出度之和相等并且等于边数。这是因为每条有向边都有一个起点和终点。</li>
-<li>用邻接矩阵方法存储图，很懂一确定图中任意两个顶点之间是否有边相连。但是，要确定图中有多少条，则必须按行、按列对每个元素进行检测，所花费的时间代价很大。</li>
+<li>用邻接矩阵方法存储图，很容易确定图中任意两个顶点之间是否有边相连。但是，要确定图中有多少条，则必须按行、按列对每个元素进行检测，所花费的时间代价很大。</li>
 <li>对于稀疏图，采用邻接表表示将极大地节省存储空间。</li>
 <li>在邻接表中，给定一顶点，能很容易地找出它的所有邻边，因为只需要读取它的邻接表就可以了。在邻接矩阵中，相同的操作则需要扫描一行，花费的时间为O(n)。但是如果要确定给定的两个顶点是否存在边，则在邻接矩阵里可以立刻查到，在邻接表中则需要在相应结点对应的边表中查找另一结点，效率较低。</li>
 <li>图的深度优先搜索（DFS）类似于树的<strong>前序遍历</strong>。</li>
@@ -851,7 +851,7 @@ f3 function
 <li>归并排序算法时一个稳定的排序算法。</li>
 <li>合并两个排好序的链表，可以借助二路归并排序。</li>
 <li>原地归并排序（不需要辅助数组即可归并）。</li>
-<li>所有简单排序（时间复杂度为$O(n^2)$） 都是稳定排序，选择排序除外；所有时间复杂度为$O(nlog2n)$的改进排序都是不稳定排序，归并排序除外。希尔排序是不稳定排序，基数排序是稳定排序。</li>
+<li>所有简单排序（时间复杂度为$O(n^2)$） 都是稳定排序，选择排序除外；所有时间复杂度为$O(nlog_2n)$的改进排序都是不稳定排序，归并排序除外。希尔排序是不稳定排序，基数排序是稳定排序。</li>
 <li>比较次数与初始排列无关的是选择排序。</li>
 <li>在初始序列基本有序的情况下，最优的是插入排序，此时的时间复杂度为$O(n)$，其次是冒泡排序，时间复杂度也为$O(n)$，快速排序在此时性能最差，时间复杂度为$O(n^2)$ 。</li>
 <li>堆排序对初始数据集的排列顺序不敏感，在最好、最坏和平均情况下，堆排序的时间复杂度均为$O(nlog_2n)$。</li>
@@ -861,7 +861,7 @@ f3 function
 <li>折半查找的树除了最后一层以外，剩下的一定是棵满二叉树。平均查找长度AVL就是每个叶结点到根结点路径上的结点数的总和，再除以总结点数就可以了。</li>
 <li>哈希表也叫散列表（具体可参见<a href="http://popperelay.cn/2016/09/17/%E6%9F%A5%E6%89%BE/" target="_blank" rel="external">这里</a>）。</li>
 <li>对哈希表的平均查找长度，是对每个元素往表里存放的试探次数之和，再除以总元素个数。</li>
-<li><p>统计海量的电话号码的个数、以及在40亿个不重复整数中判断是否有某个数，都可以使用位图法来解决：用一个bit位来表示一个值。8位数的电话号码最大数为9999999，所以可以理解为0~9999999的数字，每个数字对应一个bit（每个数字到对应位的关系可以随之确定），大约需要12MB；unsigned int可以表示$2^{32}$个整数，这40亿个整数应该都可以用unsigned int来表示（每个数字到对应位的关系可以随之确定），所以使用位图的方法，每一位都表示一个无符号整数，需要申请$512M(512<em>2^{20}</em>8=2^{32})$内存。</p>
+<li><p>统计海量的电话号码的个数、以及在40亿个不重复整数中判断是否有某个数，都可以使用位图法来解决：用一个bit位来表示一个值。8位数的电话号码最大数为9999999，所以可以理解为0~9999999的数字，每个数字对应一个bit（每个数字到对应位的关系可以随之确定），大约需要12MB；unsigned int可以表示$2^{32}$个整数，这40亿个整数应该都可以用unsigned int来表示（每个数字到对应位的关系可以随之确定），所以使用位图的方法，每一位都表示一个无符号整数，需要申请$512M(512*2^{20}*8=2^{32})$内存。</p>
 <p> 而如果是在2.5亿个整数中找出只出现一次的整数，可以使用位图法的变形：2-Bitmap，用两个位来表示一个数：00表示不存在，01表示出现一次，10表示出现多次。</p>
 </li>
 <li>数据库里建索引常用的数据结构是树。</li>
