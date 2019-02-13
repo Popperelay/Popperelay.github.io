@@ -711,7 +711,7 @@ T CQueue<span class="token operator">&lt;</span>T<span class="token operator">><
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>除此之外，计算斐波那契数列还可以使用如下公式（速度更快）：<br>$$<br>\begin{bmatrix}<br>f(n) &amp; f(n-1) \\<br>f(n-1) &amp; f(n-2)<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>1 &amp; 1 \\<br>1 &amp; 0<br>\end{bmatrix}<br>^{n-1}<br>$$<br>也就是说斐波那契数列可以转换为求一个矩阵的乘方，而乘方又可以对半分，有如下性质：<br>$$<br>a^n=<br>\begin{cases}<br>a^{n/2}\cdot a^{n/2}, &amp;n为偶数\\<br>a^{(n-1)/2}\cdot a^{(n-1)/2}\cdot a, &amp;n为奇数<br>\end{cases}<br>$$<br>所以求n次方，可以先求n/2次数，然后平方就可以了。即使使用递归也可以把时间复杂度降为$O(logn)$。不过这种解法不太常考。</p>
-<p>题目二：青蛙跳台阶问题。一只青蛙依次可以跳上级台阶，也可以跳上2级台阶。求该青蛙跳上一个n级台阶总共有多少种跳法。</p>
+<p>题目二：青蛙跳台阶问题。一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个n级台阶总共有多少种跳法。</p>
 <p>我们可以用递归的思想来看这个问题（划分成子问题）：假设跳n级台阶的跳法数为f(n)，那么当n&gt;2时，第一次跳的时候有两种不同的选择：一是第一次只跳1级，此时跳法数目等于后面剩下的n-1级台阶的跳法数目，即f(n-1)；而是第一次跳2级，此时跳法数目等于后面剩下的n-2级台阶的跳法数目，即f(n-2)。所以跳n级台阶的跳法总数为f(n)=f(n-1)+f(n-2)。可以看出这实际上就是个斐波那契数列了。</p>
 <p>题目三：<br>在青蛙跳台阶的问题中，如果把条件改成：青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以一次跳上n级，此时该青蛙跳上一个m级台阶总共有多少种跳法？其实这个问题可以类似于有n把椅子，每把椅子上要么有人要么没人（有人就是青蛙跳过的地方），问总共的座次情况有多少种。由于没把椅子上要么有人，要么没人（最后一把椅子上一定有人，因为青蛙要跳到第n级台阶上），所以很简单总数是$2^{n-1}$。</p>
 <p>题目四：<br>用2x1的小矩形去横着或者竖着去无重叠覆盖一个2xn的大矩形，问总共有多少种方法。画个图就知道了，其实也是个斐波那契数列。</p>
