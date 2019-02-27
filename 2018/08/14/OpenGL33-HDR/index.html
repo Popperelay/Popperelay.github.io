@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/OpenGL33HDR_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL33 HDR</h2></a>
             </div>
             <!-- Post -->
@@ -158,7 +158,7 @@
 			   </script>
 				
                 <h1 id="为何需要HDR"><a href="#为何需要HDR" class="headerlink" title="为何需要HDR"></a><font size="6" color="orange">为何需要HDR</font></h1><hr>
-<p>一般来说，当存储在帧缓存中时，亮度和颜色的值会被默认限制在0.0到1.0之间。很多时候，这个规则不会影响到最终的视觉效果。但是，如果我们遇上了一个特定的区域，其中有多个光源叠加在一起，使得颜色值总和超过了1.0，会发生什么？答案是颜色值或者亮度超过1.0的会被截断为1.0（这是显示器限制的），从而导致场景会有一片什么也看不清的白色，丢失场景细节。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL33HDR_1.png" alt=""><br>这是由于大量片段的颜色值都非常接近1.0，在很大一个区域内大多数片元都被截断为相同的白色（即1.0），导致损失了很多细节，使场景看起很假。</p>
+<p>一般来说，当存储在帧缓存中时，亮度和颜色的值会被默认限制在0.0到1.0之间。很多时候，这个规则不会影响到最终的视觉效果。但是，如果我们遇上了一个特定的区域，其中有多个光源叠加在一起，使得颜色值总和超过了1.0，会发生什么？答案是颜色值或者亮度超过1.0的会被截断为1.0（这是显示器限制的），从而导致场景会有一片什么也看不清的白色，丢失场景细节。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_1.jpg?raw=true" alt=""><br>这是由于大量片段的颜色值都非常接近1.0，在很大一个区域内大多数片元都被截断为相同的白色（即1.0），导致损失了很多细节，使场景看起很假。</p>
 <p>一个解决方案是减小光源强度，从而保证场景内没有一个片元的颜色（或者亮度）会超过1.0。显然，这不是一个好的解决方案，因为需要使用不切实际的光照参数。</p>
 <p>另一个更好的解决方案是允许颜色值暂时超过1.0，最后再将其转换至0.0到1.0的区间内，从而防止损失细节。</p>
 <p>允许颜色值超过1.0，有更大的颜色范围，这就是<strong>HDR（High Dynamic Range，高动态范围）</strong>。</p>
@@ -201,7 +201,7 @@ uniform sampler2D hdrBuffer<span class="token punctuation">;</span>
     color <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>hdrColor<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行结果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL33HDR_2.png" alt=""><br>可以看到还是和以前一样，亮的地方依然看不清细节。这是因为上面的片元着色器中并没有做色调映射，只是简单的将纹素值输出给默认帧缓冲，这时默认帧缓冲还是会把超过1.0的颜色值截断为1.0。所以我们需要一些色调映射算法。</p>
+<p>运行结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_2.jpg?raw=true" alt=""><br>可以看到还是和以前一样，亮的地方依然看不清细节。这是因为上面的片元着色器中并没有做色调映射，只是简单的将纹素值输出给默认帧缓冲，这时默认帧缓冲还是会把超过1.0的颜色值截断为1.0。所以我们需要一些色调映射算法。</p>
 <p><font size="6" color="orange">色调映射</font></p>
 <hr>
 <p>色调映射是一个损失很小的转换浮点颜色值到我们所有的LDR[0.0,1.0]范围内的过程。</p>
@@ -219,7 +219,7 @@ uniform sampler2D hdrBuffer<span class="token punctuation">;</span>
     color <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>mapped<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL33HDR_3.png" alt=""><br>可以看到应用了Reinhard色调映射之后，通道尽头的木头纹理变得可见了，我们不再会在场景明亮的地方损失细节。当然，这个算法是倾向于明亮的区域的，暗的区域会不那么精细也不那么有区分度。</p>
+<p>运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_3.jpg?raw=true" alt=""><br>可以看到应用了Reinhard色调映射之后，通道尽头的木头纹理变得可见了，我们不再会在场景明亮的地方损失细节。当然，这个算法是倾向于明亮的区域的，暗的区域会不那么精细也不那么有区分度。</p>
 <h2 id="曝光色调映射"><a href="#曝光色调映射" class="headerlink" title="曝光色调映射"></a><font size="5" color="red">曝光色调映射</font></h2><p>另一个有趣的色调映射算法使用了曝光（Exposure）参数。如果我们有一个场景要展现日夜交替，那么我们当然会在白天使用低曝光，在夜间使用高曝光，就像人眼调节方式一样。</p>
 <p>一个简单的曝光色调映射算法会像这样：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">uniform <span class="token keyword">float</span> exposure<span class="token punctuation">;</span>
@@ -237,7 +237,7 @@ uniform sampler2D hdrBuffer<span class="token punctuation">;</span>
     color <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>mapped<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>高曝光值会使通道的黑暗部分显示更多的细节，而低曝光值会显著减少黑暗区域的细节，但会增加更多明亮区域的细节。下面这组图展示了在不同曝光值下的场景：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL33HDR_4.png" alt=""><br>这个图片清晰地展示了HDR渲染的优点：在正常曝光下木头纹理结构隐约可见，但使用低曝光木头纹理就可以清晰可见了，而使用高曝光，可以更清楚地看到近处的木头纹理。</p>
+<p>高曝光值会使通道的黑暗部分显示更多的细节，而低曝光值会显著减少黑暗区域的细节，但会增加更多明亮区域的细节。下面这组图展示了在不同曝光值下的场景：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_4.jpg?raw=true" alt=""><br>这个图片清晰地展示了HDR渲染的优点：在正常曝光下木头纹理结构隐约可见，但使用低曝光木头纹理就可以清晰可见了，而使用高曝光，可以更清楚地看到近处的木头纹理。</p>
 <p>完整的源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL33_HDR/LearnOpenGL33_HDR_1" target="_blank" rel="external">这里</a>。</p>
 <h1 id="HDR扩展"><a href="#HDR扩展" class="headerlink" title="HDR扩展"></a><font size="6" color="orange">HDR扩展</font></h1><hr>
 <p>前面展示的两个算法仅仅是大量（更高级）的色调映射算法的一小部分，这些算法各有长短。一些色调映射算法倾向于特点的某种颜色/强度，有一些算法能够同时显示低曝光和高曝光下的颜色，从而显示更加多彩和精细的图像。还有一些自动曝光调整的色调映射算法，它能够检测前一阵场景的亮度并且缓慢调整曝光参数，使得场景在黑暗区域逐渐变亮，在明亮区域逐渐变暗。</p>

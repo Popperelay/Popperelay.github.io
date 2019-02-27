@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL34 泛光</h2></a>
             </div>
             <!-- Post -->
@@ -158,7 +158,7 @@
 			   </script>
 				
                 <h1 id="泛光的意义和实现原理"><a href="#泛光的意义和实现原理" class="headerlink" title="泛光的意义和实现原理"></a><font size="6" color="orange">泛光的意义和实现原理</font></h1><hr>
-<p>通俗地讲，泛光其实就是明亮区域发出的光晕效果。比如场景里面有一张白纸和一个白色光源(同样都是相同亮度的白色)，但是给白色光源加上一个光晕以后，光源会比白纸看起来感觉更亮。下图是虚幻引擎中的光晕效果：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_1.png" alt=""><br>光晕通常和HDR结合使用。下面我们来介绍一下光晕实现的原理和流程（核心原理是对明亮区域进行模糊处理，让它看起来有一种光晕效果）。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_2.png" alt=""><br>我们会像往常一样渲染HDR场景（下图中的左上角场景），在这个场景中诸如光源等物体是特别明亮的区域，我们把这些明亮区域提取出来（直接根据颜色值超过某个阈值来提取就可以了），获得下图中左下角所示的场景纹理，然后我们对这个纹理进行模糊处理（模糊结果就是中间下方那张图），模糊之后明亮区域就有了一种加上了光晕的感觉，然后我们把模糊后的纹理和原先的HDR场景纹理进行叠加，就能得到最终明亮区域带有光晕的场景（即最右边的那张图）。</p>
+<p>通俗地讲，泛光其实就是明亮区域发出的光晕效果。比如场景里面有一张白纸和一个白色光源(同样都是相同亮度的白色)，但是给白色光源加上一个光晕以后，光源会比白纸看起来感觉更亮。下图是虚幻引擎中的光晕效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_1.jpg?raw=true" alt=""><br>光晕通常和HDR结合使用。下面我们来介绍一下光晕实现的原理和流程（核心原理是对明亮区域进行模糊处理，让它看起来有一种光晕效果）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_2.jpg?raw=true" alt=""><br>我们会像往常一样渲染HDR场景（下图中的左上角场景），在这个场景中诸如光源等物体是特别明亮的区域，我们把这些明亮区域提取出来（直接根据颜色值超过某个阈值来提取就可以了），获得下图中左下角所示的场景纹理，然后我们对这个纹理进行模糊处理（模糊结果就是中间下方那张图），模糊之后明亮区域就有了一种加上了光晕的感觉，然后我们把模糊后的纹理和原先的HDR场景纹理进行叠加，就能得到最终明亮区域带有光晕的场景（即最右边的那张图）。</p>
 <h1 id="提取亮色"><a href="#提取亮色" class="headerlink" title="提取亮色"></a><font size="6" color="orange">提取亮色</font></h1><hr>
 <p>要做的第一件事当然就是像上篇HDR文章一样，使用很亮的光源来照亮场景，然后将渲染结果存储到帧缓存的纹理附件上了。这个就不再赘述了。</p>
 <p>接下来要做的就是提取出场景中颜色值超过某个阈值的明亮区域，我们可以使用一种叫做MRT（多渲染目标）的技术，在第一步渲染场景到纹理附件的同时，把场景中的明亮区域同时渲染到另一个纹理附件里（这样就只用一遍pass了）。而MRT其实就是在片元着色器中可以有多个输出的技术，我们只需要使用<code>location</code>这个布局标识符来声明就可以了，如下：</p>
@@ -236,10 +236,10 @@ uniform vec3 u_LightColor<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>它们都是先把每个片元的本身颜色借助于<code>FragColor_</code>输出到第一个颜色缓冲里，然后把比较亮的颜色借助于<code>BrightColor_</code>输出到第二个颜色缓冲里（其中不够亮的颜色直接重置为黑色）。</p>
 <p>需要注意的是，如果不借助HDR的话，想要提取出明亮区域，我们就必须要把颜色值压到[0,1]之间，阈值也不能设为<code>Brightness &gt; 1.0</code>了，而是要设为比1.0更小的数，但是这会很容易导致提取出来的明亮区域过多，从而导致光晕效果过重。</p>
-<p>我们的运行结果如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_3.png" alt=""><br>接下来我们就可以对提取出来的亮度区域纹理（即上图中的COLOR_ATTACHMENT1），进行模糊处理了。我们这里使用一个更高级效果更好的模糊过滤器：高斯模糊（Gaussian Blur）。</p>
+<p>我们的运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_3.jpg?raw=true" alt=""><br>接下来我们就可以对提取出来的亮度区域纹理（即上图中的COLOR_ATTACHMENT1），进行模糊处理了。我们这里使用一个更高级效果更好的模糊过滤器：高斯模糊（Gaussian Blur）。</p>
 <h1 id="高斯模糊"><a href="#高斯模糊" class="headerlink" title="高斯模糊"></a><font size="6" color="orange">高斯模糊</font></h1><hr>
-<p>在 <a href="http://popperelay.cn/2017/01/21/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2/" target="_blank" rel="external">OPENGL19 帧缓冲</a>一文中，我们采用的模糊是一个图像中所有周围像素的均值，它的确为我们提供了一个简易实现的模糊，但是效果并不好。而高斯模糊是基于高斯曲线（正态分布曲线），曲线形状如下所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_4.png" alt=""><br>高斯曲线在它的中间处值最大，两边逐渐变小。我们借助高斯曲线的值，比如以四周像素到中间像素的距离作为x轴，取得对应的高斯曲线y值，来作为对应像素的权重（而不是像以前那样周围取均值时周围所有像素的权重都是一样的），这样可以得到更好更真实的模糊效果，即高斯模糊。</p>
-<p>高斯模糊还有一个好处：如果我们对每一个像素用周围32x32的kernel区域来进行模糊处理，那么通常对每个片元我们都要从纹理中采样1024次！不过幸运的是，二维高斯模糊方差可以分解成两个更小的方程：现进行水平模糊，再进行垂直模糊，这样只需要采样32+32次，但是得到的结果却和采样1024次来进行全方位模糊是一样的！这叫做两步高斯模糊。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_5.png" alt=""><br>不过我们通常会对一个图像进行多次高斯模糊。也就是说先进行水平模糊，再进行垂直模糊，再进行水平模糊，再进行垂直模糊……，直到达到指定的高斯模糊次数为止。很容易想到我们可以借助于两个帧缓存来实现这个过程，帧缓存1进行水平模糊，把模糊结果交给帧缓存2来进行垂直模糊，然后帧缓存2把模糊结果交给帧缓存1来进行水平模糊…，如此循环反复。这两帧缓存可以被称为pingpong缓存技术。</p>
+<p>在 <a href="http://popperelay.cn/2017/01/21/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2/" target="_blank" rel="external">OPENGL19 帧缓冲</a>一文中，我们采用的模糊是一个图像中所有周围像素的均值，它的确为我们提供了一个简易实现的模糊，但是效果并不好。而高斯模糊是基于高斯曲线（正态分布曲线），曲线形状如下所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_4.jpg?raw=true" alt=""><br>高斯曲线在它的中间处值最大，两边逐渐变小。我们借助高斯曲线的值，比如以四周像素到中间像素的距离作为x轴，取得对应的高斯曲线y值，来作为对应像素的权重（而不是像以前那样周围取均值时周围所有像素的权重都是一样的），这样可以得到更好更真实的模糊效果，即高斯模糊。</p>
+<p>高斯模糊还有一个好处：如果我们对每一个像素用周围32x32的kernel区域来进行模糊处理，那么通常对每个片元我们都要从纹理中采样1024次！不过幸运的是，二维高斯模糊方差可以分解成两个更小的方程：现进行水平模糊，再进行垂直模糊，这样只需要采样32+32次，但是得到的结果却和采样1024次来进行全方位模糊是一样的！这叫做两步高斯模糊。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_5.jpg?raw=true" alt=""><br>不过我们通常会对一个图像进行多次高斯模糊。也就是说先进行水平模糊，再进行垂直模糊，再进行水平模糊，再进行垂直模糊……，直到达到指定的高斯模糊次数为止。很容易想到我们可以借助于两个帧缓存来实现这个过程，帧缓存1进行水平模糊，把模糊结果交给帧缓存2来进行垂直模糊，然后帧缓存2把模糊结果交给帧缓存1来进行水平模糊…，如此循环反复。这两帧缓存可以被称为pingpong缓存技术。</p>
 <p>我们先看一下高斯模糊的片元着色器怎么写：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
 
@@ -317,7 +317,7 @@ GaussianBlur_Shader<span class="token punctuation">.</span><span class="token fu
         IsFirstIteration <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们最终对明亮区域的高斯模糊结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_6.png" alt=""></p>
+<p>我们最终对明亮区域的高斯模糊结果如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_6.jpg?raw=true" alt=""></p>
 <h1 id="混合HDR纹理和模糊纹理"><a href="#混合HDR纹理和模糊纹理" class="headerlink" title="混合HDR纹理和模糊纹理"></a><font size="6" color="orange">混合HDR纹理和模糊纹理</font></h1><hr>
 <p>最后我们只需要把场景渲染得到的HDR纹理和高斯模糊之后的纹理，进行简单叠加，再做色调映射和Gamma校正就能得到最终的光晕效果了：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
@@ -341,7 +341,7 @@ uniform sampler2D u_BluredTexture<span class="token punctuation">;</span>
     Color_ <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>HDRColor<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>需要注意的是，我们要在应用色调映射之前添加泛光效果。这样添加的亮区的泛光，也会柔和转换为LDR，光照效果相对会更好。结果如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/OpenGL34%E6%B3%9B%E5%85%89_7.png" alt=""></p>
+<p>需要注意的是，我们要在应用色调映射之前添加泛光效果。这样添加的亮区的泛光，也会柔和转换为LDR，光照效果相对会更好。结果如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_7.jpg?raw=true" alt=""></p>
 <p>到此的所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL34_Bloom" target="_blank" rel="external">这里</a>。</p>
 <h1 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a><font size="6" color="orange">延伸阅读</font></h1><hr>
 <ul>
