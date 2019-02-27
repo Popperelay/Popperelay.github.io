@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >线性代数的本质</h2></a>
             </div>
             <!-- Post -->
@@ -172,7 +172,7 @@
 <li>直线在变换后仍然保持为直线，不能有所弯曲</li>
 <li>原点必须保持固定。</li>
 </ol>
-<p>总的来说，应该把线性变换看作是“保持网格线平行且等距分布”的变换。<br><img src="" alt=""></p>
+<p>总的来说，应该把线性变换看作是“保持网格线平行且等距分布”的变换。<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8_1.png?raw=true" alt=""></p>
 <p>因为线性变换会保持网格线平行且等距分布，所以会有如下性质：<br>$$<br>如果， \vec v=x\vec i+y\vec j\\<br>那么 ，Transformed <del>\vec v=x(Transformed</del>\vec i)+y(Transformed~~\vec j)<br>$$<br>也就是说，变换前后的向量在对应的基上的组合关系是相同的。</p>
 <p>所以对于一个向量$\begin{bmatrix} x \ y \end{bmatrix}$，如果变换之后的i hat是$\begin{bmatrix} 1 \ -2 \end{bmatrix}$，j hat是$\begin{bmatrix} 3 \ 0 \end{bmatrix}$，那么变换之后的向量是：<br>$$<br>\begin{bmatrix} x \ y \end{bmatrix} \rightarrow x\begin{bmatrix} 1 \ -2 \end{bmatrix}+y\begin{bmatrix} 3 \ 0 \end{bmatrix}=\begin{bmatrix} 1x+3y \ -2x+0y \end{bmatrix}<br>$$<br>从上面可以看出，在二维空间的线性变换，仅由四个数字完全确定：变换后i hat的两个坐标和变换后j hat的两个坐标，即2x2矩阵$\begin{bmatrix} 1 &amp; 3 \ -2 &amp; 0 \end{bmatrix}$。我们可以把这个矩阵的列理解为两个特殊的向量，即变换后的i hat和j hat。</p>
 <p>也就是说线性变换矩阵和向量的乘积（即线性变换对向量的作用），可以理解为：取出向量的坐标，将它们分别与矩阵的特定列相乘，然后将结果相加即可：<br>$$<br>\begin{bmatrix} a &amp; b \ c &amp; d \end{bmatrix}\begin{bmatrix} x \ y \end{bmatrix}=x\begin{bmatrix} a \ c \end{bmatrix}+y\begin{bmatrix} b \ d \end{bmatrix}=\begin{bmatrix} ax+by \ cx+dy \end{bmatrix}<br>$$<br>其中，$\begin{bmatrix} a \ c \end{bmatrix}$是变换之后的i hat，$\begin{bmatrix} b \ d \end{bmatrix}$是变换之后的j hat（<strong>矩阵的列向量就是变换之后的基向量</strong>）。</p>

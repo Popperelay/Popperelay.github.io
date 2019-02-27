@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(null);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >内存泄漏</h2></a>
             </div>
             <!-- Post -->
@@ -203,8 +203,8 @@ Object dump complete<span class="token punctuation">.</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果我们想要检测leakTest函数里是否发生内存泄漏，我们可以在进入该函数之前和退出该函数之后分别进行一次快照。快照的方法是：按F5进入调试运行，在诊断工具窗口的的内存使用率里，点击摄像机图标来截取快照。然后我们可以看到如下图所示的两次快照：<br><img src="" alt=""><br>点击第二次的+1或者+0.05KB，可以看到第二次快照相对于第一次快照内存增加了什么东西：<br><img src="" alt=""><br>可以看到增加的是一个12字节的int数组，双击图中的int[]，可以看到这个数据对应的具体实例：<br><img src="" alt=""><br>单击每个示例可以在调用堆栈窗口里看到它的调用层次。</p>
-<p>双击实例或者调用堆栈里的函数，可以定位到具体的代码。比如我们双击上面的示例会跳转到分配这个int数组的具体代码：<br><img src="" alt=""></p>
+<p>如果我们想要检测leakTest函数里是否发生内存泄漏，我们可以在进入该函数之前和退出该函数之后分别进行一次快照。快照的方法是：按F5进入调试运行，在诊断工具窗口的的内存使用率里，点击摄像机图标来截取快照。然后我们可以看到如下图所示的两次快照：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_1.png?raw=true" alt=""><br>点击第二次的+1或者+0.05KB，可以看到第二次快照相对于第一次快照内存增加了什么东西：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_2.png?raw=true" alt=""><br>可以看到增加的是一个12字节的int数组，双击图中的int[]，可以看到这个数据对应的具体实例：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_3.png?raw=true" alt=""><br>单击每个示例可以在调用堆栈窗口里看到它的调用层次。</p>
+<p>双击实例或者调用堆栈里的函数，可以定位到具体的代码。比如我们双击上面的示例会跳转到分配这个int数组的具体代码：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_4.png?raw=true" alt=""></p>
 
             </div>
 
