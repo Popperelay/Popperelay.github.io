@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >深入理解计算机系统第二章 信息的表示和处理</h2></a>
             </div>
             <!-- Post -->
@@ -170,7 +170,7 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <li>指针类型char*，在32位程序里是4个字节，在64位程序里是8个字节（指针使用的是程序的全字长）。</li>
 </ul>
 <p>许多程序员假设一个声明为int类型的程序对象能被用来存储一个指针。这在多数32位的机器上能正常工作，但是在一台64位的机器上却会出问题。因为在64位程序里，指针时64位，不能用32位的int类型来存储。</p>
-<p><font size="4" color="red">寻址和字节顺序</font><br>某些机器选择在内存中按照从最低有效字节到最高有效字节的顺序存储对象，而另一些机器则按照从最高有效字节到最低有效字节的顺序存储。前一种规则——最低有效字节在最前面的方式，称为小端法（little endian），后一种规则——最高有效字节在最前面的方式，称为大端法（big endian）。比如有一个变量x的类型为int，位于地址0x100处，它的十六进制值为0x01234567，下图分别是按照小端法和大端法来存储该变量值的方式：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_1.png" alt=""><br>注意，在字0x01234567中，高位字节的十六进制值为0x01，而低位字节值为0x67（有个很好的记法：地址由小到大增加时，如果存储的值的顺序和对应变量的十六进制表示顺序相同，则是大端法，顺序相反则是小端法）。</p>
+<p><font size="4" color="red">寻址和字节顺序</font><br>某些机器选择在内存中按照从最低有效字节到最高有效字节的顺序存储对象，而另一些机器则按照从最高有效字节到最低有效字节的顺序存储。前一种规则——最低有效字节在最前面的方式，称为小端法（little endian），后一种规则——最高有效字节在最前面的方式，称为大端法（big endian）。比如有一个变量x的类型为int，位于地址0x100处，它的十六进制值为0x01234567，下图分别是按照小端法和大端法来存储该变量值的方式：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_1.png?raw=true" alt=""><br>注意，在字0x01234567中，高位字节的十六进制值为0x01，而低位字节值为0x67（有个很好的记法：地址由小到大增加时，如果存储的值的顺序和对应变量的十六进制表示顺序相同，则是大端法，顺序相反则是小端法）。</p>
 <p>大多数Intel兼容机都只用小端模式，但是IBM和Oracle的大多数机器则是按照大端模式操作。许多比较新的微处理器是双端法（bi-endian），也就是说可以把它们配置成大端或者小端的机器运行。然而，实际情况是：一旦选择了特定操作系统，那么字节顺序也就固定下来（因为一种操作系统可能只能运行于大端或者小端模式）。</p>
 <p>大多数情况下，大端或者小端机器所编译的程序会得到同样的结果。但是有时候，大端还是小端的字节顺序会成为问题：</p>
 <ul>
@@ -396,7 +396,7 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <p>$$<br>x*^t_{\omega}y=U2T_{\omega}((x \cdot y)mod~2^{\omega})<br>$$</p>
 </blockquote>
 <p>可以看到，无符号乘法和补码乘法在位级运算上是一样的，不同的只是在于解释结果二进制序列的方式（以无符号的方式还是以补码的方式去解释）。</p>
-<p>无符号数[101]和[011]作乘法过程如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_2.png" alt=""><br>有符号数[101]和[011]作乘法过程如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_3_2.png" alt=""><br>在做二进制乘法时，由于原来的乘数有3位，通常计算机会设置6位来保存乘数以及乘积，所以我们首先需要把3位的乘数扩展为6位，然后执行二进制乘法运算，在得到的乘积结果中截取低6位作为最后的结果（图中红色圈出的6位）。然后我们还需要把这6位截断为3位（因为乘数是3位意思也就是用3位二进制来存储一个数），可以看到具有相同二进制位表示的乘数相乘，无符号乘法和有符号乘法最终得到的3位乘积结果具有相同的位级表示（图中绿色圈出的3位）。它们完整的乘积位级表示可能会不同，但是截断后乘积的位级表示是相同的。这也刚好符合补码乘法的定义公式。</p>
+<p>无符号数[101]和[011]作乘法过程如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_2.png?raw=true" alt=""><br>有符号数[101]和[011]作乘法过程如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_3_2.png?raw=true" alt=""><br>在做二进制乘法时，由于原来的乘数有3位，通常计算机会设置6位来保存乘数以及乘积，所以我们首先需要把3位的乘数扩展为6位，然后执行二进制乘法运算，在得到的乘积结果中截取低6位作为最后的结果（图中红色圈出的6位）。然后我们还需要把这6位截断为3位（因为乘数是3位意思也就是用3位二进制来存储一个数），可以看到具有相同二进制位表示的乘数相乘，无符号乘法和有符号乘法最终得到的3位乘积结果具有相同的位级表示（图中绿色圈出的3位）。它们完整的乘积位级表示可能会不同，但是截断后乘积的位级表示是相同的。这也刚好符合补码乘法的定义公式。</p>
 <p>检测补码乘法是否溢出，可以判断乘积乘积除以一个乘数以后是否得到另一个乘数。对应代码如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tMultOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -442,7 +442,7 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <li>$n$位小数字段frac$=f_{n-1}…f_1f_0$编码尾数$M$，但是编码出来的值也依赖于阶码字段的值是否等于0。</li>
 </ul>
 <p>在C语言中，单精度浮点格式（float）中，s、exp和frac字段分别占1位、k=8位和n=23位，得到一个32位的表示；在双精度浮点格式（double）中，s、exp和frac字段分别占1位、k=11位和n=52位，得到一个64位的表示。</p>
-<p>根据阶码exp的值不同，IEEE把浮点数分成了三种类型：规格化的浮点数、非规格化的浮点数、特殊的浮点数。它们分别有不同的编码方式。<br>如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_4.png" alt=""></p>
+<p>根据阶码exp的值不同，IEEE把浮点数分成了三种类型：规格化的浮点数、非规格化的浮点数、特殊的浮点数。它们分别有不同的编码方式。<br>如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_4.png?raw=true" alt=""></p>
 <ul>
 <li><p>规格化的值<br>当阶码exp<strong>不全为0也不全为1</strong>时，所表示的浮点数就是规格化浮点数。</p>
 <p>此时阶码值$E$实际上等于$E=e-Bias$。其中$e$是阶码的无符号表示，$Bias$是一个等于$2^{k-1}-1$的偏置值（单精度是127，双精度是1023）。由此可以看出，对于单精度浮点数，指数$E$的取值范围是$-126\sim+127$（因为无符号$e$的取值范围是$1\sim254$）；对于双精度浮点数该范围是$-1022\sim+1023$。之所以用无符号形式来编码阶码，是因为全0和全1只在无符号形式下才表示极端情况（0和255），在补码形式下全0和全1表示的是0和-1，去除这两个数字会导致阶码数值不连续（在无符号0到255的范围内去掉0和255后还是连续的，但是在补码-128到127的范围内去掉0和-1后就中断掉了）。之所以要减去偏置值$Bias$，是为了让阶码值有负的情况。</p>
@@ -453,7 +453,7 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 </li>
 <li>特殊值<br>当阶码exp<strong>全为1</strong>时，所表示的浮点数就是特殊的浮点数。它能表示的特殊值是正无穷、负无穷和NaN（Not a Number）。当尾数全为0时，表示的是无穷（符号$s=0$时是$+\infty$，符号$s=1$时是$-\infty$）；当尾数不全为0时，表示的是NaN（一些运算结果不能是实数或是无穷，就会返回这样的NaN值，比如计算$\sqrt{-1}$时）。</li>
 </ul>
-<p><font size="4" color="orange">数字示例</font><br>下图是8位浮点格式的非负值示例，其中有4位阶码($k=4$)和3位尾数($n=3$)，偏置值$Bias=2^{4-1}-1=7$。<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_5.png" alt=""><br>可以观察到最大非规格化数$\frac{7}{125}$和最小规格化数$\frac{8}{512}$之间的平滑转变。这种平滑行归功于我们队非规格化数的$E$的定义：通常将$E$定义为$1-Bias$，而不是$-Bias$，我们可以补偿非规格化的尾数没有隐含的开头的1。</p>
+<p><font size="4" color="orange">数字示例</font><br>下图是8位浮点格式的非负值示例，其中有4位阶码($k=4$)和3位尾数($n=3$)，偏置值$Bias=2^{4-1}-1=7$。<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_5.png?raw=true" alt=""><br>可以观察到最大非规格化数$\frac{7}{125}$和最小规格化数$\frac{8}{512}$之间的平滑转变。这种平滑行归功于我们队非规格化数的$E$的定义：通常将$E$定义为$1-Bias$，而不是$-Bias$，我们可以补偿非规格化的尾数没有隐含的开头的1。</p>
 <p>而且我们可以看到如果把图中的位级表示解释为无符号整数，它们就是升序排列的，恰好解释成IEEE浮点数时也是升序的，这当然不是偶然。IEEE格式如此设计就是为了浮点数能够使用整数排序函数来进行排序（当然，处理正的小数好说，但是处理负的小数时因为最高位是1，是降序的，所以就要反着来了）。用无符号整数来比较浮点数大小的代码如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">compareFloat</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">,</span> <span class="token keyword">float</span> y<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -479,7 +479,7 @@ linux<span class="token operator">></span> gcc <span class="token operator">-</s
 <li>向下舎入是指：向稍小的数舎入，类似$\lfloor ~ \rfloor$。</li>
 <li>向上舎入是指：向稍大的数舎入，类似$\lceil ~ \rceil$。</li>
 </ul>
-<p>具体示例如下表所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_6.png" alt=""><br>向偶数舎入的方式看起来有点怪，为什么不始终把位于两个可表示的值中间的值都向上或向下舎入呢？其实这种舎入方式在统计一组数据的均值时能够降低统计偏差。如果我们总是把两个可表示值中间的数字向上舎入，那么舎入后的一组数的均值会实际的偏高，如果都向下舎入，会偏低。但是如果向偶数舎入，在多数现实情况中都避免了这种统计误差。因为在50%的情况里，它将向上舍入，而在另外50%的情况里，它将向下舎入。</p>
+<p>具体示例如下表所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_6.png?raw=true" alt=""><br>向偶数舎入的方式看起来有点怪，为什么不始终把位于两个可表示的值中间的值都向上或向下舎入呢？其实这种舎入方式在统计一组数据的均值时能够降低统计偏差。如果我们总是把两个可表示值中间的数字向上舎入，那么舎入后的一组数的均值会实际的偏高，如果都向下舎入，会偏低。但是如果向偶数舎入，在多数现实情况中都避免了这种统计误差。因为在50%的情况里，它将向上舍入，而在另外50%的情况里，它将向下舎入。</p>
 <p><font size="4" color="red">浮点运算</font><br>正如前面看到的，整数（包括无符号和补码）加法可以形成阿贝尔群，满足交换律和结合律，但是计算机浮点数加法不能形成阿贝尔群，浮点数加法只满足交换律不满足结合律。这是由于浮点数精度有限导致舎入而造成的。例如，使用单精度浮点，表达式<code>(3.14+le10)-le10</code>求值得到0.0（因为舎入，值3.14会丢失）；但是表达式<code>3.14+(le10-le10)</code>求值得到3.14。</p>
 <p>浮点数乘法也满足交换律，但是由于可能发生溢出或者由于舎入而失去精度，导致浮点数乘法也不满足结合律。例如，单精度浮点情况下，表达式<code>(le20*le20)*le-20</code>求值为$+\infty$，而<code>le20*(le20*le-20)</code>将得到le20。</p>
 <p>而且浮点乘法在加法上不具备分配性。例如单精度浮点情况下，表达式<code>le20*(le20-le20)</code>求值为0.0，但是<code>le20*le20-le20*le20</code>会得出NaN。</p>

@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/MPI_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/MPI_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >MPI</h2></a>
             </div>
             <!-- Post -->
@@ -326,7 +326,7 @@ The elapsed time is<span class="token operator">:</span> <span class="token numb
 <p>我们把梯形面积计算均摊到100个进程里了，但最后的面积求和操作都是0号进程在做，0号进程在求和时，其他进程几乎都处于空闲，这无疑会浪费资源？有没有什么办法可以让其他进程也一起加入求和过程呢？这就需要使用集合通信了。</p>
 <p><font size="5" color="orange">使用集合通信来并行计算复化梯形积分</font></p>
 <hr>
-<p>上一节并行计算复化梯形积分的方法，其实是点对点通信，即单个进程对单个进程的通信。所有的求和过程都让进程0来做了。求和过程图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_1.png" alt=""><br>1到7号进程将自己计算的结果（5,2,6,2,1,9,10,4）发送给0号进程，0号进程收到后把它们加起来。可以看到0号进程做了7次接收和7次加法操作。如果进程之间可以按照下图这样两两归并相加呢？<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_2.png" alt=""><br>那么0号进程只做了3次接收和3次加法操作。而整个并行系统中必然是0号进程花费的时间最多（因为它既要计算面积，又要进行面积加和操作），所以0号进程所花费的时间就是整个并行系统计算的时间。如果是1024个进程，按照原来的做法0号进程需要1023次接收和加法操作；但是如果按照这种归并方式，0号进程只需要做10次接收和加法操作(上面那幅图很像二叉树嘛，所以是log2(n）)，这样一来并行计算的效率就提高了100倍！</p>
+<p>上一节并行计算复化梯形积分的方法，其实是点对点通信，即单个进程对单个进程的通信。所有的求和过程都让进程0来做了。求和过程图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_1.png?raw=true" alt=""><br>1到7号进程将自己计算的结果（5,2,6,2,1,9,10,4）发送给0号进程，0号进程收到后把它们加起来。可以看到0号进程做了7次接收和7次加法操作。如果进程之间可以按照下图这样两两归并相加呢？<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_2.png?raw=true" alt=""><br>那么0号进程只做了3次接收和3次加法操作。而整个并行系统中必然是0号进程花费的时间最多（因为它既要计算面积，又要进行面积加和操作），所以0号进程所花费的时间就是整个并行系统计算的时间。如果是1024个进程，按照原来的做法0号进程需要1023次接收和加法操作；但是如果按照这种归并方式，0号进程只需要做10次接收和加法操作(上面那幅图很像二叉树嘛，所以是log2(n）)，这样一来并行计算的效率就提高了100倍！</p>
 <p>这涉及到了进程集合之间的通信，即集合通信。幸运的是，MPI已经给我们封装好了这种类似的归约操作，使用MPI_Reduce函数就可以实现：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//集合通信，计算梯形积分，使用归约的方式（Reduce，多到一）</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -556,7 +556,7 @@ The elapsed time is<span class="token operator">:</span> <span class="token numb
 <p>数据归约还有以下一些变种函数：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Allreduce</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>sendbuf<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>recvbuf<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span>MPI_Datatype datatype<span class="token punctuation">,</span> MPI_Op op<span class="token punctuation">,</span>MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此函数在得到归约值以后，将结果值分发给每一个进程，这样的话，并行中的所有进程都能知道结果值了。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_3.jpg" alt=""></p>
+<p>此函数在得到归约值以后，将结果值分发给每一个进程，这样的话，并行中的所有进程都能知道结果值了。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_3.jpg?raw=true" alt=""></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Reduce_scatter</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>sendbuf<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>recvbuf<span class="token punctuation">,</span><span class="token keyword">int</span> <span class="token operator">*</span>recvcnts<span class="token punctuation">,</span>MPI_Datatype datatype<span class="token punctuation">,</span> MPI_Op op<span class="token punctuation">,</span>MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该函数在得到归约值以后，再将结果进行一次散发操作（散发后续详述）。</p>
@@ -565,7 +565,7 @@ The elapsed time is<span class="token operator">:</span> <span class="token numb
 <p>该函数完成扫描归约（又叫前缀归约），它会将<strong>部分</strong>归约结果依次发送给每个进程。</p>
 <p><font size="5" color="orange">广播</font></p>
 <hr>
-<p>在一个集合通信中，如果属于一个进程的数据被发送到通信子中的所有进程，这样的集合通信就叫做广播。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_4.png" alt=""></p>
+<p>在一个集合通信中，如果属于一个进程的数据被发送到通信子中的所有进程，这样的集合通信就叫做广播。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_4.png?raw=true" alt=""></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Bcast</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>buffer<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span>MPI_Datatype datatype<span class="token punctuation">,</span> <span class="token keyword">int</span> root<span class="token punctuation">,</span>MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>通信子comm中进程号为root的根进程把自己buffer中的count个datatype类型的数据，发送给通信子中所有其他进程。实例程序如下：</p>
@@ -631,7 +631,7 @@ Elapsed time is<span class="token operator">:</span> <span class="token number">
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">散射</font></p>
 <hr>
-<p>根进程将数据<strong>分块</strong>发送给各个进程的集合通信就叫散射。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_5_.png" alt=""></p>
+<p>根进程将数据<strong>分块</strong>发送给各个进程的集合通信就叫散射。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_5.png?raw=true" alt=""></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Scatter</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>sendbuf<span class="token punctuation">,</span> <span class="token keyword">int</span> sendcnt<span class="token punctuation">,</span>MPI_Datatype sendtype<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>recvbuf<span class="token punctuation">,</span><span class="token keyword">int</span> recvcnt<span class="token punctuation">,</span> MPI_Datatype recvtype<span class="token punctuation">,</span><span class="token keyword">int</span> root<span class="token punctuation">,</span> MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>根进程将自己sendbuf中的np（np是通信子comm中的进程总数）个连续存放的数据块按进程号的顺序依次发送给comm中的所有进程（包括根进程自己）的recvbuf中。值得注意的是，sendcnt和recvcnt是每个进程发送或接收的一个数据块的长度，而不是发送给所有进程得数据长度之和。</p>
@@ -694,7 +694,7 @@ Current rankID <span class="token operator">=</span> <span class="token number">
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">聚集</font></p>
 <hr>
-<p>每个进程都将自己的一块数据发送给根进程的集合通信就叫聚集。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_6.png" alt=""></p>
+<p>每个进程都将自己的一块数据发送给根进程的集合通信就叫聚集。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_6.png?raw=true" alt=""></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Gather</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>sendbuf<span class="token punctuation">,</span> <span class="token keyword">int</span> sendcnt<span class="token punctuation">,</span>MPI_Datatype sendtype<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>recvbuf<span class="token punctuation">,</span><span class="token keyword">int</span> recvcnt<span class="token punctuation">,</span> MPI_Datatype recvtype<span class="token punctuation">,</span><span class="token keyword">int</span> root<span class="token punctuation">,</span> MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>收集相同长度的数据块。所有进程（包括根进程自己）将sendbuf中的数据块发送给根进程root，根进程将这些数据块按进程号的顺序依次放到recvbuf中。和散射一样，sendcnt和recvcnt是每个进程发送或接收的一个数据块的长度。示例程序如下：</p>
@@ -766,7 +766,7 @@ Elapsed time is<span class="token operator">:</span> <span class="token number">
 <p>不同长度数据块的全收集。</p>
 <p><font size="5" color="orange">转置</font></p>
 <hr>
-<p>对通信子中的所有进程，将进程i的第j块数据发送到进程j的第i个位置的集合通信就叫转置。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_7.png" alt=""></p>
+<p>对通信子中的所有进程，将进程i的第j块数据发送到进程j的第i个位置的集合通信就叫转置。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_7.png?raw=true" alt=""></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Alltoall</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>sendbuf<span class="token punctuation">,</span> <span class="token keyword">int</span> sendcnt<span class="token punctuation">,</span>MPI_Datatype sendtype<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>recvbuf<span class="token punctuation">,</span><span class="token keyword">int</span> recvcnt<span class="token punctuation">,</span> MPI_Datatype recvtype<span class="token punctuation">,</span>MPI_Comm comm<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>相同长度数据块的全转置：将进程i将sendbuf中的第j块数据发送到进程j的recvbuf中的第i个位置。sendcnt和recvcnt都是指一个数据块的长度。如果对一个二维数组使用该函数，则接收到的结果就是该二维数组的转置。</p>
@@ -853,14 +853,14 @@ Elapsed time is<span class="token operator">:</span> <span class="token number">
 <li>如果MPI不缓存将要发送的数据：对于阻塞通信，只有当相应的接收调用被执行后，并且发送数据完全到达接收缓冲区后，发送操作才算完成；对于非阻塞通信，发送操作虽然没有完成，但是发送调用可以正确返回，程序可以接下来执行其他的操作。</li>
 <li>如果MPI缓冲将要发送的数据：发送操作不管接收操作是否执行，都可以进行；而且缓冲结束后发送操作就可以完成并返回，不需要等待接收操作接收到数据。</li>
 </ul>
-<p>图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_8.png" alt=""></p>
+<p>图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_8.png?raw=true" alt=""></p>
 <p><font size="5" color="orange">缓存通信模式</font></p>
 <hr>
 <p>缓存通信模式下，由用户直接对通信缓冲区进行申请、使用和释放。缓存通信模式和上图由MPI决定的缓冲方式一样，消息发送能否进行以及能否正确返回都不依赖于接收进程，完全依赖于是否有足够的通信缓冲区可用。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Buffer_attach</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>buffer<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">//用于申请缓存 </span>
 <span class="token keyword">int</span> <span class="token function">MPI_Buffer_detach</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token operator">*</span>buffer<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>size<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//用于释放缓存，这是一个阻塞调用，函数返回表示缓冲区已经被释放</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>释放缓冲是阻塞调用，它一直等到使用该缓存的消息发送完成后才返回，这一调用返回后用户可以重新使用该缓冲区。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_9.png" alt=""><br>示例程序如下：</p>
+<p>释放缓冲是阻塞调用，它一直等到使用该缓存的消息发送完成后才返回，这一调用返回后用户可以重新使用该缓冲区。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_9.png?raw=true" alt=""><br>示例程序如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;mpi.h></span></span>
 
@@ -906,7 +906,7 @@ Buffer<span class="token punctuation">[</span><span class="token number">1</span
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">同步通信模式</font></p>
 <hr>
-<p>同步通信模式的开始不依赖于接收进程相应的接收操作是否已经启动，但是同步发送却必须等到相应的接收进程开始后才可以正确返回。因此，同步发送返回后，意味着发送缓冲区中的数据已经全部被系统缓冲区缓存，并且已经开始发送。这样当同步发送返回后，发送缓冲区可以被释放或重新使用。而在标准通信模式或缓存通信模式中，在用使用缓存的模式下，发送操作返回仅仅意味着数据都已经到发送缓冲区了，数据是否到系统缓冲区不得而知（发送缓冲区表示MPI的缓冲区，系统缓冲区表示操作系统的写缓冲区）。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_10.png" alt=""><br>示例代码如下：</p>
+<p>同步通信模式的开始不依赖于接收进程相应的接收操作是否已经启动，但是同步发送却必须等到相应的接收进程开始后才可以正确返回。因此，同步发送返回后，意味着发送缓冲区中的数据已经全部被系统缓冲区缓存，并且已经开始发送。这样当同步发送返回后，发送缓冲区可以被释放或重新使用。而在标准通信模式或缓存通信模式中，在用使用缓存的模式下，发送操作返回仅仅意味着数据都已经到发送缓冲区了，数据是否到系统缓冲区不得而知（发送缓冲区表示MPI的缓冲区，系统缓冲区表示操作系统的写缓冲区）。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_10.png?raw=true" alt=""><br>示例代码如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;mpi.h></span></span>
 
@@ -958,7 +958,7 @@ Receive <span class="token number">4</span> data<span class="token punctuation">
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">就绪通信模式</font></p>
 <hr>
-<p>在就绪通信模式中，只有当接收进程的接收操作已经启动时，才可以在发送端启动发送操作。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_11.png" alt=""><br>一种可能的就绪通信模式的底层实现方式如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_12.png" alt=""><br>目标是保证1要先于4执行，方法是插入2和3：程序上1一定先于2执行，3一定等2成功后才执行（标准模式通信），3成功后4才能执行。所以这样一来就保证了1一定优先于4执行，从而保证就绪通信。</p>
+<p>在就绪通信模式中，只有当接收进程的接收操作已经启动时，才可以在发送端启动发送操作。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_11.png?raw=true" alt=""><br>一种可能的就绪通信模式的底层实现方式如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_12.png?raw=true" alt=""><br>目标是保证1要先于4执行，方法是插入2和3：程序上1一定先于2执行，3一定等2成功后才执行（标准模式通信），3成功后4才能执行。所以这样一来就保证了1一定优先于4执行，从而保证就绪通信。</p>
 <p>使用就绪通信的示例代码如下：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;mpi.h></span></span>
@@ -1018,7 +1018,7 @@ Process <span class="token number">1</span> Receive Rsend message from <span cla
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">阻塞通信与非阻塞通信</font></p>
 <hr>
-<p>阻塞通信调用时，整个程序只能执行通信相关的内容，而无法执行计算相关的内容。非阻塞调用的初衷是尽量让通信和计算重叠进行，提高程序整体执行效率。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_13.png" alt=""><br>非阻塞通信调用意味着通信开始启动；而非阻塞通信完成则需要调用其他的接口来查询。理想的非阻塞通信设计应该如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_15.png" alt=""><br>非阻塞通信对应的发送和接收函数如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_14.png" alt=""><br>重复非阻塞通信，表示可以一次完成多个非阻塞调用。</p>
+<p>阻塞通信调用时，整个程序只能执行通信相关的内容，而无法执行计算相关的内容。非阻塞调用的初衷是尽量让通信和计算重叠进行，提高程序整体执行效率。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_13.png?raw=true" alt=""><br>非阻塞通信调用意味着通信开始启动；而非阻塞通信完成则需要调用其他的接口来查询。理想的非阻塞通信设计应该如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_15.png?raw=true" alt=""><br>非阻塞通信对应的发送和接收函数如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_14.png?raw=true" alt=""><br>重复非阻塞通信，表示可以一次完成多个非阻塞调用。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Isend</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span> MPI_Datatype datatype<span class="token punctuation">,</span> <span class="token keyword">int</span> dest<span class="token punctuation">,</span> <span class="token keyword">int</span> tag<span class="token punctuation">,</span>
 MPI_Comm comm<span class="token punctuation">,</span> MPI_Request <span class="token operator">*</span>request<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -1261,7 +1261,7 @@ BlockDisplacements<span class="token punctuation">[</span><span class="token num
 <p>该函数和MPI_Type_contiguous函数类似，只不过后者是把数据类型进行连续复制，而该函数是连续复制count个块，每个块有blocklength个元素，每个元素的类型是oldtype；而且块与块之间可以存在空隙，两个相邻块的各自第一个元素之间相隔stride个元素。例如oldtype的类型图是{<double, 0="">, <char,8>}，则调用<code>MPI_Type_vector(2, 3, 4, oldtype, newtype)</code>生成的新数据类型newtype的类型图为：</char,8></double,></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token punctuation">{</span><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">24</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token operator">></span><span class="token punctuation">,</span>    <span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">64</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">72</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">88</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token punctuation">,</span><span class="token number">96</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token punctuation">,</span><span class="token number">104</span><span class="token operator">></span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/MPI_16.png" alt=""><br>图中黄色部分表示double，红色部分表示char。<br><br></p>
+<p>如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/MPI_16.png?raw=true" alt=""><br>图中黄色部分表示double，红色部分表示char。<br><br></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">MPI_Type_hvector</span><span class="token punctuation">(</span><span class="token keyword">int</span> count<span class="token punctuation">,</span><span class="token keyword">int</span> blocklength<span class="token punctuation">,</span>MPI_Aint stride<span class="token punctuation">,</span>MPI_Datatype oldtype<span class="token punctuation">,</span> MPI_Datatype <span class="token operator">*</span>newtype<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>该函数与上一个函数基本相同，只是stride不再是元素个数，而是字节数。<br><br></p>

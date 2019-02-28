@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/OpenGL26Blinn-Phong_BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL26：Blinn-Phong模型</h2></a>
             </div>
             <!-- Post -->
@@ -159,11 +159,11 @@
 				
                 <p><font size="5" color="orange">Phong模型的缺陷</font><br><a id="more"></a></p>
 <hr>
-<p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong1.png" alt=""><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong2.png" alt=""><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>
+<p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong1.png?raw=true" alt=""><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong2.png?raw=true" alt=""><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>
 <p>当镜面高光系数较大时，高光比较集中，当高光突变为0时还有很强的漫反射光存在，所以人眼观察到的镜面光硬边缘不明显；但是当镜面高光系数较小时，高光半径会很大，高光在边缘处突变为0时漫反射强度很弱，镜面光成分较高，此时的镜面光硬边缘就会很明显。</p>
 <p><font size="5" color="orange">Blinn-Phong模型</font></p>
 <hr>
-<p>1977年James F. Blinn提出了Blinn-Phong模型，它是对Phong模型的改进：放弃反射光向量，改用半程向量，半程向量是入射光线向量与视线向量的和向量，再归一化之后的单位向量。如下图中的向量H：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong3.png" alt=""><br>Blinn-Phong模型不再使用法线与反射向量的夹角来计算镜面光，而是使用半程向量和法线向量之间的夹角。半程向量越靠近法线向量，人眼观察到的镜面光强度越大。只要不从物体背面去看，半程向量和法线向量之间的夹角永远都小于等于90度。</p>
+<p>1977年James F. Blinn提出了Blinn-Phong模型，它是对Phong模型的改进：放弃反射光向量，改用半程向量，半程向量是入射光线向量与视线向量的和向量，再归一化之后的单位向量。如下图中的向量H：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong3.png?raw=true" alt=""><br>Blinn-Phong模型不再使用法线与反射向量的夹角来计算镜面光，而是使用半程向量和法线向量之间的夹角。半程向量越靠近法线向量，人眼观察到的镜面光强度越大。只要不从物体背面去看，半程向量和法线向量之间的夹角永远都小于等于90度。</p>
 <p><font size="5" color="orange">Blinn-Phong模型的代码实现</font></p>
 <hr>
 <p>Phong模型计算镜面光的代码如下：</p>
@@ -179,7 +179,7 @@ float specularFactor = pow(max(dot(halfDir, normal), 0.0f), 1);
 vec3 specularColor =  specularFactor * lightColor;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以发现Blinn-Phong模型除了表现效果更真实以外，还有个很大的优势：不用去计算复杂的反射光向量，降低了计算量，相比Phong模型性能更高。</p>
-<p>当镜面高光系数为0.5时，Phong模型表现效果如第一幅图。Blinn-Phong模型表现效果如下图：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Blinn-Phong4.png" alt=""><br>由于半程向量和法线向量之间的夹角通常会比视线向量和反射向量之间的夹角更小，即余弦值更大，所以相同镜面高光系数下，Blinn-Phong模型的镜面光会比Phong模型更亮，Blinn-Phong模型要达到和Phong模型一样的效果，需要增大镜面高光系数，通常是Phong模型中的镜面高光系数的2到4倍。</p>
+<p>当镜面高光系数为0.5时，Phong模型表现效果如第一幅图。Blinn-Phong模型表现效果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong4.png?raw=true" alt=""><br>由于半程向量和法线向量之间的夹角通常会比视线向量和反射向量之间的夹角更小，即余弦值更大，所以相同镜面高光系数下，Blinn-Phong模型的镜面光会比Phong模型更亮，Blinn-Phong模型要达到和Phong模型一样的效果，需要增大镜面高光系数，通常是Phong模型中的镜面高光系数的2到4倍。</p>
 <p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL26_BlinnPhong" target="_blank" rel="external">这里</a>。</p>
 <p>&nbsp;</p>
 <hr>
