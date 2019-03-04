@@ -91,7 +91,7 @@
 	            <a href="#s1">分类</a>
 	                    <ul class="submenu">
 	                        <li>
-	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/c/">c++</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                        <a class="category-link" href="/categories/Boost/">Boost</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/全局光照/">全局光照</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/游戏设计模式/">游戏设计模式</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/调试错误集锦/">调试错误集锦</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
 	                    </ul>
 	        </li>
 	        
@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28BG.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >Asyn Buffer Transfers</h2></a>
             </div>
             <!-- Post -->
@@ -168,11 +168,11 @@
 </ol>
 <p><font size="5" color="orange">内存传输</font></p>
 <hr>
-<p><font size="4" color="red">CPU到GPU的数据传输函数</font><br>使用glBufferData系列函数将数据从CPU传到GPU上时（即Buffer Object有可能存在于CPU，也可能存在于GPU上，由glBufferData函数的usage参数决定），会先将数据写到CPU内存（比如常用的GLfloat Verrtices[ ]）上，再由glBufferData函数将存储在CPU内存上的数据传到驱动（driver）的固定内存里，上传完之后，会立即以DMA的方式将数据从驱动的固定内存传到GPU内存上，同时glBufferData函数结束使命，函数返回。图示如下：<br> <img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_1.png" alt=""><br> 使用glMapBuffer函数可以得到驱动里固定内存的地址，直接将数据写到固定内存里，不用先把数据拷贝到CPU内存里，会比glBufferData函数更快。图示如下：<br> <img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_2.png" alt=""></p>
-<p><font size="4" color="red">Usage参数</font><br>OpenGL可以把应用程序的数据最终存在CPU或者GPU上（存在CPU上时GPU通过PCIe总线来访问数据）。对于glBufferData和glMapBuffer函数，其usage参数可以帮助驱动程序（driver）决定最终要把数据存在哪个位置（不全由usage参数决定，驱动程序可能不会遵从usage指定的内容）。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_3.png" alt=""></p>
+<p><font size="4" color="red">CPU到GPU的数据传输函数</font><br>使用glBufferData系列函数将数据从CPU传到GPU上时（即Buffer Object有可能存在于CPU，也可能存在于GPU上，由glBufferData函数的usage参数决定），会先将数据写到CPU内存（比如常用的GLfloat Verrtices[ ]）上，再由glBufferData函数将存储在CPU内存上的数据传到驱动（driver）的固定内存里，上传完之后，会立即以DMA的方式将数据从驱动的固定内存传到GPU内存上，同时glBufferData函数结束使命，函数返回。图示如下：<br> <img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_1.png?raw=true" alt=""><br> 使用glMapBuffer函数可以得到驱动里固定内存的地址，直接将数据写到固定内存里，不用先把数据拷贝到CPU内存里，会比glBufferData函数更快。图示如下：<br> <img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_2.png?raw=true" alt=""></p>
+<p><font size="4" color="red">Usage参数</font><br>OpenGL可以把应用程序的数据最终存在CPU或者GPU上（存在CPU上时GPU通过PCIe总线来访问数据）。对于glBufferData和glMapBuffer函数，其usage参数可以帮助驱动程序（driver）决定最终要把数据存在哪个位置（不全由usage参数决定，驱动程序可能不会遵从usage指定的内容）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_3.png?raw=true" alt=""></p>
 <p><font size="5" color="orange">隐式同步</font></p>
 <hr>
-<p>驱动在绘制上一帧的数据（存在VBO里）时，可能应用程序已经想要开始传下一帧的数据了，如果用的同一个VBO，那么应用程序如果传下一帧数据就会破坏上一帧存在VBO里的数据，导致绘制结果不正确，所以OpenGL会存在一个隐式同步（Implict synchronization），等待驱动利用上一帧数据绘制完以后，应用程序才开始下一帧数据传输。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_4.png" alt=""><br>这种隐式同步等待，可能会对程序程序性能造成严重损害（可能会增加好几毫秒的渲染时间）。<br> 【注】：</p>
+<p>驱动在绘制上一帧的数据（存在VBO里）时，可能应用程序已经想要开始传下一帧的数据了，如果用的同一个VBO，那么应用程序如果传下一帧数据就会破坏上一帧存在VBO里的数据，导致绘制结果不正确，所以OpenGL会存在一个隐式同步（Implict synchronization），等待驱动利用上一帧数据绘制完以后，应用程序才开始下一帧数据传输。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_4.png?raw=true" alt=""><br>这种隐式同步等待，可能会对程序程序性能造成严重损害（可能会增加好几毫秒的渲染时间）。<br> 【注】：</p>
 <ul>
 <li>绘制图形时，同时存在应用程序线程（负责发送OpenGL函数）和驱动程序线程（负责转换和处理OpenGL命令）。</li>
 <li>应用程序线程里有调用glClear等等函数，驱动程序线程同样有glClear等等函数，这些函数是从应用程序传过来的，实际上在驱动里存储的是glClear等等函数的命令形式。</li>
@@ -183,7 +183,7 @@
 <ul>
 <li>缓冲对象循环链 （多缓冲）</li>
 <li>重新分配缓存</li>
-<li>使用glFenceSync、glClientWaitSync和glMapBufferRange函数来完全手动同步<br><font size="4" color="red">缓冲对象循环链（多缓冲）方法避免隐式同步</font><br>之前会出现隐式同步，一个很重要的原因是应用程序线程和驱动程序线程使用的是同一个VBO，它们向同一块缓冲中写入和读取帧数据。所以，我们可以让它们循环使用不同的VBO来避免隐式同步：应用程序先向vbo[0]中写入帧数据，然后驱动程序在使用vbo[0]绘制的同时，应用程序向vbo[1]中传入帧数据，接下来驱动程序在使用vbo[1]绘制的同时，应用程序又向vbo[0]中写入帧数据……。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_5.png" alt=""><br><font size="4" color="red">重新分配缓存方法避免隐式同步</font><br>上面是让两个线程分别操作两个不同的缓存对象，来避免隐式同步，其实还有另一种办法来保证应用线程的glSubBufferData函数和驱动线程的glDrawElements函数操作的不是同一个缓存：在应用程序调用glBufferSubData之前，先调用glBufferData函数在GPU上重新分配一块显存区域（新的VBO显存），用来接收后续glBufferSubData函数传过来的数据，原先的VBO显存不会被覆盖，依然可以为驱动线程的glDrawElements函数提供绘制图形的数据源。图示如下：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_6.png" alt=""><br>驱动程序在调用glDrawElements绘制第n-1帧时，应用程序已经同时调用glBufferData函数在GPU上为VBO重新开辟了一段显存空间，然后用glBufferSubData为这块新的显存空间传输数据，但是glDrawElement还是用的原来的VBO显存在绘制，这样glDrawElements和glBufferSubData就是操作的不同的VBO缓存，就不会出现隐式同步了。<br>【注】：<ul>
+<li>使用glFenceSync、glClientWaitSync和glMapBufferRange函数来完全手动同步<br><font size="4" color="red">缓冲对象循环链（多缓冲）方法避免隐式同步</font><br>之前会出现隐式同步，一个很重要的原因是应用程序线程和驱动程序线程使用的是同一个VBO，它们向同一块缓冲中写入和读取帧数据。所以，我们可以让它们循环使用不同的VBO来避免隐式同步：应用程序先向vbo[0]中写入帧数据，然后驱动程序在使用vbo[0]绘制的同时，应用程序向vbo[1]中传入帧数据，接下来驱动程序在使用vbo[1]绘制的同时，应用程序又向vbo[0]中写入帧数据……。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_5.png?raw=true" alt=""><br><font size="4" color="red">重新分配缓存方法避免隐式同步</font><br>上面是让两个线程分别操作两个不同的缓存对象，来避免隐式同步，其实还有另一种办法来保证应用线程的glSubBufferData函数和驱动线程的glDrawElements函数操作的不是同一个缓存：在应用程序调用glBufferSubData之前，先调用glBufferData函数在GPU上重新分配一块显存区域（新的VBO显存），用来接收后续glBufferSubData函数传过来的数据，原先的VBO显存不会被覆盖，依然可以为驱动线程的glDrawElements函数提供绘制图形的数据源。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_6.png?raw=true" alt=""><br>驱动程序在调用glDrawElements绘制第n-1帧时，应用程序已经同时调用glBufferData函数在GPU上为VBO重新开辟了一段显存空间，然后用glBufferSubData为这块新的显存空间传输数据，但是glDrawElement还是用的原来的VBO显存在绘制，这样glDrawElements和glBufferSubData就是操作的不同的VBO缓存，就不会出现隐式同步了。<br>【注】：<ul>
 <li>上图中左下角的memory block是指驱动程序里的固定内存，右下角VBO里的memory block是GPU显存。</li>
 <li>glBufferData函数才会重新分配缓存空间，glBufferSubData不会。</li>
 </ul>
@@ -196,7 +196,7 @@ void *mydata_ptr = glMapBufferRange(GL_ARRAY_BUFFER , 0, data_size, GL_MAP_WRITE
 glUnmapBuffer(GL_ARRAY_BUFFER);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">缺点</font><br>但是上面两种方法只要和渲染操作一起同时使用，还是会造成高昂的同步代价（为什么？？？），而且使用glMapBufferRange里的这些参数标志，还会涉及到驱动器内存管理，这可能会带来10倍的性能消耗，所以不推荐使用这两种方式来避免隐式同步。可以使用接下来的异步缓存映射。</p>
-<p><font size="4" color="red">更好的方法：异步缓存映射方法避免隐式同步</font><br>首先需要给glMapBufferRange函数传递 GL_MAP_UNSYNCHRONIZED_BIT标志，告诉OpenGL驱动不需要任何同步操作和重新分配内存操作，然后使用多个VBO缓存（通常3个就足够了，因为函数延迟一般不会超过两帧），每一帧使用各自的缓冲区进行数据读写和渲染。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_7.png" alt=""><br>不过需要保证一个缓存区不会被多帧使用，比如第0帧在使用buffer[0]进行glDrawBufferRange，而第1帧也在使用buffer[0]进行glMapBufferRange。可以通过glFencSync和glClientWaitSync函数来实现：先调用glClientWaitSync函数对缓存对象对应的同步对象加锁，防止其他帧的函数也进来访问该缓存对象，使用glMapBufferRange函数取得的内存指针，写完数据后，开始绘制，绘制完后释放同步对象，这时其他帧的函数才能进来访问该缓存对象。</p>
+<p><font size="4" color="red">更好的方法：异步缓存映射方法避免隐式同步</font><br>首先需要给glMapBufferRange函数传递 GL_MAP_UNSYNCHRONIZED_BIT标志，告诉OpenGL驱动不需要任何同步操作和重新分配内存操作，然后使用多个VBO缓存（通常3个就足够了，因为函数延迟一般不会超过两帧），每一帧使用各自的缓冲区进行数据读写和渲染。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_7.png?raw=true" alt=""><br>不过需要保证一个缓存区不会被多帧使用，比如第0帧在使用buffer[0]进行glDrawBufferRange，而第1帧也在使用buffer[0]进行glMapBufferRange。可以通过glFencSync和glClientWaitSync函数来实现：先调用glClientWaitSync函数对缓存对象对应的同步对象加锁，防止其他帧的函数也进来访问该缓存对象，使用glMapBufferRange函数取得的内存指针，写完数据后，开始绘制，绘制完后释放同步对象，这时其他帧的函数才能进来访问该缓存对象。</p>
 <pre class="line-numbers language-c++"><code class="language-c++">const int buffer_number = frame_number++ % 3;
 // Wait until buffer is free to use, in most cases this should not wait
 // because we are using three buffers in chain , glClientWaitSync
@@ -220,7 +220,7 @@ fences[buffer_number] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 <p>其中glFenceSync函数用于发出信号，让阻塞在同步对象里的glWaitSync和glClientWaitSync命令变为非阻塞状态，返回释放的同步对象的名字；glWaitSync会导致OpenGL服务端被阻塞，直到指定的同步对象发出释放信号或者等待超时；glClientWaitSync会导致OpenGL客户端（应用程序）被阻塞，直到指定的同步对象发出释放信号或者等待超时。</p>
 <p><font size="5" color="orange">下载Download</font></p>
 <hr>
-<p><font size="4" color="red">使用PBO下载数据</font><br>大多数情况下我们都是从GPU上下载纹理到CPU，这时就需要用到glReadPixels和PBO了（直接glGetTexImage很慢）。先将数据渲染到纹理，再使用glReadPixels将纹理数据读入到PBO中，值得注意的是，在为PBO缓存对象分配内存空间时，即调用glBufferData时，需要指定usage参数为GL_*_READ形式，这样OpenGL就会把PBO放在驱动的固定内存里，可以直接被应用程序通过映射指针来访问。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_8.png" alt=""><br>但是应用程序需要同步等待数据从GPU完全传输到驱动内存里以后，才可以调用glMapBuffer来访问驱动固定内存里的数据，那么怎么避免这个等待呢？</p>
+<p><font size="4" color="red">使用PBO下载数据</font><br>大多数情况下我们都是从GPU上下载纹理到CPU，这时就需要用到glReadPixels和PBO了（直接glGetTexImage很慢）。先将数据渲染到纹理，再使用glReadPixels将纹理数据读入到PBO中，值得注意的是，在为PBO缓存对象分配内存空间时，即调用glBufferData时，需要指定usage参数为GL_*_READ形式，这样OpenGL就会把PBO放在驱动的固定内存里，可以直接被应用程序通过映射指针来访问。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_8.png?raw=true" alt=""><br>但是应用程序需要同步等待数据从GPU完全传输到驱动内存里以后，才可以调用glMapBuffer来访问驱动固定内存里的数据，那么怎么避免这个等待呢？</p>
 <p><font size="4" color="red">在read和map之间做一些别的工作来避免闲置等待</font><br>在调用glReadPixels函数后，做一些无关的CPU操作，等DMA数据传输完以后，再调用glMapBuffer函数。这种方法其实不实用，因为不好控制执行多少CPU操作数据才会传输完，而且这样做会增加代码的难度，难以写出高效的代码。</p>
 <p><font size="4" color="red">错帧调用map来避免闲置等待</font><br>在调用glReadPixels函数的前一帧或者后两帧，再调用glMapBuffer函数。因为这时候数据通常都已经传输完了。这种方法也需要多缓冲来实现（用多缓冲来控制前一帧或者后两帧使用map来读取对应缓冲）。</p>
 <p><font size="4" color="red">信号锁明确告知数据传输完成时间点，结合多张纹理来避免闲置等待</font><br>和上传时的异步缓存映射方法一样，使用信号锁。先调用glReadPixels函数，将数据从GPU传到驱动内存里，传输完后调用glFenceSync函数释放同步对象，在glMapBuffer之前，先判断同步对象是否被释放，如果被释放则说明数据已经全部从GPU传到了驱动内存里，立即开始映射数据到应用程序内存：</p>
@@ -259,14 +259,14 @@ glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, source_offset , w
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><font size="5" color="orange">多线程和共享上下文</font></p>
 <hr>
-<p><font size="4" color="red">线程和上下文</font><br>每一个用到OpenGL函数的额外线程都需要有自己的上下文，并且需要显式地连接到第一个上下文以便共享OpenGL对象，驱动程序会为每一个线程创建一个命令队列。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_9.png" alt=""></p>
+<p><font size="4" color="red">线程和上下文</font><br>每一个用到OpenGL函数的额外线程都需要有自己的上下文，并且需要显式地连接到第一个上下文以便共享OpenGL对象，驱动程序会为每一个线程创建一个命令队列。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_9.png?raw=true" alt=""></p>
 <p><font size="4" color="red">多线程共享上下文时会的同步问题</font></p>
 <ul>
 <li>由于多个线程之间没有隐式同步，可能会发生一个线程正在上传数据你，而另一个线程在用这些数据，这样可能会导致用的时候只上传了部分mesh或者部分实例化数据等等。</li>
 <li>可能由于多个线程在驱动里共享上下文的原因， 会导致每帧的渲染时长增加0.5ms左右。</li>
 <li>多线程共享上下文并不会让数据传输和渲染并行执行。</li>
 </ul>
-<p><font size="4" color="red">避免多线程共享上下文</font><br>建议即使用到多个线程离线上传数据或任务时，也不要共享上下文。如下图所示：<br><img src="http://oqcvzqam1.bkt.clouddn.com/Transfer_Insight28_10.png" alt=""><br>这幅图中没有画出驱动线程。在单线程环境下，客户端只有一个应用程序线程，同时负责将数据从CPU传输到驱动内存的任务，以及利用这些数据进行渲染的任务。在客户端有两个线程和一个上下文的环境下，应用程序线程负责将数据传输到驱动内存，同时渲染线程会比应用程序线程滞后一帧，渲染N-1帧的数据。可以看到多线程单上下文的环境下，帧渲染时长比单线程短了很多。</p>
+<p><font size="4" color="red">避免多线程共享上下文</font><br>建议即使用到多个线程离线上传数据或任务时，也不要共享上下文。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Transfer_Insight28_10.png?raw=true" alt=""><br>这幅图中没有画出驱动线程。在单线程环境下，客户端只有一个应用程序线程，同时负责将数据从CPU传输到驱动内存的任务，以及利用这些数据进行渲染的任务。在客户端有两个线程和一个上下文的环境下，应用程序线程负责将数据传输到驱动内存，同时渲染线程会比应用程序线程滞后一帧，渲染N-1帧的数据。可以看到多线程单上下文的环境下，帧渲染时长比单线程短了很多。</p>
 <p><font size="5" color="">补充和总结</font></p>
 <hr>
 <ol>
