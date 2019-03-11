@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >数据结构与算法之图之拓扑排序</h2></a>
             </div>
             <!-- Post -->
@@ -168,7 +168,7 @@
 <p><font size="4" color="orange">拓扑排序算法</font></p>
 <ul>
 <li>由于是要找一个任意弧尾顶点都在弧头顶点之前的序列，所以我们可以从入度为0的顶点出发，那么怎么找到下一个顶点呢？看定义，任意弧尾顶点在弧头顶点之前，也就是说需要保证我们找到的下一个顶点不会称为之前顶点的弧头(经过1段或n段有向弧称为弧头)。怎么保证？我们切断所有从之前顶点出去的弧(以之前顶点作为弧尾的有向弧)不就ok了。所以：<br>核心思想：<strong>从AOV网中选择一个入度为0的顶点，输出并删去它以及从它出去的弧(该顶点时弧尾)，重复上述步骤，直到输出全部顶点或AOV网中不存在入度为0的顶点为止</strong>。</li>
-<li><p>由于需要删除顶点，所以用邻接表要比邻接矩阵方便。因为对数组的删除操作效率并不高，有很多元素需要移位。还有我们需要查找入度为0的点，所以需要给邻接表中顶点结点增加一个数据成员InDegree，标识顶点的入度数。为了避免每次都去遍历所有顶点查找入度为0的顶点，我们需要一个栈，用来存储一开始入度就为0的顶点和删除有向弧过程中入度变为0的顶点。<br>综上，需要用到的数据结构：邻接表+栈。其中邻接表的顶点类结构如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721572839.png" alt=""></p>
+<li><p>由于需要删除顶点，所以用邻接表要比邻接矩阵方便。因为对数组的删除操作效率并不高，有很多元素需要移位。还有我们需要查找入度为0的点，所以需要给邻接表中顶点结点增加一个数据成员InDegree，标识顶点的入度数。为了避免每次都去遍历所有顶点查找入度为0的顶点，我们需要一个栈，用来存储一开始入度就为0的顶点和删除有向弧过程中入度变为0的顶点。<br>综上，需要用到的数据结构：邻接表+栈。其中邻接表的顶点类结构如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/TopoLogicalSort1.png?raw=true" alt=""></p>
 </li>
 <li><p>代码如下：</p>
 </li>

@@ -159,9 +159,9 @@
 				
                 <p>在OpenGL中，物体透明技术通常被叫做混合（Blending）。<a id="more"></a><br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">透明</font><br>透明是指物体自身颜色与它背面物体颜色不同程度的混合，而在OpenGL中就是使用混合技术来实现的，将当前要绘制的物体的颜色和颜色缓冲区中已经绘制了的物体颜色进行混合，最终决定当前物体的颜色。下图是一副全透明和半透明的窗子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148462342512.png" alt=""><br>物体的透明度是由片段颜色的alpha值（颜色向量的第4个元素）决定的，全透明的alpha值是0.0即透明度是100%，不透明的alpha值是1.0即透明度是0%。<br>&nbsp; </p>
+<p><font size="5" color="orange">透明</font><br>透明是指物体自身颜色与它背面物体颜色不同程度的混合，而在OpenGL中就是使用混合技术来实现的，将当前要绘制的物体的颜色和颜色缓冲区中已经绘制了的物体颜色进行混合，最终决定当前物体的颜色。下图是一副全透明和半透明的窗子：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%881.png?raw=true" alt=""><br>物体的透明度是由片段颜色的alpha值（颜色向量的第4个元素）决定的，全透明的alpha值是0.0即透明度是100%，不透明的alpha值是1.0即透明度是0%。<br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">丢弃片段来实现全透明</font><br>有些纹理是纹理部分要么全透明，要么不透明，不存在半透明的部分。如下面的草纹理，它没有半透明的部分：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463674953.png" alt=""><br>对于这种纹理，我们可以直接丢弃全透明部分的片段，没有必要将它存储到颜色缓冲中，更没有必要使用混合技术。</p>
+<p><font size="5" color="orange">丢弃片段来实现全透明</font><br>有些纹理是纹理部分要么全透明，要么不透明，不存在半透明的部分。如下面的草纹理，它没有半透明的部分：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%882.png?raw=true" alt=""><br>对于这种纹理，我们可以直接丢弃全透明部分的片段，没有必要将它存储到颜色缓冲中，更没有必要使用混合技术。</p>
 <p>首先，我们需要更改一下SOIL加载图片的方式，我们需要以RGBA的方式去加载带有alpha值的纹理（如果某些像素没有alpha值将会被设为1.0）：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //加载纹理图像
     unsigned char* image = SOIL_load_image(texturePath, &imageWidth, &imageHeight, 0, SOIL_LOAD_RGBA);
@@ -253,7 +253,7 @@ void main(){
         }
         glBindVertexArray(0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846367522.png" alt=""><br>出现这种结果是因为OpenGL默认是不知道如何处理alpha值得，需要我们自己来设置。在像素着色器中，当片段的alpha值小于某一指定值时，就使用discard命令丢弃它。discard是GLSL为我们提供的用于丢弃片段的命令：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%883.png?raw=true" alt=""><br>出现这种结果是因为OpenGL默认是不知道如何处理alpha值得，需要我们自己来设置。在像素着色器中，当片段的alpha值小于某一指定值时，就使用discard命令丢弃它。discard是GLSL为我们提供的用于丢弃片段的命令：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec2 TexCoords;
 out vec4 color;
@@ -267,12 +267,12 @@ void main(){
     color=texColor;
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463921017.png" alt=""><br>可以看到绘制出来的每张草纹理上方会有一个白边，这是因为我们的纹理设置得是REPEAT环绕方式，在采样纹理边缘的时候，OpenGL会在该边缘和环绕的下一张重复纹理的边缘之间插值，这里上方的白边就是草纹理的透明上边缘和下边缘（绿色）插值的结果。为了防止四周这种白边的出现，我们需要把纹理环绕方式设置为<code>GL_CLAMP_TO_EDGE</code>：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%884.png?raw=true" alt=""><br>可以看到绘制出来的每张草纹理上方会有一个白边，这是因为我们的纹理设置得是REPEAT环绕方式，在采样纹理边缘的时候，OpenGL会在该边缘和环绕的下一张重复纹理的边缘之间插值，这里上方的白边就是草纹理的透明上边缘和下边缘（绿色）插值的结果。为了防止四周这种白边的出现，我们需要把纹理环绕方式设置为<code>GL_CLAMP_TO_EDGE</code>：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //设置纹理s和t方向的环绕方式
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463922702.png" alt=""><br>草确实没有了白边，但是地面很诡异了，地面纹理边缘也被拉伸了。地面纹理和草纹理应该是不同的环绕方式，所以，我们给TextureLoader类的<code>LoadTexture</code>函数加一个参数，表示s和t方向上的环绕方式，函数声明如下：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%885.png?raw=true" alt=""><br>草确实没有了白边，但是地面很诡异了，地面纹理边缘也被拉伸了。地面纹理和草纹理应该是不同的环绕方式，所以，我们给TextureLoader类的<code>LoadTexture</code>函数加一个参数，表示s和t方向上的环绕方式，函数声明如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    GLuint LoadTexture(const GLchar* texturePath, GLint wrap_st = GL_REPEAT);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在<code>LoadTexture</code>函数的实现中，就用这个<code>wrap_st</code>参数来设置纹理环绕方式：</p>
@@ -285,14 +285,14 @@ void main(){
     GLuint grassTexture = texLoader.LoadTexture("grass.png", GL_CLAMP_TO_EDGE);
     GLuint planeTexture = texLoader.LoadTexture("container.jpg");
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148463924882.png" alt=""><br>所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL17_Blend/LearnOpenGL17_Blend_1" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%886.png?raw=true" alt=""><br>所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL17_Blend/LearnOpenGL17_Blend_1" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">混合原理</font><br>上诉丢弃片段的方式，虽然可以实现全透明效果，但是不能渲染半透明图像。为了能够实现半透明，我们需要先开启混合：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //开启混合
     glEnable(GL_BLEND);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><font size="4" color="red">混合方程</font><br>OpenGL是按照以下混合方程进行混合的：<br>$$<br>\begin{equation}<br>Result=source*sFactor+destination*dFactor<br>\end{equation}<br>$$<br>source是源颜色向量，是将要绘制的纹理的颜色向量；destination是目标颜色向量，是存储在颜色缓冲中当前位置的颜色向量。sFactor和dFactor分别是对源颜色目标颜色的影响系数。</p>
-<p>系数着色器运行完成并且所有的测试都通过以后，混合方程才开始执行。方程中的源和目标颜色会自动被OpenGL设置，而源和目标颜色的影响因子是由我们来设置的。比如现在有以下两个方块（或者说放大了的片段）：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148464152063.png" alt=""><br>我们希望在红色方块上绘制绿色方块。红色方块将是目标颜色（它会先进入颜色缓冲中），绿色方块将是源颜色。如果我们把源颜色影响因子设为源颜色的alpha值0.6， 把目标颜色影响因子设为剩下（1-0.6），那么混合方程将是：<br>$$<br>\begin{equation}<br>Result =<br>\begin{pmatrix}<br>0.0 \\\ <br>1.0 \\\\<br>0.0 \\\ <br>0.6<br>\end{pmatrix}<br>* 0.6 +<br>\begin{pmatrix}<br>1.0 \\\ <br>0.0 \\\\<br>0.0 \\\ <br>1.0 \\\\<br>\end{pmatrix}<br>* (1 - 0.6)<br>\end{equation}<br>$$<br>最终方块将包含60%的绿色和40的红色：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846421609.png" alt=""></p>
+<p>系数着色器运行完成并且所有的测试都通过以后，混合方程才开始执行。方程中的源和目标颜色会自动被OpenGL设置，而源和目标颜色的影响因子是由我们来设置的。比如现在有以下两个方块（或者说放大了的片段）：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%887.png?raw=true" alt=""><br>我们希望在红色方块上绘制绿色方块。红色方块将是目标颜色（它会先进入颜色缓冲中），绿色方块将是源颜色。如果我们把源颜色影响因子设为源颜色的alpha值0.6， 把目标颜色影响因子设为剩下（1-0.6），那么混合方程将是：<br>$$<br>\begin{equation}<br>Result =<br>\begin{pmatrix}<br>0.0 \\\ <br>1.0 \\\\<br>0.0 \\\ <br>0.6<br>\end{pmatrix}<br>* 0.6 +<br>\begin{pmatrix}<br>1.0 \\\ <br>0.0 \\\\<br>0.0 \\\ <br>1.0 \\\\<br>\end{pmatrix}<br>* (1 - 0.6)<br>\end{equation}<br>$$<br>最终方块将包含60%的绿色和40的红色：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%888.png?raw=true" alt=""></p>
 <p><font size="4" color="red">设置源和目标颜色的影响因子</font><br>我们使用<code>glBlendFunc</code>函数来设置这两个影响因子，函数原型如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void glBlendFunc(GLenum sfactor, GLenum dfactor)
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -312,7 +312,7 @@ void main(){
 <li>GL_FUNC_REVERSE_SUBTRACT：反过来相减，$Result = Dst - Src$。<br>通常可以省略<code>glBlendEquation</code>函数，因为大多数时候我们需要的混合效果都是相加的，这恰好是默认的。<br>&nbsp; </li>
 </ul>
 <hr>
-<p><font size="5" color="orange">渲染半透明纹理</font><br>现在我们开始用OpenGL来渲染下面这个半透明的窗子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14846446012.png" alt=""></p>
+<p><font size="5" color="orange">渲染半透明纹理</font><br>现在我们开始用OpenGL来渲染下面这个半透明的窗子：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%889.png?raw=true" alt=""></p>
 <p>首先我们需要开启混合，并设置合适的混合方程：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //开启混合
     glEnable(GL_BLEND);
@@ -335,7 +335,7 @@ void main(){
     color = texture(texture1,TexCoords);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148464557355.png" alt=""><br>&nbsp; </p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%8810.png?raw=true" alt=""><br>&nbsp; </p>
 <hr>
 <p>但是有个很明显的问题，前面的窗子并不能透明显示后面的窗子。这是因为深度测试并不关心alpha值，所以前面的窗子就会挡住后面的窗子，即使前面的窗子是透明的，它也会把后面窗子被挡住的片段丢弃。</p>
 <p><font size="5" color="orange">由远及近地绘制透明物体</font><br>对于包含不透明和透明物体的场景，绘制顺序应该是：</p>
@@ -375,7 +375,7 @@ void main(){
         }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>reverse_iterator</code>是逆序迭代器，<code>it-&gt;second</code>是键值对中的第二个元素，这里就是键对应的值，窗子的位置。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148465013058.png" alt=""></p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL17%E9%80%8F%E6%98%8E%E6%B7%B7%E5%90%8811.png?raw=true" alt=""></p>
 <p>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL17_Blend/LearnOpenGL17_Blend_2" target="_blank" rel="external">在这里</a>。</p>
 <p>在这个场景里，我们是按照窗子到摄像机的距离来由远及近地排序的，但是这种方法不是通用的。我们这个场景里所有的窗子都是相互平行，没有交叉折叠的，如果物体比较奇怪复杂，就需要其他排序方式了。对场景中的物体进行排序是很有难度的，完美地渲染带透明和不透明物体的场景也不那么容易，如果感兴趣可以了解一些更高级的技术，比如次序无关透明度（order independent transparency）。<br>&nbsp; </p>
 <hr>

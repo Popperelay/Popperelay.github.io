@@ -158,14 +158,14 @@
 			   </script>
 				
                 <p><font size="5" color="orange">立方体贴图概念及采样方法</font><br><a id="more"></a><br>立方体贴图包含6个2D纹理，每个2D纹理是立方体的一个面，也就是说它是一个有贴图的立方体。使用立方体贴图可以实现很多有意思的效果，比如天空盒、环境映射等等。</p>
-<p>对于2D纹理，可以通过纹素的2D坐标来采样，那么立方体纹理怎样采样呢？它的采样方式类似下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148508140727.png" alt=""><br>如果立方体的中心位于原点上，那么可以通过原点到立方体表面片段的向量来采样，如上图中的橘黄色向量。也就是说，我们可以直接使用片段的位置向量（或者说片段坐标）来进行采样，在顶点着色器里将片段的位置坐标直接赋值给输出变量纹理坐标：</p>
+<p>对于2D纹理，可以通过纹素的2D坐标来采样，那么立方体纹理怎样采样呢？它的采样方式类似下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE1.png?raw=true" alt=""><br>如果立方体的中心位于原点上，那么可以通过原点到立方体表面片段的向量来采样，如上图中的橘黄色向量。也就是说，我们可以直接使用片段的位置向量（或者说片段坐标）来进行采样，在顶点着色器里将片段的位置坐标直接赋值给输出变量纹理坐标：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void main(){
     gl_Position = position;
     TexCoords = position;
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>利用(s,t,r)采样时，首先根据(s,t,r)中模最大的分量决定在哪个面采样，然后使用剩下的2个坐标在对应的面上做2D纹理采样。例如，如果(s,t,r)中s分量的模最大，且符号为正，则决定选取+x面作为采样的2D纹理，然后使用(t,r)坐标在+x面上做2D纹理采样。</p>
-<p>这6个面在OpenGL中指定如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148508140813.png" alt=""><br>这几个枚举常量其实是连续的，可以循环遍历，在OpenGL中它们定义如下：</p>
+<p>这6个面在OpenGL中指定如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE2.png?raw=true" alt=""><br>这几个枚举常量其实是连续的，可以循环遍历，在OpenGL中它们定义如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#define GL_TEXTURE_CUBE_MAP_POSITIVE_X 0x8515
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_X 0x8516
 #define GL_TEXTURE_CUBE_MAP_POSITIVE_Y 0x8517
@@ -296,11 +296,11 @@ void main(){
         glEnable(GL_CULL_FACE);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>后面再照常绘制其他物体就可以了。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148508141071.png" alt=""><br>移动摄像机，会发现天空盒子也会跟着移动，给人的感觉确实就是个盒子，而不是一片浩瀚的天空。要解决这个问题，我们需要让天空盒子不会随着摄像机移动而移动。天空盒子之所以会移动，是因为在它的顶点着色器中顶点坐标乘上了观察矩阵view，这个观察矩阵是随着摄像机移动而改变的。我们可以去掉观察矩阵的平移部分，把4x4的矩阵改成3x3即可（线性代数知识）。我们在主程序中完成这个操作，然后把新的观察矩阵发送给顶点着色器：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE3.png?raw=true" alt=""><br>移动摄像机，会发现天空盒子也会跟着移动，给人的感觉确实就是个盒子，而不是一片浩瀚的天空。要解决这个问题，我们需要让天空盒子不会随着摄像机移动而移动。天空盒子之所以会移动，是因为在它的顶点着色器中顶点坐标乘上了观察矩阵view，这个观察矩阵是随着摄像机移动而改变的。我们可以去掉观察矩阵的平移部分，把4x4的矩阵改成3x3即可（线性代数知识）。我们在主程序中完成这个操作，然后把新的观察矩阵发送给顶点着色器：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">        mat4 view = mat4(mat3(mycamera.GetViewMatrix()));
         glUniformMatrix4fv(glGetUniformLocation(skybox_shader.shaderProgram, "view"), 1, GL_FALSE, value_ptr(view));
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>这样编译运行后的结果就正常了：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148508141352.png" alt=""><br>&nbsp; </p>
+<p>这样编译运行后的结果就正常了：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE4.png?raw=true" alt=""><br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">优化</font><br>上面再绘制天空包围盒时，我们首先禁用了深度缓冲写入，再绘制包围盒，让它处于场景外围，这样做虽然能正常工作，缺点是如果场景中有的物体挡住了天空，按照上面的绘制方式，这部分被挡住的天空还是被绘制了，只是后来又被其他物体（比如场景中的箱子）覆盖了，这导致了不必要的着色器调用，是一种性能上的损失。</p>
 <p>所以，绘制天空盒时，我们还是得允许深度写入。但是我们想办法让天空盒的深度最大（1.0），因为它是最外围的。如果有物体挡住了它，被遮挡住的天空盒部分将无法通过深度测试，会被丢弃。那么如何让天空盒的每一个片段的深度值都等于1.0呢？我们在天空盒的顶点着色器中做如下操作：</p>
@@ -319,7 +319,7 @@ void main(){
 <hr>
 <p><font size="5" color="orange">环境映射</font><br>我们使用立方体贴图能够渲染的不只是天空盒，可以是任何大环境，比如一个山谷、一个空间内部等等。我们可以利用这些带有场景的立方体贴图，让物体可以反射或折射周围的环境。像这样使用了环境立方体贴图的技术叫做环境贴图技术，其中最重要的是反射和折射。由于我们着重关注怎么让物体反射和折射环境，所以我们还是使用之前的天空盒，让箱子反射和折射天空。</p>
 <p><font size="4" color="red">反射</font><br>反射是一个物体（或物体的，某部分）反射（Reflect）它周围环境的属性，比如物体的颜色多少有些等于它周围的环境，这要基于观察者的角度。</p>
-<p>下图展示了如何计算反射向量，然后使用这个反射向量去立方体贴图中采样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509525977.png" alt=""><br>计算反射向量的方法已经在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a> 里讲过了，原理很简单，我们直接上代码：</p>
+<p>下图展示了如何计算反射向量，然后使用这个反射向量去立方体贴图中采样：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE5.png?raw=true" alt=""><br>计算反射向量的方法已经在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a> 里讲过了，原理很简单，我们直接上代码：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 in vec3 Normal;
 in vec3 PositionInWorld;
@@ -388,8 +388,8 @@ void main(){
     };
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然，对应的数据解析也得作调整了，不再赘述。环境反射的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL20_CubeMap/LearnOpenGL20_CubeMap_2" target="_blank" rel="external">在这里</a>。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509526094.png" alt=""><br>可以看到我们得到了一个镜子一样的箱子，完美地反射了周围的天空盒。如果是球模型，会更明显：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509526198.png" alt=""></p>
-<p><font size="4" color="red">折射</font><br>环境映射的另一个形式是折射。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509526251.png" alt=""><br>我们可以通过折射向量R来从立方体贴图上采样。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE6.png?raw=true" alt=""><br>可以看到我们得到了一个镜子一样的箱子，完美地反射了周围的天空盒。如果是球模型，会更明显：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE7.png?raw=true" alt=""></p>
+<p><font size="4" color="red">折射</font><br>环境映射的另一个形式是折射。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE8.png?raw=true" alt=""><br>我们可以通过折射向量R来从立方体贴图上采样。</p>
 <p>折射可以通过GLSL的内置函数refract来计算，它需要3个参数：观察向量、法线向量、折射指数：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void main(){
     //折射
@@ -399,7 +399,7 @@ void main(){
     color = texture(cubemap,R);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>折射指数决定了一个材质上光线扭曲的数量，每个材质都有自己的折射指数。下表是常见的折射指数：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509526295.png" alt=""><br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148509526374.png" alt=""><br>环境折射的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL20_CubeMap/LearnOpenGL20_CubeMap_3" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
+<p>折射指数决定了一个材质上光线扭曲的数量，每个材质都有自己的折射指数。下表是常见的折射指数：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE9.png?raw=true" alt=""><br>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE10.png?raw=true" alt=""><br>环境折射的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL20_CubeMap/LearnOpenGL20_CubeMap_3" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">动态环境贴图</font><br>现在我们的环境立方体贴图还只是静态的。但是如果我们有个镜子一样的物体，它周围有多个物体，当移动摄像机或者移动镜子物体时，它所反射/折射的环境应该是变化挺大的，用静态的立方体贴图显然不够逼真。</p>
 <p>可以使用帧缓冲为镜子物体的所有6个不同角度创建一个场景的纹理，把它们每次渲染迭代存储为一个立方体贴图。之后我们可以使用这个（动态生成的）立方体贴图来创建真实的反射和折射表面。这种方法叫做动态环境映射（Dynamic Environment Mapping），因为我们动态地创建了一个物体的以其四周为参考的立方体贴图，并把它用作环境贴图。</p>

@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD_BG.jpeg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL14：模型加载</h2></a>
             </div>
             <!-- Post -->
@@ -213,7 +213,7 @@
 <li>Stereolithography ( .stl )</li>
 <li>Stanford Polygon Library ( .ply )</li>
 </ul>
-<p><font size="4" color="red">Assimp生成的模型数据结构</font><br>当Assimp导入一个模型文件时，它会加载整个模型文件到一个scene对象，它包含了所有被导入的模型和场景数据（一个模型文件可能包含多个模型或场景）。Assimp会为这个模型文件中的所有场景节点、模型节点都生成一个对应的数据结构，每个节点包含着存储在scene对象中的数据的索引，有的可能还包含几个子节点。下图展示了一个简化的Assimp生成的模型数据结构：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148248044044.png" alt=""></p>
+<p><font size="4" color="red">Assimp生成的模型数据结构</font><br>当Assimp导入一个模型文件时，它会加载整个模型文件到一个scene对象，它包含了所有被导入的模型和场景数据（一个模型文件可能包含多个模型或场景）。Assimp会为这个模型文件中的所有场景节点、模型节点都生成一个对应的数据结构，每个节点包含着存储在scene对象中的数据的索引，有的可能还包含几个子节点。下图展示了一个简化的Assimp生成的模型数据结构：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD1.png?raw=true" alt=""></p>
 <ul>
 <li>所有的模型、场景数据都包含在scene对象中，如所有的材质和Mesh。而且，场景的根节点应用也在这个scene对象中。</li>
 <li>场景的根节点包含很多子节点和很多指向scene对象中的Mesh网格数据的引用。因为根节点的mMeshes数组才包含着实际的网格对象，其他节点的mMeshes数组的值都只是根节的mMeshes的索引。</li>
@@ -232,7 +232,7 @@
 <li>在命令行窗口运行下面两行命令：<pre class="line-numbers language-c++"><code class="language-c++">MsiExec.exe /passive /X{F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}
 MsiExec.exe /passive /X{1D8E6291-B0D5-35EC-8441-6616F567A0F7}
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-删除掉Visual C++ 2010 Redistributable Package。<br>如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148250222242.png" alt=""></li>
+删除掉Visual C++ 2010 Redistributable Package。<br>如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD2.png?raw=true" alt=""></li>
 <li>安装DirectX SDK</li>
 <li>重新安装Visual C++ 2010 Redistributable Package。可以在<a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=26999" target="_blank" rel="external">这里</a>下载到。注意x64系统需要安装vcredist_x86.exe和vcredist_x64.exe两个版本。</li>
 </ol>
@@ -572,7 +572,7 @@ directory = path.substr(0, path.find_last_of('/'));
 <ul>
 <li>主程序里去掉了对光源物体的绘制。</li>
 </ul>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148421809914.png" alt=""><br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD3.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 

@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL8：摄像机</h2></a>
             </div>
             <!-- Post -->
@@ -182,7 +182,7 @@
 <li>观察坐标系的+y轴。由+z轴和+x轴做叉乘得到，对应下面第四幅图中的绿色轴：<pre class="line-numbers language-c++"><code class="language-c++">          //摄像机+y轴（+z轴和+x轴的叉乘）
           vec3 cameraUp = normalize(cross(targetToCamera, cameraRight));
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/149233046198.png" alt=""><br>有了原点、x、y、z轴，我们就可以构建摄像机坐标系（观察坐标系）了。<br>&nbsp;</li>
+<img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA1.png?raw=true" alt=""><br>有了原点、x、y、z轴，我们就可以构建摄像机坐标系（观察坐标系）了。<br>&nbsp;</li>
 </ul>
 <hr>
 <p><font size="5" color="orange">世界坐标系转化到观察坐标系</font><br>怎么把世界坐标系转到到观察坐标系呢？先上一个线性代数中的定理（证明可参考相关线性代数教材）：</p>
@@ -216,7 +216,7 @@
 <p><font size="5" color="orange">上向量</font><br>上面的lookAt观察矩阵中以及观察坐标系构建中，有一个很诡异的上向量，它通常赋值为（0.0f,1.0f,0.0f）。</p>
 <p>为何不直接将这个上向量作为观察坐标系的y轴呢？这是因为上向量不一定和+z轴正交，而我们需要得到正交的坐标系。所以就需要用上向量和+z轴叉乘得到正交的+x轴，再有+z轴+x轴叉乘才能得到正交的+y轴。</p>
 <p>上向量指定了相机的头顶方向。对于相机而言，指定了相机位置、相机目标位置后，虽然相机的位置不变、指向不变，但还是可以通过改变这个上向量而影响成像的。这类似于你眼睛的位置不变，看的方向不变，但还是可以通过转动脑袋来改变哪个方向是向上，这个上向量就好比头顶的方向。其实上向量方向不同时，叉乘后得到的x轴、y轴也会发生相应变化，观察坐标系都变了，肯定会影响成像结果。</p>
-<p>下面三张图片分别是上向量为（0,1,0）、（1,0,0）、（0,-1,0）的成像结果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261664.png" alt=""><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261735.png" alt=""><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148101261795.png" alt=""><br>&nbsp;</p>
+<p>下面三张图片分别是上向量为（0,1,0）、（1,0,0）、（0,-1,0）的成像结果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA2.png?raw=true" alt=""><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA3.png?raw=true" alt=""><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA4.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">用键盘移动摄像机</font><br>当我们按下A、S、W、D时，摄像机会向前后左右移动，所以我们需要先给出或计算出摄像机前、右这两个方向（即-z轴和+x轴）：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">//摄像机位置
@@ -339,8 +339,8 @@ void do_movement() {
 <p>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">用鼠标移动摄像机视角 </font><br>现在我们要开始用鼠标来移动摄像机了。</p>
-<p>先来点基础数学知识。旋转共3个欧拉角：俯仰角（pitch）、偏航角（yaw）、滚转角（roll）。下面的图片展示了它们的含义：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148103336736.png" alt=""><br>俯仰角pitch是描述我们往上或往下看的角；偏航角yaw是描述我们往左或往右看的角；滚转角roll是描述我们如何翻滚摄像机的角（通常在太空飞船的摄像机中使用）。</p>
-<p>大多数摄像机系统都支持往上下左右看，除非特殊情况一般不考虑滚转角，我们这里只关心俯仰角和偏航角。旋转摄像机的视角其实就是旋转摄像机的照射方向（也就是摄像机指向目标的向量<code>cameraToTarget</code>），摄像机的照射方向正好可以用俯仰角和偏航角来表示。为了计算简单，我们以摄像机所在位置为原点（计算结果后加上摄像机位置就是实际位置了），有如下图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148103336799.png" alt=""><br>其中摄像机方向就是从原点发出的那条黄色线，它的俯仰角设为pitch，偏航角设为yaw。设这条向量的长度为1，那么该向量坐标应该是<code>（cos(pitch)*cos(yaw),sin(pitch),cos(pitch)*sin(yaw)）</code>。由于摄像机在旋转过程中，摄像机到目标的距离应该是不变的，所以用该向量乘以这个恒定距离，就是摄像机指向目标的向量的实际坐标，再加上摄像机位置，就能得到旋转过程中目标的实际位置。把目标实际位置传参给<code>lookAt</code>函数，就能实现摄像机旋转了。</p>
+<p>先来点基础数学知识。旋转共3个欧拉角：俯仰角（pitch）、偏航角（yaw）、滚转角（roll）。下面的图片展示了它们的含义：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA5.png?raw=true" alt=""><br>俯仰角pitch是描述我们往上或往下看的角；偏航角yaw是描述我们往左或往右看的角；滚转角roll是描述我们如何翻滚摄像机的角（通常在太空飞船的摄像机中使用）。</p>
+<p>大多数摄像机系统都支持往上下左右看，除非特殊情况一般不考虑滚转角，我们这里只关心俯仰角和偏航角。旋转摄像机的视角其实就是旋转摄像机的照射方向（也就是摄像机指向目标的向量<code>cameraToTarget</code>），摄像机的照射方向正好可以用俯仰角和偏航角来表示。为了计算简单，我们以摄像机所在位置为原点（计算结果后加上摄像机位置就是实际位置了），有如下图示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL8%E6%91%84%E5%83%8F%E6%9C%BA6.png?raw=true" alt=""><br>其中摄像机方向就是从原点发出的那条黄色线，它的俯仰角设为pitch，偏航角设为yaw。设这条向量的长度为1，那么该向量坐标应该是<code>（cos(pitch)*cos(yaw),sin(pitch),cos(pitch)*sin(yaw)）</code>。由于摄像机在旋转过程中，摄像机到目标的距离应该是不变的，所以用该向量乘以这个恒定距离，就是摄像机指向目标的向量的实际坐标，再加上摄像机位置，就能得到旋转过程中目标的实际位置。把目标实际位置传参给<code>lookAt</code>函数，就能实现摄像机旋转了。</p>
 <p>但是俯仰角pitch和偏航角yaw怎么得到呢？我们把俯仰角和偏航角的初始值都设为0，用前后两帧鼠标位置的x差值作为偏航角的增量，y差值作为俯仰角的增量。这样就能从一开始得到每一帧里摄像机的俯仰角和偏航角了。</p>
 <p>下面我们来实现这个功能：</p>
 <p><font size="4" color="red">设置鼠标位置回调函数</font><br>首先为了让GLFW监听鼠标移动事件，我们需要注册鼠标位置回调函数（和键盘回调函数类似）：</p>

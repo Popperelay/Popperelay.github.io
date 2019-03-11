@@ -158,10 +158,10 @@
 			   </script>
 				
                 <p><font size="5" color="orange">什么是模板测试</font><br><a id="more"></a><br>当像素着色器处理完片段之后，深度测试之前，模板测试（stencil test）就开始执行了，和深度测试一样，它能丢弃一些片段：如果片段的模板值和当前模板缓冲区的对应位置上的模板值，满足指定关系，则不会被丢弃。这就是模板测试。仍然保留下来的片段将进入深度测试阶段，深度测试又会丢弃一些片段。</p>
-<p>在渲染管线里包括很多种测试，它们的执行顺序如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148440287648.png" alt=""><br>&nbsp;</p>
+<p>在渲染管线里包括很多种测试，它们的执行顺序如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%951.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">模板缓冲</font><br>模板缓冲类似于颜色缓冲和深度缓冲，不过模板值通常是8位的，每个片段可以有256种不同的模板值（最大值255）</p>
-<p><font size="4" color="red">模板缓冲的作用</font><br>下面举一个模板缓冲的简单例子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148440287724.png" alt=""><br>左边的场景在中间的模板作用下，只有对应模板值为1的片段才会被显示，不为1的片段都被丢弃了，最终呈现右图的结果。</p>
+<p><font size="4" color="red">模板缓冲的作用</font><br>下面举一个模板缓冲的简单例子：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%952.png?raw=true" alt=""><br>左边的场景在中间的模板作用下，只有对应模板值为1的片段才会被显示，不为1的片段都被丢弃了，最终呈现右图的结果。</p>
 <p>可以看到，使用模板缓冲，我们可以根据模板值对决定是否丢弃特定的片段。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">使用模板缓冲</font><br>使用模板缓冲的步骤一般如下：</p>
@@ -209,7 +209,7 @@ glStencilMask(0x00);
 <li>参数dpfail：如果模板测试通过，但是深度测试失败时采取的动作</li>
 <li>参数dppass：如果模板测试和深度测试都通过，将采取的动作</li>
 </ul>
-<p>这三个参数是同一种枚举类型，每个参数都可以使用下列任何一个动作，来更新模板缓冲：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14844482123.png" alt=""><br>&nbsp;</p>
+<p>这三个参数是同一种枚举类型，每个参数都可以使用下列任何一个动作，来更新模板缓冲：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%953.png?raw=true" alt=""><br>&nbsp;</p>
 </li>
 </ul>
 <hr>
@@ -287,9 +287,9 @@ void main(){
 <pre class="line-numbers language-c++"><code class="language-c++">        glStencilFunc(GL_EQUAL, 1, 0xFF);
         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>接下来就按照<a href="http://popperelay.com/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">上一篇文章</a>里的方式来绘制箱子和地面即可：<br>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148446758101.png" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL16_StencilTest/LearnOpenGL16_StencilTest_1" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
+<p>接下来就按照<a href="http://popperelay.com/2017/01/14/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95/" target="_blank" rel="external">上一篇文章</a>里的方式来绘制箱子和地面即可：<br>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%954.png?raw=true" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL16_StencilTest/LearnOpenGL16_StencilTest_1" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">物体轮廓outline</font><br>接下来我们再使用模板测试来实现一个很有意识的效果：物体轮廓（object outline），如下图这样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148446778193.png" alt=""><br>给箱子添加轮廓的大致思路如下：</p>
+<p><font size="5" color="orange">物体轮廓outline</font><br>接下来我们再使用模板测试来实现一个很有意识的效果：物体轮廓（object outline），如下图这样：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%955.png?raw=true" alt=""><br>给箱子添加轮廓的大致思路如下：</p>
 <ol>
 <li>绘制出箱子，绘制时允许模板缓冲写入。这样就能在绘制箱子的同时，把箱子画入模板缓冲里（注意是窗口上二维显示的箱子，不是空间三维的箱子），其实就是一堆数字1。</li>
 <li>绘制出地面，绘制时禁用模板缓冲。因为我们的模板跟地面没关系，不希望在绘制地面时受到影响。</li>
@@ -320,14 +320,14 @@ void main(){
 <pre class="line-numbers language-c++"><code class="language-c++">        glStencilMask(0xFF);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其实，每当改变深度缓冲、模板缓冲等写入方式时，利用完了让它们恢复到最初状态是个很好的习惯，不容易出错。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148447497001.png" alt=""><br>可以看到下轮廓和地面交界的地方，轮廓只显示了很细的一条线，这是因为下轮廓片段的深度值大于交界处地面片段的深度值，被挡住了，在深度测试时被丢弃了。解决办法是在画轮廓时关闭深度测试：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%956.png?raw=true" alt=""><br>可以看到下轮廓和地面交界的地方，轮廓只显示了很细的一条线，这是因为下轮廓片段的深度值大于交界处地面片段的深度值，被挡住了，在深度测试时被丢弃了。解决办法是在画轮廓时关闭深度测试：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">        glDisable(GL_DEPTH_TEST); //保证轮廓不被挡住
         ...
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>轮廓画完了以后，不要忘了重新开启深度测试：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">        glEnable(GL_DEPTH_TEST);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148447497145.png" alt=""><br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%957.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p>箱子轮廓的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL16_StencilTest/LearnOpenGL16_StencilTest_2" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>

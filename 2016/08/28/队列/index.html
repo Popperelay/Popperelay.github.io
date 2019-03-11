@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E9%98%9F%E5%88%97_BG.jpeg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >数据结构与算法之队列</h2></a>
             </div>
             <!-- Post -->
@@ -160,7 +160,7 @@
                 <p>队列：只允许在一端进行插入操作，在另一端进行删除操作的线性表。允许插入的一端称为队尾，允许删除的一端称为队头。<br><a id="more"></a></p>
 <p><strong>顺序队列</strong></p>
 <hr>
-<p>最简单的顺序队列：<br>由数组构成，入队时在数组元素尾部插入新元素，出队时移去数组下标为0的元素，同时其他数组元素向前移动一个位置。就像一群人在买票，前面的人离开，后面的人就会全部向前一步，补上空位。图示如下：<br>入队列：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611234.png" alt=""><br>出队列：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611281.png" alt=""><br>C#的容器已经实现了这个在尾部插入数据、在头部删除数据并且自动补位的功能，用C#容器实现的队列代码如下(由于C#自带实现队头队尾的插入删除，所以不需要队头队尾节点的引用)：</p>
+<p>最简单的顺序队列：<br>由数组构成，入队时在数组元素尾部插入新元素，出队时移去数组下标为0的元素，同时其他数组元素向前移动一个位置。就像一群人在买票，前面的人离开，后面的人就会全部向前一步，补上空位。图示如下：<br>入队列：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue1.png?raw=true" alt=""><br>出队列：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue2.png?raw=true" alt=""><br>C#的容器已经实现了这个在尾部插入数据、在头部删除数据并且自动补位的功能，用C#容器实现的队列代码如下(由于C#自带实现队头队尾的插入删除，所以不需要队头队尾节点的引用)：</p>
 <pre><code>class SequenceQueue
 {
     private ArrayList Data;
@@ -192,7 +192,7 @@
 }
 </code></pre><p><strong>循环队列</strong></p>
 <hr>
-<p>但是上面的队列实现方式有个性能缺陷：出队列时所有元素都要移位。所以我们可以设置一个队头和队尾的引用(指针)，出队列时直接把队头引用处的结点移除，入队列时直接把元素添加到队尾引用所在的节点，而其他元素不用动，只是在入队列和出队列时修改队头引用或者队尾引用即可。<br>所以，队头引用front指向队头元素，队尾引用rear指向队尾元素的下一个位置(方便下次入队时直接添加到该位置)。<br>但是，这种方式存在下图的尴尬(针对固定容量的队列，非ArrayList这种大小可变的容器)：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611333.png" alt=""><br>若再在rear位置入队插入新元素，则会溢出，但是明显数组前面还有空位，是可以插入新元素的。就像坐公交，前面有空位置肯定是要去座的。为了让新元素能够按次序插入到前面的空位里去，应该把队列的首尾连起来，形成循环队列，这样新元素插入到前面的空位就水到渠成了。<br>还有一个问题，如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611379.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611433.png" alt=""><br>如上图所示，队列空和队列满的条件都是front==rear，为了区分他俩，我们人为设定：数组中只剩下一个空闲单元时，就认为队列已经满了。即敲定队列空的条件为：front==rear，队列满的条件为(rear+1)%QueueSize==front。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721611485.png" alt=""><br>综上，循环队列数据结构：数据成员：数组、队头引用front、队尾引用rear，方法成员：入队、出队等。代码如下：</p>
+<p>但是上面的队列实现方式有个性能缺陷：出队列时所有元素都要移位。所以我们可以设置一个队头和队尾的引用(指针)，出队列时直接把队头引用处的结点移除，入队列时直接把元素添加到队尾引用所在的节点，而其他元素不用动，只是在入队列和出队列时修改队头引用或者队尾引用即可。<br>所以，队头引用front指向队头元素，队尾引用rear指向队尾元素的下一个位置(方便下次入队时直接添加到该位置)。<br>但是，这种方式存在下图的尴尬(针对固定容量的队列，非ArrayList这种大小可变的容器)：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue3.png?raw=true" alt=""><br>若再在rear位置入队插入新元素，则会溢出，但是明显数组前面还有空位，是可以插入新元素的。就像坐公交，前面有空位置肯定是要去座的。为了让新元素能够按次序插入到前面的空位里去，应该把队列的首尾连起来，形成循环队列，这样新元素插入到前面的空位就水到渠成了。<br>还有一个问题，如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue4.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue5.png?raw=true" alt=""><br>如上图所示，队列空和队列满的条件都是front==rear，为了区分他俩，我们人为设定：数组中只剩下一个空闲单元时，就认为队列已经满了。即敲定队列空的条件为：front==rear，队列满的条件为(rear+1)%QueueSize==front。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/queue6.png?raw=true" alt=""><br>综上，循环队列数据结构：数据成员：数组、队头引用front、队尾引用rear，方法成员：入队、出队等。代码如下：</p>
 <pre><code>class RoundQueue
 {
     private Object[] Data;

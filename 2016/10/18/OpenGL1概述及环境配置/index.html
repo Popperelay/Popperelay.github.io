@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL1：OpenGL概述及环境配置</h2></a>
             </div>
             <!-- Post -->
@@ -241,7 +241,7 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 <p><font size="5" color="orange">VC6.0下的OpenGL环境配置</font></p>
 <p><font size="4" color="red">使用OpenGL辅助库GLAUX时的环境配置：</font></p>
 <ol>
-<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615911.png" alt=""></li>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glaux.lib（注意用空格分开） → 确定。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE1.png?raw=true" alt=""></li>
 <li>Windows平台下的源文件需要加上以下头文件：<pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token preprocessor property">#include &lt;window.h></span>
 <span class="token preprocessor property">#include &lt;GL/gl.h></span>
 <span class="token preprocessor property">#include &lt;GL/glu.h></span>
@@ -252,7 +252,7 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 <p><font size="4" color="red">使用OpenGL实用函数工具包GLUT时的环境配置：</font></p>
 <ol>
 <li>文件拷贝（这三个文件百度很容易找到）：<br>头文件glut.h拷贝到：\VC6.0安装目录\VC98\Include\GL目录下<br>连接库glut32.lib拷贝到：\VC6.0安装目录\VC98\Lib目录下<br>运行库glut32.dll拷贝到：C:\Windows\SysWOW64目录下（这时64位系统下的，如果是32位系统应该拷贝到：C:\Windows\System32）</li>
-<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721615963.png" alt=""></li>
+<li>打开工程，工程 → 设置 → 连接 → 分类选输入 → 在对象/库模块文本框中加上opengl32.lib glu32.lib glut32.lib（注意用空格分开） → 确定。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE2.png?raw=true" alt=""></li>
 <li>在源文件里加上头文件：<code>#include &lt;GL/glut.h&gt;</code></li>
 </ol>
 <p>【注】：OpenGL不需要单独下载安装，因为OpenGL是跟着驱动走的，只要装了显卡驱动，一般都会有OpenGL的。<br>&nbsp;  </p>
@@ -264,10 +264,10 @@ GLuint objectId <span class="token operator">=</span> <span class="token number"
 <p><font size="4" color="orange">下载GLFW源文件</font><br>GLFW可以从<a href="http://www.glfw.org/download.html" target="_blank" rel="external">官网</a>下载。当然是可以直接上面已经编译好的二进制文件，但是反正它有源码了，我们自己来编译一把，体验多多。而且使用源码编译出来的glwf库，可以完美适应自己的CPU/OS，编译好的二进制库就不一定了，所以先下载源码把（如果是下载编译好的二进制文件，尽量下32位的，64位可能会有很诡异的错误）。</p>
 <p>但是从源码编译也有一个问题：不是所有人的IDE（ Integrated Development  Environment）都是相同的，这就意味着用自己的IDE编译出来的库或其他文件可能别人并不能用，项目整合时会出现不兼容。比如有的用VS，有的用XCode，在VS上面写的项目要与和在XCode上面写的项目进行整合，但是IDE不同，很多项目文件会不兼容，比较原始的办法就是把VS上的源文件一个一个复制到XCode上，再在XCode上编译（或者相反），如果工程很大源文件很多，这样做是很要命的。而CMake可以根据源文件和一些简单的配置信息，生成对应OS下的IDE的项目文件，比如可以在用CMake把VS下的源文件直接整体编译为XCode项目，然后就可以直接和别人的XCode项目进行整合，还是很节省效率的。</p>
 <p><font size="4">CMake</font><br>CMake是一个可以根据源文件生成多个IDE下的项目/解决方案的工具（CMake可以从这里<a href="https://cmake.org/download/" target="_blank" rel="external">下载</a>），我用的是Win32-x86 Installer。</p>
-<p>安装完成后进入\bin文件夹选择cmake-gui.exe，再分别选择源码文件夹和用于生成项目的目标文件夹（需要自己新建一个文件夹），如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912521589.png" alt=""><br>点击Configure按钮，CMake会要求选择目标IDE环境（即想要生成哪种IDE下的项目/解决方案），由于我用的是VS2015，所以选择了VS 14 2015，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912561803.png" alt=""><br>点击finish，  当出现configuring done后，点击generate，出现generating done以后，在新建的build文件夹内就可以看到生成的项目文件了。我的文件夹如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147912612555.png" alt=""></p>
+<p>安装完成后进入\bin文件夹选择cmake-gui.exe，再分别选择源码文件夹和用于生成项目的目标文件夹（需要自己新建一个文件夹），如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE3.png?raw=true" alt=""><br>点击Configure按钮，CMake会要求选择目标IDE环境（即想要生成哪种IDE下的项目/解决方案），由于我用的是VS2015，所以选择了VS 14 2015，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE4.png?raw=true" alt=""><br>点击finish，  当出现configuring done后，点击generate，出现generating done以后，在新建的build文件夹内就可以看到生成的项目文件了。我的文件夹如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE5.png?raw=true" alt=""></p>
 <p><font size="4" color="red">编译</font><br>但是这些项目文件中还没有Debug文件夹，无法拿到我们进行OpenGL编程所需要的库文件，那么打开GLFW.sln编译一下把，在VS编辑器菜单上点击生成/生成解决方案（Build/Build Solution），然后编译好的库glfw3.lib就会出现在build/src/Debug文件夹内了。接下来把这个库链接到项目上，就可以进行OpenGL编程了。</p>
-<p><font size="4" color="red">链接</font><br>在链接到项目之前，得让IDE能够找到该库文件在哪里。新建一个将要写入OpenGL代码的VS项目，建好后在‘解决方案资源管理器’中右键项目名称，点击属性，在VC++目录（VC++ Directories）中点击包含目录（Include Directories），添加glfw源码的include文件夹。再点击库目录（Library Directories），添加glfw3.lib。现在VS能找到所需要的文件了。我添加的如下图（我是把包括后面glew要用到的文件一起放在文件夹内的，然后直接添加的文件夹。当然也可以向上面说的一个文件一个文件地添加）：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14791284794.png" alt=""></p>
-<p>接下来是链接。还是在属性里点击链接器（Linker）/输入（Input），在附加依赖项（Additional Dependencies）中添加上glfw3.lib，当然还需要把OpenGL也链接上，添加opengl32.lib（只要有显卡驱动一般都会有opengl，opengl32.lib是安装VS时自带的）。如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/1479128480.png" alt=""><br>&nbsp; </p>
+<p><font size="4" color="red">链接</font><br>在链接到项目之前，得让IDE能够找到该库文件在哪里。新建一个将要写入OpenGL代码的VS项目，建好后在‘解决方案资源管理器’中右键项目名称，点击属性，在VC++目录（VC++ Directories）中点击包含目录（Include Directories），添加glfw源码的include文件夹。再点击库目录（Library Directories），添加glfw3.lib。现在VS能找到所需要的文件了。我添加的如下图（我是把包括后面glew要用到的文件一起放在文件夹内的，然后直接添加的文件夹。当然也可以向上面说的一个文件一个文件地添加）：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE6.png?raw=true" alt=""></p>
+<p>接下来是链接。还是在属性里点击链接器（Linker）/输入（Input），在附加依赖项（Additional Dependencies）中添加上glfw3.lib，当然还需要把OpenGL也链接上，添加opengl32.lib（只要有显卡驱动一般都会有opengl，opengl32.lib是安装VS时自带的）。如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL1%E6%A6%82%E8%BF%B0%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE7.png?raw=true" alt=""><br>&nbsp; </p>
 <hr>
 <p>下面就可以在项目中使用OpenGL的函数了。其实OpenGL只是一种标准/规范，具体怎么实现要看驱动怎么来实现这种显卡支持规范（通俗点说就是提供接口函数），由于存在着很多不同版本的OpenGL驱动，不能够在编译的时候（compile-time）就确定静态链接哪个OpenGL函数，需要在运行时（run-time）指定所需要的函数地址，然后把地址存储在函数指针中以备后用（有点像先声明后定义）。在Windows中类似如下代码段：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//定义函数原型</span>

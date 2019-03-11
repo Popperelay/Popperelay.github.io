@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >进程的描述与控制</h2></a>
             </div>
             <!-- Post -->
@@ -228,8 +228,8 @@ counter<span class="token punctuation">:</span><span class="token operator">=</s
 </ul>
 <p><font size="4" color="red">进程的组织方式</font><br>系统中那么多进程，它们是如何联系在一起的呢？也就是说操作系统是通过怎样的方式把它们聚在一块的？<br>我们先来想想，需要把所有进程拿出来连在一起吗？这当然是很不划算的，因为有的进程是很大的，而且在地址空间上不一定连续，这样做会有很大的时间空间上的开销。上面讲了进程控制块PCB可以唯一标识一个进程，所以把PCB组织在一起就够了。</p>
 <ul>
-<li>链接方式<br>把系统中具有相同状态的进程的PCB用其中的链接字链接成一个队列，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600366.png" alt=""></li>
-<li>索引方式<br>系统根据所有进程的状态，建立几张索引表，索引表的每一个表项指向一个PCB的物理块，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600412.png" alt=""></li>
+<li>链接方式<br>把系统中具有相同状态的进程的PCB用其中的链接字链接成一个队列，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ProcessDescribe1.png?raw=true" alt=""></li>
+<li>索引方式<br>系统根据所有进程的状态，建立几张索引表，索引表的每一个表项指向一个PCB的物理块，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ProcessDescribe2.png?raw=true" alt=""></li>
 </ul>
 <p><font size="4" color="red">进程的三种基本状态</font></p>
 <ul>
@@ -238,7 +238,7 @@ counter<span class="token punctuation">:</span><span class="token operator">=</s
 <li>阻塞状态<br>阻塞状态是进程由于<strong>等待资源或由于某个事件的发生而暂停执行</strong>的状态。把多个处于阻塞状态的进程组织在一起，形成一个或多个阻塞队列。</li>
 </ul>
 <p>【注】：新创建进程的状态一般被设置为就绪状态</p>
-<p>三种基本状态之间的转换关系如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721600462.png" alt=""></p>
+<p>三种基本状态之间的转换关系如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ProcessDescribe3.png?raw=true" alt=""></p>
 <hr>
 <p><font size="5" color="orange">进程的控制</font></p>
 <p><font size="4" color="red">进程的创建</font><br>创建新进程包括在主存中为进程分配地址空间、建立操作系统用于管理进程的数据结构（如进程控制块）等操作。<br>在Linux系统中，除了0号进程（swapper进程）外的其他进程都是由其父进程创建的。<br>调用创建新进程的系统调用来创建进程的一般步骤为：</p>

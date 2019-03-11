@@ -176,7 +176,7 @@ void main() {
     EndPrimitive();
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在几何着色器中，我们需要声明输入的基本图形（primitive）类型，这个输入是我们从顶点着色器中接收到的。需要在in关键字前面声明一个layout标识符，括号里表示可以从一个顶点着色器接收的基本图形。可以有以下基本图形值：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628384767.png" alt=""><br>这是我们能够给渲染函数的几乎所有的基本图形。如果我们在主程序中选择以<code>GL_TRIANGLES</code>方式绘制顶点，我们就要把这里的输入修饰符设置为triangles。括号里的数字代表对应基本图形的最少顶点数。</p>
+<p>在几何着色器中，我们需要声明输入的基本图形（primitive）类型，这个输入是我们从顶点着色器中接收到的。需要在in关键字前面声明一个layout标识符，括号里表示可以从一个顶点着色器接收的基本图形。可以有以下基本图形值：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A81.png?raw=true" alt=""><br>这是我们能够给渲染函数的几乎所有的基本图形。如果我们在主程序中选择以<code>GL_TRIANGLES</code>方式绘制顶点，我们就要把这里的输入修饰符设置为triangles。括号里的数字代表对应基本图形的最少顶点数。</p>
 <p>当我们需要指定几何着色器所输出的基本图形类型时，我们就在out关键字前面加一个layout标识符。和输入layout标识符一样，输出的layout标识符也可以接受以下基本图形值：</p>
 <ul>
 <li>points</li>
@@ -185,7 +185,7 @@ void main() {
 </ul>
 <p>使用这三个输出修饰符，我们可以从输入的基本图形创建任何我们想要的形状。为了生成一个三角形，我们定义一个<code>triangle_strip</code>作为输出标识符，然后在其main函数里输出3个顶点，就能够输出一个三角形。同时，我们需要指定几何着色器能够输出的顶点数量的最大值（如果超出了这个数值，OpenGL就会忽略剩下的顶点），如上面的<code>line_strip, max_vertices=2</code>，表示我们将使用2个顶点输出一个line_strip。<br>【注】：</p>
 <ul>
-<li>line_strip就是首位相连的线条。线条是把多个点链接起来表示出一个连续的线，它最少有两个点来组成。后一个点在前一个新渲染的点后面渲染。line_strip如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628384832.png" alt=""><br>在上面的着色器里，当然不能得到上图的线条，因为输出顶点数量的最大值被我们设置为了2，只能输出一个线段。</li>
+<li>line_strip就是首位相连的线条。线条是把多个点链接起来表示出一个连续的线，它最少有两个点来组成。后一个点在前一个新渲染的点后面渲染。line_strip如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A82.png?raw=true" alt=""><br>在上面的着色器里，当然不能得到上图的线条，因为输出顶点数量的最大值被我们设置为了2，只能输出一个线段。</li>
 </ul>
 <p>顶点着色器的数据是通过什么传递到几何着色器的呢？GLSL为我们提供了一个内置变量<code>gl_in</code>，它的内部像这样：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">in gl_Vertex
@@ -256,9 +256,9 @@ void main(){
         glDrawArrays(GL_POINTS, 0, 4);
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628384876.png" alt=""><br>还是很神奇的！因为我们渲染时是用的<code>GL_POINTS</code>，但是却能够根据这些点绘制出几个线条，这都是几何着色器的功劳。<br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A83.png?raw=true" alt=""><br>还是很神奇的！因为我们渲染时是用的<code>GL_POINTS</code>，但是却能够根据这些点绘制出几个线条，这都是几何着色器的功劳。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">使用几何着色器把点画成房子</font><br>绘制点和线好像挺枯燥的，所以我们将在每个点上使用几何着色器绘制一个房子。它是由几个三角形构成的，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628384921.png" alt=""><br>在OpenGL里这样挨在一起的三角形，用trangle_strip绘制起来更搞笑，因为它所需要的顶点更少。所以我们把几何着色器里的输出基本图形设置为<code>triangle_strip</code>。这个房子总共有5个顶点，使用<code>triangle_strip</code>时，每3个毗邻的顶点都会构成一个三角形，所以得到这些三角形：（1,2,3）、（2,3,4）、（3,4,5）。其实有N个顶点就能得到N-2个三角形。注意，上图的房子里只有中间的蓝色点才是来自顶点着色器的输入，而房子的5个顶点都是根据这个蓝色点，在几何着色器里生成的：</p>
+<p><font size="5" color="orange">使用几何着色器把点画成房子</font><br>绘制点和线好像挺枯燥的，所以我们将在每个点上使用几何着色器绘制一个房子。它是由几个三角形构成的，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A84.png?raw=true" alt=""><br>在OpenGL里这样挨在一起的三角形，用trangle_strip绘制起来更搞笑，因为它所需要的顶点更少。所以我们把几何着色器里的输出基本图形设置为<code>triangle_strip</code>。这个房子总共有5个顶点，使用<code>triangle_strip</code>时，每3个毗邻的顶点都会构成一个三角形，所以得到这些三角形：（1,2,3）、（2,3,4）、（3,4,5）。其实有N个顶点就能得到N-2个三角形。注意，上图的房子里只有中间的蓝色点才是来自顶点着色器的输入，而房子的5个顶点都是根据这个蓝色点，在几何着色器里生成的：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
 layout (points) in;
 layout (triangle_strip,max_vertices=5) out;
@@ -294,7 +294,7 @@ void main(){
     color= vec4(1.0f, 0.0f, 0.0f, 1.0f);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628384965.png" alt=""><br>这4个房子都一个颜色，现在我们让每个房子都有不同的颜色。我们给每个顶点再加上一个颜色属性，同时更新对顶点属性数据的解析：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A85.png?raw=true" alt=""><br>这4个房子都一个颜色，现在我们让每个房子都有不同的颜色。我们给每个顶点再加上一个颜色属性，同时更新对顶点属性数据的解析：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    GLfloat pointsVertices[] = {
         //位置坐标   //颜色
         0.5f, 0.5f,  1.0f, 0.0f, 0.0f,
@@ -366,7 +366,7 @@ void main(){
     color= vec4(fcolor, 1.0f);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628385008.png" alt=""><br>如果我们还想给房子的屋顶上加点白色，就像落了雪一样，其实也就是说房子的5个顶点不是同一个颜色了，屋顶顶点变成了白色。我们只需要做如下改变即可：</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A86.png?raw=true" alt=""><br>如果我们还想给房子的屋顶上加点白色，就像落了雪一样，其实也就是说房子的5个顶点不是同一个颜色了，屋顶顶点变成了白色。我们只需要做如下改变即可：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void main(){
     fcolor = gs_in[0].color;
     gl_Position = gl_in[0].gl_Position + vec4(-0.2f, -0.2f, 0.0f, 0.0f);// 1:左下角
@@ -384,7 +384,7 @@ void main(){
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>让屋顶顶点的输出颜色等于白色即可。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628385054.png" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_1" target="_blank" rel="external">这里</a>。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A87.png?raw=true" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_1" target="_blank" rel="external">这里</a>。</p>
 <p>可以看到，使用几何着色器，可以使用最简单的基本图形就能获得漂亮的新玩意。因为这些形状是在GPU这种超快硬件上动态生成的，这要比使用顶点缓冲自己定义这些形状更为高效。几何缓冲在简单的经常被重复的形状（比如体素的世界和室外的草地）上，是一种非常强大的优化工具。</p>
 <p><font size="5" color="orange">Demo：爆破物体</font></p>
 <hr>
@@ -447,7 +447,7 @@ out vec2 TexCoords;
     EndPrimitive();
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>不要忘了在主程序中对time变量赋值，而且顶点着色器也得作出相应调整（改成接口块）。编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628385114.png" alt=""><br>全部源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_2" target="_blank" rel="external">这里</a>。</p>
+<p>不要忘了在主程序中对time变量赋值，而且顶点着色器也得作出相应调整（改成接口块）。编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A88.png?raw=true" alt=""><br>全部源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_2" target="_blank" rel="external">这里</a>。</p>
 <p><font size="5" color="orange">显示法向量</font></p>
 <hr>
 <p>下面我们将使用几何着色器来显示纳米铠甲每个顶点的法线向量。当编写光照着色器的时候，经常会遇到奇怪的视频输出问题，很难分辨是哪里出了问题。通常是因为不正确地加载了顶点数据，以及给它们指定了不合理的顶点属性，或者是在着色器中不合法的管理，导致产生了不正确的法线向量。我们希望可以用某种方式检测出法线向量是否正确，而我们这里的把法向量显示出来就是一种不错的方法。</p>
@@ -527,7 +527,7 @@ normalDisplay.Use();
 ...
 mymodel.Draw(normalDisplay);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148628385163.png" alt=""></p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A89.png?raw=true" alt=""></p>
 <p>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_3" target="_blank" rel="external">这里</a>。<br>&nbsp; </p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>

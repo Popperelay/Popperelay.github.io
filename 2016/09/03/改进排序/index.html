@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E6%8E%92%E5%BA%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >数据结构与算法之改进排序</h2></a>
             </div>
             <!-- Post -->
@@ -159,7 +159,7 @@
 				
                 <p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)<br><a id="more"></a></p>
 <hr>
-<p><font size="5" color="orange">希尔排序</font><br>希尔排序是直接插入排序的升级版。对于直接插入排序，原序列中待排序的元素还是比较多。每次插入时需要很多次后移操作(因为序列较长时一般后移距离也长)，有没有什么办法能够减少后移的距离呢？很容易想到的是，把原序列分组，在每一组内进行直接插入排序，由于每一组序列长度较小，再插入时移动的次数也就自然少了。<br>但是有一个问题，对{9，1，2，5，7，4，8，6，3，5}分成五组：{9，1}，{2，5}，{7，4}，{8，6}，{3，5}，即使每一分组都排好序后再合并：{1，9，2，5，4，7，6，8，3，5}，得到的这个序列依旧是杂乱无章的，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159135.png" alt=""><br>并没有大体上让小的元素往前走，让大的元素往后走，对下一次的直接排序几乎没有多大帮助。原因在于分组时，元素间隔太小，交换位置时，只能和附近的元素交换，如果把元素间隔设大一点，就能够和较远的元素交换位置，这就增大了小元素大幅度往前走，大元素大幅度往后走的几率。但是通常仅有一次排序是不够的，需要缩小间隔再直接插入排序多次（第一次间隔gap=n/2，后面几次的间隔减半gap=gap/2，直到gap==1。直接插入排序相当于gap=1时的希尔排序）。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159142.png" alt=""><br>希尔排序的核心：<strong>按间隔分组直接插入排序，再缩小间隔分组直接插入排序，直到间隔等于1</strong><br>代码如下：</p>
+<p><font size="5" color="orange">希尔排序</font><br>希尔排序是直接插入排序的升级版。对于直接插入排序，原序列中待排序的元素还是比较多。每次插入时需要很多次后移操作(因为序列较长时一般后移距离也长)，有没有什么办法能够减少后移的距离呢？很容易想到的是，把原序列分组，在每一组内进行直接插入排序，由于每一组序列长度较小，再插入时移动的次数也就自然少了。<br>但是有一个问题，对{9，1，2，5，7，4，8，6，3，5}分成五组：{9，1}，{2，5}，{7，4}，{8，6}，{3，5}，即使每一分组都排好序后再合并：{1，9，2，5，4，7，6，8，3，5}，得到的这个序列依旧是杂乱无章的，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort1.png?raw=true" alt=""><br>并没有大体上让小的元素往前走，让大的元素往后走，对下一次的直接排序几乎没有多大帮助。原因在于分组时，元素间隔太小，交换位置时，只能和附近的元素交换，如果把元素间隔设大一点，就能够和较远的元素交换位置，这就增大了小元素大幅度往前走，大元素大幅度往后走的几率。但是通常仅有一次排序是不够的，需要缩小间隔再直接插入排序多次（第一次间隔gap=n/2，后面几次的间隔减半gap=gap/2，直到gap==1。直接插入排序相当于gap=1时的希尔排序）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort2.png?raw=true" alt=""><br>希尔排序的核心：<strong>按间隔分组直接插入排序，再缩小间隔分组直接插入排序，直到间隔等于1</strong><br>代码如下：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ShellSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> gap <span class="token operator">=</span> array<span class="token punctuation">.</span>Length <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//多次分组直接插入排序，直到gap=1</span>
@@ -181,7 +181,7 @@
 <ul>
 <li>由于希尔排序比直接插入排序减少了移动距离(移动次序)，所以希尔排序的效率比直接插入排序高，也就自然比简单选择排序和冒泡排序性能好了。进过分析希尔排序的平均时间复杂度是O(nlogn)。</li>
 <li>由于希尔排序是将元素跳跃式分组，插入元素时也是跳跃式插入，如上图中第一轮排序里两个5在排序前后的次序发生了变化，所以希尔排序是不稳定排序。</li>
-<li>大量研究表明，当间隔序列为<img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591476.png" alt=""><br>时，可以获得不错的效果。但是最后一个增量值必须等于1。</li>
+<li>大量研究表明，当间隔序列为<img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort3.png?raw=true" alt=""><br>时，可以获得不错的效果。但是最后一个增量值必须等于1。</li>
 </ul>
 <hr>
 <p><font size="5" color="orange">堆排序</font><br>堆排序是对简单选择排序的一种改进。来看几个定义：</p>
@@ -190,9 +190,9 @@
 <li>堆可以用层序遍历的次序存入到数组中</li>
 </ul>
 <p><strong>把待排序的序列建成一个大顶堆的方法：</strong><br>先把待排序的序列按照层序构建成一棵完全二叉树，再从下往上、从右到左，将每个非叶结点与其左右子结点的较大值互换，直到比它的左右儿子都大为止。</p>
-<p>比如有一个待排序序列：{50，10，90，30，70，40，80，60，20}，先按层序构建成完全二叉树，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591531.png" alt=""><br>接下来从下往上，从右到左的第一个非叶结点是30，将它与左右儿子的较大者60互换，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591581.png" alt=""><br>接着从下往上，从右到左的第二个非叶结点是10，将它与左右儿子的较大者70互换，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591637.png" alt=""><br>再接下来从下往上，从右到左的第三个非叶结点是90，因为它本身就比它的左右儿子都大，所以不用互换了。<br>再接下来从下往上，从右到左的第四个非叶结点是50，将它与左右儿子的较大者90互换，因为要一直换到比左右儿子都大为止，所以把50、90互换之后，50还要和它的左右儿子的较大者80互换，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591688.png" alt=""><br>到此，整个大顶堆就构建完成了。那么如何利用这个大顶堆来排序呢？</p>
+<p>比如有一个待排序序列：{50，10，90，30，70，40，80，60，20}，先按层序构建成完全二叉树，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort4.png?raw=true" alt=""><br>接下来从下往上，从右到左的第一个非叶结点是30，将它与左右儿子的较大者60互换，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort5.png?raw=true" alt=""><br>接着从下往上，从右到左的第二个非叶结点是10，将它与左右儿子的较大者70互换，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort6.png?raw=true" alt=""><br>再接下来从下往上，从右到左的第三个非叶结点是90，因为它本身就比它的左右儿子都大，所以不用互换了。<br>再接下来从下往上，从右到左的第四个非叶结点是50，将它与左右儿子的较大者90互换，因为要一直换到比左右儿子都大为止，所以把50、90互换之后，50还要和它的左右儿子的较大者80互换，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort7.png?raw=true" alt=""><br>到此，整个大顶堆就构建完成了。那么如何利用这个大顶堆来排序呢？</p>
 <p><strong>利用大顶堆来排序的方法：</strong><br>把根结点元素与还未排序的最后一个元素交换位置（层序下的最后一个未排序元素），再把交换后的根结点与其左右孩子的较大者交换，直到比它的左右孩子都大。重复，直到所有结点都排序完成。</p>
-<p>对上面的大顶堆排序的过程如下：<br>先把根结点90和待排序的最后一个元素20交换位置，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591734.png" alt=""><br>再把20和它的左右儿子的较大者交换位置，直到比它的左右儿子都大，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591805.png" alt=""><br>这样最大的元素90就被放到了数组的最后一个位置，是不是有点像选出了最大的元素然后把它放到最后的位置？？？所以从这里可以看出堆排序是简单选择排序的改进版。<br>接下来把根结点80和待排序的最后一个元素30交换位置，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591858.png" alt=""><br>再把30和它的左右儿子的较大者交换位置，直到比它的左右儿子都大，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591909.png" alt=""><br>后面的变化完全类似，不再赘述，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721591965.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592021.png" alt=""><br>至此，便完成了堆排序的过程。<br>经过分析，堆排序的时间复杂度为O(nlogn)（堆排序对原始序列的排序状态并不敏感，所以堆排序的最好、最坏和平均时间复杂度都为O(nlogn)），空间复杂度为O(1)。但是由于它的交换是跳跃式的（不是和相邻的元素交换），所以堆排序也是一种不稳定排序。<br>【注】：</p>
+<p>对上面的大顶堆排序的过程如下：<br>先把根结点90和待排序的最后一个元素20交换位置，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort8.png?raw=true" alt=""><br>再把20和它的左右儿子的较大者交换位置，直到比它的左右儿子都大，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort9.png?raw=true" alt=""><br>这样最大的元素90就被放到了数组的最后一个位置，是不是有点像选出了最大的元素然后把它放到最后的位置？？？所以从这里可以看出堆排序是简单选择排序的改进版。<br>接下来把根结点80和待排序的最后一个元素30交换位置，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort10.png?raw=true" alt=""><br>再把30和它的左右儿子的较大者交换位置，直到比它的左右儿子都大，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort11.png?raw=true" alt=""><br>后面的变化完全类似，不再赘述，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort12.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort13.png?raw=true" alt=""><br>至此，便完成了堆排序的过程。<br>经过分析，堆排序的时间复杂度为O(nlogn)（堆排序对原始序列的排序状态并不敏感，所以堆排序的最好、最坏和平均时间复杂度都为O(nlogn)），空间复杂度为O(1)。但是由于它的交换是跳跃式的（不是和相邻的元素交换），所以堆排序也是一种不稳定排序。<br>【注】：</p>
 <ul>
 <li>由于构建堆的时候需要很多次比较，所以它并不适合待排序序列个数较少的情况，因为得不偿失嘛！</li>
 </ul>
@@ -265,7 +265,7 @@ int GreaterRoot(int array[], int i, int length) {
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<p><font size="5" color="orange">归并排序</font><br>归并排序很简单，归并在数据结构中定义是将两个或者两个以上的有序表组合成一个新的有序表。2路归并排序就是每两个一组进行排序，再归并（合起来并同时排序），再每两个一组进行排序，再归并，直到不能再归并为止（或者得到的有序序列长度等于原始待排序序列长度为止）。如下图所示：<br>迭代图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592075.png" alt=""><br>递归图示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592208.png" alt=""><br>归并排序可以用递归来实现，也可以用迭代（非递归）来实现。<br>归并排序的递归代码如下：<br>归并排序的迭代代码如下：</p>
+<p><font size="5" color="orange">归并排序</font><br>归并排序很简单，归并在数据结构中定义是将两个或者两个以上的有序表组合成一个新的有序表。2路归并排序就是每两个一组进行排序，再归并（合起来并同时排序），再每两个一组进行排序，再归并，直到不能再归并为止（或者得到的有序序列长度等于原始待排序序列长度为止）。如下图所示：<br>迭代图示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort14.png?raw=true" alt=""><br>递归图示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort15.png?raw=true" alt=""><br>归并排序可以用递归来实现，也可以用迭代（非递归）来实现。<br>归并排序的递归代码如下：<br>归并排序的迭代代码如下：</p>
 <hr>
 <p><font size="5" color="orange">快速排序</font><br>希尔排序是直接插入排序的升级版，属于插入排序类，堆排序是简单选择排序的升级版，属于选择排序类，而快速排序是冒泡排序的升级版，属于交换排序类。</p>
 <p>快速排序的核心思想：<strong>随机选择一个基准数，把小于基准数的元素移到基准数左边，把大于等于基准数的元素移到基准数右边。再分别对左右两边的元素重新选择基准数，重复上诉过程，直到排序结束（从小到大排序）</strong>。</p>
@@ -274,10 +274,10 @@ int GreaterRoot(int array[], int i, int length) {
 <li><p><strong>哨兵换岗法：</strong><br>随机选择一个基准数（一般选择待排序序列最左边的数），开始时左哨兵指向序列头，右哨兵指向序列尾。右哨兵先向左移动，直到找一个小于基准数的数，然后左哨兵向右移动，直到找到一个大于基准数的数，然后两哨兵换岗（两哨兵所在的元素交换位置，这样小的就到左边了，大的就到右边了）。重复上诉过程直到右哨兵和左哨兵相遇，再把相遇的数和基准数交换位置。这样一次排序后，比基准数小的全在它的左边，比基准数大的全在它的右边，再分别对左右两边进行上诉排序，直到排序完成（一看就是递归）。</p>
 <p>例如要对{6，1，2，7，9，3，4，5，10，8}这个序列进行排序：</p>
 <ul>
-<li>假定选择6作为基准数，设置左哨兵i和右哨兵j，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592267.png" alt=""></li>
-<li>然后右哨兵j向左走找到比6小的数5，左哨兵i向右走找到比6大的数7，交换5和7，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592322.png" alt=""></li>
-<li>接着右哨兵继续向左走找到比6小的数4，左哨兵向右走找到比6大的数9，交换4和9，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159238.png" alt=""></li>
-<li>然后右哨兵继续向左走找到比6小的数3，左哨兵向右走去找比6大的数，结果遇到右哨兵了，把左右哨兵所在的数3和基准数交换。到此第一轮排序结束了。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592443.png" alt=""></li>
+<li>假定选择6作为基准数，设置左哨兵i和右哨兵j，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort16.png?raw=true" alt=""></li>
+<li>然后右哨兵j向左走找到比6小的数5，左哨兵i向右走找到比6大的数7，交换5和7，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort17.png?raw=true" alt=""></li>
+<li>接着右哨兵继续向左走找到比6小的数4，左哨兵向右走找到比6大的数9，交换4和9，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort18.png?raw=true" alt=""></li>
+<li>然后右哨兵继续向左走找到比6小的数3，左哨兵向右走去找比6大的数，结果遇到右哨兵了，把左右哨兵所在的数3和基准数交换。到此第一轮排序结束了。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort19.png?raw=true" alt=""></li>
 <li>再对6左边的序列{3，1，2，5，4}进行上诉排序，以3为新的基准数得到的序列应该是：{2，1，3，5，4}，这样比3小的都在3左边，比3大的都在3右边。再对序列{2，1}和{5，4}进行排序，最后得到的序列应该是：{1，2，3，4，5，6，9，7，10，8}，对6右边的序列{9，7，10，8}也是同样的排序方式，最终得到的序列是：{1，2，3，4，5，6，7，8，9，10}</li>
 </ul>
 <p>代码如下：</p>
@@ -285,13 +285,13 @@ int GreaterRoot(int array[], int i, int length) {
 <li><p><strong>挖坑填数法：</strong><br>随机选择一个基准数（一般选择待排序序列最左边的数），将基准数所在的位置看作第一个坑，从右往左找第一个小于基准数的数，把它挪到坑里去（这个数原先所在的位置就形成了一个新的坑），再从左往右找第一个大于基准数的数，把它挪到新坑里去。重复上诉过程直到左右相遇，再把基准数挪到最后一个坑里去。样一次排序后，比基准数小的全在它的左边，比基准数大的全在它的右边，再分别对左右两边进行上诉排序，直到排序完成（从小到大排序。而且其实也是有哨兵的，不过为了突出挖坑，下面的图示没有画出哨兵）。</p>
 <p>例如要对{6，1，2，7，9，3，4，5，10，8}这个序列进行排序：</p>
 <ul>
-<li>假定选择6作为基准数，则6所在的位置就是第一个坑，如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159264.png" alt=""></li>
-<li>从右往左找到小于基准数6的数5，把它挪到坑里，结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592689.png" alt=""></li>
-<li>再从左往右找到大于基准数6的数7，把它挪到坑里，结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159274.png" alt=""></li>
-<li>接下来继续从右往左找到小于基准数6的数4，把它坑里，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592787.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159284.png" alt=""></li>
-<li>再从左往右找到大于基准数6的数9，把它挪到坑里，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592895.png" alt=""></li>
-<li>接着继续从右向左找到小于基准数6的数3，把它挪到坑里，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592954.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721593007.png" alt=""></li>
-<li>再从左往右去找大于基准数6的数，结果发现左右相遇了，这时到第一轮排序的最后一步了，把基准数挪到坑里，结果如下图：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721593055.png" alt=""></li>
+<li>假定选择6作为基准数，则6所在的位置就是第一个坑，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort20.png?raw=true" alt=""></li>
+<li>从右往左找到小于基准数6的数5，把它挪到坑里，结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort21.png?raw=true" alt=""></li>
+<li>再从左往右找到大于基准数6的数7，把它挪到坑里，结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort22.png?raw=true" alt=""></li>
+<li>接下来继续从右往左找到小于基准数6的数4，把它坑里，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort23.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort24.png?raw=true" alt=""></li>
+<li>再从左往右找到大于基准数6的数9，把它挪到坑里，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort25.png?raw=true" alt=""></li>
+<li>接着继续从右向左找到小于基准数6的数3，把它挪到坑里，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort26.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort27.png?raw=true" alt=""></li>
+<li>再从左往右去找大于基准数6的数，结果发现左右相遇了，这时到第一轮排序的最后一步了，把基准数挪到坑里，结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort28.png?raw=true" alt=""></li>
 </ul>
 <p>到此，快速排序的挖坑填数法的第一轮排序就结束了，接下来再对基准数左右两边的序列重复上诉排序过程就ok了。<br>代码如下：</p>
 <p>从排序过程和代码都可以看出，挖坑填数法其实是哨兵换岗法的改进版，挖坑填数法一样存在左右哨兵，但是明显交换次数少了（交换时的赋值语句少了）。</p>
@@ -306,7 +306,7 @@ int GreaterRoot(int array[], int i, int length) {
 <li>九数取中。和三数取中是一个意思，在数组中分三次取样，每次选出各组的中间数，再在这三个中数种选出一个中数作为基准数。九数取中一般用于序列长度比较大的情况下，以保证取出的基准数比较接近序列的中值。</li>
 </ul>
 </li>
-<li>减少交换次数。在哨兵换岗法中，右哨兵和左哨兵找出的数要互相交换位置，这种swap交换需要三个赋值语句，其实可以减少。而挖坑填数法正好是哨兵换岗法的这种优化，把要调到前面或者后面的数填到坑里就行，不一定要正好调换两个哨兵的位置，只要保证把小的大致往前放，把大的大致往后放就行。比如右哨兵找到了一个比基准数小的数，左哨兵找到了一个比基准数大的数，这时候其实不需要交换左右哨兵，只需要把右哨兵填到前面的坑里（基准数那个位置），再把左哨兵填到后面的坑里（原右哨兵空出来的位置），这样就大致保证了“把小的往前挪，把大的往后挪”的原则，同时减少了交换次数（在下图中可以看到只有两次赋值，而不是三次），如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14772159251.png" alt=""></li>
+<li>减少交换次数。在哨兵换岗法中，右哨兵和左哨兵找出的数要互相交换位置，这种swap交换需要三个赋值语句，其实可以减少。而挖坑填数法正好是哨兵换岗法的这种优化，把要调到前面或者后面的数填到坑里就行，不一定要正好调换两个哨兵的位置，只要保证把小的大致往前放，把大的大致往后放就行。比如右哨兵找到了一个比基准数小的数，左哨兵找到了一个比基准数大的数，这时候其实不需要交换左右哨兵，只需要把右哨兵填到前面的坑里（基准数那个位置），再把左哨兵填到后面的坑里（原右哨兵空出来的位置），这样就大致保证了“把小的往前挪，把大的往后挪”的原则，同时减少了交换次数（在下图中可以看到只有两次赋值，而不是三次），如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort29.png?raw=true" alt=""></li>
 <li>小数组时使用直接插入排序（直接插入排序是简单排序中性能最好的）。对于序列元素较少时，使用快速排序反而不如直接插入排序，因为快速排序用到了递归操作，在数据量大时，相比于快排的优势递归带来的开销可以忽略，但数据量小时就无法忽略了。所以对快排的优化，可以在待排序序列长度递归到很小时，就不再继续用快排进行排序了，而换成直接插入排序。一般递归到待排序序列长度小于7（有时是50）时，改为使用直接插入排序。伪码如下：<pre class="line-numbers language-csharp"><code class="language-csharp"> <span class="token keyword">const</span> <span class="token keyword">int</span> Length_InsertSort <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
  <span class="token keyword">void</span> <span class="token function">QuickSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">,</span><span class="token keyword">int</span> low<span class="token punctuation">,</span><span class="token keyword">int</span> high<span class="token punctuation">)</span><span class="token punctuation">{</span>
      <span class="token keyword">int</span> pivot<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//基准数在序列中的位置</span>
@@ -345,7 +345,7 @@ int GreaterRoot(int array[], int i, int length) {
 将<code>low=pivot+1</code>后，再循环来一次<code>pivot = Partition(array, low, high);</code>，其实就是<code>pivot = Partition(array, pivot+1, high);</code>，与<code>QuickSort(array, pivot + 1, high);</code>是同样的效果，因为QuickSort本来做的就是Partition操作。但是使用循环减少了一个递归调用，从而减少了堆栈带来的开销，提高了性能。</li>
 </ol>
 <hr>
-<p><font size="5" color="orange">7种排序算法的时间复杂度和空间复杂度的比较</font><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147721592573.png" alt=""></p>
+<p><font size="5" color="orange">7种排序算法的时间复杂度和空间复杂度的比较</font><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort30.png?raw=true" alt=""></p>
 
             </div>
 

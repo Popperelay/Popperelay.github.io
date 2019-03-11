@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL12：光照贴图Lighting Maps</h2></a>
             </div>
             <!-- Post -->
@@ -164,7 +164,7 @@
 </ul>
 <hr>
 <p><font size="5" color="orange">漫反射贴图diffuse map</font><br>我们使用漫反射贴图的纹素颜色来代替材质的环境属性和漫反射属性。</p>
-<p>首先，我们加载下面一张图片，它是一个由一圈钢边的<a href="https://learnopengl-cn.github.io/img/02/04/container2.png" target="_blank" rel="external">木箱</a>：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148170663195.png" alt=""><br>需要用到<a href="http://popperelay.com/2016/11/29/OpenGL5%E7%BA%B9%E7%90%86/" target="_blank" rel="external">《OpenGL5：纹理》</a>一文中的纹理加载类，所以先创建和包含相应的头文件：</p>
+<p>首先，我们加载下面一张图片，它是一个由一圈钢边的<a href="https://learnopengl-cn.github.io/img/02/04/container2.png" target="_blank" rel="external">木箱</a>：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE1.png?raw=true" alt=""><br>需要用到<a href="http://popperelay.com/2016/11/29/OpenGL5%E7%BA%B9%E7%90%86/" target="_blank" rel="external">《OpenGL5：纹理》</a>一文中的纹理加载类，所以先创建和包含相应的头文件：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">#include "TextureLoader.h"
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>接着使用该类的<code>LoadTexture</code>函数加载木箱图片：</p>
@@ -258,9 +258,9 @@ struct Material{
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148170663345.png" alt=""><br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE2.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">镜面贴图speculate map</font><br>上面的物体是一个带钢边的木箱，木箱部分应该是没有高光的（或者高光很弱）才对。也就是说一个物体的不同部分可能有不同的镜面反射效果。和不同部分有不同漫反射效果类似，我们使用一张镜面贴图来表示对应不同部分的不同镜面反射效果，即用镜面贴图的纹素来代替材质的镜面反射属性。通常在镜面贴图中，镜面反射强度大的用接近白色的颜色表示，反射强度小的用接近黑色的颜色表示。使用ps或gimp之类的工具，通过将图片进行裁剪，将某部分调整成黑白图样，并调整亮度/对比度，可以很容易吧一个diffuse贴图处理成specular贴图。我们这里给准备上面的箱子使用的<a href="https://learnopengl-cn.github.io/img/02/04/container2_specular.png" target="_blank" rel="external">镜面贴图</a>如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148170873539.png" alt=""><br>木箱子部分不镜面反射，只有钢边部分才有镜面光。</p>
+<p><font size="5" color="orange">镜面贴图speculate map</font><br>上面的物体是一个带钢边的木箱，木箱部分应该是没有高光的（或者高光很弱）才对。也就是说一个物体的不同部分可能有不同的镜面反射效果。和不同部分有不同漫反射效果类似，我们使用一张镜面贴图来表示对应不同部分的不同镜面反射效果，即用镜面贴图的纹素来代替材质的镜面反射属性。通常在镜面贴图中，镜面反射强度大的用接近白色的颜色表示，反射强度小的用接近黑色的颜色表示。使用ps或gimp之类的工具，通过将图片进行裁剪，将某部分调整成黑白图样，并调整亮度/对比度，可以很容易吧一个diffuse贴图处理成specular贴图。我们这里给准备上面的箱子使用的<a href="https://learnopengl-cn.github.io/img/02/04/container2_specular.png" target="_blank" rel="external">镜面贴图</a>如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE3.png?raw=true" alt=""><br>木箱子部分不镜面反射，只有钢边部分才有镜面光。</p>
 <p>使用这张镜面贴图的过程和上面漫反射贴图类似，简单走一下：</p>
 <p>首先加载镜面贴图：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    GLuint specularMap = textureLoader.LoadTexture("container2_specular.png");
@@ -291,7 +291,7 @@ glUniform1i(glGetUniformLocation(lightObject.shaderProgram, "material.specular")
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148170873632.png" alt=""><br>可以看到这个箱子明显真实多了！<br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL12%E5%85%89%E7%85%A7%E8%B4%B4%E5%9B%BE4.png?raw=true" alt=""><br>可以看到这个箱子明显真实多了！<br>&nbsp;</p>
 <hr>
 <p>使用漫反射光照贴图和镜面贴图的所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL12_LightingMaps" target="_blank" rel="external">在这里</a>。</p>
 <p>其余代码不变，和<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">《OpenGL10：光照基础Phong模型》</a>一样。<br>&nbsp;</p>

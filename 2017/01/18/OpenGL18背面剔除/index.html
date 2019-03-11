@@ -166,9 +166,9 @@
 </ul>
 <hr>
 <p><font size="5" colorr="orange">顶点绕序</font><br>我们需要丢弃背对观察者的三角形片元，那如何确定一个面是否背对观察者呢？OpenGL使用顶点绕序（winding order）来解决这个问题。</p>
-<p>顶点绕序就是当几何对象细分为三角形时，三角形顶点相对于中心的定义顺序，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148472939189.png" alt=""><br>左图中的顶点绕序是顺时针的，右边是逆时针的。</p>
+<p>顶点绕序就是当几何对象细分为三角形时，三角形顶点相对于中心的定义顺序，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL18%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A41.png?raw=true" alt=""><br>左图中的顶点绕序是顺时针的，右边是逆时针的。</p>
 <p>默认情况下，OpenGL认为三角形的正面都是逆时针的顶点绕序，顺时针的顶点绕序都是三角形的背面，背对观察者。</p>
-<p>我们在定义顶点属性数据时，需要从三角形的正面看过去（保证能够看到三角形），以逆时针绕序进行定义。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148473026998.png" alt=""><br>右边的三角形顶点和左边的三角形顶点都是以逆时针顺序进行定义的，它们在各自的方向上都能被看到：右边的三角形从右边能够被看到，左边的三角形从左边能够被看到。但是如果现在观察点在右边，OpenGL会根据三角形顶点被定义的顺序，来计算相对于观察者来说这个顺序是逆时针还是顺时针。如果是逆时针，说明该面是正面，朝向观察者；如果是顺时针，说明该面是背面，背对观察者。根据三角形顶点的本身绕序，来计算相对于观察者的相对绕序（即相对于观察者是逆时针/顺时针），这是在光栅化阶段由OpenGL自动完成的。<br>&nbsp; </p>
+<p>我们在定义顶点属性数据时，需要从三角形的正面看过去（保证能够看到三角形），以逆时针绕序进行定义。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL18%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A42.png?raw=true" alt=""><br>右边的三角形顶点和左边的三角形顶点都是以逆时针顺序进行定义的，它们在各自的方向上都能被看到：右边的三角形从右边能够被看到，左边的三角形从左边能够被看到。但是如果现在观察点在右边，OpenGL会根据三角形顶点被定义的顺序，来计算相对于观察者来说这个顺序是逆时针还是顺时针。如果是逆时针，说明该面是正面，朝向观察者；如果是顺时针，说明该面是背面，背对观察者。根据三角形顶点的本身绕序，来计算相对于观察者的相对绕序（即相对于观察者是逆时针/顺时针），这是在光栅化阶段由OpenGL自动完成的。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">在OpenGL中使用背面剔除</font><br>首先，我们需要把立方体每个面的顶点按逆时针顺序去定义。注意，一定要从正面去看立方体的每个面，这时再去确定逆时针顺序的顶点。由于我们是用索引去绘制立方体，所以只需要按逆时针指定索引就可以了:</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //三角形顶点的坐标、纹理坐标
@@ -231,7 +231,7 @@
 <pre class="line-numbers language-c++"><code class="language-c++">    //开启面剔除
     glEnable(GL_CULL_FACE);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>编译运行后，所有不是正面朝向观察者的面都会被丢弃，尝试移动摄像机到箱子里面，会发现看不到箱子了：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148474153975.png" alt=""><br>如果不开启背面剔除，运行的结果会是这样：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148474154426.png" alt=""><br>目前，因为使用了背面剔除，在渲染片段上我们节约了超过50%的性能，但记住这只对像立方体这样的封闭形状有效。</p>
+<p>编译运行后，所有不是正面朝向观察者的面都会被丢弃，尝试移动摄像机到箱子里面，会发现看不到箱子了：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL18%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A43.png?raw=true" alt=""><br>如果不开启背面剔除，运行的结果会是这样：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL18%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A44.png?raw=true" alt=""><br>目前，因为使用了背面剔除，在渲染片段上我们节约了超过50%的性能，但记住这只对像立方体这样的封闭形状有效。</p>
 <p>所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL18_FaceCulling" target="_blank" rel="external">在这里</a>。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">更多剔除</font></p>

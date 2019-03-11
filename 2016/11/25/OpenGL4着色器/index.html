@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL4%E7%9D%80%E8%89%B2%E5%99%A8_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL4：着色器</h2></a>
             </div>
             <!-- Post -->
@@ -236,7 +236,7 @@ vec4 otherResult <span class="token operator">=</span> <span class="token functi
 <span class="token string">"color=vertexColor;\n"</span>
 <span class="token string">"}\0"</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到我们在顶点着色器中声明了一个vertexColor变量作为输出，并且在顶点着色器的main函数中为这个输出变量赋了值；然后在像素着色器中声明了一个同名同类型的输入变量，并在其main函数中令输出变量color等于该输入变量。当链接程序对象后，像素着色器的vertexColor就和顶点着色器的vertexColor链接在一起了，因为我们在顶点着色器中设置的是深红色的，所以在像素着色器中输出的结果也是深红色的：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147973357727.png" alt=""><br>我们完成了顶点着色器向像素着色器发送数据！<br>&nbsp; </p>
+<p>可以看到我们在顶点着色器中声明了一个vertexColor变量作为输出，并且在顶点着色器的main函数中为这个输出变量赋了值；然后在像素着色器中声明了一个同名同类型的输入变量，并在其main函数中令输出变量color等于该输入变量。当链接程序对象后，像素着色器的vertexColor就和顶点着色器的vertexColor链接在一起了，因为我们在顶点着色器中设置的是深红色的，所以在像素着色器中输出的结果也是深红色的：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL4%E7%9D%80%E8%89%B2%E5%99%A81.png?raw=true" alt=""><br>我们完成了顶点着色器向像素着色器发送数据！<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">全局变量uniform</font><br>上面我们完成了一个着色器向另一个着色器发送数据，那么能不能从应用程序向像素着色器发送一个颜色呢？我们可以使用全局变量unifrom来实现。</p>
 <p>uniform是一种从CPU中的应用向GPU中的着色器发送数据的方式。但是uniform和顶点属性不同，uniform变量是全局的，在每个着色器程序都是独一无二的，可以在渲染管线的任意一个阶段访问。而且uniform变量会一直保存它们的数据，直到它们被重置或更新。</p>
@@ -332,7 +332,7 @@ vec4 otherResult <span class="token operator">=</span> <span class="token functi
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样我们就能给三角形三个顶点赋不同的颜色值了，并且三角形内部的点会由三个顶点颜色插值得到。</p>
 <p>全部源码<a href="https://github.com/Popperelay/BlogCode/blob/master/LearnOpenGL4_Shader/LearnOpenGL4_Shader_2/main.cpp" target="_blank" rel="external">在这里</a>。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/147978386887.png" alt=""><br>&nbsp; </p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL%E7%9D%80%E8%89%B2%E5%99%A82.png?raw=true" alt=""><br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">自定义着色器类</font><br>从上面的程序里可以看到，主函数main太庞杂了，我们希望减轻main函数的负担，把有关着色器的内容拿出来，单独封装成一个类，用于读取、编译、管理着色器，也便于程序理解和移植。</p>
 <p>前面是直接把着色器代码写到字符串里，很不方便，IDE也没法检查是否有语法错误。所以我们选择把着色器代码单独写在另一个文件里，要用的时候从文件里读出来。读文件的代码如下：</p>

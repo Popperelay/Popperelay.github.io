@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%86_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL5：纹理</h2></a>
             </div>
             <!-- Post -->
@@ -159,7 +159,7 @@
 				
                 <p>在前面的文章中，我们画过矩形，画过彩色三角形。<a id="more"></a>那么能不能画出现实生活中的图片呢？比如画一面砖墙，画一朵花。这样的图形无疑看起来更真实。但是这些更真实的图形也无疑很复杂，因为它们的每个像素颜色之间并没有什么明显的规律，如果要去画的话，就得一个像素一个像素的去画，要我们自己去指定大量的顶点颜色，这个开销太庞大了~~~<br>&nbsp; </p>
 <hr>
-<p><font size="5" color="orange">纹理概述</font><br>幸运的是，还有另一种方式。我们可以先照一张砖墙的照片，让GPU自动提取这张照片上的像素，然后画到屏幕上。这张用于GPU提取像素颜色的照片，就叫做纹理。纹理通常是一个2D图片（也有1D和3D的纹理）。可以想象纹理是一张绘有砖块的纸，无缝折叠贴合到我们的3D房子上，这样我们的房子看起来就像有砖墙外表了。这样我们就不用去一个一个地去指定纹理中每个纹素（纹理中的像素）的颜色了，只需要指定怎样把纹理贴到我们的模型（比如一个三角形、矩形甚至3D房子）上。举个例子：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025320358.png" alt=""><br>为了把这张木箱纹理贴到图中红色三角形上，我们需要指定三角形的顶点对应纹理的那个位置。这个位置我们叫做纹理坐标，表示纹素在纹理上的位置，通常坐标值在0.0到1.0之间，原点通常在纹理左下角。我们把三角形左下角顶点对应纹理坐标（0,0），把三角形右下角顶点对应纹理坐标（1,0），把三角形上中顶点对应纹理坐标（0.5,1.0）。我们只要给顶点着色器传递这三个顶点纹理坐标就行了，接下来它们会被传到像素着色器中，GPU会根据三角形顶点纹理坐标，去为三角形内部点进行插值（根据内部点坐标和顶点坐标的关系，去纹理中找相应纹素颜色）。使用纹理坐标获取纹理颜色叫做采样。</p>
+<p><font size="5" color="orange">纹理概述</font><br>幸运的是，还有另一种方式。我们可以先照一张砖墙的照片，让GPU自动提取这张照片上的像素，然后画到屏幕上。这张用于GPU提取像素颜色的照片，就叫做纹理。纹理通常是一个2D图片（也有1D和3D的纹理）。可以想象纹理是一张绘有砖块的纸，无缝折叠贴合到我们的3D房子上，这样我们的房子看起来就像有砖墙外表了。这样我们就不用去一个一个地去指定纹理中每个纹素（纹理中的像素）的颜色了，只需要指定怎样把纹理贴到我们的模型（比如一个三角形、矩形甚至3D房子）上。举个例子：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%861.png?raw=true" alt=""><br>为了把这张木箱纹理贴到图中红色三角形上，我们需要指定三角形的顶点对应纹理的那个位置。这个位置我们叫做纹理坐标，表示纹素在纹理上的位置，通常坐标值在0.0到1.0之间，原点通常在纹理左下角。我们把三角形左下角顶点对应纹理坐标（0,0），把三角形右下角顶点对应纹理坐标（1,0），把三角形上中顶点对应纹理坐标（0.5,1.0）。我们只要给顶点着色器传递这三个顶点纹理坐标就行了，接下来它们会被传到像素着色器中，GPU会根据三角形顶点纹理坐标，去为三角形内部点进行插值（根据内部点坐标和顶点坐标的关系，去纹理中找相应纹素颜色）。使用纹理坐标获取纹理颜色叫做采样。</p>
 <p>这么说来，纹理坐标也应该是三角形顶点的一个属性，所以我们定义如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //三角形顶点的坐标、颜色、纹理坐标
     GLfloat vertices[] = {
@@ -236,7 +236,7 @@
 <li>GL_CLAMP_TO_EDGE：纹理坐标会被约束在0到1之间，超出部分会重复纹理边缘，产生一种边缘被拉伸的效果。</li>
 <li>GL_CLAMP_TO_BORDER：超出坐标为用户指定的边缘颜色。</li>
 </ul>
-<p>当纹理坐标不在0到1之间时，每个选项都有不同的视觉输出效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148025552863.png" alt=""><br>可以使用<code>glTextParameteri</code>函数来设置纹理的环绕方式：</p>
+<p>当纹理坐标不在0到1之间时，每个选项都有不同的视觉输出效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%862.png?raw=true" alt=""><br>可以使用<code>glTextParameteri</code>函数来设置纹理的环绕方式：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -253,10 +253,10 @@
 <p>接下来我们看看对纹理过滤方式的配置</p>
 <p><font size="5" color="orange">纹理过滤</font><br>当使用顶点坐标映射相应纹素时，由于是根据位置关系进行插值计算的，所以得到的内部点的纹理坐标不一定是整数，比如说如果纹素位置（即纹理坐标）为（152.34,255,38）该怎么办呢？这种情况称为纹理过滤。</p>
 <p>纹理过滤有很多种方法，这里只讨论最重要的两种：GL_NEAREST（最邻近滤波）和GL_LINEAR（线性滤波）</p>
-<p><font size="4" color="red">最邻近滤波</font><br>最邻近滤波是选择中心点距离浮点数纹理坐标最近的那个纹素。图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032559086.png" alt=""><br>因为图中红色纹素离纹理坐标最近，所以选择该红色作为最终的输出纹素。</p>
+<p><font size="4" color="red">最邻近滤波</font><br>最邻近滤波是选择中心点距离浮点数纹理坐标最近的那个纹素。图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%863.png?raw=true" alt=""><br>因为图中红色纹素离纹理坐标最近，所以选择该红色作为最终的输出纹素。</p>
 <p>最邻近滤波容易导致走样误差，明显有像素块的感觉。</p>
-<p><font size="4" color="red">线性滤波</font><br>线性滤波是使用纹理坐标附近的一组纹素的加权平均值（插值）来确定最终的纹素值。这个权值就是纹素中心到这个纹理坐标的距离，距离越近的纹素对最终的纹素值贡献越大。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032559137.png" alt=""></p>
-<p>最邻近滤波和线性滤波的对比效果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148032631514.png" alt=""><br>GL_NEAREST产生了颗粒状的图案，能够清晰地看到纹素，而GK_LINEAR能够产生更平滑的图案，很难看出单个的纹素。GL_LINEAR可以产生更真实的输出，不过GL_NEAREST却可以产生出8-bit风格（像素风），也有很多人喜欢。</p>
+<p><font size="4" color="red">线性滤波</font><br>线性滤波是使用纹理坐标附近的一组纹素的加权平均值（插值）来确定最终的纹素值。这个权值就是纹素中心到这个纹理坐标的距离，距离越近的纹素对最终的纹素值贡献越大。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%864.png?raw=true" alt=""></p>
+<p>最邻近滤波和线性滤波的对比效果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%865.png?raw=true" alt=""><br>GL_NEAREST产生了颗粒状的图案，能够清晰地看到纹素，而GK_LINEAR能够产生更平滑的图案，很难看出单个的纹素。GL_LINEAR可以产生更真实的输出，不过GL_NEAREST却可以产生出8-bit风格（像素风），也有很多人喜欢。</p>
 <p>还有一些其它的滤波方式，比如三线性滤波（Trilinear Filtering）等。</p>
 <p><font size="4" color="red">纹素放大缩小时滤波</font><br>除了对纹理坐标取整时需要用到滤波以外，在纹素到像素时的放大和缩小时，也可能要用到滤波。</p>
 <p>什么是纹素到像素的放大、缩小？</p>
@@ -265,7 +265,7 @@
 <li>一个纹素最终对应屏幕上的一个像素，这时不需要滤波</li>
 <li>一个纹素最终对应少于一个像素，称为缩小</li>
 </ul>
-<p>放大和缩小图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033138491.png" alt=""></p>
+<p>放大和缩小图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%866.png?raw=true" alt=""></p>
 <p>我们可以使用<code>glTexParameteri</code>函数在图像放大滤波和缩小滤波选项时设置纹理滤波：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -273,7 +273,7 @@
 <p>第二个参数是放大滤波或者缩小滤波，第三个参数指定滤波方式。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">多级渐远纹理mipmap</font><br>一个物体，当它距离我们比较近时，需要很多像素去表现它；而当距离我们很远时，会看不大清楚，只有很少的像素需要被绘制，这时再从该物体对应的纹理中去找几个纹素来表现它，是很难的。因为它需要跨过纹理很大部分只拾取一个纹素，而且最终拾取出来的纹素凑在一起可能就面目全非了。更何况对于很远的物体去使用高分辨率的纹理无疑是浪费内存。</p>
-<p>OpenGL使用多级渐远纹理Mipmap来解决这个问题。mipmap其实就是一系列纹理图像，后一个纹理图像只有前一个纹理图像的一半大小。在观察者的距离在不同的距离范围时使用不同级别的mipmap。mipmap的另一个加分点是它的性能非常好。mipmap图示如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033241373.png" alt=""></p>
+<p>OpenGL使用多级渐远纹理Mipmap来解决这个问题。mipmap其实就是一系列纹理图像，后一个纹理图像只有前一个纹理图像的一半大小。在观察者的距离在不同的距离范围时使用不同级别的mipmap。mipmap的另一个加分点是它的性能非常好。mipmap图示如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%867.png?raw=true" alt=""></p>
 <p><font size="4" color="red">mipmap滤波</font><br>在渲染中切换不同级别的mipmap时，会产生一些很明显的边界。对纹素的滤波也可以用到这里，来消除这些很生硬的边界。由于mipmap其实也相当于是把纹理缩小，所以它的滤滤波也是通过<code>glTexParameteri</code>函数在缩小滤波<code>GL_TEXTURE_MIN_FILTER</code>选项时来实现：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -336,7 +336,7 @@ void main(){
 <p>&nbsp;</p>
 <hr>
 <p>自此，所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL5_Texture/LearnOpenGL5_Texture_1" target="_blank" rel="external">在这里</a>。</p>
-<p>编译运行后，结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148033659587.png" alt=""><br>&nbsp;</p>
+<p>编译运行后，结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%868.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">使用多个纹理</font></p>
 <p><font size="4" color="red">载入第二张图片</font><br>载入<a href="https://learnopengl-cn.github.io/img/01/06/awesomeface.png" target="_blank" rel="external">第二张图片</a>和第一张类似：</p>
@@ -424,7 +424,7 @@ void main(){
 <li>设置完采样器的值后，接下来就需要绑定纹理对象，好把相应纹理放在刚刚激活的纹理单元（图层）上。</li>
 <li>OpenGL至少保证有16个纹理单元可供使用，也就是说可以激活从<code>GL_TEXTURE0</code>到<code>GL_TEXTURE15</code>。它们都是按顺序定义的，所以<code>GL_TEXTURE8=GL_TEXTURE0+8</code>，这在当我们需要循环一些纹理单元时会很有用。</li>
 </ul>
-<p>其余代码和之前的源程序一样，编译运行的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148034269274.png" alt=""></p>
+<p>其余代码和之前的源程序一样，编译运行的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%869.png?raw=true" alt=""></p>
 <p><font size="4" color="red">翻转图片</font><br>可以看到第二张纹理上下颠倒了！这是因为OpenGL要求y轴0.0在图片底部，但是通常图片y轴0.0在图片顶部。有一些图片加载器比如DevIL在加载的时候有选项重载y原点，但是SOIL没有。所以，为了修复这个小问题，有两个选择：</p>
 <ul>
 <li>改变顶点的纹理坐标属性，翻转y值（用1减去y坐标）</li>
@@ -441,7 +441,7 @@ void main(){
   TexCoord=vec2(texCoord.x,1-texCoord.y);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148034318836.png" alt=""><br>&nbsp;</li>
+编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL5%E7%BA%B9%E7%90%8610.png?raw=true" alt=""><br>&nbsp;</li>
 </ul>
 <hr>
 <p>到此，使用两张纹理的全部源程序<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL5_Texture/LearnOpenGL5_Texture_2" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>

@@ -127,7 +127,7 @@
 </nav>
 
         <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(undefined);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10_%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80Phong%E6%A8%A1%E5%9E%8B_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL10：光照基础Phong模型</h2></a>
             </div>
             <!-- Post -->
@@ -159,7 +159,7 @@
 				
                 <p>要模拟现实的光照是很困难的<a id="more"></a>，例如实际光照中，一束光可以经过场景中若干物体反射后，照射到目标物体上，也可以是直接照射到目标物体上。其中经过其他物体反射后再次照射到目标物体上，这是一个递归的过程，将会无比复杂。因此实际模拟光照过程中，总是采用近似模型去接近实现光照。<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">Phong模型</font><br>冯氏光照模型（Phong Lighting Model）就是其中很经典的一个光照模型，它由三部分光照组成：环境光+漫反射光+镜面光。如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148137706557.png" alt=""><br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148137711634.png" alt=""></p>
+<p><font size="5" color="orange">Phong模型</font><br>冯氏光照模型（Phong Lighting Model）就是其中很经典的一个光照模型，它由三部分光照组成：环境光+漫反射光+镜面光。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%801.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%802.png?raw=true" alt=""></p>
 <ul>
 <li>环境光（ambient lighting）：环境光是场景中光源给定或者全局给定的一个光照常量，它一般很小，主要是为了模拟即使场景中没有光照时，也不是全黑的效果。场景中总有一点环境光，不至于使场景全部黑暗。例如远处的月亮、来自远处的光。</li>
 <li>漫反射光：模拟一个发光物对另一个物体的方向性影响。比如面向光源的一面会比其他面更亮。它是Phong模型最显著的组成部分。</li>
@@ -181,9 +181,9 @@ void main(){
     color=vec4(ambientColor*objectColor,1.0f);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其余程序不变，编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14813794356.png" alt=""><br>可以看到冯氏光照的环境光已经应用到受光物体上了，这个物体变得暗了一下，因为环境光弱了嘛！<br>&nbsp;</p>
+<p>其余程序不变，编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%803.png?raw=true" alt=""><br>可以看到冯氏光照的环境光已经应用到受光物体上了，这个物体变得暗了一下，因为环境光弱了嘛！<br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">漫反射光Diffuse Lighting</font><br>从文首的环境光照图可以看到，环境光本身不提供明显的光照效果，但是漫反射光会对物体产生显著的视觉影响。漫反射光使物体上与光线排布越近的片段越能从光源处获得更多的亮度。<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148144280309.png" alt=""><br>漫反射光强度与光线入射方向和物体表面的法向量之间的夹角$\theta$有关。当$\theta =0$时，光线垂直照射物体表面，这时获得的光照强度最大；当$\theta =90$时，光线与物体表面平行，此时光线照射不到物体，物体获得的光照强度最小；当$\theta &gt;90$后，物体表面转到转到光线背面了，此时物体表面接受不到光照。</p>
+<p><font size="5" color="orange">漫反射光Diffuse Lighting</font><br>从文首的环境光照图可以看到，环境光本身不提供明显的光照效果，但是漫反射光会对物体产生显著的视觉影响。漫反射光使物体上与光线排布越近的片段越能从光源处获得更多的亮度。<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%804.png?raw=true" alt=""><br>漫反射光强度与光线入射方向和物体表面的法向量之间的夹角$\theta$有关。当$\theta =0$时，光线垂直照射物体表面，这时获得的光照强度最大；当$\theta =90$时，光线与物体表面平行，此时光线照射不到物体，物体获得的光照强度最小；当$\theta &gt;90$后，物体表面转到转到光线背面了，此时物体表面接受不到光照。</p>
 <p>所以，我们可以用光线入射方向的单位向量和单位法向量的点乘，来表示光对片元颜色的影响程度。其实也就是用两个向量之间的夹角余弦值，因为两个向量都需要标准化，取的是单位向量。</p>
 <p><font size="4" color="red">添加法向量</font><br>法向量是垂直于顶点表面的（单位）向量。由于顶点自身并没有表面（它只是空间中一个独立的点），所以我们利用顶点周围的顶点来计算出这个顶点的表面。我们可以使用叉乘来为立方体所有顶点计算出发现。但是由于3D立方体不是一个复杂的形状，所以我们可以简单的把法线数据手工添加到顶点数据中：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //立方体各面顶点的坐标、法线
@@ -241,7 +241,7 @@ layout (location=1) in vec3 normal;    //顶点法线属性的位置值为1
 out vec3 Normal;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>传进顶点着色器的法线数据是在主程序顶点数据中定义的，它们是局部坐标（模型坐标），但是我们的片元到光源的方向向量却是世界坐标，所以我们需要在顶点着色器中将输入的法线向量转化为世界坐标。</p>
-<p>但是却不是简单的用模型矩阵乘以法线向量就可以，如<code>Normal=model*normal;</code>，因为当模型矩阵执行了不等比缩放时，法向量就不一定垂直于表面了，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148146405809.png" alt=""><br>为了修复这个问题，我们需要先把模型矩阵求逆矩阵，再转置，取左上角三行三列的矩阵部分，来和法向量相乘：</p>
+<p>但是却不是简单的用模型矩阵乘以法线向量就可以，如<code>Normal=model*normal;</code>，因为当模型矩阵执行了不等比缩放时，法向量就不一定垂直于表面了，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%805.png?raw=true" alt=""><br>为了修复这个问题，我们需要先把模型矩阵求逆矩阵，再转置，取左上角三行三列的矩阵部分，来和法向量相乘：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    Normal=mat3(transpose(inverse(model)))*normal;
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>顶点着色器的全部源码见后面。</p>
@@ -276,10 +276,10 @@ out vec3 Normal;
 <pre class="line-numbers language-c++"><code class="language-c++">color=vec4((ambientColor+diffuseColor)*objectColor,1.0f);
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>到此，Phong模型中的环境光和漫反射光都搞定了。所有源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL10_PhongLighting/LearnOpenGL10_PhongLighting_1" target="_blank" rel="external">在这里</a>。</p>
-<p><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148163892539.png" alt=""><br>&nbsp;</p>
+<p><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%806.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">镜面反射光Specular Lighting</font><br>和环境光一样，镜面反射光也要依据光的入射向量和法向量，但是镜面光还会依据观察方向，例如玩家是从什么方向看着这个片元的：</p>
-<p>当镜面反射光和观察方向夹角$\theta$越小时，人眼观察到的镜面光成分越明显。镜面反射系数定义为：$specFactor=\cos (\theta)^s$。其中s是镜面高光系数 ，它的值一般为2的整数幂，值越大高光部分越集中。下图是不同高光系数下的高光效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148152626008.png" alt=""></p>
+<p>当镜面反射光和观察方向夹角$\theta$越小时，人眼观察到的镜面光成分越明显。镜面反射系数定义为：$specFactor=\cos (\theta)^s$。其中s是镜面高光系数 ，它的值一般为2的整数幂，值越大高光部分越集中。下图是不同高光系数下的高光效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%807.png?raw=true" alt=""></p>
 <p><font size="4" color="red">求反射光线的方向向量</font><br>为了计算出夹角$\theta$，我们需要先求出反射光线方向。可以使用<code>reflect</code>函数求出：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    vec3 reflectDir=normalize(reflect(-lightDir,normal));   //反射光方向
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -311,9 +311,9 @@ out vec3 Normal;
 <p>环境光、漫反射光和镜面反射光的和构成了最终的光照颜色，再乘上物体本身的颜色，就是受光物体最终的输出颜色了。<br>&nbsp;</p>
 <hr>
 <p>到此，我们为Phong光照模型计算了全部光照元素。全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL10_PhongLighting/LearnOpenGL10_PhongLighting_2" target="_blank" rel="external">在这里</a>。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148163932939.png" alt=""><br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%808.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
-<p><font size="5" color="orange">per-vertex和per-fragment实现光照的对比</font><br>我们上面的光照计算是在像素着色器中进行的，这种是基于片元计算的，称为Phong Shading（冯氏光照）。但是早期的光照着色器，开发者是在顶点着色器中实现这些光照的，这是基于顶点计算的，称为Gouraud Shading。因为顶点相比片元来说，顶点要少得多，光照的计算频率会更低，所以会更高效。然而，如果在顶点着色器中计算冯氏光照，那么除了顶点以外的其他片元，都只是根据顶点颜色插值得到自己的颜色，这种插值后的光照显得不是很真实，没有冯氏关照的那种平滑的光照效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148152749318.png" alt=""><br>基于顶点这是的Gouraud Shading想要获得更平滑的效果，就得使用更多的顶点来加以完善，下面的图分别显示了少量顶点和大量顶点的基于顶点的关照计算效果：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148152749374.png" alt=""><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148152749434.png" alt=""><br>&nbsp;</p>
+<p><font size="5" color="orange">per-vertex和per-fragment实现光照的对比</font><br>我们上面的光照计算是在像素着色器中进行的，这种是基于片元计算的，称为Phong Shading（冯氏光照）。但是早期的光照着色器，开发者是在顶点着色器中实现这些光照的，这是基于顶点计算的，称为Gouraud Shading。因为顶点相比片元来说，顶点要少得多，光照的计算频率会更低，所以会更高效。然而，如果在顶点着色器中计算冯氏光照，那么除了顶点以外的其他片元，都只是根据顶点颜色插值得到自己的颜色，这种插值后的光照显得不是很真实，没有冯氏关照的那种平滑的光照效果：<br>![]<a href="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%809.png?raw=true" target="_blank" rel="external">https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%809.png?raw=true</a>)<br>基于顶点这是的Gouraud Shading想要获得更平滑的效果，就得使用更多的顶点来加以完善，下面的图分别显示了少量顶点和大量顶点的基于顶点的关照计算效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%8010.png?raw=true" alt=""><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%8011.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 

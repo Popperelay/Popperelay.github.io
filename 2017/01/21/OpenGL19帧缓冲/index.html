@@ -162,7 +162,7 @@
 <p><font size="5" color="orange">帧缓冲FBO概念</font><br>在OpenGL中，渲染管线中的顶点、纹理等经过一系列处理后，最终显示在2D屏幕上，渲染管线的最终目的地就是帧缓冲区。帧缓冲包括颜色缓冲区、深度缓冲区、模板缓冲区。默认的缓冲区由窗口系统创建，例如我们一直使用GLFW库来完成这项任务。这个默认的帧缓冲区，就是目前我们一直使用的绘图命令的作用对象， 称之为<strong>窗口系统提供的帧缓冲区</strong>。</p>
 <p>OpenGL也允许我们手动创建一个帧缓冲区，并将渲染结果重定向到这个缓冲区。在创建时允许我们自定义帧缓冲区的一些特性，这个自定义的帧缓冲区，称之为<strong>应用程序帧缓冲区</strong>。</p>
 <p>和默认的帧缓冲区一样，自定义的帧缓冲区也包含颜色缓冲、深度和模板缓冲，这些逻辑上的缓冲区在FBO中称之为附件（可附加的文件，Attachment），它们是可以附加到FBO的数组内存空间。</p>
-<p>FBO中包含两种类型的附件：纹理图像、渲染缓冲（renderbuffer）对象。之所以用附加这个词，表达的是FBO可以附加多个缓冲区，而且可以灵活地在缓冲区间切换，一个重要的概念是附加点（其实就是指针）。FBO中可以包含多个颜色附加点，但只能有一个深度和模板附加点，如下图所示：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148491821495.png" alt=""><br>从图中可以看到FBO本身并不包含任何缓冲对象，实际上是通过附加点指向实际缓冲对象的。这样FBO就可以快速地切换缓冲对象。<br>&nbsp;</p>
+<p>FBO中包含两种类型的附件：纹理图像、渲染缓冲（renderbuffer）对象。之所以用附加这个词，表达的是FBO可以附加多个缓冲区，而且可以灵活地在缓冲区间切换，一个重要的概念是附加点（其实就是指针）。FBO中可以包含多个颜色附加点，但只能有一个深度和模板附加点，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B21.png?raw=true" alt=""><br>从图中可以看到FBO本身并不包含任何缓冲对象，实际上是通过附加点指向实际缓冲对象的。这样FBO就可以快速地切换缓冲对象。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">创建帧缓冲FBO</font><br>和创建其他缓冲对象一样，使用<code>glGenFramebuffers</code>函数创建FBO如下：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //创建FBO
@@ -376,7 +376,7 @@ void main(){
         glDrawArrays(GL_TRIANGLES, 0, 6);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在渲染四边形之前，我们给它绑定了在自定义帧缓冲中已经渲染好的纹理（附件）。</p>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499563004.png" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL19_FrameBuffer" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B22.png?raw=true" alt=""><br>全部源码<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL19_FrameBuffer" target="_blank" rel="external">在这里</a>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">后期处理</font><br>现在，我们把整个场景渲染到了一个单独的纹理上，只需要简单操纵纹理数据，我么就能创建一些有趣的效果。下面，会展示出一些流行的后期处理（Post-processing）特效。</p>
 <p><font size="4" color="red">反相</font><br>我们已经在纹理上存储了渲染输出的每个颜色，可以在四边形的像素着色器中用1减去每个颜色，就能得到这些颜色的反射：</p>
@@ -384,7 +384,7 @@ void main(){
     color = 1.0 - texture(texture1,TexCoords);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950269.png" alt=""><br>想象一下，如果不先把场景渲染到纹理上，而是用我们之前的直接渲染到默认帧缓冲里，要实现这种效果，那我们就得在每一种着色器中去做上面的反色操作（每一种物体可能都有它们各自的着色器）。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B23.png?raw=true" alt=""><br>想象一下，如果不先把场景渲染到纹理上，而是用我们之前的直接渲染到默认帧缓冲里，要实现这种效果，那我们就得在每一种着色器中去做上面的反色操作（每一种物体可能都有它们各自的着色器）。</p>
 <p><font size="4" color="red">灰度</font><br>另一个有意思的效果是把整个场景图像变成黑白的。实现它的简单方式是获得每一个颜色分量，然后将它们平均化：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void main(){
     color = texture(texture1,TexCoords);
@@ -392,7 +392,7 @@ void main(){
     color = vec4(average,average,average,1.0f);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950349.png" alt=""><br>&nbsp;</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B24.png?raw=true" alt=""><br>&nbsp;</p>
 <hr>
 <p>在单独纹理图像上进行后处理的另一个好处是我们可以从纹理的其他部分进行采样。比如我们可以从当前纹理值的周围采样多个纹理值。这样我们可以使用一些图像处理技巧，来实现很多后处理效果。比如接下来的后处理效果中的Kernel效果。</p>
 <p><font size="5" color="orange">Kernel effects</font><br>kernel是一个长得有点像一个小矩阵的数值数组，通常是一个3x3的矩阵，而且所有元素加起来的和通常等于1。</p>
@@ -479,7 +479,7 @@ void main(){
     color = vec4(col,1.0f);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950443.png" alt=""><br>这是一个锐化的Kernel，就好像玩家吞了麻醉剂产生的幻觉一样。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B25.png?raw=true" alt=""><br>这是一个锐化的Kernel，就好像玩家吞了麻醉剂产生的幻觉一样。</p>
 <p><font size="4" color="red">kernel模糊效果Blur</font><br>创建模糊效果的kernel如下：<br>$$<br>\begin{bmatrix} 1 &amp; 2 &amp; 1 \\\ 2 &amp; 4 &amp; 2 \\\ 1 &amp; 2 &amp; 1 \end{bmatrix} / 16<br>$$<br>我们像素着色器里的kernel数组现在变成：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1.0 / 16, 2.0 / 16, 1.0 / 16,
@@ -487,7 +487,7 @@ void main(){
         1.0 / 16, 2.0 / 16, 1.0 / 16 
     );
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/148499950506.png" alt=""></p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B26.png?raw=true" alt=""></p>
 <p><font size="4" color="red">kernel边缘检测效果</font><br>边缘检测的kernel矩阵如下，和锐化kernel有点像：<br>$$<br>\begin{bmatrix} 1 &amp; 1 &amp; 1 \\\ 1 &amp; -8 &amp; 1 \\\ 1 &amp; 1 &amp; 1 \end{bmatrix}<br>$$<br>现在的kernel数组变为：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    float kernel[9] = float[](
         1, 1, 1,
@@ -495,7 +495,7 @@ void main(){
         1, 1, 1
     );
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="http://cfwjm.img48.wal8.com/img48/559974_20161023165829/14849995058.png" alt=""><br>当偏移量offset不同时，效果会有所改变。更多kernel效果可查看<a href="http://setosa.io/ev/image-kernels/" target="_blank" rel="external">Image Kernels</a>。<br>&nbsp; </p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B27.png?raw=true" alt=""><br>当偏移量offset不同时，效果会有所改变。更多kernel效果可查看<a href="http://setosa.io/ev/image-kernels/" target="_blank" rel="external">Image Kernels</a>。<br>&nbsp; </p>
 <hr>
 <p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
 
