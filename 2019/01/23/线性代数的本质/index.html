@@ -173,18 +173,18 @@
 <li>原点必须保持固定。</li>
 </ol>
 <p>总的来说，应该把线性变换看作是“保持网格线平行且等距分布”的变换。<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8_1.png?raw=true" alt=""></p>
-<p>因为线性变换会保持网格线平行且等距分布，所以会有如下性质：<br>$$<br>如果， \vec v=x\vec i+y\vec j\\<br>那么 ，Transformed \quad \vec v=x(Transformed \quad \vec i)+y(Transformed \quad \vec j)<br>$$<br>也就是说，变换前后的向量在对应的基上的组合关系是相同的。</p>
-<p>所以对于一个向量$\begin{bmatrix} x \ y \end{bmatrix}$，如果变换之后的i hat是$\begin{bmatrix} 1 \ -2 \end{bmatrix}$，j hat是$\begin{bmatrix} 3 \ 0 \end{bmatrix}$，那么变换之后的向量是：<br>$$<br>\begin{bmatrix} x \ y \end{bmatrix} \rightarrow x\begin{bmatrix} 1 \ -2 \end{bmatrix}+y\begin{bmatrix} 3 \ 0 \end{bmatrix}=\begin{bmatrix} 1x+3y \ -2x+0y \end{bmatrix}<br>$$<br>从上面可以看出，在二维空间的线性变换，仅由四个数字完全确定：变换后i hat的两个坐标和变换后j hat的两个坐标，即2x2矩阵$\begin{bmatrix} 1 &amp; 3 \ -2 &amp; 0 \end{bmatrix}$。我们可以把这个矩阵的列理解为两个特殊的向量，即变换后的i hat和j hat。</p>
-<p>也就是说线性变换矩阵和向量的乘积（即线性变换对向量的作用），可以理解为：取出向量的坐标，将它们分别与矩阵的特定列相乘，然后将结果相加即可：<br>$$<br>\begin{bmatrix} a &amp; b \ c &amp; d \end{bmatrix}\begin{bmatrix} x \ y \end{bmatrix}=x\begin{bmatrix} a \ c \end{bmatrix}+y\begin{bmatrix} b \ d \end{bmatrix}=\begin{bmatrix} ax+by \ cx+dy \end{bmatrix}<br>$$<br>其中，$\begin{bmatrix} a \ c \end{bmatrix}$是变换之后的i hat，$\begin{bmatrix} b \ d \end{bmatrix}$是变换之后的j hat（<strong>矩阵的列向量就是变换之后的基向量</strong>）。</p>
-<p>比如，我们要实现一个逆时针旋转90度的线性变换，因为变换之后的i hat是(0, 1)，j hat是(-1, 0)，所以变换矩阵的两列就分别是(0,1)和(-1,0)，即变换矩阵是$\begin{bmatrix} 0 &amp; -1 \ 1 &amp; 0 \end{bmatrix}$。</p>
-<p>还有一种叫做剪切（或者错切，Shear）的变换，在这个变换里，i hat保持不变，所以矩阵第一列是(1, 0)，但是j hat变成了(1, 1)，所以矩阵第二列是(1,1)，所以剪切矩阵就是$\begin{bmatrix} 1 &amp; 1 \ 0 &amp; 1 \end{bmatrix}$。</p>
-<p>相反的，如果已知一个线性变换矩阵$\begin{bmatrix} 1 &amp; 3 \ 2 &amp; 1 \end{bmatrix}$，我们可以推测出它代表的线性变换是什么样的：首先将i hat从(1, 0)变到(1, 2)，再将j hat从(0, 1)变到(3, 1)。</p>
-<p>但是如果变换矩阵的两列是线性相关的（比如$\begin{bmatrix} 2 &amp; -2 \ 1 &amp; -1 \end{bmatrix}$），也就是说变换后的i hat和j hat在同一条直线上，那么这个线性变换会将整个二维空间挤压到它们所在的那条直线上（移位空间）。</p>
+<p>因为线性变换会保持网格线平行且等距分布，所以会有如下性质：<br>$$<br>如果， \vec v=x\vec i+y\vec j\\\\<br>那么 ，Transformed \quad \vec v=x(Transformed \quad \vec i)+y(Transformed \quad \vec j)<br>$$<br>也就是说，变换前后的向量在对应的基上的组合关系是相同的。</p>
+<p>所以对于一个向量$\begin{bmatrix} x \\\ y \end{bmatrix}$，如果变换之后的i hat是$\begin{bmatrix} 1 \\\ -2 \end{bmatrix}$，j hat是$\begin{bmatrix} 3 \\\ 0 \end{bmatrix}$，那么变换之后的向量是：<br>$$<br>\begin{bmatrix} x \\\ y \end{bmatrix} \rightarrow x\begin{bmatrix} 1 \\\ -2 \end{bmatrix}+y\begin{bmatrix} 3 \\\ 0 \end{bmatrix}=\begin{bmatrix} 1x+3y \\\ -2x+0y \end{bmatrix}<br>$$<br>从上面可以看出，在二维空间的线性变换，仅由四个数字完全确定：变换后i hat的两个坐标和变换后j hat的两个坐标，即2x2矩阵$\begin{bmatrix} 1 &amp; 3 \\\ -2 &amp; 0 \end{bmatrix}$。我们可以把这个矩阵的列理解为两个特殊的向量，即变换后的i hat和j hat。</p>
+<p>也就是说线性变换矩阵和向量的乘积（即线性变换对向量的作用），可以理解为：取出向量的坐标，将它们分别与矩阵的特定列相乘，然后将结果相加即可：<br>$$<br>\begin{bmatrix} a &amp; b \\\ c &amp; d \end{bmatrix}\begin{bmatrix} x \\\ y \end{bmatrix}=x\begin{bmatrix} a \\\ c \end{bmatrix}+y\begin{bmatrix} b \\\ d \end{bmatrix}=\begin{bmatrix} ax+by \\\ cx+dy \end{bmatrix}<br>$$<br>其中，$\begin{bmatrix} a \\\ c \end{bmatrix}$是变换之后的i hat，$\begin{bmatrix} b \\\ d \end{bmatrix}$是变换之后的j hat（<strong>矩阵的列向量就是变换之后的基向量</strong>）。</p>
+<p>比如，我们要实现一个逆时针旋转90度的线性变换，因为变换之后的i hat是(0, 1)，j hat是(-1, 0)，所以变换矩阵的两列就分别是(0,1)和(-1,0)，即变换矩阵是$\begin{bmatrix} 0 &amp; -1 \\\ 1 &amp; 0 \end{bmatrix}$。</p>
+<p>还有一种叫做剪切（或者错切，Shear）的变换，在这个变换里，i hat保持不变，所以矩阵第一列是(1, 0)，但是j hat变成了(1, 1)，所以矩阵第二列是(1,1)，所以剪切矩阵就是$\begin{bmatrix} 1 &amp; 1 \\\ 0 &amp; 1 \end{bmatrix}$。</p>
+<p>相反的，如果已知一个线性变换矩阵$\begin{bmatrix} 1 &amp; 3 \\\ 2 &amp; 1 \end{bmatrix}$，我们可以推测出它代表的线性变换是什么样的：首先将i hat从(1, 0)变到(1, 2)，再将j hat从(0, 1)变到(3, 1)。</p>
+<p>但是如果变换矩阵的两列是线性相关的（比如$\begin{bmatrix} 2 &amp; -2 \\\ 1 &amp; -1 \end{bmatrix}$），也就是说变换后的i hat和j hat在同一条直线上，那么这个线性变换会将整个二维空间挤压到它们所在的那条直线上（移位空间）。</p>
 <p>可以看到，矩阵和向量相乘确实就只是向量加法和向量数乘。</p>
 <p>总之，线性变换是操纵空间的一种手段，它保持网格线平行且等距分布，并保持原点不动。任何一个矩阵都可以看作是对空间的一种特定变换。</p>
 <p><font size="6" color="orange">矩阵乘法</font></p>
 <hr>
-<p>两个矩阵相乘，比如$\begin{bmatrix} a &amp; b \ c &amp; d \end{bmatrix}\begin{bmatrix} e &amp; f \ g &amp; h \end{bmatrix}$，可以将第二个矩阵看作多个列向量，让每个列向量和第一个矩阵相乘（矩阵和向量相乘可以使用上面的方法）。</p>
+<p>两个矩阵相乘，比如$\begin{bmatrix} a &amp; b \\\ c &amp; d \end{bmatrix}\begin{bmatrix} e &amp; f \\\ g &amp; h \end{bmatrix}$，可以将第二个矩阵看作多个列向量，让每个列向量和第一个矩阵相乘（矩阵和向量相乘可以使用上面的方法）。</p>
 <p><font size="6" color="orange">行列式</font></p>
 <hr>
 <p>矩阵变换在保持网格线平行且等距的同时，对空间存在着拉伸或挤压。也就是说在原空间里的一个区域面积，做矩阵变换之后这个区域的面积有可能增大或者减小了（在二维空间里，这个变换会把i hat和j hat为边构成的正方形压缩或者拉伸为一个平行四边形）。</p>
