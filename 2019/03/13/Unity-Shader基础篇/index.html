@@ -179,8 +179,12 @@
 <p>表面着色器（Surface Shader）被定义在SubShader语义块（<strong>而非Pass语义块</strong>）中的CGPROGRAM和ENDPROGRAM之间，因为表面着色器不需要开发者关心使用多少个Pass、每个Pass如何渲染等问题，Unity会在背后为我们做好这些事情，我们只需要传给它需要的纹理等等。</p>
 <p>对于模型空间和世界空间，Unity使用的是左手坐标系，但是对于观察空间，Unity使用的是右手坐标系。</p>
 <p>向量叉积的模等于两个向量的模和夹角正弦的乘积：$|a\times b|=|a||b|sin\theta$。</p>
+<p>仿射变换（affine transform）就是合并线性变换和平移变换的变换类型。仿射变换可以使用一个4x4的矩阵来表示，为此，需要把矢量扩展到四维空间下，这就是齐次坐标空间（homogeneous space）。</p>
 <p>对于法线向量，为了使其模型变换以后，法线依然垂直表面，那么法线应该左乘的不是模型矩阵，而是模型矩阵的逆转置矩阵。</p>
 <p>如果只包括旋转和统一缩放（假设缩放系数是k），那么变换矩阵（在Unity里是UNITY_MATRIX_MV）就几乎是一个正交矩阵了。为什么是几乎呢？因为统一缩放可能会导致每一行（或每一列）的矢量长度不为1，而是k，这不符合正交矩阵的特性，但我们可以通过除以这个统一缩放系数，来把它变成正交矩阵。</p>
+<p>对于向量$v$来说，左乘正交矩阵$M$的逆（或者转置），等效于向量$v$的转置来右乘矩阵$M$，再将得到的向量进行转置。因为：$(v^{T}M)^{T}=M^Tv=M^{-1}v$。所以变换法线向量时通常使用如下代码（最后一步结果向量的转置是Unity自动做的，不需要额外写代码显式转置）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">o<span class="token punctuation">.</span>normal <span class="token operator">=</span> <span class="token function">mul</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span>normal<span class="token punctuation">,</span> <span class="token punctuation">(</span>float3x3<span class="token punctuation">)</span>unity_WorldToObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>对于Unity Shader中mul函数（源自于cg语言），mul会根据向量是左乘还是右乘矩阵，来自动将向量变换为行或者列矩阵（或者说行/列向量）：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> col_mul_result <span class="token operator">=</span> <span class="token function">mul</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//向量v被转换为列矩阵</span>
 <span class="token keyword">float</span> row_mul_result <span class="token operator">=</span> <span class="token function">mul</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> M<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//向量v被转换为行矩阵</span>
