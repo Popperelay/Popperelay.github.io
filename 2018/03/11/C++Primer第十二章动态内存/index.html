@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
 	 <link rel="shortcut icon" href="/img/logo_miccall.png">
 	
 			
     <title>
     Elays'Blog
     </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
     
     	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	
     <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
+        <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
 			    <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.scrollex.min.js"></script>
@@ -62,12 +62,12 @@
 </script>
 
 <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_undefined.css" />
-<link rel="stylesheet" href="/css/typo.css" />
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
 <!-- 文章页 -->
 <body class="is-loading">
     <!-- Wrapper 外包 s-->
@@ -79,10 +79,10 @@
     <a href="/" class="logo">MICCALL</a>
 </header>
         <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
+        <nav id="nav" class="special">
+            <ul class="menu links">
 			<!-- Homepage  主页  --> 
-			<li >
+			<li>
 	            <a href="/" rel="nofollow">主页</a>
 	        </li>
 			<!-- categories_name  分类   --> 
@@ -92,7 +92,7 @@
 	                    <ul class="submenu">
 	                        <li>
 	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
-	                    </ul>
+	                    </li></ul>
 	        </li>
 	        
 	        <!-- archives  归档   --> 
@@ -126,9 +126,9 @@
 			</ul>
 </nav>
 
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC12%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C++Primer第十二章 动态内存</h2></a>
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC12%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>C++Primer第十二章 动态内存</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
@@ -209,7 +209,7 @@
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="8">
 <li>我们可以用make_shared函数代替new来生成一个指针，这样更安全，同时不需要匹配的delete操作，因为智能指针在计算器变为0时会自动调用delete：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  当然用auto来保存make_shared的结果更简单：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -268,7 +268,7 @@ std<span class="token operator">::</span>shared_ptr<span class="token operator">
 
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">41</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">process</span><span class="token punctuation">(</span>std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法，但函数退出后p指向的内存会被释放，p称为悬空指针</span>
-<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>    
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当将一个shared_ptr绑定到一个普通指针时，我们就将内存的管理责任交给了这个shared_ptr。一旦这样做了，我们就不应该再使用内置指针来问shared_ptr所指向的内存了。</p>
 </li>
@@ -443,7 +443,7 @@ std<span class="token operator">::</span>weak_ptr<span class="token operator">&l
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="9">
 <li>allocator分配的内存是未构造的，我们需要在此内存中构造对象，而construct成员函数接受一个指针和零个或多个额外参数，在指针所指的位置构造一个元素：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> q <span class="token operator">=</span> p<span class="token punctuation">;</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//*q为空字符串</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//*q为10个字符c组成的字符串</span>
@@ -562,7 +562,7 @@ std<span class="token operator">::</span><span class="token function">uninitiali
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="8">
 <li>我们可以用make_shared函数代替new来生成一个指针，这样更安全，同时不需要匹配的delete操作，因为智能指针在计算器变为0时会自动调用delete：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  当然用auto来保存make_shared的结果更简单：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -621,7 +621,7 @@ std<span class="token operator">::</span>shared_ptr<span class="token operator">
 
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">41</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">process</span><span class="token punctuation">(</span>std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法，但函数退出后p指向的内存会被释放，p称为悬空指针</span>
-<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>    
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当将一个shared_ptr绑定到一个普通指针时，我们就将内存的管理责任交给了这个shared_ptr。一旦这样做了，我们就不应该再使用内置指针来问shared_ptr所指向的内存了。</p>
 </li>
@@ -796,7 +796,7 @@ std<span class="token operator">::</span>weak_ptr<span class="token operator">&l
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="9">
 <li>allocator分配的内存是未构造的，我们需要在此内存中构造对象，而construct成员函数接受一个指针和零个或多个额外参数，在指针所指的位置构造一个元素：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> q <span class="token operator">=</span> p<span class="token punctuation">;</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//*q为空字符串</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//*q为10个字符c组成的字符串</span>
@@ -915,7 +915,7 @@ std<span class="token operator">::</span><span class="token function">uninitiali
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="8">
 <li>我们可以用make_shared函数代替new来生成一个指针，这样更安全，同时不需要匹配的delete操作，因为智能指针在计算器变为0时会自动调用delete：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  当然用auto来保存make_shared的结果更简单：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -974,7 +974,7 @@ std<span class="token operator">::</span>shared_ptr<span class="token operator">
 
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">41</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">process</span><span class="token punctuation">(</span>std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法，但函数退出后p指向的内存会被释放，p称为悬空指针</span>
-<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>    
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当将一个shared_ptr绑定到一个普通指针时，我们就将内存的管理责任交给了这个shared_ptr。一旦这样做了，我们就不应该再使用内置指针来问shared_ptr所指向的内存了。</p>
 </li>
@@ -1149,7 +1149,7 @@ std<span class="token operator">::</span>weak_ptr<span class="token operator">&l
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="9">
 <li>allocator分配的内存是未构造的，我们需要在此内存中构造对象，而construct成员函数接受一个指针和零个或多个额外参数，在指针所指的位置构造一个元素：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> q <span class="token operator">=</span> p<span class="token punctuation">;</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//*q为空字符串</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//*q为10个字符c组成的字符串</span>
@@ -1268,7 +1268,7 @@ std<span class="token operator">::</span><span class="token function">uninitiali
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="8">
 <li>我们可以用make_shared函数代替new来生成一个指针，这样更安全，同时不需要匹配的delete操作，因为智能指针在计算器变为0时会自动调用delete：<pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
  当然用auto来保存make_shared的结果更简单：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> p1 <span class="token operator">=</span> std<span class="token operator">::</span>make_shared<span class="token operator">&lt;</span>std<span class="token operator">::</span>string<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1327,7 +1327,7 @@ std<span class="token operator">::</span>shared_ptr<span class="token operator">
 
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">41</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">process</span><span class="token punctuation">(</span>std<span class="token operator">::</span>shared_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//合法，但函数退出后p指向的内存会被释放，p称为悬空指针</span>
-<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>    
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当将一个shared_ptr绑定到一个普通指针时，我们就将内存的管理责任交给了这个shared_ptr。一旦这样做了，我们就不应该再使用内置指针来问shared_ptr所指向的内存了。</p>
 </li>
@@ -1502,7 +1502,7 @@ std<span class="token operator">::</span>weak_ptr<span class="token operator">&l
 </tr>
 </tbody>
 </table>
-<ol>
+<ol start="9">
 <li>allocator分配的内存是未构造的，我们需要在此内存中构造对象，而construct成员函数接受一个指针和零个或多个额外参数，在指针所指的位置构造一个元素：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token keyword">auto</span> q <span class="token operator">=</span> p<span class="token punctuation">;</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//*q为空字符串</span>
  Alloc<span class="token punctuation">.</span><span class="token function">construct</span><span class="token punctuation">(</span>q<span class="token operator">++</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">//*q为10个字符c组成的字符串</span>

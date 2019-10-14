@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
 	 <link rel="shortcut icon" href="/img/logo_miccall.png">
 	
 			
     <title>
     Elays'Blog
     </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
     
     	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	
     <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
+        <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
 			    <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.scrollex.min.js"></script>
@@ -62,12 +62,12 @@
 </script>
 
 <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_undefined.css" />
-<link rel="stylesheet" href="/css/typo.css" />
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
 <!-- 文章页 -->
 <body class="is-loading">
     <!-- Wrapper 外包 s-->
@@ -79,10 +79,10 @@
     <a href="/" class="logo">MICCALL</a>
 </header>
         <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
+        <nav id="nav" class="special">
+            <ul class="menu links">
 			<!-- Homepage  主页  --> 
-			<li >
+			<li>
 	            <a href="/" rel="nofollow">主页</a>
 	        </li>
 			<!-- categories_name  分类   --> 
@@ -92,7 +92,7 @@
 	                    <ul class="submenu">
 	                        <li>
 	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
-	                    </ul>
+	                    </li></ul>
 	        </li>
 	        
 	        <!-- archives  归档   --> 
@@ -126,9 +126,9 @@
 			</ul>
 </nav>
 
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >内存泄漏</h2></a>
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>内存泄漏</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
@@ -183,7 +183,7 @@ Object dump complete<span class="token punctuation">.</span>
 <p>如果程序有多个退出点（不止main函数里的return 0可以终止程序），一种方法是在每个退出点上都使用<code>_CrtDumpMemoryLeaks</code>函数，但是比较繁琐。另一种方法是在程序开始的地方加上<code>_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );</code>（不用再显式调用<code>_CrtDumpMemoryLeaks</code>函数了），这个函数会在程序的每个退出点上都自动执行<code>_CrtDumpMemoryLeaks</code>函数。</p>
 <p><font size="6" color="orange">使用Visual Leak Detector（VLD）插件</font></p>
 <hr>
-<p>可以在<a href="https://kinddragon.github.io/vld/" target="_blank" rel="external">这里</a>下载VLD插件，双击安装即可（可以不用它自己设置的环境）。在配置好VLD的库文件以后，只需要在需要检测内存泄漏的cpp源文件包含进<code>vld.h</code>就可以了：</p>
+<p>可以在<a href="https://kinddragon.github.io/vld/" target="_blank" rel="noopener">这里</a>下载VLD插件，双击安装即可（可以不用它自己设置的环境）。在配置好VLD的库文件以后，只需要在需要检测内存泄漏的cpp源文件包含进<code>vld.h</code>就可以了：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vld.h></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>按F5调试运行后，可以在output窗口看到类似的内存泄漏信息。</p>
@@ -203,8 +203,8 @@ Object dump complete<span class="token punctuation">.</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果我们想要检测leakTest函数里是否发生内存泄漏，我们可以在进入该函数之前和退出该函数之后分别进行一次快照。快照的方法是：按F5进入调试运行，在诊断工具窗口的的内存使用率里，点击摄像机图标来截取快照。然后我们可以看到如下图所示的两次快照：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_1.png?raw=true" alt=""><br>点击第二次的+1或者+0.05KB，可以看到第二次快照相对于第一次快照内存增加了什么东西：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_2.png?raw=true" alt=""><br>可以看到增加的是一个12字节的int数组，双击图中的int[]，可以看到这个数据对应的具体实例：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_3.png?raw=true" alt=""><br>单击每个示例可以在调用堆栈窗口里看到它的调用层次。</p>
-<p>双击实例或者调用堆栈里的函数，可以定位到具体的代码。比如我们双击上面的示例会跳转到分配这个int数组的具体代码：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_4.png?raw=true" alt=""></p>
+<p>如果我们想要检测leakTest函数里是否发生内存泄漏，我们可以在进入该函数之前和退出该函数之后分别进行一次快照。快照的方法是：按F5进入调试运行，在诊断工具窗口的的内存使用率里，点击摄像机图标来截取快照。然后我们可以看到如下图所示的两次快照：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_1.png?raw=true" alt><br>点击第二次的+1或者+0.05KB，可以看到第二次快照相对于第一次快照内存增加了什么东西：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_2.png?raw=true" alt><br>可以看到增加的是一个12字节的int数组，双击图中的int[]，可以看到这个数据对应的具体实例：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_3.png?raw=true" alt><br>单击每个示例可以在调用堆栈窗口里看到它的调用层次。</p>
+<p>双击实例或者调用堆栈里的函数，可以定位到具体的代码。比如我们双击上面的示例会跳转到分配这个int数组的具体代码：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F_4.png?raw=true" alt></p>
 
             </div>
 

@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
 	 <link rel="shortcut icon" href="/img/logo_miccall.png">
 	
 			
     <title>
     Elays'Blog
     </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
     
     	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	
     <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
+        <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
 			    <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.scrollex.min.js"></script>
@@ -62,12 +62,12 @@
 </script>
 
 <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_undefined.css" />
-<link rel="stylesheet" href="/css/typo.css" />
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
 <!-- 文章页 -->
 <body class="is-loading">
     <!-- Wrapper 外包 s-->
@@ -79,10 +79,10 @@
     <a href="/" class="logo">MICCALL</a>
 </header>
         <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
+        <nav id="nav" class="special">
+            <ul class="menu links">
 			<!-- Homepage  主页  --> 
-			<li >
+			<li>
 	            <a href="/" rel="nofollow">主页</a>
 	        </li>
 			<!-- categories_name  分类   --> 
@@ -92,7 +92,7 @@
 	                    <ul class="submenu">
 	                        <li>
 	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
-	                    </ul>
+	                    </li></ul>
 	        </li>
 	        
 	        <!-- archives  归档   --> 
@@ -126,9 +126,9 @@
 			</ul>
 </nav>
 
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC16%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >C++Primer第十六章 模板与泛型编程</h2></a>
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC16%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>C++Primer第十六章 模板与泛型编程</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
@@ -327,7 +327,7 @@ declaration是一个类或函数声明，其中所有模板参数已被替换为
 </li>
 <li>因为实参时左值，所以推断出T的类型为string&amp;</li>
 <li>因此，remove_reference用string&amp;进行实例化</li>
-<li>remove_reference<string&>的type成员是string</string&></li>
+<li>remove_reference&lt;string&amp;&gt;的type成员是string</li>
 <li>move的返回类型仍然是string&amp;&amp;</li>
 <li><p>move的函数参数t的类型为string&amp; &amp;&amp;，会折叠为string&amp;</p>
 <p>所以该move的实例化版本为<code>string&amp;&amp; move(string &amp;t)</code>。这就是我们想要的，使用std::move来获取一个左值的右值引用。</p>
@@ -456,7 +456,7 @@ declaration是一个类或函数声明，其中所有模板参数已被替换为
 <li>特例化的本质是实例化一个模板，而非重载它。因此，特例化不影响函数匹配。</li>
 <li>编译器优先选择非模板版本，再选择模板特例化版本，再选择最佳匹配的模板版本。</li>
 <li>模板及其特例化版本应该声明在同一个头文件中。所以同名模板的声明应该放在前面，然后是这些模板的特例化版本。</li>
-<li><p>默认情况下，无序容器使用hash<key_type>来组织其元素。标准库为内置类型和很多标准库类型定义了hash类的特例化版本，比如我们可以使用一个（未命名的）hash<string>对象来生成一个字符串的hash值。所以我们可以把类似string这种标准库类型对象存入无序容器中，但是却无法把类似CData这种自定义类型放入无序容器中，因为标准库没有提供针对CData的hash类版本：</string></key_type></p>
+<li><p>默认情况下，无序容器使用hash&lt;key_type&gt;来组织其元素。标准库为内置类型和很多标准库类型定义了hash类的特例化版本，比如我们可以使用一个（未命名的）hash<string>对象来生成一个字符串的hash值。所以我们可以把类似string这种标准库类型对象存入无序容器中，但是却无法把类似CData这种自定义类型放入无序容器中，因为标准库没有提供针对CData的hash类版本：</string></p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"> std<span class="token operator">::</span>unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">double</span><span class="token operator">></span> IntDoubleMap<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//正确</span>
  std<span class="token operator">::</span>unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> CData<span class="token operator">></span> IntCDataMap<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//正确</span>
  std<span class="token operator">::</span>unordered_map<span class="token operator">&lt;</span>CData<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> CDataIntMap2<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//错误，标准库没有为键CData提供对应的hash版本</span>

@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html>
 
-<head>
-	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
 	 <link rel="shortcut icon" href="/img/logo_miccall.png">
 	
 			
     <title>
     Elays'Blog
     </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/css/mic_main.css" />
-    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
     
     	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 	
     <noscript>
-        <link rel="stylesheet" href="/css/noscript.css" />
+        <link rel="stylesheet" href="/css/noscript.css">
     </noscript>
 			    <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.scrollex.min.js"></script>
@@ -62,12 +62,12 @@
 </script>
 
 <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
 </script>
 
 <!--  代码渲染  -->
-<link rel="stylesheet" href="/css/prism_undefined.css" />
-<link rel="stylesheet" href="/css/typo.css" />
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
 <!-- 文章页 -->
 <body class="is-loading">
     <!-- Wrapper 外包 s-->
@@ -79,10 +79,10 @@
     <a href="/" class="logo">MICCALL</a>
 </header>
         <!-- Nav 导航条 start -->
-        <nav id="nav" class="special" >
-            <ul class="menu links" >
+        <nav id="nav" class="special">
+            <ul class="menu links">
 			<!-- Homepage  主页  --> 
-			<li >
+			<li>
 	            <a href="/" rel="nofollow">主页</a>
 	        </li>
 			<!-- categories_name  分类   --> 
@@ -92,7 +92,7 @@
 	                    <ul class="submenu">
 	                        <li>
 	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机图形学/">计算机图形学</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
-	                    </ul>
+	                    </li></ul>
 	        </li>
 	        
 	        <!-- archives  归档   --> 
@@ -126,9 +126,9 @@
 			</ul>
 </nav>
 
-        <div id="main" >
-            <div class ="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%96_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
-                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >OpenGL24：实例化</h2></a>
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%96_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL24：实例化</h2></a>
             </div>
             <!-- Post -->
             <div class="typo" style="padding: 3rem;">
@@ -201,19 +201,7 @@ void main(){
 <pre class="line-numbers language-c++"><code class="language-c++">    //100个方块的位置
     vec2 quadOffsets[100];
     int index = 0;
-    for (GLfloat y = -0.9; y <= 0.9; y += 0.2) {
-        for (GLfloat x = -0.9; x <= 0.9; x += 0.2) {
-            quadOffsets[index].x = x;
-            quadOffsets[index].y = y;
-            index++;
-        }
-    }
-    ... 
-    quad_shader.Use();
-    for (int i = 0; i < 100; i++) {
-            glUniform2f(glGetUniformLocation(quad_shader.shaderProgram, ("offsets[" + IntToString(i) + "]").c_str()), quadOffsets[i].x, quadOffsets[i].y);
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    for (GLfloat y = -0.9; y <= 0.9; y +="0.2)" { for (glfloat x="-0.9;" <="0.9;" quadoffsets[index].x="x;" quadoffsets[index].y="y;" index++; } ... quad_shader.use(); (int i="0;" 100; i++) gluniform2f(glgetuniformlocation(quad_shader.shaderprogram, ("offsets[" inttostring(i) "]").c_str()), quadoffsets[i].x, quadoffsets[i].y); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></=></code></pre>
 <p>其中<code>IntToString</code>是我们用于把整数变成字符串的自定义函数：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">//把int类型转换为string类型
 string IntToString(int number) {
@@ -236,7 +224,7 @@ void main(){
         glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
         glBindVertexArray(0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%961.png?raw=true" alt=""></p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%961.png?raw=true" alt></p>
 <p><font size="5" color="orange">实例化数组</font></p>
 <hr>
 <p>前面我们使用了100个uniform来标识方块的不同位置，但是uniform数量是有上线的，想要绘制更多方块显然不能再使用uniform了。解决这个问题的另一个可替代方案是实例化数组（Instanced Array），它用顶点属性来存储这些方块的位置。下面我们在顶点着色器中加入方块位置属性：</p>
@@ -272,10 +260,10 @@ void main(){
     fColor = color;
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%962.png?raw=true" alt=""><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_1" target="_blank" rel="external">这里</a>。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%962.png?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_1" target="_blank" rel="noopener">这里</a>。</p>
 <p><font size="5" color="orange">Demo：小行星带</font></p>
 <hr>
-<p>想象一下，在一个场景中一个很大的行星（<a href="http://learnopengl.com/data/models/planet.rar" target="_blank" rel="external">从这里下载</a>），行星周围有一圈小行星带。这样一个小行星带可能包含成千上万的石块(<a href="http://learnopengl.com/data/models/rock.rar" target="_blank" rel="external">从这里下载</a>)，对于多达数显卡来说一个一个地渲染几乎是难以完成的渲染任务。但是对于实例化渲染来说却不在话下，每个小行星都可以使用一个模型来表示，经过一个变换矩阵后他们就是一个独一无二的小行星了。</p>
+<p>想象一下，在一个场景中一个很大的行星（<a href="http://learnopengl.com/data/models/planet.rar" target="_blank" rel="noopener">从这里下载</a>），行星周围有一圈小行星带。这样一个小行星带可能包含成千上万的石块(<a href="http://learnopengl.com/data/models/rock.rar" target="_blank" rel="noopener">从这里下载</a>)，对于多达数显卡来说一个一个地渲染几乎是难以完成的渲染任务。但是对于实例化渲染来说却不在话下，每个小行星都可以使用一个模型来表示，经过一个变换矩阵后他们就是一个独一无二的小行星了。</p>
 <p><font size="4" color="red">老方法绘制小行星带</font><br>我们先使用老办法，一个一个地渲染出这些石块：<br>由于行星周围的陨石块在不同的位置，所以我们给这些陨石块设置不同的模型矩阵：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">    //1000个陨石块的模型矩阵
     GLuint amount = 1000;
@@ -332,7 +320,7 @@ void main(){
             rock.Draw(planetAndRock_shader);
         }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%963.png?raw=true" alt=""><br>用老办法渲染小行星带的所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_2" target="_blank" rel="external">这里</a>。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%963.png?raw=true" alt><br>用老办法渲染小行星带的所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_2" target="_blank" rel="noopener">这里</a>。</p>
 <p>这个场景包含1001次渲染函数调用，每帧渲染1001个模型。但是当我们开始增加数量的时候，很快会注意到帧数下降得很厉害，amount设置为2000的时候，场景明显出现卡顿。上升到100000时，场景已经卡得很难移动了。</p>
 <p>下面我们使用实例化来渲染同样的场景。</p>
 <p><font size="4" color="red">实例化绘制小行星带</font><br>由于行星不需要实例化绘制，而岩石需要。所以行星和陨石得分别使用各自的一套着色器了。</p>
@@ -398,11 +386,11 @@ void main(){
         }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>绘制行星的代码和之前一样，不再赘述了。</p>
-<p>编译运行后的结果和使用老方法绘制的结果一样，不过速度变快了。不实例渲染我们可以流畅渲染1000到1500个陨石；而使用了实例渲染，我们可以渲染100000个陨石！每个模型有576个顶点，这就是5千7百万个顶点，但是帧率几乎没有下降（有些渲染性能不太好的机器可能会下降一点）。调整为100000陨石后编译运行的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%964.png?raw=true" alt=""></p>
+<p>编译运行后的结果和使用老方法绘制的结果一样，不过速度变快了。不实例渲染我们可以流畅渲染1000到1500个陨石；而使用了实例渲染，我们可以渲染100000个陨石！每个模型有576个顶点，这就是5千7百万个顶点，但是帧率几乎没有下降（有些渲染性能不太好的机器可能会下降一点）。调整为100000陨石后编译运行的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%964.png?raw=true" alt></p>
 <p>实例渲染通常用来渲染草、草虫、粒子以及想小行星带这样的场景，基本上只要场景中有很多重复物体，使用实例渲染都会获得好处。</p>
-<p>实例化绘制小行星带的所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_3" target="_blank" rel="external">这里</a>。<br>&nbsp; </p>
+<p>实例化绘制小行星带的所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL24_Instance/LearnOpenGL24_Instance_3" target="_blank" rel="noopener">这里</a>。<br>&nbsp; </p>
 <hr>
-<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="external">LearnOpenGL</a></p>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="noopener">LearnOpenGL</a></p>
 
             </div>
 
