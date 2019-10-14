@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Graphics/">Graphics</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL32 视差贴图</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#视差贴图的作用"><span class="toc-text">视差贴图的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#视差贴图的原理"><span class="toc-text">视差贴图的原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现视差贴图"><span class="toc-text">实现视差贴图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#视差遮蔽贴图"><span class="toc-text">视差遮蔽贴图</span></a></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <h1 id="视差贴图的作用"><a href="#视差贴图的作用" class="headerlink" title="视差贴图的作用"></a><font size="6" color="orange">视差贴图的作用</font></h1><hr>
+<p>上一篇文章中，我们用法线贴图技术，使得平面产生了凹凸不平的视觉效果，而本文将要介绍的视差贴图（Parallax Mapping）也是一种类似的视觉错觉技术（比法线贴图的凹凸感更明显）。</p>
+<p>视差贴图会借助于一张高度图（Height Map），高度图里的每个纹素都存储着一个高度值，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_1.png?raw=true" alt><br>如果我们有足够多的顶点，让每个顶点都去高度图对应位置上取出一个高度值，从而来改变顶点的高度值（通常是顶点的y坐标），是可以直接产生出凹凸视觉的（因为从几何上就已经是凹凸不平的了）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_2.png?raw=true" alt><br>但是这需要渲染大量的顶点，对于一整块墙面来说本来渲染6个顶点（两个三角形）就够了，为了实现凹凸效果而去渲染成千上万个顶点无疑太耗性能了。这时候我们就可以借助视差贴图技术并配合法线贴图来达到类似的视觉效果了。</p>
+<h1 id="视差贴图的原理"><a href="#视差贴图的原理" class="headerlink" title="视差贴图的原理"></a><font size="6" color="orange">视差贴图的原理</font></h1><hr>
+<p>视差贴图的核心思想是根据观察向量和高度图，来偏移片元原有的纹理坐标。我们先看一下下面这幅图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_3.png?raw=true" alt><br>其中红线的高度图中数值的立体表达，$V$是观察向量。如果我们对平面（底部的非黑色部分）按照高度图把顶点进行实际位移，那么观察者沿着图中的观察方向实际上看到的是点B，但是我们实际上不想去位移这个平面的顶点（前文说过会有很大开销），如果不按照高度图位移的话，那么观察者会看到的是点A。视差贴图的目的就是，让平面是A位置处的片元不再使用点A的纹理坐标，而是使用B的纹理坐标来采样，这样观察者就会像看到了B一样。</p>
+<p>那么问题是我们怎么从点A得到点B的纹理坐标呢？看下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_4.png?raw=true" alt><br>我们将$V$的长度缩放为高度图在点A处的高度H(A)，得到缩放之后的向量$P$，以向量$P$的终点来近似为点B。所以向量P的x、y坐标就近似为点B相对于点A的纹理坐标偏移量（即纹理坐标$\Delta s、\Delta t$）了。</p>
+<p>不过这种近似有两个问题：</p>
+<ul>
+<li>当高度变化很快的时候，以向量$P$的终点近似点B就会很不准确，从而导致不真实的结果，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_5.png?raw=true" alt></li>
+<li>另一个问题是，用向量$P$的x、y坐标来近似纹理坐标偏移量，这个只有在纹理坐标的s、t轴确实跟向量$P$的x、y轴重合时才有效。如果物体旋转一下，那么纹理坐标轴s、t的方向也会跟着转，这样就不能用向量$P$的x、y坐标来近似了。如果向量$P$的x、y轴永远和纹理坐标轴重合就好了，很容易想到上一篇文章中所述的切线空间，把向量$P$从世界空间转换到切线空间就可以了（因为切线空间下的切线方和副切线向量与表面纹理坐标的方向相同）。</li>
+</ul>
+<p>而且通常，我们不是使用高度图，而是使用深度图来实现视差贴图（据说是因为使用深度图去模拟深度比模拟高度更容易~不懂），比如下面这张图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_6.png?raw=true" alt><br>可以看到跟之前的那张高度图颜色正好是反着的。那么这时视差映射就应该对应下面这种图了：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_7.png?raw=true" alt><br>这个时候应该用向量$V$减去点A的纹理坐标在乘以深度值得到向量$P$。</p>
+<h1 id="实现视差贴图"><a href="#实现视差贴图" class="headerlink" title="实现视差贴图"></a><font size="6" color="orange">实现视差贴图</font></h1><hr>
+<p>由于向量$P$需要在切线空间下来计算纹理偏移量，所以我们还是选择在切线空间里进行光照计算。顶点着色器和上一篇文章一样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 _Position<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span> in vec3 _Normal<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> in vec2 _TexCoord<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">)</span> in vec3 _Tangent<span class="token punctuation">;</span>
+<span class="token function">layout</span> <span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">)</span> in vec3 _Bitangent<span class="token punctuation">;</span>
+
+out vec2 v2f_TexCoord<span class="token punctuation">;</span>
+out vec3 v2f_FragPosInTangentSpace<span class="token punctuation">;</span>
+out vec3 v2f_ViewPosInTangentSpace<span class="token punctuation">;</span>
+out vec3 v2f_LightPosInTangentSpace<span class="token punctuation">;</span>
+
+uniform mat4 u_Projection<span class="token punctuation">;</span>
+uniform mat4 u_View<span class="token punctuation">;</span>
+uniform mat4 u_Model<span class="token punctuation">;</span>
+uniform vec3 u_ViewPos<span class="token punctuation">;</span>
+uniform vec3 u_LightPos <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec4 FragPosInWorldSpace <span class="token operator">=</span> u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    gl_Position <span class="token operator">=</span> u_Projection <span class="token operator">*</span> u_View <span class="token operator">*</span> FragPosInWorldSpace<span class="token punctuation">;</span>
+    v2f_TexCoord <span class="token operator">=</span> _TexCoord<span class="token punctuation">;</span>
+
+    mat3 NormalMatrix <span class="token operator">=</span> <span class="token function">mat3</span><span class="token punctuation">(</span><span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">inverse</span><span class="token punctuation">(</span>u_Model<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 T <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Tangent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 B <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Bitangent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 N <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>NormalMatrix <span class="token operator">*</span> _Normal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mat3 InverseTBN <span class="token operator">=</span> <span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">mat3</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> B<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    v2f_FragPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> FragPosInWorldSpace<span class="token punctuation">.</span>xyz<span class="token punctuation">;</span>
+    v2f_ViewPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> u_ViewPos<span class="token punctuation">;</span>
+    v2f_LightPosInTangentSpace <span class="token operator">=</span> InverseTBN <span class="token operator">*</span> u_LightPos<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在片元着色器里，我们需要根据观察向量算出纹理坐标偏移量，然后使用当前纹理坐标减去这个偏移量，返回应用视差贴图技术以后的片元的新的纹理坐标：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec2 <span class="token function">ParallaxMapping</span><span class="token punctuation">(</span>vec2 vTexCoords<span class="token punctuation">,</span> vec3 vViewDir<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> Depth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthMap<span class="token punctuation">,</span> vTexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    vec3 P <span class="token operator">=</span> vViewDir <span class="token operator">*</span> <span class="token punctuation">(</span>Depth <span class="token operator">*</span> u_DepthScale<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec2 TexCoordsOffset <span class="token operator">=</span> P<span class="token punctuation">.</span>xy <span class="token operator">/</span> vViewDir<span class="token punctuation">.</span>z<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> vTexCoords <span class="token operator">-</span> TexCoordsOffset<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码很好懂，使用从深度图中采出来的深度值，来缩放观察向量，得到向量$P$，然后以向量$P$的x、y分量作为纹理坐标偏移量，最后相减得到新的纹理坐标。其中<code>u_DepthScale</code>是因为视差效果如果没有一个缩放参数通常会过于强烈（我们这里设置的是0.1）。而除以<code>vViewDir.z</code>是为了在观察向量大致平行于表面时，能够获得较大的$P$向量，也就能获得较大的纹理坐标偏移量（因为平行表面时，观察向量的z分量接近于0.0），也有些业内人士在这里不除以<code>vViewDir.z</code>，因为它们觉得观察方向在某些角度下，它会带来一些不好的效果。当然，除不除看个人爱好了，随意。</p>
+<p>然后我们，使用新的纹理坐标来采样法线贴图和漫反射贴图（即物体本身的纹理）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec2 TexCoords <span class="token operator">=</span> <span class="token function">ParallaxMapping</span><span class="token punctuation">(</span>v2f_TexCoord<span class="token punctuation">,</span> ViewDir<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vec3 Normal <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_WallNormalMap<span class="token punctuation">,</span> TexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>接下来就是跟以前一样执行光照计算了。运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_8.png?raw=true" alt><br>可以看到，使用视差贴图以后，凹凸感更明显了。</p>
+<p>但是也可以看到，视差贴图结果在边上有些失真，这是因为在平面的边缘上，<code>ParallaxMapping</code>函数返回的纹理坐标超出了0到1的范围，采样时由于纹理的环绕方式而导致了不真实的结果。解决方案是当返回的纹理坐标超出[0,1]的范围时，直接丢弃掉那个片元：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">TexCoords <span class="token operator">=</span> <span class="token function">ParallaxMapping</span><span class="token punctuation">(</span>v2f_TexCoord<span class="token punctuation">,</span> ViewDir<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>TexCoords<span class="token punctuation">.</span>x <span class="token operator">></span> <span class="token number">1.0</span> <span class="token operator">||</span> TexCoords<span class="token punctuation">.</span>y <span class="token operator">></span> <span class="token number">1.0</span> <span class="token operator">||</span> TexCoords<span class="token punctuation">.</span>x <span class="token operator">&lt;</span> <span class="token number">0.0</span> <span class="token operator">||</span> TexCoords<span class="token punctuation">.</span>y <span class="token operator">&lt;</span> <span class="token number">0.0</span><span class="token punctuation">)</span>
+    discard<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>运行结果如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_9.png?raw=true" alt><br>值得注意的是，这个技巧不能在所有类型的表面上都能正常工作，通常只是应用于平面上（看起来像真的进行位移了）。</p>
+<p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL32_ParallaxMap/LearnOpenGL32_ParallaxMap_1" target="_blank" rel="noopener">这里</a>。</p>
+<p>但是当我们从某些角度看过去的时候，还是会出现一些问题，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_10.png?raw=true" alt><br>问题的原因是我们用向量$P$的终点来近似点$P$不一定准确（尤其是在像上图那样的角度下，观察方向与表面接近平行时，向量$P$会比较大，纹理坐标偏移量也很大）。如果我们不再使用单一样本，而是使用多个样本来找到离点B更近的点会是怎样呢？</p>
+<p><font size="6" color="orange">陡峭视差贴图</font></p>
+<hr>
+<p>陡峭视差贴图（Steep Parallax Mapping）是视差贴图技术的扩展，原理是一样的，但不再是使用一个样本而是多个样本来确定向量$P$的终点。它把[0,1]范围的深度划分成了多个层，从每个层中我们沿着$P$的方向（也就是观察方向）移动采样纹理坐标，直到我们出现一个采样得到的深度值低于当前层的深度值才停止。如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_11.png?raw=true" alt><br>我们从上到下遍历层，我们把每个深度层（黄色线）和对应存储在深度图中的深度值（在图中就是竖直线和红色深度曲线的交点）进行比较。我们一直比到深度等于0.6的那一层，发现层深度0.6小于了它对应的深度图中的值，然后停下来，用向量$P$和0.6这一层的交点作为$P$的终点，来进行视差映射：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//陡峭视差贴图</span>
+vec2 <span class="token function">ParallaxMapping</span><span class="token punctuation">(</span>vec2 vTexCoords<span class="token punctuation">,</span> vec3 vViewDir<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token keyword">float</span> NumLayers <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> LayerDepth <span class="token operator">=</span> <span class="token number">1.0</span> <span class="token operator">/</span> NumLayers<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> CurrentLayerDepth <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    vec2 DeltaTexCoords <span class="token operator">=</span> vViewDir<span class="token punctuation">.</span>xy <span class="token operator">*</span> u_DepthScale <span class="token operator">/</span> NumLayers<span class="token punctuation">;</span>
+    vec2 CurrentTexCoords <span class="token operator">=</span> vTexCoords<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> CurrentDepthFromDepthMap <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthMap<span class="token punctuation">,</span> CurrentTexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span>CurrentLayerDepth <span class="token operator">&lt;</span> CurrentDepthFromDepthMap<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        CurrentTexCoords <span class="token operator">-</span><span class="token operator">=</span> DeltaTexCoords<span class="token punctuation">;</span>
+        CurrentDepthFromDepthMap <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthMap<span class="token punctuation">,</span> CurrentTexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+        CurrentLayerDepth <span class="token operator">+</span><span class="token operator">=</span> LayerDepth<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> CurrentTexCoords<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们先定义了层的数量，计算每一层的深度，然后计算出每移动一层需要偏移的纹理坐标（按向量$P$的方向来进行偏移），然后遍历所有层，算出向量$P$在当前层上的纹理坐标<code>CurrentTexCoords</code>，用该坐标去深度图中取到对应的深度值，我们要一直遍历到这个深度值<code>CurrentTexCoords</code>小于当前层的深度<code>CurrentLayerDepth</code>为止。循环结束后就以当前层上对应的纹理坐标<code>CurrentTexCoords</code>作为视差映射之后的新的纹理坐标（注意这里的<code>CurrentTexCoords</code> 不是纹理坐标偏移量，所以不需要再用<code>vTexCoords</code>去减了）。</p>
+<p>这样得到的结果会比之前只采样一次来得到新的纹理坐标，结果看起来要好一些，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_12.png?raw=true" alt><br>因为当越靠近垂直看一个表面的时候纹理坐标偏移量肯定越小，所以我们可以在这时候适当减少采样数量（也就是减少层数）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">float</span> MinLayers <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">float</span> MaxLayers <span class="token operator">=</span> <span class="token number">32</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> NumLayers <span class="token operator">=</span> <span class="token function">mix</span><span class="token punctuation">(</span>MaxLayers<span class="token punctuation">,</span> MinLayers<span class="token punctuation">,</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span><span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> vViewDir<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>代码很简单，我们使用观察向量（切线空间下）和切线空间的z方向（切线空间的z方向就是表面的法线）的夹角，来调整层数。</p>
+<p>所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL32_ParallaxMap/LearnOpenGL32_ParallaxMap_2" target="_blank" rel="noopener">这里</a>。</p>
+<p>但是陡峭视差贴图也有一些不足，如下图所示，在某些角度下面会看到明显的锯齿效果以及图层之间的断层，这是因为该技术是基于有限的样本数量的：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_13.png?raw=true" alt><br>我们可以通过增加样本来减弱上面的走样，但是肯定会带来更多性能消耗的。还有另外一种思路：不是在多个样本中，去找层深度值小于表面深度值（即深度图中的深度值）的第一个位置，而是第一个小于和最后一个大于的两个深度层之间进行插值，得到更接近点B的位置。这种思路下有两种比较流行的解决方案：Relief Parallax Mapping和Parallax Occlusion Mapping。Relief Parallax Mapping更精确一些，但是比Parallax Occlusion Mapping性能开销更多。Parallax Occlusion Mapping的效果差不了多少，但是效率更高，因此这种方式更经常使用，那么下面我们来看一下Parallax Occlusion Mapping。</p>
+<h1 id="视差遮蔽贴图"><a href="#视差遮蔽贴图" class="headerlink" title="视差遮蔽贴图"></a><font size="6" color="orange">视差遮蔽贴图</font></h1><hr>
+<p>视差遮蔽贴图（Parallax Occlusion Mapping）和陡峭视差贴图原理类似，只是后者的基础上，不再使用循环退出后的第一个满足小于条件的深度层对应的纹理坐标，而是在第一个小于的层和它的上一层（即最后一个大于的层）对应的纹理坐标之间进行线性插值，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_14.png?raw=true" alt><br>我们分别计算出循环结束前后的层与其对应的表面之间的深度距离，用这两个深度距离来对前后的纹理坐标进行线性插值，代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">while</span><span class="token punctuation">(</span>CurrentLayerDepth <span class="token operator">&lt;</span> CurrentDepthFromDepthMap<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    CurrentTexCoords <span class="token operator">-</span><span class="token operator">=</span> DeltaTexCoords<span class="token punctuation">;</span>
+    CurrentDepthFromDepthMap <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthMap<span class="token punctuation">,</span> CurrentTexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    CurrentLayerDepth <span class="token operator">+</span><span class="token operator">=</span> LayerDepth<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+vec2 BeforeTexCoords <span class="token operator">=</span> CurrentTexCoords <span class="token operator">+</span> DeltaTexCoords<span class="token punctuation">;</span>
+<span class="token keyword">float</span> AfterDepth <span class="token operator">=</span> CurrentLayerDepth <span class="token operator">-</span> CurrentDepthFromDepthMap<span class="token punctuation">;</span>
+<span class="token keyword">float</span> BeforeDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthMap<span class="token punctuation">,</span> BeforeTexCoords<span class="token punctuation">)</span><span class="token punctuation">.</span>r <span class="token operator">-</span> CurrentLayerDepth <span class="token operator">+</span> LayerDepth<span class="token punctuation">;</span>
+<span class="token keyword">float</span> Weight <span class="token operator">=</span> AfterDepth <span class="token operator">/</span> <span class="token punctuation">(</span>AfterDepth <span class="token operator">+</span> BeforeDepth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> Weight <span class="token operator">*</span> BeforeTexCoords <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> Weight<span class="token punctuation">)</span> <span class="token operator">*</span> CurrentTexCoords<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码很简单，就是按照前后两次的深度距离来进行插值（原理其实就是图中的相似三角形）。</p>
+<p>运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_15.png?raw=true" alt><br>可以看到遮蔽视差贴图的效果非常好，几乎没有锯齿和断层了。所有源码请看<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL32_ParallaxMap/LearnOpenGL32_ParallaxMap_3" target="_blank" rel="noopener">这里</a>。</p>
+<p>需要注意的是，虽然视差贴图是提升场景细节非常好的技术，但是它大多数时候都只是用于地面和墙壁表面上，因为对于它们来说大多数时候都看不到表面的边界（也就可以忽略边界上的走样），而且观察角度也通常垂直于这些表面，所以视差贴图带来的非真实效果就很难被注意到了。但是对于一些能看到边界的复杂物体，使用视差贴图可能会额外带来一些不好的副作用。</p>
+<p>对于Relief Parallax Mapping和Parallax Mapping and self-shadowing可以参考<a href="http://sunandblackcat.com/tipFullView.php?topicid=28" target="_blank" rel="noopener">这篇文章</a>。<br>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="noopener">LearnOpenGL</a> <a href="http://sunandblackcat.com/tipFullView.php?topicid=28" target="_blank" rel="noopener">Parallax Occlusion Mapping in GLSL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/08/14/OpenGL32-视差贴图/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/08/14/OpenGL32-视差贴图/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

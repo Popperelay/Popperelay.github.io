@@ -1,0 +1,639 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Graphics/">Graphics</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A8_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL23：几何着色器</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p>在顶点和片段着色器之间有一个可选的着色器，叫做几何着色器（Geometry Shader）。<br><a id="more"></a></p>
+<p><font size="5" color="orange">几何着色器</font></p>
+<hr>
+<p>几何着色器以一个或多个基本图形的顶点作为输入，比如一个点或者三角形。几何着色器可以将这些顶点转变为完全不同的基本图形，可以生成比原来多得多的顶点，再把这些顶点发送到下一个着色器阶段。</p>
+<p>我们直接来看一个几何着色器的例子：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (points) in;
+layout (line_strip, max_vertices = 2) out;
+
+void main() {
+    gl_Position = gl_in[0].gl_Position + vec4(-0.1, 0.0, 0.0, 0.0);
+    EmitVertex();
+
+    gl_Position = gl_in[0].gl_Position + vec4(0.1, 0.0, 0.0, 0.0);
+    EmitVertex();
+
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在几何着色器中，我们需要声明输入的基本图形（primitive）类型，这个输入是我们从顶点着色器中接收到的。需要在in关键字前面声明一个layout标识符，括号里表示可以从一个顶点着色器接收的基本图形。可以有以下基本图形值：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A81.png?raw=true" alt><br>这是我们能够给渲染函数的几乎所有的基本图形。如果我们在主程序中选择以<code>GL_TRIANGLES</code>方式绘制顶点，我们就要把这里的输入修饰符设置为triangles。括号里的数字代表对应基本图形的最少顶点数。</p>
+<p>当我们需要指定几何着色器所输出的基本图形类型时，我们就在out关键字前面加一个layout标识符。和输入layout标识符一样，输出的layout标识符也可以接受以下基本图形值：</p>
+<ul>
+<li>points</li>
+<li>line_strip</li>
+<li>triangle_strip</li>
+</ul>
+<p>使用这三个输出修饰符，我们可以从输入的基本图形创建任何我们想要的形状。为了生成一个三角形，我们定义一个<code>triangle_strip</code>作为输出标识符，然后在其main函数里输出3个顶点，就能够输出一个三角形。同时，我们需要指定几何着色器能够输出的顶点数量的最大值（如果超出了这个数值，OpenGL就会忽略剩下的顶点），如上面的<code>line_strip, max_vertices=2</code>，表示我们将使用2个顶点输出一个line_strip。<br>【注】：</p>
+<ul>
+<li>line_strip就是首位相连的线条。线条是把多个点链接起来表示出一个连续的线，它最少有两个点来组成。后一个点在前一个新渲染的点后面渲染。line_strip如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A82.png?raw=true" alt><br>在上面的着色器里，当然不能得到上图的线条，因为输出顶点数量的最大值被我们设置为了2，只能输出一个线段。</li>
+</ul>
+<p>顶点着色器的数据是通过什么传递到几何着色器的呢？GLSL为我们提供了一个内置变量<code>gl_in</code>，它的内部像这样：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">in gl_Vertex
+{
+    vec4 gl_Position;
+    float gl_PointSize;
+    float gl_ClipDistance[];
+} gl_in[];
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>它被声明为一个借口块，表示从顶点着色器接收的顶点数组。其中就包含了与顶点着色器输出相似的位置向量<code>gl_Position</code>。要注意<code>gl_in</code>是一个数组，因为几何着色器一次接收一个基本图形的所有顶点来填充<code>gl_in</code>数组，作为它的输入。</p>
+<p>使用来自顶点着色器的顶点数据，我们可以开始输出新的顶点数据了。这需要通过<code>EmitVertex</code>函数（输出一个顶点）和<code>EndPrimitive</code>函数（结束基本图形）来实现。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">使用几何着色器把点转化为线</font><br>这里我们用一个demo：在几个着色器里接收一些点的输入，转化为线条输出，来完整地使用一次几何着色器。</p>
+<p>首先我们在顶点着色器里定义4个顶点的顶点数据：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    GLfloat pointsVertices[] = {
+        //位置坐标     
+        0.5f, 0.5f,
+        0.5f,-0.5f,
+       -0.5f,-0.5f,
+       -0.5f, 0.5f,
+    };
+
+    //点的pointsVAO和数据解析
+    GLuint pointsVAO, pointsVBO;
+    glGenVertexArrays(1, &pointsVAO);
+    glBindVertexArray(pointsVAO);
+    glGenBuffers(1, &pointsVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, pointsVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(pointsVertices), &pointsVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GL_FLOAT), (GLvoid*)0);
+    glBindVertexArray(0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后是我们的几何着色器（写在points.geometry）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (points) in;
+layout (line_strip,max_vertices=2) out;
+
+void main(){
+    gl_Position = gl_in[0].gl_Position + vec4(-0.1f,0.0f,0.0f,0.0f);
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4(0.1f,0.0f,0.0f,0.0f);
+    EmitVertex();
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在该几何着色器里，我们接收的输入是点这种基本图形的顶点，输出是线条这种基本图形，同时指定输出的图形最多由两个顶点组成。在main函数里，我们先把接收到的第一个顶点向x方向移动-0.1，把得到的新顶点用<code>EmitVertex</code>函数发送出去；接着再把第一个顶点向x方向移动0.1，把得到的新顶点用<code>EmitVertex</code>函数发送出去，两个顶点发完了，我们的线条这个基本图形到此结束。注意，由于这里几何着色器的输入基本图形是点points，所以它每次得到的来自顶点着色器的输入顶点只有1个，而不是4个，这4个顶点是分4次传到几何着色器里的；如果输入基本图形是triangles，那么几何着色器每次得到的顶点个数就是3个。</p>
+<p>当然，不要忘了，我们的着色器类得改改了。得把几何着色器也加进来，编译后附加到着色器程序对象上：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">        const GLchar* geometryShaderSource = GetShaderSourceFromFile(geometryPath);
+        GLuint geometryShader;
+        geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
+        glShaderSource(geometryShader, 1, &geometryShaderSource, NULL);
+        glCompileShader(geometryShader);
+        glGetShaderiv(geometryShader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(geometryShader, 512, NULL, infolog);
+            cout << "geometry shader compilation failed" << infolog << endl;
+        }
+        glAttachShader(shaderProgram, geometryShader);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在主程序里定义着色器类对象：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    //定义自定义着色器类shader的对象
+    shader points_shader("points.vertex", "points.fragment", "points.geometry");
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>最后我们在渲染循环里绘制4个顶点：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">        points_shader.Use();
+        glBindVertexArray(pointsVAO);
+        glDrawArrays(GL_POINTS, 0, 4);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A83.png?raw=true" alt><br>还是很神奇的！因为我们渲染时是用的<code>GL_POINTS</code>，但是却能够根据这些点绘制出几个线条，这都是几何着色器的功劳。<br>&nbsp;</p>
+<hr>
+<p><font size="5" color="orange">使用几何着色器把点画成房子</font><br>绘制点和线好像挺枯燥的，所以我们将在每个点上使用几何着色器绘制一个房子。它是由几个三角形构成的，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A84.png?raw=true" alt><br>在OpenGL里这样挨在一起的三角形，用trangle_strip绘制起来更搞笑，因为它所需要的顶点更少。所以我们把几何着色器里的输出基本图形设置为<code>triangle_strip</code>。这个房子总共有5个顶点，使用<code>triangle_strip</code>时，每3个毗邻的顶点都会构成一个三角形，所以得到这些三角形：（1,2,3）、（2,3,4）、（3,4,5）。其实有N个顶点就能得到N-2个三角形。注意，上图的房子里只有中间的蓝色点才是来自顶点着色器的输入，而房子的5个顶点都是根据这个蓝色点，在几何着色器里生成的：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (points) in;
+layout (triangle_strip,max_vertices=5) out;
+
+void main(){
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f, -0.2f, 0.0f, 0.0f);// 1:左下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f, -0.2f, 0.0f, 0.0f);// 2:右下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f,  0.2f, 0.0f, 0.0f);// 3:左上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f,  0.2f, 0.0f, 0.0f);// 4:右上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.0f,  0.4f, 0.0f, 0.0f);// 5:屋顶
+    EmitVertex();
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为要从一个输入顶点变成5个顶点连线构成的房子，所以几何着色器的输出需要加上标识符<code>layout (triangle_strip, max_vertices = 5) out;</code>。</p>
+<p>顶点着色器如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (location=0) in vec2 position;
+
+void main(){
+    gl_Position = vec4(position, 0.0f, 1.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>像素着色器如下：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+
+void main(){
+    color= vec4(1.0f, 0.0f, 0.0f, 1.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A85.png?raw=true" alt><br>这4个房子都一个颜色，现在我们让每个房子都有不同的颜色。我们给每个顶点再加上一个颜色属性，同时更新对顶点属性数据的解析：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">    GLfloat pointsVertices[] = {
+        //位置坐标   //颜色
+        0.5f, 0.5f,  1.0f, 0.0f, 0.0f,
+        0.5f,-0.5f,  0.0f, 1.0f, 0.0f,
+       -0.5f,-0.5f,  0.0f, 0.0f, 1.0f,
+       -0.5f, 0.5f,  1.0f, 1.0f, 0.0f
+    };
+
+    //点的pointsVAO和数据解析
+    GLuint pointsVAO, pointsVBO;
+    glGenVertexArrays(1, &pointsVAO);
+    glBindVertexArray(pointsVAO);
+    glGenBuffers(1, &pointsVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, pointsVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(pointsVertices), &pointsVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), (GLvoid*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), (GLvoid*)(2 * sizeof(GL_FLOAT)));
+    glBindVertexArray(0);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接着在顶点着色器中，增加输入变量来接收这个颜色属性，并且我们使用接口块来把顶点颜色发送给几何着色器：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (location=0) in vec2 position;
+layout (location=1) in vec3 color;
+
+out VS_OUT{
+    vec3 color;
+} vs_out;
+
+void main(){
+    gl_Position = vec4(position, 0.0f, 1.0f);
+    vs_out.color = color;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然也可以不使用接口块，直接使用<code>out vec3 color</code>也是可以的。</p>
+<p>接下里需要在几何着色器中声明同样的接口块（块名相同，块变量可以不同名）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">in VS_OUT{
+    vec3 color;
+} gs_in[];
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>注意这里的块变量是一个数组，这是因为几何着色器一次接收的是组成基本图形的所有顶点，可能会有多个顶点被一次传到几何着色器里（现在我们是<code>layout (points) in;</code>，只有一个顶点被传过来，即<code>gs_in[0]</code>）。</p>
+<p>我们最后需要把颜色输出给像素着色器，所以还需要在几何着色器里声明一个输出颜色向量：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">out vec3 fcolor;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>接下来我们在几何着色器的main函数里，让这个输出颜色向量等于来自顶点着色器的颜色向量：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    fcolor = gs_in[0].color;
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f, -0.2f, 0.0f, 0.0f);// 1:左下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f, -0.2f, 0.0f, 0.0f);// 2:右下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f,  0.2f, 0.0f, 0.0f);// 3:左上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f,  0.2f, 0.0f, 0.0f);// 4:右上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.0f,  0.4f, 0.0f, 0.0f);// 5:屋顶
+    EmitVertex();
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于房子的5个顶点都是相同的颜色，都等于对应的顶点着色器的输出颜色，所以只需要做一次<code>fcolor = gs_in[0].color;</code>即可，后面几何着色器使用<code>EmitVertex</code>函数发送顶点时，都会包含最新的out变量<code>fcolor</code>的值。</p>
+<p>在像素着色器里，片段颜色应该是等于接收到的顶点颜色了，房子内部的点就由像素着色器自己去插值了：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+in vec3 fcolor;
+out vec4 color;
+
+void main(){
+    color= vec4(fcolor, 1.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A86.png?raw=true" alt><br>如果我们还想给房子的屋顶上加点白色，就像落了雪一样，其实也就是说房子的5个顶点不是同一个颜色了，屋顶顶点变成了白色。我们只需要做如下改变即可：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    fcolor = gs_in[0].color;
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f, -0.2f, 0.0f, 0.0f);// 1:左下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f, -0.2f, 0.0f, 0.0f);// 2:右下角
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4(-0.2f,  0.2f, 0.0f, 0.0f);// 3:左上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.2f,  0.2f, 0.0f, 0.0f);// 4:右上
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4( 0.0f,  0.4f, 0.0f, 0.0f);// 5:屋顶
+    fcolor = vec3(1.0f, 1.0f, 1.0f);
+    EmitVertex();
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>让屋顶顶点的输出颜色等于白色即可。</p>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A87.png?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_1" target="_blank" rel="noopener">这里</a>。</p>
+<p>可以看到，使用几何着色器，可以使用最简单的基本图形就能获得漂亮的新玩意。因为这些形状是在GPU这种超快硬件上动态生成的，这要比使用顶点缓冲自己定义这些形状更为高效。几何缓冲在简单的经常被重复的形状（比如体素的世界和室外的草地）上，是一种非常强大的优化工具。</p>
+<p><font size="5" color="orange">Demo：爆破物体</font></p>
+<hr>
+<p>下面我们使用几何着色器来实现纳米铠甲的爆破效果。其实就是在几何着色器里让每个三角形面片沿着法线向外移动了一段距离，好像纳米铠甲爆炸了一样。也就是在几何着色器里，三角形的每个顶点沿着法线向外移动了一段距离。</p>
+<p>这时的几何着色器接收的基本图形应该是三角形，输出的应该也是三角形。所以：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (triangles) in;
+layout (triangle_strip, max_vertices = 3) out;
+...
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于我们要使用纳米铠甲这个模型，我们需要从顶点着色器里接收顶点的法线、世界坐标、纹理坐标等属性，在几何着色器里处理完毕后再把它们输出给像素着色器（可以参考<a href="http://popperelay.com/2017/01/12/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD/" target="_blank" rel="noopener">《OpenGL14：模型加载》</a>） 一文中的顶点着色器和像素着色器）。所以在几何着色器里我们用接口块VS_OUT来接收来自顶点着色器的顶点属性，并且设置对应的输出变量：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">in VS_OUT{
+    vec3 Normal;
+    vec3 positionInWorld;
+    vec2 TexCoords;
+} gs_in[];
+out vec3 Normal;
+out vec3 positionInWorld;
+out vec2 TexCoords;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于三角形的每个顶点需要沿着三角形的法线，向外移动一段距离，所以我们需要先算出三角形的法线，我们把它写在<code>GetNormal</code>中：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">vec3 GetNormal(){
+    vec3 a = vec3(gl_in[0].gl_Position) - vec3(gl_in[1].gl_Position);
+    vec3 b = vec3(gl_in[1].gl_Position) - vec3(gl_in[2].gl_Position);
+    return normalize(cross(a, b));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们用<code>explode</code>函数来计算顶点沿着法线向外移动一段距离后的位置：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">vec4 explode(vec4 position, vec3 normal){
+    float magnitude = 2.0f;
+    vec3 direction = normal * magnitude * ((sin(time) + 1.0f)/2.0f);
+    return position + vec4(direction, 0.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>它接收两个参数：顶点原来的位置和法线向量。上面我们乘了一个时间变量time，来实现动态的爆炸效果。这个time变量是个uniform变量，需要从主程序给它赋值：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">uniform float time;
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在几何着色器的main函数里，只需要改变三个顶点的位置为爆炸后的位置，顶点的法线、世界坐标、纹理坐标等原样输出即可。需要在main函数里发送3次顶点：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void main(){
+    vec3 normal = GetNormal();
+
+    gl_Position = explode(gl_in[0].gl_Position, normal);
+    Normal = gs_in[0].Normal;
+    positionInWorld = gs_in[0].positionInWorld;
+    TexCoords = gs_in[0].TexCoords;
+    EmitVertex();
+
+    gl_Position = explode(gl_in[1].gl_Position, normal);
+    Normal = gs_in[1].Normal;
+    positionInWorld = gs_in[1].positionInWorld;
+    TexCoords = gs_in[1].TexCoords;
+    EmitVertex();
+
+    gl_Position = explode(gl_in[2].gl_Position, normal);
+    Normal = gs_in[2].Normal;
+    positionInWorld = gs_in[2].positionInWorld;
+    TexCoords = gs_in[2].TexCoords;
+    EmitVertex();
+
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不要忘了在主程序中对time变量赋值，而且顶点着色器也得作出相应调整（改成接口块）。编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A88.png?raw=true" alt><br>全部源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_2" target="_blank" rel="noopener">这里</a>。</p>
+<p><font size="5" color="orange">显示法向量</font></p>
+<hr>
+<p>下面我们将使用几何着色器来显示纳米铠甲每个顶点的法线向量。当编写光照着色器的时候，经常会遇到奇怪的视频输出问题，很难分辨是哪里出了问题。通常是因为不正确地加载了顶点数据，以及给它们指定了不合理的顶点属性，或者是在着色器中不合法的管理，导致产生了不正确的法线向量。我们希望可以用某种方式检测出法线向量是否正确，而我们这里的把法向量显示出来就是一种不错的方法。</p>
+<p>显示法线向量的思路：先不使用几何着色器，正常绘制物体；然后使用我们用于显示法线向量的几何着色器，再绘制一次物体，这次只绘制物体上顶点的法线，不会绘制物体的面片。看起来就像这样：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">lightObject.Use();
+mymodel.Draw(lightObject);
+normalDisplay.Use();
+mymodel.Draw(normalDisplay);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们先写一个显示法线的顶点着色器（写在normalDisplay.vertex中）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">//顶点着色器
+#version 330 core
+layout (location=0) in vec3 position;  //顶点位置属性的位置值为0
+layout (location=1) in vec3 normal;    //顶点法线属性的位置值为1
+out    VS_OUT{
+    vec3 Normal;
+} vs_out;
+
+//模型矩阵
+uniform mat4 model;
+//观察矩阵
+uniform mat4 view;
+//投影矩阵
+uniform mat4 projection;
+void main(){
+    gl_Position = projection * view * model * vec4(position,1.0f);
+    vs_out.Normal = normalize(vec3(projection * view * vec4(mat3(transpose(inverse(model))) * normal, 1.0f)));
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，这里的法线向量我们将它变换到裁剪空间了，因为接下来显示法线向量也是在裁剪空间中进行的。而在对模型的光照处理时，这些法线是在世界空间下，不会乘以proection和view，因为点光源等等计算向量夹角是在世界坐标系下进行的。</p>
+<p>接着我们在几何着色器里接收三角形基本图元，但是输出的是线条。在main函数里，三角形的每个顶点和它法线方向上指定距离的某个点，构成一个线段基本图元。这样进行3次<code>EndPrimitive()</code>就能产生3条线段，输出的最大顶点数就是6（写在normalDisplay.geometry中）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+layout (triangles) in;
+layout (line_strip, max_vertices = 6) out;
+
+in VS_OUT {
+    vec3 Normal;
+} gs_in[];
+
+const float MAGNITUDE = 0.1f;
+
+void main(){
+    gl_Position = gl_in[0].gl_Position;
+    EmitVertex();
+    gl_Position = gl_in[0].gl_Position + vec4(gs_in[0].Normal, 0.0f) * MAGNITUDE;
+    EmitVertex();
+    EndPrimitive();
+
+    gl_Position = gl_in[1].gl_Position;
+    EmitVertex();
+    gl_Position = gl_in[1].gl_Position + vec4(gs_in[1].Normal, 0.0f) * MAGNITUDE;
+    EmitVertex();
+    EndPrimitive();
+
+    gl_Position = gl_in[2].gl_Position;
+    EmitVertex();
+    gl_Position = gl_in[2].gl_Position + vec4(gs_in[2].Normal, 0.0f) * MAGNITUDE;
+    EmitVertex();
+    EndPrimitive();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>MAGNITUDE</code>是为了控制绘制的法线向量的长度。</p>
+<p>至于像素着色器就很简单了，让这些法线线段显示一个颜色即可（写在normalDisplay.fragment中）：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">#version 330 core
+out vec4 color;
+
+void main(){
+    color = vec4(1.0f, 1.0f, 0.0f, 1.0f);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在主程序里，两次使用着色器类对象，一次用于绘制模型物体，接着另一次用于绘制模型顶点的法线向量：</p>
+<pre class="line-numbers language-c++"><code class="language-c++">lightObject.Use();
+...
+mymodel.Draw(lightObject);
+...
+normalDisplay.Use();
+...
+mymodel.Draw(normalDisplay);
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译运行后的结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL23%E5%87%A0%E4%BD%95%E7%9D%80%E8%89%B2%E5%99%A89.png?raw=true" alt></p>
+<p>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL23_GeometryShader/LearnOpenGL23_GeometryShader_3" target="_blank" rel="noopener">这里</a>。<br>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="noopener">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2017/02/05/OpenGL23几何着色器/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2017/02/05/OpenGL23几何着色器/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

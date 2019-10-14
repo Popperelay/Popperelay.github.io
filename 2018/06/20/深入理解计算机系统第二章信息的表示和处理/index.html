@@ -1,0 +1,614 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Graphics/">Graphics</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>深入理解计算机系统第二章 信息的表示和处理</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p><font size="5" color="orange">信息存储</font></p>
+<hr>
+<p><font size="4" color="red">字数据大小</font><br>每台计算机都有一个字长（word size），指明指针数据的标称大小（normal size）。因为虚拟地址是以这样的一个字来编码的，所以字长决定的最重要的系统参数就是虚拟地址空间的最大大小。也就是说，对于一个字长为$\omega$位的机器而言，虚拟地址的范围为$0 \sim 2^\omega-1$，程序最多访问$2^\omega$个字节。</p>
+<p>我们将程序称为“32位程序”或“64位程序”时，区别在于该程序是如何编译的，而不是其运行的机器类型。即用32位还是64位指令来编译的：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">linux<span class="token operator">></span> gcc <span class="token operator">-</span>m32 prog<span class="token punctuation">.</span>c
+linux<span class="token operator">></span> gcc <span class="token operator">-</span>m64 prog<span class="token punctuation">.</span>c
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>C语言数据类型中，有两种数据类型大小与程序字长有关：</p>
+<ul>
+<li>long和unsigned long类型，在32位程序里是4个字节，在64位程序里是8个字节。</li>
+<li>指针类型char*，在32位程序里是4个字节，在64位程序里是8个字节（指针使用的是程序的全字长）。</li>
+</ul>
+<p>许多程序员假设一个声明为int类型的程序对象能被用来存储一个指针。这在多数32位的机器上能正常工作，但是在一台64位的机器上却会出问题。因为在64位程序里，指针时64位，不能用32位的int类型来存储。</p>
+<p><font size="4" color="red">寻址和字节顺序</font><br>某些机器选择在内存中按照从最低有效字节到最高有效字节的顺序存储对象，而另一些机器则按照从最高有效字节到最低有效字节的顺序存储。前一种规则——最低有效字节在最前面的方式，称为小端法（little endian），后一种规则——最高有效字节在最前面的方式，称为大端法（big endian）。比如有一个变量x的类型为int，位于地址0x100处，它的十六进制值为0x01234567，下图分别是按照小端法和大端法来存储该变量值的方式：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_1.png?raw=true" alt><br>注意，在字0x01234567中，高位字节的十六进制值为0x01，而低位字节值为0x67（有个很好的记法：地址由小到大增加时，如果存储的值的顺序和对应变量的十六进制表示顺序相同，则是大端法，顺序相反则是小端法）。</p>
+<p>大多数Intel兼容机都只用小端模式，但是IBM和Oracle的大多数机器则是按照大端模式操作。许多比较新的微处理器是双端法（bi-endian），也就是说可以把它们配置成大端或者小端的机器运行。然而，实际情况是：一旦选择了特定操作系统，那么字节顺序也就固定下来（因为一种操作系统可能只能运行于大端或者小端模式）。</p>
+<p>大多数情况下，大端或者小端机器所编译的程序会得到同样的结果。但是有时候，大端还是小端的字节顺序会成为问题：</p>
+<ul>
+<li>首先是在不同类型的机器之间通过网络传送二进制数据时，一个常见的问题是当小端法机器产生的数据被发送到大端法机器或者反过来时，接收程序会发现，字里的字节成了反序的。为了避免这类问题，网络应用程序的代码编写必须遵守已建立的关于字节顺序的规则，以确保发送方机器将它的内部表示转换成网络标准，而接收机器则将网络标准转换为它的内部表示。</li>
+<li>第二种情况是，当阅读表示整数数据的字节序列时字节顺序也很重要。比如下面的机器级代码：<pre class="line-numbers language-cpp"><code class="language-cpp">4004d3<span class="token operator">:</span>  <span class="token number">01</span> <span class="token number">05</span> <span class="token number">43</span> 0b <span class="token number">20</span> <span class="token number">00</span>      add  <span class="token operator">%</span>eax<span class="token punctuation">,</span><span class="token function">0x200b43</span><span class="token punctuation">(</span><span class="token operator">%</span>rip<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+这一行是由反汇编器（disassembler）生成的，反汇编器是一种可确定可执行程序文件所表示的指令序列的工具。这行代码的意思是：把一个字长的数据加到一个值上，该值的存储地址由0x200b43加上当前程序计数器的值得到。如果取出这个序列的最后4个字节：43 0b 20 00，并且按照相反的顺序（小端法）写出，我们得到00 20 0b 43。去掉开头的0，得到值0x200b43，这就是右边要加的数值；但是如果是大端法，那么要加的值就是0x430b2000了。</li>
+<li><p>第三种情况是当编写规避正常的类型系统的程序时（比如强制类型转换）。比如下面的代码使用强制类型转换来规避类型系统，来打印程序对象的字节表示：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">  <span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token operator">*</span> byte_pointer<span class="token punctuation">;</span>
+
+  <span class="token keyword">void</span> <span class="token function">showBytes</span><span class="token punctuation">(</span>byte_pointer vStart<span class="token punctuation">,</span> size_t vLen<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> vLen<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+          <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%.2x "</span><span class="token punctuation">,</span> vStart<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">void</span> <span class="token function">showInt</span><span class="token punctuation">(</span><span class="token keyword">int</span> vValue<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token function">showBytes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte_pointer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vValue<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">void</span> <span class="token function">showFloat</span><span class="token punctuation">(</span><span class="token keyword">float</span> vValue<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token function">showBytes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte_pointer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vValue<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">void</span> <span class="token function">showPointer</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>vPointer<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token function">showBytes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte_pointer<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>vPointer<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token keyword">int</span> IValue <span class="token operator">=</span> <span class="token number">12345</span><span class="token punctuation">;</span>
+      <span class="token keyword">float</span> FValue <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span>IValue<span class="token punctuation">;</span>
+      <span class="token keyword">int</span> <span class="token operator">*</span>pValue <span class="token operator">=</span> <span class="token operator">&amp;</span>IValue<span class="token punctuation">;</span>
+      <span class="token function">showInt</span><span class="token punctuation">(</span>IValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">showFloat</span><span class="token punctuation">(</span>FValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">showPointer</span><span class="token punctuation">(</span>pValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面程序使用<code>(byte_pointer)</code>将指针<code>&amp;vValue</code>强制类型转换为<code>unsigned char *</code>，它告诉编译器，程序应该把这个指针看成指向一个字节序列，而不是指向一个原始数据类型的对象。运行结果如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token number">39</span> <span class="token number">30</span> <span class="token number">00</span> <span class="token number">00</span>
+<span class="token number">00</span> e4 <span class="token number">40</span> <span class="token number">46</span>
+<span class="token number">14</span> fa cf <span class="token number">00</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>数字12345的十六进制表示为0x00003039，本机输出它的十六进制表示是0x3930000，说明笔者本机是小端法机器。虽然上面的整型和浮点型数据都是对数值12345的编码，但是它们有截然不同的字节模式，整型为0x00003039，浮点型为0x4640E400，将他俩分别展开为二进制形式，如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">  <span class="token number">00000000000000000011000000111001</span>
+                     <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+            <span class="token number">01000110010000001110010000000000</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>会发现它俩有一个13位相匹配的位序列（星号标出来那一串），这当然不是巧合，后文研究浮点数表示格式时会见分晓。</p>
+</li>
+</ul>
+<p><font size="4" color="red">表示字符串</font><br>在使用ASCII码作为字符码的任何系统上都将得到相同的结果，与字节顺序和字大小规则无关。因此，使用ASCII码表示的文本数据比二进制数据具有更强的平台独立性。二进制代码是不兼容的，很少有二进制代码能够在不同机器和操作系统组合之间移植。</p>
+<p><font size="4" color="red">C语言中的位级运算</font><br>位级运算的一个常见用法就是实现掩码运算，这里掩码是一个位模式，表示从一个字中选出的位的集合。比如位级运算x&amp;0xFF将会生成一个由x的最低有效字节组成的值，而其他自己被置位0。</p>
+<p><font size="4" color="red">C语言中的移位运算</font></p>
+<ul>
+<li>左移：C表达式<code>x&lt;&lt;k</code>会生成一个值：x向左移动k位，并在右端补k个0。</li>
+<li>右移：右移<code>x&gt;&gt;k</code>有两种：逻辑右移和算术右移。逻辑右移是直接在左端补k个0；而算术右移是在左端补k个最高有效位的值（最高有效位是1就补1，是0就补0，它对有符号整数数据的运算非常有用）。</li>
+</ul>
+<p>因为算术右移补的实际上是符号位（最高有效位），所以只有有符号数才存在算术右移，无符号数不存在算术右移，它只有逻辑右移。</p>
+<p>C语言标准并没有明确定义对于有符号数应该使用哪种类型的右移：算术右移或者逻辑右移都可以。不幸的是，这就意味着任何假设一种或者另一种右移形式的代码都可能会遇到可移植性问题。然而实际上，几乎所有的编译器/机器组合都对有符号数使用算术右移，且许多程序员也都假设机器会使用这种右移。与C相比，Java对于如何进行右移有明确的定义：表达式<code>x&gt;&gt;k</code>会将x算术右移k个位置，而<code>x&gt;&gt;&gt;k</code>会对x做逻辑右移。</p>
+<p>如果数据只有w位，但是要求移动k位而且k&gt;=w，C语言规定这种情况下实际上移动的是k%w位。</p>
+<p><font size="5" color="orange">整数表示</font></p>
+<hr>
+<p><font size="4" color="red">整型数据类型</font><br>对于有符号数据类型，它们的取值范围不是对称的：负数的范围比正数的范围大1。</p>
+<p>C和C++都支持有符号（默认）和无符号数。Java只支持有符号数。</p>
+<p><font size="4" color="red">无符号数的编码</font><br>无符号数编码定义如下(B2U是Binary to Unsigned的缩写)：</p>
+<blockquote>
+<p>对向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$：<br>$$<br>B2U_{\omega}(\vec x) \doteq \sum_{i=0}^{\omega-1} x_i 2^i<br>$$</p>
+</blockquote>
+<p>也就是说无符号数编码其实就是每个二进制位对应的二次幂的加和。</p>
+<p><font size="4" color="red">补码编码</font><br>最常见的有符号数的计算机表示方式是补码形式。有符号数补码编码的定义如下（B2T是Binary to Two’s-complement的缩写）：</p>
+<blockquote>
+<p>对向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$：<br>$$B2T_{\omega}(\vec x) \doteq -x_{\omega-1}2^{\omega-1}+\sum_{i=0}^{\omega-2}x_i2^i $$</p>
+</blockquote>
+<p>也就是说补码编码实际上是最高位（符号位）的二次幂的负数，加上其余位的二次幂的和。如下：<br>$$B2T_4([1011])=-1 \cdot 2^3+ 0 \cdot 2^2+1\cdot2^1+1\cdot2^0=-8+0+2+1=-5$$<br>从无符号数编码和补码编码的定义上我们可以很容易得知，对于16位的编码，最小的无符号数$UMin_{\omega}$=0x0000=0，最大的无符号数$UMax_{\omega}$=0xFFFF=65535，最小的补码$TMin_{\omega}$=0x8000=-32768，最大的补码$TMax_{\omega}$=0x7FFF=32767。而且-1的补码编码是0xFFFF，0的补码编码是0x0000。</p>
+<p>也可以看到补码编码下负数的表示范围总比正数的表示范围大1，之所以会有这样的不对称性，是因为一半的位模式（符号位设置为1的数）表示负数，一般的位模式（符号位设置为0的数）表示<strong>非</strong>负数，然后0恰好是非负数，当然就导致补码编码能表示的正数比负数少了一个。</p>
+<p>有符号数还有其他两种表示方法：反码和原码。</p>
+<blockquote>
+<p>反码编码(Ones’ Complement)定义如下：<br>$$B2O_{\omega}(\vec x) \doteq -x_{\omega-1}(2^{\omega-1}-1)+\sum_{i=0}^{\omega-2}x_i2^i$$</p>
+</blockquote>
+<p>可以看到除了符号位的权是$-(2^{\omega-1}-1)$而不是$-2^{\omega-1}$以外，反码和补码的定义几乎是一样的。</p>
+<blockquote>
+<p>原码编码(Sign-Magnitude)定义如下：<br>$$B2S_{\omega}(\vec x) \doteq (-1)^{x_{\omega-1}}\cdot(\sum_{i=0}^{\omega-2}x_i2^i)$$</p>
+</blockquote>
+<p>可以看到原码实际上是除了符号位以外的其余位的二次幂的加和，再乘上符号位（符号位是0就乘1，符号位是1就乘-1）。</p>
+<p>这两种表示方法都一个奇怪的数学，那就是对于数字0有两种不同的编码方式，它们都把[00…0]都解释为+0；-0在原码中是[10…0]，在反码中是[11…1]。虽然过去生成过基于反码表示的机器，但是几乎所有的现代机器都使用补码。</p>
+<p>C语言标准并没有要求要用补码形式来表示有符号整数，但是几乎所有的机器都是这么做的。不过Java标准明确要求用补码来表示有符号整数。</p>
+<p><font size="4" color="red">有符号数和无符号数之间的转换</font><br>强制类型转换时，数的底层位模式是不会变的，变的只是解释这些位的方式。比如0xFF在被解释为有符号数，按照补码编码它的值就是-1，但是按照无符号数编码它的值就是255：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">char</span> N1 <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> N1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> N2 <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> N2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> N3 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token punctuation">)</span>N1<span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> N3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>输出如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token operator">-</span><span class="token number">1</span> <span class="token number">255</span> <span class="token number">255</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>从上面无符号数编码和补码编码的定义中，我们可以很容易看出当符号位为-1时：$B2U_{\omega}(\vec x)-B2T_{\omega}(\vec x)=2*2^{\omega-1}=2^{\omega}$，当然符号位为0时，这个差值为0。所以：</p>
+<blockquote>
+<p>补码到无符号数的转换可以定义为如下：<br>对满足$TMin_{\omega}\le x \le TMax_{\omega}$的$x$有：<br>$$<br>T2U_{\omega}(x)=<br>\begin{cases}<br>x+2^{\omega}, &amp; x&lt;0 \<br>x, &amp; x \ge 0<br>\end{cases}<br>$$</p>
+</blockquote>
+<p>再通俗解释一下，如果是4位长度的编码，从补码变为无符号数，最高有效位的权重从-8变为+8。因此，补码表示的负数如果看出无符号数，值会增加16。所以，补码的-5被强制转换为无符号数以后变成11，-1被变成15。</p>
+<p>从无符号数变成补码当然就是反过来了，比如对于8位长度的编码，当无符号数处在补码能够表示的非负数范围0~127时，转换后的补码值不变；但是当无符号数处在这个范围之外时，即128~255的范围，转换后的补码值就是将该数减去$2^8=256$。所以：</p>
+<blockquote>
+<p>无符号数到补码的转换可以定义为如下：<br>$$<br>U2T_{\omega}(u)=<br>\begin{cases}<br>u, &amp; u \le TMax_{\omega} \<br>u-2^{\omega}, &amp; u &gt; TMax_{\omega}<br>\end{cases}<br>$$</p>
+</blockquote>
+<p><font size="4" color="red">C语言中的有符号数与无符号数</font><br>尽管C语言标准没有指定有符号数要采用某种表示，但是几乎所有的机器都使用补码。通常，大多数数字都默认为是有符号的。例如当声明一个像12345或者0x1A2B这样的常量时，这个值就被认为是有符号的。要创建一个无符号常量，必须加上后缀字符‘U’或者‘u’，例如12345U或者0x1A2Bu。</p>
+<p>当执行一个运算时，如果它的一个运算数是有符号的而另一个是无符号的，那么C语言会隐式地将有符号参数强制类型转换为无符号数，并假设这两个数都是非负的，来执行这个运算。例如下面的代码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&lt;</span> x<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">(</span>std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Little"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span>std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Greater"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>输出的并不是我们通常想要的Little，二是Greater。这是因为在进行小于运算时，由于x是无符号数，所以有符号数-1会先被转换成无符号数4294967295U，所以实际上比较的是4294967295U&lt;0U，当然输出的就是Greater了。</p>
+<p><font size="4" color="red">扩展一个数字的位表示</font><br>要将一个无符号数转换为一个更大的数据类型，我们只要简单地在二进制位表示的开头添加0，这种运算被称为零扩展（zero extension）。要讲一个补码数字转换为一个更大的数据类型，可以执行一个符号扩展（sign extension），在二进制位表示的开头添加符号位。比如把0101扩展为8位变成00000101，把1101扩展为8位变成11111101。可以很简单地证明符号扩展以后的值和原来的值相等（即1101和11111101表示的是同一个数值）：<br>对向量$\vec x=[1,x_{\omega-2},x_{\omega-3},…,x_0]$，把它从$\omega$位扩展为$\omega+k$位，变成$ \vec {x^,}=[1,…,1,1,x_{\omega-2},x_{\omega-3,…,x_0}]$，$\vec{x^,}$是在$\vec{x}$前面扩展了$k$个1。证明如下：<br>$$<br>\begin{align}<br>B2T_{\omega+k}(\vec{x^,})&amp;=(-2^{\omega+k}*1+2^{\omega+k-1}*1+…+2^{\omega}*1+2^{\omega-1}*1)+(2^{\omega-2}*x_{\omega-2}+…+2^0*x_0)\<br>&amp;=-2^{\omega-1}*1+2^{\omega-2}*x_{\omega-2}+…+2^0*x_0\<br>&amp;=B2T_{\omega}(\vec x)<br>\end{align}<br>$$<br>其实道理很简单，就是[111]和[111111111]其实都表示的是-1的意思。</p>
+<p>当把short转换成unsigned（unsigned就是unsigned int）时，我们先要改变大小（从2字节扩展到4字节），之后再完成从有符号到无符号的转换。如下程序：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">short</span> sx <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">12345</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> uy <span class="token operator">=</span> sx<span class="token punctuation">;</span>
+<span class="token function">showBytes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>byte_pointer<span class="token punctuation">)</span><span class="token operator">&amp;</span>uy<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>程序在本机（小端法机器）输出如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">c7 cf ff ff
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输出结果也证明了short到unsigned的转换是先扩展大小，再从有符号转变为无符号数。如果是先从有符号转变为无符号数，uy会先变成无符号数0xcfc7，然后把该无符号数扩展为4字节0x0000cfc7；如果是先把有符号数扩展4字节，uy会先变0xffffcfc7，然后把该有符号数转换从成无符号数0xffffcfc7。</p>
+<p><font size="4" color="red">截断数字</font></p>
+<blockquote>
+<p>截断无符号数：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2U_{k}(\vec {x^,})$，则$x^,=x\;mod\;2^k$。</p>
+</blockquote>
+<p>该原理背后的直觉就是：截去的部分变为0，就好像是对其取模$2^k$，前面那些位在该取模下结果都为0。</p>
+<blockquote>
+<p>截断补码数值：<br>令$\vec x$等于位向量$\vec x=[x_{\omega-1}, x_{\omega-2}, …, x_0]$，而$\vec {x^,}$是将其截断为$k$位的结果：$\vec x=[x_{k-1}, x_{k-2}, …, x_0]$。令$x=B2U_{\omega}(\vec x)$，$x^,=B2T_{k}(\vec {x^,})$，则$x^,=U2T_k(x\;mod\;2^k)$。</p>
+</blockquote>
+<p>该原理背后的直觉就是：和无符号数一样，在位级操作上把前k位变为0（把有符号当作无符号数来截断），然后再把截断后的二进制数解释为有符号补码数（相当于把无符号数转换为有符号补码数）。</p>
+<p><font size="4" color="red">关于有符号数与无符号数的建议</font><br>先看如下代码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">sumElements</span><span class="token punctuation">(</span><span class="token keyword">float</span> vArray<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">unsigned</span> vLength<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> Result<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> vLength <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        Result <span class="token operator">+</span><span class="token operator">=</span> vArray<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当参数vLength等于0时，运行这段代码应该返回0.0。但是实际上，运行时会遇到一个内存错误（内存冲突，无法访问的地址）。这是因为0-1的结果是一个无符号数$UMax$，所以在i递增时，代码将会试图访问数组vArray以外的非法元素。解决方案是换成<code>&lt;vLength</code>，或者将参数vLength声明为有符号数。<br>再看下面的代码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">strLonger</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>vStr1<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>vStr2<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">strlen</span><span class="token punctuation">(</span>vStr1<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">strlen</span><span class="token punctuation">(</span>vStr2<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由于strlen函数的返回值是无符号size_t类型，所以当字符串vStr1的长度小于字符串vStr2的长度时，由于是无符号数运算，所以函数最终返回的不是0，而是1，出现错误结果。解决方案是改成<code>return strlen(vStr1) &gt; strlen(vStr2);</code>。</p>
+<p>避免这类错误的一种方法就是绝不使用无符号数。实际上，除了C以外很少有语言支持无符号整数。因为这些语言的设计者认为无符号数带来的麻烦比益处多得多。比如Java只支持有符号整数，并且要求以补码运算来实现，正常的右移运算符&gt;&gt;被定义为执行算术右移，特殊的运算符&gt;&gt;&gt;被定义为逻辑右移。</p>
+<p><font size="5" color="orange">整数运算</font></p>
+<hr>
+<p>有时我们会发现，两个整数相加会得出一个负数，而比较表达式<code>x&lt;y</code>和比较表达式<code>x-y&lt;0</code>会产生不同的结果。这些都是由于计算机运算的有限性造成的（即一定字长的编码表示的数的范围有限）。</p>
+<p><font size="4" color="red">无符号加法</font></p>
+<blockquote>
+<p>无符号数加法：<br>对满足$0\le x,y&lt;2^{\omega}$的$x$和$y$有：<br>$$<br>x+^u_{\omega}y=<br>\begin{cases}<br>x+y, &amp;x+y&lt;2^{\omega} &amp;正常 \<br>x+y-2^{\omega}, &amp;2^{\omega}\le x+y&lt;2^{\omega+1} &amp;溢出<br>\end{cases}<br>$$</p>
+</blockquote>
+<p>公式很好理解，就是溢出时，把溢出的那一位1给截掉。</p>
+<p>说一个算术运算溢出，是指完整的整数结果不能放到数据类型的字长限制中去。</p>
+<blockquote>
+<p>我们检测无符号数加法中的溢出，可以判断加法结果是否小于任何一个加数：<br>对在范围$0\le x,y\le UMax_{\omega}$中的$x$和$y$，令$s \doteq x+^u_{\omega}y$。则对计算$s$，当且仅当$s&lt;x$（或者等价地$s&lt;y$）时，发生了溢出。</p>
+</blockquote>
+<p>对应程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">uAddOK</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> x<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sum <span class="token operator">></span> x <span class="token operator">&amp;&amp;</span> sum <span class="token operator">></span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>无符号数求反：<br>对满足$0 \le x&lt;2^{\omega}$的任意$x$，其$\omega$位的无符号逆元$-^u_{\omega}x$由下式给出：</p>
+</blockquote>
+<p>$$<br>-^u_{\omega}x=<br>\begin{cases}<br>x, &amp; x = 0\<br>2^{\omega}-x, &amp; x&gt;0<br>\end{cases}<br>$$</p>
+<p>公式的原理很简单就不细说了。</p>
+<p><font size="4" color="red">补码加法</font></p>
+<blockquote>
+<p>补码加法：<br>对满足$-2^{\omega-1}\le x，y\le 2^{\omega-1}-1$的整数$x$和$y$有：</p>
+</blockquote>
+<p>$$<br>x+^t_{\omega}y=<br>\begin{cases}<br>x+y-2^{\omega}, &amp;2^{\omega-1}\le x+y &amp;正溢出 \<br>x+y, &amp;-2^{\omega-1} \le x+y&lt;2^{\omega-1} &amp;正常\<br>x+y+2^{\omega}, &amp;x+y&lt;-2^{\omega-1} &amp;负溢出<br>\end{cases}<br>$$</p>
+<p>当$x+^t_{\omega}y$小于$-2^{\omega-1}$时，产生负溢出；当它大于$2^{\omega-1}$时，产生正溢出。</p>
+<p>两个数的$\omega$位补码之和与无符号之和其实有完全相同的位级表示。所以当发生正溢出时（即第$\omega-1$位为0，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和减去$2^{\omega}$；当发生负溢出时（即即第$\omega-1$位为1，超出的第$\omega$位为1）将超出的这位截掉，就相当于把和加上$2^{\omega}$（联系补码的定义公式比较容易理解）。</p>
+<blockquote>
+<p>检测补码加法的溢出，可以判断两个正数相加是否得到负数，或者两个负数相加是否得到正数：<br>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$，令$s\doteq x+^t_{\omega}y$。当且仅当$x&gt;0,y&gt;0$，但$s\le 0$时，计算s发生了正溢出；当且仅当$x&lt;0,y&lt;0$，但$s\ge 0$时，计算s发生了负溢出。</p>
+</blockquote>
+<p>对应程序如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tAddOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> NegOver <span class="token operator">=</span> x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> sum <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> PosOver <span class="token operator">=</span> x <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> sum <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span>NegOver <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>PosOver<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是我们不能使用如下代码来判断补码加法是否溢出：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tAddOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sum <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>sum <span class="token operator">-</span> x <span class="token operator">==</span> y<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>sum <span class="token operator">-</span> y <span class="token operator">==</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>简单来说，从上面补码加法的定义公式可以看出，补码溢出时很像模数运算。而模数加法会形成一种数学结构，叫阿贝尔群，阿贝尔群是满足交换律和结合律的。也就是说无论加法是否溢出，<code>sum-x</code>，即<code>x+y-x</code>，始终都会求值得到y（因为补码加法会形成阿贝尔群，满足交换律和结合律），所以我们不能通过上面的代码来判断补码加法是否溢出，因为该函数总是返回1（还可以通过补码加法的定义公式来推导出总是求值得到y的原因，不再赘述）。</p>
+<p><font size="4" color="red">补码的非</font></p>
+<blockquote>
+<p>对满足$TMin_{\omega}\le x\le TMax_{\omega}$的$x$，其补码的非（补码逆元）$-^t_{\omega}x$由下式给出：</p>
+</blockquote>
+<p>$$<br>-^t_{\omega}x=<br>\begin{cases}<br>TMin_{\omega}, &amp;x=TMin_{\omega} \<br>-x, &amp;x&gt;TMin_{\omega}<br>\end{cases}<br>$$</p>
+<p>也就是说，对于$\omega$位的补码加法来说，$TMin_{\omega}$是自己的加法的逆（[100…]+[100…]=[000…]），而对其他任何数值$x$都有$-x$作为其加法的逆。</p>
+<p>执行位级补码非的第一种方法是对每一位求反，再对结果加1。在C语言中，我们可以说，对于任意整数值$x$，计算表达式<code>-x</code>和<code>~x+1</code>得到的结果完全一样。</p>
+<p>执行位级补码非的第二种方法是对最右边的1的左边所有二进制位求反（不包括这个1）。比如$x$的位级表示是$[x_{\omega-1},x_{\omega-2},…,x_{k+1},1,0,…,0]$，那么它的补码非的位级表示就是$[\sim x_{\omega-1},\sim x_{\omega-2},…,\sim x_{k+1},1,0,…,0]$。</p>
+<p><font size="4" color="red">无符号乘法</font></p>
+<blockquote>
+<p>对满足$0\le x，y\le UMax_{\omega}$的整数$x$和$y$有：</p>
+</blockquote>
+<p>$$<br>x*^u_{\omega}y=(x \cdot y)mod~2^{\omega}<br>$$</p>
+<p><font size="4" color="red">补码乘法</font></p>
+<blockquote>
+<p>对满足$TMin_{\omega}\le x,y\le TMax_{\omega}$的$x$和$y$有：</p>
+</blockquote>
+<p>$$<br>x*^t_{\omega}y=U2T_{\omega}((x \cdot y)mod~2^{\omega})<br>$$</p>
+<p>可以看到，无符号乘法和补码乘法在位级运算上是一样的，不同的只是在于解释结果二进制序列的方式（以无符号的方式还是以补码的方式去解释）。</p>
+<p>无符号数[101]和[011]作乘法过程如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_2.png?raw=true" alt><br>有符号数[101]和[011]作乘法过程如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_3_2.png?raw=true" alt><br>在做二进制乘法时，由于原来的乘数有3位，通常计算机会设置6位来保存乘数以及乘积，所以我们首先需要把3位的乘数扩展为6位，然后执行二进制乘法运算，在得到的乘积结果中截取低6位作为最后的结果（图中红色圈出的6位）。然后我们还需要把这6位截断为3位（因为乘数是3位意思也就是用3位二进制来存储一个数），可以看到具有相同二进制位表示的乘数相乘，无符号乘法和有符号乘法最终得到的3位乘积结果具有相同的位级表示（图中绿色圈出的3位）。它们完整的乘积位级表示可能会不同，但是截断后乘积的位级表示是相同的。这也刚好符合补码乘法的定义公式。</p>
+<p>检测补码乘法是否溢出，可以判断乘积乘积除以一个乘数以后是否得到另一个乘数。对应代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">tMultOK</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> p <span class="token operator">=</span> x<span class="token operator">*</span>y<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span>x <span class="token operator">||</span> p <span class="token operator">/</span> x <span class="token operator">==</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>正如前文所述的，我们不能通过减法来判断加法是否溢出，但是却可以用除法来判断乘法是否溢出，这是因为补码加法会形成阿贝尔群，但是补码乘法不会形成阿贝尔群，因此补码乘法不满足交换律和结合律，即溢出时<code>x*y/x</code>不是等于y的。</p>
+<p><font size="4" color="red">乘以常数</font><br>因为乘法指令很慢，所需要的时钟周期很长（大多数机器需要10+个时钟周期），但是其他整数运算（例如加法、减法、位级运算和移位）只需要1个时钟周期。所以，编译器使用了一项重要的优化：试着用移位和加法运算的组合来代替乘以常数因子的乘法。</p>
+<p>我们先来看一下乘以2的幂的情况：</p>
+<blockquote>
+<p>设x为位模式$[x_{\omega-1},x_{\omega-2},…,x_0]$表示的无符号整数。那么，对于任何$k\ge0$，我们都认为$[x_{\omega-1},x_{\omega-2},…,x_0,0,…,0]$给出了$x2^k$的$\omega+k$位的无符号表示，这里右边增加了$k$个0。</p>
+</blockquote>
+<p>右边增加0，其实就相当于将其位模式进行左移。所以左移一个数值等价于执行一个与2的幂相乘的乘法（对无符号数和补码数均适用，因为无符号数和补码的位级运算实际上是一样的）。</p>
+<p>由于整数乘法比移位和加法的代价要大得多，许多C语言编译器试图以移位、加法和减法的组合来消除很多整数乘以常数的情况。例如，假设一个程序包含表达式<code>x*14</code>。利用$14=2^3+2^2+2^1$，编译器会将乘法重写为<code>(x&lt;&lt;3)+(x&lt;&lt;2)+(x&lt;&lt;1)</code>，将一个乘法替换为三个移位和两个加法。更好的是，编译器还可以利用属性$14=2^4-2^1$，将乘法重写为<code>(x&lt;&lt;4)-(x&lt;&lt;1)</code>，这时只需要两个移位和一个减法。</p>
+<p>当然，选择使用移位、加法和减法的组合，还是使用一条乘法指令，取决于这些指令的相对速度，而这些是与机器高度相关的。大多数编译器只在需要少量移位、加法和减法就足够的时候才使用这种优化。</p>
+<p><font size="4" color="red">除以2的幂</font><br>在大对数机器上，整数除法比整数乘法更慢：需要30个或者更多的时钟周期。除以2的幂也可以用移位运算来实现，只不过我们用的是右移，而不是左移。无符号和补码数分别使用逻辑移位和算术移位来达到目的。</p>
+<blockquote>
+<p>除以2的幂的无符号除法：<br>C变量x和k有无符号数值$x$和无符号数值$k$，且$0\le k&lt;\omega$，则C表达式<code>x&gt;&gt;k</code>产生数值$\lfloor x/2^k\rfloor$。</p>
+</blockquote>
+<blockquote>
+<p>除以2的幂的补码除法，向下舎入：<br>C变量x和k分别有补码值$x$和无符号数值$k$，且$0\le k&lt;\omega$，则当执行算术移位时，C表达式<code>x&gt;&gt;k</code>产生数值$\lfloor x/2^k\rfloor$。</p>
+</blockquote>
+<blockquote>
+<p>除以2的幂的补码除法，向上舎入：<br>C变量x和k分别有补码值$x$和无符号数值$k$，且$0\le k&lt;\omega$，则当执行算术移位时，C表达式<code>(x+(1&lt;&lt;k)-1)&gt;&gt;k</code>产生数值$\lceil x/2^k\rceil$。</p>
+</blockquote>
+<p>除以2的幂可通过逻辑或者算术右移来实现。这也正是为什么大多数机器上提供这两种类型的右移。不幸的是，这种方法不能推广到除以任意常数。同乘法不同，我们不能除以2的幂的除法来表示除以任意常数K的除法（因为乘法可以拆开来分别乘，但是除法不可以拆开来除）。</p>
+<p><font size="4" color="red">关于整数运算的最后思考</font><br>补码表示提供了一种既能表示负数也能表示正数的灵活方法，同时使用了与执行无符号算术相同的位级实现，这些运算包括像加法、减法、乘法，甚至除法，无论运算数是以无符号形式还是以补码形式表示的，都有完全一样或者非常类似的位级行为。</p>
+<p><font size="5" color="orange">浮点数</font></p>
+<hr>
+<p><font size="4" color="red">二进制小数</font></p>
+<blockquote>
+<p>设一个小数b的二进制位模式为$b_mb_{m-1}…b_1b_0.b_{-1}b_{-2}…b_{-n-1}b_{-n}$，那么数b的定义如下：<br>$$b=\sum_{i=-n}^{m}(2^i\times b_i)$$</p>
+</blockquote>
+<p>二进制小数点向左移动一位相当于这个数被2除，向右移动一位相当于将该数乘2。</p>
+<p><font size="4" color="red">IEEE浮点表示</font><br>上面小数b的表示法是一种顶点表示法，它不能很有效地表示非常大的数字。例如，表达式$5\times 2^{100}$是用101后面跟随100个零的位模式来表示。相反，我们希望通过给定$x$和$y$的值，来表示形如$x\times 2^y$的数。</p>
+<p>IEEE浮点标准用$V=(-1)^s\times M\times2^E$的形式来表示一个数：</p>
+<ul>
+<li>符号（sign）：s决定这数是负数（s=1）还是正数（s=0），而对于数值0的符号位解释作为特殊情况处理。</li>
+<li>尾数（significand）：$M$是一个二进制小数，它的范围是$1\sim2-\epsilon$，或者是$0\sim 1-\epsilon$。</li>
+<li>阶码（exponent）：$E$的作用是对浮点数加权，这个权重是2的$E$次幂（可能是负数）。</li>
+</ul>
+<p>所以我们可以将浮点数的位表示划分为三个字段，分别对这些值进行编码：</p>
+<ul>
+<li>一个单独的符号位s直接编码符号s。</li>
+<li>$k$位的阶码字段exp$=e_{k-1}…e_1e_0$编码阶码$E$。</li>
+<li>$n$位小数字段frac$=f_{n-1}…f_1f_0$编码尾数$M$，但是编码出来的值也依赖于阶码字段的值是否等于0。</li>
+</ul>
+<p>在C语言中，单精度浮点格式（float）中，s、exp和frac字段分别占1位、k=8位和n=23位，得到一个32位的表示；在双精度浮点格式（double）中，s、exp和frac字段分别占1位、k=11位和n=52位，得到一个64位的表示。</p>
+<p>根据阶码exp的值不同，IEEE把浮点数分成了三种类型：规格化的浮点数、非规格化的浮点数、特殊的浮点数。它们分别有不同的编码方式。<br>如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_4.png?raw=true" alt></p>
+<ul>
+<li><p>规格化的值<br>当阶码exp<strong>不全为0也不全为1</strong>时，所表示的浮点数就是规格化浮点数。</p>
+<p>此时阶码值$E$实际上等于$E=e-Bias$。其中$e$是阶码的无符号表示，$Bias$是一个等于$2^{k-1}-1$的偏置值（单精度是127，双精度是1023）。由此可以看出，对于单精度浮点数，指数$E$的取值范围是$-126\sim+127$（因为无符号$e$的取值范围是$1\sim254$）；对于双精度浮点数该范围是$-1022\sim+1023$。之所以用无符号形式来编码阶码，是因为全0和全1只在无符号形式下才表示极端情况（0和255），在补码形式下全0和全1表示的是0和-1，去除这两个数字会导致阶码数值不连续（在无符号0到255的范围内去掉0和255后还是连续的，但是在补码-128到127的范围内去掉0和-1后就中断掉了）。之所以要减去偏置值$Bias$，是为了让阶码值有负的情况。</p>
+<p>而且此时尾数值$M$实际上等于$M=1+f$。其中$f$是尾数二进制序列$0.f_{n-1}…f_1f_0$所代表的小数。之所以会加1，是因为我们总能通过调整阶码的值，把尾数$M$变成$1.f_{n-1}…f_1f_0$的形式，既然第一位总是1，那么我们也就不需要显式地编码它了，相当于可以多出一个额外的表示精度。</p>
+</li>
+<li><p>非规格化的值<br>当阶码exp<strong>全为0</strong>时，所表示的浮点数就是非规格化浮点数。</p>
+<p>此时的阶码值$E$并不是0，而是$E=1-Bias$，而尾数值$M=f$。为何非规格化浮点数阶码值不是0而是这个数（对单精度而言$E=-126$）呢？为何尾数值是$f$，而不是像规格化浮点数那样$1+f$呢？这实际上跟非规格化浮点数的两个用途有关？首先，非规格化浮点数被设计用于表示数值0，因为规格化浮点数的$M$总是大于等于1，所以无法用规格化浮点数来表示0，这也是非规格化浮点数的$M$不加1的原因。其次，非规格化浮点数还被设计用于表示安歇非常接近0.0的数，这就是指数$E$不等于0，而等于很小的值$1-Bias$的原因。至于为何是$1-Bias$而不直接是$-Bias$，是因为前者提供了一种从非规格化值平滑转换到规格化值的方法（最大非规格化数平滑转变到最小规格化数）。</p>
+</li>
+<li>特殊值<br>当阶码exp<strong>全为1</strong>时，所表示的浮点数就是特殊的浮点数。它能表示的特殊值是正无穷、负无穷和NaN（Not a Number）。当尾数全为0时，表示的是无穷（符号$s=0$时是$+\infty$，符号$s=1$时是$-\infty$）；当尾数不全为0时，表示的是NaN（一些运算结果不能是实数或是无穷，就会返回这样的NaN值，比如计算$\sqrt{-1}$时）。</li>
+</ul>
+<p><font size="4" color="orange">数字示例</font><br>下图是8位浮点格式的非负值示例，其中有4位阶码($k=4$)和3位尾数($n=3$)，偏置值$Bias=2^{4-1}-1=7$。<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_5.png?raw=true" alt><br>可以观察到最大非规格化数$\frac{7}{125}$和最小规格化数$\frac{8}{512}$之间的平滑转变。这种平滑行归功于我们队非规格化数的$E$的定义：通常将$E$定义为$1-Bias$，而不是$-Bias$，我们可以补偿非规格化的尾数没有隐含的开头的1。</p>
+<p>而且我们可以看到如果把图中的位级表示解释为无符号整数，它们就是升序排列的，恰好解释成IEEE浮点数时也是升序的，这当然不是偶然。IEEE格式如此设计就是为了浮点数能够使用整数排序函数来进行排序（当然，处理正的小数好说，但是处理负的小数时因为最高位是1，是降序的，所以就要反着来了）。用无符号整数来比较浮点数大小的代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">compareFloat</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">,</span> <span class="token keyword">float</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> ux <span class="token operator">=</span> <span class="token function">f2u</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> uy <span class="token operator">=</span> <span class="token function">f2u</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取浮点数的符号位</span>
+    <span class="token keyword">unsigned</span> sx <span class="token operator">=</span> ux <span class="token operator">>></span> <span class="token number">31</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> sy <span class="token operator">=</span> uy <span class="token operator">>></span> <span class="token number">32</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> sx <span class="token operator">==</span> sy <span class="token operator">?</span> <span class="token punctuation">(</span>sx <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> ux <span class="token operator">&lt;=</span> uy <span class="token operator">:</span> ux <span class="token operator">></span> uy<span class="token punctuation">)</span> <span class="token operator">:</span> sx <span class="token operator">></span> sy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们可以在回顾一下之前说过的数值12345的无符号整数编码和浮点数编码：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token number">00000000000000000011000000111001</span>
+                   <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span><span class="token operator">*</span>
+          <span class="token number">01000110010000001110010000000000</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以看到相同的序列段刚好对应于无符号整数编码的低位（在等于1的最高有效为之前停止），这是因为数值12345在进行规格化浮点数编码时，会先把浮点数值12345的定点二进制序列转化成IEEE形式的浮点格式，然后再对尾数进行$M=1+f$形式的编码，所以就出现了浮点编码中有一段二进制序列，会恰好对应于无符号编码中等于1的最高有效位的右边的序列。</p>
+<p><font size="4" color="red">舎入</font><br>由于表示方法限制了浮点数的范围和精度，所以当某个数$x$的精度超出了浮点数能够表示的最大精度时，就需要进行舎入了。浮点数舎入方式有4种：向偶数舎入、向零舎入、向下舎入和向上舎入。</p>
+<ul>
+<li>向偶数舎入是指：对于非中间值采用四舍五入，对于中间值将数字向上或者向下舎入，使得结果的最低有效数字是偶数。比如1.4向偶数舎入后的结果是1，而1.5和2.5向偶数舎入后的结果都是2。</li>
+<li>向零舎入是指：把正数向下舎入，把负数向上舎入。其实就是向绝对值更小的方向舎入。</li>
+<li>向下舎入是指：向稍小的数舎入，类似$\lfloor ~ \rfloor$。</li>
+<li>向上舎入是指：向稍大的数舎入，类似$\lceil ~ \rceil$。</li>
+</ul>
+<p>具体示例如下表所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%AC%AC2%E7%AB%A0_6.png?raw=true" alt><br>向偶数舎入的方式看起来有点怪，为什么不始终把位于两个可表示的值中间的值都向上或向下舎入呢？其实这种舎入方式在统计一组数据的均值时能够降低统计偏差。如果我们总是把两个可表示值中间的数字向上舎入，那么舎入后的一组数的均值会实际的偏高，如果都向下舎入，会偏低。但是如果向偶数舎入，在多数现实情况中都避免了这种统计误差。因为在50%的情况里，它将向上舍入，而在另外50%的情况里，它将向下舎入。</p>
+<p><font size="4" color="red">浮点运算</font><br>正如前面看到的，整数（包括无符号和补码）加法可以形成阿贝尔群，满足交换律和结合律，但是计算机浮点数加法不能形成阿贝尔群，浮点数加法只满足交换律不满足结合律。这是由于浮点数精度有限导致舎入而造成的。例如，使用单精度浮点，表达式<code>(3.14+le10)-le10</code>求值得到0.0（因为舎入，值3.14会丢失）；但是表达式<code>3.14+(le10-le10)</code>求值得到3.14。</p>
+<p>浮点数乘法也满足交换律，但是由于可能发生溢出或者由于舎入而失去精度，导致浮点数乘法也不满足结合律。例如，单精度浮点情况下，表达式<code>(le20*le20)*le-20</code>求值为$+\infty$，而<code>le20*(le20*le-20)</code>将得到le20。</p>
+<p>而且浮点乘法在加法上不具备分配性。例如单精度浮点情况下，表达式<code>le20*(le20-le20)</code>求值为0.0，但是<code>le20*le20-le20*le20</code>会得出NaN。</p>
+<p><font size="4" color="red">C语言中的浮点数</font><br>由于C语言标准中不要求机器使用IEEE浮点，所以没有标准的方法来改变舎入方式（大多数用的向偶数舎入）或者得到诸如$-0$、$+\infty$、$-\infty$或者$NaN$之类的特殊值。不过大多数系统中，当程序文件中出现下列句子时，GNU编译器GCC会定义程序常数INFINITY（表示$+\infty$）和NAN（表示NaN）。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">define</span> _GNU_SOURCE 1</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>当在int、float和double格式之间进行强制类型转换时，程序改变数值和位模式的原则如下（假设int是32位的）：</p>
+<ul>
+<li>从int转换成float，数字不会溢出，但是可能被舎入。</li>
+<li>从int或float转换成double，因为double有更大的范围，也有更高的精度，所以能够保留精确的数值。</li>
+<li>从double转换成float，因为范围要小一些，所以值可能溢出成$+\infty$或$-\infty$。另外，由于精度变小，它还可能被舎入。</li>
+<li>从float或者double转换成int，值将会向零舎入。例如，1.999将被转换成1，而-1.999将被转换成-1。进一步来说，值可能会溢出。一个从浮点数到整数的转换，如果不能为该浮点数找到一个合理的整数近似值，就会产生一个整数不确定值（与Intel兼容的微处理器指定位模式$[10…00]$为整数不确定值）。例如表达式<code>(int)+le10</code>会得到<code>-21483648</code>，即从一个正值变成了一个负值。</li>
+</ul>
+<p><font size="5" color="orange">小结</font></p>
+<hr>
+<p>64位程序的优势是可以突破32位程序具有的4GB地址限制。</p>
+<p>大多数机器对整数使用补码编码，而对浮点数使用IEEE标准754编码。</p>
+<p>在相同长度的无符号和有符号整数之间进行强制类型转换时，大多数C语言实现遵循的原则是底层的位模式不变。</p>
+<p>无符号数和补码的运算都满足整数运算的许多其他属性，包括结合律、交换律和分配率。这就允许编译器做很多的优化。例如，用<code>(x&lt;&lt;3)-x</code>取代表达式<code>7*x</code>时，我们就利用了结合律、交换律和分配律的属性，还利用了移位和乘以2的幂之间的关系。<br>&nbsp; </p>
+<hr>
+<p>参考文献：《深入理解计算机系统第三版》</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/06/20/深入理解计算机系统第二章信息的表示和处理/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/06/20/深入理解计算机系统第二章信息的表示和处理/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Graphics/">Graphics</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL29点光源阴影</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#生成深度立方体贴图"><span class="toc-text">生成深度立方体贴图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用几何着色器的分层渲染"><span class="toc-text">使用几何着色器的分层渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成深度cubemap的着色器"><span class="toc-text">生成深度cubemap的着色器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示深度cubemap"><span class="toc-text">显示深度cubemap</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#显示点阴影"><span class="toc-text">显示点阴影</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PCF"><span class="toc-text">PCF</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改进的PCF"><span class="toc-text">改进的PCF</span></a></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <p>上一篇文章中介绍的是定向光源的阴影，而这篇文章中我们将要介绍怎样生成点光源的阴影（Point Shadow，点阴影）。由于点光源的光线是向球面上所有方向发散的，所以点阴影也通常叫做万向阴影（omnidirectional shadow）。</p>
+<p>在定向阴影中，由于光线方向是固定的，我们可以用一张2D贴图来保存从定向光源看过去的场景深度，点光源的光线方向不是固定的，而是朝向球面上的所有方向，那么我们应该怎么保存点光源视角下的场景深度呢？可以使用立方体贴图CubeMap来保存点光源视角下的整个场景的深度值。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_1.png?raw=true" alt></p>
+<h1 id="生成深度立方体贴图"><a href="#生成深度立方体贴图" class="headerlink" title="生成深度立方体贴图"></a><font size="6" color="orange">生成深度立方体贴图</font></h1><hr>
+<h2 id="使用几何着色器的分层渲染"><a href="#使用几何着色器的分层渲染" class="headerlink" title="使用几何着色器的分层渲染"></a><font size="5" color="red">使用几何着色器的分层渲染</font></h2><p>很容易想到的一个方案是仿照定向阴影的方式，把场景按6个方向渲染6次：用6个不同的观察矩阵，每次把一个不同的cubemap面附加到一个帧缓冲上，每次渲染一个面。类似下面这样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    GLuint face <span class="token operator">=</span> GL_TEXTURE_CUBE_MAP_POSITIVE_X <span class="token operator">+</span> i<span class="token punctuation">;</span>
+    <span class="token function">glFramebufferTexture2D</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> GL_DEPTH_ATTACHMENT<span class="token punctuation">,</span> face<span class="token punctuation">,</span> depthCubemap<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">BindViewMatrix</span><span class="token punctuation">(</span>lightViewMatrices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RenderScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不过我们这里使用几何着色器的分层渲染技术：在几何着色器里通过使用gl_Layer内置变量，来指定渲染到cubemap的哪一个面，这样就能一遍pass同时渲染出cubemap的6个面，而不用分6遍pass把场景渲染6次。</p>
+<h2 id="生成深度cubemap的着色器"><a href="#生成深度cubemap的着色器" class="headerlink" title="生成深度cubemap的着色器"></a><font size="5" color="red">生成深度cubemap的着色器</font></h2><p>我们先来看一下着色器怎么写。</p>
+<p>顶点着色器很简单：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 _Position<span class="token punctuation">;</span>
+
+uniform mat4 u_Model<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    gl_Position <span class="token operator">=</span> u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>几何着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+<span class="token function">layout</span><span class="token punctuation">(</span>triangles<span class="token punctuation">)</span> in<span class="token punctuation">;</span>
+<span class="token function">layout</span><span class="token punctuation">(</span>triangle_strip<span class="token punctuation">,</span> max_vertices <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">)</span> out<span class="token punctuation">;</span>
+
+uniform mat4 u_ShadowVPMatrices<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+out vec4 g2f_WorldPos<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> Face <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> Face <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token operator">++</span>Face<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        gl_Layer <span class="token operator">=</span> Face<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            g2f_WorldPos <span class="token operator">=</span> gl_in<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>gl_Position<span class="token punctuation">;</span>
+            gl_Position <span class="token operator">=</span> u_ShadowVPMatrices<span class="token punctuation">[</span>Face<span class="token punctuation">]</span> <span class="token operator">*</span> g2f_WorldPos<span class="token punctuation">;</span>
+            <span class="token function">EmitVertex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">EndPrimitive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>它需要从外界接收6个方向的观察和投影矩阵（从光源出发看向cubemap的6个面），设置几何着色器接收三角形图元，然后可以输出的最大顶点数量是18。在main函数里，对于每一个面：我们把输入的三角形的三个顶点，乘上光源视角下看向该面的观察和投影矩阵，生成一个新的三角形，这样我们就相当于我们以从光源出发看向6个面的不同的视角，把场景渲染了6次。然后配合几何着色器的内置变量gl_Layer，我们可以指定把当前生成的图元渲染到gl_Layer指定的面上（gl_Layer只在帧缓存附加了数组纹理或者cubemap时才有效）。</p>
+<p>几何着色器所需要的6个观察和投影矩阵如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">GLfloat ShadowNearPlane <span class="token operator">=</span> <span class="token number">0.1f</span><span class="token punctuation">,</span> ShadowFarPlane <span class="token operator">=</span> <span class="token number">25.0f</span><span class="token punctuation">;</span>
+mat4 ShadowProjection <span class="token operator">=</span> <span class="token function">perspective</span><span class="token punctuation">(</span><span class="token function">radians</span><span class="token punctuation">(</span><span class="token number">90.0f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">GLfloat</span><span class="token punctuation">(</span>ShadowWidth<span class="token punctuation">)</span> <span class="token operator">/</span> ShadowHeight<span class="token punctuation">,</span> ShadowNearPlane<span class="token punctuation">,</span> ShadowFarPlane<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//从光源看向CubeMap六个面的投影矩阵*观察矩阵</span>
+std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>mat4<span class="token operator">></span> ShadowVPMatrics<span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShadowVPMatrics<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ShadowProjection <span class="token operator">*</span> <span class="token function">lookAt</span><span class="token punctuation">(</span>lightPos<span class="token punctuation">,</span> lightPos <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>片元着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+in vec4 g2f_WorldPos<span class="token punctuation">;</span>
+
+uniform vec3 u_LightPos<span class="token punctuation">;</span>
+uniform <span class="token keyword">float</span> u_FarPlane<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> Light2FragDistance <span class="token operator">=</span> <span class="token function">length</span><span class="token punctuation">(</span>g2f_WorldPos<span class="token punctuation">.</span>xyz <span class="token operator">-</span> u_LightPos<span class="token punctuation">)</span> <span class="token operator">/</span> u_FarPlane<span class="token punctuation">;</span>
+    gl_FragDepth <span class="token operator">=</span> Light2FragDistance<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们把当前片元到光源的距离（世界坐标）写到帧缓存的Cubemap附件中，除以u_FarPlane是为了归一化到0到1之间。</p>
+<p>当然，生成点阴影的深度cubemap，肯定需要帧缓存以及对应的cubemap纹理附件：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//生成立方体贴图</span>
+<span class="token keyword">const</span> GLuint ShadowWidth <span class="token operator">=</span> <span class="token number">1024</span><span class="token punctuation">,</span> ShadowHeight <span class="token operator">=</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+GLuint DepthCubeMap <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">glGenTextures</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>DepthCubeMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> DepthCubeMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token function">glTexImage2D</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP_POSITIVE_X <span class="token operator">+</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_DEPTH_COMPONENT<span class="token punctuation">,</span> ShadowWidth<span class="token punctuation">,</span> ShadowHeight<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> GL_DEPTH_COMPONENT<span class="token punctuation">,</span> GL_FLOAT<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_MIN_FILTER<span class="token punctuation">,</span> GL_NEAREST<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_MAG_FILTER<span class="token punctuation">,</span> GL_NEAREST<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_S<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_T<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glTexParameteri</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> GL_TEXTURE_WRAP_R<span class="token punctuation">,</span> GL_CLAMP_TO_EDGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindTexture</span><span class="token punctuation">(</span>GL_TEXTURE_CUBE_MAP<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//生成阴影贴图所需的FBO</span>
+GLuint ShadowFBO <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">glGenFramebuffers</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>ShadowFBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> ShadowFBO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glFramebufferTexture</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> GL_DEPTH_ATTACHMENT<span class="token punctuation">,</span> DepthCubeMap<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glDrawBuffer</span><span class="token punctuation">(</span>GL_NONE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">glReadBuffer</span><span class="token punctuation">(</span>GL_NONE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">glCheckFramebufferStatus</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">)</span> <span class="token operator">!=</span> GL_FRAMEBUFFER_COMPLETE<span class="token punctuation">)</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Framebuffer not complete!"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token function">glBindFramebuffer</span><span class="token punctuation">(</span>GL_FRAMEBUFFER<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>再传入shader所需要的其他uniform变量，以及做好绘制场景所需要的操作以后，就能把场景的深度渲染到cubemap里。</p>
+<h2 id="显示深度cubemap"><a href="#显示深度cubemap" class="headerlink" title="显示深度cubemap"></a><font size="5" color="red">显示深度cubemap</font></h2><p>如果想要验证深度cubemap是否正确，因为我们无法把cubemap直观地显示出来（即使显示出来也不好看深度是否渲染正确），所以我们<strong>再</strong>绘制一次场景，但是片元的颜色是从cubemap中读出的深度值。显示cubemap深度所需的顶点着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 _Position<span class="token punctuation">;</span>
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span> in vec3 _Normal<span class="token punctuation">;</span>
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> in vec2 _TexCoord<span class="token punctuation">;</span>
+
+out vec3 v2f_WorldPos<span class="token punctuation">;</span>
+
+uniform mat4 u_Projection<span class="token punctuation">;</span>
+uniform mat4 u_View<span class="token punctuation">;</span>
+uniform mat4 u_Model<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    gl_Position <span class="token operator">=</span> u_Projection <span class="token operator">*</span> u_View <span class="token operator">*</span> u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v2f_WorldPos <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span>u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>显示cubemap深度所需的片元着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+in vec3 v2f_WorldPos<span class="token punctuation">;</span>
+
+out vec4 Color_<span class="token punctuation">;</span>
+
+uniform samplerCube u_DepthCubeMap<span class="token punctuation">;</span>
+uniform vec3 u_LightPos<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 Light2Frag <span class="token operator">=</span> v2f_WorldPos <span class="token operator">-</span> u_LightPos<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> ClosestDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthCubeMap<span class="token punctuation">,</span> Light2Frag <span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    Color_ <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span><span class="token function">vec3</span><span class="token punctuation">(</span>ClosestDepth<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这个片元着色器里，使用samplerCube 类型的采样器，来从深度cubemap中采出场景的深度值，对应的采样坐标就是光源到片元的方向向量。</p>
+<p>显示结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_2.png?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_1" target="_blank" rel="noopener">这里</a>。</p>
+<h1 id="显示点阴影"><a href="#显示点阴影" class="headerlink" title="显示点阴影"></a><font size="6" color="orange">显示点阴影</font></h1><hr>
+<p>有了深度cubemap以后，我们就可以渲染点光源照射下，场景里形成的点阴影了。</p>
+<p>顶点着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> in vec3 _Position<span class="token punctuation">;</span>
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span> in vec3 _Normal<span class="token punctuation">;</span>
+<span class="token function">layout</span><span class="token punctuation">(</span>location <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> in vec2 _TexCoord<span class="token punctuation">;</span>
+
+out vec2 v2f_TexCoord<span class="token punctuation">;</span>
+out vec3 v2f_Normal<span class="token punctuation">;</span>
+out vec3 v2f_WorldPos<span class="token punctuation">;</span>
+
+uniform mat4 u_Projection<span class="token punctuation">;</span>
+uniform mat4 u_View<span class="token punctuation">;</span>
+uniform mat4 u_Model<span class="token punctuation">;</span>
+uniform <span class="token keyword">bool</span> u_IsReverseNormal<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    gl_Position <span class="token operator">=</span> u_Projection <span class="token operator">*</span> u_View <span class="token operator">*</span> u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v2f_WorldPos <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span>u_Model <span class="token operator">*</span> <span class="token function">vec4</span><span class="token punctuation">(</span>_Position<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v2f_TexCoord <span class="token operator">=</span> _TexCoord<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>u_IsReverseNormal<span class="token punctuation">)</span>
+        v2f_Normal <span class="token operator">=</span> <span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">inverse</span><span class="token punctuation">(</span><span class="token function">mat3</span><span class="token punctuation">(</span>u_Model<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1.0</span> <span class="token operator">*</span> _Normal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        v2f_Normal <span class="token operator">=</span> <span class="token function">transpose</span><span class="token punctuation">(</span><span class="token function">inverse</span><span class="token punctuation">(</span><span class="token function">mat3</span><span class="token punctuation">(</span>u_Model<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> _Normal<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中u_IsReverseNormal，是想让最大的盒子的法线反相，这样点光源才能照亮最大盒子的内部的面。</p>
+<p>片元着色器里使用blinn-phong光照模型，我们可以通过判断当前片元到点光源的实际距离，和从深度cubemap中以光源到当前片元的方向为采样坐标读出的最近距离，二者作比较，如果大于的话就说明当前片元处于阴影里：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">calculateShadow</span><span class="token punctuation">(</span>vec3 vWorldPos<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 Light2Frag <span class="token operator">=</span> vWorldPos <span class="token operator">-</span> u_LightPos<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> ClosestDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthCubeMap<span class="token punctuation">,</span> Light2Frag<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    ClosestDepth <span class="token operator">*</span><span class="token operator">=</span> u_FarPlane<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> CurrentDepth <span class="token operator">=</span> <span class="token function">length</span><span class="token punctuation">(</span>Light2Frag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Bias <span class="token operator">=</span> <span class="token number">0.05</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Shadow <span class="token operator">=</span> CurrentDepth <span class="token operator">-</span> Bias <span class="token operator">></span> ClosestDepth <span class="token operator">?</span> <span class="token number">1.0</span> <span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Shadow<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>函数传入的参数vWorldPos是当前片元的世界坐标。</p>
+<p>完整的片元着色器如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#version 430 core</span>
+
+in vec2 v2f_TexCoord<span class="token punctuation">;</span>
+in vec3 v2f_Normal<span class="token punctuation">;</span>
+in vec3 v2f_WorldPos<span class="token punctuation">;</span>
+
+out vec4 Color_<span class="token punctuation">;</span>
+
+uniform sampler2D u_DiffuseTexture<span class="token punctuation">;</span>
+uniform samplerCube u_DepthCubeMap<span class="token punctuation">;</span>
+uniform vec3 u_LightPos<span class="token punctuation">;</span>
+uniform vec3 u_ViewPos<span class="token punctuation">;</span>
+uniform <span class="token keyword">float</span> u_FarPlane<span class="token punctuation">;</span>
+uniform vec3 u_LightColor <span class="token operator">=</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">float</span> <span class="token function">calculateShadow</span><span class="token punctuation">(</span>vec3 vWorldPos<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 Light2Frag <span class="token operator">=</span> vWorldPos <span class="token operator">-</span> u_LightPos<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> ClosestDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthCubeMap<span class="token punctuation">,</span> Light2Frag<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    ClosestDepth <span class="token operator">*</span><span class="token operator">=</span> u_FarPlane<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> CurrentDepth <span class="token operator">=</span> <span class="token function">length</span><span class="token punctuation">(</span>Light2Frag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Bias <span class="token operator">=</span> <span class="token number">0.05</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Shadow <span class="token operator">=</span> CurrentDepth <span class="token operator">-</span> Bias <span class="token operator">></span> ClosestDepth <span class="token operator">?</span> <span class="token number">1.0</span> <span class="token operator">:</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Shadow<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 ObjectColor <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DiffuseTexture<span class="token punctuation">,</span> v2f_TexCoord<span class="token punctuation">)</span><span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+    vec3 Normal <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>v2f_Normal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Ambient</span>
+    vec3 AmbientColor <span class="token operator">=</span> <span class="token number">0.3</span> <span class="token operator">*</span> ObjectColor<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Diffuse</span>
+    vec3 LightDirection <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>u_LightPos <span class="token operator">-</span> v2f_WorldPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> DiffuseFactor <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>LightDirection<span class="token punctuation">,</span> Normal<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 DiffuseColor <span class="token operator">=</span> DiffuseFactor <span class="token operator">*</span> u_LightColor<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Specular</span>
+    vec3 ViewDirection <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>u_ViewPos <span class="token operator">-</span> v2f_WorldPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 HalfDirection <span class="token operator">=</span> <span class="token function">normalize</span><span class="token punctuation">(</span>LightDirection <span class="token operator">+</span> ViewDirection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> SpecularFactor <span class="token operator">=</span> <span class="token function">pow</span><span class="token punctuation">(</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token function">dot</span><span class="token punctuation">(</span>Normal<span class="token punctuation">,</span> HalfDirection<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">64.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 SpecularColor <span class="token operator">=</span> SpecularFactor <span class="token operator">*</span> u_LightColor<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//Calculate Shadow</span>
+    <span class="token keyword">float</span> Shadow <span class="token operator">=</span> <span class="token function">calculateShadow</span><span class="token punctuation">(</span>v2f_WorldPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vec3 Result <span class="token operator">=</span> AmbientColor <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">-</span> Shadow<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>DiffuseColor <span class="token operator">+</span> SpecularColor<span class="token punctuation">)</span> <span class="token operator">*</span> ObjectColor<span class="token punctuation">;</span>
+    Color_ <span class="token operator">=</span> <span class="token function">vec4</span><span class="token punctuation">(</span>Result<span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>传入对应的uniform参数，并做好场景渲染的操作以后，运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_3.jpg?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_2" target="_blank" rel="noopener">这里</a>。</p>
+<h1 id="PCF"><a href="#PCF" class="headerlink" title="PCF"></a><font size="6" color="orange">PCF</font></h1><hr>
+<p>由于点阴影贴图基于传统阴影映射的原则，所以它也存在由于精度产生的反走样问题：靠近阴影边缘，就能看到明显的锯齿边。我们可以使用和上一篇文章一样的PCF技术，通过采样周围多个样本，来对阴影进行滤波。不同的只是上一篇文章是2D纹理，只需要在两个方向上采样即可，而我们这里对cubemap深度纹理，需要在三个方向上采样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> <span class="token function">calculateShadow</span><span class="token punctuation">(</span>vec3 vWorldPos<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vec3 Frag2Light <span class="token operator">=</span> vWorldPos <span class="token operator">-</span> u_LightPos<span class="token punctuation">;</span>
+    <span class="token keyword">float</span> CurrentDepth <span class="token operator">=</span> <span class="token function">length</span><span class="token punctuation">(</span>Frag2Light<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Bias <span class="token operator">=</span> <span class="token number">0.05</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Shadow <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Samples <span class="token operator">=</span> <span class="token number">4.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Offset <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> Step <span class="token operator">=</span> Offset <span class="token operator">/</span> <span class="token punctuation">(</span>Samples <span class="token operator">*</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">float</span> x <span class="token operator">=</span> <span class="token operator">-</span>Offset<span class="token punctuation">;</span> x <span class="token operator">&lt;</span> Offset<span class="token punctuation">;</span> x <span class="token operator">+</span><span class="token operator">=</span> Step<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">float</span> y <span class="token operator">=</span> <span class="token operator">-</span>Offset<span class="token punctuation">;</span> y <span class="token operator">&lt;</span> Offset<span class="token punctuation">;</span> y <span class="token operator">+</span><span class="token operator">=</span> Step<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">float</span> z <span class="token operator">=</span> <span class="token operator">-</span>Offset<span class="token punctuation">;</span> z <span class="token operator">&lt;</span> Offset<span class="token punctuation">;</span> z <span class="token operator">+</span><span class="token operator">=</span> Step<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">float</span> ClosestDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthCubeMap<span class="token punctuation">,</span> Frag2Light <span class="token operator">+</span> <span class="token function">vec3</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+                ClosestDepth <span class="token operator">*</span><span class="token operator">=</span> u_FarPlane<span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>CurrentDepth <span class="token operator">-</span> Bias <span class="token operator">></span> ClosestDepth<span class="token punctuation">)</span>
+                    Shadow <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    Shadow <span class="token operator">/</span><span class="token operator">=</span> <span class="token punctuation">(</span>Samples <span class="token operator">*</span> Samples <span class="token operator">*</span> Samples<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Shadow<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>代码应该很好理解，就是采样了当前片元在xyz三个方向上的周围64个点的深度值，然后和当前片元的实际深度值作比较，累加阴影值最后求均值。</p>
+<p>运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_4.jpg?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_3" target="_blank" rel="noopener">这里</a>。</p>
+<h1 id="改进的PCF"><a href="#改进的PCF" class="headerlink" title="改进的PCF"></a><font size="6" color="orange">改进的PCF</font></h1><hr>
+<p>上面的PCF方面里，需要对每个片元采周围64个样本，太多了！而且其中大多数样本都是多余的，因为它们都是在原始方向向量的近处采样，这些采样点靠的太近，不够分散。不如在采样方向向量的垂直方向进行采样更有意义。</p>
+<p>我们使用一个有着20个偏移方向的数组：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">vec3 SampleOffsetDirections<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span> <span class="token operator">=</span> vec3<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">(</span>
+    <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+    <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">0</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">vec3</span><span class="token punctuation">(</span> <span class="token number">0</span><span class="token punctuation">,</span>  <span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后使用这些偏移方向来采样：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> ViewDistance <span class="token operator">=</span> <span class="token function">length</span><span class="token punctuation">(</span>u_ViewPos <span class="token operator">-</span> v2f_WorldPos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> DiskRadius <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">+</span> <span class="token punctuation">(</span>ViewDistance <span class="token operator">/</span> u_FarPlane<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">25.0</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> Samples<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> ClosestDepth <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>u_DepthCubeMap<span class="token punctuation">,</span> Light2Frag <span class="token operator">+</span> SampleOffsetDirections<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> DiskRadius<span class="token punctuation">)</span><span class="token punctuation">.</span>r<span class="token punctuation">;</span>
+    ClosestDepth <span class="token operator">*</span><span class="token operator">=</span> u_FarPlane<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>CurrentDepth <span class="token operator">-</span> Bias <span class="token operator">></span> ClosestDepth<span class="token punctuation">)</span>
+        Shadow <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+Shadow <span class="token operator">/</span><span class="token operator">=</span> <span class="token keyword">float</span><span class="token punctuation">(</span>Samples<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这样做的好处是与之前的PCF相比，达到相同效果所需要的采样数量变少了。</p>
+<p>其中，DiskRadius 是偏移半径，可以是一个常数，也也可以像代码中那样，根据观察者到片元的距离来改变偏移半径：当距离更远的时候偏移半径较大，阴影更柔和；当距离更近的时候阴影就更锐利。</p>
+<p>运行结果如下：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_5.png?raw=true" alt><br>所有源码在<a href="https://github.com/Popperelay/BlogCode/tree/master/LearnOpenGL29_PointShadow/LearnOpenGL29_PointShadow_4" target="_blank" rel="noopener">这里</a>。<br>&nbsp; </p>
+<hr>
+<p>参考文献：<a href="https://learnopengl.com/" target="_blank" rel="noopener">LearnOpenGL</a></p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2018/08/14/OpenGL29点光源阴影/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2018/08/14/OpenGL29点光源阴影/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
