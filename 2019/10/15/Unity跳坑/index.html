@@ -140,7 +140,7 @@
 				<div id="toc-article" class="toc-article">
 					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
-					
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MainTex-TexelSize的坑"><span class="toc-text">_MainTex_TexelSize的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ExecuteCommandBuffer的坑"><span class="toc-text">ExecuteCommandBuffer的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DepthTextureMode的坑"><span class="toc-text">DepthTextureMode的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RWTexture2DArray的坑1"><span class="toc-text">RWTexture2DArray的坑1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RWTexture2DArray的坑2"><span class="toc-text">RWTexture2DArray的坑2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RWTexture2DArray的坑3"><span class="toc-text">RWTexture2DArray的坑3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shader变量默认参数的坑"><span class="toc-text">Shader变量默认参数的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#清空数组纹理RT的坑"><span class="toc-text">清空数组纹理RT的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组纹理和RT多次使用时的坑"><span class="toc-text">数组纹理和RT多次使用时的坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UnityEditor和MonoBehaviour的坑"><span class="toc-text">UnityEditor和MonoBehaviour的坑</span></a></li></ol>
 			   </div>
 			   <script type="text/javascript">
 				function showToc(){
@@ -157,25 +157,28 @@
 					};
 			   </script>
 				
-                <ol>
-<li>不在Shader的Properties里声明<code>_MainTex</code>，就访问不到<code>_MainTex_TexelSize</code>的值，会是0：<pre class="line-numbers language-shader"><code class="language-shader">Properties
+                <h1 id="MainTex-TexelSize的坑"><a href="#MainTex-TexelSize的坑" class="headerlink" title="_MainTex_TexelSize的坑"></a><font size="6" color="orange">_MainTex_TexelSize的坑</font></h1><hr>
+<p>不在Shader的Properties里声明<code>_MainTex</code>，就访问不到<code>_MainTex_TexelSize</code>的值，会是0：</p>
+<pre class="line-numbers language-shader"><code class="language-shader">Properties
 {
- _MainTex ("Base (RGB)", 2D) = "white" {}
- ...
+    _MainTex ("Base (RGB)", 2D) = "white" {}
+    ...
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><code>Graphics.ExecuteCommandBuffer</code>函数必须在<code>OnPreRender</code>、<code>OnPostRender</code>、<code>OnRenderImage</code>等函数中运行，也就是需要和摄像机相关。在<code>Update</code>函数中调用很可能会出错（比如渲染不出来RT）（在<code>OnPreRender</code>中一样有问题，脚本挂到摄像机上了，函数运行了，但是还是渲染不出来，不知道为啥。。。）。</li>
-<li>把<code>m_Camera.depthTextureMode</code>设置为<code>DepthTextureMode.Depth</code>有时候会得不到深度图，巨特么坑。。。需要设置为深度法线模式：<pre class="line-numbers language-cpp"><code class="language-cpp">m_Camera<span class="token punctuation">.</span>depthTextureMode <span class="token operator">=</span> DepthTextureMode<span class="token punctuation">.</span>DepthNormals<span class="token punctuation">;</span>
+<h1 id="ExecuteCommandBuffer的坑"><a href="#ExecuteCommandBuffer的坑" class="headerlink" title="ExecuteCommandBuffer的坑"></a><font size="6" color="orange">ExecuteCommandBuffer的坑</font></h1><hr>
+<p><code>Graphics.ExecuteCommandBuffer</code>函数必须在<code>OnPreRender</code>、<code>OnPostRender</code>、<code>OnRenderImage</code>等函数中运行，也就是需要和摄像机相关。在<code>Update</code>函数中调用很可能会出错（比如渲染不出来RT）（在<code>OnPreRender</code>中一样有问题，脚本挂到摄像机上了，函数运行了，但是还是渲染不出来，不知道为啥。。。）。</p>
+<h1 id="DepthTextureMode的坑"><a href="#DepthTextureMode的坑" class="headerlink" title="DepthTextureMode的坑"></a><font size="6" color="orange">DepthTextureMode的坑</font></h1><hr>
+<p>把<code>m_Camera.depthTextureMode</code>设置为<code>DepthTextureMode.Depth</code>有时候会得不到深度图，巨特么坑。。。需要设置为深度法线模式：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">m_Camera<span class="token punctuation">.</span>depthTextureMode <span class="token operator">=</span> DepthTextureMode<span class="token punctuation">.</span>DepthNormals<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li>在Unity里创建可读写的纹理数组时，需要加上寄存器以及并且在CPU端设置随机写目标。在Shader里：<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _LightmapArray : register(u1);
+<h1 id="RWTexture2DArray的坑1"><a href="#RWTexture2DArray的坑1" class="headerlink" title="RWTexture2DArray的坑1"></a><font size="6" color="orange">RWTexture2DArray的坑1</font></h1><hr>
+<p>在Unity里创建可读写的纹理数组时，需要加上寄存器以及并且在CPU端设置随机写目标。在Shader里：</p>
+<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _LightmapArray : register(u1);
 //...
 #pragma target 5.0
 _LightmapArray[uint3(ScreenPos, _LightmapIndex)] = float4(1.0, 0.0, 0.0, 1.0);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></float4></code></pre>
-还需要注意的是，需要在Shader里把Shader Model设置成5.0，因为设置寄存器是Shader Model5.0中的特性。其中<code>u1</code>表示1号寄存器（这个寄存器有点像是OpenGL中的纹理绑定点，显式地表示我们要把纹理绑定到哪个寄存器上）。</li>
-</ol>
+<p>还需要注意的是，需要在Shader里把Shader Model设置成5.0，因为设置寄存器是Shader Model5.0中的特性。其中<code>u1</code>表示1号寄存器（这个寄存器有点像是OpenGL中的纹理绑定点，显式地表示我们要把纹理绑定到哪个寄存器上）。</p>
 <p>然后在CPU端：</p>
 <pre class="line-numbers language-c#"><code class="language-c#">RenderTexture m_lightMapArray = new RenderTexture(1024, 1024, 24, RenderTextureFormat.ARGBFloat);
 m_lightMapArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
@@ -190,42 +193,49 @@ Graphics.SetRandomWriteTarget(1, m_lightMapArray);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>值得注意的是最后用<code>SetRandomWriteTarget</code>函数将可读写纹理数组关联到1号寄存器上。</p>
 <p>而普通的纹理或者纹理数组，只需要使用<code>Shader.SetGlobalTexture</code>或者<code>Material.SetTexture</code>来设置纹理就可以了，不需要显式指定寄存器。这就是Unity坑的地方，用到读写纹理数组时需要显式指定寄存器。。。（在片元着色器里使用读写纹理需要显式指定寄存器，在计算着色器里不需要）</p>
-<ol start="5">
-<li>Unity Shader里使用<code>RWTexture2DArray</code>可以写，但是不能读。也就说说下面这样是有效的：<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _Baker_LightmapArray : register(u1);
+<h1 id="RWTexture2DArray的坑2"><a href="#RWTexture2DArray的坑2" class="headerlink" title="RWTexture2DArray的坑2"></a><font size="6" color="orange">RWTexture2DArray的坑2</font></h1><hr>
+<p>Unity Shader里使用<code>RWTexture2DArray</code>可以写，但是不能读。也就说说下面这样是有效的：</p>
+<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _Baker_LightmapArray : register(u1);
 _Baker_LightmapArray[uint3(ScreenPos, _Baker_LightmapIndex)] = float4(1, 0, 0, 1)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></float4></code></pre>
-但是下面这样是无效的，读不出来：<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _Dilate_LightmapArray : register(u2);
+<p>但是下面这样是无效的，读不出来：</p>
+<pre class="line-numbers language-shader"><code class="language-shader">RWTexture2DArray<float4> _Dilate_LightmapArray : register(u2);
 float4 TexelColor = _Baker_LightmapArray[uint3(ScreenPos, i)]
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></float4></code></pre>
-坑比！读需要用<code>Texture2DArray</code>。注：这个坑比只是在针对<code>RWTexture2DArray&lt;float4&gt;</code>才是不能读的，对于其他类型的，比如<code>RWTexture2DArray&lt;uint&gt;</code>，是可读可写的。</li>
-<li><p>在Unity Shader的vertex函数和fragment函数之外设置变量的默认值是无效的。例如：</p>
+<p>坑比！读需要用<code>Texture2DArray</code>。注：这个坑比只是在针对<code>RWTexture2DArray&lt;float4&gt;</code>才是不能读的，对于其他类型的，比如<code>RWTexture2DArray&lt;uint&gt;</code>，是可读可写的。</p>
+<h1 id="RWTexture2DArray的坑3"><a href="#RWTexture2DArray的坑3" class="headerlink" title="RWTexture2DArray的坑3"></a><font size="6" color="orange">RWTexture2DArray的坑3</font></h1><hr>
+<p>Unity在RWTextureArray上坑的一匹。。。使用<code>Graphics.DrawMesh</code>来跑一遍Pass时，RWTextureArray是绑不上去的。。。</p>
+<h1 id="Shader变量默认参数的坑"><a href="#Shader变量默认参数的坑" class="headerlink" title="Shader变量默认参数的坑"></a><font size="6" color="orange">Shader变量默认参数的坑</font></h1><hr>
+<p>在Unity Shader的vertex函数和fragment函数之外设置变量的默认值是无效的。例如：</p>
 <pre class="line-numbers language-shader"><code class="language-shader">Pass
 {
- CGPROGRAM
- float2 uvOffset = float2(100.0 / 1024, 100.0 / 1024);
- //...
- v2f vert()
- {
-     //...
- }
+    CGPROGRAM
+    float2 uvOffset = float2(100.0 / 1024, 100.0 / 1024);
+    //...
+    v2f vert()
+    {
+        //...
+    }
 
- fixed4 frag()
- {
-     //...
- }
+    fixed4 frag()
+    {
+        //...
+    }
 
- #pragma vertex vert
- #pragma fragment frag
- ENDCG
+    #pragma vertex vert
+    #pragma fragment frag
+    ENDCG
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>上面给<code>uvOffset</code>设置的默认值是无效的，运行起来实际上值还是0。需要到函数里去设置这个值，或者从CPU把值传过来。坑的一匹~</p>
-</li>
-<li>对一个RenderTexture设置默认颜色值，可以如下设置（类似于OpenGL中的<code>clear</code>）：<pre class="line-numbers language-c#"><code class="language-c#">RenderTexture RT = UnityEngine.RenderTexture.active;
+<p>上面给<code>uvOffset</code>设置的默认值是无效的，运行起来实际上值还是0。需要到函数里去设置这个值，或者从CPU把值传过来。坑的一匹（因为内部实际上跟材质有关）~</p>
+<h1 id="清空数组纹理RT的坑"><a href="#清空数组纹理RT的坑" class="headerlink" title="清空数组纹理RT的坑"></a><font size="6" color="orange">清空数组纹理RT的坑</font></h1><hr>
+<p>对一个RenderTexture设置默认颜色值，可以如下设置（类似于OpenGL中的<code>clear</code>）：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">RenderTexture RT = UnityEngine.RenderTexture.active;
 UnityEngine.RenderTexture.active = Tex;
 GL.Clear(true, true, new Color(0.6f, 0.6f, 0.6f, 1));
 UnityEngine.RenderTexture.active = RT;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-但是如果该RenderTexture是一个纹理数组，即它的创建如下：<pre class="line-numbers language-c#"><code class="language-c#">var Tex = new RenderTexture(width, height, 24, RenderTextureFormat.ARGBFloat);
+<p>但是如果该RenderTexture是一个纹理数组，即它的创建如下：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">var Tex = new RenderTexture(width, height, 24, RenderTextureFormat.ARGBFloat);
 Tex.dimension = TextureDimension.Tex2DArray;  //纹理数组类型
 Tex.volumeDepth = lightMapCount;  //纹理数组长度
 Tex.enableRandomWrite = true;  //可在GPU里进行读写
@@ -234,31 +244,40 @@ Tex.wrapMode = TextureWrapMode.Clamp;
 Tex.useMipMap = true;
 Tex.Create();
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-这时使用之前的方式，只能把RenderTexture中第一层纹理清空为默认颜色值，而无法对所有层纹理都生效。应该使用<code>Graphics.SetRenderTarget</code>来代替<code>UnityEngine.RenderTexture.active</code>：<pre class="line-numbers language-c#"><code class="language-c#">RenderTexture RT = UnityEngine.RenderTexture.active;
+<p>这时使用之前的方式，只能把RenderTexture中第一层纹理清空为默认颜色值，而无法对所有层纹理都生效。应该使用<code>Graphics.SetRenderTarget</code>来代替<code>UnityEngine.RenderTexture.active</code>：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">RenderTexture RT = UnityEngine.RenderTexture.active;
 for (int i = 0; i < lightMapCount; ++i)
 {
- Graphics.SetRenderTarget(Tex, 0, CubemapFace.Unknown, i);
- GL.Clear(false, true, new Color(0.6f, 0.6f, 0.6f, 1.0f));
+    Graphics.SetRenderTarget(Tex, 0, CubemapFace.Unknown, i);
+    GL.Clear(false, true, new Color(0.6f, 0.6f, 0.6f, 1.0f));
 }
 Graphics.SetRenderTarget(RT);
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li>Unity的RenderTexture（实际上是个Buffer）和读写Texture的寄存器在底层可能是有绑定关系的。如下程序，我先在第一遍pass中申请临时RT，再绑定一个渲染纹理数组（实际上是一个有深度维数的RenderTexture）到寄存器上面（这个可以参考前面的第4点）：<br><code>`</code>c#<br>Graphics.SetRandomWriteTarget(2, m_dilatedLightmapArray);  //绑定渲染纹理数组到2号寄存器上</li>
-</ol>
-<p>RenderTexture m_TmpTexture1 = RenderTexture.GetTemporary(1024, 1024);  //分配临时RT<br>RenderTexture m_TmpTexture2 = RenderTexture.GetTemporary(1024, 1024);</p>
-<p>m_dilateLightmapMat.SetTexture(“_Baker_LightmapArray”, m_lightMapArray);  //绑定一个渲染纹理数组到2D纹理数组上，可以参考前面第5点<br>Graphics.Blit(m_TmpTexture1, m_TmpTexture2, m_Mat1);</p>
-<p>RenderTexture.ReleaseTemporary(m_TmpTexture1);  //释放临时RT<br>RenderTexture.ReleaseTemporary(m_TmpTexture2);</p>
-<p>Graphics.ClearRandomWriteTargets();  //清理寄存器</p>
-<pre><code>然后在第二个Pass里，我又申请了临时RT，再绑定渲染纹理数组到寄存器上面：
-```c#
-RenderTexture m_TmpTexture1 = RenderTexture.GetTemporary(1024, 1024);
+<h1 id="数组纹理和RT多次使用时的坑"><a href="#数组纹理和RT多次使用时的坑" class="headerlink" title="数组纹理和RT多次使用时的坑"></a><font size="6" color="orange">数组纹理和RT多次使用时的坑</font></h1><hr>
+<p>Unity的RenderTexture（实际上是个Buffer）和读写Texture的寄存器在底层可能是有绑定关系的。如下程序，我先在第一遍pass中申请临时RT，再绑定一个渲染纹理数组（实际上是一个有深度维数的RenderTexture）到寄存器上面（这个可以参考前面的第4点）：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">Graphics.SetRandomWriteTarget(2, m_dilatedLightmapArray);  //绑定渲染纹理数组到2号寄存器上
+
+RenderTexture m_TmpTexture1 = RenderTexture.GetTemporary(1024, 1024);  //分配临时RT
+RenderTexture m_TmpTexture2 = RenderTexture.GetTemporary(1024, 1024);
+
+m_dilateLightmapMat.SetTexture("_Baker_LightmapArray", m_lightMapArray);  //绑定一个渲染纹理数组到2D纹理数组上，可以参考前面第5点
+Graphics.Blit(m_TmpTexture1, m_TmpTexture2, m_Mat1);
+
+RenderTexture.ReleaseTemporary(m_TmpTexture1);  //释放临时RT
+RenderTexture.ReleaseTemporary(m_TmpTexture2);
+
+Graphics.ClearRandomWriteTargets();  //清理寄存器
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在第二个Pass里，我又申请了临时RT，再绑定渲染纹理数组到寄存器上面：</p>
+<pre class="line-numbers language-c#"><code class="language-c#">RenderTexture m_TmpTexture1 = RenderTexture.GetTemporary(1024, 1024);
 RenderTexture m_TmpTexture2 = RenderTexture.GetTemporary(1024, 1024);
 
 Graphics.SetRandomWriteTarget(3, m_testRenderTextureArray);  //这是一个新的渲染纹理数组
 
 Graphics.Blit(m_TmpTexture1, m_TmpTexture2, m_Mat2, 0);
 Graphics.ClearRandomWriteTargets();
-</code></pre><p>然后发现渲染纹理数组<code>m_testRenderTextureArray</code>死活绑定不到GPU上。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Unity%E5%9D%91_1.png?raw=true" alt><br>而第一个Pass里，渲染纹理数组是绑定上去了的，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Unity%E5%9D%91_2.png?raw=true" alt><br>但是看两个图里面的第一行数据都是<strong>Render Target View 196573</strong>，说明这两个Pass分配的临时渲染纹理实际上是同一个，然后查了下<a href="https://docs.unity3d.com/ScriptReference/RenderTexture.GetTemporary.html" target="_blank" rel="noopener">官方文档</a>，确实是这样，申请的临时内存连续几帧不用才会被释放，而我这两个Pass是在一帧内运行的，导致第二个Pass实际上复用了第一个Pass申请的临时渲染纹理内存，也就是说它俩实际上是同一个内存对象。所以猜测导致第二个Pass绑定不上渲染纹理数组是因为，寄存器和渲染纹理（渲染纹理实际上应该是个帧缓存对象）是有绑定关系的，第一个临时渲染纹理在释放以及调用<code>ClearRandomWriteTargets</code>清理寄存器时，并没有正确释放寄存器和渲染纹理之间的绑定关系，导致第二次再用到相同的渲染纹理时，无论如何都绑定不上任何寄存器了。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后发现渲染纹理数组<code>m_testRenderTextureArray</code>死活绑定不到GPU上。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Unity%E5%9D%91_1.png?raw=true" alt><br>而第一个Pass里，渲染纹理数组是绑定上去了的，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/Unity%E5%9D%91_2.png?raw=true" alt><br>但是看两个图里面的第一行数据都是<strong>Render Target View 196573</strong>，说明这两个Pass分配的临时渲染纹理实际上是同一个，然后查了下<a href="https://docs.unity3d.com/ScriptReference/RenderTexture.GetTemporary.html" target="_blank" rel="noopener">官方文档</a>，确实是这样，申请的临时内存连续几帧不用才会被释放，而我这两个Pass是在一帧内运行的，导致第二个Pass实际上复用了第一个Pass申请的临时渲染纹理内存，也就是说它俩实际上是同一个内存对象。所以猜测导致第二个Pass绑定不上渲染纹理数组是因为，寄存器和渲染纹理（渲染纹理实际上应该是个帧缓存对象）是有绑定关系的，第一个临时渲染纹理在释放以及调用<code>ClearRandomWriteTargets</code>清理寄存器时，并没有正确释放寄存器和渲染纹理之间的绑定关系，导致第二次再用到相同的渲染纹理时，无论如何都绑定不上任何寄存器了。</p>
 <p>然后改了下代码，第二个Pass不使用临时渲染纹理，而是正常分配的渲染纹理，就成功地把渲染纹理数组绑定上去了：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">RenderTexture m_TmpTexture1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">RenderTexture</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> RenderTextureFormat<span class="token punctuation">.</span>ARGB32<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//正常分配渲染纹理数组，非临时内存</span>
 m_TmpTexture1<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -323,10 +342,7 @@ Graphics<span class="token punctuation">.</span><span class="token function">Cle
     ReleaseRenderTexture(ref m_TmpTexture2);
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="9">
-<li>Unity在RWTextureArray上坑的一匹。。。使用<code>Graphics.DrawMesh</code>来跑一遍Pass时，RWTextureArray是绑不上去的。。。</li>
-<li></li>
-</ol>
+<h1 id="UnityEditor和MonoBehaviour的坑"><a href="#UnityEditor和MonoBehaviour的坑" class="headerlink" title="UnityEditor和MonoBehaviour的坑"></a><font size="6" color="orange">UnityEditor和MonoBehaviour的坑</font></h1><p>如果在场景中某个物体身上添加了继承自UnityEditor的类，如果在运行时向该物体再添加一个继承自MonoBehaviour的脚本，之前继承自UnityEditor的类中所有变量值会被重置为默认值。</p>
 
             </div>
 
