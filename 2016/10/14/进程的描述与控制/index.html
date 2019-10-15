@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>进程的描述与控制</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
+                
+				<p><font size="5" color="orange">程序的并发执行</font><br><a id="more"></a><br>程序的并发执行：宏观上，用户看到多个程序同时执行，向前不间断地推进；微观上，任意时刻一个CPU上只能有一个程序在执行。<br>程序不加控制地并发执行的结果可能不是唯一的，举个例子：</p>
 <ul>
 <li>ex：counter是全局变量，初值为0，现进程p1和进程p2都对counter加1：<pre class="line-numbers language-csharp"><code class="language-csharp">进程p1：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 进程p2：<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>counter<span class="token operator">=</span>counter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
@@ -290,7 +291,7 @@ counter<span class="token punctuation">:</span><span class="token operator">=</s
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

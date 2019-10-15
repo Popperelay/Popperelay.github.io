@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL19%E5%B8%A7%E7%BC%93%E5%86%B2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL19：帧缓冲</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>颜色缓冲、深度缓冲、模板缓冲统称帧缓冲。到目前为止，我们在使用OpenGL渲染时，最终的目的地都是默认的帧缓冲区，实际上OpenGL也允许我们创建自定义的帧缓冲区。使用自定义的帧缓冲区，可以实现镜面、离屏渲染，以及很酷的后处理效果。<br><a id="more"></a><br>&nbsp;</p>
+                
+				<p>颜色缓冲、深度缓冲、模板缓冲统称帧缓冲。到目前为止，我们在使用OpenGL渲染时，最终的目的地都是默认的帧缓冲区，实际上OpenGL也允许我们创建自定义的帧缓冲区。使用自定义的帧缓冲区，可以实现镜面、离屏渲染，以及很酷的后处理效果。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">帧缓冲FBO概念</font><br>在OpenGL中，渲染管线中的顶点、纹理等经过一系列处理后，最终显示在2D屏幕上，渲染管线的最终目的地就是帧缓冲区。帧缓冲包括颜色缓冲区、深度缓冲区、模板缓冲区。默认的缓冲区由窗口系统创建，例如我们一直使用GLFW库来完成这项任务。这个默认的帧缓冲区，就是目前我们一直使用的绘图命令的作用对象， 称之为<strong>窗口系统提供的帧缓冲区</strong>。</p>
 <p>OpenGL也允许我们手动创建一个帧缓冲区，并将渲染结果重定向到这个缓冲区。在创建时允许我们自定义帧缓冲区的一些特性，这个自定义的帧缓冲区，称之为<strong>应用程序帧缓冲区</strong>。</p>
@@ -479,7 +480,7 @@ void main(){
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

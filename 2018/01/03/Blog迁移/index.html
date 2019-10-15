@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/Blog%E8%BF%81%E7%A7%BB_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/Blog%E8%BF%81%E7%A7%BB_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Blog迁移</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -140,7 +140,7 @@
 				<div id="toc-article" class="toc-article">
 					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
 					<strong class="toc-title">文章目录</strong>
-					
+					<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#encrypt-message"><span class="toc-text">Please enter the password to read the blog.</span></a></li></ol>
 			   </div>
 			   <script type="text/javascript">
 				function showToc(){
@@ -157,39 +157,11 @@
 					};
 			   </script>
 				
-                <ol>
-<li>安装git和nodejs。</li>
-<li>在任意路径下安装hexo：<pre class="line-numbers language-c++"><code class="language-c++">npm install -g hexo
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li>在博客文件夹下，初始化hexo和安装依赖包：<pre class="line-numbers language-c++"><code class="language-c++">hexo init
-npm install
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li>在新机器上生成SSH密钥：<pre class="line-numbers language-c++"><code class="language-c++">ssh-keygen -t rsa -C “你的邮箱地址”
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-会提示输入用户名密码等，连续按3个回车就行（即设置密码为空）</li>
-<li>在C:\Users\Administrator.ssh路径下，打开id_rsa.pub文件，复制全文，在GitHub里Add SSH key，粘贴进去。</li>
-<li>检查密钥是否设置成功：<pre class="line-numbers language-c++"><code class="language-c++">$ ssh -T git@github.com
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-如果是类似下面的反馈：<pre class="line-numbers language-c++"><code class="language-c++">The authenticity of host 'github.com (207.97.227.239)' can't be established.
-RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-Are you sure you want to continue connecting (yes/no)?
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-输入yes就好，然后类似得到反馈：<pre class="line-numbers language-c++"><code class="language-c++">Hi cnfeat! You've successfully authenticated, but GitHub does not provide shell access.
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-表明以及可以通过SSH链接到GitHub了。</li>
-<li>接下来需要设置用户名和邮箱信息：<pre class="line-numbers language-c++"><code class="language-c++">$ git config --global user.name "cnfeat"//用户名
-$ git config --global user.email  "cnfeat@gmail.com"//填写自己的邮箱
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li>将原来博客根目录下的.deploy_git、public、source、themes、_config.yml等文件夹或文件拷贝到新机器的博客根目录下。</li>
-</ol>
-<p>到此，博客就迁移成功了，可以在新机器上正常使用。</p>
-
+                
+				<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3 id="encrypt-message">Please enter the password to read the blog.</h3><link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <div id="security"> <div> <div class="input-group"> <input type="text" class="form-control" aria-label="Enter the password." id="pass"> <div class="input-group-btn"> <button type="button" class="btn btn-default" onclick="decryptAES()">Decrypt</button> </div> </div> </div> </div> <div id="encrypt-blog" style="display:none"> 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 </div>
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

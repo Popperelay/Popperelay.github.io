@@ -4,23 +4,32 @@ function decryptAES() {
         var content = CryptoJS.AES.decrypt(document.getElementById("encrypt-blog").innerHTML.trim(), pass);
         content = content.toString(CryptoJS.enc.Utf8);
         content = decodeBase64(content);
-        console.log(content);
         content = unescape(content);
         if (content == '') {
-            alert("密码错误！！");
+            alert("密码错误");
         } else {
             document.getElementById("encrypt-blog").style.display    = "inline";
-            document.getElementById("encrypt-blog").innerHTML        = content;
-            document.getElementById("encrypt-message").style.display = "none";
+            document.getElementById("encrypt-blog").innerHTML        = '';
+            // use jquery to load some js code
+            $("#encrypt-blog").html(content);
 
             document.getElementById("security").style.display        = "none";
 
             if (document.getElementById("toc-div")) {
                 document.getElementById("toc-div").style.display     = "inline";
             }
+
+            // 加入这几行，主动触发 MathJax 渲染
+            // =====================
+            MathJax.Hub.Queue(
+                ["resetEquationNumbers",MathJax.InputJax.TeX],
+                ["PreProcess",MathJax.Hub],
+                ["Reprocess",MathJax.Hub]
+            );
+            // =====================
         }
     } catch (e) {
-        alert("密码错误！！");
+        alert("解密失败");
         console.log(e);
     }
 }

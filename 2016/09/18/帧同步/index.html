@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%B8%A7%E5%90%8C%E6%AD%A5_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%B8%A7%E5%90%8C%E6%AD%A5_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>网游流畅基础：帧同步游戏开发</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>在现代多人游戏中，多个客户端之间的通讯，主要是同步多方状态。为了同步多方状态，主要有两个技术：<br><a id="more"></a></p>
+                
+				<p>在现代多人游戏中，多个客户端之间的通讯，主要是同步多方状态。为了同步多方状态，主要有两个技术：<br><a id="more"></a></p>
 <ol>
 <li>状态同步<br>客户端发送游戏动作到服务器，服务器收到后，计算游戏行为的结果，然后以广播的方式下发游戏中各种状态，客户端收到状态后再根据状态显示内容。在回合制游戏中，大多都是这种方式</li>
 <li>帧同步<br>也是客户端发送游戏动作到服务器，服务器收到后并不计算游戏行为结果，只是转发所有客户端的动作（或者不需要服务器，客户端之间直接通过P2P技术发送游戏动作）。然后客户端根据收到的所有游戏动作来做游戏运算和显示。早期的IPX（Internetwork Parket Exchange Protocol，互联网数据包交换协议）网络游戏就是这种帧同步的方式，比如红色警戒、星际争霸和大量的支持网络连线双打的游戏机模拟器。</li>
@@ -222,7 +223,7 @@
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

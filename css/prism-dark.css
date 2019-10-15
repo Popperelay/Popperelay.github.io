@@ -10,6 +10,7 @@ pre[class*="language-"] {
 	background: none;
 	text-shadow: 0 -.1em .2em black;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -56,20 +57,6 @@ pre[class*="language-"] {
 	border: .13em solid hsl(30, 20%, 40%);
 	box-shadow: 1px 1px .3em -.1em black inset;
 	white-space: normal;
-}
-
-/* Plugin styles: Line Numbers */
-pre[class*="language-"].line-numbers {
-	padding-left: 0;
-}
-
-pre[class*="language-"].line-numbers code {
-	padding-top: 0px;
-	padding-left: 3.8em;
-}
-
-pre[class*="language-"].line-numbers .line-numbers-rows {
-	left: 0;
 }
 
 .token.comment,

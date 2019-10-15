@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL40PBR%E5%85%89%E7%85%A7_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL40PBR%E5%85%89%E7%85%A7_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL40 PBR实现</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>这篇文章主要是把<a href="http://popperelay.cn/2018/08/14/OpenGL39-PBR%E7%90%86%E8%AE%BA/" target="_blank" rel="noopener">上篇文章</a>中的理论转化为实际的渲染器。先来看一下上篇文章中提到的反射率方程的最终版：<br>$$L_o(p,\omega_o)=\int_\Omega(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)})L_i(p,\omega_i)n\cdot \omega_id\omega_i$$<br>通过上一篇文章，我们大致清楚这个反射率方程在干什么，但是仍然有一些迷雾尚未揭开。比如说我们究竟怎样表示场景的辐射度以及辐射率$L$？我们知道辐射率$L$表示在给定立体角$\omega$的情况下，光源的辐射通量$\Phi$或光源在角度$\omega$下发送出来的光能。我们不妨假设立体角$\omega$无限小，这样辐射率就表示光源在一条光线或单个方向向量上的辐射通量。</p>
+                
+				<p>这篇文章主要是把<a href="http://popperelay.cn/2018/08/14/OpenGL39-PBR%E7%90%86%E8%AE%BA/" target="_blank" rel="noopener">上篇文章</a>中的理论转化为实际的渲染器。先来看一下上篇文章中提到的反射率方程的最终版：<br>$$L_o(p,\omega_o)=\int_\Omega(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)})L_i(p,\omega_i)n\cdot \omega_id\omega_i$$<br>通过上一篇文章，我们大致清楚这个反射率方程在干什么，但是仍然有一些迷雾尚未揭开。比如说我们究竟怎样表示场景的辐射度以及辐射率$L$？我们知道辐射率$L$表示在给定立体角$\omega$的情况下，光源的辐射通量$\Phi$或光源在角度$\omega$下发送出来的光能。我们不妨假设立体角$\omega$无限小，这样辐射率就表示光源在一条光线或单个方向向量上的辐射通量。</p>
 <h1 id="点大小的光源的辐射率计算"><a href="#点大小的光源的辐射率计算" class="headerlink" title="点大小的光源的辐射率计算"></a><font size="6" color="orange">点大小的光源的辐射率计算</font></h1><hr>
 <p>想象一下，我们有一个点光源（在所有方向具有相同的亮度），它的辐射通量用RGB表示为（23.47,21.31,20.79）。该光源的辐射强度等于它在每一条出射光线上的辐射通量。然而，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL40PBR%E5%85%89%E7%85%A7_1.png?raw=true" alt><br>当我们为一个表面上的特定点$p$着色时，在其半球领域$\Omega$的所有可能的入射方向上，只有一个入射方向向量$\omega_i$直接来自于该点光源。假设我们在场景中只有一个光源，位于空间中的某一个点，因而对于$p$点的其他可能的入射光线方向上的辐射率为0。</p>
 <p>如果我们假设点光源不受光线衰减（光照强度随着距离变暗）的影响，那么无论我们把光源放在哪，入射光线的辐射率总是一样的（除去入射角$cos\theta$对辐射率的影响之外）。正是因为我们无论从哪个角度观察它，点光源总具有相同的辐射强度，所以我们可以有效地将其辐射强度建模为其辐射通量：一个常量向量（23.47,21.31,20.79）。</p>
@@ -348,7 +349,7 @@ vec3 <span class="token function">getNormalFromMap</span><span class="token punc
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

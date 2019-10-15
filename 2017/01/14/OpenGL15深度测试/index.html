@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL15%E6%B7%B1%E5%BA%A6%E6%B5%8B%E8%AF%95_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL15：深度测试</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>使用深度缓冲所存储的深度值，可以确定一个片段是否被其他片段遮挡。<a id="more"></a></p>
+                
+				<p>使用深度缓冲所存储的深度值，可以确定一个片段是否被其他片段遮挡。<a id="more"></a></p>
 <p><font size="5" color="orange">什么是深度测试</font><br>深度缓冲区、颜色缓冲区和窗口像素是一一对应的，也就是说窗口上的每一个像素都有一个颜色值和一个深度值。颜色缓冲区存储的是像素的颜色信息，而深度缓冲区存储的是像素的深度信息。</p>
 <p>在决定是否绘制一个片段时，首先让该片段的深度值与当前深度缓冲区对应位置上的深度值作比较，如果小于深度缓冲区中的值，则用该片段的颜色值和深度值去更新颜色缓冲区和深度缓冲区；否则，说明三维空间中该片段在对应屏幕像素后面，被挡住了，将丢弃该片段。这个过程就叫做深度测试（Depth Testing）。<br>&nbsp;</p>
 <hr>
@@ -256,7 +257,7 @@ uniform <span class="token keyword">float</span> u_Near <span class="token opera
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

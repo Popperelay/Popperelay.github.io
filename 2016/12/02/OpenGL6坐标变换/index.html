@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL6%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL6%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL6坐标变换</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>在本文将会介绍利用矩阵来对图形进行坐标变化，如平移、旋转、缩放。<a id="more"></a>下面先简单介绍一些数学知识，更详细的可以参考[《几何变换》]一文。<br>&nbsp;</p>
+                
+				<p>在本文将会介绍利用矩阵来对图形进行坐标变化，如平移、旋转、缩放。<a id="more"></a>下面先简单介绍一些数学知识，更详细的可以参考[《几何变换》]一文。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">向量</font><br>向量的乘积分为点乘和叉乘。</p>
 <p><font size="4" color="orange">向量点乘</font><br>两个向量的点乘等于它们的模和夹角余弦值的乘积：<br>$$<br>\vec x \cdot \vec y = || \vec x || \cdot ||\vec y|| \cdot \cos \theta<br>$$<br>当两个向量的夹角$\theta$是90度时，余弦值就为0，那么点乘结果就是0,；如果两个向量的夹角是0度，余弦值就为1，那么点乘结果就是两个向量模的乘积。所以，使用点乘可以很容易测试两个向量是否正交或平行。</p>
@@ -244,7 +245,7 @@ void main(){
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

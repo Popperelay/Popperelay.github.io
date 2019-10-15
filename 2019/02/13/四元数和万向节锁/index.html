@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9B%9B%E5%85%83%E6%95%B0%E5%92%8C%E4%B8%87%E5%90%91%E8%8A%82%E9%94%81_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9B%9B%E5%85%83%E6%95%B0%E5%92%8C%E4%B8%87%E5%90%91%E8%8A%82%E9%94%81_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>四元数和万向节锁</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <h1 id="欧拉角和万向节锁"><a href="#欧拉角和万向节锁" class="headerlink" title="欧拉角和万向节锁"></a><font size="6" color="orange">欧拉角和万向节锁</font></h1><hr>
+                
+				<h1 id="欧拉角和万向节锁"><a href="#欧拉角和万向节锁" class="headerlink" title="欧拉角和万向节锁"></a><font size="6" color="orange">欧拉角和万向节锁</font></h1><hr>
 <p>常用的表示旋转的方式是欧拉角：绕物体坐标系三个坐标轴（x、y、z轴）的旋转角度。但是如果在旋转过程中如果物体坐标系的某一个轴和原来的轴重合了，就会导致万向节锁（Gimbal Lock）的现象（物体无法再通过欧拉角旋转到任意方向）：比如旋转顺序是xyz，先绕着x轴旋转任意角度，再绕着y轴旋转90度，此时物体坐标系的z轴就会和原来的x轴重合，所以当我们再接着绕z轴旋转任意角度的时候，实际还是在绕着原来的x轴在旋转。也就是说，最后z轴的旋转与x轴的旋转其实操纵的是同一个外部旋转轴，三次旋转仅仅覆盖了两个外部轴的旋转，一个自由度就丢失了，这就导致了万向节锁的现象。万向节锁问题的核心还是在于我们采用了固定的旋转顺序。</p>
 <p>如果动画师在某个关键帧处指定了会引发万向锁的方位，则下一个关键帧的方位一旦超出了万向锁的约束范围，则这两个关键帧之间的路径就会发生偏移，反映在角色动画上是旋转偏移，反映在镜头控制上就是镜头抖动。</p>
 <p>通常用来避免万向节锁的方法就是使用四元数来代替欧拉角。</p>
@@ -202,7 +203,7 @@
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

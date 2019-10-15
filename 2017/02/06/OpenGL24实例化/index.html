@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%96_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL24%E5%AE%9E%E4%BE%8B%E5%8C%96_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL24：实例化</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p>假如我们有一个许多模型的场景，而这些模型的顶点数据都一样，只是进行了不同的世界空间的变换。想象一下，有一个场景中充满了草：每根草都是几个三角形组成的。最终一次渲染循环中可能有成千上万个草需要绘制。<a id="more"></a>渲染多个物体的时候，代码类似下面这样：</p>
+                
+				<p>假如我们有一个许多模型的场景，而这些模型的顶点数据都一样，只是进行了不同的世界空间的变换。想象一下，有一个场景中充满了草：每根草都是几个三角形组成的。最终一次渲染循环中可能有成千上万个草需要绘制。<a id="more"></a>渲染多个物体的时候，代码类似下面这样：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">for(GLuint i = 0; i < amount_of_models_to_draw; i++)
 {
     DoSomePreparations(); //在这里绑定VAO、绑定纹理、设置uniform变量等
@@ -394,7 +395,7 @@ void main(){
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

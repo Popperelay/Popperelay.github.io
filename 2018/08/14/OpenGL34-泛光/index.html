@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL34 泛光</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <h1 id="泛光的意义和实现原理"><a href="#泛光的意义和实现原理" class="headerlink" title="泛光的意义和实现原理"></a><font size="6" color="orange">泛光的意义和实现原理</font></h1><hr>
+                
+				<h1 id="泛光的意义和实现原理"><a href="#泛光的意义和实现原理" class="headerlink" title="泛光的意义和实现原理"></a><font size="6" color="orange">泛光的意义和实现原理</font></h1><hr>
 <p>通俗地讲，泛光其实就是明亮区域发出的光晕效果。比如场景里面有一张白纸和一个白色光源(同样都是相同亮度的白色)，但是给白色光源加上一个光晕以后，光源会比白纸看起来感觉更亮。下图是虚幻引擎中的光晕效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_1.png?raw=true" alt><br>光晕通常和HDR结合使用。下面我们来介绍一下光晕实现的原理和流程（核心原理是对明亮区域进行模糊处理，让它看起来有一种光晕效果）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL34%E6%B3%9B%E5%85%89_2.png?raw=true" alt><br>我们会像往常一样渲染HDR场景（下图中的左上角场景），在这个场景中诸如光源等物体是特别明亮的区域，我们把这些明亮区域提取出来（直接根据颜色值超过某个阈值来提取就可以了），获得下图中左下角所示的场景纹理，然后我们对这个纹理进行模糊处理（模糊结果就是中间下方那张图），模糊之后明亮区域就有了一种加上了光晕的感觉，然后我们把模糊后的纹理和原先的HDR场景纹理进行叠加，就能得到最终明亮区域带有光晕的场景（即最右边的那张图）。</p>
 <h1 id="提取亮色"><a href="#提取亮色" class="headerlink" title="提取亮色"></a><font size="6" color="orange">提取亮色</font></h1><hr>
 <p>要做的第一件事当然就是像上篇HDR文章一样，使用很亮的光源来照亮场景，然后将渲染结果存储到帧缓存的纹理附件上了。这个就不再赘述了。</p>
@@ -354,7 +355,7 @@ uniform sampler2D u_BluredTexture<span class="token punctuation">;</span>
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

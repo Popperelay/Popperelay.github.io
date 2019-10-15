@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL20：立方体贴图</h2></a>
             </div>
-            <!-- Post -->
+            <!-- page -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,7 +157,8 @@
 					};
 			   </script>
 				
-                <p><font size="5" color="orange">立方体贴图概念及采样方法</font><br><a id="more"></a><br>立方体贴图包含6个2D纹理，每个2D纹理是立方体的一个面，也就是说它是一个有贴图的立方体。使用立方体贴图可以实现很多有意思的效果，比如天空盒、环境映射等等。</p>
+                
+				<p><font size="5" color="orange">立方体贴图概念及采样方法</font><br><a id="more"></a><br>立方体贴图包含6个2D纹理，每个2D纹理是立方体的一个面，也就是说它是一个有贴图的立方体。使用立方体贴图可以实现很多有意思的效果，比如天空盒、环境映射等等。</p>
 <p>对于2D纹理，可以通过纹素的2D坐标来采样，那么立方体纹理怎样采样呢？它的采样方式类似下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL20%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE1.png?raw=true" alt><br>如果立方体的中心位于原点上，那么可以通过原点到立方体表面片段的向量来采样，如上图中的橘黄色向量。也就是说，我们可以直接使用片段的位置向量（或者说片段坐标）来进行采样，在顶点着色器里将片段的位置坐标直接赋值给输出变量纹理坐标：</p>
 <pre class="line-numbers language-c++"><code class="language-c++">void main(){
     gl_Position = position;
@@ -409,7 +410,7 @@ void main(){
 
             </div>
 
-            <!-- Post Comments -->
+            <!-- page Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">
