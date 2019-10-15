@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL25%E5%8F%8D%E8%B5%B0%E6%A0%B7_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL25%E5%8F%8D%E8%B5%B0%E6%A0%B7_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL25：反走样初步</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p><font size="5" color="orange">锯齿效果</font><br><a id="more"></a></p>
+                <p><font size="5" color="orange">锯齿效果</font><br><a id="more"></a></p>
 <hr>
 <p>在我们的渲染中，可能会遇到模型边缘有锯齿的问题。锯齿边出现的原因是由顶点数据像素化成为片段的方式引起的。比如直线上的点是连续的，而屏幕上的像素却是离散的，用屏幕上的像素来近似表示直线段，必然会出现锯齿效果（可参考<a href="http://popperelay.com/2016/11/06/%E5%9F%BA%E6%9C%AC%E5%85%89%E6%A0%85%E5%9B%BE%E5%BD%A2%E7%94%9F%E4%BA%A7%E6%8A%80%E6%9C%AF/" target="_blank" rel="noopener">《基本光栅图形生成技术》</a>一文中的直线扫描转换）。</p>
 <p>下面是一个简单的立方体，可以看到它有锯齿边的效果：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL25%E6%8A%97%E9%94%AF%E9%BD%BF1.png?raw=true" alt><br>放大后会更明显：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL25%E6%8A%97%E9%94%AF%E9%BD%BF2.png?raw=true" alt><br>很明显能看到边是由像素所构成的，这种现象叫做走样（Aliasing）。有很多技术能够减少走样，产生更平滑的边缘，这些技术叫做抗锯齿技术（Anti-aliasing，也被称为反走样技术）。<br>&nbsp; </p>
@@ -257,7 +256,7 @@ while(!glfwWindowShouldClose(window))
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

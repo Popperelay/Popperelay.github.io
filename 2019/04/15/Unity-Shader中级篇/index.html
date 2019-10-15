@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/UnityShader%E4%B8%AD%E7%BA%A7%E7%AF%87_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/UnityShader%E4%B8%AD%E7%BA%A7%E7%AF%87_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Unity Shader中级篇</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<h1 id="第九章-更复杂的光照"><a href="#第九章-更复杂的光照" class="headerlink" title="第九章 更复杂的光照"></a><font size="6" color="orange">第九章 更复杂的光照</font></h1><hr>
+                <h1 id="第九章-更复杂的光照"><a href="#第九章-更复杂的光照" class="headerlink" title="第九章 更复杂的光照"></a><font size="6" color="orange">第九章 更复杂的光照</font></h1><hr>
 <h2 id="Unity的渲染路径"><a href="#Unity的渲染路径" class="headerlink" title="Unity的渲染路径"></a><font size="5" color="red">Unity的渲染路径</font></h2><p>在Unity里，渲染路径（Rendering Path）决定了光照是如何应用到Unity Shader中的。因此，如果要和光源打交道，我们需要为每个Pass指定它所使用的渲染路径。Unity支持多种类型的渲染路径。在Unity5.0版本之前，主要有3种：前向渲染路径（Forward Rendering Path）、延迟渲染路径（Deferred Rendering Path）和顶点照明渲染路径（Vertex Lit Rendering Path）。但在Unity5.0版本之后，Unity做了很多改动，主要有两个变化：首先，顶点照明渲染路径已经被Unity抛弃（但目前仍然可以兼容之前使用了顶点照明渲染路径的Unity Shader）；其次，新的延迟渲染路径代替了原来的延迟渲染路径（同样，目标也提供了对较旧版本的兼容）。所以实际上现版本分为4中渲染路径：Forward、Deferred、Legacy Vertex Lit、Legacy Deferred。</p>
 <p>可以在Camera的Rendering Path选项中设置对该相机使用哪种渲染路径。如果当前显卡不支持所选择的渲染路径，Unity会自动使用更低一级的渲染路径。例如，如果一个GPU不支持延迟渲染，那么Unity就会使用前向渲染。</p>
 <p>其实每一个渲染路径中还包含一些子路径，可以在Shader的Pass中通过<code>LightMode</code>标签设置具体使用哪一个子路径。可以设置的渲染路径标签选项如下表所示：</p>
@@ -1258,7 +1257,7 @@ public float blurFactor
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

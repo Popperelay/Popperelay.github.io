@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL29点光源阴影</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>上一篇文章中介绍的是定向光源的阴影，而这篇文章中我们将要介绍怎样生成点光源的阴影（Point Shadow，点阴影）。由于点光源的光线是向球面上所有方向发散的，所以点阴影也通常叫做万向阴影（omnidirectional shadow）。</p>
+                <p>上一篇文章中介绍的是定向光源的阴影，而这篇文章中我们将要介绍怎样生成点光源的阴影（Point Shadow，点阴影）。由于点光源的光线是向球面上所有方向发散的，所以点阴影也通常叫做万向阴影（omnidirectional shadow）。</p>
 <p>在定向阴影中，由于光线方向是固定的，我们可以用一张2D贴图来保存从定向光源看过去的场景深度，点光源的光线方向不是固定的，而是朝向球面上的所有方向，那么我们应该怎么保存点光源视角下的场景深度呢？可以使用立方体贴图CubeMap来保存点光源视角下的整个场景的深度值。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL29%E7%82%B9%E5%85%89%E6%BA%90%E9%98%B4%E5%BD%B1_1.png?raw=true" alt></p>
 <h1 id="生成深度立方体贴图"><a href="#生成深度立方体贴图" class="headerlink" title="生成深度立方体贴图"></a><font size="6" color="orange">生成深度立方体贴图</font></h1><hr>
 <h2 id="使用几何着色器的分层渲染"><a href="#使用几何着色器的分层渲染" class="headerlink" title="使用几何着色器的分层渲染"></a><font size="5" color="red">使用几何着色器的分层渲染</font></h2><p>很容易想到的一个方案是仿照定向阴影的方式，把场景按6个方向渲染6次：用6个不同的观察矩阵，每次把一个不同的cubemap面附加到一个帧缓冲上，每次渲染一个面。类似下面这样：</p>
@@ -456,7 +455,7 @@ Shadow <span class="token operator">/</span><span class="token operator">=</span
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

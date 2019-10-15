@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL32 视差贴图</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<h1 id="视差贴图的作用"><a href="#视差贴图的作用" class="headerlink" title="视差贴图的作用"></a><font size="6" color="orange">视差贴图的作用</font></h1><hr>
+                <h1 id="视差贴图的作用"><a href="#视差贴图的作用" class="headerlink" title="视差贴图的作用"></a><font size="6" color="orange">视差贴图的作用</font></h1><hr>
 <p>上一篇文章中，我们用法线贴图技术，使得平面产生了凹凸不平的视觉效果，而本文将要介绍的视差贴图（Parallax Mapping）也是一种类似的视觉错觉技术（比法线贴图的凹凸感更明显）。</p>
 <p>视差贴图会借助于一张高度图（Height Map），高度图里的每个纹素都存储着一个高度值，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_1.png?raw=true" alt><br>如果我们有足够多的顶点，让每个顶点都去高度图对应位置上取出一个高度值，从而来改变顶点的高度值（通常是顶点的y坐标），是可以直接产生出凹凸视觉的（因为从几何上就已经是凹凸不平的了）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL32%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BE_2.png?raw=true" alt><br>但是这需要渲染大量的顶点，对于一整块墙面来说本来渲染6个顶点（两个三角形）就够了，为了实现凹凸效果而去渲染成千上万个顶点无疑太耗性能了。这时候我们就可以借助视差贴图技术并配合法线贴图来达到类似的视觉效果了。</p>
 <h1 id="视差贴图的原理"><a href="#视差贴图的原理" class="headerlink" title="视差贴图的原理"></a><font size="6" color="orange">视差贴图的原理</font></h1><hr>
@@ -288,7 +287,7 @@ vec2 BeforeTexCoords <span class="token operator">=</span> CurrentTexCoords <spa
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

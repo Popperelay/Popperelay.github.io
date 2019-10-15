@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL4%E7%9D%80%E8%89%B2%E5%99%A8_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL4%E7%9D%80%E8%89%B2%E5%99%A8_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL4：着色器</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>在上一篇文章中，我们已经知道了简单的着色器和它们的使用方法，本文再详细地来看看着色器。<br><a id="more"></a><br>着色器是运行在GPU上的小程序，是一种相当独立的程序，它们不能相互通信，只能通过输入和输出的方式进行沟通：在链接程序对象的时候，上一个阶段着色器的输出变量，和下一阶段的同名同类型输入变量，会链接到一起。<br>&nbsp; </p>
+                <p>在上一篇文章中，我们已经知道了简单的着色器和它们的使用方法，本文再详细地来看看着色器。<br><a id="more"></a><br>着色器是运行在GPU上的小程序，是一种相当独立的程序，它们不能相互通信，只能通过输入和输出的方式进行沟通：在链接程序对象的时候，上一个阶段着色器的输出变量，和下一阶段的同名同类型输入变量，会链接到一起。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">GLSL概述</font><br>在OpenGL中着色器是用GLSL语言来编写的，它是为图形计算量身定制的，尤其是向量和矩阵运算。</p>
 <p>着色器的开头总是要声明GLSL的版本，用于匹配对应的OpenGL版本。接着是输入变量和输出变量、uniform和main函数。和大多数程序一样，着色器的入口点也是main函数，在main函数中我们处理所有的输入变量，并且用输出变量输出结果。</p>
@@ -370,7 +369,7 @@ vec4 otherResult <span class="token operator">=</span> <span class="token functi
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

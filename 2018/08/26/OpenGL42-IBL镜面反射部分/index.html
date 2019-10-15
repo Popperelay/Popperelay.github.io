@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_12.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL42IBL%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84%E9%83%A8%E5%88%86_12.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL42 IBL镜面反射部分</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>还是先贴出终极反射率方程：<br>$$L_o(p,\omega_o)=\int_{\Omega}(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i \cdot n)})L_i(p,\omega_i)n\cdot\omega_id\omega_i$$</p>
+                <p>还是先贴出终极反射率方程：<br>$$L_o(p,\omega_o)=\int_{\Omega}(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i \cdot n)})L_i(p,\omega_i)n\cdot\omega_id\omega_i$$</p>
 <h1 id="使用黎曼和在PBR里直接求解镜面积分"><a href="#使用黎曼和在PBR里直接求解镜面积分" class="headerlink" title="使用黎曼和在PBR里直接求解镜面积分"></a><font size="6" color="orange">使用黎曼和在PBR里直接求解镜面积分</font></h1><hr>
 <p>上一篇文章使用预计算的辐照度贴图求解了漫反射积分部分，那这篇文章我们着重关注镜面积分部分。即：<br>$$L_o(p,\omega_o)=\int_{\Omega}k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)}L_i(p,\omega_i)n\cdot\omega_id\omega_i=\int_{\Omega}f_r(p,\omega_i,\omega_o)L_i(p,\omega_i)n\cdot\omega_id\omega_i$$<br>当然，我们可以直接在使用PBR渲染物体时，在片元着色器里直接来做这个积分：</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp">float3 <span class="token function">SpecularIBL</span><span class="token punctuation">(</span> float3 SpecularColor<span class="token punctuation">,</span> <span class="token keyword">float</span> Roughness<span class="token punctuation">,</span> float3 N<span class="token punctuation">,</span> float3 V <span class="token punctuation">)</span>
@@ -714,7 +713,7 @@ vec3 Ambient <span class="token operator">=</span> Kd <span class="token operato
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%95_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%95_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL16：模板测试</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p><font size="5" color="orange">什么是模板测试</font><br><a id="more"></a><br>当像素着色器处理完片段之后，深度测试之前，模板测试（stencil test）就开始执行了，和深度测试一样，它能丢弃一些片段：如果片段的模板值和当前模板缓冲区的对应位置上的模板值，满足指定关系，则不会被丢弃。这就是模板测试。仍然保留下来的片段将进入深度测试阶段，深度测试又会丢弃一些片段。</p>
+                <p><font size="5" color="orange">什么是模板测试</font><br><a id="more"></a><br>当像素着色器处理完片段之后，深度测试之前，模板测试（stencil test）就开始执行了，和深度测试一样，它能丢弃一些片段：如果片段的模板值和当前模板缓冲区的对应位置上的模板值，满足指定关系，则不会被丢弃。这就是模板测试。仍然保留下来的片段将进入深度测试阶段，深度测试又会丢弃一些片段。</p>
 <p>在渲染管线里包括很多种测试，它们的执行顺序如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%951.png?raw=true" alt><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">模板缓冲</font><br>模板缓冲类似于颜色缓冲和深度缓冲，不过模板值通常是8位的，每个片段可以有256种不同的模板值（最大值255）</p>
@@ -336,7 +335,7 @@ void main(){
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

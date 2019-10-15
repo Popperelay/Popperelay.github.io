@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10_%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80Phong%E6%A8%A1%E5%9E%8B_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10_%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80Phong%E6%A8%A1%E5%9E%8B_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL10：光照基础Phong模型</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>要模拟现实的光照是很困难的<a id="more"></a>，例如实际光照中，一束光可以经过场景中若干物体反射后，照射到目标物体上，也可以是直接照射到目标物体上。其中经过其他物体反射后再次照射到目标物体上，这是一个递归的过程，将会无比复杂。因此实际模拟光照过程中，总是采用近似模型去接近实现光照。<br>&nbsp;</p>
+                <p>要模拟现实的光照是很困难的<a id="more"></a>，例如实际光照中，一束光可以经过场景中若干物体反射后，照射到目标物体上，也可以是直接照射到目标物体上。其中经过其他物体反射后再次照射到目标物体上，这是一个递归的过程，将会无比复杂。因此实际模拟光照过程中，总是采用近似模型去接近实现光照。<br>&nbsp;</p>
 <hr>
 <h1 id="Phong模型"><a href="#Phong模型" class="headerlink" title="Phong模型"></a><font size="6" color="orange">Phong模型</font></h1><p>冯氏光照模型（Phong Lighting Model）就是其中很经典的一个光照模型，它由三部分光照组成：环境光+漫反射光+镜面光。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%801.png?raw=true" alt><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%802.png?raw=true" alt></p>
 <ul>
@@ -321,7 +320,7 @@ out vec3 Normal;
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

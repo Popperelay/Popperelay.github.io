@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL27Gamma%E6%A0%A1%E6%AD%A3_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL27Gamma%E6%A0%A1%E6%AD%A3_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL27：Gamma校正</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>现在的很多监视器都是<a href="http://popperelay.com/2016/10/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="noopener">阴极射线管显示器（CRT）或者LED显示器</a>，它们在显示颜色时并非按照线性方式工作，我们在程序中输出的颜色，最终显示到屏幕上亮度会减弱，这对于计算光照和实时渲染的图形质量有一定影响，需要我们进行Gamma校正。<br><a id="more"></a></p>
+                <p>现在的很多监视器都是<a href="http://popperelay.com/2016/10/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="noopener">阴极射线管显示器（CRT）或者LED显示器</a>，它们在显示颜色时并非按照线性方式工作，我们在程序中输出的颜色，最终显示到屏幕上亮度会减弱，这对于计算光照和实时渲染的图形质量有一定影响，需要我们进行Gamma校正。<br><a id="more"></a></p>
 <p><font size="5" color="orange">Gamma校正的概念及意义</font></p>
 <hr>
 <p>我们在自己的图形程序中认为颜色(1.0,0.0,0.0)的红色强度应该是颜色(0.5,0.0,0.0)的两倍，但是实际上显示设备对于输入的原始值，是按照2.2次幂的的指数形式（简称Gamma指数变换）进行处理的，即$C_{out}=C_{in}^{2.2}$，其中2.2是Gamma系数，不同显示器的Gamma系数值会略有不同，通常在2.0到2.4之间。所以程序中红色分量增大到了2倍，但是显示器显示出来的红色亮度并不是2倍，而是暗一些，比2倍低（因为原始颜色值都是在0到1之间的小数）。显示器所做的这种Gamma指数变换如下图所示：</p>
@@ -212,7 +211,7 @@ vec3 diffuseColor = pow(texture(diffuse, texCoords).rgb, vec3(gamma));
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

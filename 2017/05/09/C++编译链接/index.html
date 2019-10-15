@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84C++%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E9%94%99%E8%AF%AF_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84C++%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E9%94%99%E8%AF%AF_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>项目中遇到的C++编译链接错误</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<ol>
+                <ol>
 <li>编译时出现重定义，可参考<a href="http://popperelay.com/2017/03/15/C++%E9%87%8D%E5%AE%9A%E4%B9%89/" target="_blank" rel="noopener">这篇文章</a><a id="more"></a></li>
 <li>链接时出现LINK1120：无法解析的外部符号，这种情况通常都是没有包含对应的库文件，或者库文件没有包含正确。库文件包括.lib和.dll。</li>
 <li>链接过程中出现读取访问冲突，很可能是空指针造成的。如果是在调用OpenGL函数的时候出现该问题，无法访问某个地址，则很有可能是在初始化GLEW之前就调用了该函数。要知道没有初始化GLEW，有可能某些OpenGL函数是无法使用的（版本问题）。</li>
@@ -213,7 +212,7 @@ public:
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD_BG.jpeg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL14%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD_BG.jpeg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL14：模型加载</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>之前我们的场景里用的全都是小方块，现在我们想要去加载一些其他模型。<a id="more"></a>我们是无法像定义小方块一样，用程序去手动地指定房子、人这些复杂模型的顶点、法线和纹理坐标。这些复杂模型通常是由美工用Blender、3DS Max和Maya这些建模软件来制作的，我们要做的只是把这些已经做好的模型打入到我们的应用程序中。在建模软件导出模型文件时，会自动生成模型的所有顶点坐标、顶点法线和纹理坐标，而我们需要去解析这些导出的模型文件，并将其中的模型数据存储为OpenGL能够使用的数据。</p>
+                <p>之前我们的场景里用的全都是小方块，现在我们想要去加载一些其他模型。<a id="more"></a>我们是无法像定义小方块一样，用程序去手动地指定房子、人这些复杂模型的顶点、法线和纹理坐标。这些复杂模型通常是由美工用Blender、3DS Max和Maya这些建模软件来制作的，我们要做的只是把这些已经做好的模型打入到我们的应用程序中。在建模软件导出模型文件时，会自动生成模型的所有顶点坐标、顶点法线和纹理坐标，而我们需要去解析这些导出的模型文件，并将其中的模型数据存储为OpenGL能够使用的数据。</p>
 <p>由于导出的模型文件通常有几十种格式，为每种格式都写一种解析方式是很麻烦的。这里我们直接使用市面上一个很流行的模型加载库，叫做Assimp。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">模型加载库Assimp</font><br>Assimp是一个常用的模型加载库，全称是Open Asset Import Library。它可以导入几十种不同格式的模型文件（也可以导出部分模型格式），并且可以把不同的模型文件都转换为一个统一的数据结构，所以无论我们导入哪种格式的模型文件，都可以用同一个方式去访问我们需要的模型数据。<br>它能读取以下格式的模型文件：</p>
@@ -579,7 +578,7 @@ directory = path.substr(0, path.find_last_of('/'));
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++%E9%87%8D%E5%AE%9A%E4%B9%89_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++%E9%87%8D%E5%AE%9A%E4%B9%89_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>C++里XXX重定义</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>有时候我们编译工程会出现重定义的编译错误，在同一个源文件里定义两个相同的变量就不说了，这是最低级的错误。我们来说一下其他可能造成重定义的原因和解决办法。<a id="more"></a></p>
+                <p>有时候我们编译工程会出现重定义的编译错误，在同一个源文件里定义两个相同的变量就不说了，这是最低级的错误。我们来说一下其他可能造成重定义的原因和解决办法。<a id="more"></a></p>
 <ol>
 <li>没有在头文件最前面加<code>#pragma once</code>：<br>如果我们在同一个文件中包含了某个头文件两次：<pre class="line-numbers language-c++"><code class="language-c++">#include "A.h"
 #include "A.h"
@@ -223,7 +222,7 @@ class A {
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

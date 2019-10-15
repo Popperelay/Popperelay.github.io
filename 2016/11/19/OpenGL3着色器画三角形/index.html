@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL3%E7%9D%80%E8%89%B2%E5%99%A8%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL3%E7%9D%80%E8%89%B2%E5%99%A8%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL3：着色器画三角形</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>在高版本的OpenGL中绘制图形，这个过程主要是由OpenGL的<strong>图形输送管道</strong>来完成的。<br><a id="more"></a><br>&nbsp;</p>
+                <p>在高版本的OpenGL中绘制图形，这个过程主要是由OpenGL的<strong>图形输送管道</strong>来完成的。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">图形输送管道</font><br>图形输送管段（pipeline，管线）接收一组3D坐标，然后把它们转变为屏幕上的有色2D像素。图形输送管道可以被划分为几个阶段，每个阶段的输出都是下一个阶段的输入。所有这些阶段都是高度专门化的，它们能够简单地并行执行。由于它们的可并行执行的特征，当今大多数显卡都有成千上万的小处理核心，在GPU上为管线上的每个阶段运行各自的小程序，从而在图形输送管道中快速处理这些它的以及几何运算。这些小程序就叫做着色器（如今CPU最多只有8核，而GPU却有很多很多简单的核，可以大量并行执行那些不是很复杂的计算，比如绘制图形所用的几何运算。关于GPU可以参考这下面这个视频）。</p>
 <iframe height="498" width="510" src="http://player.youku.com/embed/XMTYyMzg0MDUzMg==" frameborder="0" 'allowfullscreen'></iframe>
@@ -446,7 +445,7 @@
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

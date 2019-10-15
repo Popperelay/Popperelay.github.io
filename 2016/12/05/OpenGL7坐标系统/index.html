@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL7%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL7%E5%9D%90%E6%A0%87%E7%B3%BB%E7%BB%9F_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL7：坐标系统</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>OpenGL希望每次顶点着色器运行后，我们所有可见的顶点都化为标准化设备坐标（NDC，normalized device coordinate）。<a id="more"></a>也就是说，每个顶点的x、y、z坐标都应该在-1.0到1.0之间，超出这个坐标范围的顶点都将不可见。我们通常会自己设定一个可见的坐标范围，之后再顶点着色器中将这些坐标变换为标准化设备坐标，然后将这些标准化设备坐标传入光栅器（Rasterizer），把它们变换为屏幕上的二维坐标/像素。<br>&nbsp;</p>
+                <p>OpenGL希望每次顶点着色器运行后，我们所有可见的顶点都化为标准化设备坐标（NDC，normalized device coordinate）。<a id="more"></a>也就是说，每个顶点的x、y、z坐标都应该在-1.0到1.0之间，超出这个坐标范围的顶点都将不可见。我们通常会自己设定一个可见的坐标范围，之后再顶点着色器中将这些坐标变换为标准化设备坐标，然后将这些标准化设备坐标传入光栅器（Rasterizer），把它们变换为屏幕上的二维坐标/像素。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">坐标转化过程</font></p>
 <p><font size="4" color="red">坐标转化过程中的坐标系统</font><br>物体的顶点在最终化为屏幕坐标之前，还会被变换到多个坐标系统。这是因为，在中间的那些特定的坐标系统里，一些操作或运算更加方便和容易。其实这个过程类似现实世界的物体被我们看到的过程：最开始由物体出发，物体上可能有各种细节需要去研究，这时候是在局部空间（或称物体空间）；接着这个物体肯定是和我们身处在一个世界里，它身边可能还有其他物体，这时候是在世界空间；但是并不是世界里所有的物体都能被我们看到，只有在我们眼睛前方的物体，才能被我们看到，脑后的东西肯定看不到了，我们眼睛视角前方的世界范围都是观察空间（或称视觉空间）；但是受视力限制，在我们眼睛前方的世界（观察空间）不是都能看得到，我们只能看到目力所能及的观察空间，眼睛前方的视觉范围就是裁剪空间，即使在我们眼睛前方，但太近或者太远不在我们的视力范围内也是看不到的，处在裁剪空间里的物体会通过反射光投影到我们的视网膜上（根据是点光线/点光源还是平行光线/太阳光，可以分为透视投影和正交投影）；在视网膜上的投影最终会转换为我们脑海中的事物，在我们脑海中形成一个世界，这就是屏幕空间。</p>
@@ -402,7 +401,7 @@ void main(){
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

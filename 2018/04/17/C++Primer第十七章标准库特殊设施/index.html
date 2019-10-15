@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC17%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/C++Primer%E7%AC%AC17%E7%AB%A0.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>C++Primer第十七章 标准库特殊设施</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p><font size="5" color="orange">tuple类型</font></p>
+                <p><font size="5" color="orange">tuple类型</font></p>
 <hr>
 <ol>
 <li><p>tuple是类似pair的模板，一个tuple可以有任意数量的成员。当我们希望将一些数据组合成单一对象，但又不想麻烦地定义一个新数据结构来表示这些数据时，tuple是非常有用的。下表列出了一些重要的tuple操作，它们都定义在tuple头文件中：<br>tuple操作 | 描述<br>:-: | : -:<br>tuple&lt;T1,T2,…,Tn&gt; t; | 定义一个tuple，有n个成员，第i个成员的类型是Ti，所有成员都进行值初始化<br>tuple&lt;T1,T2,…,Tn&gt; t(v1,v2,…,vn)| 定义一个tuple，每个成员用对应的vi进行初始化。此构造函数是explicit的，即参数无法进行隐式转换<br>make_tuple&lt;v1,v2,…,vn&gt; | 返回一个用给定值初始化的tuple。tuple的类型从初始值的类型推断。<br>get<i>(t) | 返回t的第i个数据成员的引用。如果t是一个左值，则返回的结果是一个左值引用；如果t是一个右值，则返回的结果是一个右值引用。tuple的所有成员都是public的。<br>tuple_size<tupletype>::value | 返回给定tuple类型tupleType中包含的成员的数量。注意tupleType是一个类型而非变量，所以通常要配合decltype使用。<br>tuple_element&lt;i, tupleType&gt;::type | 返回给定tuple类型中第i个成员的类型。</tupletype></i></p>
@@ -801,7 +800,7 @@ FInOut<span class="token punctuation">.</span><span class="token function">close
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

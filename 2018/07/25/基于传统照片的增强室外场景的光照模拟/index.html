@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>基于传统照片的增强室外场景的光照模拟</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_1.png?raw=true" alt></p>
+                <p><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9F%E7%85%A7%E7%89%87%E7%9A%84%E5%A2%9E%E5%BC%BA%E6%88%B7%E5%A4%96%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E6%8B%9F_1.png?raw=true" alt></p>
 <p><center>图1：本文系统根据传统照片模拟室外场景的照明。我们根据图像恢复环境贴图，并使用六个光照参数为其照明进行建模。真实世界和虚拟物体之间的阴影投射可以被合成，确保增强的场景图像的一致性。该图显示了两个不同的场景，左边的是输入图像，右边的是我们合成后的结果。</center></p>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>我们提出了一种新的方法来模拟基于传统照片的增强室外场景的光照。不像前人只把表面辐射度和光照相关的先验知识来作为光照估计的基础，本文方法集成了这两者。通过使用球函数，我们推导出一个只有6个光照参数的线性模型。室外场景的光照最终通过求解日光和天光颜色约束下的线性最小二乘问题来计算。然后建立一个高质量的环境贴图，引导出真实的渲染结果。我们还研究了在不知道投射阴影的物体的几何形状下，怎样在真实的和虚拟的物体之间投射阴影的问题。一种有效的方式是，通过纹理映射将真实世界地面上复杂的阴影（比如树的阴影）投射到虚拟物体的表面。最后，我们提出了一个真实场景和虚拟物体进行图像合成的统一方案，以确保光照一致性和阴影一致性。实验结果证明了我们方法的有效性和灵活性。</p>
 <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>当把一个合成的物体插入到图像或者视频里时，真实场景的光照模拟是很有必要的。对于基于传统照片的室外光照模拟，有两个问题需要解决：1）恢复场景的光照分布； 2）在真实的和虚拟的物体之间投射阴影。然而，照片中的每一个像素都是物体和入射光线之间交互影响的综合结果，这让基于传统照片去做光照模拟变得很困难。</p>
@@ -312,7 +311,7 @@
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

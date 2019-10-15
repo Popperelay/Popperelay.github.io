@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/UnityShader%E9%AB%98%E7%BA%A7%E7%AF%87_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/UnityShader%E9%AB%98%E7%BA%A7%E7%AF%87_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Unity Shader高级篇</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<h1 id="第十二章-屏幕后处理效果"><a href="#第十二章-屏幕后处理效果" class="headerlink" title="第十二章 屏幕后处理效果"></a><font size="6" color="orange">第十二章 屏幕后处理效果</font></h1><hr>
+                <h1 id="第十二章-屏幕后处理效果"><a href="#第十二章-屏幕后处理效果" class="headerlink" title="第十二章 屏幕后处理效果"></a><font size="6" color="orange">第十二章 屏幕后处理效果</font></h1><hr>
 <h2 id="建立一个基本的屏幕后处理脚本系统"><a href="#建立一个基本的屏幕后处理脚本系统" class="headerlink" title="建立一个基本的屏幕后处理脚本系统"></a><font size="5" color="red">建立一个基本的屏幕后处理脚本系统</font></h2><p>要在Unity中实现屏幕后处理效果，过程通常如下：我们首先需要在<strong>摄像机</strong>中添加一个用于屏幕后处理的脚本。在这个脚本中，我们会实现<code>OnRenderImage</code>函数来获取当前屏幕的渲染纹理。然后，再调用<code>Graphics.Blit</code>函数使用特定的Unity Shader来对当前图像进行处理，再把返回的渲染纹理显示到屏幕上。对于一些复杂的屏幕特效，我们可能需要多次调用Graphics.Blit函数来对上一步的输出结果进行下一步处理。</p>
 <p>其中<code>OnRenderImage</code>函数声明如下：</p>
 <pre class="line-numbers language-c#"><code class="language-c#">MonoBehaviour.OnRenderImage(RenderTexture src, RenderTexture dest);
@@ -2111,7 +2110,7 @@ v2f vert(a2v v)
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

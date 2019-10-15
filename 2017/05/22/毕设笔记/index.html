@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0_BG.png?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>毕设笔记</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<ol>
+                <ol>
 <li>在投影变换的过程中，就会剔除掉所有在视见体之外的片段，它们是不会从顶点着色器进入片元着色器的。也就是说那些在视见体之外的片段不会执行片元着色器。<a id="more"></a></li>
 <li>深度测试是在片元着色器的过程中的，即使是那些被挡住的片段也是会执行片元着色器里的内容（比如片元着色器里的所有光照计算），很明显的证明例子就是延迟着色，延迟着色的优点就是剔除掉了对那些被遮挡的片段的光照计算。虽然被遮挡的和没被遮挡的片段都会执行光照计算，但是最后留在帧缓冲里的都是没被遮挡的片段，因为开启了深度测试。</li>
 <li>透视除法也是在片元着色器之前的。当我们在顶点着色器输出一个裁剪空间顶点位置到<code>gl_Position</code>时，OpenGL会自动进行一个透视除法，将裁剪空间坐标范围的-w到w转换为-1到1。这要通过将x、y、z元素除以w元素来实现。</li>
@@ -323,7 +322,7 @@ A只是返回了实例对象，而不是对象指针，也就是说B类中通过
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

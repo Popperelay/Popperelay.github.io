@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E6%8E%92%E5%BA%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E6%8E%92%E5%BA%8F_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>数据结构与算法之改进排序</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)<br><a id="more"></a></p>
+                <p>排序算法主要分为7类：冒泡排序、简单选择排序、直接插入排序(这三种属于简单算法)、希尔排序、堆排序、归并排序、快速排序(这四种属于改进算法)<br><a id="more"></a></p>
 <hr>
 <p><font size="5" color="orange">希尔排序</font><br>希尔排序是直接插入排序的升级版。对于直接插入排序，原序列中待排序的元素还是比较多。每次插入时需要很多次后移操作(因为序列较长时一般后移距离也长)，有没有什么办法能够减少后移的距离呢？很容易想到的是，把原序列分组，在每一组内进行直接插入排序，由于每一组序列长度较小，再插入时移动的次数也就自然少了。<br>但是有一个问题，对{9，1，2，5，7，4，8，6，3，5}分成五组：{9，1}，{2，5}，{7，4}，{8，6}，{3，5}，即使每一分组都排好序后再合并：{1，9，2，5，4，7，6，8，3，5}，得到的这个序列依旧是杂乱无章的，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort1.png?raw=true" alt><br>并没有大体上让小的元素往前走，让大的元素往后走，对下一次的直接排序几乎没有多大帮助。原因在于分组时，元素间隔太小，交换位置时，只能和附近的元素交换，如果把元素间隔设大一点，就能够和较远的元素交换位置，这就增大了小元素大幅度往前走，大元素大幅度往后走的几率。但是通常仅有一次排序是不够的，需要缩小间隔再直接插入排序多次（第一次间隔gap=n/2，后面几次的间隔减半gap=gap/2，直到gap==1。直接插入排序相当于gap=1时的希尔排序）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/ImprovedSort2.png?raw=true" alt><br>希尔排序的核心：<strong>按间隔分组直接插入排序，再缩小间隔分组直接插入排序，直到间隔等于1</strong><br>代码如下：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">ShellSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -350,7 +349,7 @@ int GreaterRoot(int array[], int i, int length) {
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">

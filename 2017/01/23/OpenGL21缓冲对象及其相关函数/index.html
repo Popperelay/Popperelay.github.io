@@ -127,10 +127,10 @@
 </nav>
 
         <div id="main">
-            <div class="page_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL21%E7%BC%93%E5%86%B2%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL21%E7%BC%93%E5%86%B2%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
                 <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>OpenGL21：缓冲对象及其相关函数</h2></a>
             </div>
-            <!-- page -->
+            <!-- Post -->
             <div class="typo" style="padding: 3rem;">
 				<!-- 目录 -->
 				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
@@ -157,8 +157,7 @@
 					};
 			   </script>
 				
-                
-				<p><font size="5" color="orange">缓冲对象的概念</font><br><a id="more"></a><br>在OpenGL中，缓冲对象（buffer  object）是OpenGL的绘制上下文，是GPU分配的，完成未格式化数据区域的存储，例如完成顶点数据、帧缓冲数据的存储。</p>
+                <p><font size="5" color="orange">缓冲对象的概念</font><br><a id="more"></a><br>在OpenGL中，缓冲对象（buffer  object）是OpenGL的绘制上下文，是GPU分配的，完成未格式化数据区域的存储，例如完成顶点数据、帧缓冲数据的存储。</p>
 <p>缓冲对象中的数据实际上就是原始的字节流，例如我们在程序中指定顶点属性数据，然后使用<code>glBufferData</code>这个函数将数据从CPU传送至GPU中，这一步只完成了数据的上传，关于这份数据，OpenGL是不知道其具体格式的，因此在实际使用中还必须告诉OpenGL如何具体使用这些数据，这是通过<code>glVertexAttribPointer</code>这样的函数来完成的。</p>
 <p>每个缓冲对象，必须绑定到一个具体的目标（target）后，OpenGL才知道如何具体操作这个缓冲对象，例如绑定到<code>GL_ARRAY_BUFFER</code>，OpenGL使用这个缓冲对象作为顶点属性数据；例如绑定到<code>GL_ELEMENT_ARRAY_BUFFER</code>，则OpenGL使用这个缓冲对象的数据作为索引绘图的索引数据。</p>
 <p>缓冲对象的数据，也存在读写、复制、清除等操作，同时缓存对象在适当时候也可以使用<code>glDeleteBuffers</code>这类函数释放。<br>&nbsp;</p>
@@ -223,7 +222,7 @@ glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, sizeof(vertexDa
 
             </div>
 
-            <!-- page Comments -->
+            <!-- Post Comments -->
             
     <!-- 使用 DISQUS_CLICK -->
 <div id="disqus-comment">
