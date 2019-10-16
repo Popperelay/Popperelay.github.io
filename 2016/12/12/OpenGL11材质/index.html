@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">材质概述</font><br>在真实世界里，每个物体会对光产生不同的反应。<a id="more"></a>钢看起来比陶瓷花瓶更闪闪发光，木头箱子肯定不会像钢箱子那样对光产生很强的反射。每个物体对镜面高光也有不同的反应。有些物体不会散射（scatter）很多光却会反射（reflect）很多光，结果看起来就有一个较小的高光点（highlight）；有些物体散射了很多，它们就会产生一个半径更大的高光（这其实就是镜面高光系数的体现）。如果我们想要模拟不同物体接受光照后的效果，就需要考虑物体的材质属性， 利用材质属性模拟出不同的效果。材质就是不同光属性组成的一个结构体。最终用材质颜色来代替<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">《OpenGL10》</a>中的物体本身颜色<code>objectColor</code>。<br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">定义材质结构体</font><br>在OpenGL10中，我们使用了冯氏光照模型来模拟复杂的光照，它有三种元素：环境光颜色、漫反射光颜色、镜面反射光颜色，我们这里再加上镜面高光系数，一起作为材质的属性，在像素着色器中组成材质结构体：</p>
@@ -382,6 +371,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">阴影的重要意义</font><br><a id="more"></a></p>
 <hr>
 <p>阴影是光线被阻挡的结果，它能够使场景看起来真实很多，可以让观察者获得物体之间的空间位置关系。如下图所示：</p>
@@ -607,6 +596,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

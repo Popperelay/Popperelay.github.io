@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>当定义一个类时，我们显式地或隐式地指定在此类型的对象拷贝、移动、赋值和销毁时做什么。一个类通过定义五种特殊的成员函数来控制这些操作，包括：拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符和析构函数。拷贝和移动构造函数定义了当相同类型的另一个对象初始化本对象时做什么。拷贝和移动赋值运算符定义了将一个对象赋予同类型的另一个对象时做什么。析构函数定义了当此类型对象销毁时做什么。我们称这些操作为拷贝控制操作。</p>
 <p><font size="5" color="orange">拷贝、赋值与销毁</font></p>
 <hr>
@@ -532,6 +521,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

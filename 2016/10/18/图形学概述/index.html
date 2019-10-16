@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">什么是计算机图形学？</font><br><a id="more"></a></p>
 <ul>
 <li>ISO定义：通过计算机将数据转换为图形，并在专门的显示设备上进行显示，而计算机图形学就是研究其中的原理、方法和技术的学科。</li>
@@ -317,6 +306,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

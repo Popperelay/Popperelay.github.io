@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>在上一篇<a href="http://popperelay.com/2016/10/18/OpenGL%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener">《OpenGL1：OpenGL概述及环境配置》</a>中，已经说过接下来的OpenGL项目，我们将使用GLFW和GLEW相结合的方式。<br><a id="more"></a></p>
 <p><font size="5" color="orange">头文件</font><br>既然要使用GLFW和GLEW中的函数，那在我们的源文件里肯定要包含它俩的头文件：</p>
 <pre class="line-numbers language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">//GLEW</span>
@@ -376,6 +365,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

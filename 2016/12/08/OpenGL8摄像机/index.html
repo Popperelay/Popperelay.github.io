@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>OpenGL本身没有摄像机的概念，是我们虚构的，我们通过把场景往反方向移动的方式来模拟出摄像机，产生一种我们在移动的感觉。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">摄像机坐标系（观察坐标系）</font><br>摄像机默认位置是在世界空间原点，通过观察矩阵把所有的世界坐标转化为相对于摄像机位置与方向的观察坐标。但是通过观察矩阵，摄像机不一定要在原点，也是可以移动的，这就有了我们在游戏中用键盘鼠标手柄等移动视角的效果。</p>
@@ -561,6 +550,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

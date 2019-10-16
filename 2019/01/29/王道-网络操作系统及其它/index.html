@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a><font size="6" color="orange">计算机网络</font></h1><hr>
 <ol>
 <li>国际标准化组织（ISO）提出的网络体系结构模型，称为开放系统互联参考模型，简称OSI参考模型。OSI有七层，自下而上依次为物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。</li>
@@ -363,6 +352,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>在上一篇文章中，我们已经知道了简单的着色器和它们的使用方法，本文再详细地来看看着色器。<br><a id="more"></a><br>着色器是运行在GPU上的小程序，是一种相当独立的程序，它们不能相互通信，只能通过输入和输出的方式进行沟通：在链接程序对象的时候，上一个阶段着色器的输出变量，和下一阶段的同名同类型输入变量，会链接到一起。<br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">GLSL概述</font><br>在OpenGL中着色器是用GLSL语言来编写的，它是为图形计算量身定制的，尤其是向量和矩阵运算。</p>
@@ -464,6 +453,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

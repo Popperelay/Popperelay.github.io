@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <h1 id="第十二章-屏幕后处理效果"><a href="#第十二章-屏幕后处理效果" class="headerlink" title="第十二章 屏幕后处理效果"></a><font size="6" color="orange">第十二章 屏幕后处理效果</font></h1><hr>
 <h2 id="建立一个基本的屏幕后处理脚本系统"><a href="#建立一个基本的屏幕后处理脚本系统" class="headerlink" title="建立一个基本的屏幕后处理脚本系统"></a><font size="5" color="red">建立一个基本的屏幕后处理脚本系统</font></h2><p>要在Unity中实现屏幕后处理效果，过程通常如下：我们首先需要在<strong>摄像机</strong>中添加一个用于屏幕后处理的脚本。在这个脚本中，我们会实现<code>OnRenderImage</code>函数来获取当前屏幕的渲染纹理。然后，再调用<code>Graphics.Blit</code>函数使用特定的Unity Shader来对当前图像进行处理，再把返回的渲染纹理显示到屏幕上。对于一些复杂的屏幕特效，我们可能需要多次调用Graphics.Blit函数来对上一步的输出结果进行下一步处理。</p>
 <p>其中<code>OnRenderImage</code>函数声明如下：</p>
@@ -2205,6 +2194,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

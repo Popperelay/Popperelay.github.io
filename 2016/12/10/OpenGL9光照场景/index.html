@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>我们先来看看物体颜色颜色是怎么形成的。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">光照颜色和物体颜色</font><br>计算机中的颜色主要是由三基色（RGB）来表示的，用有限种颜色来模拟现实世界中（无限）的颜色，因为现实世界中能被人眼区分的颜色只有有限种，差别太小的颜色人眼是看不出来的。如果想了解屏幕颜色是如何形成的，可以参考<a href>《》</a></p>
@@ -379,6 +368,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

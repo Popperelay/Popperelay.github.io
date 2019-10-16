@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>在高版本的OpenGL中绘制图形，这个过程主要是由OpenGL的<strong>图形输送管道</strong>来完成的。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">图形输送管道</font><br>图形输送管段（pipeline，管线）接收一组3D坐标，然后把它们转变为屏幕上的有色2D像素。图形输送管道可以被划分为几个阶段，每个阶段的输出都是下一个阶段的输入。所有这些阶段都是高度专门化的，它们能够简单地并行执行。由于它们的可并行执行的特征，当今大多数显卡都有成千上万的小处理核心，在GPU上为管线上的每个阶段运行各自的小程序，从而在图形输送管道中快速处理这些它的以及几何运算。这些小程序就叫做着色器（如今CPU最多只有8核，而GPU却有很多很多简单的核，可以大量并行执行那些不是很复杂的计算，比如绘制图形所用的几何运算。关于GPU可以参考这下面这个视频）。</p>
@@ -540,6 +529,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

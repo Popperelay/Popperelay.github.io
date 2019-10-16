@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>一个处理器支持的指令和指令的字节级编码称为它的指令集体系结构（Instruction-Set Architecture，ISA）。在本章里，我们会自定义一个简单的指令集，称作Y86-64指令集（我们要尝试一点点建立起一个简单的可工作的处理器）。</p>
 <p>HCL（Hardware Control Language）是一种描述硬件系统控制部分的简单语言。</p>
 <p>冒险就是指一条指令的位置或操作数依赖于其他仍在流水线中的指令。</p>
@@ -419,6 +408,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

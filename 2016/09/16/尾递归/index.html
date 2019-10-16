@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>递归：在函数或者方法里调用自身，且有明确的递归结束条件。<br><a id="more"></a></p>
 <hr>
 <p>下面来看一个基本递归（一般意义下的递归）<br>问题：计算n!<br>计算公式为：n!=nx(n-1)x(n-2)……2x1<br>递归公式为：<br>$$<br>F(n)=<br>\begin{cases}<br>1, &amp;n=0 || n=1\<br>nF(n-1),&amp;n&gt;1<br>\end{cases}<br>$$<br>代码如下：</p>
@@ -285,6 +274,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

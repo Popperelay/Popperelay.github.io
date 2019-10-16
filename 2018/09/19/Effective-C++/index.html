@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <h1 id="1：视C-为一个语言联邦"><a href="#1：视C-为一个语言联邦" class="headerlink" title="1：视C++为一个语言联邦"></a><font size="6" color="orange">1：视C++为一个语言联邦</font></h1><hr>
 <h1 id="2：尽量以const-enum-inline替换-define"><a href="#2：尽量以const-enum-inline替换-define" class="headerlink" title="2：尽量以const,enum,inline替换#define"></a><font size="6" color="orange">2：尽量以const,enum,inline替换#define</font></h1><hr>
 <ol>
@@ -868,6 +857,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

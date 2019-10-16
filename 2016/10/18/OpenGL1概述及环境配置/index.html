@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">OpenGL简介</font><br><a id="more"></a><br>OpenGL是一个功能强大的图形库，提供了很多操作图形和图片的API（Application Programming Interface），用户可以用它很方便地开发所需要的有多种特殊视觉（如光照、透明、纹理、阴影）的三维图形。<br>OpenGL库的实际开发者通常是各大显卡厂商。Khronos Group公开提供了所有OpenGL的规范文档，可以从<a href="https://www.opengl.org/registry/doc/glspec33.core.20100311.withchanges.pdf" target="_blank" rel="noopener">这里</a>看到OpenGL3.3规范文档。<br>OpenGL具有很好的跨平台性，2012年8月已经更新到4.3版本。</p>
 <p><font size="4" color="red">OpenGL组成</font><br>OpenGL主要由OpenGL基本函数库、OpenGL实用函数工具包、WGL库（OpenGL的Windows扩展库）</p>
 <ul>
@@ -414,6 +403,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

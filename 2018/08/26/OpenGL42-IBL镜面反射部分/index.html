@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>还是先贴出终极反射率方程：<br>$$L_o(p,\omega_o)=\int_{\Omega}(k_d\frac{c}{\pi}+k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i \cdot n)})L_i(p,\omega_i)n\cdot\omega_id\omega_i$$</p>
 <h1 id="使用黎曼和在PBR里直接求解镜面积分"><a href="#使用黎曼和在PBR里直接求解镜面积分" class="headerlink" title="使用黎曼和在PBR里直接求解镜面积分"></a><font size="6" color="orange">使用黎曼和在PBR里直接求解镜面积分</font></h1><hr>
 <p>上一篇文章使用预计算的辐照度贴图求解了漫反射积分部分，那这篇文章我们着重关注镜面积分部分。即：<br>$$L_o(p,\omega_o)=\int_{\Omega}k_s\frac{DFG}{4(\omega_o\cdot n)(\omega_i\cdot n)}L_i(p,\omega_i)n\cdot\omega_id\omega_i=\int_{\Omega}f_r(p,\omega_i,\omega_o)L_i(p,\omega_i)n\cdot\omega_id\omega_i$$<br>当然，我们可以直接在使用PBR渲染物体时，在片元着色器里直接来做这个积分：</p>
@@ -808,6 +797,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

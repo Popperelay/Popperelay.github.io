@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>本文将会讨论一些GLSL内置变量、接口块和uniform缓冲对象。<br><a id="more"></a><br>&nbsp; </p>
 <hr>
 <p><font size="5" color="orange">GLSL的内置变量</font><br>GLSL有几个以<strong>gl_</strong>为前缀的变量，我们可以用它们来实现对着色器的输入输出数据。其中两个我们已经接触过：<code>gl_Position</code>和<code>gl_FragCoord</code>，前一个是顶点着色器的输出向量，后一个是像素着色器的变量。接下里我们再多了解几个内置变量。</p>
@@ -596,6 +585,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

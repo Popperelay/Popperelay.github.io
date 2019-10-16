@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <h1 id="重新链接着色器程序后uniform失效"><a href="#重新链接着色器程序后uniform失效" class="headerlink" title="重新链接着色器程序后uniform失效"></a><font size="6" color="orange">重新链接着色器程序后uniform失效</font></h1><a id="more"></a>
 <hr>
 <p>如果链接着色器程序后，为着色器程序设置好了uniform变量，然后再链接一次。着色器程序将会回到初始状态，所有设置好的uniform变量也会还原（可能变成0）。</p>
@@ -390,6 +379,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

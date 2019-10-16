@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">Phong模型的缺陷</font><br><a id="more"></a></p>
 <hr>
 <p>在<a href="http://popperelay.com/2016/12/12/OpenGL10%E5%85%89%E7%85%A7%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">《OpenGL10：光照基础Phong模型》</a>中，我们使用了Phong模型来模拟光照效果，但是在镜面高光系数很低（比如0.5），即镜面光半径很大的时候，它的镜面反射会失效，如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong1.png?raw=true" alt><br>可以看到，镜面区域边缘迅速减弱并截止，出现这个问题的原因是视线向量和反射光向量之间的夹角大于90度了，根据Phong模型中<code>max(dot(reflectDir, viewDir), 0);</code>，夹角大于90度时，镜面反射系数会被设置为0，所以一旦视线方向和反射光之间夹角大于90度，镜面光就会突然消失，变为0，产生镜面光硬边缘。但是<strong>大于90度变为0</strong>这只适用于漫反射光，而不适用于镜面光。计算漫反射光需要的夹角是入射方向和法线之间的夹角，大于90度时，入射光转到了物体背面，变为0；但是计算镜面反射光需要的夹角是视线方向和反射光方向之间的夹角，大于90度时，光线不一定转到了物体背面，如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL26Blinn-Phong2.png?raw=true" alt><br>所以对于镜面光，不能在夹角大于90度时令镜面光反射系数变为0。</p>
@@ -282,6 +271,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

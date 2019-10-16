@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p><font size="5" color="orange">什么是操作系统</font><br>操作系统（Operating System，OS）是一种复杂的系统软件，它提供计算机用户与计算机硬件之间的接口，并管理计算机软件和硬件资源。操作系统本身并不向用户提供功能，但是它为应用程序的运行提供平台，并使应用程序的编程变得简单、容易。<br><a id="more"></a></p>
 <ul>
 <li>接口：两个不同组成部分的交界面。在计算机领域，接口分为硬件接口（如USB接口、串口、并口）和软件接口（如C语言中的函数调用printf()）。</li>
@@ -303,6 +292,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->

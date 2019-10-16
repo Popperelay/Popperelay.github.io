@@ -157,17 +157,6 @@
 					};
 			   </script>
 				
-				<script>
-					(function(){
-						if('{{ page.password }}'){
-							if (prompt('请输入文章密码') !== '{{ page.password }}'){
-								alert('密码错误！');
-								history.back();
-							}
-						}
-					})();
-				</script>
-				
                 <p>有时候我们编译工程会出现重定义的编译错误，在同一个源文件里定义两个相同的变量就不说了，这是最低级的错误。我们来说一下其他可能造成重定义的原因和解决办法。<a id="more"></a></p>
 <ol>
 <li>没有在头文件最前面加<code>#pragma once</code>：<br>如果我们在同一个文件中包含了某个头文件两次：<pre class="line-numbers language-c++"><code class="language-c++">#include "A.h"
@@ -317,6 +306,17 @@ $('.btn_click_load').click(function() {
     }
 </style>
 
+
+<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入文章密码') !== '{{ page.password }}'){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
 
         </div>
         <!-- Copyright 版权 start -->
