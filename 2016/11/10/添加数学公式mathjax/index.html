@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="5" color="orange">配置方法</font><br><a id="more"></a></p>
 <ol>
 <li><p>在Hexo\themes\transparent\layout_partial路径下新建文件mathjax.ejs（transparent是我的主题名）。打开文件写入如下代码：</p>

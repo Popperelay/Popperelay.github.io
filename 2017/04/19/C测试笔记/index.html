@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <ol>
 <li>C语言中默认没有bool类型。需要加上stdbool.h头文件以后才能使用bool类型。<a id="more"></a></li>
 <li>符号常量（用define定义的）和变量不同，符号常量是不占内存的，只是一个临时符号，预编译后这个符号就不存在了。</li>

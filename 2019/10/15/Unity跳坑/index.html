@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="MainTex-TexelSize的坑"><a href="#MainTex-TexelSize的坑" class="headerlink" title="_MainTex_TexelSize的坑"></a><font size="6" color="orange">_MainTex_TexelSize的坑</font></h1><hr>
 <p>不在Shader的Properties里声明<code>_MainTex</code>，就访问不到<code>_MainTex_TexelSize</code>的值，会是0：</p>
 <pre class="line-numbers language-shader"><code class="language-shader">Properties

@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a><font size="6" color="orange">向量</font></h1><hr>
 <p>线性代数围绕两种基本运算：向量加法与向量数乘。</p>
 <p>向量的每一维坐标，都是一个标量，表示把单位坐标轴$\vec i$或$\vec j$（简称i hat和j hat）进行缩放。</p>

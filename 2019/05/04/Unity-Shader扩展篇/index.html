@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="第十七章-Unity的表面着色器探秘"><a href="#第十七章-Unity的表面着色器探秘" class="headerlink" title="第十七章 Unity的表面着色器探秘"></a><font size="6" color="orange">第十七章 Unity的表面着色器探秘</font></h1><p>Unity的著名渲染工程师Aras认为，把渲染流程分为顶点和像素的抽象层面是错误的，是一种不易理解的抽象。相反，他认为，应该划分成表面着色器、光照模型和光照着色器这样的层面。其中，表面着色器定义了模型表面的反射率、法线、高光等；光照模型则选择是用Lambert还是Blinn-Phong等模型；而光照着色器负责计算光照衰减、阴影等。这样绝大部分时间我们只需要和表面着色器打交道，比如混合纹理和颜色等。</p>
 <p>其实Unity的表面着色器（Surface）实际上就是在顶点/片元着色器上又添加了一层抽象，即Unity在背后会根据表面着色器生成一个包含了很多Pass的顶点/片元着色器。</p>
 <h2 id="表面着色器的一个例子"><a href="#表面着色器的一个例子" class="headerlink" title="表面着色器的一个例子"></a><font size="5" color="red">表面着色器的一个例子</font></h2><p>下面直接来看一个表面着色器的Shader代码：</p>

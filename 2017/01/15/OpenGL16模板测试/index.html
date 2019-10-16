@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="5" color="orange">什么是模板测试</font><br><a id="more"></a><br>当像素着色器处理完片段之后，深度测试之前，模板测试（stencil test）就开始执行了，和深度测试一样，它能丢弃一些片段：如果片段的模板值和当前模板缓冲区的对应位置上的模板值，满足指定关系，则不会被丢弃。这就是模板测试。仍然保留下来的片段将进入深度测试阶段，深度测试又会丢弃一些片段。</p>
 <p>在渲染管线里包括很多种测试，它们的执行顺序如下图：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL16%E6%A8%A1%E6%9D%BF%E6%B5%8B%E8%AF%951.png?raw=true" alt><br>&nbsp;</p>
 <hr>

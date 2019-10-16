@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="4" color="orange">先来看几个图的概念和特性</font><br><a id="more"></a></p>
 <ul>
 <li>图：由顶点的有穷非空集合和顶点之间边的集合组成</li>

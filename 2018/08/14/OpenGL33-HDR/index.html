@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="为何需要HDR"><a href="#为何需要HDR" class="headerlink" title="为何需要HDR"></a><font size="6" color="orange">为何需要HDR</font></h1><hr>
 <p>一般来说，当存储在帧缓存中时，亮度和颜色的值会被默认限制在0.0到1.0之间。很多时候，这个规则不会影响到最终的视觉效果。但是，如果我们遇上了一个特定的区域，其中有多个光源叠加在一起，使得颜色值总和超过了1.0，会发生什么？答案是颜色值或者亮度超过1.0的会被截断为1.0（这是显示器限制的），从而导致场景会有一片什么也看不清的白色，丢失场景细节。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/OpenGL33HDR_1.png?raw=true" alt><br>这是由于大量片段的颜色值都非常接近1.0，在很大一个区域内大多数片元都被截断为相同的白色（即1.0），导致损失了很多细节，使场景看起很假。</p>
 <p>一个解决方案是减小光源强度，从而保证场景内没有一个片元的颜色（或者亮度）会超过1.0。显然，这不是一个好的解决方案，因为需要使用不切实际的光照参数。</p>

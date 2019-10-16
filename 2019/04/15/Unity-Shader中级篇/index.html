@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="第九章-更复杂的光照"><a href="#第九章-更复杂的光照" class="headerlink" title="第九章 更复杂的光照"></a><font size="6" color="orange">第九章 更复杂的光照</font></h1><hr>
 <h2 id="Unity的渲染路径"><a href="#Unity的渲染路径" class="headerlink" title="Unity的渲染路径"></a><font size="5" color="red">Unity的渲染路径</font></h2><p>在Unity里，渲染路径（Rendering Path）决定了光照是如何应用到Unity Shader中的。因此，如果要和光源打交道，我们需要为每个Pass指定它所使用的渲染路径。Unity支持多种类型的渲染路径。在Unity5.0版本之前，主要有3种：前向渲染路径（Forward Rendering Path）、延迟渲染路径（Deferred Rendering Path）和顶点照明渲染路径（Vertex Lit Rendering Path）。但在Unity5.0版本之后，Unity做了很多改动，主要有两个变化：首先，顶点照明渲染路径已经被Unity抛弃（但目前仍然可以兼容之前使用了顶点照明渲染路径的Unity Shader）；其次，新的延迟渲染路径代替了原来的延迟渲染路径（同样，目标也提供了对较旧版本的兼容）。所以实际上现版本分为4中渲染路径：Forward、Deferred、Legacy Vertex Lit、Legacy Deferred。</p>
 <p>可以在Camera的Rendering Path选项中设置对该相机使用哪种渲染路径。如果当前显卡不支持所选择的渲染路径，Unity会自动使用更低一级的渲染路径。例如，如果一个GPU不支持延迟渲染，那么Unity就会使用前向渲染。</p>

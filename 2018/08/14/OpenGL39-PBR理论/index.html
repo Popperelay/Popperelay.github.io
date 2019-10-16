@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p>PBR（Physical Based Rendering，基于物理的渲染），指的是一些渲染技术的集合，这些渲染技术在不同程度上都基于与现实世界的物理原理更相符的基本理论。正因为PBR的目的就是为了使用一种更符合物理学规律的方式来模拟光线，所以它比Phong或者Blinn-Phong看起来更真实一些。</p>
 <p>但是，PBR仍然只是现实世界物理原理的一种近似，所以才是基于物理着色，而不是直接叫物理着色。PBR必须满足三个条件：</p>
 <ol>

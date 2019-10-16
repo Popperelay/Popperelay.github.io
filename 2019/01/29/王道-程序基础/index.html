@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="6" color="orange">程序设计基础及数据结构基础</font></p>
 <ol>
 <li>内存分区类型有：堆、栈、全局（静态）存储区、程序代码区、文字常量区。</li>

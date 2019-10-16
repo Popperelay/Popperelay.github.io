@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="5" color="orange">锯齿效果</font><br><a id="more"></a></p>
 <hr>
 <p>在我们的渲染中，可能会遇到模型边缘有锯齿的问题。锯齿边出现的原因是由顶点数据像素化成为片段的方式引起的。比如直线上的点是连续的，而屏幕上的像素却是离散的，用屏幕上的像素来近似表示直线段，必然会出现锯齿效果（可参考<a href="http://popperelay.com/2016/11/06/%E5%9F%BA%E6%9C%AC%E5%85%89%E6%A0%85%E5%9B%BE%E5%BD%A2%E7%94%9F%E4%BA%A7%E6%8A%80%E6%9C%AF/" target="_blank" rel="noopener">《基本光栅图形生成技术》</a>一文中的直线扫描转换）。</p>

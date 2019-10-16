@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <ol>
 <li>安装git和nodejs。</li>
 <li>在任意路径下安装hexo：<pre class="line-numbers language-c++"><code class="language-c++">npm install -g hexo

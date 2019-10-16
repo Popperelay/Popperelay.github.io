@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p>先来回顾一下图形显示的过程。<br><a id="more"></a><br>&nbsp;</p>
 <hr>
 <p><font size="5" color="orange">图形显示的过程</font><br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/%E5%9F%BA%E6%9C%AC%E5%85%89%E6%A0%85%E5%9B%BE%E5%BD%A2%E7%94%9F%E6%88%90%E6%8A%80%E6%9C%AF1.png?raw=true" alt><br>可以看到，视频控制器是从帧缓存中读出数据不为0的单元进行显示。但是，正如图中所示，对于三角形，我们一般存储的都只是三个顶点的坐标，那么怎么根据这三个顶点的坐标得到对应的帧缓存数据呢？其实这就是图形的生成过程，从参数形式转换为点阵形式，便于光栅扫描生成相应的图形（参数形式和点阵形式可参考<a href="http://popperelay.com/2016/10/18/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E6%A6%82%E8%BF%B0/" target="_blank" rel="noopener">《图形学概述》</a>一文中的计算机图形表示方法）。</p>

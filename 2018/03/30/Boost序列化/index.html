@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="5" color="orange">概述</font></p>
 <hr>
 <p>Boost C++的序列化库允许将C++对象转换为一个字节序列（序列化），此序列可以被保存成字符串、文件等等形式，并且可以在需要的时候把字节序列恢复成一个对象（反序列化）。</p>

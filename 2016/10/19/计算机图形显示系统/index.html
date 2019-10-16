@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p>在揭开计算机图形显示系统的面纱之前，我们先来看看我们再熟悉不过的显示器吧。<br><a id="more"></a></p>
 <p><font size="5" color="orange">显示器</font><br>如今的显示器大致分为两类（按器件的发光性质）：</p>
 <ul>

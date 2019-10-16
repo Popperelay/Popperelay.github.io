@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a><font size="6" color="orange">1. Introduction</font></h1><hr>
 <p>显示设备的刷新频率和显示频率可能是不一样的。</p>
 <h1 id="2-The-Graphics-Rendering-Pipeline"><a href="#2-The-Graphics-Rendering-Pipeline" class="headerlink" title="2. The Graphics Rendering Pipeline"></a><font size="6" color="orange">2. The Graphics Rendering Pipeline</font></h1><hr>

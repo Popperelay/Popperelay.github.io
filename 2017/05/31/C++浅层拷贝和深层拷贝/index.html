@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p><font size="5" color="orange">拷贝构造函数</font><br><a id="more"></a></p>
 <hr>
 <p><font size="4" color="red">什么是拷贝构造函数</font><br>拷贝构造函数是一种特殊的构造函数，其形参是本类对象的引用。它的作用是：在建立一个新对象时，使用一个已经存在的对象去初始化这个新对象。例如：</p>

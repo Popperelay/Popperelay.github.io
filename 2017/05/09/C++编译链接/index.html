@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <ol>
 <li>编译时出现重定义，可参考<a href="http://popperelay.com/2017/03/15/C++%E9%87%8D%E5%AE%9A%E4%B9%89/" target="_blank" rel="noopener">这篇文章</a><a id="more"></a></li>
 <li>链接时出现LINK1120：无法解析的外部符号，这种情况通常都是没有包含对应的库文件，或者库文件没有包含正确。库文件包括.lib和.dll。</li>

@@ -157,6 +157,17 @@
 					};
 			   </script>
 				
+				<script>
+					(function(){
+						if('{{ page.password }}'){
+							if (prompt('请输入文章密码') !== '{{ page.password }}'){
+								alert('密码错误！');
+								history.back();
+							}
+						}
+					})();
+				</script>
+				
                 <p>感谢老张！<br><a id="more"></a></p>
 <hr>
 <p>案例：房间里有一台电视和一台空调，按下遥控器的Open键后，可以同时打开空调和电视。设计程序来实现该按键的功能。</p>
