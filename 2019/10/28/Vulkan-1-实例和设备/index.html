@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	 <link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			
+    <title>
+    Elays'Blog
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<script>
+	(function(){
+		if('{{ page.password }}'){
+			if (prompt('请输入博客密码') !== "elayRender"){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+	</script>
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+			    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+    
+		
+<!-- Layouts -->
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_undefined.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">MICCALL</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/C/">C#</a></li><li><a class="category-link" href="/categories/C-语法/">C#语法</a></li><li><a class="category-link" href="/categories/C/">C++</a></li><li><a class="category-link" href="/categories/C语言/">C语言</a></li><li><a class="category-link" href="/categories/Graphics/">Graphics</a></li><li><a class="category-link" href="/categories/Math/">Math</a></li><li><a class="category-link" href="/categories/OpenGL/">OpenGL</a></li><li><a class="category-link" href="/categories/Unity/">Unity</a></li><li><a class="category-link" href="/categories/Vulkan/">Vulkan</a></li><li><a class="category-link" href="/categories/博客配置/">博客配置</a></li><li><a class="category-link" href="/categories/并行计算/">并行计算</a></li><li><a class="category-link" href="/categories/操作系统/">操作系统</a></li><li><a class="category-link" href="/categories/数据结构/">数据结构</a></li><li><a class="category-link" href="/categories/毕设/">毕设</a></li><li><a class="category-link" href="/categories/游戏开发/">游戏开发</a></li><li><a class="category-link" href="/categories/计算机系统/">计算机系统</a></li><li><a class="category-link" href="/categories/设计模式/">设计模式</a></li><li><a class="category-link" href="/categories/面试/">面试</a>
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="搜索">
+		                搜索
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/miccall" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url(https://github.com/Popperelay/Photos/blob/master/Photos/VulkanCookBook_1_BG.jpg?raw=true);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>Vulkan 1 实例和设备</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+				<!-- 目录 -->
+				<p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+				<span class="btn-bg"></span>
+				<span class="btn-text">文章导航</span>
+				</p>
+				<div id="toc-article" class="toc-article">
+					<span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+					<strong class="toc-title">文章目录</strong>
+					<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Environment"><span class="toc-text">Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#启用验证层"><span class="toc-text">启用验证层</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#连接Vulkan动态链接库"><span class="toc-text">连接Vulkan动态链接库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加载Vulkan-API之前的准备工作"><span class="toc-text">加载Vulkan API之前的准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加载Vulkan动态链接库里的函数"><span class="toc-text">加载Vulkan动态链接库里的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过宏EXPORTED-VULKAN-FUNCTION，加载Vulkan函数vkGetInstanceProcAddr"><span class="toc-text">通过宏EXPORTED_VULKAN_FUNCTION，加载Vulkan函数vkGetInstanceProcAddr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过vkGetInstanceProcAddr和宏加载全局函数"><span class="toc-text">通过vkGetInstanceProcAddr和宏加载全局函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建Vulkan实例"><span class="toc-text">创建Vulkan实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检查可以获取哪些实例扩展"><span class="toc-text">检查可以获取哪些实例扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Vulkan实例-1"><span class="toc-text">创建Vulkan实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加载实例函数"><span class="toc-text">加载实例函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#获取可用的物理设备"><span class="toc-text">获取可用的物理设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查物理设备可以支持哪些设备扩展"><span class="toc-text">检查物理设备可以支持哪些设备扩展</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#获取物理设备的特性和属性"><span class="toc-text">获取物理设备的特性和属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查可用的队列族及其属性"><span class="toc-text">检查可用的队列族及其属性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选择出支持所需功能的队列族"><span class="toc-text">选择出支持所需功能的队列族</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建逻辑设备"><span class="toc-text">创建逻辑设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#加载设备级函数"><span class="toc-text">加载设备级函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#获取设备队列"><span class="toc-text">获取设备队列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备"><span class="toc-text">示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#销毁资源"><span class="toc-text">销毁资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#销毁逻辑设备"><span class="toc-text">销毁逻辑设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#销毁Vulkan实例"><span class="toc-text">销毁Vulkan实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#释放Vulkan动态链接库"><span class="toc-text">释放Vulkan动态链接库</span></a></li></ol></li></ol>
+			   </div>
+			   <script type="text/javascript">
+				function showToc(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:block");
+					show_toc_btn.setAttribute("style","display:none");
+					};
+				function showBtn(){
+					var toc_article = document.getElementById("toc-article");
+					var show_toc_btn = document.getElementById("show-toc-btn");
+					toc_article.setAttribute("style","display:none");
+					show_toc_btn.setAttribute("style","display:block");
+					};
+			   </script>
+				
+                <h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a><font size="6" color="orange">Environment</font></h1><hr>
+<p>在<a href="https://vulkan.lunarg.com" target="_blank" rel="noopener">这里</a>下载安装Vulkan SDK，然后进入安装目录找到并执行VulkanRT-<version>-Installer.exe（遇到写入错误的话忽略），来安装最新的Vulkan加载器（Vulkan Loader）。然后在工程里设置Vulkan的包含目录（include文件夹）以及链接库（lib文件夹）。</version></p>
+<h1 id="启用验证层"><a href="#启用验证层" class="headerlink" title="启用验证层"></a><font size="6" color="orange">启用验证层</font></h1><hr>
+<p>Vulkan为了提高性能，它减少了驱动器执行的状态检查和错误检查，所以它也被称为“薄驱动器”，它只是对硬件做了一个简单的抽象，只要求可以跨平台就行。但是这就给程序员编码带来了很大的困难，反馈太少了。就像在VS里写了一大堆代码，程序崩了但是没有给出任何错误信息，很蓝瘦。所以Vulkan开发者在Vulkan API之上提供了一个验证层，来方便调试错误信息。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/VulkanCookBook_1_1.png?raw=true" alt><br>怎么开启？</p>
+<ol>
+<li>先到Vulkan安装目录的Config文件夹里找到vk_layer_settings.txt文件，把它复制到我们的应用程序里（需要和exe在同一个目录下）</li>
+<li>在Cmd里输入命令<code>setx VK_INSTANCE_LAYERS VK_LAYER_LUNARG_standard_validation</code>，来设置环境变量（或者自己去电脑设置里手动填上环境变量也可以）</li>
+<li>然后在Cmd里运行自己程序的exe，潜在的警告和错误就会输出到窗口上。</li>
+</ol>
+<p>Vulkan验证层可以检查传递给Vulkan函数的参数、纹理以及渲染目标的格式、跟踪Vulkan对象的生命周期和使用情况、检查内存泄漏……。大多数功能都集成在<code>VK_LAYER_LUNARG_standard_validation</code>层里。这个就是我们上面设置给环境变量<code>VK_INSTANCE_LAYERS</code>的值。如果想同时启用别的验证层，可以用分号给该环境变量加入对应的验证层的名字：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">setx VK_INSTANCE_LAYERS VK_LAYER_LUNARG_api_dump<span class="token punctuation">;</span>VK_LAYER_LUNARG_core_validation
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在发布产品的时候，一般都要禁用验证层，这时可以通过直接删掉环境变量<code>VK_INSTANCE_LAYERS</code>来实现。</p>
+<h1 id="连接Vulkan动态链接库"><a href="#连接Vulkan动态链接库" class="headerlink" title="连接Vulkan动态链接库"></a><font size="6" color="orange">连接Vulkan动态链接库</font></h1><hr>
+<p>不同的显卡厂商可以在它的驱动程序里面提供自己对Vulkan API的实现，大家的实现方式不尽相同，而Vulkan动态链接库就是帮我们自动解决怎么加载这些各种各样Vulkan驱动的，不用我们自己去管是哪一个厂商提供的何种实现。</p>
+<p>Vulkan动态链接器库在Windows上对应的库是vulkan-1.dll，在Linux上对应的库是libvulkan.so.1。</p>
+<p>在一个机器上，可能会有多个硬件都支持Vulkan，有了Vulkan动态链接库后，我们就不必去操心应该使用哪个驱动器。只需要在代码里把vulkan-1.dll加载进来就可以：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token macro property">#<span class="token directive keyword">if</span> defined(_Win32) ||defined(_Win64)</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> LIBRARY_TYPE HMODULE</span>
+    <span class="token macro property">#<span class="token directive keyword">elif</span> defined __linux</span>
+    <span class="token macro property">#<span class="token directive keyword">define</span> LIBRARY_TYPE void*</span>
+    <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+    <span class="token comment" spellcheck="true">//加载Vulkan动态链接库</span>
+    <span class="token keyword">bool</span> <span class="token function">connectWithVulkanDLL</span><span class="token punctuation">(</span>LIBRARY_TYPE<span class="token operator">&amp;</span> vVulkanLibrary<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token macro property">#<span class="token directive keyword">if</span> defined(_Win32) ||defined(_Win64)</span>
+            vVulkanLibrary <span class="token operator">=</span> <span class="token function">LoadLibrary</span><span class="token punctuation">(</span><span class="token string">"vulkan-1.dll"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token macro property">#<span class="token directive keyword">elif</span> defined __linux</span>
+            vulkan_library <span class="token operator">=</span> <span class="token function">dlopen</span><span class="token punctuation">(</span><span class="token string">"libvulkan.so.1"</span><span class="token punctuation">,</span> RTLD_NOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>vVulkanLibrary <span class="token operator">==</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not connect with a Vulkan Runtime library."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先声明了一个<code>LIBRARY_TYPE</code>类型的变量，然后在Windows上调用<code>LoadLibrary</code>函数来加载vulkan-1.dll库（在Linux上用<code>dlopen</code>），并且把加载结果存到该变量里，然后通过检查该变量是否为空，来判断是否加载成功。<code>LoadLibrary</code>是Windows操作系统的一个函数，它可以把一个动态库加载到我们的应用程序的内存空间中。Linux上对应的函数是<code>dlopen</code>。<br>vulkan动态链接库加载成功后，接下来我们就可以加载Vulkan动态链接库中的API函数了。</p>
+<h1 id="加载Vulkan-API之前的准备工作"><a href="#加载Vulkan-API之前的准备工作" class="headerlink" title="加载Vulkan API之前的准备工作"></a><font size="6" color="orange">加载Vulkan API之前的准备工作</font></h1><hr>
+<p>加载Vulkan API有两种实现方式：</p>
+<ol>
+<li>把vulkan-1.dll静态链接到我们的项目里，然后直接使用<code>vulkan.h</code>中的函数原型</li>
+<li>禁用<code>vulkan.h</code>中的函数原型，然后把函数指针动态地加载到我们的项目里</li>
+</ol>
+<p>第一种方式更简单，但是它是直接使用的定义在Vulkan动态链接库中的函数，当我们在一个给定设备上执行这些函数时，Vulkan动态链接库会根据我们提供的设备句柄参数，来重定向这些函数调用。重定向会浪费一些时间，影响性能。</p>
+<p>第二种方式虽然麻烦点，但是通过运行在设备上的加载函数，来直接加载我们需要的Vulkan API，省掉了重定向的过程。而且我们可以只加载我们需要的一部分Vulkan API，而不用全部加载。所以我们这里选择第二种。</p>
+<p>在Vulkan API中，函数的原型可以直接由函数的名字推出来。如果一个函数名字叫<code>&lt;name&gt;</code>，那么指向这个函数的指针类型就是<code>PFN_&lt;name&gt;</code>。</p>
+<p>为了更方便地动态加载Vulkan API，我们把Vulkan API的名字封装到一组宏里面，并且把API的声明、定义和函数加载放到多个文件里：</p>
+<ol>
+<li>首先在项目属性里定义<code>VK_NO_PROTOTYPES</code>预处理器，来禁用vulkan.h中的函数原型（或者在包含vulkan.h之前，加一句<code>#define VK_NO_PROTOTYPES</code>）</li>
+<li>然后创建ListOfVulkanFunctions.inl，输入如下内容：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">ifndef</span> EXPORTED_VULKAN_FUNCTION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> EXPORTED_VULKAN_FUNCTION( function )</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> EXPORTED_VULKAN_FUNCTION</span>
+ <span class="token comment" spellcheck="true">//</span>
+ <span class="token macro property">#<span class="token directive keyword">ifndef</span> GLOBAL_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> GLOBAL_LEVEL_VULKAN_FUNCTION( function )</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> GLOBAL_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token comment" spellcheck="true">//</span>
+ <span class="token macro property">#<span class="token directive keyword">ifndef</span> INSTANCE_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION( function )</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> INSTANCE_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token comment" spellcheck="true">//</span>
+ <span class="token macro property">#<span class="token directive keyword">ifndef</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( function, extension )</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+ <span class="token comment" spellcheck="true">//</span>
+ <span class="token macro property">#<span class="token directive keyword">ifndef</span> DEVICE_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION( function )</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> DEVICE_LEVEL_VULKAN_FUNCTION</span>
+ <span class="token comment" spellcheck="true">//</span>
+ <span class="token macro property">#<span class="token directive keyword">ifndef</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+ <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( function, extension)</span>
+ <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+ <span class="token macro property">#<span class="token directive keyword">undef</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 该文件重新定义<code>EXPORTED_VULKAN_FUNCTION</code>等等宏的格式，后面可以这些宏来加载Vulkan函数。不同的宏对应不同级别的Vulkan函数，而<code>EXPORTED_VULKAN_FUNCTION</code>宏才是用来加载Vulkan动态链接库中的一个特定函数的。</li>
+<li>然后创建 VulkanFunctions.h，输入如下内容：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vulkan/vulkan.h></span></span>
+ <span class="token keyword">namespace</span> VulkanCookbook 
+ <span class="token punctuation">{</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> EXPORTED_VULKAN_FUNCTION( name ) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> GLOBAL_LEVEL_VULKAN_FUNCTION( name ) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION( name ) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION( name ) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension) extern PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+ <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// namespace VulkanCookbook</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>然后创建VulkanFunctions.cpp，输入如下内容：<pre class="line-numbers language-cpp"><code class="language-cpp"> <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"VulkanFunctions.h"</span></span>
+ <span class="token keyword">namespace</span> VulkanCookbook 
+ <span class="token punctuation">{</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> EXPORTED_VULKAN_FUNCTION( name ) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> GLOBAL_LEVEL_VULKAN_FUNCTION( name ) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION( name ) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION( name ) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension) PFN_##name name;</span>
+     <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+ <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// namespace VulkanCookbook</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+VulkanFunctions.h和VulkanFunctions.cpp这两个文件用来定义这些宏的具体作用。现在上面的代码只是用宏来定义了变量。后面我们会根据需求进一步在该cpp中改写宏的具体意义。</li>
+</ol>
+<p>有一点需要注意，用这些宏来定义函数指针变量时，尽量在命名空间或者类里面来做，因为在某些操作系统上，全局的的函数指针变量可能出现问题。</p>
+<h1 id="加载Vulkan动态链接库里的函数"><a href="#加载Vulkan动态链接库里的函数" class="headerlink" title="加载Vulkan动态链接库里的函数"></a><font size="6" color="orange">加载Vulkan动态链接库里的函数</font></h1><hr>
+<h2 id="通过宏EXPORTED-VULKAN-FUNCTION，加载Vulkan函数vkGetInstanceProcAddr"><a href="#通过宏EXPORTED-VULKAN-FUNCTION，加载Vulkan函数vkGetInstanceProcAddr" class="headerlink" title="通过宏EXPORTED_VULKAN_FUNCTION，加载Vulkan函数vkGetInstanceProcAddr"></a><font size="5" color="red">通过宏EXPORTED_VULKAN_FUNCTION，加载Vulkan函数vkGetInstanceProcAddr</font></h2><p>前面我们只是通过<code>LoadLibrary</code>加载了Vulkan动态链接库，我们现在来真正获取Vulkan动态链接库里封装的函数。但是不同的操作系统，从动态库里加载函数地址的方式又不同，Vulkan提供了一个名叫<code>vkGetInstanceProcAddr</code>的函数来帮我们自动解决这种差异性。所以我们需要先把这个函数的地址（函数指针）从动态链接库里加载出来。</p>
+<p>我们使用之前定义的宏<code>EXPORTED_VULKAN_FUNCTION</code>来加载这个函数，所以这里我们需要改一下这个宏的具体定义。我们不在VulkanFunctions.cpp里面改，而是重新写一个函数来重写这个宏：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"VulkanFunctions.h"</span></span>
+<span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//从Vulkan动态链接库里加载函数</span>
+    <span class="token keyword">bool</span> <span class="token function">loadFunctionFromVulkanDLL</span><span class="token punctuation">(</span>LIBRARY_TYPE <span class="token keyword">const</span><span class="token operator">&amp;</span> vVulkanLibrary<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token macro property">#<span class="token directive keyword">if</span> defined(_Win32) ||defined(_Win64)</span>
+            <span class="token macro property">#<span class="token directive keyword">define</span> LoadFunction GetProcAddress</span>
+        <span class="token macro property">#<span class="token directive keyword">elif</span> defined __linux</span>
+            <span class="token macro property">#<span class="token directive keyword">define</span> LoadFunction dlsym</span>
+        <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+        <span class="token macro property">#<span class="token directive keyword">define</span> EXPORTED_VULKAN_FUNCTION( name )                            \
+        name = (PFN_##name)LoadFunction( vVulkanLibrary, #name );            \
+        if( name == nullptr )                                                \
+        {                                                                    \
+            std::cout &lt;&lt; "Could not load exported Vulkan function named: "  \
+            #name &lt;&lt; std::endl;                                                \
+            return false;                                                   \
+        }</span>
+        <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>GetProcAddress</code>是Windows操作系统的一个函数，<code>dlsym</code>是Linux操作系统的一个函数。它们都可以从已经加载的动态链接库里，取出指定函数的内存地址。然后我们在ListOfVulkanFunctions.inl里把函数<code>vkGetInstanceProcAddr</code>的名字传给这个宏：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">ifndef</span> EXPORTED_VULKAN_FUNCTION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> EXPORTED_VULKAN_FUNCTION( function )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">EXPORTED_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetInstanceProcAddr<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">//定义变量vkGetInstanceProcAddr，并且加载Vulkan函数vkGetInstanceProcAddr</span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> EXPORTED_VULKAN_FUNCTION</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在解释一下编译器对这些宏的翻译流程：首先最开始在<code>#include &quot;VulkanFunctions.h&quot;</code>时，这时是把宏EXPORTED_VULKAN_FUNCTION定义成了<code>PFN_##name name</code>，然后在该头文件末尾又<code>#include &quot;ListOfVulkanFunctions.inl&quot;</code>，所以编译器会去执行ListOfVulkanFunctions.inl文件里的<code>EXPORTED_VULKAN_FUNCTION(vkGetInstanceProcAddr)</code>，这个宏现在的定义刚才说过了，所以实际上是在执行<code>PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr</code>，也就是说定义了一个函数指针变量<code>vkGetInstanceProcAddr</code>。接下来在<code>loadFunctionFromVulkanDLL</code>函数里又重新定义了<code>EXPORTED_VULKAN_FUNCTION</code>这个宏，用传进来的变量的名字去加载对应的Vulkan API函数。所以最后再次<code>#include &quot;ListOfVulkanFunctions.inl&quot;</code>时，会再次执行这个文件里的<code>EXPORTED_VULKAN_FUNCTION(vkGetInstanceProcAddr)</code>，从动态链接库里加载出vulkan函数<code>vkGetInstanceProcAddr</code>的地址，并强制转换为对应的函数指针，重新存回变量<code>name</code>，也就是之前创建的变量<code>vkGetInstanceProcAddr</code>里。</p>
+<p>Vulkan函数<code>vkGetInstanceProcAddr</code>我们已经加载出来了，然后我们就可以用<code>vkGetInstanceProcAddr</code>来加载其它Vulkan函数，而不再需要关心具体是哪个操作系统了。</p>
+<p>可以看到通过使用宏，我们可以获取函数指针类型、定义函数指针变量、加载函数、把函数地址存到函数指针变量，这一系列操作都可以封装到一个宏里。让我们以后可以仅仅通过一个宏，就能很简单地加载出我们需要的函数。</p>
+<h2 id="通过vkGetInstanceProcAddr和宏加载全局函数"><a href="#通过vkGetInstanceProcAddr和宏加载全局函数" class="headerlink" title="通过vkGetInstanceProcAddr和宏加载全局函数"></a><font size="5" color="red">通过vkGetInstanceProcAddr和宏加载全局函数</font></h2><p>Vulkan里面有3个全局函数：<code>vkEnumerateInstanceExtensionProperties</code>、<code>vkEnumerateInstanceLayerProperties</code>和<code>vkCreateInstance</code>。它们是用来检查哪些实例级扩展可用以及用来创建实例。</p>
+<p>要加载这些全局函数， 我们可以先写一个函数来重新定义宏<code>GLOBAL_LEVEL_VULKAN_FUNCTION</code>：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">loadGlobalLevelFunctions</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token macro property">#<span class="token directive keyword">define</span> GLOBAL_LEVEL_VULKAN_FUNCTION(name)                                \
+        name = (PFN_##name)vkGetInstanceProcAddr(nullptr, #name);                \
+        if( name == nullptr )                                                    \
+        {                                                                        \
+            std::cout &lt;&lt; "Could not load global level Vulkan function named: "  \
+            #name &lt;&lt; std::endl;                                                    \
+            return false;                                                       \
+        }</span>
+        <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后在ListOfVulkanFunctions.inl里通过宏来加载这3个全局函数：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">ifndef</span> GLOBAL_LEVEL_VULKAN_FUNCTION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> GLOBAL_LEVEL_VULKAN_FUNCTION( function )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">GLOBAL_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkEnumerateInstanceExtensionProperties<span class="token punctuation">)</span>
+<span class="token function">GLOBAL_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkEnumerateInstanceLayerProperties<span class="token punctuation">)</span>
+<span class="token function">GLOBAL_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkCreateInstance<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> GLOBAL_LEVEL_VULKAN_FUNCTION</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在我们就是直接通过<code>vkGetInstanceProcAddr</code>函数来加载其它Vulkan函数了，而不需要关心具体的操作系统。</p>
+<h1 id="创建Vulkan实例"><a href="#创建Vulkan实例" class="headerlink" title="创建Vulkan实例"></a><font size="6" color="orange">创建Vulkan实例</font></h1><hr>
+<h2 id="检查可以获取哪些实例扩展"><a href="#检查可以获取哪些实例扩展" class="headerlink" title="检查可以获取哪些实例扩展"></a><font size="5" color="red">检查可以获取哪些实例扩展</font></h2><p>Vulkan实例（Vulkan Instance）会收集每个应用程序的状态，并且可以让我们创建一个逻辑设备，几乎所有的操作都会在逻辑设备上执行。在创建实例之前，我们需要弄清楚我们想要开启哪些实例扩展。比如最重要的一个实例扩展是和交换链（swapchain）相关的扩展，因为我们会用交换链扩展来把图片显示到屏幕上。</p>
+<p>但是我们需要先确定我们的硬件，是否支持我们想要的实例扩展。如果不支持的话，强行创建实例是会失败的。</p>
+<p>我们可以先用<code>vkEnumerateInstanceExtensionProperties</code>函数来查询我们的设备支持多少个扩展，查询结果存在它的第二个（输出）参数里，然后创建一个对应容量大小的VkExtensionProperties类型的数组，再用该函数查询一次，这次把数组地址同时传给它的第三个（输出）参数，这样函数会把当前设备可用的扩展都存到该数组里。具体代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">checkAvailableInstanceExtensions</span><span class="token punctuation">(</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span><span class="token operator">&amp;</span> voAvailableExtensions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        size_t ExtensionsCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        VkResult Result <span class="token operator">=</span> VK_SUCCESS<span class="token punctuation">;</span>
+
+        Result <span class="token operator">=</span> <span class="token function">vkEnumerateInstanceExtensionProperties</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>ExtensionsCount<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>ExtensionsCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not get the number of instance extensions."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        voAvailableExtensions<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>ExtensionsCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Result <span class="token operator">=</span> <span class="token function">vkEnumerateInstanceExtensionProperties</span><span class="token punctuation">(</span><span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>ExtensionsCount<span class="token punctuation">,</span> voAvailableExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> ExtensionsCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not enumerate instance extensions."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种连续两次调用同一个函数的情况在Vulkan里很常见。它们都是当最后一个参数为空时，会返回查询的元素的数量；当第最后一个参数不为空时，会把元素本身也一起返回给最后一个参数。</p>
+<h2 id="创建Vulkan实例-1"><a href="#创建Vulkan实例-1" class="headerlink" title="创建Vulkan实例"></a><font size="5" color="red">创建Vulkan实例</font></h2><p>之前介绍过Vulkan实例会收集每个应用程序的状态，包括应用程序的名字、创建应用程序的引擎的名字和版本、以及开启的实例扩展和层（layers）。</p>
+<p>通过实例，我们可以获取可用的物理设备有哪些，并且可以创建逻辑设备来执行图像创建或者绘制等等操作。所以，下面我们先来创建一个实例对象。</p>
+<p>首先我们创建一个数组，来保存我们想要开启的实例扩展的名字。然后我们根据之前查询到的可用的实例扩展，来检查我们想要开启的实例扩展是不是都支持（就是简单的判断我们想要开启的实例扩展，是不是都包含在可用的实例扩展里面就可以了）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">isExtensionSupported</span><span class="token punctuation">(</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span> <span class="token keyword">const</span><span class="token operator">&amp;</span> vAvailableExtensions<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span> <span class="token keyword">const</span> vExtension<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> AvailableExtension <span class="token operator">:</span> vAvailableExtensions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strstr</span><span class="token punctuation">(</span>AvailableExtension<span class="token punctuation">.</span>extensionName<span class="token punctuation">,</span> vExtension<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">bool</span> <span class="token function">createVulkanInstance</span><span class="token punctuation">(</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span><span class="token operator">></span> <span class="token keyword">const</span><span class="token operator">&amp;</span> vDesiredExtensions<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span> <span class="token keyword">const</span> vApplicationName<span class="token punctuation">,</span> VkInstance<span class="token operator">&amp;</span> voInstance<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span> AvailableExtensions<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableInstanceExtensions</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Extension <span class="token operator">:</span> vDesiredExtensions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isExtensionSupported</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">,</span> Extension<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Extension named '"</span> <span class="token operator">&lt;&lt;</span> Extension <span class="token operator">&lt;&lt;</span> <span class="token string">"' is not supported by an Instance object."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们需要创建一个<code>VkApplicationInfo</code>类型的变量，来保存一些跟我们的应用程序相关的信息，比如我们的应用程序的名字和版本、创建应用程序的引擎的名字和版本、以及我们想要使用的Vulkan API的版本（这里指定的是1.0.0）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">VkApplicationInfo AppInfo <span class="token operator">=</span>
+<span class="token punctuation">{</span>
+    VK_STRUCTURE_TYPE_APPLICATION_INFO<span class="token punctuation">,</span>                 <span class="token comment" spellcheck="true">// VkStructureType           sType</span>
+    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void              * pNext</span>
+    vApplicationName<span class="token punctuation">,</span>                                   <span class="token comment" spellcheck="true">// const char              * pApplicationName</span>
+    <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment" spellcheck="true">// uint32_t                  applicationVersion</span>
+    <span class="token string">"Vulkan Cookbook"</span><span class="token punctuation">,</span>                                  <span class="token comment" spellcheck="true">// const char              * pEngineName</span>
+    <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment" spellcheck="true">// uint32_t                  engineVersion</span>
+    <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                            <span class="token comment" spellcheck="true">// uint32_t                  apiVersion</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后还需要再创建一个<code>VkInstanceCreateInfo</code>类型的变量，来保存一些和Vulkan实例相关的的信息，比如指向应用程序信息的指针、我们想要开启的扩展的数量、以及保存我们想要开启的扩展名字的数组：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">VkInstanceCreateInfo InstanceCreateInfo <span class="token operator">=</span>
+<span class="token punctuation">{</span>
+    VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO<span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">// VkStructureType           sType</span>
+    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void              * pNext</span>
+    <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// VkInstanceCreateFlags     flags</span>
+    <span class="token operator">&amp;</span>AppInfo<span class="token punctuation">,</span>                                  <span class="token comment" spellcheck="true">// const VkApplicationInfo * pApplicationInfo</span>
+    <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// uint32_t                  enabledLayerCount</span>
+    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const char * const      * ppEnabledLayerNames</span>
+    <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>vDesiredExtensions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// uint32_t                  enabledExtensionCount</span>
+    vDesiredExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                           <span class="token comment" spellcheck="true">// const char * const      * ppEnabledExtensionNames</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后，我们调用<code>vkCreateInstance</code>函数来创建Vulkan实例对象，它的第一个参数是指向实例信息的指针，第三个参数是指向实例对象的指针，大多数时候第二个参数是空的（第二个参数一般都用于调试，用来分配回调掉函数的）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">VkResult Result <span class="token operator">=</span> <span class="token function">vkCreateInstance</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>InstanceCreateInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>voInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>voInstance <span class="token operator">==</span> VK_NULL_HANDLE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not create Vulkan instance."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个过程的完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">createVulkanInstance</span><span class="token punctuation">(</span>std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span><span class="token operator">></span> <span class="token keyword">const</span><span class="token operator">&amp;</span> vDesiredExtensions<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span> <span class="token keyword">const</span> vApplicationName<span class="token punctuation">,</span> VkInstance<span class="token operator">&amp;</span> voInstance<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span> AvailableExtensions<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableInstanceExtensions</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Extension <span class="token operator">:</span> vDesiredExtensions<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isExtensionSupported</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">,</span> Extension<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Extension named '"</span> <span class="token operator">&lt;&lt;</span> Extension <span class="token operator">&lt;&lt;</span> <span class="token string">"' is not supported by an Instance object."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        VkApplicationInfo AppInfo <span class="token operator">=</span>
+        <span class="token punctuation">{</span>
+            VK_STRUCTURE_TYPE_APPLICATION_INFO<span class="token punctuation">,</span>                 <span class="token comment" spellcheck="true">// VkStructureType           sType</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void              * pNext</span>
+            vApplicationName<span class="token punctuation">,</span>                                   <span class="token comment" spellcheck="true">// const char              * pApplicationName</span>
+            <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment" spellcheck="true">// uint32_t                  applicationVersion</span>
+            <span class="token string">"Vulkan Cookbook"</span><span class="token punctuation">,</span>                                  <span class="token comment" spellcheck="true">// const char              * pEngineName</span>
+            <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment" spellcheck="true">// uint32_t                  engineVersion</span>
+            <span class="token function">VK_MAKE_VERSION</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                            <span class="token comment" spellcheck="true">// uint32_t                  apiVersion</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        VkInstanceCreateInfo InstanceCreateInfo <span class="token operator">=</span>
+        <span class="token punctuation">{</span>
+            VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO<span class="token punctuation">,</span>             <span class="token comment" spellcheck="true">// VkStructureType           sType</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void              * pNext</span>
+            <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// VkInstanceCreateFlags     flags</span>
+            <span class="token operator">&amp;</span>AppInfo<span class="token punctuation">,</span>                                  <span class="token comment" spellcheck="true">// const VkApplicationInfo * pApplicationInfo</span>
+            <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// uint32_t                  enabledLayerCount</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const char * const      * ppEnabledLayerNames</span>
+            <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>vDesiredExtensions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// uint32_t                  enabledExtensionCount</span>
+            vDesiredExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                           <span class="token comment" spellcheck="true">// const char * const      * ppEnabledExtensionNames</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        VkResult Result <span class="token operator">=</span> <span class="token function">vkCreateInstance</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>InstanceCreateInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>voInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>voInstance <span class="token operator">==</span> VK_NULL_HANDLE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not create Vulkan instance."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="加载实例函数"><a href="#加载实例函数" class="headerlink" title="加载实例函数"></a><font size="6" color="red">加载实例函数</font></h1><hr>
+<p>我们已经创建好了Vulkan实例对象，接下来就是获取可用的物理设备，从中选择一个来创建逻辑设备，这些操作都是用实例级函数（instance-level functions）来完成的，所以我们需要先把这些实例级函数从动态链接库里加载出来。</p>
+<p>实例级函数主要也是用来操作物理设备的：检查物理设备的属性、功能，并创建逻辑设备。我们要用到的主要有以下这些实例级函数<code>vkEnumeratePhysicalDevices()</code> 、<code>vkGetPhysicalDeviceProperties()</code>、<code>vkGetPhysicalDeviceFeatures()</code>、<br><code>vkGetPhysicalDeviceQueueFamilyProperties()</code>、  <code>vkCreateDevice()</code>、 <code>vkGetDeviceProcAddr()</code>、 <code>vkDestroyInstance()</code>、<br><code>vkEnumerateDeviceExtensionProperties()</code>。</p>
+<p>设备级（device-level）函数会包含<code>VkDevice</code>、<code>VkQueue</code>或者<code>VkCommandBuffer</code>这些前缀，所以如果一个函数没有包含这些前缀并且不是全局函数，那么它就是实例级函数（扩展的函数除外）。</p>
+<p>还是和之前加载全局函数的过程类似，我们定义一个函数来重写宏<code>INSTANCE_LEVEL_VULKAN_FUNCTION</code>，方便后面用这个宏来直接加载实例级函数：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//加载Vulkan实例级函数</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION(name)                                                    \
+name = (PFN_##name)vkGetInstanceProcAddr(Instance, #name);                                        \
+if(name == nullptr)                                                                                \
+{                                                                                                \
+    std::cout &lt;&lt; "Could not load instance-level Vulkan function named: "#name &lt;&lt; std::endl;     \
+    return false;                                                                                \
+}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>和之前加载全局函数不同的是，这里<code>vkGetInstanceProcAddr</code>函数的第一个参数是实例对象，而之前加载全局函数时是nullptr。</p>
+<p>同时我们重新定义另一个宏<code>INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</code>来从扩展里加载实例函数（这些实例函数是来自扩展的，不在Vulkan Core里，只有扩展开启时，这些实例函数才可用）：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//从扩展里加载Vulkan实例级函数，其中for是为了检查宏里面指定的扩展，是否包含在硬件支持的扩展里</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension )                                \
+for( auto &amp; EnabledExtension : vEnabledExtensions )                                                        \
+{                                                                                                        \
+    if(std::string(EnabledExtension) == std::string(extension))                                            \
+    {                                                                                                    \
+        name = (PFN_##name)vkGetInstanceProcAddr( Instance, #name );                                    \
+        if( name == nullptr )                                                                            \
+        {                                                                                                \
+            std::cout &lt;&lt; "Could not load instance-level Vulkan function named: "#name &lt;&lt; std::endl;        \
+            return false;                                                                                \
+        }                                                                                                \
+    }                                                                                                    \
+}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中的for循环，是为了检查宏指定的扩展是否包含在当前硬件支持的扩展里。</p>
+<p>该函数的完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">loadInstanceLevelFunctions</span><span class="token punctuation">(</span>VkInstance Instance<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token keyword">const</span> <span class="token operator">*</span><span class="token operator">></span> <span class="token keyword">const</span> <span class="token operator">&amp;</span>vEnabledExtensions<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//加载Vulkan实例级函数</span>
+        <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION(name)                                                    \
+        name = (PFN_##name)vkGetInstanceProcAddr(Instance, #name);                                        \
+        if(name == nullptr)                                                                                \
+        {                                                                                                \
+            std::cout &lt;&lt; "Could not load instance-level Vulkan function named: "#name &lt;&lt; std::endl;     \
+            return false;                                                                                \
+        }</span>
+
+        <span class="token comment" spellcheck="true">//从扩展里加载Vulkan实例级函数，其中for是为了检查宏里面指定的扩展，是否包含在硬件支持的扩展里</span>
+        <span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension )                                \
+        for( auto &amp; EnabledExtension : vEnabledExtensions )                                                        \
+        {                                                                                                        \
+            if(std::string(EnabledExtension) == std::string(extension))                                            \
+            {                                                                                                    \
+                name = (PFN_##name)vkGetInstanceProcAddr( Instance, #name );                                    \
+                if( name == nullptr )                                                                            \
+                {                                                                                                \
+                    std::cout &lt;&lt; "Could not load instance-level Vulkan function named: "#name &lt;&lt; std::endl;        \
+                    return false;                                                                                \
+                }                                                                                                \
+            }                                                                                                    \
+        }</span>
+
+        <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们在ListOfVulkanFunctions.inl文件里通过宏来加载需要的Vulkan实例级函数：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">ifndef</span> INSTANCE_LEVEL_VULKAN_FUNCTION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION( function )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkEnumeratePhysicalDevices<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkEnumerateDeviceExtensionProperties<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetPhysicalDeviceProperties<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetPhysicalDeviceFeatures<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkCreateDevice<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetDeviceProcAddr<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> INSTANCE_LEVEL_VULKAN_FUNCTION</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token macro property">#<span class="token directive keyword">ifndef</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( function, extension )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkGetPhysicalDeviceSurfaceSupportKHR<span class="token punctuation">,</span> VK_KHR_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkGetPhysicalDeviceSurfaceCapabilitiesKHR<span class="token punctuation">,</span> VK_KHR_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkGetPhysicalDeviceSurfaceFormatsKHR<span class="token punctuation">,</span> VK_KHR_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">ifdef</span> VK_USE_PLATFORM_WIN32_KHR</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkCreateWin32SurfaceKHR<span class="token punctuation">,</span> VK_KHR_WIN32_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">elif</span> defined VK_USE_PLATFORM_XCB_KHR</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkCreateXcbSurfaceKHR<span class="token punctuation">,</span> VK_KHR_XLIB_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">elif</span> defined VK_USE_PLATFORM_XLIB_KHR</span>
+<span class="token function">INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkCreateXlibSurfaceKHR<span class="token punctuation">,</span> VK_KHR_XCB_SURFACE_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> INSTANCE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="获取可用的物理设备"><a href="#获取可用的物理设备" class="headerlink" title="获取可用的物理设备"></a><font size="6" color="orange">获取可用的物理设备</font></h1><hr>
+<p>几乎Vulkan的所有操作都是执行在逻辑设备上的，包括：在逻辑设备上创建资源、管理内存、在逻辑设备上创建并记录command buffer、提交命令等等。通俗地讲，逻辑设备就是开启了一些特性和扩展的物理设备。由于Vulkan应用程序可能会跑在不同的机器上，比如PC、笔记本、手机等等，而且一个设备可能还会有几张显卡。所以，为了创建逻辑设备，我们需要先知道在当前硬件上有哪些物理设备是可用的。</p>
+<p>和之前获取可用的实例扩展类似，这里我们调用两次<code>vkEnumeratePhysicalDevices</code>函数，第一次查询可用物理设备的数量，然后分配一个对应大小的<code>VkPhysicalDevice</code>类型的数组，然后再次调用该函数获取出具体的可用物理设备，保存到该数组里。代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">enumerateAvaliablePhysicalDevices</span><span class="token punctuation">(</span>VkInstance vInstance<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkPhysicalDevice<span class="token operator">></span><span class="token operator">&amp;</span> voAvailableDevices<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        uint32_t DevicesCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        VkResult Result <span class="token operator">=</span> VK_SUCCESS<span class="token punctuation">;</span>
+
+        Result <span class="token operator">=</span> <span class="token function">vkEnumeratePhysicalDevices</span><span class="token punctuation">(</span>vInstance<span class="token punctuation">,</span> <span class="token operator">&amp;</span>DevicesCount<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>DevicesCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not get the number of available physical devices."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        voAvailableDevices<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>DevicesCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Result <span class="token operator">=</span> <span class="token function">vkEnumeratePhysicalDevices</span><span class="token punctuation">(</span>vInstance<span class="token punctuation">,</span> <span class="token operator">&amp;</span>DevicesCount<span class="token punctuation">,</span> voAvailableDevices<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>DevicesCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not enumerate physical devices."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在我们获取出了当前硬件上可用的物理设备，然后就可以来查看这些设备的属性了，看看能够在它们上面执行哪些操作，以及它们都支持哪些设备扩展。</p>
+<h1 id="检查物理设备可以支持哪些设备扩展"><a href="#检查物理设备可以支持哪些设备扩展" class="headerlink" title="检查物理设备可以支持哪些设备扩展"></a><font size="6" color="orange">检查物理设备可以支持哪些设备扩展</font></h1><hr>
+<p>之前介绍过，如果我们想要使用Vulkan的某些特性，必须我们显式地去开启对应的扩展（OpenGL是自动开启的）。Vulkan里有两种扩展：实例级扩展（Instance-Level）和设备级扩展（Device-Level）。和之前在创建实例的时候开启实例级扩展类似，这里我们也需要在创建逻辑设备的时候开启设备级扩展。</p>
+<p>查询物理设备支持哪些设备扩展的过程，和之前类似。两次调用<code>vkEnumerateDeviceExtensionProperties</code>函数，把结果存到<code>VkExtensionProperties</code>类型的数组里：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">checkAvailableDeviceExtensions</span><span class="token punctuation">(</span>VkPhysicalDevice vPhysicalDevice<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span><span class="token operator">&amp;</span> voAvailableExtensions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        uint32_t ExtensionsCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        VkResult Result <span class="token operator">=</span> VK_SUCCESS<span class="token punctuation">;</span>
+
+        Result <span class="token operator">=</span> <span class="token function">vkEnumerateDeviceExtensionProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>ExtensionsCount<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>ExtensionsCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not get the number of device extensions."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        voAvailableExtensions<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>ExtensionsCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Result <span class="token operator">=</span> <span class="token function">vkEnumerateDeviceExtensionProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>ExtensionsCount<span class="token punctuation">,</span> voAvailableExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>ExtensionsCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not enumerate device extensions."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="获取物理设备的特性和属性"><a href="#获取物理设备的特性和属性" class="headerlink" title="获取物理设备的特性和属性"></a><font size="6" color="orange">获取物理设备的特性和属性</font></h1><hr>
+<p>我们不仅仅要检查当前硬件上可以支持Vulkan的物理设备及其设备扩展有哪些，我们还需要去检查这些物理设备支持的功能特性都有哪些，是否能够满足我们在代码里的需求。</p>
+<p>查询的代码很简单，先上代码吧：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">getFeaturesAndPropertiseOfPhysicalDevice</span><span class="token punctuation">(</span>VkPhysicalDevice vPhysicalDevice<span class="token punctuation">,</span> VkPhysicalDeviceFeatures<span class="token operator">&amp;</span> voDeviceFeatures<span class="token punctuation">,</span> VkPhysicalDeviceProperties<span class="token operator">&amp;</span> voDeviceProperties<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">vkGetPhysicalDeviceProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>voDeviceProperties<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">vkGetPhysicalDeviceFeatures</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>voDeviceFeatures<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先我们可以通过函数<code>vkGetPhysicalDeviceProperties</code>来获取指定物理设备的一些基本信息，将结果保存到<code>VkPhysicalDeviceProperties</code>类型的结构体里。通过该函数，我们可以获取到物理设备的名字、驱动版本、支持的Vulkan API版本，也可以检查出是否是独显、集显或者就只是个CPU，也可以检查出该物理设备支持创建的纹理的最大尺寸、在Shader里面最多可以使用多少个buffer、绘制时顶点属性的上限。</p>
+<p>还可以通过<code>vkGetPhysicalDeviceFeatures</code>来获取物理设备支持的一些其他的额外特性，这些特性并定义在核心Vulkan规范（core Vulkan specification）里。这些额外特性包括几何着色器、细分着色器、深度截断（depth clamp，不知道这个是个啥~）、深度偏移（depth bias）、多视口（multiple viewports）和wide lines等等。由于这些额外特性不在Vulkan核心里，所以默认是不开启的，所以如果我们要用到几何着色器这些特性，需要在创建逻辑设备时显式开启这些特性（就跟创建实例时显式开启实例级扩展类似）。</p>
+<h1 id="检查可用的队列族及其属性"><a href="#检查可用的队列族及其属性" class="headerlink" title="检查可用的队列族及其属性"></a><font size="6" color="orange">检查可用的队列族及其属性</font></h1><hr>
+<p>在Vulkan里，我们会把要执行的操作（或者叫命令）提交到队列里。在单个队列里的命令，会按照它们提交的先后顺序，一个一个地被执行。而在不同队列里的命令是相互独立（当然我们可以通过骚操作来同步不同队列里的命令）。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/VulkanCookBook_1_2.png?raw=true" alt><br>不同的队列可能代表硬件的不同部分，所以可能支持多种不同类型的操作。并不是每个操作都能在所有队列上执行的。队列族里的队列可能支持多种类型的操作。不同的队列也有可能支持的是完全相同的类型的操作。</p>
+<p>具有相同功能的队列会被组成一个队列族（queue family）。一个物理设备可能包含多个队列族，每个族里可能包含多个队列。所以，为了检查指定物理设备能够执行哪些操作之前，我们还需要查询所有队列族的属性。</p>
+<p>和之前查询可用的物理设备及其可用的设备级扩展类似，我们这里调用两次<code>vkGetPhysicalDeviceQueueFamilyProperties</code>函数来查询队列族的属性：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">checkAvailableQueueFamiliesAndTheirProperties</span><span class="token punctuation">(</span>VkPhysicalDevice vPhysicalDevice<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkQueueFamilyProperties<span class="token operator">></span><span class="token operator">&amp;</span> voQueueFamilies<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        uint32_t QueueFamiliesCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">vkGetPhysicalDeviceQueueFamilyProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>QueueFamiliesCount<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>QueueFamiliesCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not get the number of queue families."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        voQueueFamilies<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>QueueFamiliesCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">vkGetPhysicalDeviceQueueFamilyProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>QueueFamiliesCount<span class="token punctuation">,</span> voQueueFamilies<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>QueueFamiliesCount <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not acquire properties of queue families."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从队列族属性里我们能获取的最重要的信息是：在给定队列族里，那些队列能够执行哪种类型的操作（或者叫命令）。队列能够能行的操作有以下几种：</p>
+<ul>
+<li>图形（Graphics）：用来创建图形管线以及绘制图形的操作。</li>
+<li>计算（Compute）：用来创建计算管线以及调度（dispatch）计算着色器的操作。</li>
+<li>传输（Transfer）：用来进行快速内存拷贝的操作。</li>
+<li>Spares：添加额外的内存管理特性（不知道是啥~）</li>
+</ul>
+<p>除此之外，从队列族属性里，我们还能获取到一个队列族里包含的队列数量、队列族支持的时间戳、图像传输操作的粒度（即每次以几乘几的像素块来进行拷贝）。</p>
+<p>知道了队列族的数量、队列族的属性、以及每个队列族里有多少个队列以后，我们就可以开始创建逻辑设备了。</p>
+<h1 id="选择出支持所需功能的队列族"><a href="#选择出支持所需功能的队列族" class="headerlink" title="选择出支持所需功能的队列族"></a><font size="6" color="orange">选择出支持所需功能的队列族</font></h1><hr>
+<p>在我们创建逻辑设备之前，我们需要想一下我们想要执行哪些操作，这样我们才能够选择出支持相应功能的队列族，从而把操作提交到该队列族包含的队列里面去。</p>
+<p>首先我们用之前的函数来查询队列族及其属性：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkQueueFamilyProperties<span class="token operator">></span> QueueFamilies<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableQueueFamiliesAndTheirProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> QueueFamilies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们循环vector里的所有的队列族，看是否有队列族的能够支持我们想要的所有操作。队列族属性结构体<code>VkQueueFamilyProperties</code>，它的成员变量<code>queueCount</code>表示队列族里包含的队列数量，另一个成员变量<code>queueFlags</code>是一个位域变量，该变量中的每个位都表示一种不同的操作类型。而我们想要开启的操作也是用位域变量来表示的，所以可以通过对两个位域变量做与操作，来判断队列族是不是能够支持我们想要的所有操作。具体代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span>uint32_t Index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> Index <span class="token operator">&lt;</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>Index<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">[</span>Index<span class="token punctuation">]</span><span class="token punctuation">.</span>queueCount <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">[</span>Index<span class="token punctuation">]</span><span class="token punctuation">.</span>queueFlags <span class="token operator">&amp;</span> vDesiredCapabilities<span class="token punctuation">)</span> <span class="token operator">==</span> vDesiredCapabilities<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        voQueueFamilyIndex <span class="token operator">=</span> Index<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>该函数的完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">selectIndexOfQueueFamilyWithDesiredCapabilities</span><span class="token punctuation">(</span>VkPhysicalDevice vPhysicalDevice<span class="token punctuation">,</span> VkQueueFlags vDesiredCapabilities<span class="token punctuation">,</span> uint32_t<span class="token operator">&amp;</span> voQueueFamilyIndex<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkQueueFamilyProperties<span class="token operator">></span> QueueFamilies<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableQueueFamiliesAndTheirProperties</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> QueueFamilies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>uint32_t Index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> Index <span class="token operator">&lt;</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>Index<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">[</span>Index<span class="token punctuation">]</span><span class="token punctuation">.</span>queueCount <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>QueueFamilies<span class="token punctuation">[</span>Index<span class="token punctuation">]</span><span class="token punctuation">.</span>queueFlags <span class="token operator">&amp;</span> vDesiredCapabilities<span class="token punctuation">)</span> <span class="token operator">==</span> vDesiredCapabilities<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                voQueueFamilyIndex <span class="token operator">=</span> Index<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>VkQueueFlags</code>类型就是一个位域变量类型，它的值对应不同的操作类型：  <code>VK_QUEUE_GRAPHICS_BIT</code>,  <code>VK_QUEUE_COMPUTE_BIT</code>,<br><code>VK_QUEUE_TRANSFER_BIT</code>, <code>VK_QUEUE_SPARSE_BINDING_BIT</code>，也可以通过或运算取这些值的组合。</p>
+<h1 id="创建逻辑设备"><a href="#创建逻辑设备" class="headerlink" title="创建逻辑设备"></a><font size="6" color="orange">创建逻辑设备</font></h1><hr>
+<p>对于我们的应用程序，逻辑设备是一个很重要的存在。它代表了真实的硬件、以及在硬件上开启的扩展和特性、以及向硬件请求的所有队列。如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/VulkanCookBook_1_3.png?raw=true" alt><br>逻辑设备可以让我们做很多渲染相关的工作，比如创建图像和缓存、设置渲染管线状态、加载Shader等等。其中逻辑设备给我们提供的最重要的功能是记录命令（record command），并且把这些命令提交到队列里，交由硬件去执行。</p>
+<p>和之前创建实例类似，首先我们需要去检查指定物理设备上有哪些可用的设备扩展，然后通过一个for循环来检查我们想要开启的设备扩展是不是包含在里面：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span> AvailableExtensions<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableDeviceExtensions</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> AvailableExtensions<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Extension <span class="token operator">:</span> vDesiredExtensions<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isExtensionSupported</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">,</span> Extension<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Extension named '"</span> <span class="token operator">&lt;&lt;</span> Extension <span class="token operator">&lt;&lt;</span> <span class="token string">"' is not supported by a physical device."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们创建一个结构体<code>SQueueInfo</code>：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> SQueueInfo
+<span class="token punctuation">{</span>
+    uint32_t            FamilyIndex<span class="token punctuation">;</span>
+    std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">float</span><span class="token operator">></span>    Priorities<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>该结构体存储了我们想要从某个队列族申请的队列的信息，<code>FamilyIndex</code>是队列所属的队列族索引，<code>Priorities</code>是这些队列的优先级。优先级的数值在[0.0, 1.0]之间，值越大优先级越高，硬件会尝试先执行优先级高的队列，并且给与更多的处理时间。但是优先级只是我们给硬件的一个建议，硬件不保证一定是按照我们指定的优先级去执行的。然后我们使用一个<code>SQueueInfo</code>类型的vector来保存我们想要从不同队列族申请的所有队列的信息。然后我们根据这些队列信息来填充一个<code>VkDeviceQueueCreateInfo</code>类型的队列：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>SQueueInfo<span class="token operator">></span> vQueueInfos<span class="token punctuation">;</span>
+
+std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkDeviceQueueCreateInfo<span class="token operator">></span> QueueCreateInfos<span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Info <span class="token operator">:</span> vQueueInfos<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    QueueCreateInfos<span class="token punctuation">.</span><span class="token function">push_back</span>
+    <span class="token punctuation">(</span>
+        <span class="token punctuation">{</span> 
+            VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO<span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">// VkStructureType                  sType</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                          <span class="token comment" spellcheck="true">// const void                     * pNext</span>
+            <span class="token number">0</span><span class="token punctuation">,</span>                                                <span class="token comment" spellcheck="true">// VkDeviceQueueCreateFlags         flags</span>
+            Info<span class="token punctuation">.</span>FamilyIndex<span class="token punctuation">,</span>                                 <span class="token comment" spellcheck="true">// uint32_t                         queueFamilyIndex</span>
+            <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>Info<span class="token punctuation">.</span>Priorities<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">// uint32_t                         queueCount</span>
+            Info<span class="token punctuation">.</span>Priorities<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们就可以使用这些设备队列创建信息、想要开启的扩展以及想要开启的设备特性来填充最后一个<code>VkDeviceCreateInfo</code>结构体了：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">VkDeviceCreateInfo DeviceCreateInfo <span class="token operator">=</span>
+<span class="token punctuation">{</span>
+    VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO<span class="token punctuation">,</span>               <span class="token comment" spellcheck="true">// VkStructureType                  sType</span>
+    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void                     * pNext</span>
+    <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// VkDeviceCreateFlags              flags</span>
+    <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>QueueCreateInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>        <span class="token comment" spellcheck="true">// uint32_t                         queueCreateInfoCount</span>
+    QueueCreateInfos<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                            <span class="token comment" spellcheck="true">// const VkDeviceQueueCreateInfo  * pQueueCreateInfos</span>
+    <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// uint32_t                         enabledLayerCount</span>
+    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const char * const             * ppEnabledLayerNames</span>
+    <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>vDesiredExtensions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// uint32_t                         enabledExtensionCount</span>
+    vDesiredExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                          <span class="token comment" spellcheck="true">// const char * const             * ppEnabledExtensionNames</span>
+    vDesiredFeatures                                    <span class="token comment" spellcheck="true">// const VkPhysicalDeviceFeatures * pEnabledFeatures</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后我们就可以使用上面这个结构体变量并调用<code>vkCreateDevice</code>函数来创建逻辑设备了：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">VkResult Result <span class="token operator">=</span> <span class="token function">vkCreateDevice</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>DeviceCreateInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>voLogicalDevice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>voLogicalDevice <span class="token operator">==</span> VK_NULL_HANDLE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not create logical device."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>创建逻辑设备的函数的完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">createLogicalDevice</span><span class="token punctuation">(</span>VkPhysicalDevice vPhysicalDevice<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>SQueueInfo<span class="token operator">></span> vQueueInfos<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span><span class="token operator">></span><span class="token keyword">const</span><span class="token operator">&amp;</span> vDesiredExtensions<span class="token punctuation">,</span> VkPhysicalDeviceFeatures<span class="token operator">*</span> vDesiredFeatures<span class="token punctuation">,</span> VkDevice<span class="token operator">&amp;</span> voLogicalDevice<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkExtensionProperties<span class="token operator">></span> AvailableExtensions<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">checkAvailableDeviceExtensions</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> AvailableExtensions<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Extension <span class="token operator">:</span> vDesiredExtensions<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isExtensionSupported</span><span class="token punctuation">(</span>AvailableExtensions<span class="token punctuation">,</span> Extension<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Extension named '"</span> <span class="token operator">&lt;&lt;</span> Extension <span class="token operator">&lt;&lt;</span> <span class="token string">"' is not supported by a physical device."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkDeviceQueueCreateInfo<span class="token operator">></span> QueueCreateInfos<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> Info <span class="token operator">:</span> vQueueInfos<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            QueueCreateInfos<span class="token punctuation">.</span><span class="token function">push_back</span>
+            <span class="token punctuation">(</span>
+                <span class="token punctuation">{</span> 
+                    VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO<span class="token punctuation">,</span>       <span class="token comment" spellcheck="true">// VkStructureType                  sType</span>
+                    <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                          <span class="token comment" spellcheck="true">// const void                     * pNext</span>
+                    <span class="token number">0</span><span class="token punctuation">,</span>                                                <span class="token comment" spellcheck="true">// VkDeviceQueueCreateFlags         flags</span>
+                    Info<span class="token punctuation">.</span>FamilyIndex<span class="token punctuation">,</span>                                 <span class="token comment" spellcheck="true">// uint32_t                         queueFamilyIndex</span>
+                    <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>Info<span class="token punctuation">.</span>Priorities<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">// uint32_t                         queueCount</span>
+                    Info<span class="token punctuation">.</span>Priorities<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        VkDeviceCreateInfo DeviceCreateInfo <span class="token operator">=</span>
+        <span class="token punctuation">{</span>
+            VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO<span class="token punctuation">,</span>               <span class="token comment" spellcheck="true">// VkStructureType                  sType</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const void                     * pNext</span>
+            <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// VkDeviceCreateFlags              flags</span>
+            <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>QueueCreateInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>        <span class="token comment" spellcheck="true">// uint32_t                         queueCreateInfoCount</span>
+            QueueCreateInfos<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                            <span class="token comment" spellcheck="true">// const VkDeviceQueueCreateInfo  * pQueueCreateInfos</span>
+            <span class="token number">0</span><span class="token punctuation">,</span>                                                  <span class="token comment" spellcheck="true">// uint32_t                         enabledLayerCount</span>
+            <span class="token keyword">nullptr</span><span class="token punctuation">,</span>                                            <span class="token comment" spellcheck="true">// const char * const             * ppEnabledLayerNames</span>
+            <span class="token keyword">static_cast</span><span class="token operator">&lt;</span>uint32_t<span class="token operator">></span><span class="token punctuation">(</span>vDesiredExtensions<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">// uint32_t                         enabledExtensionCount</span>
+            vDesiredExtensions<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                          <span class="token comment" spellcheck="true">// const char * const             * ppEnabledExtensionNames</span>
+            vDesiredFeatures                                    <span class="token comment" spellcheck="true">// const VkPhysicalDeviceFeatures * pEnabledFeatures</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        VkResult Result <span class="token operator">=</span> <span class="token function">vkCreateDevice</span><span class="token punctuation">(</span>vPhysicalDevice<span class="token punctuation">,</span> <span class="token operator">&amp;</span>DeviceCreateInfo<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>voLogicalDevice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>Result <span class="token operator">!=</span> VK_SUCCESS<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>voLogicalDevice <span class="token operator">==</span> VK_NULL_HANDLE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Could not create logical device."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="加载设备级函数"><a href="#加载设备级函数" class="headerlink" title="加载设备级函数"></a><font size="6" color="orange">加载设备级函数</font></h1><hr>
+<p>现在我们已经创建好了逻辑设备，我们可以在逻辑设备上执行很多操作了，比如渲染三维场景（包括创建buffer、图像、采样器、Shader、渲染管线、提交操作命令等等）、计算游戏物体的碰撞、处理视频帧等等。不过这些操作都是设备级函数，所以我们需要先把这些设备级函数加载出来。</p>
+<p>我们也可以像之前一样使用<code>vkGetInstanceProcAddr</code>函数来加载设备级函数，但是该函数无法让设备级函数和具体的设备关联到一起（它只是隐藏了操作系统上的差异），对于不同的设备，<code>vkGetInstanceProcAddr</code>加载出来的函数地址，会有一个针对具体设备的重定向过程。虽然这个代价很小，但是我们可以通过另一个加载函数<code>vkGetDeviceProcAddr</code>来完全避免这个开销。这两个函数的区别如下图所示：<br><img src="https://github.com/Popperelay/Photos/blob/master/Photos/VulkanCookBook_1_4.png?raw=true" alt><br>区分设备级函数的关键是：设备级函数的第一个参数一定是<code>VkDevice</code>、<code>VkQueue</code>或者<code>VkCommandBuffer</code>类型。</p>
+<p>和之前加载实例级函数类似，首先我们写一个函数，使用<code>vkGetInstanceProcAddr</code>来重新定义宏<code>DEVICE_LEVEL_VULKAN_FUNCTION</code>和宏<code>DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</code>：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">loadDeviceLevelFunctions</span><span class="token punctuation">(</span>VkDevice vLogicalDevice<span class="token punctuation">,</span> std<span class="token operator">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span> <span class="token keyword">const</span><span class="token operator">*</span><span class="token operator">></span><span class="token keyword">const</span><span class="token operator">&amp;</span> vEnabledExtensions<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//加载定义在Vulkan核心的设备级函数</span>
+        <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION(name)                                                            \
+        name = (PFN_##name)vkGetDeviceProcAddr(vLogicalDevice, #name);                                        \
+        if(name == nullptr)                                                                                    \
+        {                                                                                                    \
+            std::cout &lt;&lt; "Could not load device-level Vulkan function named: "#name &lt;&lt; std::endl;            \
+            return false;                                                                                    \
+        }</span>
+
+            <span class="token comment" spellcheck="true">//加载定义在扩展里的设备级函数，并且通过for循环来检查扩展是否开启了</span>
+        <span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( name, extension )                                \
+        for( auto &amp; EnabledExtension : vEnabledExtensions )                                                    \
+        {                                                                                                    \
+            if( std::string(EnabledExtension) == std::string(extension))                                    \
+            {                                                                                                \
+                name = (PFN_##name)vkGetDeviceProcAddr(vLogicalDevice, #name);                                \
+                if(name == nullptr)                                                                         \
+                {                                                                                            \
+                    std::cout &lt;&lt; "Could not load device-level Vulkan function named: "#name &lt;&lt; std::endl;    \
+                    return false;                                                                            \
+                }                                                                                            \
+            }                                                                                                \
+        }</span>
+        <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"ListOfVulkanFunctions.inl"</span></span>
+
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后我们在 ListOfVulkanFunctions.inl文件里用这两个宏来定义和加载一些设备级函数：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">ifndef</span> DEVICE_LEVEL_VULKAN_FUNCTION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION( function )</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetDeviceQueue<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkDeviceWaitIdle<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkDestroyDevice<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkDestroyInstance<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkCreateBuffer<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION</span><span class="token punctuation">(</span>vkGetBufferMemoryRequirements<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> DEVICE_LEVEL_VULKAN_FUNCTION</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token macro property">#<span class="token directive keyword">ifndef</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION( function, extension)</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkCreateSwapchainKHR<span class="token punctuation">,</span> VK_KHR_SWAPCHAIN_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkGetSwapchainImagesKHR<span class="token punctuation">,</span> VK_KHR_SWAPCHAIN_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkAcquireNextImageKHR<span class="token punctuation">,</span> VK_KHR_SWAPCHAIN_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkQueuePresentKHR<span class="token punctuation">,</span> VK_KHR_SWAPCHAIN_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token function">DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span><span class="token punctuation">(</span>vkDestroySwapchainKHR<span class="token punctuation">,</span> VK_KHR_SWAPCHAIN_EXTENSION_NAME<span class="token punctuation">)</span>
+<span class="token macro property">#<span class="token directive keyword">undef</span> DEVICE_LEVEL_VULKAN_FUNCTION_FROM_EXTENSION</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="获取设备队列"><a href="#获取设备队列" class="headerlink" title="获取设备队列"></a><font size="6" color="orange">获取设备队列</font></h1><hr>
+<p>前面我们在创建逻辑设备时会顺带一起创建队列。我们现在需要获取到这些已经创建的队列，才能向这些队列里提交操作命令。</p>
+<p>我们通过函数<code>vkGetDeviceQueue</code>来获取想要的队列：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">getDeviceQueue</span><span class="token punctuation">(</span>VkDevice vLogicalDevice<span class="token punctuation">,</span> uint32_t vQueueFamilyIndex<span class="token punctuation">,</span> uint32_t vQueueIndex<span class="token punctuation">,</span> VkQueue<span class="token operator">&amp;</span> voQueue<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">vkGetDeviceQueue</span><span class="token punctuation">(</span>vLogicalDevice<span class="token punctuation">,</span> vQueueFamilyIndex<span class="token punctuation">,</span> vQueueIndex<span class="token punctuation">,</span> <span class="token operator">&amp;</span>voQueue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中<code>vLogicalDevice</code>是我们之前创建的逻辑设备，<code>vQueueFamilyIndex</code>是创建逻辑设备时指定的队列族索引之一，<code>vQueueIndex</code>是队列族里的一个队列索引，通过该函数就能获取出指定队列族里的指定队列，保存到<code>VkQueue</code>类型的对象里。</p>
+<h1 id="示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备"><a href="#示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备" class="headerlink" title="示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备"></a><font size="6" color="orange">示例：创建一个支持几何着色器、以及图形和计算队列的逻辑设备</font></h1><hr>
+<p>首先我们获取出当前硬件上所有可用的物理设备：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkPhysicalDevice<span class="token operator">></span> PhysicalDevices<span class="token punctuation">;</span>
+<span class="token function">enumerateAvaliablePhysicalDevices</span><span class="token punctuation">(</span>vInstance<span class="token punctuation">,</span> PhysicalDevices<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>然后我们循环所有可用的物理设备，获取出它们的设备特性，看特性里是否支持几何着色器：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> PhysicalDevice <span class="token operator">:</span> PhysicalDevices<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    VkPhysicalDeviceFeatures DeviceFeatures<span class="token punctuation">;</span>
+    VkPhysicalDeviceProperties DeviceProperties<span class="token punctuation">;</span>
+    <span class="token function">getFeaturesAndPropertiseOfPhysicalDevice</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> DeviceFeatures<span class="token punctuation">,</span> DeviceProperties<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>DeviceFeatures<span class="token punctuation">.</span>geometryShader<span class="token punctuation">)</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        DeviceFeatures <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        DeviceFeatures<span class="token punctuation">.</span>geometryShader <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中发现支持几何着色器时，我们清空了除几何着色器以外的其他特性，因为这个例子里我们只想要开启几何着色器这个特性，不想要开启别的特性。</p>
+<p>然后我们从物理设备中，分别获取出支持图形和计算的队列族索引：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">uint32_t GraphicsQueueFamilyIndex<span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">selectIndexOfQueueFamilyWithDesiredCapabilities</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span>VK_QUEUE_GRAPHICS_BIT<span class="token punctuation">,</span>GraphicsQueueFamilyIndex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+uint32_t ComputeQueueFamilyIndex<span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">selectIndexOfQueueFamilyWithDesiredCapabilities</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> VK_QUEUE_COMPUTE_BIT<span class="token punctuation">,</span> ComputeQueueFamilyIndex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后把这些队列族及其优先级信息放到一个<code>SQueueInfo</code>类型的数组里，并使用这些队列族信息以及设备特性来创建逻辑设备，然后加载设备级函数，并通过设备级函数来分别获取支持图形和计算的队列：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>SQueueInfo<span class="token operator">></span> RequestedQueue <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">{</span>GraphicsQueueFamilyIndex<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>GraphicsQueueFamilyIndex <span class="token operator">!=</span> ComputeQueueFamilyIndex<span class="token punctuation">)</span>
+    RequestedQueue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token punctuation">{</span> ComputeQueueFamilyIndex <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token number">1.0f</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">createLogicalDevice</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> RequestedQueue<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>DeviceFeatures<span class="token punctuation">,</span> voLogicalDevice<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">loadDeviceLevelFunctions</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token function">getDeviceQueue</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> GraphicsQueueFamilyIndex<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> voGraphicsQueue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">getDeviceQueue</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> ComputeQueueFamilyIndex<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> voComputeQueue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个过程的完整代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">bool</span> <span class="token function">createLogicalDeviceWithGeometryShadersAndGraphicsAndComputeQueues</span><span class="token punctuation">(</span>VkInstance vInstance<span class="token punctuation">,</span> VkDevice<span class="token operator">&amp;</span> voLogicalDevice<span class="token punctuation">,</span> VkQueue<span class="token operator">&amp;</span> voGraphicsQueue<span class="token punctuation">,</span> VkQueue<span class="token operator">&amp;</span> voComputeQueue<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>VkPhysicalDevice<span class="token operator">></span> PhysicalDevices<span class="token punctuation">;</span>
+        <span class="token function">enumerateAvaliablePhysicalDevices</span><span class="token punctuation">(</span>vInstance<span class="token punctuation">,</span> PhysicalDevices<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> PhysicalDevice <span class="token operator">:</span> PhysicalDevices<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            VkPhysicalDeviceFeatures DeviceFeatures<span class="token punctuation">;</span>
+            VkPhysicalDeviceProperties DeviceProperties<span class="token punctuation">;</span>
+            <span class="token function">getFeaturesAndPropertiseOfPhysicalDevice</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> DeviceFeatures<span class="token punctuation">,</span> DeviceProperties<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>DeviceFeatures<span class="token punctuation">.</span>geometryShader<span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                DeviceFeatures <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+                DeviceFeatures<span class="token punctuation">.</span>geometryShader <span class="token operator">=</span> VK_TRUE<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            uint32_t GraphicsQueueFamilyIndex<span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">selectIndexOfQueueFamilyWithDesiredCapabilities</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span>VK_QUEUE_GRAPHICS_BIT<span class="token punctuation">,</span>GraphicsQueueFamilyIndex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+            uint32_t ComputeQueueFamilyIndex<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">selectIndexOfQueueFamilyWithDesiredCapabilities</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> VK_QUEUE_COMPUTE_BIT<span class="token punctuation">,</span> ComputeQueueFamilyIndex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+            std<span class="token operator">::</span>vector<span class="token operator">&lt;</span>SQueueInfo<span class="token operator">></span> RequestedQueue <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">{</span>GraphicsQueueFamilyIndex<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">1.0f</span><span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>GraphicsQueueFamilyIndex <span class="token operator">!=</span> ComputeQueueFamilyIndex<span class="token punctuation">)</span>
+                RequestedQueue<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token punctuation">{</span> ComputeQueueFamilyIndex <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token number">1.0f</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">createLogicalDevice</span><span class="token punctuation">(</span>PhysicalDevice<span class="token punctuation">,</span> RequestedQueue<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>DeviceFeatures<span class="token punctuation">,</span> voLogicalDevice<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">loadDeviceLevelFunctions</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token function">getDeviceQueue</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> GraphicsQueueFamilyIndex<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> voGraphicsQueue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">getDeviceQueue</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> ComputeQueueFamilyIndex<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> voComputeQueue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="销毁资源"><a href="#销毁资源" class="headerlink" title="销毁资源"></a><font size="6" color="orange">销毁资源</font></h1><hr>
+<p>销毁资源的顺序应该和它们被创建的顺序相反。</p>
+<h2 id="销毁逻辑设备"><a href="#销毁逻辑设备" class="headerlink" title="销毁逻辑设备"></a><font size="5" color="red">销毁逻辑设备</font></h2><p>到目前为止，逻辑设备是最后被创建的，所以这里它应该第一个被销毁。我们使用函数<code>vkDestroyDevice</code>来销毁逻辑设备。代码如下：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">destroyLogicalDevice</span><span class="token punctuation">(</span>VkDevice<span class="token operator">&amp;</span> voLogicalDevice<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">vkDestroyDevice</span><span class="token punctuation">(</span>voLogicalDevice<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            voLogicalDevice <span class="token operator">=</span> VK_NULL_HANDLE<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="销毁Vulkan实例"><a href="#销毁Vulkan实例" class="headerlink" title="销毁Vulkan实例"></a><font size="5" color="red">销毁Vulkan实例</font></h2><p>接下来我们销毁Vulkan实例，通过函数<code>vkDestroyInstance</code>来实现：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">destroyVulkanDevice</span><span class="token punctuation">(</span>VkInstance<span class="token operator">&amp;</span> voInstance<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>voInstance<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">vkDestroyInstance</span><span class="token punctuation">(</span>voInstance<span class="token punctuation">,</span> <span class="token keyword">nullptr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            voInstance <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="释放Vulkan动态链接库"><a href="#释放Vulkan动态链接库" class="headerlink" title="释放Vulkan动态链接库"></a><font size="5" color="red">释放Vulkan动态链接库</font></h2><p>被显式加载的动态链接库也需要被显式释放。在Windows上我们使用函数<code>FreeLibrary</code>，在Linux上使用函数<code>dlclose</code>来完成释放：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">namespace</span> VulkanCookbook
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">releaseVulkanDLL</span><span class="token punctuation">(</span>LIBRARY_TYPE<span class="token operator">&amp;</span> voVulkanLibrary<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">nullptr</span> <span class="token operator">!=</span> voVulkanLibrary<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token macro property">#<span class="token directive keyword">if</span> defined(_Win32) ||defined(_Win64)</span>
+            <span class="token function">FreeLibrary</span><span class="token punctuation">(</span>voVulkanLibrary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token macro property">#<span class="token directive keyword">elif</span> defined __linux</span>
+            <span class="token function">dlclose</span><span class="token punctuation">(</span>voVulkanLibrary<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token macro property">#<span class="token directive keyword">endif</span></span>
+            voVulkanLibrary <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/10/28/Vulkan-1-实例和设备/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/10/28/Vulkan-1-实例和设备/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+            	<span id="busuanzi_container_site_pv">2019总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
