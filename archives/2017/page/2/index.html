@@ -16,7 +16,9 @@
 		if('{{ page.password }}'){
 			if (prompt('请输入博客密码') !== "elayRender"){
 				alert('密码错误！');
+				window.location.href='http://www.google.com'
 				window.open('','_top'); 
+				window.top.close(); 
 				window.opener=null; 
 				window.close();
 			}
